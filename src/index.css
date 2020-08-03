@@ -1,6 +1,8 @@
-@import './Components/header.css';
-@import './Components/login.css';
-@import './Components/main.css';
+@import './Components/css/header.css';
+@import './Components/css/login.css';
+@import './Components/css/main.css';
+@import './Components/css/mypage.css';
+
 
 body {
   margin: 0;
