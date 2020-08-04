@@ -1,0 +1,17 @@
+.festival-store {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.festival__content {
+    display: flex;
+    margin: 50px 50px;
+}
+.festival__content .festival__title {
+    margin-left: 15px;
+    font-size: 22px;
+}
+.festival__content .festival__title .festival__name {
+    margin-bottom: 10px;
+}

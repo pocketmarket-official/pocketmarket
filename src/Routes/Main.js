@@ -122,7 +122,7 @@ function Main() {
                 <div className="main">
                     <div className="main__navigation">
                         {content.map((section, index) =>  (
-                                <button onClick={() => changeItem(index)}>{section.tab}</button>
+                                <button onClick={() => changeItem(index)} key={index}>{section.tab}</button>
                             ))}
                     </div>
                     {currentItem.content}

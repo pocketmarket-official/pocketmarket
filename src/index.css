@@ -2,7 +2,8 @@
 @import './Components/css/login.css';
 @import './Components/css/main.css';
 @import './Components/css/mypage.css';
-
+@import './Components/css/festivalstore.css';
+@import './Components/css/store.css';
 
 body {
   margin: 0;
