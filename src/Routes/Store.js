@@ -43,7 +43,62 @@ const content = [
         tab: "list", 
         content:
         <>
-            <div>hihi</div>
+            <div className="review__container">
+                <div className="review__content">
+                    <div>image</div>
+                    <div className="review__title">
+                        <div className="review__name">마진형</div>
+                        <div className="review__detail">리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰</div>
+                    </div>
+                </div>
+                <div className="review__common">
+                    <div className="common__btns">
+                        <div>Sale Dt</div>
+                        <div className="review__order">주문내역</div>
+                        <div className="review__likes">좋아요</div>
+                    </div>
+                    <div className="review__comment">댓글댓글</div>
+                    <div className="review__comment">댓글댓글</div>
+                    <div className="review__comment">댓글댓글</div>
+                    <div className="review__comment">댓글댓글</div>
+                </div>
+                <div className="review__content">
+                    <div>image</div>
+                    <div className="review__title">
+                        <div className="review__name">마진형</div>
+                        <div className="review__detail">리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰</div>
+                    </div>
+                </div>
+                <div className="review__common">
+                    <div className="common__btns">
+                        <div>Sale Dt</div>
+                        <div className="review__order">주문내역</div>
+                        <div className="review__likes">좋아요</div>
+                    </div>
+                    <div className="review__comment">댓글댓글</div>
+                    <div className="review__comment">댓글댓글</div>
+                    <div className="review__comment">댓글댓글</div>
+                    <div className="review__comment">댓글댓글</div>
+                </div>
+                <div className="review__content">
+                    <div>image</div>
+                    <div className="review__title">
+                        <div className="review__name">마진형</div>
+                        <div className="review__detail">리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰</div>
+                    </div>
+                </div>
+                <div className="review__common">
+                    <div className="common__btns">
+                        <div>Sale Dt</div>
+                        <div className="review__order">주문내역</div>
+                        <div className="review__likes">좋아요</div>
+                    </div>
+                    <div className="review__comment">댓글댓글</div>
+                    <div className="review__comment">댓글댓글</div>
+                    <div className="review__comment">댓글댓글</div>
+                    <div className="review__comment">댓글댓글</div>
+                </div>
+            </div>
         </>
     },
 ];
