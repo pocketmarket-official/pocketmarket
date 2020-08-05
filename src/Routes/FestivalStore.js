@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 
 const ColoredLine = ({color}) => (
@@ -27,6 +28,7 @@ function FestivalStore() {
                     <ColoredLine color="black" />
                     <div className="content__store">
                         <div className="store__store">
+                            <Link to="/main/store/1">
                             <div className="store__image">image</div>
                             <div className="store__detail">
                                 <div className="detail__title">
@@ -38,6 +40,7 @@ function FestivalStore() {
                                     설명설명설명설명설명설명설명설명설명설명설명
                                 </div>
                             </div>
+                            </Link>
                         </div>
                         <div className="store__review">
                             리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
