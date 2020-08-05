@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 
 
@@ -22,7 +23,7 @@ const content = [
         content: 
         <>
             <div className="store__review grid" id="review__container">
-                <div>image1</div>
+                <Link to="/main/store/1/1"><div>image1</div></Link>
                 <div>image2</div>
                 <div>image3</div>
                 <div>image1</div>
@@ -44,6 +45,7 @@ const content = [
         content:
         <>
             <div className="review__container">
+                <Link to="/main/store/1/1">
                 <div className="review__content">
                     <div>image</div>
                     <div className="review__title">
@@ -51,6 +53,7 @@ const content = [
                         <div className="review__detail">리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰</div>
                     </div>
                 </div>
+                </Link>
                 <div className="review__common">
                     <div className="common__btns">
                         <div>Sale Dt</div>

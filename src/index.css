@@ -4,6 +4,9 @@
 @import './Components/css/mypage.css';
 @import './Components/css/festivalstore.css';
 @import './Components/css/store.css';
+@import './Components/css/review.css';
+@import './Components/css/fastorder.css';
+
 
 body {
   margin: 0;

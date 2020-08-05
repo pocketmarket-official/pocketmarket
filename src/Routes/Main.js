@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../Components/js/Header';
+
 
 // react hooks that changes tabs
 const useTabs = (initialTab, allTabs) => {
@@ -22,6 +24,7 @@ const content = [
         content: 
         <>
             <div className="current-position">내 현재 위치 GPS icon</div>
+            <Link to="/main/festival/1">
             <div className="content__festival">
                 <div>image</div>
                 <div className="festival__detail">
@@ -30,6 +33,7 @@ const content = [
                     <div className="detail__address">Address</div>
                 </div>
             </div>
+            </Link>
             <div className="content__festival">
                 <div>image</div>
                 <div className="festival__detail">
@@ -54,6 +58,7 @@ const content = [
         <>
             <div className="current-position">내 현재 위치 GPS icon</div>
             <div className="content__store">
+                <Link to="/main/store/1">
                 <div className="store__store">
                     <div className="store__image">image</div>
                     <div className="store__detail">
@@ -67,6 +72,7 @@ const content = [
                         </div>
                     </div>
                 </div>
+                </Link>
                 <div className="store__review">
                     리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
                     <div className="review__likes">리뷰 좋아요</div>

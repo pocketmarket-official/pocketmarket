@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 function HeaderBack() {
     return (
             <div className="header__box">
                 <div>back</div>
-                <div>Pocket Market</div>
-                <div>my</div>
+                <Link to="/main"><div>Pocket Market</div></Link>
+                <Link to="/mypage"><div>my</div></Link>
             </div>
         );
 }
