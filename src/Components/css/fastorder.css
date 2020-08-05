@@ -3,8 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
     overflow: scroll;
+    padding: 10px 10px;
 }
 .fastorder .fastorder__container {
     display: flex;
@@ -12,8 +12,9 @@
     justify-content: center;
     align-items: center;
     width: 90%;
-    min-height: 200px;
+    min-height: 250px;
     font-size: 24px;
+    margin: 50px 10px;
 }
 .fastorder .fastorder__container .fastorder__content {
     width: 100%;
