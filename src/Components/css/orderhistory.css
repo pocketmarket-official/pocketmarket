@@ -65,3 +65,33 @@
     align-items: center;
     width: 100%;
 }
+#receipt1 {
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#receipt1.hidden {
+    display: none;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__menu .receipt__container .receipt__image {
+    width: 500px;
+    height: 500px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    font: black;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__menu .receipt__container button {
+    position: fixed;
+    right: 300px;
+    top: 150px;
+}
