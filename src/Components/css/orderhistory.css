@@ -1,0 +1,67 @@
+.orderhistory {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.orderhistory .orderhistory__search {
+    margin-top: 50px;
+}
+.orderhistory .orderhistory__result {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 15px 50px;
+}
+.orderhistory .orderhistory__result .orderhistory__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 50%;
+    margin: 20px 0;
+    min-height: 150px;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__detail .orderhistory__name {
+    margin-right: 5px;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__detail .orderhistory__count {
+    margin-right: 5px;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__content .orderhistory__btn {
+    margin-left: 10px;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__menu {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__menu.hidden {
+    display: none;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__menu .menu__receipt {
+    margin-left: auto;
+}
+.orderhistory .orderhistory__result .orderhistory__container .orderhistory__menu .menu__detail {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
