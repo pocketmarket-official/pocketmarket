@@ -12,12 +12,12 @@ function OrderHistory() {
                     <input type="submit" value="조회"/>
                 </div>
                 <div className="orderhistory__result">
-                    <div className="orderhistory__container" onClick={() => {
+                    <div className="orderhistory__container">
+                        <div className="orderhistory__date">2020년 8월 1일</div>
+                        <div className="orderhistory__content" onClick={() => {
                         const elt = document.getElementById("orderhistory1");
                         elt.classList.toggle("hidden");
                     }}>
-                        <div className="orderhistory__date">2020년 8월 1일</div>
-                        <div className="orderhistory__content">
                             <div className="orderhistory__detail">
                                 <div className="orderhistory__name">스타벅스</div>
                                 <div className="orderhistory__price">10000원</div>
@@ -40,15 +40,25 @@ function OrderHistory() {
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
                             </div>
-                            <div className="menu__receipt">승인전표조회</div>
+                            <div className="menu__receipt" onClick={() => {
+                                const elt = document.getElementById("receipt1");
+                                elt.classList.remove("hidden");
+                            }}>승인전표조회</div>
+                            <div className="receipt__container hidden" id="receipt1">
+                                <div className="receipt__image">영수증 이미지</div>
+                                <button onClick={() => {
+                                    const elt = document.getElementById("receipt1");
+                                    elt.classList.add("hidden");
+                                }}>X</button>
+                            </div>
                         </div>
                     </div>
-                    <div className="orderhistory__container" onClick={() => {
+                    <div className="orderhistory__container">
+                        <div className="orderhistory__date">2020년 8월 1일</div>
+                        <div className="orderhistory__content" onClick={() => {
                         const elt = document.getElementById("orderhistory2");
                         elt.classList.toggle("hidden");
                     }}>
-                        <div className="orderhistory__date">2020년 8월 1일</div>
-                        <div className="orderhistory__content">
                             <div className="orderhistory__detail">
                                 <div className="orderhistory__name">스타벅스</div>
                                 <div className="orderhistory__price">10000원</div>
@@ -74,12 +84,12 @@ function OrderHistory() {
                             <div className="menu__receipt">승인전표조회</div>
                         </div>
                     </div>
-                    <div className="orderhistory__container" onClick={() => {
+                    <div className="orderhistory__container">
+                        <div className="orderhistory__date">2020년 8월 1일</div>
+                        <div className="orderhistory__content" onClick={() => {
                         const elt = document.getElementById("orderhistory3");
                         elt.classList.toggle("hidden");
                     }}>
-                        <div className="orderhistory__date">2020년 8월 1일</div>
-                        <div className="orderhistory__content">
                             <div className="orderhistory__detail">
                                 <div className="orderhistory__name">스타벅스</div>
                                 <div className="orderhistory__price">10000원</div>

@@ -17,7 +17,6 @@ const useTabs = (initialTab, allTabs) => {
     };
 };
 
-//
 const content = [
     {
         tab: "축제보기", 
