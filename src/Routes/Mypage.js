@@ -14,7 +14,7 @@ function Mypage() {
                     <div className="mypage__list">주문 / 결재 이력</div>
                     <div className="mypage__list">포인트 / 좋아요 이력</div>
                     <div className="mypage__list">리뷰 목록</div>
-                    <div className="mypage__list">문의 내역</div>
+                    <div className="mypage__list"><Link to="/mypage/questions">문의 내역</Link></div>
                 </div>
                 <div className="setting__box">
                     <div className="setting__list">점주페이지</div>
