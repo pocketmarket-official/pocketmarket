@@ -8,8 +8,10 @@ import StoreView from './Routes/Store';
 import ReviewList from './Routes/ReviewList';
 import Fastorder from './Routes/Fastorder';
 import OrderHistory from './Routes/OrderHistory';
+import PointHistory from './Routes/PointHistory';
 import QuestionsHistory from './Routes/QuestionsHistory';
 import QuestionWrite from './Routes/QuestionWrite';
+import ReviewWrite from './Routes/ReviewWrite';
 import logo from './logo.svg';
 import './App.css';
 import { firestore } from "./firebase";
@@ -23,9 +25,11 @@ function App() {
             <Route exact path="/main/festival/:id" component={FestivalStore} />
             <Route exact path="/main/store/:storeId/:reviewId" component={ReviewList} />
             <Route exact path="/main/store/:storeId" component={StoreView} />
+            <Route exact path="/order/review" component={ReviewWrite} />
             <Route exact path="/mypage" component={Mypage} />
             <Route exact path="/mypage/fastorder" component={Fastorder} />
             <Route exact path="/mypage/order" component={OrderHistory} />
+            <Route exact path="/mypage/point" component={PointHistory} />
             <Route exact path="/mypage/questions" component={QuestionsHistory} />
             <Route exact path="/mypage/questions/write" component={QuestionWrite} />
         </BrowserRouter>
