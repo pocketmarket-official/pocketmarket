@@ -5,12 +5,15 @@
 @import './Components/css/festivalstore.css';
 @import './Components/css/store.css';
 @import './Components/css/review.css';
+@import './Components/css/order.css';
+@import './Components/css/orderinfo.css';
 @import './Components/css/fastorder.css';
 @import './Components/css/question.css';
 @import './Components/css/questionwrite.css';
 @import './Components/css/orderhistory.css';
 @import './Components/css/pointhistory.css';
 @import './Components/css/reviewwrite.css';
+@import './Components/css/optionmodal.css';
 
 
 body {

@@ -1,0 +1,88 @@
+.orderpage {
+    width: 100%;
+    height: 100%;
+}
+.orderpage .order__category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: scroll;
+}
+.orderpage .order__category .category__content:first-child {
+    margin-left: 50px;
+}
+.orderpage .order__category .category__content:last-child {
+    margin-right: 50px;
+}
+.orderpage .order__category .category__content {
+    min-width: 60px;
+    margin: 5px 20px;
+}
+.orderpage .order__menu {
+    overflow: scroll;
+    width: 100%;
+    min-height: 60%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(150px, auto);
+}
+.orderpage .order__menu .menu__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.orderpage .order__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30%;
+    position: fixed;
+    bottom: 0px;
+}
+.orderpage .order__container .order__result {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+.orderpage .order__container .order__result .order__quantity {
+    display: flex;
+}
+.orderpage .order__container .order__result .order__quantity .order__total-quantity {
+    margin-left: 5px;
+}
+.orderpage .order__container .order__result .order__cost {
+    display: flex;
+}
+.orderpage .order__container .order__result .order__cost .cost__cost {
+    margin-left: 5px;
+}
+.orderpage .order__container .order__detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    overflow-y: scroll;
+}
+.orderpage .order__container .order__detail .order__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+}
+.orderpage .order__container .order__detail .order__item .item__name {
+    margin-left: 50px;
+}
+.orderpage .order__container .order__detail .order__item button {
+    margin-right: 50px;
+}
+#quantity {
+    width: 40px;
+}
