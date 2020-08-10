@@ -106,8 +106,12 @@ const content = [
     },
 ];
 
-function StoreView() {
+function StoreView({match}) {
     const { currentItem, changeItem } = useTabs(0, content);
+
+    const id = match.params.storeId;
+    const link = "/main/store/" + id + "/order"
+
     return (
         <>
             <HeaderBack />
@@ -134,7 +138,7 @@ function StoreView() {
                 </div>
                 {currentItem.content}
             </div>
-            <div className="order">주문하기</div>
+            <div className="order"><Link to={link}>주문하기</Link></div>
         </>
     );
 }
