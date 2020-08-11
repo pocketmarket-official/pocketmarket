@@ -44,12 +44,13 @@ function OrderHistory() {
                                 const elt = document.getElementById("receipt1");
                                 elt.classList.remove("hidden");
                             }}>승인전표조회</div>
-                            <div className="receipt__container hidden" id="receipt1">
-                                <div className="receipt__image">영수증 이미지</div>
-                                <button onClick={() => {
-                                    const elt = document.getElementById("receipt1");
-                                    elt.classList.add("hidden");
-                                }}>X</button>
+                            <div className="receipt__container hidden" id="receipt1" onClick={() => {
+                                const elt = document.getElementById("receipt1");
+                                elt.classList.add("hidden");
+                            }}>
+                                <div className="receipt__image" onClick={(e) => {
+                                    e.stopPropagation();
+                                }}>영수증 이미지</div>
                             </div>
                         </div>
                     </div>

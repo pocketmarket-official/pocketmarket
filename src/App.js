@@ -8,6 +8,7 @@ import StoreView from './Routes/Store';
 import ReviewList from './Routes/ReviewList';
 import Order from './Routes/Order';
 import OrderInfo from './Routes/OrderInfo';
+import OrderComplete from './Routes/CompleteOrder';
 import Fastorder from './Routes/Fastorder';
 import OrderHistory from './Routes/OrderHistory';
 import PointHistory from './Routes/PointHistory';
@@ -32,6 +33,7 @@ function App() {
             </Switch>
             <Route exact path="/main/store/:storeId" component={StoreView} />
             <Route exact path="/order/review" component={ReviewWrite} />
+            <Route exact path="/order/complete" component={OrderComplete} />
             <Route exact path="/mypage" component={Mypage} />
             <Route exact path="/mypage/fastorder" component={Fastorder} />
             <Route exact path="/mypage/order" component={OrderHistory} />
