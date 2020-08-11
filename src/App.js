@@ -30,6 +30,7 @@ function App() {
                 <Login authenticated={authenticated} login={setUserInfo} {...props} />
             )} />
             <Route exact path="/" component={Main} />
+            <Route exact path="/main" component={Main} />
             <Route exact path="/main/festival/:id" component={FestivalStore} />
             <Switch>
                 <Route exact path="/main/store/:storeId/order" component={Order} />
