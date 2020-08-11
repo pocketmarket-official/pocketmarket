@@ -6,6 +6,18 @@ function PointHistory() {
     return (
         <>
             <HeaderBack />
+            <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {
+                const elt = document.getElementById("modal__conversion");
+                elt.classList.add("hidden");
+            }}>
+                <div className="modal__modal" onClick={(e) => {
+                    e.stopPropagation();
+                }}>
+                    <div className="modal__header"></div>
+                    <div className="modal__detail">100 likes -> 100 PM</div>
+                    <button>전환</button>
+                </div>
+            </div>
             <div className="pointhistory">
                 <div className="pointhistory__container">
                     <div className="pointhistory__data">
@@ -28,11 +40,6 @@ function PointHistory() {
                         <div className="pointhistory__title">잔여 포인트</div>
                         <div className="pointhistory__point">1500PM</div>
                     </div>
-                </div>
-                <div className="modal__conversion hidden" id="modal__conversion">
-                    <div className="modal__header"></div>
-                    <div className="modal__detail">100 likes -> 100 PM</div>
-                    <button>전환</button>
                 </div>
                 <button className="pointhistory__conversion" onClick={() => {
                         const elt = document.getElementById("modal__conversion");
