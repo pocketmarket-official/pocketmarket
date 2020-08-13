@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCYaFuGXcKFTV1wIm8PeN0ri4jpur29CCY",
+    apiKey: process.env.REACT_APP_FIREBASE_KEY,
     authDomain: "pocket-market-ddc08.firebaseapp.com",
     databaseURL: "https://pocket-market-ddc08.firebaseio.com",
     projectId: "pocket-market-ddc08",
