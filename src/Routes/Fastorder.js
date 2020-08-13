@@ -21,7 +21,9 @@ function Fastorder() {
                             </div>
                             <div className="detail__body">
                                 <div className="detail__description">설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명</div>
-                                <button>X</button>
+                                <button onClick={(e) => {
+                                    e.stopPropagation();
+                                }}>X</button>
                             </div>
                         </div>
                     </div>
