@@ -1,13 +1,8 @@
-import React, {useState} from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from '@fortawesome/free-solid-svg-icons';
-import fontawesome from '@fortawesome/fontawesome';
+import React from 'react';
 import KaKaoLogin from 'react-kakao-login';
 import styled from 'styled-components';
 import { Redirect } from "react-router-dom";
 const axios = require('axios');
-
-fontawesome.library.add(faComments);
 
 function Login({ authenticated, login, location }) {
     const responseKaKao = (res) => {
@@ -58,7 +53,7 @@ function Login({ authenticated, login, location }) {
                 {/*<div className="kakao__login"><FontAwesomeIcon icon="comments" className="login__icon" />카카오 로그인</div>*/}
                 <KaKaoBtn
                     //styled component 통해 style을 입혀 줄 예정
-                    jsKey={''}
+                    jsKey={process.env.REACT_APP_KAKAO_KEY}
                     //카카오에서 할당받은 jsKey를 입력
                     buttonText='카카오 계정으로 로그인'
                     //로그인 버튼의 text를 입력
