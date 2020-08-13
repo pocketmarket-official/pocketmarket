@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 function HeaderBack() {
+    const history = useHistory();
+
     return (
             <div className="header__box">
-                <div>back</div>
+                <div id="back-btn" onClick={() => {
+                    history.goBack();
+                }}>back</div>
                 <Link to="/main"><div>Pocket Market</div></Link>
                 <Link to="/mypage"><div>my</div></Link>
             </div>

@@ -5,7 +5,6 @@ import HeaderBack from '../Components/js/HeaderBack';
 function PointHistory() {
     return (
         <>
-            <HeaderBack />
             <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {
                 const elt = document.getElementById("modal__conversion");
                 elt.classList.add("hidden");
@@ -18,6 +17,7 @@ function PointHistory() {
                     <button>전환</button>
                 </div>
             </div>
+            <HeaderBack />
             <div className="pointhistory">
                 <div className="pointhistory__container">
                     <div className="pointhistory__data">

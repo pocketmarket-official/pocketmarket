@@ -4,8 +4,13 @@ import React from 'react';
 function OptionModal() {
     return (
         <>
-            <div className="optionmodal hidden" id="optionmodal">
-                <div className="optionmodal__container">
+            <div className="optionmodal hidden" id="optionmodal" onClick={() => {
+                const elt = document.getElementById("optionmodal");
+                elt.classList.add("hidden");
+            }}>
+                <div className="optionmodal__container" onClick={(e) => {
+                    e.stopPropagation();
+                }}>
                     <div className="optionmodal__header">
                         <div>image</div>
                         <div className="optionmodal__title">
