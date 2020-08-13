@@ -21,7 +21,7 @@ function OrderInfo() {
                     <div className="orderinfo__choices">포인트 사용</div>
                 </div>
                 <div className="orderinfo__btn">
-                    <Link to="">결재하기</Link>
+                    <Link to="/order/complete">결제하기</Link>
                 </div>
             </div>
         </>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 
 
@@ -13,7 +14,7 @@ function OrderComplete() {
                     <div className="ordercomplete__line3">마진형님 앞에는 n명의 고객님이 대기중이십니다.</div>
                 </div>
                 <div className="ordercomplete__container">
-                    <div className="ordercomplete__confirm">확인</div>
+                    <div className="ordercomplete__confirm"><Link to="/order/status">확인</Link></div>
                     <div className="ordercomplete__fastorder" onClick={() => {
                         const elt = document.getElementById("modal__fastorder");
                         elt.classList.remove("hidden");
