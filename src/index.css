@@ -8,6 +8,7 @@
 @import './Components/css/order.css';
 @import './Components/css/orderinfo.css';
 @import './Components/css/ordercomplete.css';
+@import './Components/css/orderstatus.css';
 @import './Components/css/fastorder.css';
 @import './Components/css/question.css';
 @import './Components/css/questionwrite.css';
@@ -15,6 +16,7 @@
 @import './Components/css/pointhistory.css';
 @import './Components/css/reviewwrite.css';
 @import './Components/css/optionmodal.css';
+@import './Components/css/bigstatus.css';
 
 
 body {
