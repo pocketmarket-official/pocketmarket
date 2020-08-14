@@ -21,6 +21,14 @@ function ReviewWrite() {
                         프라푸치노
                         <input type="range" min="0" max="5.0" step="0.5" />
                     </div>
+                    <div className="input__container">
+                        뭐시기
+                        <input type="range" min="0" max="5.0" step="0.5" />
+                    </div>
+                    <div className="input__container">
+                        뭐시기
+                        <input type="range" min="0" max="5.0" step="0.5" />
+                    </div>
                     <div className="image__container" id="image__container">
                     {/* need to show image preview */}
                     </div>

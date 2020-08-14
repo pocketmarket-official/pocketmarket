@@ -17,6 +17,8 @@ import QuestionsHistory from './Routes/QuestionsHistory';
 import QuestionWrite from './Routes/QuestionWrite';
 import ReviewWrite from './Routes/ReviewWrite';
 import BigStatus from './Routes/BigStatus';
+import Myplace from './Routes/Myplace';
+import MyplaceDetail from './Routes/MyplaceDetail';
 import './App.css';
 import { firestore } from "./firebase";
 import AuthRoute from "./Security/AuthRoute";
@@ -46,6 +48,8 @@ function App() {
             <AuthRoute authenticated={authenticated} exact path="/order/status/:storeId" component={BigStatus} />
             <AuthRoute authenticated={authenticated} exact path="/mypage" component={Mypage} />
             <AuthRoute authenticated={authenticated} exact path="/mypage/fastorder" component={Fastorder} />
+            <AuthRoute authenticated={authenticated} exact path="/mypage/myplace" component={Myplace} />
+            <AuthRoute authenticated={authenticated} exact path="/mypage/myplace/:placeId" component={MyplaceDetail} />
             <AuthRoute authenticated={authenticated} exact path="/mypage/order" component={OrderHistory} />
             <AuthRoute authenticated={authenticated} exact path="/mypage/point" component={PointHistory} />
             <AuthRoute authenticated={authenticated} exact path="/mypage/questions" component={QuestionsHistory} />

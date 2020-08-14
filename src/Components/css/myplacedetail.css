@@ -1,0 +1,29 @@
+.myplacedetail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+}
+.myplacedetail .myplacedetail__map {
+    min-width: 300px;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 15px;
+}
+.myplacedetail .myplacedetail__api {
+    margin-right: auto;
+}
+.myplacedetail input {
+    width: 100%;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+}
+.myplacedetail input[type="submit"] {
+    background-color: #2AC1BC;
+    color: #ffffff;
+}
