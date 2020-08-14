@@ -6,6 +6,20 @@ import HeaderBack from '../Components/js/HeaderBack';
 function OrderComplete() {
     return (
         <>
+            <div className="modal__fastorder hidden" id="modal__fastorder" onClick={(e) => {
+                const elt = document.getElementById("modal__fastorder");
+                elt.classList.add("hidden");
+            }}>
+                <div className="modal__modal" id="modal__modal" onClick={(e) => {
+                    e.stopPropagation();
+                }}>
+                    <div className="modal__text">Fast order의 이름을 입력해주세요. </div>
+                    <div className="modal__btns">
+                        <input type="text" />
+                        <input type="submit" value="제출" />
+                    </div>
+                </div>
+            </div>
             <HeaderBack />
             <div className="ordercomplete">
                 <div className="ordercomplete__text">
@@ -19,20 +33,6 @@ function OrderComplete() {
                         const elt = document.getElementById("modal__fastorder");
                         elt.classList.remove("hidden");
                     }}>Fast order에 추가</div>
-                </div>
-                <div className="modal__fastorder hidden" id="modal__fastorder" onClick={(e) => {
-                    const elt = document.getElementById("modal__fastorder");
-                    elt.classList.add("hidden");
-                }}>
-                    <div className="modal__modal" id="modal__modal" onClick={(e) => {
-                        e.stopPropagation();
-                    }}>
-                        <div className="modal__text">Fast order의 이름을 입력해주세요. </div>
-                        <div className="modal__btns">
-                            <input type="text" />
-                            <input type="submit" value="제출" />
-                        </div>
-                    </div>
                 </div>
             </div>
         </>

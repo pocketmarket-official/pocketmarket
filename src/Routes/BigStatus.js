@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 
 
@@ -31,6 +32,7 @@ function BigStatus() {
                     <div className="bigstatus__title">현재 대기인원: </div>
                     <div className="bigstatus__detail">n명</div>
                 </div>
+                <button className="bigstatus__btn"><Link to="/order/review">리뷰작성</Link></button>
             </div>
         </>
     );
