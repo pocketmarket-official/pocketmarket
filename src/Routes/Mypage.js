@@ -13,7 +13,7 @@ function Mypage() {
                     <div className="mypage__list"><Link to="/mypage/myplace">주소관리</Link></div>
                     <div className="mypage__list"><Link to="/mypage/order">주문 / 결재 이력</Link></div>
                     <div className="mypage__list"><Link to="/mypage/point">포인트 / 좋아요 이력</Link></div>
-                    <div className="mypage__list">리뷰 목록</div>
+                    <div className="mypage__list"><Link to="/review">리뷰 목록</Link></div>
                     <div className="mypage__list"><Link to="/mypage/questions">문의 내역</Link></div>
                 </div>
                 <div className="setting__box">

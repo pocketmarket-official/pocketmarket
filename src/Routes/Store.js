@@ -23,7 +23,7 @@ const content = [
         content: 
         <>
             <div className="store__review grid" id="review__container">
-                <Link to="/main/store/1/1"><div>image1</div></Link>
+                <Link to="/review"><div>image1</div></Link>
                 <div>image2</div>
                 <div>image3</div>
                 <div>image1</div>
@@ -45,7 +45,7 @@ const content = [
         content:
         <>
             <div className="review__container">
-                <Link to="/main/store/1/1">
+                <Link to="/review">
                 <div className="review__content">
                     <div>image</div>
                     <div className="review__title">

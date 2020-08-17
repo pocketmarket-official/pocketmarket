@@ -39,13 +39,13 @@ function App() {
             <Switch>
                 <Route exact path="/main/store/:storeId/order" component={Order} />
                 <Route exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
-                <Route exact path="/main/store/:storeId/:reviewId" component={ReviewList} />
             </Switch>
             <AuthRoute authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
             <AuthRoute authenticated={authenticated} exact path="/order/review" component={ReviewWrite} />
             <AuthRoute authenticated={authenticated} exact path="/order/complete" component={OrderComplete} />
             <AuthRoute authenticated={authenticated} exact path="/order/status" component={OrderStatus} />
             <AuthRoute authenticated={authenticated} exact path="/order/status/:storeId" component={BigStatus} />
+            <AuthRoute authenticated={authenticated} exact path="/review" component={ReviewList} />
             <AuthRoute authenticated={authenticated} exact path="/mypage" component={Mypage} />
             <AuthRoute authenticated={authenticated} exact path="/mypage/fastorder" component={Fastorder} />
             <AuthRoute authenticated={authenticated} exact path="/mypage/myplace" component={Myplace} />
