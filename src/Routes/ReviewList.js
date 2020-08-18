@@ -23,7 +23,11 @@ function ReviewList() {
                         </div>
                         <div className="review__order">주문 일자 주문 목록</div>
                         <div className="review__review">리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰</div>
-                        <div className="review__comment">
+                        <button id="review__more" onClick={() => {
+                            const elt = document.getElementById("review__comment1");
+                            elt.classList.toggle("hidden");
+                        }}>...</button>
+                        <div className="review__comment hidden" id="review__comment1">
                             <div>1댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글</div>
                             <div>2댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글</div>
                             <div>3댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글</div>
@@ -62,7 +66,11 @@ function ReviewList() {
                         </div>
                         <div className="review__order">주문 일자 주문 목록</div>
                         <div className="review__review">리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰</div>
-                        <div className="review__comment">
+                        <button id="review__more" onClick={() => {
+                            const elt = document.getElementById("review__comment2");
+                            elt.classList.toggle("hidden");
+                        }}>...</button>
+                        <div className="review__comment hidden" id="review__comment2">
                             <div>1댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글</div>
                             <div>2댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글</div>
                             <div>3댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글</div>

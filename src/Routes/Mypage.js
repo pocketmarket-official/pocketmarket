@@ -17,7 +17,7 @@ function Mypage() {
                     <div className="mypage__list"><Link to="/mypage/questions">문의 내역</Link></div>
                 </div>
                 <div className="setting__box">
-                    <div className="setting__list">점주페이지</div>
+                    <div className="setting__list"><Link to="/biz/certification">점주페이지</Link></div>
                     <div className="setting__list">로그아웃</div>
                 </div>
             </div>

@@ -51,6 +51,13 @@
 .review .review__list .review__container .review__review {
     margin-bottom: 10px;
 }
+#review__more {
+    margin-left: auto;
+}
+.review .review__list .review__container .review__comment.hidden {
+    height: 150px;
+    overflow: hidden;
+}
 .review .review__list .review__container .review__input {
     width: 100%;
     display: flex;
