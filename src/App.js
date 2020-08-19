@@ -21,6 +21,9 @@ import Myplace from './Routes/Myplace';
 import MyplaceDetail from './Routes/MyplaceDetail';
 import BizCertification from './Routes/BizCertification';
 import BizMypage from './Routes/BizMypage';
+import BizMaster from './Routes/BizMaster';
+import BizSearchMonth from './Routes/BizSearchMonth';
+import BizSearchDaily from './Routes/BizSearchDaily';
 import './App.css';
 import { firestore } from "./firebase";
 import AuthRoute from "./Security/AuthRoute";
@@ -58,6 +61,9 @@ function App() {
             <AuthRoute authenticated={authenticated} exact path="/mypage/questions/write" component={QuestionWrite} />
             <AuthRoute authenticated={authenticated} exact path="/biz/certification" component={BizCertification} />
             <AuthRoute authenticated={authenticated} exact path="/biz/mypage" component={BizMypage} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/master" component={BizMaster} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/search/month" component={BizSearchMonth} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/search/date" component={BizSearchDaily} />
         </BrowserRouter>
     );
 }

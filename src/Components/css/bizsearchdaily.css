@@ -1,0 +1,25 @@
+.bizsearch-daily {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+}
+.bizsearch-daily .bizsearch-daily__search {
+    margin: 20px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+}
+.bizsearch-daily .bizsearch-daily__date {
+    margin-right: auto;
+    margin-left: 15px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+.bizsearch-daily .bizsearch-daily__result {
+    margin-right: auto;
+    margin-left: 15px;
+}

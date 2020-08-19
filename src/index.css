@@ -20,6 +20,9 @@
 @import './Components/css/myplace.css';
 @import './Components/css/myplacedetail.css';
 @import './Components/css/bizcertification.css';
+@import './Components/css/bizmaster.css';
+@import './Components/css/bizsearchmonth.css';
+@import './Components/css/bizsearchdaily.css';
 
 
 body {
