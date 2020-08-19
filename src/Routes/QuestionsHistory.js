@@ -6,7 +6,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function QuestionsHistory() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="question">
                 <div className="question__search">
                     <input type="date" /> ~ <input type="date" />

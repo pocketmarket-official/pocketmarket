@@ -5,7 +5,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function ReviewList() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="review">
                 <div className="review__list">
                     <div className="image__container">

@@ -6,7 +6,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function OrderInfo() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="orderinfo">
                 <div className="orderinfo__options">
                     <div className="orderinfo__title">포장선택</div>

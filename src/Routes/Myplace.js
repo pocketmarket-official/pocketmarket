@@ -20,7 +20,7 @@ function Myplace() {
                     </div>
                 </div>
             </div>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="myplace">
                 <div className="myplace__favorite">
                     <div className="myplace__title">My Place</div>

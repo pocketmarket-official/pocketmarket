@@ -17,7 +17,7 @@ function PointHistory() {
                     <button>전환</button>
                 </div>
             </div>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="pointhistory">
                 <div className="pointhistory__container">
                     <div className="pointhistory__data">

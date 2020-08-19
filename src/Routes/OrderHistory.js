@@ -5,7 +5,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function OrderHistory() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="orderhistory">
                 <div className="orderhistory__search">
                     <input type="date" /> ~ <input type="date" />

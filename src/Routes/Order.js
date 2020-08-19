@@ -12,7 +12,7 @@ function Order({match}) {
     return (
         <>
             <OptionModal />
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="orderpage">
                 <div className="order__category">
                     <div className="category__content">음료</div>

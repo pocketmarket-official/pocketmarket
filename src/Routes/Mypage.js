@@ -6,7 +6,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function Mypage() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="mypage">
                 <div className="mypage__box">
                     <div className="mypage__list"><Link to="/mypage/fastorder">Fast-order</Link></div>

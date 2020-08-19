@@ -6,7 +6,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function OrderStatus() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="orderstatus">
                 <Link to="/order/status/1">
                 <div className="orderstatus__card">

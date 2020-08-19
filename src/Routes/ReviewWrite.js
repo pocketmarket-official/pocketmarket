@@ -5,7 +5,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function ReviewWrite() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="reviewwrite">
                 <textarea className="reviewwrite__context" readOnly>context</textarea>
                 <div className="review__content">

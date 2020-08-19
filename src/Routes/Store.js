@@ -114,7 +114,7 @@ function StoreView({match}) {
 
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="store">
                 <div className="content__store">
                     <div className="store__store">

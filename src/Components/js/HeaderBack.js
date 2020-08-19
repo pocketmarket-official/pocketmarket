@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 
-function HeaderBack() {
+function HeaderBack(props) {
     const history = useHistory();
 
     return (
@@ -11,7 +11,7 @@ function HeaderBack() {
                     history.goBack();
                 }}>back</div>
                 <Link to="/main"><div>Pocket Market</div></Link>
-                <Link to="/mypage"><div>my</div></Link>
+                <Link to={props.url}><div>my</div></Link>
             </div>
         );
 }

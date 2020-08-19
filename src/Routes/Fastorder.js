@@ -5,7 +5,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function Fastorder() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="fastorder">
                 <div className="fastorder__container" onClick={() => {
                         const elt = document.getElementById("menu1");

@@ -1,11 +1,11 @@
 import React from 'react';
-import HeaderBizBack from '../Components/js/HeaderBizBack';
+import HeaderBack from '../Components/js/HeaderBack';
 
 
 function BizSearchDaily() {
     return (
         <>
-        <HeaderBizBack />
+        <HeaderBack url='/biz/mypage' />
             <div className="bizsearch-daily">
                 <div className="bizsearch-daily__search">
                     <input type="date" /> ~ <input type="date" />

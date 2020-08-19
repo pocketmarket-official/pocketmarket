@@ -16,7 +16,7 @@ const ColoredLine = ({color}) => (
 function FestivalStore() {
     return (
             <>
-                <HeaderBack />
+                <HeaderBack url='/mypage' />
                 <div className="festival-store">
                     <div className="festival__content">
                         <div className="festival__image">image</div>

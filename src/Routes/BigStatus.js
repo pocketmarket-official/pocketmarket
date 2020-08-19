@@ -6,7 +6,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function BigStatus() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="bigstatus">
                 <div className="bigstatus__content">
                     <div className="bigstatus__title">점포명: </div>

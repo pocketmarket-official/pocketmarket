@@ -5,7 +5,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 function MyplaceDetail() {
     return (
         <>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="myplacedetail">
                 <div className="myplacedetail__map">지도</div>
                 <div className="myplacedetail__api">

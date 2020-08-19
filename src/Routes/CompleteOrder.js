@@ -20,7 +20,7 @@ function OrderComplete() {
                     </div>
                 </div>
             </div>
-            <HeaderBack />
+            <HeaderBack url='/mypage' />
             <div className="ordercomplete">
                 <div className="ordercomplete__text">
                     <div className="ordercomplete__line1">스타벅스에</div>
