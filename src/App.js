@@ -20,6 +20,7 @@ import BigStatus from './Routes/BigStatus';
 import Myplace from './Routes/Myplace';
 import MyplaceDetail from './Routes/MyplaceDetail';
 import BizCertification from './Routes/BizCertification';
+import BizMypage from './Routes/BizMypage';
 import './App.css';
 import { firestore } from "./firebase";
 import AuthRoute from "./Security/AuthRoute";
@@ -56,6 +57,7 @@ function App() {
             <AuthRoute authenticated={authenticated} exact path="/mypage/questions" component={QuestionsHistory} />
             <AuthRoute authenticated={authenticated} exact path="/mypage/questions/write" component={QuestionWrite} />
             <AuthRoute authenticated={authenticated} exact path="/biz/certification" component={BizCertification} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/mypage" component={BizMypage} />
         </BrowserRouter>
     );
 }
