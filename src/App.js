@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './Routes/Login';
 import Main from './Routes/Main';
@@ -24,6 +24,7 @@ import BizMypage from './Routes/BizMypage';
 import BizMaster from './Routes/BizMaster';
 import BizSearchMonth from './Routes/BizSearchMonth';
 import BizSearchDaily from './Routes/BizSearchDaily';
+import BizOrderStatus from './Routes/BizOrderStatus';
 import './App.css';
 import { firestore } from "./firebase";
 import AuthRoute from "./Security/AuthRoute";
@@ -64,6 +65,7 @@ function App() {
             <AuthRoute authenticated={authenticated} exact path="/biz/master" component={BizMaster} />
             <AuthRoute authenticated={authenticated} exact path="/biz/search/month" component={BizSearchMonth} />
             <AuthRoute authenticated={authenticated} exact path="/biz/search/date" component={BizSearchDaily} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/order/status" component={BizOrderStatus} />
         </BrowserRouter>
     );
 }

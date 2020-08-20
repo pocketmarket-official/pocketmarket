@@ -1,0 +1,33 @@
+.bizorderstatus {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+}
+.bizorderstatus .bizorderstatus__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+.bizorderstatus .bizorderstatus__container .bizorderstatus__status {
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+.bizorderstatus .bizorderstatus__container .bizorderstatus__detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+.bizorderstatus .bizorderstatus__container .bizorderstatus__detail .bizorderstatus__order {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
