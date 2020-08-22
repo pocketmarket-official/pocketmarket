@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Components/js/Header';
+import FestivalInfo from '../Festival/FestivalInfo';
+
 
 
 // react hooks that changes tabs
@@ -19,37 +21,9 @@ const useTabs = (initialTab, allTabs) => {
 
 const content = [
     {
-        tab: "축제보기", 
-        content: 
-        <>
-            <div className="current-position">내 현재 위치 GPS icon</div>
-            <Link to="/main/festival/1">
-            <div className="content__festival">
-                <div>image</div>
-                <div className="festival__detail">
-                    <div className="detail__name">Festival Name</div>
-                    <div className="detail__description">Festival Dscpt</div>
-                    <div className="detail__address">Address</div>
-                </div>
-            </div>
-            </Link>
-            <div className="content__festival">
-                <div>image</div>
-                <div className="festival__detail">
-                    <div className="detail__name">Festival Name</div>
-                    <div className="detail__description">Festival Dscpt</div>
-                    <div className="detail__address">Address</div>
-                </div>
-            </div>
-            <div className="content__festival">
-                <div className="festival__image">image</div>
-                <div className="festival__detail">
-                    <div className="detail__name">Festival Name</div>
-                    <div className="detail__description">Festival Dscpt</div>
-                    <div className="detail__address">Address</div>
-                </div>
-            </div>
-        </>
+        tab: "축제보기",
+        content:
+        <FestivalInfo></FestivalInfo>
     }, 
     {
         tab: "매장보기", 
