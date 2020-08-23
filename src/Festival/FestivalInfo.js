@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from 'react-router-dom';
-import { firestore} from "../firebase";
+import { firestore, storageRef } from "../firebase";
 
 function Festival() {
     const [festivalList, setFestivalList] = useState([]);
@@ -36,15 +36,24 @@ function Festival() {
 }
 
 function FestivalInfo({ festival }) {
+
     console.log(festival.data());
     const festivalData = festival.data();
+    const [imageUrl, setImageUrl] = useState('');
+    const imgRef = storageRef.child(festivalData.image);
+    imgRef.getDownloadURL().then(function(url) {
+        // Insert url into an <img> tag to "download"
+        //console.log(url);
+        setImageUrl(url);
+    });
+
     return (
         <Link to={{
             pathname : `/main/festival/${festival.id}`
-            ,state : { festival : festivalData }
+            ,state : { festivalData, imageUrl }
         }}>
             <div className="content__festival">
-                <div>image</div>
+                <div><img src={imageUrl} /></div>
                 <div className="festival__detail">
                     <div className="detail__name">{festivalData.name}</div>
                     <div className="detail__description">{festivalData.description}</div>
