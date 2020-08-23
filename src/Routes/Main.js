@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Components/js/Header';
-import FestivalInfo from '../Festival/FestivalInfo';
+import Festival from '../Festival/FestivalInfo';
 
 
 
@@ -23,7 +23,7 @@ const content = [
     {
         tab: "축제보기",
         content:
-        <FestivalInfo></FestivalInfo>
+        <Festival></Festival>
     }, 
     {
         tab: "매장보기", 

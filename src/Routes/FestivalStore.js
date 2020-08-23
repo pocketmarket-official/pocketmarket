@@ -13,16 +13,19 @@ const ColoredLine = ({color}) => (
     />
 );
 
-function FestivalStore() {
+function FestivalStore( {location} ) {
+    const festivalData  = location.state.festival;
     return (
             <>
                 <HeaderBack url='/mypage' />
                 <div className="festival-store">
                     <div className="festival__content">
-                        <div className="festival__image">image</div>
+                        <div className="festival__image">Image</div>
                         <div className="festival__title">
-                            <div className="festival__name">Festival Name</div>
-                            <div className="festival__description">Festival Dscpt</div>
+                            <div className="festival__name">{ festivalData.name }</div>
+                            <div className="festival__description">{ festivalData.description }</div>
+                            <div className="festival__address">{ festivalData.address }</div>
+
                         </div>
                     </div>
                     <ColoredLine color="black" />
