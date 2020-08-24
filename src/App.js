@@ -22,9 +22,11 @@ import MyplaceDetail from './Routes/MyplaceDetail';
 import BizCertification from './Routes/BizCertification';
 import BizMypage from './Routes/BizMypage';
 import BizMaster from './Routes/BizMaster';
+import BizKitchen from './Routes/BizKitchen';
 import BizSearchMonth from './Routes/BizSearchMonth';
 import BizSearchDaily from './Routes/BizSearchDaily';
 import BizOrderStatus from './Routes/BizOrderStatus';
+import BizReview from './Routes/BizReview';
 import './App.css';
 import { firestore } from "./firebase";
 import AuthRoute from "./Security/AuthRoute";
@@ -62,10 +64,13 @@ function App() {
             <AuthRoute authenticated={authenticated} exact path="/mypage/questions/write" component={QuestionWrite} />
             <AuthRoute authenticated={authenticated} exact path="/biz/certification" component={BizCertification} />
             <AuthRoute authenticated={authenticated} exact path="/biz/mypage" component={BizMypage} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/mypage/order" component={OrderHistory} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/mypage/kitchen" component={BizKitchen} />
             <AuthRoute authenticated={authenticated} exact path="/biz/master" component={BizMaster} />
-            <AuthRoute authenticated={authenticated} exact path="/biz/search/month" component={BizSearchMonth} />
-            <AuthRoute authenticated={authenticated} exact path="/biz/search/date" component={BizSearchDaily} />
-            <AuthRoute authenticated={authenticated} exact path="/biz/order/status" component={BizOrderStatus} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/mypage/search/month" component={BizSearchMonth} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/mypage/search/date" component={BizSearchDaily} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/mypage/order/status" component={BizOrderStatus} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/mypage/review" component={BizReview} />
         </BrowserRouter>
     );
 }
