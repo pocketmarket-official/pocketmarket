@@ -58,6 +58,7 @@ function Myplace() {
                     <div className="myplace__searchbar">
                         <input type="text" />
                         <input type="submit" value="search" />
+                        <button>+</button>
                     </div>
                     <div className="myplace__result">
                         <div className="result__content">

@@ -26,7 +26,6 @@ import BizKitchen from './Routes/BizKitchen';
 import BizSearchMonth from './Routes/BizSearchMonth';
 import BizSearchDaily from './Routes/BizSearchDaily';
 import BizOrderStatus from './Routes/BizOrderStatus';
-import BizReview from './Routes/BizReview';
 import './App.css';
 import { firestore } from "./firebase";
 import AuthRoute from "./Security/AuthRoute";
@@ -70,7 +69,7 @@ function App() {
             <AuthRoute authenticated={authenticated} exact path="/biz/mypage/search/month" component={BizSearchMonth} />
             <AuthRoute authenticated={authenticated} exact path="/biz/mypage/search/date" component={BizSearchDaily} />
             <AuthRoute authenticated={authenticated} exact path="/biz/mypage/order/status" component={BizOrderStatus} />
-            <AuthRoute authenticated={authenticated} exact path="/biz/mypage/review" component={BizReview} />
+            <AuthRoute authenticated={authenticated} exact path="/biz/mypage/review" component={ReviewList} />
         </BrowserRouter>
     );
 }

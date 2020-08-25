@@ -7,7 +7,7 @@ function ReviewWrite() {
         <>
             <HeaderBack url='/mypage' />
             <div className="reviewwrite">
-                <textarea className="reviewwrite__context" readOnly>context</textarea>
+                <textarea className="reviewwrite__context"></textarea>
                 <div className="review__content">
                     <div className="input__container">
                         아이스 아메리카노
