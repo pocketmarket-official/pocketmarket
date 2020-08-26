@@ -18,6 +18,12 @@ function OptionModal() {
                             <div className="optionmodal__content">item content</div>
                         </div>
                     </div>
+                    <div className="optionmodal__category">
+                        <div className="category__category">Opt Cat</div>
+                        <div className="category__category">Opt Cat</div>
+                        <div className="category__category">Opt Cat</div>
+                        <div className="category__category">Opt Cat</div>
+                    </div>
                     <div className="optionmodal__options">
                         <div className="options__option">
                             <div>option</div>

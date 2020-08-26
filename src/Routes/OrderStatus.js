@@ -10,7 +10,7 @@ function OrderStatus() {
             <div className="orderstatus">
                 <Link to="/order/status/1">
                 <div className="orderstatus__card">
-                    <button className="card__delete" onClick={(e) => {
+                    <button className="card__delete hidden" onClick={(e) => {
                         e.preventDefault();
                     }}>X</button>
                     <div className="card__contents">
@@ -43,7 +43,7 @@ function OrderStatus() {
                 </div>
                 </Link>
                 <div className="orderstatus__card">
-                    <button className="card__delete">X</button>
+                    <button className="card__delete hidden">X</button>
                     <div className="card__contents">
                         <div className="card__title">점포명: </div>
                         <div className="card__detail">스타벅스</div>

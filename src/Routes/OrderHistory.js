@@ -29,16 +29,28 @@ function OrderHistory() {
                                 <div className="menu__name">아이스 아메리카노</div>
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
+                                <div className="menu__button-container">
+                                    <button>리뷰</button>
+                                    <button>재주문</button>
+                                </div>
                             </div>
                             <div className="menu__detail">
                                 <div className="menu__name">아이스 아메리카노</div>
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
+                                <div className="menu__button-container">
+                                    <button>리뷰</button>
+                                    <button>재주문</button>
+                                </div>
                             </div>
                             <div className="menu__detail">
                                 <div className="menu__name">아이스 아메리카노</div>
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
+                                <div className="menu__button-container">
+                                    <button>리뷰</button>
+                                    <button>재주문</button>
+                                </div>
                             </div>
                             <div className="menu__receipt" onClick={() => {
                                 const elt = document.getElementById("receipt1");
@@ -71,16 +83,28 @@ function OrderHistory() {
                                 <div className="menu__name">아이스 아메리카노</div>
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
+                                <div className="menu__button-container">
+                                    <button>리뷰</button>
+                                    <button>재주문</button>
+                                </div>
                             </div>
                             <div className="menu__detail">
                                 <div className="menu__name">아이스 아메리카노</div>
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
+                                <div className="menu__button-container">
+                                    <button>리뷰</button>
+                                    <button>재주문</button>
+                                </div>
                             </div>
                             <div className="menu__detail">
                                 <div className="menu__name">아이스 아메리카노</div>
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
+                                <div className="menu__button-container">
+                                    <button>리뷰</button>
+                                    <button>재주문</button>
+                                </div>
                             </div>
                             <div className="menu__receipt">승인전표조회</div>
                         </div>
@@ -102,16 +126,28 @@ function OrderHistory() {
                                 <div className="menu__name">아이스 아메리카노</div>
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
+                                <div className="menu__button-container">
+                                    <button>리뷰</button>
+                                    <button>재주문</button>
+                                </div>
                             </div>
                             <div className="menu__detail">
                                 <div className="menu__name">아이스 아메리카노</div>
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
+                                <div className="menu__button-container">
+                                    <button>리뷰</button>
+                                    <button>재주문</button>
+                                </div>
                             </div>
                             <div className="menu__detail">
                                 <div className="menu__name">아이스 아메리카노</div>
                                 <div className="menu__count">1개</div>
                                 <div className="menu__price">4100원</div>
+                                <div className="menu__button-container">
+                                    <button>리뷰</button>
+                                    <button>재주문</button>
+                                </div>
                             </div>
                             <div className="menu__receipt">승인전표조회</div>
                         </div>

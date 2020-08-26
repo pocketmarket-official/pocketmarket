@@ -28,6 +28,13 @@
     justify-content: center;
     align-items: center;
 }
+.optionmodal .optionmodal__container .optionmodal__category {
+    display: flex;
+    align-items: center;
+}
+.optionmodal .optionmodal__container .optionmodal__category .category__category {
+    margin: 5px 5px;
+}
 .optionmodal .optionmodal__container .optionmodal__options {
     width: 100%;
     top: 0;
