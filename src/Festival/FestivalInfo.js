@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { firestore} from "../firebase";
 
 function Festival() {
@@ -40,8 +40,8 @@ function FestivalInfo({ festival }) {
     const festivalData = festival.data();
     return (
         <Link to={{
-            pathname : `/main/festival/${festival.id}`
-            ,state : { festival : festivalData }
+            pathname : `/main/festival/${festival.id}`,
+            state : { festival : festivalData }
         }}>
             <div className="content__festival">
                 <div>image</div>

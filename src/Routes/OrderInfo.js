@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import pay from '../bootpay.js';
 import HeaderBack from '../Components/js/HeaderBack';
 
 
@@ -21,7 +22,7 @@ function OrderInfo() {
                     <div className="orderinfo__choices"><input type="checkbox" value="포인트 사용" />포인트 사용</div>
                 </div>
                 <div className="orderinfo__btn">
-                    <Link to="/order/complete">결제하기</Link>
+                    <div onClick={() => pay()}>결제하기</div>
                 </div>
             </div>
         </>
