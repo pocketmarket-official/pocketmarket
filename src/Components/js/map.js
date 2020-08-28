@@ -31,6 +31,7 @@ class MapContent extends React.Component {
                 };
                 const map = new kakao.maps.Map(container, options);
 
+                //처음에는 현 위치에 마커
                 let markerPosition = new kakao.maps.LatLng(
                     lat, long
                 );
@@ -41,12 +42,14 @@ class MapContent extends React.Component {
 
                 marker.setMap(map);
 
+                // zoom control
                 let zoomControl = new kakao.maps.ZoomControl();
                 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
                 let infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
                 const btn = document.getElementById("search__map");
+
                 // 장소 검색하기
                 btn.onclick = () => {
                     const keyword = document.getElementById("keyword__map").value;
@@ -67,7 +70,6 @@ class MapContent extends React.Component {
                             map.setBounds(bounds);
                         }
                     }
-
                     function displayMarker(place) {
                         let marker = new kakao.maps.Marker({
                             map: map,

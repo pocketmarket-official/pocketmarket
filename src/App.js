@@ -26,6 +26,10 @@ import BizKitchen from './Routes/BizKitchen';
 import BizSearchMonth from './Routes/BizSearchMonth';
 import BizSearchDaily from './Routes/BizSearchDaily';
 import BizOrderStatus from './Routes/BizOrderStatus';
+import KDSMain from './Routes/KDSMain';
+import KDSPickup from './Routes/KDSPickup';
+import KDSKitchen from './Routes/KDSKitchen';
+import KDSSetting from './Routes/KDSSetting';
 import './App.css';
 import { firestore } from "./firebase";
 import AuthRoute from "./Security/AuthRoute";
@@ -70,6 +74,10 @@ function App() {
             <AuthRoute authenticated={authenticated} exact path="/biz/mypage/search/date" component={BizSearchDaily} />
             <AuthRoute authenticated={authenticated} exact path="/biz/mypage/order/status" component={BizOrderStatus} />
             <AuthRoute authenticated={authenticated} exact path="/biz/mypage/review" component={ReviewList} />
+            <AuthRoute authenticated={authenticated} exact path="/kds/main" component={KDSMain} />
+            <AuthRoute authenticated={authenticated} exact path="/kds/pickup" component={KDSPickup} />
+            <AuthRoute authenticated={authenticated} exact path="/kds/kitchen" component={KDSKitchen} />
+            <AuthRoute authenticated={authenticated} exact path="/kds/setting" component={KDSSetting} />
         </BrowserRouter>
     );
 }
