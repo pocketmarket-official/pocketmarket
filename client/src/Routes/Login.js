@@ -2,7 +2,6 @@ import React from 'react';
 import KaKaoLogin from 'react-kakao-login';
 import styled from 'styled-components';
 import { Redirect } from "react-router-dom";
-import { firestore} from "../firebase";
 
 const axios = require('axios');
 
@@ -15,7 +14,7 @@ function Login({ authenticated, login, location }) {
         } catch (e) {
             alert("Failed to login");
         }
-        firestore.collection("users").doc(email).get()
+        /*firestore.collection("users").doc(email).get()
             .then(function(doc) {
                 if (doc.exists) {
                     console.log("Document data:", doc.data());
@@ -36,7 +35,7 @@ function Login({ authenticated, login, location }) {
                 }
             }).catch(function(error) {
             console.log("Error getting document:", error);
-        });
+        });*/
 
 
         /*firestore.collection("users").add({
