@@ -21,6 +21,9 @@
 .orderstatus .orderstatus__card .card__delete {
     margin-left: auto;
 }
+.orderstatus .orderstatus__card .card__delete.hidden {
+    display: none;
+}
 .orderstatus .orderstatus__card .card__contents {
     display: flex;
     align-items: center;

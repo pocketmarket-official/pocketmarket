@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
+import KakaoMap from '../Components/js/kakaomap';
 
 
 function MyplaceDetail() {
@@ -7,13 +8,13 @@ function MyplaceDetail() {
         <>
             <HeaderBack url='/mypage' />
             <div className="myplacedetail">
-                <div className="myplacedetail__map">지도</div>
+                <KakaoMap />
                 <div className="myplacedetail__api">
-                    <div className="myplacedetail__address">안양시 동안구 호계동 1027</div>
-                    <div className="myplacedetail__street">엘에스로 91번길 16-39</div>
+                    <div className="myplacedetail__address" id="myplacedetail__address"></div>
+                    <div className="myplacedetail__street" id="myplacedetail__street"></div>
                 </div>
-                <input type="text" placeholder="상세주소를 입력하세요(건물명, 동 / 호수 등)" />
-                <input type="submit" value="완료" />
+                <input type="text" placeholder="상세주소를 입력하세요(건물명, 동 / 호수 등)" id="keyword__map" />
+                <input type="submit" value="완료" id="search__map" />
             </div>
         </>
     );

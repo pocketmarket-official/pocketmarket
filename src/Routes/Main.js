@@ -29,7 +29,6 @@ const content = [
         tab: "매장보기", 
         content: 
         <>
-            <div className="current-position">내 현재 위치 GPS icon</div>
             <div className="content__store">
                 <Link to="/main/store/1">
                 <div className="store__store">
@@ -103,6 +102,11 @@ function Main() {
                         {content.map((section, index) =>  (
                                 <button onClick={() => changeItem(index)} key={index}>{section.tab}</button>
                             ))}
+                    </div>
+                    <div className="current-position">
+                        <button>▼</button>
+                        <div>내 현재 위치</div>
+                        <div>GPS icon</div>
                     </div>
                     {currentItem.content}
                 </div>

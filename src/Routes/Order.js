@@ -24,7 +24,10 @@ function Order({match}) {
                     <div className="category__content">기타</div>
                 </div>
                 <div className="order__menu">
-                    <div className="menu__container">
+                    <div className="menu__container" onClick={() => {
+                                const elt = document.getElementById("optionmodal");
+                                elt.classList.remove("hidden");
+                            }}>
                         <div className="menu__image">image</div>
                         <div className="menu__name">아이스 아메리카노</div>
                     </div>

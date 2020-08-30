@@ -1,0 +1,82 @@
+.bizkitchen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bizkitchen .bizkitchen__large, 
+.bizkitchen .bizkitchen__middle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+}
+.bizkitchen .bizkitchen__large {
+    margin-top: 25px;
+}
+.bizkitchen .bizkitchen__middle {
+    margin-top: 25px;
+}
+.bizkitchen .bizkitchen__large .bizkitchen__large__container, 
+.bizkitchen .bizkitchen__middle .bizkitchen__middle__container {
+    flex: 10;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+}
+.bizkitchen .bizkitchen__large .bizkitchen__large__container .bizkitchen__large__content, 
+.bizkitchen .bizkitchen__middle .bizkitchen__middle__container .bizkitchen__middle__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 15px;
+}
+.bizkitchen .bizkitchen__large .bizkitchen__large__left, 
+.bizkitchen .bizkitchen__middle .bizkitchen__middle__left {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+}
+.bizkitchen .bizkitchen__large .bizkitchen__large__right, 
+.bizkitchen .bizkitchen__middle .bizkitchen__middle__right {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+.bizkitchen .bizkitchen__result {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(auto-fill, 500px);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    grid-gap: 15px;
+}
+.bizkitchen .bizkitchen__result .bizkitchen__result__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bizkitchen .bizkitchen__result .bizkitchen__result__container .bizkitchen__result__content {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bizkitchen .bizkitchen__result .bizkitchen__result__container .bizkitchen__result__name {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

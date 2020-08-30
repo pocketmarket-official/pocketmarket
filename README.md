@@ -1,68 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 포켓 마켓
 
-In the project directory, you can run:
+서비스명 : 포켓마켓
+설명 : 행사별 푸드트럭의 위치와 고객을 연결해주는 플랫폼입니다.
 
-### `npm start`
+기능 : 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+각 지역별 행사 정보 조회
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+행사장에 위치한 푸드트럭 정보 조회
 
-### `npm test`
+결재연동
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+통합 포인트 제공 
 
-### `npm run build`
+주문 상태 실시간 모니터링
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+주문,결재 이력 확인
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+사용 기술 스택 :
 
-### `npm run eject`
+frontend - react hooks, react router
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+backend - serverless
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+database - firebase store, firebase storage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+hosting - firebase hosting
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+vcs - github
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+멤버 :
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+기획 - 장문진, 마진형
 
-### Code Splitting
+개발 - 손수훈(기능구현), 노민철(디자인, 레이아웃)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+배포 url : https://pocket-market-ddc08.firebaseapp.com/
 
-### Analyzing the Bundle Size
+화면 정의서 : https://www.dropbox.com/sh/n5e7at14pkujn3n/AABjF1m1fnqbclk3L4kA-L8ma/%EA%B0%9C%EB%B0%9C/%ED%99%94%EB%A9%B4%EC%A0%95%EC%9D%98%EC%84%9C?dl=0&preview=%ED%99%94%EB%A9%B4%EC%A0%95%EC%9D%98%EC%84%9C_v2.0_20200804.pptx&subfolder_nav_tracking=1
+테이블 정의서 : https://www.dropbox.com/sh/n5e7at14pkujn3n/AAAUrlnq2B5Lm0x6StJNeCk8a/%EA%B0%9C%EB%B0%9C/%ED%85%8C%EC%9D%B4%EB%B8%94%EC%A0%95%EC%9D%98%EC%84%9C?dl=0&preview=POCKETMARKET+%ED%85%8C%EC%9D%B4%EB%B8%94%EC%A0%95%EC%9D%98%EC%84%9C.xlsx&subfolder_nav_tracking=1
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

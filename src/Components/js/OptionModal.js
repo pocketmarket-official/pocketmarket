@@ -18,26 +18,32 @@ function OptionModal() {
                             <div className="optionmodal__content">item content</div>
                         </div>
                     </div>
+                    <div className="optionmodal__category">
+                        <div className="category__category">Opt Cat</div>
+                        <div className="category__category">Opt Cat</div>
+                        <div className="category__category">Opt Cat</div>
+                        <div className="category__category">Opt Cat</div>
+                    </div>
                     <div className="optionmodal__options">
                         <div className="options__option">
-                            <div className="">option</div>
-                            <div className="">option</div>
-                            <div className="">option</div>
+                            <div>option</div>
+                            <div>option</div>
+                            <div>option</div>
                         </div>
                         <div className="options__option">
-                            <div className="">option</div>
-                            <div className="">option</div>
-                            <div className="">option</div>
+                            <div>option</div>
+                            <div>option</div>
+                            <div>option</div>
                         </div>
                         <div className="options__option">
-                            <div className="">option</div>
-                            <div className="">option</div>
-                            <div className="">option</div>
+                            <div>option</div>
+                            <div>option</div>
+                            <div>option</div>
                         </div>
                         <div className="options__option">
-                            <div className="">option</div>
-                            <div className="">option</div>
-                            <div className="">option</div>
+                            <div>option</div>
+                            <div>option</div>
+                            <div>option</div>
                         </div>
                     </div>
                     <div className="optionmodal__result">
@@ -46,7 +52,7 @@ function OptionModal() {
                                 <div>seq</div>
                                 <div>옵션</div>
                                 <input type="number" id="option__quantity" />
-                                <button className="">X</button>
+                                <button>X</button>
                             </div>
                         </div>
                         <div className="optionmodal__btn">
