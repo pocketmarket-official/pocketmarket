@@ -14,6 +14,10 @@ function Login({ authenticated, login, location }) {
         } catch (e) {
             alert("Failed to login");
         }
+        axios.get(`http://localhost:3001/api/users?email=${email}`)
+            .then(res => {
+                console.log(res);
+            })
         /*firestore.collection("users").doc(email).get()
             .then(function(doc) {
                 if (doc.exists) {
