@@ -23,11 +23,11 @@
 
 frontend - react hooks, react router
 
-backend - serverless
+backend - express
 
-database - firebase store, firebase storage
+database - 
 
-hosting - firebase hosting
+hosting - 
 
 vcs - github
 
@@ -41,6 +41,7 @@ vcs - github
 배포 url : https://pocket-market-ddc08.firebaseapp.com/
 
 화면 정의서 : https://www.dropbox.com/sh/n5e7at14pkujn3n/AABjF1m1fnqbclk3L4kA-L8ma/%EA%B0%9C%EB%B0%9C/%ED%99%94%EB%A9%B4%EC%A0%95%EC%9D%98%EC%84%9C?dl=0&preview=%ED%99%94%EB%A9%B4%EC%A0%95%EC%9D%98%EC%84%9C_v2.0_20200804.pptx&subfolder_nav_tracking=1
+
 테이블 정의서 : https://www.dropbox.com/sh/n5e7at14pkujn3n/AAAUrlnq2B5Lm0x6StJNeCk8a/%EA%B0%9C%EB%B0%9C/%ED%85%8C%EC%9D%B4%EB%B8%94%EC%A0%95%EC%9D%98%EC%84%9C?dl=0&preview=POCKETMARKET+%ED%85%8C%EC%9D%B4%EB%B8%94%EC%A0%95%EC%9D%98%EC%84%9C.xlsx&subfolder_nav_tracking=1
 
 
