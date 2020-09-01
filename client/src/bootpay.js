@@ -4,6 +4,7 @@ import BootPay from "bootpay-js";
 function pay() {
     BootPay.request({
         price: '1000', //실제 결제되는 가격
+        tax_free: '0',
         application_id: process.env.REACT_APP_BOOTPAY_APP_ID,
         name: '식당 이름',
         pg: 'kakao',
@@ -19,14 +20,14 @@ function pay() {
             }
         ],
         user_info: {
-            username: '사용자 이름',
-            email: '사용자 이메일',
-            addr: '사용자 주소',
-            phone: '010-1234-4567'
+            username: '노민철',
+            email: 'rmc2@naver.com',
+            addr: '경기도 안양시',
+            phone: '010-8222-9249'
         },
         order_id: `${Date.now()}_사용자_이름`,
-        params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
-        account_expire_at: '2018-05-25', // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. )
+//        params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+//        account_expire_at: '2018-05-25', // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. )
     }).error(function (data) {
         console.log(data);
     }).cancel(function (data) {

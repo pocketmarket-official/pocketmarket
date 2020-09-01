@@ -8,13 +8,13 @@
 }
 .myplacedetail .kakaomap,
 .myplacedetail .kakaomap #map {
-    width: 500px;
+    width: 700px;
     height: 500px;
 }
 @media (max-width: 550px) {
     .myplacedetail .kakaomap,
     .myplacedetail .kakaomap #map {
-        width: 300px;
+        width: 90%;
         height: 300px;
     }
 }
