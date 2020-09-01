@@ -111,3 +111,10 @@
 .myplace__modal .modal__modal .modal__title {
     margin-bottom: 5px;
 }
+.myplace .myplace__favorite a {
+    width: 80%;
+    margin: 15px auto;
+}
+.myplace .myplace__favorite a input[type="button"] {
+    width: 100%;
+}

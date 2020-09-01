@@ -53,48 +53,7 @@ function Myplace() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="myplace__search">
-                    <div className="myplace__searchbar">
-                        <input type="text" />
-                        <input type="submit" value="search" />
-                        <button>+</button>
-                    </div>
-                    <div className="myplace__result">
-                        <div className="result__content">
-                            <Link to="/mypage/myplace/1">
-                                <div className="result__title">강동구 천호동 151-2 1305호</div>
-                                <div className="result__detail">
-                                    <div className="result__address">성안로 173 1305호</div>
-                                    <div className="result__button" onClick={(e) => {
-                                        e.preventDefault();
-                                    }}>X</div>
-                                </div>
-                            </Link>
-                        </div>
-                        <div className="result__content">
-                            <Link to="/mypage/myplace/2">
-                                <div className="result__title">강동구 천호동 151-2 1305호</div>
-                                <div className="result__detail">
-                                    <div className="result__address">성안로 173 1305호</div>
-                                    <div className="result__button" onClick={(e) => {
-                                        e.preventDefault();
-                                    }}>X</div>
-                                </div>
-                            </Link>
-                        </div>
-                        <div className="result__content">
-                            <Link to="/mypage/myplace/3">
-                                <div className="result__title">강동구 천호동 151-2 1305호</div>
-                                <div className="result__detail">
-                                    <div className="result__address">성안로 173 1305호</div>
-                                    <div className="result__button" onClick={(e) => {
-                                        e.preventDefault();
-                                    }}>X</div>
-                                </div>
-                            </Link>
-                        </div>
-                    </div>
+                    <Link to="/mypage/myplace/search"><input type="button" value="위치 검색하기" /></Link>
                 </div>
             </div>
         </>

@@ -59,7 +59,7 @@ function App() {
         <AuthRoute authenticated={authenticated} exact path="/mypage" component={Mypage} />
         <AuthRoute authenticated={authenticated} exact path="/mypage/fastorder" component={Fastorder} />
         <AuthRoute authenticated={authenticated} exact path="/mypage/myplace" component={Myplace} />
-        <AuthRoute authenticated={authenticated} exact path="/mypage/myplace/:placeId" component={MyplaceDetail} />
+        <AuthRoute authenticated={authenticated} exact path="/mypage/myplace/search" component={MyplaceDetail} />
         <AuthRoute authenticated={authenticated} exact path="/mypage/order" component={OrderHistory} />
         <AuthRoute authenticated={authenticated} exact path="/mypage/point" component={PointHistory} />
         <AuthRoute authenticated={authenticated} exact path="/mypage/questions" component={QuestionsHistory} />
