@@ -10,8 +10,11 @@ function MyplaceDetail() {
             <div className="myplacedetail">
                 <KakaoMap />
                 <div className="myplacedetail__api">
-                    <div className="myplacedetail__address" id="myplacedetail__address"></div>
-                    <div className="myplacedetail__street" id="myplacedetail__street"></div>
+                    <div>
+                        <div className="myplacedetail__address" id="myplacedetail__address"></div>
+                        <div className="myplacedetail__street" id="myplacedetail__street"></div>
+                    </div>
+                    <button id="addList">추가하기</button>
                 </div>
                 <input type="text" placeholder="상세주소를 입력하세요(건물명, 동 / 호수 등)" id="keyword__map" />
                 <input type="submit" value="완료" id="search__map" />

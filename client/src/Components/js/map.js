@@ -3,10 +3,6 @@ import React from 'react';
 
 
 class MapContent extends React.Component {
-    state = {
-        results: []
-    }
-
     componentDidMount() {
         // create and add script tag to the head
         const script = document.createElement("script");
@@ -59,7 +55,7 @@ class MapContent extends React.Component {
                     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
                         if (status === kakao.maps.services.Status.OK) {
                             let detailAddr = !!result[0].road_address ? '<div style="padding:5px;font-size:12px;">도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-                            detailAddr += '<div style="padding:5px;font-size:12px;">지번 주소 : ' + result[0].address.address_name + '</div>';
+                            detailAddr += '<div style="padding:5px; margin-bottom:5px;font-size:12px;">지번 주소 : ' + result[0].address.address_name + '</div>';
                             
                             let content = '<div class="bAddr" style="padding:5px;font-size:12px;">' + detailAddr + '</div>';
 
@@ -93,6 +89,10 @@ class MapContent extends React.Component {
                     markers = [];
                     const keyword = document.getElementById("keyword__map").value;
                     const searchResult = document.getElementById("results");
+                    const btn = document.getElementById("addList");
+                    while(searchResult.hasChildNodes()) {
+                        searchResult.removeChild(searchResult.firstChild);
+                    }
 
                     let places = new kakao.maps.services.Places();
 
@@ -100,17 +100,11 @@ class MapContent extends React.Component {
                         if (status === kakao.maps.services.Status.OK) {
 
                             let bounds = new kakao.maps.LatLngBounds();
-                            this.setState({results: []});
 
                             for (let i = 0; i < data.length; i++) {
                                 displayMarker(data[i]);
                                 bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
                             }
-                            this.state.results.map((item) => {
-                                let elt = document.createElement("div");
-                                elt.innerHTML = `${item.place_name}`;
-                                searchResult.appendChild(elt);
-                            });
                             map.setBounds(bounds);
                         }
                     }
@@ -122,16 +116,24 @@ class MapContent extends React.Component {
                         });
 
                         markers.push(marker);
-                        this.setState({results: [...this.state.results, place]});
 
-                        kakao.maps.event.addListener(marker, 'click', function() {
+                        let elt = document.createElement("div");
+                        elt.innerHTML = `${place.place_name}`;
+
+                        function displayInfowindow() {
                             infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
                             const address = document.getElementById("myplacedetail__address");
                             const street = document.getElementById("myplacedetail__street");
                             address.innerHTML = '지번 주소: ' + place.address_name;
                             street.innerHTML = '도로명 주소: ' + place.road_address_name;
+                            btn.style.display = 'block';
                             infowindow.open(map, marker);
-                        });
+                        }
+
+                        kakao.maps.event.addListener(marker, 'click', displayInfowindow);
+                        elt.classList.add("search__result");
+                        elt.addEventListener("click", displayInfowindow);
+                        searchResult.appendChild(elt);
                     }
 
                     places.keywordSearch(keyword, placesSearchCB);

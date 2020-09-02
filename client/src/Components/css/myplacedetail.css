@@ -20,6 +20,10 @@
 }
 .myplacedetail .myplacedetail__api {
     margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 .myplacedetail input {
     width: 100%;
@@ -30,4 +34,7 @@
 .myplacedetail input[type="submit"] {
     background-color: #2AC1BC;
     color: #ffffff;
+}
+#addList {
+    display: none;
 }
