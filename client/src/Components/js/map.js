@@ -3,6 +3,9 @@ import React from 'react';
 
 
 class MapContent extends React.Component {
+    state = {
+        results: []
+    }
 
     componentDidMount() {
         // create and add script tag to the head
@@ -13,7 +16,7 @@ class MapContent extends React.Component {
         let lat;
         let long;
         let markers = [];
-
+ 
         const success = (pos) => {
             const coords = pos.coords;
             lat = coords.latitude;
@@ -89,30 +92,37 @@ class MapContent extends React.Component {
                     }
                     markers = [];
                     const keyword = document.getElementById("keyword__map").value;
+                    const searchResult = document.getElementById("results");
 
                     let places = new kakao.maps.services.Places();
 
-                    places.keywordSearch(keyword, placesSearchCB);
-
-                    function placesSearchCB (data, status, pagination) {
+                    const placesSearchCB = (data, status, pagination) => {
                         if (status === kakao.maps.services.Status.OK) {
 
                             let bounds = new kakao.maps.LatLngBounds();
+                            this.setState({results: []});
 
                             for (let i = 0; i < data.length; i++) {
                                 displayMarker(data[i]);
                                 bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
                             }
+                            this.state.results.map((item) => {
+                                let elt = document.createElement("div");
+                                elt.innerHTML = `${item.place_name}`;
+                                searchResult.appendChild(elt);
+                            });
                             map.setBounds(bounds);
                         }
                     }
-                    function displayMarker(place) {
+
+                    const displayMarker = (place) => {
                         let marker = new kakao.maps.Marker({
                             map: map,
                             position: new kakao.maps.LatLng(place.y, place.x) 
                         });
 
                         markers.push(marker);
+                        this.setState({results: [...this.state.results, place]});
 
                         kakao.maps.event.addListener(marker, 'click', function() {
                             infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
@@ -123,6 +133,8 @@ class MapContent extends React.Component {
                             infowindow.open(map, marker);
                         });
                     }
+
+                    places.keywordSearch(keyword, placesSearchCB);
                 }
             });
         }

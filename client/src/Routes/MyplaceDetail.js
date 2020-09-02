@@ -15,6 +15,7 @@ function MyplaceDetail() {
                 </div>
                 <input type="text" placeholder="상세주소를 입력하세요(건물명, 동 / 호수 등)" id="keyword__map" />
                 <input type="submit" value="완료" id="search__map" />
+                <div id="results"></div>
             </div>
         </>
     );
