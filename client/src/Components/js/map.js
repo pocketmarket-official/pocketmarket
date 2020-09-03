@@ -49,6 +49,10 @@ class MapContent extends React.Component {
 
                 let infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
+                let content = '<div style="padding:5px;font-size:12px;">현위치</div>';
+                infowindow.setContent(content);
+                infowindow.open(map, marker);
+
                 const btn = document.getElementById("search__map");
 
                 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
@@ -63,17 +67,35 @@ class MapContent extends React.Component {
                             marker.setPosition(mouseEvent.latLng);
                             marker.setMap(map);
 
+                            const address = document.getElementById("myplacedetail__address");
+                            const street = document.getElementById("myplacedetail__street");
+                            const btn = document.getElementById("addList");
+                            let addressName;
+                            let roadAddress;
+
+                            try {
+                                addressName = result[0].address.address_name;
+                            }
+                            catch {
+                                addressName = ""
+                            }
+
+                            try {
+                                roadAddress = result[0].road_address.address_name;
+                            }
+                            catch {
+                                roadAddress = ""
+                            }
+                            address.innerHTML = '지번 주소: ' + addressName;
+                            street.innerHTML = '도로명 주소: ' + roadAddress;
+                            btn.style.display = 'block';
+
                             // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                             infowindow.setContent(content);
                             infowindow.open(map, marker);
                             }
                         });
                     });
-
-                function searchAddrFromCoords(coords, callback) {
-                    // 좌표로 행정동 주소 정보를 요청합니다
-                    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-                }
 
                 function searchDetailAddrFromCoords(coords, callback) {
                     // 좌표로 법정동 상세 주소 정보를 요청합니다
