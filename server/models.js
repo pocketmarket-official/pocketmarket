@@ -8,6 +8,7 @@ if (process.env.NODE_ENV === 'development') {
         storage: './db.sqlite',
         define: {
             freezeTableName: true,
+            underscored: true,
         }
     }
 } else if (process.env.NODE_ENV === 'production') {
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV === 'development') {
         ,database: process.env.DB_SCHEMA,
         define: {
             freezeTableName: true,
+            underscored: true,
         }
     }
 }
@@ -52,7 +54,7 @@ const Festival = sequelize.define('M_FESTIVAL', {
     description: {
         type: Sequelize.STRING
     },
-    adress: {
+    address: {
         type: Sequelize.STRING
     },
     imageUrl: {
@@ -73,19 +75,19 @@ const Festival = sequelize.define('M_FESTIVAL', {
 });
 
 const Store = sequelize.define('M_STORE', {
-    compCd: {
+    companyCode: {
         type: Sequelize.STRING
     },
-    storeCd: {
+    storeCode: {
         type: Sequelize.STRING
     },
-    storeNM: {
+    storeName: {
         type: Sequelize.STRING
     },
     storeCeo: {
         type: Sequelize.STRING
     },
-    bizopNo: {
+    businessNumber: {
         type: Sequelize.STRING
     },
     storeTel: {
@@ -97,25 +99,25 @@ const Store = sequelize.define('M_STORE', {
     storeFax: {
         type: Sequelize.STRING
     },
-    postCd: {
+    postCode: {
         type: Sequelize.STRING
     },
     storeMail: {
         type: Sequelize.STRING
     },
-    storeAddr1: {
+    storeAddress1: {
         type: Sequelize.STRING
     },
-    storeAddr2: {
+    storeAddress2: {
         type: Sequelize.STRING
     },
-    storeOldAddr : {
+    storeOldAddress : {
         type: Sequelize.STRING
     },
-    openTm : {
+    openTime : {
         type: Sequelize.INTEGER
     },
-    closeTm: {
+    closeTime: {
         type: Sequelize.INTEGER
     }
 });
