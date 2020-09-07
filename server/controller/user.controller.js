@@ -2,17 +2,19 @@ const models = require('../models');
 
 const index = function(req, res) {
     req.query.limit = req.query.limit || 10;
+    req.query.email = req.query.email || '';
     const limit = parseInt(req.query.limit, 10);
     if (Number.isNaN(limit)) {
         return res.status(400).end();
     }
-    models.User.findAll({
-        limit: limit
-    })
+    const option = {};
+    option.limit = limit;
+    if (req.query.email) option.where = {email : req.query.email};
+    option.attribute = { exclude: ['createdAt', 'updatedAt']};
+    models.User.findAll(option)
         .then(users => {
             res.json(users);
         });
-    //res.json(users.slice(0,limit));
 };
 
 const show = function (req, res) {
@@ -68,7 +70,6 @@ const update = (req, res) => {
     }).then(user => {
         if (!user) return res.status(404).end();
         user.email = email;
-        console.log(email);
         user.save()
             .then(user => {
                 res.json(user);

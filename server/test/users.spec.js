@@ -5,7 +5,7 @@ const models = require('../models');
 
 describe('GET /users는', () => {
     const users = [
-        { email: 'shson@test.com'},
+        { email: 'jebi10mari@naver.com'},
         { email: 'eunbee@mocha.com'},
         { email: 'jiyoung@for.com' }
     ];
@@ -16,7 +16,7 @@ describe('GET /users는', () => {
         models.User.bulkCreate(users).then(() => { done(); });
     });
     describe('성공시', () => {
-        it('유저 객체를 담은 배열로 응답한 ', (done) => {
+        it('유저 객체를 담은 배열로 응답한다', (done) => {
             request(app)
                 .get('/users')
                 .end((err, res) => {
@@ -29,6 +29,15 @@ describe('GET /users는', () => {
                 .get('/users?limit=2')
                 .end((err, res) => {
                     res.body.should.have.lengthOf(2);
+                    done();
+                });
+        });
+        it('email에 해당하는 유저를 리턴한다.', (done) => {
+            request(app)
+                .get('/users?email=jebi10mari@naver.com')
+                .end((err, res) => {
+                    res.body.should.have.lengthOf(1);
+                    res.body[0].should.be.property('email', 'jebi10mari@naver.com')
                     done();
                 });
         })
@@ -122,11 +131,11 @@ describe('POST /users', () => {
     });
     describe('성공시 ', () => {
         let body;
-        let email = 'daniel'
+        let email = 'daniel@test.com';
         before((done) => {
             request(app)
                 .post('/users')
-                .send({email: 'daniel@test.com'})
+                .send({email: email})
                 .expect(201)
                 .end((err, res) => {
                     body = res.body;
@@ -136,7 +145,7 @@ describe('POST /users', () => {
         it('생성된 유저 객체를 반환한다', () => {
             body.should.have.property('id');
         })
-        it('입력한 email을 반환한', () => {
+        it('입력한 email을 반환한다', () => {
             body.should.have.property('email', email);
         })
     })
@@ -151,13 +160,13 @@ describe('POST /users', () => {
         it('email이 중복일 경우 409를 반환한다 ', (done) => {
             request(app)
                 .post('/users')
-                .send({email: 'eunbee'})
+                .send({email: 'eunbee@mocha.com'})
                 .expect(409)
                 .end(done)
         })
     })
 })
-describe.only('PUT /users', () => {
+describe('PUT /users', () => {
     const users = [
         { email: 'shson@test.com'},
         { email: 'eunbee@mocha.com'},
