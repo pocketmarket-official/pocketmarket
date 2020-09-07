@@ -1,11 +1,30 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './db.sqlite',
-    define: {
-        freezeTableName: true,
+require('dotenv').config();
+let sequelizeOption;
+console.log('mode: '+ process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+    sequelizeOption = {
+        dialect: 'sqlite',
+        storage: './db.sqlite',
+        define: {
+            freezeTableName: true,
+        }
     }
-});
+} else if (process.env.NODE_ENV === 'production') {
+    sequelizeOption = {
+        dialect: 'mysql'
+        ,username: process.env.DB_USER
+        ,password: process.env.DB_PASSWORD
+        ,host: process.env.DB_HOST
+        ,database: process.env.DB_SCHEMA,
+        define: {
+            freezeTableName: true,
+        }
+    }
+}
+
+
+const sequelize = new Sequelize(sequelizeOption);
 
 const User = sequelize.define('M_USER', {
     email: {
