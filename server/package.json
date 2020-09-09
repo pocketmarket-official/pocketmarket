@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=express:* nodemon --exec babel-node ./bin/www",
-    "test": "set NODE_ENV=test&&mocha --require=@babel/register test/users.spec.js -w"
+    "test": "set NODE_ENV=test&&mocha test --recursive --require=@babel/register"
   },
   "dependencies": {
     "@babel/core": "^7.11.4",
@@ -18,6 +18,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "mysql2": "^2.1.0",
     "nodemon": "^2.0.4",
     "sequelize": "^6.3.4",
     "sqlite3": "^5.0.0"

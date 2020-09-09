@@ -23,12 +23,13 @@ function Festival() {
     const [festivalList, setFestivalList] = useState([]);
     useEffect(() => {
         console.log('마운트됨');
-        axios.get('http://localhost:3001')
+        axios.get('http://localhost:3001/festival')
             .then(res => {
-                console.log(res);
+                console.log(res.data);
+                setFestivalList(res.data.rows);
             })
 
-        setFestivalList(temp);
+
         /*firestore.collection("m_festival").get()
             .then(function(doc) {
                 if (doc.size) {

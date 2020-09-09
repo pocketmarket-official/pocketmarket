@@ -14,68 +14,18 @@ function Login({ authenticated, login, location }) {
         } catch (e) {
             alert("Failed to login");
         }
-        axios.get(`http://localhost:3001/api/users?email=${email}`)
+        axios.get(`http://localhost:3001/users?email=${email}`)
             .then(res => {
+                if (res.data.length == 0) {
+                    axios.post(`http://localhost:3001/users`, {
+                        email
+                    })
+                        .then(res => {
+                            console.log(email + '신규등록 되었습니다.');
+                        })
+                }
                 console.log(res);
             })
-        /*firestore.collection("users").doc(email).get()
-            .then(function(doc) {
-                if (doc.exists) {
-                    console.log("Document data:", doc.data());
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
-                    //유저가 없다.. 문서를 새로 만듬
-                    firestore.collection("users").doc(email)
-                        .set({
-                        email : email
-                        })
-                        .then(function(doc) {
-                            console.log("Document written with ID: ", email);
-                        })
-                        .catch(function(error) {
-                            console.error("Error adding document: ", error);
-                        });
-                }
-            }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });*/
-
-
-        /*firestore.collection("users").add({
-            email : 'abc@abc.com'
-        })
-            .then(function(docRef) {
-                console.log("Document written with ID: ", docRef.id);
-            })
-            .catch(function(error) {
-                console.error("Error adding document: ", error);
-            });*/
-        // 사용자가 서버에 등록이 되었는지 확인하기
-        /*let isExistUser = false;
-        axios.get('http://localhost:3001/users?user_id=' + email)
-            // 응답(성공)
-            .then((response) => {
-                if (response.data.length === 0) isExistUser = false
-                else isExistUser = true
-                //유저가 없으면 유저를 등록
-                if (!isExistUser) {
-                    axios.post(
-                        'http://localhost:3001/users',
-                        {"user_id": res.profile.kakao_account.email}
-                    )
-                        .then((res) => {
-                            console.log(res);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        })
-                }  //if (!isExistUser) {
-            }) //then end
-            // 응답(실패)
-            .catch(function (error) {
-                console.log(error);
-            })*/
     };
 
     const responseFail = (err) => {
