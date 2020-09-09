@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Components/js/Header';
 import Festival from '../Festival/FestivalInfo';
-
-
+import StoreJSX from '../Components/js/mainStoreJSX';
 
 // react hooks that changes tabs
 const useTabs = (initialTab, allTabs) => {
@@ -27,73 +26,14 @@ const content = [
     }, 
     {
         tab: "매장보기", 
-        content: 
-        <>
-            <div className="content__store">
-                <Link to="/main/store/1">
-                <div className="store__store">
-                    <div className="store__image">image</div>
-                    <div className="store__detail">
-                        <div className="detail__title">
-                            <div className="detail__name">강남 핫도그</div>
-                            <div className="detail__distance">0.7km</div>
-                            <div className="detail__likes">좋아요</div>
-                        </div>
-                        <div className="detail__description">
-                            설명설명설명설명설명설명설명설명설명설명설명
-                        </div>
-                    </div>
-                </div>
-                </Link>
-                <div className="store__review">
-                    리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
-                    <div className="review__likes">리뷰 좋아요</div>
-                </div>
-            </div>
-            <div className="content__store">
-                <div className="store__store">
-                    <div className="store__image">image</div>
-                    <div className="store__detail">
-                        <div className="detail__title">
-                            <div className="detail__name">강남 핫도그</div>
-                            <div className="detail__distance">0.7km</div>
-                            <div className="detail__likes">좋아요</div>
-                        </div>
-                        <div className="detail__description">
-                            설명설명설명설명설명설명설명설명설명설명설명
-                        </div>
-                    </div>
-                </div>
-                <div className="store__review">
-                    리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
-                    <div className="review__likes">리뷰 좋아요</div>
-                </div>
-            </div>
-            <div className="content__store">
-                <div className="store__store">
-                    <div className="store__image">image</div>
-                    <div className="store__detail">
-                        <div className="detail__title">
-                            <div className="detail__name">강남 핫도그</div>
-                            <div className="detail__distance">0.7km</div>
-                            <div className="detail__likes">좋아요</div>
-                        </div>
-                        <div className="detail__description">
-                            설명설명설명설명설명설명설명설명설명설명설명
-                        </div>
-                    </div>
-                </div>
-                <div className="store__review">
-                    리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
-                    <div className="review__likes">리뷰 좋아요</div>
-                </div>
-            </div>
-        </>
+        content:
+        <StoreJSX />
     },
 ];
 
 function Main() {
     const { currentItem, changeItem } = useTabs(0, content);
+
     return (
             <>
                 <Header />

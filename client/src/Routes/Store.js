@@ -106,11 +106,13 @@ const content = [
     },
 ];
 
-function StoreView({match}) {
+function StoreView(props) {
     const { currentItem, changeItem } = useTabs(0, content);
 
-    const id = match.params.storeId;
-    const link = "/main/store/" + id + "/order"
+    const id = props.location.state.id;
+    const link = "/main/store/" + id + "/order";
+
+    console.log(props.location.state);
 
     return (
         <>
@@ -121,12 +123,12 @@ function StoreView({match}) {
                         <div className="store__image">image</div>
                         <div className="store__detail">
                             <div className="detail__title">
-                                <div className="detail__name">강남 핫도그</div>
+                                <div className="detail__name">{props.location.state.store_nm}</div>
                                 <div className="detail__distance">0.7km</div>
-                                <div className="detail__likes">좋아요</div>
+                                <div className="detail__likes">{props.location.state.like_count}</div>
                             </div>
                             <div className="detail__description">
-                                설명설명설명설명설명설명설명설명설명설명설명
+                                {props.location.state.comment}
                             </div>
                         </div>
                     </div>

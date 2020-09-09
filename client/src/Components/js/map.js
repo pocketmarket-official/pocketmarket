@@ -150,6 +150,7 @@ class MapContent extends React.Component {
                             street.innerHTML = '도로명 주소: ' + place.road_address_name;
                             btn.style.display = 'block';
                             infowindow.open(map, marker);
+                            console.log(place);
                         }
 
                         kakao.maps.event.addListener(marker, 'click', displayInfowindow);
