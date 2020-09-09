@@ -59,22 +59,21 @@ class StoreJSX extends React.Component {
 
         let rtn = Math.round(Math.round(ret) / 1000);
 
-        console.log(ret);
+        let dist = (Math.round(ret) / 1000).toFixed(1);
+        console.log(dist);
 
-        if(rtn <= 0) {
-            let dist = Math.round(ret);
-            console.log(dist);
-            if(dist <= 50) {
+        if(rtn < 1) {
+            if(dist <= 0.05) {
                 rtn = "50m 이내";
-            } else if(dist <= 100) {
+            } else if(dist <= 0.1) {
                 rtn = "100m 이내";
-            } else if(dist <= 500) {
-                rtn = "500m 이내";
+            } else if(dist <= 0.2) {
+                rtn = "200m 이내";
             } else {
-                rtn = "500m 이상";
+                rtn = dist + "m";
             }
         } else {
-            rtn += "km";
+            rtn = dist + "km";
         }
 
         return rtn;
@@ -88,7 +87,7 @@ class StoreJSX extends React.Component {
                 <div className="content__store">
                     <Link to={{
                         pathname: `/main/store/${data.id}`,
-                        state: data
+                        state: {data, d}
                     }}>
                     <div className="store__store">
                         <img className="store__image" src={data.image}></img>

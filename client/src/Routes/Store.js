@@ -109,10 +109,8 @@ const content = [
 function StoreView(props) {
     const { currentItem, changeItem } = useTabs(0, content);
 
-    const id = props.location.state.id;
+    const id = props.location.state.data.id;
     const link = "/main/store/" + id + "/order";
-
-    console.log(props.location.state);
 
     return (
         <>
@@ -123,12 +121,12 @@ function StoreView(props) {
                         <div className="store__image">image</div>
                         <div className="store__detail">
                             <div className="detail__title">
-                                <div className="detail__name">{props.location.state.store_nm}</div>
-                                <div className="detail__distance">0.7km</div>
-                                <div className="detail__likes">{props.location.state.like_count}</div>
+                                <div className="detail__name">{props.location.state.data.store_nm}</div>
+                                <div className="detail__distance">{props.location.state.d}</div>
+                                <div className="detail__likes">{props.location.state.data.like_count}</div>
                             </div>
                             <div className="detail__description">
-                                {props.location.state.comment}
+                                {props.location.state.data.comment}
                             </div>
                         </div>
                     </div>
