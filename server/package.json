@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=express:* nodemon --exec babel-node ./bin/www",
-    "test": "set NODE_ENV=test&&mocha test --recursive --require=@babel/register"
+    "test": "set NODE_ENV=test&&mocha test --recursive --require=@babel/register",
+    "store" : "set NODE_ENV=test&&mocha  test/store.spec.js --require=@babel/register"
   },
   "dependencies": {
     "@babel/core": "^7.11.4",

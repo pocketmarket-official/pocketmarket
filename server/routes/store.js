@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 import controller from '../controller/store.controller';
 
-/* GET users listing. */
+/* GET store listing. */
 router.get('/', controller.index);
 
 

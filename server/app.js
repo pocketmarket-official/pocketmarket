@@ -10,7 +10,7 @@ import logger from "morgan";
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var festivalRouter = require('./routes/festival');
-import {route as storeRouter} from './routes/store';
+var storeRouter = require('./routes/store');
 var cors = require('cors');
 var app = express();
 

@@ -4,33 +4,30 @@ const should = require('should');
 const models = require('../models');
 
 describe('GET /store', () => {
-/*    const stores = [
+    const stores = [
         {
-            startDate: new Date('2020-06-30'),
-            endDate: new Date('2020-12-30'),
-            startTime: 8,
-            endTime: 17,
-            description: '이것은 first 설명이니라',
-            address: '서울시 흑석동',
-            imageUrl: '/store/1'
+            storeNm: '스타벅스',
+            imageLogoUrl: 'store/log1.jpeg',
+            description: '커피전문점 스타벅스입니다. ',
+            likeCount: 21,
+            xposition: 126.959825301786,
+            yposition: 37.3830222877067
         },
         {
-            startDate: new Date('2021-06-30'),
-            endDate: new Date('2022-12-30'),
-            startTime: 8,
-            endTime: 17,
-            description: '이것은 second 설명이니라',
-            address: '서울시 방배동',
-            imageUrl: '/store/2'
+            storeNm: '강남핫도그',
+            imageLogoUrl: 'store/log2.jpeg',
+            description: '맛있는 핫도그',
+            likeCount: 13,
+            xposition: 126.96062441408118,
+            yposition: 37.383628044534525
         },
         {
-            startDate: new Date('2023-06-30'),
-            endDate: new Date('2024-12-30'),
-            startTime: 8,
-            endTime: 17,
-            description: '이것은 third 설명이니라',
-            address: '서울시 문정동',
-            imageUrl: '/store/3'
+            storeNm: '이디야커피',
+            imageLogoUrl: 'store/log3.jpeg',
+            description: '커피커피',
+            likeCount: 14,
+            xposition: 126.953515910111,
+            yposition: 37.3899722725388
         }
     ];
     before((done) => {
@@ -50,57 +47,13 @@ describe('GET /store', () => {
                 .end((err, res) => {
                     res.body.should.be.instanceOf(Object);
                     res.body.should.be.json;
-                    res.body.should.have.property('count');
+                    res.body.should.have.property('total_count');
                     res.body.should.have.property('rows');
-                    //console.log(res.body);
+                    res.body.should.have.property('total_count',3);
+                    res.body.rows.should.be.instanceOf(Array);
+                    res.body.rows[0].should.have.property('id');
                     done();
                 });
         });
     })
-    describe('POST /store', () => {
-        before((done) => {
-            models.sequelize.sync({force: true}).then(() => { done(); });
-        });
-
-        describe('성공시 ', () => {
-            let body;
-            const newStore = {
-                name: '불꽃축제',
-                startDate: new  Date('2021-06-30'),
-                endDate: new Date('2022-12-30'),
-                startTime: 8,
-                endTime: 17,
-                description: '이것은 second 설명이니라',
-                address: '서울시 방배동',
-                imageUrl: '/store/2'
-            }
-            before((done) => {
-                request(app)
-                    .post('/store')
-                    .send(newStore)
-                    .expect(201)
-                    .end((err, res) => {
-                        body = res.body;
-                        done();
-                    });
-            })
-            it('생성된 축제 객체를 반환한다', () => {
-                body.should.have.property('id');
-            })
-            it('입력한 축제이름을 반환한다', () => {
-                body.should.have.property('name', newStore.name);
-            })
-        })
-        describe('실패시 ', () => {
-            it(' 파라미터 누락시 400을 반환한다 ', (done) => {
-                request(app)
-                    .post('/store')
-                    .send({})
-                    .expect(400)
-                    .end(done)
-            })
-        })
-    })
-
- */
 })

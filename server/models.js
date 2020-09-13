@@ -75,50 +75,101 @@ const Festival = sequelize.define('M_FESTIVAL', {
 });
 
 const Store = sequelize.define('M_STORE', {
-    companyCode: {
+    compCd: {
         type: Sequelize.STRING
     },
-    storeCode: {
+    brandCd: {
         type: Sequelize.STRING
     },
-    storeName: {
+    storCd: {
         type: Sequelize.STRING
     },
-    storeCeo: {
+    storNm: {
         type: Sequelize.STRING
     },
-    businessNumber: {
+    storCeo: {
         type: Sequelize.STRING
     },
-    storeTel: {
+    bizopNo: {
         type: Sequelize.STRING
     },
-    storeMobile: {
+    storTel: {
         type: Sequelize.STRING
     },
-    storeFax: {
+    storMobile: {
         type: Sequelize.STRING
     },
-    postCode: {
+    storFax: {
         type: Sequelize.STRING
     },
-    storeMail: {
+    postCd: {
         type: Sequelize.STRING
     },
-    storeAddress1: {
+    storMail: {
         type: Sequelize.STRING
     },
-    storeAddress2: {
+    storAddr1: {
         type: Sequelize.STRING
     },
-    storeOldAddress : {
+    storAddr2: {
         type: Sequelize.STRING
     },
-    openTime : {
-        type: Sequelize.INTEGER
+    storOldAddr : {
+        type: Sequelize.STRING
     },
-    closeTime: {
-        type: Sequelize.INTEGER
+    openTm : {
+        type: Sequelize.STRING
+    },
+    closeTm: {
+        type: Sequelize.STRING
+    },
+    dbYn: {
+        type: Sequelize.STRING
+    },
+    useYn: {
+        type: Sequelize.STRING
+    },
+    bankCd: {
+        type: Sequelize.STRING
+    },
+    bankNo: {
+        type: Sequelize.STRING
+    },
+    openDt: {
+        type: Sequelize.STRING
+    },
+    closeDt: {
+        type: Sequelize.STRING
+    },
+    imageLogoUrl: {
+        type: Sequelize.STRING
+    },
+    org: {
+        type: Sequelize.STRING
+    },
+    xposition: {
+        type: Sequelize.STRING
+    },
+    yposition: {
+        type: Sequelize.STRING
+    },
+    likeCount: {
+        type: Sequelize.STRING
+    },
+    score: {
+        type: Sequelize.STRING
+    },
+    description: {
+        type: Sequelize.STRING
+    },
+    openYn: {
+        type: Sequelize.STRING
+    },
+    insUs: {
+        type: Sequelize.STRING
+    },
+    modUs: {
+        type: Sequelize.STRING
     }
 });
 

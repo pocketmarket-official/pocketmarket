@@ -2,7 +2,6 @@ const models = require('../models');
 
 
 const index = function(req, res) {
-    req.query.limit = req.query.limit || 10;
     console.log(req.headers['content-range']);
     const contentRange = req.headers['content-range'] ? req.headers['content-range'].split('-') : null;
     let limit = 10;
@@ -20,10 +19,14 @@ const index = function(req, res) {
     models.Store.findAndCountAll({
         limit: limit,
         offset: offset,
-        attributes: { exclude: ['createdAt', 'updatedAt']}
+        attributes: ['id', 'stor_nm', 'xposition', 'yposition', 'like_count', 'image_logo_url', 'description']
     })
-        .then(users => {
-            res.json(users);
+        .then(store => {
+            //console.log(store)
+            let response = {};
+            response['total_count'] = store['count'];
+            response['rows'] = store['rows'];
+            res.json(response);
         });
     //res.json(users.slice(0,limit));
 };
