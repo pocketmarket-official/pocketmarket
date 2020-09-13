@@ -23,7 +23,7 @@ function Festival() {
     const [festivalList, setFestivalList] = useState([]);
     useEffect(() => {
         console.log('마운트됨');
-        axios.get('http://localhost:3001/festival')
+        axios.get('/festival')
             .then(res => {
                 console.log(res.data);
                 setFestivalList(res.data.rows);

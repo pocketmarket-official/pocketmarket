@@ -14,10 +14,10 @@ function Login({ authenticated, login, location }) {
         } catch (e) {
             alert("Failed to login");
         }
-        axios.get(`http://localhost:3001/users?email=${email}`)
+        axios.get(`/users?email=${email}`)
             .then(res => {
                 if (res.data.length == 0) {
-                    axios.post(`http://localhost:3001/users`, {
+                    axios.post(`/users`, {
                         email
                     })
                         .then(res => {
