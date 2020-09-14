@@ -2,6 +2,13 @@
     width: 100%;
     height: 100%;
 }
+.main__btns {
+    display: flex;
+    margin: 10px 50px;
+}
+.main__btns .btn__current {
+    margin-left: auto;
+}
 .main__navigation {
     display: flex;
     flex-direction: row;
@@ -14,17 +21,6 @@
     margin-top: 25px;
 }
 .main__navigation button {
-    font-size: 24px;
-}
-.current-position {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 5px 0px;
-    margin: 5px 50px;
     font-size: 24px;
 }
 .content__festival {
@@ -74,4 +70,18 @@
 .content__store .store__review .review__likes {
     display: flex;
     justify-content: flex-end;
+}
+.main .modal__address.hidden {
+    display: none;
+}
+.main .modal__address {
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px 50px;
+    padding-left: 30%;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
 }
