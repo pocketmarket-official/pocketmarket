@@ -56,7 +56,13 @@ const temp = [
         username: '노민철',
         name: '학교',
         address: '서울특별시 성북구 안암동',
-    }
+    },
+    {
+        id: 3,
+        username: '노민철',
+        name: '회사',
+        address: '서울특별시 강남구',
+    },
 ]
 
 function Main() {
