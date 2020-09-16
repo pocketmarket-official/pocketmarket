@@ -1,161 +1,103 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
+import OrderResult from '../Components/js/OrderResult';
 
 
-function OrderHistory() {
-    return (
-        <>
-            <HeaderBack url='/mypage' />
-            <div className="orderhistory">
-                <div className="orderhistory__search">
-                    <input type="date" /> ~ <input type="date" />
-                    <input type="submit" value="조회"/>
-                </div>
-                <div className="orderhistory__result">
-                    <div className="orderhistory__container">
-                        <div className="orderhistory__date">2020년 8월 1일</div>
-                        <div className="orderhistory__content" onClick={() => {
-                        const elt = document.getElementById("orderhistory1");
-                        elt.classList.toggle("hidden");
-                    }}>
-                            <div className="orderhistory__detail">
-                                <div className="orderhistory__name">스타벅스</div>
-                                <div className="orderhistory__price">10000원</div>
-                            </div>
-                            <div className="orderhistory__btn">재주문</div>
-                        </div>
-                        <div className="orderhistory__menu hidden" id="orderhistory1">
-                            <div className="menu__detail">
-                                <div className="menu__name">아이스 아메리카노</div>
-                                <div className="menu__count">1개</div>
-                                <div className="menu__price">4100원</div>
-                                <div className="menu__button-container">
-                                    <button>리뷰</button>
-                                    <button>재주문</button>
-                                </div>
-                            </div>
-                            <div className="menu__detail">
-                                <div className="menu__name">아이스 아메리카노</div>
-                                <div className="menu__count">1개</div>
-                                <div className="menu__price">4100원</div>
-                                <div className="menu__button-container">
-                                    <button>리뷰</button>
-                                    <button>재주문</button>
-                                </div>
-                            </div>
-                            <div className="menu__detail">
-                                <div className="menu__name">아이스 아메리카노</div>
-                                <div className="menu__count">1개</div>
-                                <div className="menu__price">4100원</div>
-                                <div className="menu__button-container">
-                                    <button>리뷰</button>
-                                    <button>재주문</button>
-                                </div>
-                            </div>
-                            <div className="menu__receipt" onClick={() => {
-                                const elt = document.getElementById("receipt1");
-                                elt.classList.remove("hidden");
-                            }}>승인전표조회</div>
-                            <div className="receipt__container hidden" id="receipt1" onClick={() => {
-                                const elt = document.getElementById("receipt1");
-                                elt.classList.add("hidden");
-                            }}>
-                                <div className="receipt__image" onClick={(e) => {
-                                    e.stopPropagation();
-                                }}>영수증 이미지</div>
-                            </div>
-                        </div>
+class OrderHistory extends React.Component {
+    constructor(props) {
+        super(props);
+        this.searchHistory = this.searchHistory.bind(this);
+
+        let today = new Date();
+        let month = today.getMonth();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(month + 1).padStart(2, '0');
+        let yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        if(month == 0) {
+            mm = '12';
+            yyyy = today.getFullYear() - 1;
+        }
+        else {
+            mm = String(month).padStart(2, '0');
+        }
+        let past = yyyy + '-' + mm + '-' + dd;
+
+        let temp = [
+                {
+                    id: 1,
+                    username: '노민철',
+                    date: '2020-08-01',
+                    place: '스타벅스',
+                    order: [['아메리카노', 4100, 2], ['아이스 라떼', 4900, 1]],
+                },
+                {
+                    id: 2,
+                    username: '노민철',
+                    date: '2020-08-27',
+                    place: '강남핫도그',
+                    order: [['아메리카노', 4100, 1], ['티라미수', 5900, 1]],
+                },
+                {
+                    id: 3,
+                    username: '노민철',
+                    date: '2020-09-03',
+                    place: '조폭떡볶이',
+                    order: [['아이스 라떼', 4900, 1]],
+                },
+            ];
+
+        let search_result = [];
+        for (let t in temp) {
+            if(temp[t].date >= past && temp[t].date <= today) {
+                search_result.push(temp[t]);
+            }
+        }
+
+        this.state = {
+            today: today,
+            past: past,
+            result: search_result,
+            temp: temp,
+        }
+    }
+
+    searchHistory() {
+        const val1 = document.getElementById("date1").value;
+        const val2 = document.getElementById("date2").value;
+        let search_result = [];
+        for (let t in this.state.temp) {
+            if(this.state.temp[t].date >= val1 && this.state.temp[t].date <= val2) {
+                search_result.push(this.state.temp[t]);
+            }
+        }
+        this.setState({ result: search_result });
+    }
+
+    componentDidMount() {
+        const date1 = document.getElementById("date1");
+        const date2 = document.getElementById("date2");
+        date1.value = this.state.past;
+        date2.value = this.state.today;
+        this.searchHistory();
+    }
+
+    render() {
+        return (
+            <>
+                <HeaderBack url='/mypage' />
+                <div className="orderhistory">
+                    <div className="orderhistory__search">
+                        <input type="date" id="date1" /> ~ <input type="date" id="date2" />
+                        <input type="submit" value="조회" onClick={this.searchHistory}/>
                     </div>
-                    <div className="orderhistory__container">
-                        <div className="orderhistory__date">2020년 8월 1일</div>
-                        <div className="orderhistory__content" onClick={() => {
-                        const elt = document.getElementById("orderhistory2");
-                        elt.classList.toggle("hidden");
-                    }}>
-                            <div className="orderhistory__detail">
-                                <div className="orderhistory__name">스타벅스</div>
-                                <div className="orderhistory__price">10000원</div>
-                            </div>
-                            <div className="orderhistory__btn">재주문</div>
-                        </div>
-                        <div className="orderhistory__menu hidden" id="orderhistory2">
-                            <div className="menu__detail">
-                                <div className="menu__name">아이스 아메리카노</div>
-                                <div className="menu__count">1개</div>
-                                <div className="menu__price">4100원</div>
-                                <div className="menu__button-container">
-                                    <button>리뷰</button>
-                                    <button>재주문</button>
-                                </div>
-                            </div>
-                            <div className="menu__detail">
-                                <div className="menu__name">아이스 아메리카노</div>
-                                <div className="menu__count">1개</div>
-                                <div className="menu__price">4100원</div>
-                                <div className="menu__button-container">
-                                    <button>리뷰</button>
-                                    <button>재주문</button>
-                                </div>
-                            </div>
-                            <div className="menu__detail">
-                                <div className="menu__name">아이스 아메리카노</div>
-                                <div className="menu__count">1개</div>
-                                <div className="menu__price">4100원</div>
-                                <div className="menu__button-container">
-                                    <button>리뷰</button>
-                                    <button>재주문</button>
-                                </div>
-                            </div>
-                            <div className="menu__receipt">승인전표조회</div>
-                        </div>
-                    </div>
-                    <div className="orderhistory__container">
-                        <div className="orderhistory__date">2020년 8월 1일</div>
-                        <div className="orderhistory__content" onClick={() => {
-                        const elt = document.getElementById("orderhistory3");
-                        elt.classList.toggle("hidden");
-                    }}>
-                            <div className="orderhistory__detail">
-                                <div className="orderhistory__name">스타벅스</div>
-                                <div className="orderhistory__price">10000원</div>
-                            </div>
-                            <div className="orderhistory__btn">재주문</div>
-                        </div>
-                        <div className="orderhistory__menu hidden" id="orderhistory3">
-                            <div className="menu__detail">
-                                <div className="menu__name">아이스 아메리카노</div>
-                                <div className="menu__count">1개</div>
-                                <div className="menu__price">4100원</div>
-                                <div className="menu__button-container">
-                                    <button>리뷰</button>
-                                    <button>재주문</button>
-                                </div>
-                            </div>
-                            <div className="menu__detail">
-                                <div className="menu__name">아이스 아메리카노</div>
-                                <div className="menu__count">1개</div>
-                                <div className="menu__price">4100원</div>
-                                <div className="menu__button-container">
-                                    <button>리뷰</button>
-                                    <button>재주문</button>
-                                </div>
-                            </div>
-                            <div className="menu__detail">
-                                <div className="menu__name">아이스 아메리카노</div>
-                                <div className="menu__count">1개</div>
-                                <div className="menu__price">4100원</div>
-                                <div className="menu__button-container">
-                                    <button>리뷰</button>
-                                    <button>재주문</button>
-                                </div>
-                            </div>
-                            <div className="menu__receipt">승인전표조회</div>
-                        </div>
+                    <div className="orderhistory__result">
+                        <OrderResult result={this.state.result} />
                     </div>
                 </div>
-            </div>
-        </>
-    );
+            </>
+        );
+    }
 }
 
 export default OrderHistory;
