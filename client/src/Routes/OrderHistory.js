@@ -83,16 +83,25 @@ class OrderHistory extends React.Component {
     }
 
     render() {
+        let jsx;
+        if(this.state.result.length == 0) {
+            jsx =
+                <>
+                    <div>검색 결과가 없습니다.</div>
+                </>;
+        } else {
+            jsx = <OrderResult result={this.state.result} />;
+        }
         return (
             <>
                 <HeaderBack url='/mypage' />
                 <div className="orderhistory">
                     <div className="orderhistory__search">
                         <input type="date" id="date1" /> ~ <input type="date" id="date2" />
-                        <input type="submit" value="조회" onClick={this.searchHistory}/>
+                        <input type="submit" value="조회" onClick={this.searchHistory} />
                     </div>
                     <div className="orderhistory__result">
-                        <OrderResult result={this.state.result} />
+                        {jsx}
                     </div>
                 </div>
             </>
