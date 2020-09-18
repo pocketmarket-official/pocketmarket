@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../Components/js/Header';
 import Festival from '../Festival/FestivalInfo';
 import StoreJSX from '../Components/js/mainStoreJSX';
-import handleBtn from '../Components/js/storeBtn';
+import MainMap from '../Components/js/mainMap';
 
 
 // react hooks that changes tabs
@@ -20,29 +20,14 @@ const useTabs = (initialTab, allTabs) => {
     };
 };
 
-const content = [
-    {
-        tab: "축제보기",
-        content:
-        <Festival></Festival>,
-        btn:
-        <>
-        </>
-    }, 
-    {
-        tab: "매장보기",
-        content:
-        <StoreJSX />,
-        btn:
-        <>
-            <div className="main__btns">
-                <button className="btn__current"><Link to="/mypage/myplace/search">현위치</Link></button>
-                <button className="btn__address" id="btn__address" onClick={handleBtn}>주소지</button>
-                <button className="btn__map_list" id="btn__map_list" onClick={handleBtn}>목록</button>
-            </div>
-        </>
-    },
-];
+function handleAddress() {
+    const btn = document.getElementById("btn__address");
+    const modal = document.getElementById("modal__address");
+
+    btn.onclick = function() {
+        modal.classList.toggle("hidden");
+    }
+}
 
 const temp = [
     {
@@ -66,7 +51,57 @@ const temp = [
 ]
 
 function Main() {
+    const content = [
+        {
+            tab: "축제보기",
+            content:
+            <Festival></Festival>,
+            btn:
+            <>
+            </>
+        }, 
+        {
+            tab: "매장보기",
+            content:
+            <StoreJSX />,
+            btn:
+            <>
+                <div className="main__btns">
+                    <button className="btn__current"><Link to="/mypage/myplace/search">현위치</Link></button>
+                    <button className="btn__address" id="btn__address" onClick={handleAddress}>주소지</button>
+                    <button className="btn__map_list" id="btn__map_list" onClick={handleBtn}>목록</button>
+                </div>
+            </>
+        },
+        {
+            content:
+            <MainMap></MainMap>,
+            btn:
+            <>
+                <div className="main__btns">
+                    <button className="btn__current"><Link to="/mypage/myplace/search">현위치</Link></button>
+                    <button className="btn__address" id="btn__address" onClick={handleAddress}>주소지</button>
+                    <button className="btn__map_list" id="btn__map_list" onClick={handleBtn}>목록</button>
+                </div>
+            </>
+        }
+    ];
+
     const { currentItem, changeItem } = useTabs(0, content);
+
+    function handleBtn() {
+        const btn = document.getElementById("btn__map_list");
+
+        btn.onclick = function() {
+            if(btn.innerHTML === "목록") {
+                btn.innerHTML = "지도";
+                changeItem(2);
+            } else if(btn.innerHTML === "지도") {
+                btn.innerHTML = "목록";
+                changeItem(1);
+            }
+        }
+    }
 
     function handleModalContent(e) {
         const button1 = document.getElementById("btn__address");
@@ -74,6 +109,20 @@ function Main() {
         let address_test = e.target.innerHTML;
         button1.innerHTML = address_test;
         modal.classList.toggle("hidden");
+    }
+
+    function handleTabBtn() {
+        const elt = document.getElementById("btn__map_list");
+        if(elt) {
+            if(elt.innerHTML === "지도") {
+                changeItem(1);
+                elt.innerHTML = "목록";
+            } else {
+                changeItem(1);
+            }
+        } else {
+            changeItem(1);
+        }
     }
 
     return (
@@ -90,9 +139,8 @@ function Main() {
                         })}
                     </div>
                     <div className="main__navigation">
-                        {content.map((section, index) =>  (
-                                <button onClick={() => changeItem(index)} key={index}>{section.tab}</button>
-                            ))}
+                        <button onClick={() => changeItem(0)}>{content[0].tab}</button>
+                        <button onClick={handleTabBtn}>{content[1].tab}</button>
                     </div>
                     {currentItem.content}
                 </div>

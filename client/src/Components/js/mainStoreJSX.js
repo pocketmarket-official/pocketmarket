@@ -60,7 +60,6 @@ class StoreJSX extends React.Component {
         let rtn = Math.round(Math.round(ret) / 1000);
 
         let dist = (Math.round(ret) / 1000).toFixed(1);
-        console.log(dist);
 
         if(rtn < 1) {
             if(dist <= 0.05) {
