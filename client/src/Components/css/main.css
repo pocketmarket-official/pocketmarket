@@ -85,3 +85,10 @@
     width: 100%;
     z-index: 1;
 }
+#main_map {
+    display: flex;
+    margin: auto auto;
+    margin-top: 20px;
+    width: 90%;
+    height: 80%;
+}
