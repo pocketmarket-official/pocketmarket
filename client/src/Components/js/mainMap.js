@@ -11,6 +11,7 @@ class MainMap extends React.Component {
         document.head.appendChild(script);
         let lat;
         let long;
+        let markers = [];
  
         const success = (pos) => {
             const coords = pos.coords;
@@ -36,7 +37,41 @@ class MainMap extends React.Component {
 
                 let keywordContainer = document.getElementById("btn__address");
 
-                if(keywordContainer.innerHTML == "주소지") {
+                const placesSearchCB = (data, status, pagination) => {
+                    if (status === kakao.maps.services.Status.OK) {
+
+                        let bounds = new kakao.maps.LatLngBounds();
+
+                        for (let i = 0; i < data.length; i++) {
+                            displayMarker(data[i]);
+                            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                        }
+                        map.setBounds(bounds);
+                    }
+                }
+
+                const displayMarker = (place) => {
+                    let marker = new kakao.maps.Marker({
+                        map: map,
+                        position: new kakao.maps.LatLng(place.y, place.x) 
+                    });
+
+                    markers.push(marker);
+
+                    let elt = document.createElement("div");
+                    elt.innerHTML = `${place.place_name}`;
+
+                    function displayInfowindow() {
+                        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+                        infowindow.open(map, marker);
+                    }
+
+                    kakao.maps.event.addListener(marker, 'click', displayInfowindow);
+                    elt.classList.add("search__result");
+                    elt.addEventListener("click", displayInfowindow);
+                }
+
+                if(keywordContainer.innerHTML === "주소지") {
                     let markerPosition = new kakao.maps.LatLng(
                         lat, long
                     );
@@ -57,7 +92,7 @@ class MainMap extends React.Component {
 
                     let places = new kakao.maps.services.Places();
                     keyword = keywordContainer.innerHTML.split(":")[1];
-                    places.keywordSearch(keyword, this.placesSearchCB);
+                    places.keywordSearch(keyword, placesSearchCB);
                 }
 
                 // zoom control
@@ -93,41 +128,6 @@ class MainMap extends React.Component {
                     // 좌표로 법정동 상세 주소 정보를 요청합니다
                     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
                 }
-
-/*                const placesSearchCB = (data, status, pagination) => {
-                    if (status === kakao.maps.services.Status.OK) {
-
-                        let bounds = new kakao.maps.LatLngBounds();
-
-                        for (let i = 0; i < data.length; i++) {
-                            displayMarker(data[i]);
-                            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-                        }
-                        map.setBounds(bounds);
-                    }
-                }
-
-                const displayMarker = (place) => {
-                    let marker = new kakao.maps.Marker({
-                        map: map,
-                        position: new kakao.maps.LatLng(place.y, place.x) 
-                    });
-
-                    this.markers.push(marker);
-
-                    let elt = document.createElement("div");
-                    elt.innerHTML = `${place.place_name}`;
-
-                    function displayInfowindow() {
-                        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-                        infowindow.open(map, marker);
-                    }
-
-                    kakao.maps.event.addListener(marker, 'click', displayInfowindow);
-                    elt.classList.add("search__result");
-                    elt.addEventListener("click", displayInfowindow);
-                }
-        */
             });
         }
     }

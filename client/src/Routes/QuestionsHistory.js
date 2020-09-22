@@ -15,7 +15,7 @@ class QuestionsHistory extends React.Component {
         let mm = String(month + 1).padStart(2, '0');
         let yyyy = today.getFullYear();
         today = yyyy + '-' + mm + '-' + dd;
-        if(month == 0) {
+        if(month === 0) {
             mm = '12';
             yyyy = today.getFullYear() - 1;
         }
@@ -85,7 +85,7 @@ class QuestionsHistory extends React.Component {
 
     render() {
         let jsx;
-        if(this.state.result.length == 0) {
+        if(this.state.result.length === 0) {
             jsx =
                 <>
                     <div>검색 결과가 없습니다.</div>

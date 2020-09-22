@@ -2,13 +2,9 @@ import React from 'react';
 
 
 class OrderResult extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidUpdate() {
         let result = this.props.result;
-        result.map((data) => {
+        result.forEach((data) => {
             let eltId = "orderhistory" + data.id;
             let contentId = "content" + data.id;
             const elt = document.getElementById(eltId);

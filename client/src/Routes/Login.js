@@ -16,7 +16,7 @@ function Login({ authenticated, login, location }) {
         }
         axios.get(`/users?email=${email}`)
             .then(res => {
-                if (res.data.length == 0) {
+                if (res.data.length === 0) {
                     axios.post(`/users`, {
                         email
                     })

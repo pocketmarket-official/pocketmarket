@@ -12,7 +12,7 @@ class PointHistory extends React.Component {
         let mm = String(month + 1).padStart(2, '0');
         let yyyy = today.getFullYear();
         today = yyyy + '-' + mm + '-' + dd;
-        if(month == 0) {
+        if(month === 0) {
             mm = '12';
             yyyy = today.getFullYear() - 1;
         }

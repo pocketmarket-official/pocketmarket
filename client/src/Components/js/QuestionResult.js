@@ -2,10 +2,6 @@ import React from 'react';
 
 
 class QuestionResult extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         let result = this.props.result;
 
