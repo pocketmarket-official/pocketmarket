@@ -3,6 +3,36 @@ import React from 'react';
 
 
 class MainMap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            current: 2,
+        };
+        this.temp = [
+            {
+                id: 1,
+                username: '노민철',
+                name: '집',
+                address: '경기도 안양시',
+                latlong: [126.950783, 37.389696],
+            },
+            {
+                id: 2,
+                username: '노민철',
+                name: '학교',
+                address: '서울특별시 성북구 안암동',
+                latlong: [127.028015, 37.582367],
+            },
+            {
+                id: 3,
+                username: '노민철',
+                name: '회사',
+                address: '서울특별시 강남구',
+                latlong: [127.028015, 37.582367],
+            },
+        ];
+    }
+
     componentDidMount() {
         // create and add script tag to the head
         const script = document.createElement("script");
@@ -11,7 +41,6 @@ class MainMap extends React.Component {
         document.head.appendChild(script);
         let lat;
         let long;
-        let markers = [];
  
         const success = (pos) => {
             const coords = pos.coords;
@@ -33,66 +62,32 @@ class MainMap extends React.Component {
                 const map = new kakao.maps.Map(container, options);
 
                 let marker;
-                let keyword;
 
                 let keywordContainer = document.getElementById("btn__address");
 
-                const placesSearchCB = (data, status, pagination) => {
-                    if (status === kakao.maps.services.Status.OK) {
+                let markerPosition = new kakao.maps.LatLng(
+                    lat, long
+                );
+                marker = new kakao.maps.Marker({
+                    position: markerPosition,
+                });
 
-                        let bounds = new kakao.maps.LatLngBounds();
+                marker.setMap(map);
 
-                        for (let i = 0; i < data.length; i++) {
-                            displayMarker(data[i]);
-                            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                if(keywordContainer.innerHTML !== "주소지") {
+                    let keyword = keywordContainer.innerHTML;
+                    let parsed = keyword.split(":")[1].trim();
+                    for(let item in this.temp) {
+                        if(this.temp[item].address === parsed) {
+                            lat = this.temp[item].latlong[1];
+                            long = this.temp[item].latlong[0];
+                            break;
                         }
-                        map.setBounds(bounds);
                     }
-                }
-
-                const displayMarker = (place) => {
-                    let marker = new kakao.maps.Marker({
-                        map: map,
-                        position: new kakao.maps.LatLng(place.y, place.x) 
-                    });
-
-                    markers.push(marker);
-
-                    let elt = document.createElement("div");
-                    elt.innerHTML = `${place.place_name}`;
-
-                    function displayInfowindow() {
-                        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-                        infowindow.open(map, marker);
-                    }
-
-                    kakao.maps.event.addListener(marker, 'click', displayInfowindow);
-                    elt.classList.add("search__result");
-                    elt.addEventListener("click", displayInfowindow);
-                }
-
-                if(keywordContainer.innerHTML === "주소지") {
-                    let markerPosition = new kakao.maps.LatLng(
+                    let moveLatLon = new kakao.maps.LatLng(
                         lat, long
                     );
-                    marker = new kakao.maps.Marker({
-                        position: markerPosition,
-                    });
-
-                    marker.setMap(map);
-                } else {
-                    let markerPosition = new kakao.maps.LatLng(
-                        lat, long
-                    );
-                    marker = new kakao.maps.Marker({
-                        position: markerPosition,
-                    });
-
-                    marker.setMap(map);
-
-                    let places = new kakao.maps.services.Places();
-                    keyword = keywordContainer.innerHTML.split(":")[1];
-                    places.keywordSearch(keyword, placesSearchCB);
+                    map.setCenter(moveLatLon);
                 }
 
                 // zoom control
@@ -133,11 +128,7 @@ class MainMap extends React.Component {
     }
 
     render() {
-        return (
-            <>
-                <div id="main_map"></div>
-            </>
-        );
+        return <div id="main_map"></div>;
     }
 }
 

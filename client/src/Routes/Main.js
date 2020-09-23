@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../Components/js/Header';
 import Festival from '../Festival/FestivalInfo';
 import StoreJSX from '../Components/js/mainStoreJSX';
-import MainMap from '../Components/js/mainMap';
+import MainMapContent from '../Components/js/MainMapContent';
 
 
 // react hooks that changes tabs
@@ -35,24 +35,28 @@ const temp = [
         username: '노민철',
         name: '집',
         address: '경기도 안양시',
+        latlong: [126.950783, 37.389696],
     },
     {
         id: 2,
         username: '노민철',
         name: '학교',
         address: '서울특별시 성북구 안암동',
+        latlong: [127.025875, 37.584892],
     },
     {
         id: 3,
         username: '노민철',
         name: '회사',
         address: '서울특별시 강남구',
+        latlong: [127.025875, 37.584892],
     },
 ]
 
 function Main() {
     const content = [
         {
+            id: 1,
             tab: "축제보기",
             content:
             <Festival></Festival>,
@@ -61,6 +65,7 @@ function Main() {
             </>
         }, 
         {
+            id: 2,
             tab: "매장보기",
             content:
             <StoreJSX />,
@@ -74,8 +79,9 @@ function Main() {
             </>
         },
         {
+            id: 3,
             content:
-            <MainMap></MainMap>,
+            <MainMapContent></MainMapContent>,
             btn:
             <>
                 <div className="main__btns">

@@ -85,6 +85,7 @@
     width: 100%;
     z-index: 1;
 }
+.mainmapcontent,
 #main_map {
     display: flex;
     margin: auto auto;
