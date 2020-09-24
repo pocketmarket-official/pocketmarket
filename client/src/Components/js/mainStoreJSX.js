@@ -31,6 +31,7 @@ class StoreJSX extends React.Component {
                 latlong: [126.953515910111, 37.3899722725388]
             }
         ];
+
         this.state = {
             lat1: 0,
             long1: 0

@@ -6,33 +6,9 @@ class MainMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: 2,
-        };
-        this.temp = [
-            {
-                id: 1,
-                username: '노민철',
-                name: '집',
-                address: '경기도 안양시',
-                latlong: [126.950783, 37.389696],
-            },
-            {
-                id: 2,
-                username: '노민철',
-                name: '학교',
-                address: '서울특별시 성북구 안암동',
-                latlong: [127.028015, 37.582367],
-            },
-            {
-                id: 3,
-                username: '노민철',
-                name: '회사',
-                address: '서울특별시 강남구',
-                latlong: [127.028015, 37.582367],
-            },
-        ];
+            map: "",
+        }
     }
-
     componentDidMount() {
         // create and add script tag to the head
         const script = document.createElement("script");
@@ -57,13 +33,26 @@ class MainMap extends React.Component {
                 let container = document.getElementById("main_map");
                 let options = {
                     center: new kakao.maps.LatLng(lat, long),
-                    level: 3
+                    level: 3 // 지도 확대 레벨
                 };
+
+                let addressContainer = document.getElementById("btn__address");
+
+                if(addressContainer.innerHTML !== "주소지") {
+                    if(this.props.place !== []) {
+                        lat = this.props.place.place[1];
+                        long = this.props.place.place[0];
+                    }
+                    let moveLatLong = new kakao.maps.LatLng(
+                        lat, long
+                    );
+                    options.center = moveLatLong;
+                }
+
                 const map = new kakao.maps.Map(container, options);
+                this.setState({ map: map });
 
                 let marker;
-
-                let keywordContainer = document.getElementById("btn__address");
 
                 let markerPosition = new kakao.maps.LatLng(
                     lat, long
@@ -72,33 +61,11 @@ class MainMap extends React.Component {
                     position: markerPosition,
                 });
 
-                marker.setMap(map);
-
-                if(keywordContainer.innerHTML !== "주소지") {
-                    let keyword = keywordContainer.innerHTML;
-                    let parsed = keyword.split(":")[1].trim();
-                    for(let item in this.temp) {
-                        if(this.temp[item].address === parsed) {
-                            lat = this.temp[item].latlong[1];
-                            long = this.temp[item].latlong[0];
-                            break;
-                        }
-                    }
-                    let moveLatLon = new kakao.maps.LatLng(
-                        lat, long
-                    );
-                    map.setCenter(moveLatLon);
-                }
-
                 // zoom control
                 let zoomControl = new kakao.maps.ZoomControl();
                 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
                 let infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-                let content = '<div style="padding:5px;font-size:12px;">현위치</div>';
-                infowindow.setContent(content);
-                infowindow.open(map, marker);
 
                 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
@@ -124,6 +91,22 @@ class MainMap extends React.Component {
                     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
                 }
             });
+        }
+    }
+
+    componentDidUpdate() {
+        let addressContainer = document.getElementById("btn__address");
+        let lat;
+        let long;
+        if(addressContainer.innerHTML !== "주소지") {
+            if(this.props.place !== []) {
+                lat = this.props.place.place[1];
+                long = this.props.place.place[0];
+            }
+            let moveLatLong = new kakao.maps.LatLng(
+                lat, long
+            );
+        this.state.map.panTo(moveLatLong);
         }
     }
 

@@ -5,13 +5,6 @@ import OptionModal from '../Components/js/OptionModal';
 
 
 class Order extends React.Component {
-
-    constructor(props) {
-        super(props);
-        const id = props.match.params.storeId;
-        const link = "/main/store/" + id + "/orderinfo";
-    }
-
     render() {
         return (
             <>

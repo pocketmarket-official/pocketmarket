@@ -2,10 +2,10 @@ import React from "react";
 import MainMap from "./mainMap";
 
 
-function MainMapContent() {
+function MainMapContent(props) {
     return (
         <div className="mainmapcontent">
-            <MainMap />
+            <MainMap place={props} />
         </div>
     );
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import pay from '../bootpay.js';
 import HeaderBack from '../Components/js/HeaderBack';
 
