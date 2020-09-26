@@ -39,7 +39,7 @@ class MainMap extends React.Component {
                 let addressContainer = document.getElementById("btn__address");
 
                 if(addressContainer.innerHTML !== "주소지") {
-                    if(this.props.place !== []) {
+                    if(this.props.place.place !== []) {
                         lat = this.props.place.place[1];
                         long = this.props.place.place[0];
                     }
@@ -99,7 +99,7 @@ class MainMap extends React.Component {
         let lat;
         let long;
         if(addressContainer.innerHTML !== "주소지") {
-            if(this.props.place !== []) {
+            if(this.props.place.place !== []) {
                 lat = this.props.place.place[1];
                 long = this.props.place.place[0];
             }

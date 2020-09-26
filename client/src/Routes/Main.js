@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Components/js/Header';
 import Festival from '../Festival/FestivalInfo';
-import StoreJSX from '../Components/js/mainStoreJSX';
+import MainStoreContent from '../Components/js/MainStoreContent';
 import MainMapContent from '../Components/js/MainMapContent';
 
 class Main extends React.Component {
@@ -52,7 +52,7 @@ class Main extends React.Component {
         if(this.state.current === 0) {
             return <Festival />;
         } else if(this.state.current === 1) {
-            return <StoreJSX />;
+            return <MainStoreContent place={this.state.latlong} />;
         } else if(this.state.current === 2) {
             return <MainMapContent place={this.state.latlong} />;
         } else {
@@ -114,6 +114,19 @@ class Main extends React.Component {
                 this.setState({ latlong: target });
                 break;
             }
+        }
+    }
+
+    async componentDidMount() {
+        try {
+            const res = await fetch("http://localhost:8000/api/stores/");
+            const res2 = await fetch("http://localhost:8000/api/festivals/");
+            const stores = await res.json();
+            const festivals = await res2.json();
+            console.log(stores);
+            console.log(festivals);
+        } catch(e) {
+            console.log(e);
         }
     }
 
