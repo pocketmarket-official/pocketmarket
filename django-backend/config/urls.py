@@ -19,11 +19,13 @@ from django.urls import path
 from rest_framework import routers
 from stores import views as store_views
 from festivals import views as festival_views
+from brand import views as brand_views
 
 router = routers.DefaultRouter()
 
 router.register(r'stores', store_views.StoreView, 'store')
 router.register(r'festivals', festival_views.FestivalView, 'festival')
+router.register(r'brand', brand_views.BrandView, 'brand')
 
 
 urlpatterns = [

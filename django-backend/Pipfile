@@ -10,6 +10,7 @@ django = "*"
 django-cors-headers = "*"
 djangorestframework = "*"
 django-dotenv = "*"
+mysqlclient = "*"
 
 [requires]
 python_version = "3.8"
