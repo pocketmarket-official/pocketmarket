@@ -1,6 +1,8 @@
+"""
+define festivals related models
+"""
 from django.db import models
 
-# Create your models here.
 
 class Brand(models.Model):
 

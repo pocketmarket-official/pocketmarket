@@ -42,7 +42,7 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     'festivals.apps.FestivalsConfig',
     'stores.apps.StoresConfig',
-    'brand.apps.BrandConfig'
+    'brands.apps.BrandsConfig'
 ]
 
 THIRD_PARTY_APPS = [

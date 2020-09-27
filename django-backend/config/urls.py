@@ -19,7 +19,7 @@ from django.urls import path
 from rest_framework import routers
 from stores import views as store_views
 from festivals import views as festival_views
-from brand import views as brand_views
+from brands import views as brand_views
 
 router = routers.DefaultRouter()
 
