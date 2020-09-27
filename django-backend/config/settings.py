@@ -47,7 +47,8 @@ PROJECT_APPS = [
     'storeLikes.apps.StoreLikesConfig',
     'storeDics.apps.StoreDicsConfig',
     'myplaces.apps.MyplacesConfig',
-    'reviews.apps.ReviewsConfig'
+    'reviews.apps.ReviewsConfig',
+    'reviewLikes.apps.ReviewLikesConfig'
 ]
 
 THIRD_PARTY_APPS = [
