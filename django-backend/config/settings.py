@@ -43,7 +43,8 @@ PROJECT_APPS = [
     'festivals.apps.FestivalsConfig',
     'stores.apps.StoresConfig',
     'brands.apps.BrandsConfig',
-    'points.apps.PointsConfig'
+    'points.apps.PointsConfig',
+    'storeLikes.apps.StoreLikesConfig'
 ]
 
 THIRD_PARTY_APPS = [
@@ -101,7 +102,7 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.mysql',
         'NAME' : 'pocketMarket_dev',
         'USER' : 'admin',
-            'PASSWORD' : os.environ.get("DB_ADMIN_PASSWORD"),
+        'PASSWORD' : os.environ.get("DB_ADMIN_PASSWORD"),
         'PORT' : '3306',
         'HOST' : 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
         'OPTIONS' : {

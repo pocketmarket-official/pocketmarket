@@ -21,13 +21,15 @@ from stores import views as store_views
 from festivals import views as festival_views
 from brands import views as brand_views
 from points import views as point_views
+from storeLikes import views as storeLike_views
 
 router = routers.DefaultRouter()
 
 router.register(r'stores', store_views.StoreView, 'store')
 router.register(r'festivals', festival_views.FestivalView, 'festival')
-router.register(r'brand', brand_views.BrandView, 'brand')
-router.register(r'point', point_views.PointView, 'point')
+router.register(r'brands', brand_views.BrandView, 'brand')
+router.register(r'points', point_views.PointView, 'point')
+router.register(r'storeLikes', storeLike_views.StoreLikeView, 'storeLike')
 
 
 urlpatterns = [
