@@ -1,3 +1,11 @@
+"""
+define users related models
+"""
 from django.db import models
 
-# Create your models here.
+
+class User(models.Model):
+
+    """ User Model Definition """
+
+    userName = models.CharField(max_length=50)

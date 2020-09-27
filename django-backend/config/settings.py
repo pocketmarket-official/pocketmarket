@@ -41,6 +41,7 @@ DJANGO_APPS = [
 
 PROJECT_APPS = [
     'festivals.apps.FestivalsConfig',
+    'users.apps.UsersConfig',
     'stores.apps.StoresConfig',
     'brands.apps.BrandsConfig',
     'points.apps.PointsConfig',
