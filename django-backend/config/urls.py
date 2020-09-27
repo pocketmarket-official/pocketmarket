@@ -23,6 +23,7 @@ from brands import views as brand_views
 from points import views as point_views
 from storeLikes import views as storeLike_views
 from storeDics import views as storeDic_views
+from myplaces import views as myplace_views
 
 router = routers.DefaultRouter()
 
@@ -32,6 +33,7 @@ router.register(r'brands', brand_views.BrandView, 'brand')
 router.register(r'points', point_views.PointView, 'point')
 router.register(r'storeLikes', storeLike_views.StoreLikeView, 'storeLike')
 router.register(r'storeDics', storeDic_views.StoreDicView, 'storeDic')
+router.register(r'myplaces', myplace_views.MyplaceView, 'myplace')
 
 
 urlpatterns = [

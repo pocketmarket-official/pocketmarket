@@ -6,8 +6,8 @@ from storeLikes import models
 
 
 @admin.register(models.StoreLike)
-class StoreLikesAdmin(admin.ModelAdmin):
+class StoreLikeAdmin(admin.ModelAdmin):
 
-    """ storeLikes Admin """
+    """ StoreLike Admin """
 
     pass
