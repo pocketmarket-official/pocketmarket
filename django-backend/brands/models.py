@@ -7,7 +7,7 @@ from django.db import models
 class Brand(models.Model):
 
     """ Brand Model Definition """
-
+"""
     brandCd = models.CharField(max_length=5)
     brandName = models.CharField(max_length=100)
     useYn = models.CharField(max_length=1)
@@ -16,3 +16,4 @@ class Brand(models.Model):
     modDt = models.DateTimeField()
     modUs = models.CharField(max_lenght=20)
 
+"""
