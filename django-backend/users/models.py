@@ -1,7 +1,7 @@
 """
 define users related models
 """
-
+"""
 ## 2020.09.27 Jhonny Cloche Ma
 ## refrenced by
 ## https://milooy.wordpress.com/2016/02/18/extend-django-user-model/
@@ -85,4 +85,16 @@ class PocketmarketUser(AbstractBaseUser, PermissionMixin):
         # Simplest possible answer : All admins are staff
         return self.is_admin
 
+"""
 
+"""
+define festivals related models
+"""
+from django.db import models
+
+
+class User(models.Model):
+
+    """ User Model Definition """
+
+    userName = models.CharField(max_length=50)
