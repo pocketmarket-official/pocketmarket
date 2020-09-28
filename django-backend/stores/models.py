@@ -7,7 +7,7 @@ from django.db import models
 class Store(models.Model):
 
     """ Store Model Definition """
-
+"""
     brandCd = models.Foreignkey(brand)
     storeCd = models.CharField(max_length=10)
     storeName = models.CharField(max_length=50)
@@ -21,3 +21,4 @@ class Store(models.Model):
     storeAddr1 = models.CharField(max_length=200)
     storeAddr2 = models.CharField(max_length=200)
     storeOldAddr = models.CharField(max_length=200)
+"""
