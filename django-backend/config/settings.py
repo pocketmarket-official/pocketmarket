@@ -50,7 +50,8 @@ PROJECT_APPS = [
     'myplaces.apps.MyplacesConfig',
     'reviews.apps.ReviewsConfig',
     'reviewLikes.apps.ReviewLikesConfig',
-    'replies.apps.RepliesConfig'
+    'replies.apps.RepliesConfig',
+    'items.apps.ItemsConfig'
 ]
 
 THIRD_PARTY_APPS = [
