@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='store',
             name='brandCd',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='brands.brand'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='brands.brand'),
         ),
     ]

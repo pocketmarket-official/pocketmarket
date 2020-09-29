@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                 ('takeOutYn', models.CharField(default='Y', max_length=1)),
                 ('callNoYn', models.CharField(default='Y', max_length=1)),
                 ('useYn', models.CharField(default='Y', max_length=1)),
-                ('storeCd', models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='stores.store')),
+                ('storeCd', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='stores.store')),
             ],
         ),
     ]

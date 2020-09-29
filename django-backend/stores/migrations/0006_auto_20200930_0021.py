@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                 ('insUs', models.CharField(default='defaultValue', max_length=30)),
                 ('modDt', models.DateTimeField(default=datetime.datetime(2020, 9, 30, 0, 21, 13, 410404))),
                 ('modUs', models.CharField(default='defaultValue', max_length=30)),
-                ('storeCd', models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='stores.store')),
+                ('storeCd', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='stores.store')),
             ],
         ),
     ]

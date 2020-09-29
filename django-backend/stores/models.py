@@ -8,7 +8,7 @@ from django.apps import apps
 
 class Store(models.Model):
     """ Store Model Definition """
-    brandCd = models.ForeignKey('brands.Brand', on_delete=models.CASCADE, default=0)
+    brandCd = models.ForeignKey('brands.Brand', on_delete=models.CASCADE, default=1)
     storeCd = models.CharField(max_length=10, default='00000')
     storeName = models.CharField(max_length=50, default='')
     storeCeo = models.CharField(max_length=50, blank=True)
@@ -42,7 +42,7 @@ class Store(models.Model):
     modUs = models.CharField(max_length=30, default='defaultValue')
 
 class storeFunSet(models.Model):
-    storeCd = models.ForeignKey('store', on_delete=models.CASCADE, default=0)
+    storeCd = models.ForeignKey('store', on_delete=models.CASCADE, default=1)
     tmnId = models.CharField(max_length=20, blank=True)
     normVanCd = models.CharField(max_length=3, default='000')
     callFg = models.CharField(max_length=1, default='0')
@@ -62,7 +62,7 @@ class storeFunSet(models.Model):
     modUs = models.CharField(max_length=30, default='defaultValue')
 
 class storePos(models.Model):
-    storeCd = models.ForeignKey('store', on_delete=models.CASCADE, default=0)
+    storeCd = models.ForeignKey('store', on_delete=models.CASCADE, default=1)
     # keymapCd
     # grpCd
     ordStartNo = models.CharField(max_length=10, default='0000')
