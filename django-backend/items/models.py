@@ -36,3 +36,21 @@ class ItemSet(models.Model):
     insUs = models.CharField(max_length=30, default='defaultValue')
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
+
+class ItemSetOpt(models.Model):
+    storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
+    subItemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
+    changeItemCd = models.CharField(max_length=20, default='00000')
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')
+
+class ItemAdd(models.Model):
+    itemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
+    itemAddCd = models.CharField(max_length=20, default='00000')
+    itemSort = models.IntegerField(default=0)
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')
