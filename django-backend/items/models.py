@@ -24,3 +24,15 @@ class Item(models.Model):
     insUs = models.CharField(max_length=30, default='defaultValue')
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
+
+
+class ItemSet(models.Model):
+    setItemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
+    seq = models.IntegerField(default=1)
+    subItemCd = models.CharField(max_length=20, default='00000')
+    subItemQty = models.IntegerField(default=1)
+    subItemPric = models.FloatField(default=0.0)
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')
