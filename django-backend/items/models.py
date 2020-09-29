@@ -54,3 +54,20 @@ class ItemAdd(models.Model):
     insUs = models.CharField(max_length=30, default='defaultValue')
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
+
+class itemAddCat(models.Model):
+    addCatCd = models.CharField(max_length=5, default='00000')
+    addCatNm = models.CharField(max_length=20, default='')
+    useYn = models.CharField(max_length=1, default='Y')
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')
+
+class itemAddCatMaster(models.Model):
+    addCatCd = models.ForeignKey('items.itemAddCat', on_delete=models.CASCADE, default=1)
+    addItemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')
