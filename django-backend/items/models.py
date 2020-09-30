@@ -31,7 +31,7 @@ class Set(models.Model):
     seq = models.IntegerField(default=1)
     subItemCd = models.CharField(max_length=20, default='00000')
     subItemQty = models.IntegerField(default=1)
-    subItemPric = models.FloatField(default=0.0)
+    subItemPrie = models.FloatField(default=0.0)
     insDt = models.DateTimeField(default=datetime.now())
     insUs = models.CharField(max_length=30, default='defaultValue')
     modDt = models.DateTimeField(default=datetime.now())
