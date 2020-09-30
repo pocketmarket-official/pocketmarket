@@ -1,10 +1,24 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from cprts.serializer import MasterSerializer
-from cprts.models import Master
+from cprts.serializer import CprtSerializer
+from cprts.serializer import GroupSerializer
+from cprts.serializer import RelationSerializer
+from cprts.models import Cprt
+from cprts.models import Group
+from cprts.models import Relation
 
 
-class MasterView(viewsets.ModelViewSet):
+class CprtView(viewsets.ModelViewSet):
 
-    serializer_class = MasterSerializer
-    queryset = Master.objects.all()
+    serializer_class = CprtSerializer
+    queryset = Cprt.objects.all()
+
+class GroupView(viewsets.ModelViewSet):
+
+    serializer_class = GroupSerializer
+    queryset = Group.objects.all()
+
+class RelationView(viewsets.ModelViewSet):
+
+    serializer_class = RelationSerializer
+    queryset = Relation.objects.all()

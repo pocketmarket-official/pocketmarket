@@ -1,11 +1,52 @@
 from rest_framework import serializers
-from cprts.models import Master
+from cprts.models import Cprt
+from cprts.models import Group
+from cprts.models import Relation
 
 
-class MasterSerializer(serializers.ModelSerializer):
+class CprtSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Master
+        model = Cprt
         fields = (
+            'storeCd',
+            'scprtCd',
             'cprtName',
+            'useYn',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs'
+        )
+
+
+class GroupSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Group
+        fields = (
+            'storeCd',
+            'cprtGroupCd',
+            'cprtGroupName',
+            'useYn',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs'
+        )
+
+
+class RelationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Relation
+        fields = (
+            'storeCd',
+            'cprtGroupCd',
+            'seq',
+            'cprtCd',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs'
         )
