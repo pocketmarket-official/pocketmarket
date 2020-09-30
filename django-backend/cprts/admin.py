@@ -5,7 +5,7 @@ from django.contrib import admin
 from cprts import models
 
 
-@admin.register(models.Cprt)
+@admin.register(models.Master)
 class CprtAdmin(admin.ModelAdmin):
 
     """ Festival Admin """

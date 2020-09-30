@@ -45,7 +45,7 @@ router.register(r'reviews', review_views.ReviewView, 'review')
 router.register(r'reviewLikes', reviewLike_views.ReviewLikeView, 'reviewLike')
 router.register(r'replies', reply_views.ReplyView, 'reply')
 router.register(r'items', item_views.ItemView, 'item')
-router.register(r'cprts', cprt_views.CprtView, 'cprt')
+router.register(r'cprts', cprt_views.MasterView, 'cprt')
 
 
 urlpatterns = [

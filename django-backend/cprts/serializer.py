@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from cprts.models import Cprt
+from cprts.models import Master
 
 
-class CprtSerializer(serializers.ModelSerializer):
+class MasterSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Cprt
+        model = Master
         fields = (
             'cprtName',
         )
