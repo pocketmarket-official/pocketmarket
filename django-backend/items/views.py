@@ -19,22 +19,22 @@ class ItemView(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
 
-class Set(viewsets.ModelViewSet):
+class SetView(viewsets.ModelViewSet):
 
     serializer_class = SetSerializer
     queryset = Set.objects.all()
 
-class SetOpt(viewsets.ModelViewSet):
+class SetOptView(viewsets.ModelViewSet):
 
     serializer_class = SetOptSerializer
     queryset = SetOpt.objects.all()
 
-class ItemAdd(viewsets.ModelViewSet):
+class ItemAddView(viewsets.ModelViewSet):
 
     serializer_class = ItemAddSerializer
     queryset = ItemAdd.objects.all()
 
-class AddCat(viewsets.ModelViewSet):
+class AddCatView(viewsets.ModelViewSet):
 
     serializer_class = AddCatSerializer
     queryset = AddCat.objects.all()

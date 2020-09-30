@@ -30,10 +30,13 @@ from reviewLikes import views as reviewLike_views
 from replies import views as reply_views
 from items import views as item_views
 from cprts import views as cprt_views
+from keymaps import views as keymap_views
 
 router = routers.DefaultRouter()
 
 router.register(r'stores_store', store_views.StoreView, 'store')
+router.register(r'stores_funSet', store_views.FunSetView, 'funSet')
+router.register(r'stores_pos', store_views.PosView, 'pos')
 router.register(r'festivals_festival', festival_views.FestivalView, 'festival')
 router.register(r'users_user', user_views.UserView, 'user')
 router.register(r'brands_brand', brand_views.BrandView, 'brand')
@@ -45,9 +48,17 @@ router.register(r'reviews_review', review_views.ReviewView, 'review')
 router.register(r'reviewLikes_reviewLike', reviewLike_views.ReviewLikeView, 'reviewLike')
 router.register(r'replies_reply', reply_views.ReplyView, 'reply')
 router.register(r'items_item', item_views.ItemView, 'item')
+router.register(r'items_set', item_views.SetView, 'set')
+router.register(r'items_setOpt', item_views.SetOptView, 'setOpt')
+router.register(r'items_itemAdd', item_views.ItemAddView, 'itemAdd')
+router.register(r'items_Add', item_views.AddView, 'add')
 router.register(r'cprts_cprt', cprt_views.CprtView, 'cprt')
 router.register(r'cprts_group', cprt_views.GroupView, 'group')
 router.register(r'cprts_relation', cprt_views.RelationView, 'relation')
+router.register(r'keymaps_storeKeymap', keymap_views.StoreKeymapView, 'storeKeymap')
+router.register(r'keymaps_touchGroup', keymap_views.TouchGroupView, 'touchGroup')
+router.register(r'keymaps_keymap', keymap_views.KeymapView, 'keymap')
+
 
 
 urlpatterns = [
