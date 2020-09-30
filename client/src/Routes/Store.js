@@ -33,17 +33,18 @@ class StoreView extends React.Component {
             },
         ]
 
+        const id = this.props.location.state.data.id;
+        const link = "/main/store/" + id + "/order";
+
         this.state = {
             current: 0,
             temp: this.temp,
+            link: link,
         }
 
         this.handlePageGrid = this.handlePageGrid.bind(this);
         this.handlePageList = this.handlePageList.bind(this);
         this.handlePageRender = this.handlePageRender.bind(this);
-
-        const id = this.props.location.state.data.id;
-        const link = "/main/store/" + id + "/order";
     }
 
     handlePageGrid() {
@@ -109,7 +110,7 @@ class StoreView extends React.Component {
                     </div>
                     {this.handlePageRender()}
                 </div>
-                <div className="order"><Link to={this.link}>주문하기</Link></div>
+                <div className="order"><Link to={this.state.link}>주문하기</Link></div>
             </>
         );
     }
