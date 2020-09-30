@@ -29,6 +29,7 @@ from reviews import views as review_views
 from reviewLikes import views as reviewLike_views
 from replies import views as reply_views
 from items import views as item_views
+from cprts import views as cprt_views
 
 router = routers.DefaultRouter()
 
@@ -43,7 +44,8 @@ router.register(r'myplaces', myplace_views.MyplaceView, 'myplace')
 router.register(r'reviews', review_views.ReviewView, 'review')
 router.register(r'reviewLikes', reviewLike_views.ReviewLikeView, 'reviewLike')
 router.register(r'replies', reply_views.ReplyView, 'reply')
-router.register(r'items', reply_views.ReplyView, 'item')
+router.register(r'items', item_views.ItemView, 'item')
+router.register(r'cprts', cprt_views.MasterView, 'cprt')
 
 
 urlpatterns = [
