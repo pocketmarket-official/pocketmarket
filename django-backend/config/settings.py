@@ -52,7 +52,8 @@ PROJECT_APPS = [
     'reviewLikes.apps.ReviewLikesConfig',
     'replies.apps.RepliesConfig',
     'items.apps.ItemsConfig',
-    'cprts.apps.CprtsConfig'
+    'cprts.apps.CprtsConfig',
+    'keymaps.apps.KeymapsConfig'
 ]
 
 THIRD_PARTY_APPS = [

@@ -6,7 +6,7 @@ from keymaps import models
 
 
 @admin.register(models.StoreKeymap)
-class KeymapAdmin(admin.ModelAdmin):
+class StoreKeymapAdmin(admin.ModelAdmin):
 
     """ StoreKeymap Admin """
 
@@ -14,7 +14,7 @@ class KeymapAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.TouchGroup)
-class KeymapAdmin(admin.ModelAdmin):
+class TouchGroupAdmin(admin.ModelAdmin):
 
     """ TouchGroup Admin """
 

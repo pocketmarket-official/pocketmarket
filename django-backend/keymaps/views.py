@@ -8,15 +8,15 @@ from keymaps.serializer import KeymapSerializer
 from keymaps.models import Keymap
 
 
-class KeymapView(viewsets.ModelViewSet):
+class StoreKeymapView(viewsets.ModelViewSet):
 
-    serializer_class = KeymapSerializer
-    queryset = Keymap.objects.all()
+    serializer_class = StoreKeymapSerializer
+    queryset = StoreKeymap.objects.all()
 
-class KeymapView(viewsets.ModelViewSet):
+class TouchGroupView(viewsets.ModelViewSet):
 
-    serializer_class = KeymapSerializer
-    queryset = Keymap.objects.all()
+    serializer_class = TouchGroupSerializer
+    queryset = TouchGroup.objects.all()
 
 class KeymapView(viewsets.ModelViewSet):
 
