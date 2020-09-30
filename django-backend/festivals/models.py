@@ -2,10 +2,29 @@
 define festivals related models
 """
 from django.db import models
-
+from datetime import datetime
 
 class Festival(models.Model):
 
     """ Festival Model Definition """
 
-    festivalName = models.CharField(max_length=50)
+    festivalCd = models.CharField(max_length=5, default='0000')
+    festivalName = models.CharField(max_length=100, default='')
+    startDt = models.CharField(max_length=8, default='')
+    endDt = models.CharField(max_length=8, default='')
+    descriptionHeader = models.CharField(max_length=30, default='')
+    descriptionDetail = models.CharField(max_length=255, default='')
+    joinCount = models.IntegerField(default=0)
+    simulOperCount = models.IntegerField(default=0)
+    innerMapUrl = models.CharField(max_length=200, blank=True)
+    addr1 = models.CharField(max_length=200, default='')
+    addr2 = models.CharField(max_length=200, default='')
+    oldAddr = models.CharField(max_length=200, default='')
+    organ = models.CharField(max_length=50, default='')
+    organManger = models.CharField(max_length=10, default='')
+    organPhone = models.CharField(max_length=20, default='')
+    organMail = models.CharField(max_length=50, default='')
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')
