@@ -26,7 +26,7 @@ class Item(models.Model):
     modUs = models.CharField(max_length=30, default='defaultValue')
 
 
-class ItemSet(models.Model):
+class Set(models.Model):
     setItemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
     seq = models.IntegerField(default=1)
     subItemCd = models.CharField(max_length=20, default='00000')
@@ -37,7 +37,7 @@ class ItemSet(models.Model):
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
 
-class ItemSetOpt(models.Model):
+class SetOpt(models.Model):
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
     subItemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
     changeItemCd = models.CharField(max_length=20, default='00000')
@@ -55,7 +55,7 @@ class ItemAdd(models.Model):
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
 
-class itemAddCat(models.Model):
+class AddCat(models.Model):
     addCatCd = models.CharField(max_length=5, default='00000')
     addCatNm = models.CharField(max_length=20, default='')
     useYn = models.CharField(max_length=1, default='Y')
@@ -64,8 +64,8 @@ class itemAddCat(models.Model):
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
 
-class itemAddCatMaster(models.Model):
-    addCatCd = models.ForeignKey('items.itemAddCat', on_delete=models.CASCADE, default=1)
+class Add(models.Model):
+    addCatCd = models.ForeignKey('items.AddCat', on_delete=models.CASCADE, default=1)
     addItemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
     insDt = models.DateTimeField(default=datetime.now())
     insUs = models.CharField(max_length=30, default='defaultValue')
