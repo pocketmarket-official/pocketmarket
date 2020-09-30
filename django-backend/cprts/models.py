@@ -4,7 +4,7 @@ define cprts related models
 from django.db import models
 from datetime import datetime
 
-class Cprt(models.Model):
+class Master(models.Model):
 
     """ Cprt Model Definition """
 
@@ -17,3 +17,4 @@ class Cprt(models.Model):
     insUs = models.CharField(max_length=30, default='defaultValue')
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
+
