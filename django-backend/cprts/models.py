@@ -28,3 +28,11 @@ class Group(models.Model):
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
 
+class Cprt(models.Model):
+    storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
+    cprtGroupCd = models.ForeignKey('cprts.Group', on_delete=models.CASCADE, default=1)
+    cprtCd = models.ForeignKey('cprts.Master', on_delete=models.CASCADE, default=1)
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')
