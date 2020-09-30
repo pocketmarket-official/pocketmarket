@@ -29,7 +29,7 @@ class Festival(models.Model):
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
 
-class join(models.Model):
+class Join(models.Model):
     festivalCd = models.ForeignKey('festivals.Festival', on_delete=models.CASCADE, default=1)
     seq = models.IntegerField(default=1)
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)

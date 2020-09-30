@@ -10,7 +10,7 @@ class CprtSerializer(serializers.ModelSerializer):
         model = Cprt
         fields = (
             'storeCd',
-            'scprtCd',
+            'cprtCd',
             'cprtName',
             'useYn',
             'insDt',

@@ -11,3 +11,11 @@ class FestivalAdmin(admin.ModelAdmin):
     """ Festival Admin """
 
     pass
+
+
+@admin.register(models.Join)
+class JoinAdmin(admin.ModelAdmin):
+
+    """ Join Admin """
+
+    pass
