@@ -35,4 +35,19 @@ class TouchGroup(models.Model):
     modUs = models.CharField(max_length=30, default='defaultValue')
 
 
+class Keymap(models.Model):
+    storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
+    keymapCd = models.ForeignKey('keymaps.StoreKeymap', on_delete=models.CASCADE, default=1)
+    touchGroupCd = models.ForeignKey('keymaps.TouchGroup', on_delete=models.CASCADE, default=1)
+    posPage = models.IntegerField(default=0)
+    posIndex = models.IntegerField(default=0)
+    itemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
+    soldOutYn = models.CharField(max_length=1, default='N')
+    cprtGroupCd = models.CahrField(max_length=5, default='000')
+    dispYn = models.CharField(max_length=1, default='Y')
+    expectCnt = models.IntegerField(default=0)
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')
 
