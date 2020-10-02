@@ -20,7 +20,7 @@ class ItemSerializer(serializers.ModelSerializer):
             'setYn',
             'itemFg',
             'useYn',
-            'imgSmallUlr',
+            'imgSmallUrl',
             'ordPrtYn',
             'ordPrtText',
             'kdsSendYn',
