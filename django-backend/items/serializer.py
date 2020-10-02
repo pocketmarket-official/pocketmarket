@@ -39,7 +39,7 @@ class SetSerializer(serializers.ModelSerializer):
             'seq',
             'subItemCd',
             'subItemQty',
-            'subItePrice',
+            'subItemPrice',
             'insDt',
             'insUs',
             'modDt',
