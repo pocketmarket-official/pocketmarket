@@ -21,7 +21,7 @@ class Festival(models.Model):
     addr2 = models.CharField(max_length=200, default='')
     oldAddr = models.CharField(max_length=200, default='')
     organ = models.CharField(max_length=50, default='')
-    organManger = models.CharField(max_length=10, default='')
+    organManager = models.CharField(max_length=10, default='')
     organPhone = models.CharField(max_length=20, default='')
     organMail = models.CharField(max_length=50, default='')
     insDt = models.DateTimeField(default=datetime.now())
