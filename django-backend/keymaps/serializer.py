@@ -7,7 +7,7 @@ from keymaps.models import Keymap
 class StoreKeymapSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Keymap
+        model = StoreKeymap
         fields = (
             'storeCd',
             'keymapCd',

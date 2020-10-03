@@ -9,14 +9,14 @@ class FestivalSerializer(serializers.ModelSerializer):
         model = Festival
         fields = (
             'festivalCd',
-            'fesitvalName',
+            'festivalName',
             'startDt',
             'endDt',
             'descriptionHeader',
             'descriptionDetail',
             'joinCount',
             'simulOperCount',
-            'innerMapURL',
+            'innerMapUrl',
             'addr1',
             'addr2',
             'oldAddr',

@@ -74,7 +74,7 @@ class PosSerializer(serializers.ModelSerializer):
         model = Pos
         fields = (
             'storeCd',
-            'keymap',
+            'keymapCd',
             'ordStartNo',
             'ordEndNo',
             'cntPayYn',
