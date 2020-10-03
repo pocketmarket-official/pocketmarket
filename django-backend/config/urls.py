@@ -31,6 +31,7 @@ from replies import views as reply_views
 from items import views as item_views
 from cprts import views as cprt_views
 from keymaps import views as keymap_views
+from interfaces import views as interface_views
 
 router = routers.DefaultRouter()
 
@@ -61,7 +62,9 @@ router.register(r'keymaps_keymap', keymap_views.KeymapView, 'keymap')
 
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('interfaces/', interface_views.InterfaceView, name='interface')
 ]

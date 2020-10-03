@@ -53,7 +53,8 @@ PROJECT_APPS = [
     'replies.apps.RepliesConfig',
     'items.apps.ItemsConfig',
     'cprts.apps.CprtsConfig',
-    'keymaps.apps.KeymapsConfig'
+    'keymaps.apps.KeymapsConfig',
+    'interfaces'
 ]
 
 THIRD_PARTY_APPS = [
