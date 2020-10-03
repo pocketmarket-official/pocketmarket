@@ -8,39 +8,13 @@ class StoreView extends React.Component {
     constructor(props) {
         super(props);
 
-        this.temp = [
-            {
-                id: 1,
-                username: "노민철",
-                like_count: 14,
-                order_date: "2020-09-10",
-                order_list: ["아이스아메리카노 2", "아이스라떼 1"],
-                comment: "커피가 정말 맛있어요",
-                review: '한입 와앙! 물고 놨는데 한도 끝도 없이 끊어지지 않고 늘어나는 치즈!',
-                storeName: '강남핫도그',
-                comments: ["감사합니다 길동님!"],
-            },
-            {
-                id: 2,
-                username: "마진형",
-                like_count: 22,
-                order_date: "2020-09-11",
-                order_list: ["아이스아메리카노 1", "티라미수 1"],
-                comment: "맛있는 티라미수",
-                review: '맵기만 한 떢볶이는 이제 그만! 화끈한 매운맛과 불맛, 그리고 건강까지...',
-                storeName: '조폭 떡볶이',
-                comments: ["감사합니다 길동님!", "가나다라마바사"],
-            },
-        ]
-
         const id = this.props.location.state.data.id;
         const link = "/main/store/" + id + "/order";
 
         this.state = {
             current: 0,
-            temp: this.temp,
             link: link,
-        }
+        };
 
         this.handlePageGrid = this.handlePageGrid.bind(this);
         this.handlePageList = this.handlePageList.bind(this);
@@ -78,7 +52,7 @@ class StoreView extends React.Component {
             </>
             );
         } else if(this.state.current === 1) {
-            return <StoreList data={this.state.temp} />;
+            return <StoreList />;
         } else {
             return null;
         }
