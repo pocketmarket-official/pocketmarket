@@ -10,7 +10,7 @@ def InterfaceView(request):
     try:
         ## compCd
         compCd = 'C0028'
-        storeCd = 'S0002'
+        storeCd = 'S0001'
 
         ## brands_brand
         url = "http://asp-test.imtsoft.me/api/pocketMarket/brandsBrand?compCd=" + compCd  # json 결과
@@ -109,74 +109,53 @@ def InterfaceView(request):
                             store_pktmkt.save()
 
                 ##stores_funset
-                # url = "http://asp-test.imtsoft.me/api/pocketMarket/storesFunset?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
-                # request = urllib.request.Request(url)
-                # response = urllib.request.urlopen(request)
-                # rescode = response.getcode()
-                # if (rescode == 200):
-                #     response_body = response.read().decode('euc-kr')
-                #     response_body_json = json.loads(response_body)
-                #     for funset_imt in response_body_json:
-                #         funset = FunSet.objects.get(brandCd=funset_imt.get('BRAND_CD'))
-                #         funset_pktmkt, flag = Store.objects.get_or_create(storeCd=funset_imt.get('STOR_CD'),
-                #                                                          defaults={
-                #                                                              'brandCd_id': brand.id,
-                #                                                              'storeName': funset_imt.get('STOR_NM'),
-                #                                                              'storeCeo': funset_imt.get('STOR_CEO'),
-                #                                                              'bizopNo': funset_imt.get('BIZOP_NO'),
-                #                                                              'tel': funset_imt.get('STOR_TEL'),
-                #                                                              'mobile': funset_imt.get('STOR_MOBILE'),
-                #                                                              'fax': funset_imt.get('STOR_FAX'),
-                #                                                              'postCd': funset_imt.get('POST_CD'),
-                #                                                              'mail': funset_imt.get('STOR_MAIL'),
-                #                                                              'addr1': funset_imt.get('STOR_ADDR1'),
-                #                                                              'addr2': funset_imt.get('STOR_ADDR2'),
-                #                                                              'oldAddr': funset_imt.get(
-                #                                                                  'STOR_OLD_ADDR'),
-                #                                                              'openTm': funset_imt.get('OPEN_TM'),
-                #                                                              'closeTm': funset_imt.get('CLOSE_TM'),
-                #                                                              'dvYn': funset_imt.get('DV_YN'),
-                #                                                              'bankCd': funset_imt.get('BANK_CD'),
-                #                                                              'bankNo': funset_imt.get('BANK_NO'),
-                #                                                              'openDt': funset_imt.get('OPEN_DT'),
-                #                                                              'closeDt': funset_imt.get('CLOSE_DT'),
-                #                                                              'imgLogoUrl': funset_imt.get(
-                #                                                                  'IMG_LOGO_URL'),
-                #                                                              'orgIf': funset_imt.get('ORG_IF'),
-                #                                                              'useYn': funset_imt.get('USE_YN'),
-                #                                                              'insDt': funset_imt.get('INS_DT'),
-                #                                                              'insUs': funset_imt.get('INS_US'),
-                #                                                              'modDt': funset_imt.get('MOD_DT'),
-                #                                                              'modUs': funset_imt.get('MOD_US')
-                #                                                          })
-                #         if not flag:
-                #             funset_pktmkt.brandCd_id = brand.id
-                #             funset_pktmkt.storeName = funset_imt.get('STOR_NM')
-                #             funset_pktmkt.storeCeo = funset_imt.get('STOR_CEO')
-                #             funset_pktmkt.bizopNo = funset_imt.get('BIZOP_NO')
-                #             funset_pktmkt.tel = funset_imt.get('STOR_TEL')
-                #             funset_pktmkt.mobile = funset_imt.get('STOR_MOBILE')
-                #             funset_pktmkt.fax = funset_imt.get('STOR_FAX')
-                #             funset_pktmkt.postCd = funset_imt.get('POST_CD')
-                #             funset_pktmkt.mail = funset_imt.get('STOR_MAIL')
-                #             funset_pktmkt.addr1 = funset_imt.get('STOR_ADDR1')
-                #             funset_pktmkt.addr2 = funset_imt.get('STOR_ADDR2')
-                #             funset_pktmkt.oldAddr = funset_imt.get('STOR_OLD_ADDR')
-                #             funset_pktmkt.openTm = funset_imt.get('OPEN_TM')
-                #             funset_pktmkt.closeTm = funset_imt.get('CLOSE_TM')
-                #             funset_pktmkt.dvYn = funset_imt.get('DV_YN')
-                #             funset_pktmkt.bankCd = funset_imt.get('BANK_CD')
-                #             funset_pktmkt.bankNo = funset_imt.get('BANK_NO')
-                #             funset_pktmkt.openDt = funset_imt.get('OPEN_DT')
-                #             funset_pktmkt.closeDt = funset_imt.get('CLOSE_DT')
-                #             funset_pktmkt.imgLogoUrl = funset_imt.get('IMG_LOGO_URL')
-                #             funset_pktmkt.orgIf = funset_imt.get('ORG_IF')
-                #             funset_pktmkt.useYn = funset_imt.get('USE_YN')
-                #             funset_pktmkt.insDt = funset_imt.get('INS_DT')
-                #             funset_pktmkt.insUs = funset_imt.get('INS_US')
-                #             funset_pktmkt.modDt = funset_imt.get('MOD_DT')
-                #             funset_pktmkt.modUs = funset_imt.get('MOD_US')
-                #             funset_pktmkt.save()
+                url = "http://asp-test.imtsoft.me/api/pocketMarket/storesFunset?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+                request = urllib.request.Request(url)
+                response = urllib.request.urlopen(request)
+                rescode = response.getcode()
+                if (rescode == 200):
+                    response_body = response.read().decode('euc-kr')
+                    response_body_json = json.loads(response_body)
+                    for funset_imt in response_body_json:
+                        store = Store.objects.get(storeCd=funset_imt.get('STOR_CD'))
+                        funset_pktmkt, flag = Funset.objects.get_or_create(storeCd=store,
+                                                                         defaults={
+                                                                             'tmnId': funset_imt.get('TMN_ID'),
+                                                                             'normVanCd': funset_imt.get('NORM_VAN_CD'),
+                                                                             'callFg': funset_imt.get('CALL_FG'),
+                                                                             'ordPrtTy': funset_imt.get('ORD_PRT_TY'),
+                                                                             'alrYn': funset_imt.get('ALR_YN'),
+                                                                             'alrTy': funset_imt.get('ALR_TY'),
+                                                                             'alrPntFg': funset_imt.get('ALR_PNT_FG'),
+                                                                             'alrUrl': funset_imt.get('ALR_URL'),
+                                                                             'kktAlrCallId': funset_imt.get('KKT_ALR_CALL_ID'),
+                                                                             'kktAlrAccessKey': funset_imt.get('KKT_ALR_ACCESS_KEY'),
+                                                                             'kktAlrFailFg': funset_imt.get('KKT_ALR_FAIL_FG'),
+                                                                             'kktAlrId': funset_imt.get('KKT_ALR_ID'),
+                                                                             'kktAlrPw': funset_imt.get('KKT_ALR_PW'),
+                                                                             'insDt': funset_imt.get('INS_DT'),
+                                                                             'insUs': funset_imt.get('INS_US'),
+                                                                             'modDt': funset_imt.get('MOD_DT'),
+                                                                             'modUs': funset_imt.get('MOD_US')
+                                                                         })
+                        if not flag:
+                            funset_pktmkt.tmnId = funset_imt.get('TMN_ID')
+                            funset_pktmkt.normVanCd = funset_imt.get('NORM_VAN_CD')
+                            funset_pktmkt.callFg = funset_imt.get('CALL_FG')
+                            funset_pktmkt.ordPrtTy = funset_imt.get('ORD_PRT_TY')
+                            funset_pktmkt.alrYn = funset_imt.get('ALR_YN')
+                            funset_pktmkt.alrTy = funset_imt.get('ALR_TY')
+                            funset_pktmkt.alrPntFg = funset_imt.get('ALR_PNT_FG')
+                            funset_pktmkt.alrUrl = funset_imt.get('ALR_URL')
+                            funset_pktmkt.kktAlrCallId = funset_imt.get('KKT_ALR_CALL_ID')
+                            funset_pktmkt.kktAlrAccessKey = funset_imt.get('KKT_ALR_ACCESS_KEY')
+                            funset_pktmkt.kktAlrId = funset_imt.get('KKT_ALR_ID')
+                            funset_pktmkt.kktAlrPw = funset_imt.get('KKT_ALR_PW')
+                            funset_pktmkt.insDt = funset_imt.get('INS_DT')
+                            funset_pktmkt.insUs = funset_imt.get('INS_US')
+                            funset_pktmkt.modDt = funset_imt.get('MOD_DT')
+                            funset_pktmkt.modUs = funset_imt.get('MOD_US')
+                            funset_pktmkt.save()
         else:
             print("Error Code:" + rescode)
         return
