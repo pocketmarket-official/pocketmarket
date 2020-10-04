@@ -36,7 +36,7 @@ from interfaces import views as interface_views
 router = routers.DefaultRouter()
 
 router.register(r'stores_store', store_views.StoreView, 'store')
-router.register(r'stores_funSet', store_views.FunSetView, 'funSet')
+router.register(r'stores_funSset', store_views.FunsetView, 'funset')
 router.register(r'stores_pos', store_views.PosView, 'pos')
 router.register(r'festivals_festival', festival_views.FestivalView, 'festival')
 router.register(r'users_user', user_views.UserView, 'user')

@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
             field=models.DateTimeField(default=datetime.datetime(2020, 9, 30, 0, 21, 13, 409262)),
         ),
         migrations.CreateModel(
-            name='storeFunSet',
+            name='storeFunset',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('tmnId', models.CharField(blank=True, max_length=20)),

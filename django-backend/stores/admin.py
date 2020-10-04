@@ -12,10 +12,10 @@ class StoreAdmin(admin.ModelAdmin):
 
     pass
 
-@admin.register(models.FunSet)
-class FunSetAdmin(admin.ModelAdmin):
+@admin.register(models.Funset)
+class FunsetAdmin(admin.ModelAdmin):
 
-    """ FunSet Admin """
+    """ Funset Admin """
 
     pass
 

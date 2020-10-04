@@ -39,7 +39,7 @@ class Store(models.Model):
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
 
-class FunSet(models.Model):
+class Funset(models.Model):
     storeCd = models.ForeignKey('store', on_delete=models.CASCADE, default=1)
     tmnId = models.CharField(max_length=20, blank=True)
     normVanCd = models.CharField(max_length=3, default='000')

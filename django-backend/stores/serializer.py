@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from stores.models import Store
-from stores.models import FunSet
+from stores.models import Funset
 from stores.models import Pos
 
 
@@ -43,10 +43,10 @@ class StoreSerializer(serializers.ModelSerializer):
             'modUs'
         )
 
-class FunSetSerializer(serializers.ModelSerializer):
+class FunsetSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = FunSet
+        model = Funset
         fields = (
             'storeCd',
             'tmnId',
