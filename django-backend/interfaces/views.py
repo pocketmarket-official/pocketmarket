@@ -5,15 +5,17 @@ from stores.models import Store
 from stores.models import Funset
 from stores.models import Pos
 from keymaps.models import StoreKeymap
+from keymaps.models import TouchGroup
 
 
 def InterfaceView(request):
     try:
         ## constant
         compCd = 'C0028'
-        posNo = '91'
+        posNo = '01'
         ## parameter
         storeCd = 'S0002'
+        keymapCd = '002'
 
         ## brands_brand
         url = "http://asp-test.imtsoft.me/api/pocketMarket/brandsBrand?compCd=" + compCd  # json 결과
@@ -218,7 +220,7 @@ def InterfaceView(request):
                     funset_pktmkt.save()
 
         ##keymaps_StoreKeymap
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsStoreKeymap?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsStoreKeymap?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + keymapCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -228,30 +230,108 @@ def InterfaceView(request):
             for storeKeymap_imt in response_body_json:
                 store = Store.objects.get(storeCd=storeKeymap_imt.get('STOR_CD'))
                 storeKeymap_pktmkt, flag = StoreKeymap.objects.get_or_create(storeCd=store,
+                                                                             keymapCd=storeKeymap_imt.get('KEYMAP_CD'),
                                                                              defaults={
-                                                                                 'keymapCd': storeKeymap_imt.get(
-                                                                                     'KEYMAP_CD'),
                                                                                  'keymapName': storeKeymap_imt.get(
                                                                                      'KEYMAP_NM'),
                                                                                  'blankImgUrl': storeKeymap_imt.get(
                                                                                      'BLANK_IMG_URL'),
-                                                                                 'useYn': storeKeymap_imt.get('USE_YN'),
-                                                                                 'insDt': storeKeymap_imt.get('INS_DT'),
-                                                                                 'insUs': storeKeymap_imt.get('INS_US'),
-                                                                                 'modDt': storeKeymap_imt.get('MOD_DT'),
-                                                                                 'modUs': storeKeymap_imt.get('MOD_US')
+                                                                                 'useYn': storeKeymap_imt.get(
+                                                                                     'USE_YN'),
+                                                                                 'insDt': storeKeymap_imt.get(
+                                                                                     'INS_DT'),
+                                                                                 'insUs': storeKeymap_imt.get(
+                                                                                     'INS_US'),
+                                                                                 'modDt': storeKeymap_imt.get(
+                                                                                     'MOD_DT'),
+                                                                                 'modUs': storeKeymap_imt.get(
+                                                                                     'MOD_US')
                                                                              })
+        if not flag:
+            storeKeymap_pktmkt.keymapName = storeKeymap_imt.get('KEYMAP_NM')
+            storeKeymap_pktmkt.blankimgUrl = storeKeymap_imt.get(
+                'BLANK_IMG_URL')
+            storeKeymap_pktmkt.useYn = storeKeymap_imt.get('USE_YN')
+            storeKeymap_pktmkt.insDt = storeKeymap_imt.get('INS_DT')
+            storeKeymap_pktmkt.insUs = storeKeymap_imt.get('INS_US')
+            storeKeymap_pktmkt.modDt = storeKeymap_imt.get('MOD_DT')
+            storeKeymap_pktmkt.modUs = storeKeymap_imt.get('MOD_US')
+            storeKeymap_pktmkt.save()
+
+        ##stores_pos
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/storesPos?compCd=" + compCd + "&storCd=" + storeCd + "&posNo=" + posNo  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for pos_imt in response_body_json:
+                store = Store.objects.get(storeCd=pos_imt.get('STOR_CD'))
+                storeKeymap = StoreKeymap.objects.get(keymapCd=pos_imt.get('KEYMAP_CD'))
+                pos_pktmkt, flag = Pos.objects.get_or_create(storeCd=store,
+                                                             defaults={
+                                                                 'keymapCd': storeKeymap,
+                                                                 'ordStartNo': pos_imt.get('ORD_ST_NO'),
+                                                                 'ordEndNo': pos_imt.get('ORD_END_NO'),
+                                                                 'cntPayYn': pos_imt.get('CNT_PAY_YN'),
+                                                                 'kktAlrTmplCd': pos_imt.get('KKT_ALR_TMP_CD'),
+                                                                 'takeOutYn': pos_imt.get('TAKE_OUT_YN'),
+                                                                 'callNoYn': pos_imt.get('CALL_NO_YN'),
+                                                                 'useYn': pos_imt.get('USE_YN')
+                                                             })
+        if not flag:
+            pos_pktmkt.keymapCd = storeKeymap
+            pos_pktmkt.ordStartNo = pos_imt.get('ORD_ST_NO')
+            pos_pktmkt.ordEndNo = pos_imt.get('ORD_END_NO')
+            pos_pktmkt.cntPayYn = pos_imt.get('CNT_PAY_YN')
+            pos_pktmkt.kktAlrTmplCd = pos_imt.get('KKT_ALR_TMPL_CD')
+            pos_pktmkt.takeOutYn = pos_imt.get('TAKE_OUT_YN')
+            pos_pktmkt.callNoYn = pos_imt.get('CALL_NO_YN')
+            pos_pktmkt.useYn = pos_imt.get('USE_YN')
+            pos_pktmkt.save()
+
+        # TODO have to complete after store_pos
+        ##keymaps_Tgrp
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsTgrp?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + keymapCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for touchGroup_imt in response_body_json:
+                store = Store.objects.get(storeCd=touchGroup_imt.get('STOR_CD'))
+                keymap = StoreKeymap.objects.get(storeCd=store, keymapCd=keymapCd)
+                touchGroup_pktmkt, flag = TouchGroup.objects.get_or_create(storeCd=store, keymapCd=keymap,
+                                                                            groupCd=touchGroup_imt.get('GRP_Cd'),
+                                                                            defaults={
+                                                                                'groupName': touchGroup_imt.get(
+                                                                                    'GRP_NM'),
+                                                                                'imgUrl': touchGroup_imt.get('IMG_URL'),
+                                                                                'imgUseYn': touchGroup_imt.get(
+                                                                                    'IMG_USE_YN'),
+                                                                                'posPage': touchGroup_imt.get('POS_PG'),
+                                                                                'posIndex': touchGroup_imt.get(
+                                                                                    'POS_IX'),
+                                                                                'useYn': touchGroup_imt.get('USE_YN'),
+                                                                                'insDt': touchGroup_imt.get('INS_DT'),
+                                                                                'insUs': touchGroup_imt.get('INS_US'),
+                                                                                'modDt': touchGroup_imt.get('MOD_DT'),
+                                                                                'modUs': touchGroup_imt.get('MOD_US')
+                                                                            })
                 if not flag:
-                    storeKeymap_pktmkt.keymapCd = storeKeymap_imt.get('KEYMAP_CD')
-                    storeKeymap_pktmkt.keymapName = storeKeymap_imt.get('KEYMAP_NM')
-                    storeKeymap_pktmkt.blankimgUrl = storeKeymap_imt.get(
-                        'BLANK_IMG_URL')
-                    storeKeymap_pktmkt.useYn = storeKeymap_imt.get('USE_YN')
-                    storeKeymap_pktmkt.insDt = storeKeymap_imt.get('INS_DT')
-                    storeKeymap_pktmkt.insUs = storeKeymap_imt.get('INS_US')
-                    storeKeymap_pktmkt.modDt = storeKeymap_imt.get('MOD_DT')
-                    storeKeymap_pktmkt.modUs = storeKeymap_imt.get('MOD_US')
-                    storeKeymap_pktmkt.save()
+                    touchGroup_pktmkt.groupName = touchGroup_imt.get('GRP_NM')
+                    touchGroup_pktmkt.imgUrl = touchGroup_imt.get('IMG_URL')
+                    touchGroup_pktmkt.imgUseYn = touchGroup_imt.get('IMG_USE_YN')
+                    touchGroup_pktmkt.posPage = touchGroup_imt.get('POS_PG')
+                    touchGroup_pktmkt.posIndex = touchGroup_imt.get('POS_IX')
+                    touchGroup_pktmkt.useYn = touchGroup_imt.get('USE_YN')
+                    touchGroup_pktmkt.insDt = touchGroup_imt.get('INS_DT')
+                    touchGroup_pktmkt.insUs = touchGroup_imt.get('INS_US')
+                    touchGroup_pktmkt.modDt = touchGroup_imt.get('MOD_DT')
+                    touchGroup_pktmkt.modUs = touchGroup_imt.get('MOD_US')
+                    touchGroup_pktmkt.save()
 
         # TODO have to complete after keymap
 
