@@ -6,6 +6,7 @@ from stores.models import Funset
 from stores.models import Pos
 from keymaps.models import StoreKeymap
 from keymaps.models import TouchGroup
+from items.models import Item
 
 
 def InterfaceView(request):
@@ -291,7 +292,6 @@ def InterfaceView(request):
             pos_pktmkt.useYn = pos_imt.get('USE_YN')
             pos_pktmkt.save()
 
-        # TODO have to complete after store_pos
         ##keymaps_Tgrp
         url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsTgrp?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + keymapCd  # json 결과
         request = urllib.request.Request(url)
@@ -333,45 +333,52 @@ def InterfaceView(request):
                     touchGroup_pktmkt.modUs = touchGroup_imt.get('MOD_US')
                     touchGroup_pktmkt.save()
 
-        # TODO have to complete after keymap
-
-        # ##stores_pos
-        # url = "http://asp-test.imtsoft.me/api/pocketMarket/storesPos?compCd=" + compCd + "&storCd=" + storeCd + "&posNo=" + posNo  # json 결과
-        # request = urllib.request.Request(url)
-        # response = urllib.request.urlopen(request)
-        # rescode = response.getcode()
-        # if (rescode == 200):
-        #     response_body = response.read().decode('euc-kr')
-        #     response_body_json = json.loads(response_body)
-        #     for pos_imt in response_body_json:
-        #         store = Store.objects.get(storeCd=pos_imt.get('STOR_CD'))
-        #         pos_pktmkt, flag = Pos.objects.get_or_create(storeCd=store,
-        #                                                         defaults={
-        #                                                             'keymapCd': pos_imt.get(),
-        #
-        #                                                             'insDt': pos_imt.get('INS_DT'),
-        #                                                             'insUs': pos_imt.get('INS_US'),
-        #                                                             'modDt': pos_imt.get('MOD_DT'),
-        #                                                             'modUs': pos_imt.get('MOD_US')
-        #                                                         })
-        #         if not flag:
-        #             pos_pktmkt.tmnId = pos_imt.get('TMN_ID')
-        #             pos_pktmkt.normVanCd = pos_imt.get('NORM_VAN_CD')
-        #             pos_pktmkt.callFg = pos_imt.get('CALL_FG')
-        #             pos_pktmkt.ordPrtTy = pos_imt.get('ORD_PRT_TY')
-        #             pos_pktmkt.alrYn = pos_imt.get('ALR_YN')
-        #             pos_pktmkt.alrTy = pos_imt.get('ALR_TY')
-        #             pos_pktmkt.alrPntFg = pos_imt.get('ALR_PNT_FG')
-        #             pos_pktmkt.alrUrl = pos_imt.get('ALR_URL')
-        #             pos_pktmkt.kktAlrCallId = pos_imt.get('KKT_ALR_CALL_ID')
-        #             pos_pktmkt.kktAlrAccessKey = pos_imt.get('KKT_ALR_ACCESS_KEY')
-        #             pos_pktmkt.kktAlrId = pos_imt.get('KKT_ALR_ID')
-        #             pos_pktmkt.kktAlrPw = pos_imt.get('KKT_ALR_PW')
-        #             pos_pktmkt.insDt = pos_imt.get('INS_DT')
-        #             pos_pktmkt.insUs = pos_imt.get('INS_US')
-        #             pos_pktmkt.modDt = pos_imt.get('MOD_DT')
-        #             pos_pktmkt.modUs = pos_imt.get('MOD_US')
-        #             pos_pktmkt.save()
+        ## items_item
+        brandCd = store.brandCd.brandCd
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brandCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for item_imt in response_body_json:
+                brand = Brand.objects.get(brandCd=item_imt.get('BRAND_CD'))
+                item_pktmkt, flag = Item.objects.get_or_create(itemCd=item_imt.get('ITEM_CD'),
+                                                               defaults={
+                                                                   'brandCd' : brand,
+                                                                   'itemName': item_imt.get('ITEM_NM'),
+                                                                   'price': item_imt.get('PRIC'),
+                                                                   'takeOutPrice': item_imt.get('TAKE_OUT_PRICE'),
+                                                                   'setYn': item_imt.get('SET_YN'),
+                                                                   'itemFg': item_imt.get('ITEM_FG'),
+                                                                   'imgSmallUrl': item_imt.get('IMG_SMALL_URL'),
+                                                                   'ordPrtYn': item_imt.get('ORD_PRT_YN'),
+                                                                   'ordPrtText': item_imt.get('ORD_PRT_TXT'),
+                                                                   'kdsSendYn': item_imt.get('KDS_SEND_YN'),
+                                                                   'useYn': item_imt.get('USE_YN'),
+                                                                   'insDt': item_imt.get('INS_DT'),
+                                                                   'insUs': item_imt.get('INS_US'),
+                                                                   'modDt': item_imt.get('MOD_DT'),
+                                                                   'modUs': item_imt.get('MOD_US')
+                                                               })
+                if not flag:
+                    item_pktmkt.brandCd = brand
+                    item_pktmkt.itemName = item_imt.get('ITEM_NM')
+                    item_pktmkt.price = item_imt.get('PRIC')
+                    item_pktmkt.takeOutPrice = item_imt.get('TAKE_OUT_PRICE')
+                    item_pktmkt.setYn = item_imt.get('SET_YN')
+                    item_pktmkt.itemFg = item_imt.get('ITEM_FG')
+                    item_pktmkt.imgSmallUrl = item_imt.get('IMG_SMALL_URL')
+                    item_pktmkt.ordPrtYn = item_imt.get('ORD_PRT_YN')
+                    item_pktmkt.ordPrtText = item_imt.get('ORD_PRT_TXT')
+                    item_pktmkt.kdsSendYn = item_imt.get('KDS_SEND_YN')
+                    item_pktmkt.useYn = item_imt.get('USE_YN')
+                    item_pktmkt.insDt = item_imt.get('INS_DT')
+                    item_pktmkt.insUs = item_imt.get('INS_US')
+                    item_pktmkt.modDt = item_imt.get('MOD_DT')
+                    item_pktmkt.modUs = item_imt.get('MOD_US')
+                    item_pktmkt.save()
 
         else:
             print("Error Code:" + rescode)
