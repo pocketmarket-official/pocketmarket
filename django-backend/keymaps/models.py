@@ -21,7 +21,7 @@ class StoreKeymap(models.Model):
 
 class TouchGroup(models.Model):
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
-    keymapCd = models.ForeignKey('keymaps.Keymap', on_delete=models.CASCADE, default=1)
+    keymapCd = models.ForeignKey('keymaps.StoreKeymap', on_delete=models.CASCADE, default=1)
     groupCd = models.CharField(max_length=5, default='000')
     groupName = models.CharField(max_length=100, default='')
     imgUrl = models.CharField(max_length=200, null=True)
