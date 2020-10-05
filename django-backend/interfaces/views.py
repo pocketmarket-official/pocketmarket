@@ -304,22 +304,22 @@ def InterfaceView(request):
                 store = Store.objects.get(storeCd=touchGroup_imt.get('STOR_CD'))
                 keymap = StoreKeymap.objects.get(storeCd=store, keymapCd=keymapCd)
                 touchGroup_pktmkt, flag = TouchGroup.objects.get_or_create(storeCd=store, keymapCd=keymap,
-                                                                            groupCd=touchGroup_imt.get('GRP_Cd'),
-                                                                            defaults={
-                                                                                'groupName': touchGroup_imt.get(
-                                                                                    'GRP_NM'),
-                                                                                'imgUrl': touchGroup_imt.get('IMG_URL'),
-                                                                                'imgUseYn': touchGroup_imt.get(
-                                                                                    'IMG_USE_YN'),
-                                                                                'posPage': touchGroup_imt.get('POS_PG'),
-                                                                                'posIndex': touchGroup_imt.get(
-                                                                                    'POS_IX'),
-                                                                                'useYn': touchGroup_imt.get('USE_YN'),
-                                                                                'insDt': touchGroup_imt.get('INS_DT'),
-                                                                                'insUs': touchGroup_imt.get('INS_US'),
-                                                                                'modDt': touchGroup_imt.get('MOD_DT'),
-                                                                                'modUs': touchGroup_imt.get('MOD_US')
-                                                                            })
+                                                                           groupCd=touchGroup_imt.get('GRP_CD'),
+                                                                           defaults={
+                                                                               'groupName': touchGroup_imt.get(
+                                                                                   'GRP_NM'),
+                                                                               'imgUrl': touchGroup_imt.get('IMG_URL'),
+                                                                               'imgUseYn': touchGroup_imt.get(
+                                                                                   'IMG_USE_YN'),
+                                                                               'posPage': touchGroup_imt.get('POS_PG'),
+                                                                               'posIndex': touchGroup_imt.get(
+                                                                                   'POS_IX'),
+                                                                               'useYn': touchGroup_imt.get('USE_YN'),
+                                                                               'insDt': touchGroup_imt.get('INS_DT'),
+                                                                               'insUs': touchGroup_imt.get('INS_US'),
+                                                                               'modDt': touchGroup_imt.get('MOD_DT'),
+                                                                               'modUs': touchGroup_imt.get('MOD_US')
+                                                                           })
                 if not flag:
                     touchGroup_pktmkt.groupName = touchGroup_imt.get('GRP_NM')
                     touchGroup_pktmkt.imgUrl = touchGroup_imt.get('IMG_URL')
