@@ -147,7 +147,7 @@ class Main extends React.Component {
                         {this.state.temp.map((data) => {
                             let contentId = `modal__content${data.id}`;
                             return (
-                                <div id={contentId} onClick={(e) => this.handleModalContent(e)}>{data.name}: {data.address}</div>
+                                <div id={contentId} key={contentId} onClick={(e) => this.handleModalContent(e)}>{data.name}: {data.address}</div>
                             );
                         })}
                     </div>

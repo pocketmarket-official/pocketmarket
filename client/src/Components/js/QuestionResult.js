@@ -15,7 +15,7 @@ class QuestionResult extends React.Component {
                             {data.answer.map((content) => {
                                 return (
                                     <>
-                                        <div className="result__answer">{content}</div>
+                                        <div className="result__answer" key={data.answer.indexOf(content)} >{content}</div>
                                     </>
                                 );
                             })}
