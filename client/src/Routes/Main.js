@@ -119,12 +119,12 @@ class Main extends React.Component {
 
     async componentDidMount() {
         try {
-            const res = await fetch("http://localhost:8000/api/stores/");
-            const res2 = await fetch("http://localhost:8000/api/festivals/");
+            const res = await fetch("http://localhost:8000/api/stores_store/");
+            const res2 = await fetch("http://localhost:8000/api/brands_brand/");
             const stores = await res.json();
-            const festivals = await res2.json();
+            const brands = await res2.json();
             console.log(stores);
-            console.log(festivals);
+            console.log(brands);
         } catch(e) {
             console.log(e);
         }

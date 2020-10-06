@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import InfiniteScroll from './InfiniteScroll';
 
 
@@ -143,7 +142,7 @@ class StoreList extends React.Component {
             {
                 id: 13,
                 username: "노민철",
-                like_count: 14,
+                like_count: 144,
                 order_date: "2020-09-10",
                 order_list: ["아이스아메리카노 2", "아이스라떼 1"],
                 comment: "커피가 정말 맛있어요",
@@ -154,7 +153,7 @@ class StoreList extends React.Component {
             {
                 id: 14,
                 username: "마진형",
-                like_count: 22,
+                like_count: 222,
                 order_date: "2020-09-11",
                 order_list: ["아이스아메리카노 1", "티라미수 1"],
                 comment: "맛있는 티라미수",
@@ -170,45 +169,56 @@ class StoreList extends React.Component {
             gap: 5,
             preItems: 0,
             items: 5,
+            page: 1,
         };
 
         this._getData = this._getData.bind(this);
         this._infiniteScroll = this._infiniteScroll.bind(this);
     }
 
+    // infitite scroll에서 다음 가져와야할 index 처리 후 동작
+    // react는 겹치는 부분은 알아서 rendering 안함 data 새로운거로 하면 기존에꺼 없어짐 기존에 있던거에 concat 시킬 것
     _getData() {
         let result = this.state.temp.slice(this.state.preItems, this.state.items);
-        console.log(result);
-        this.setState({ data: result });
+        this.setState({
+            data: this.state.data.concat(result),
+            page: this.state.page + 1,
+        });
         return result;
     }
 
+    // infinite scroll 계산하는 부분
+    // setstate로 아이템 갯수 관리한 후 callback으로 getdata 돌림
+    // setstate는 비동기로 맘대로 돌아가고 await도 사용 못하므로 주의 필요
     _infiniteScroll() {
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
         let clientHeight = document.documentElement.clientHeight;
 
-        console.log(scrollHeight);
-        console.log(scrollTop + clientHeight);
-
-        if( 0 === Math.floor(scrollHeight - scrollTop - clientHeight)) {
+        if( 10 >= scrollHeight - scrollTop - clientHeight ) {
             this.setState({
                 preItems: this.state.items,
                 items: this.state.items + this.state.gap,
-            });
-            this._getData();
+            },
+                () => this._getData()
+            );
         }
     }
 
+    // event listener 등록
     componentDidMount() {
-        window.addEventListener("scroll", this._infiniteScroll);
+        window.addEventListener("scroll", this._infiniteScroll, true);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this._infiniteScroll, true);
     }
 
     render() {
-        console.log(this.state.data)
-        let id = 0;
         return(
-            <InfiniteScroll data={this.state.data} key={id++} />
+            this.state.data.map((data) => (
+                <InfiniteScroll data={data} key={data.id} />
+            ))
         );
     }
 }
