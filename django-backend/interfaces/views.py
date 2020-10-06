@@ -16,7 +16,6 @@ def InterfaceView(request):
         posNo = '01'
         ## parameter
         storeCd = 'S0002'
-        keymapCd = '002'
 
         ## brands_brand
         url = "http://asp-test.imtsoft.me/api/pocketMarket/brandsBrand?compCd=" + compCd  # json 결과
@@ -113,6 +112,9 @@ def InterfaceView(request):
                     store_pktmkt.modDt = store_imt.get('MOD_DT')
                     store_pktmkt.modUs = store_imt.get('MOD_US')
                     store_pktmkt.save()
+            ## parameters about store
+            store = store_pktmkt
+            brandCd = store.brandCd.brandCd
 
         ##stores_funset
         url = "http://asp-test.imtsoft.me/api/pocketMarket/storesFunset?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
@@ -123,7 +125,6 @@ def InterfaceView(request):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for funset_imt in response_body_json:
-                store = Store.objects.get(storeCd=funset_imt.get('STOR_CD'))
                 funset_pktmkt, flag = Funset.objects.get_or_create(storeCd=store,
                                                                    defaults={
                                                                        'tmnId': funset_imt.get('TMN_ID'),
@@ -166,62 +167,8 @@ def InterfaceView(request):
                     funset_pktmkt.modUs = funset_imt.get('MOD_US')
                     funset_pktmkt.save()
 
-        ##stores_funset
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/storesFunset?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
-        request = urllib.request.Request(url)
-        response = urllib.request.urlopen(request)
-        rescode = response.getcode()
-        if (rescode == 200):
-            response_body = response.read().decode('euc-kr')
-            response_body_json = json.loads(response_body)
-            for funset_imt in response_body_json:
-                store = Store.objects.get(storeCd=funset_imt.get('STOR_CD'))
-                funset_pktmkt, flag = Funset.objects.get_or_create(storeCd=store,
-                                                                   defaults={
-                                                                       'tmnId': funset_imt.get('TMN_ID'),
-                                                                       'normVanCd': funset_imt.get(
-                                                                           'NORM_VAN_CD'),
-                                                                       'callFg': funset_imt.get('CALL_FG'),
-                                                                       'ordPrtTy': funset_imt.get('ORD_PRT_TY'),
-                                                                       'alrYn': funset_imt.get('ALR_YN'),
-                                                                       'alrTy': funset_imt.get('ALR_TY'),
-                                                                       'alrPntFg': funset_imt.get('ALR_PNT_FG'),
-                                                                       'alrUrl': funset_imt.get('ALR_URL'),
-                                                                       'kktAlrCallId': funset_imt.get(
-                                                                           'KKT_ALR_CALL_ID'),
-                                                                       'kktAlrAccessKey': funset_imt.get(
-                                                                           'KKT_ALR_ACCESS_KEY'),
-                                                                       'kktAlrFailFg': funset_imt.get(
-                                                                           'KKT_ALR_FAIL_FG'),
-                                                                       'kktAlrId': funset_imt.get('KKT_ALR_ID'),
-                                                                       'kktAlrPw': funset_imt.get('KKT_ALR_PW'),
-                                                                       'insDt': funset_imt.get('INS_DT'),
-                                                                       'insUs': funset_imt.get('INS_US'),
-                                                                       'modDt': funset_imt.get('MOD_DT'),
-                                                                       'modUs': funset_imt.get('MOD_US')
-
-                                                                   })
-                if not flag:
-                    funset_pktmkt.tmnId = funset_imt.get('TMN_ID')
-                    funset_pktmkt.normVanCd = funset_imt.get('NORM_VAN_CD')
-                    funset_pktmkt.callFg = funset_imt.get('CALL_FG')
-                    funset_pktmkt.ordPrtTy = funset_imt.get('ORD_PRT_TY')
-                    funset_pktmkt.alrYn = funset_imt.get('ALR_YN')
-                    funset_pktmkt.alrTy = funset_imt.get('ALR_TY')
-                    funset_pktmkt.alrPntFg = funset_imt.get('ALR_PNT_FG')
-                    funset_pktmkt.alrUrl = funset_imt.get('ALR_URL')
-                    funset_pktmkt.kktAlrCallId = funset_imt.get('KKT_ALR_CALL_ID')
-                    funset_pktmkt.kktAlrAccessKey = funset_imt.get('KKT_ALR_ACCESS_KEY')
-                    funset_pktmkt.kktAlrId = funset_imt.get('KKT_ALR_ID')
-                    funset_pktmkt.kktAlrPw = funset_imt.get('KKT_ALR_PW')
-                    funset_pktmkt.insDt = funset_imt.get('INS_DT')
-                    funset_pktmkt.insUs = funset_imt.get('INS_US')
-                    funset_pktmkt.modDt = funset_imt.get('MOD_DT')
-                    funset_pktmkt.modUs = funset_imt.get('MOD_US')
-                    funset_pktmkt.save()
-
         ##keymaps_StoreKeymap
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsStoreKeymap?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + keymapCd  # json 결과
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsStoreKeymap?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -229,7 +176,6 @@ def InterfaceView(request):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for storeKeymap_imt in response_body_json:
-                store = Store.objects.get(storeCd=storeKeymap_imt.get('STOR_CD'))
                 storeKeymap_pktmkt, flag = StoreKeymap.objects.get_or_create(storeCd=store,
                                                                              keymapCd=storeKeymap_imt.get('KEYMAP_CD'),
                                                                              defaults={
@@ -268,7 +214,6 @@ def InterfaceView(request):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for pos_imt in response_body_json:
-                store = Store.objects.get(storeCd=pos_imt.get('STOR_CD'))
                 storeKeymap = StoreKeymap.objects.get(keymapCd=pos_imt.get('KEYMAP_CD'))
                 pos_pktmkt, flag = Pos.objects.get_or_create(storeCd=store,
                                                              defaults={
@@ -293,6 +238,7 @@ def InterfaceView(request):
             pos_pktmkt.save()
 
         ##keymaps_Tgrp
+        keymapCd = pos_pktmkt.keymapCd
         url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsTgrp?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + keymapCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
@@ -301,7 +247,6 @@ def InterfaceView(request):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for touchGroup_imt in response_body_json:
-                store = Store.objects.get(storeCd=touchGroup_imt.get('STOR_CD'))
                 keymap = StoreKeymap.objects.get(storeCd=store, keymapCd=keymapCd)
                 touchGroup_pktmkt, flag = TouchGroup.objects.get_or_create(storeCd=store, keymapCd=keymap,
                                                                            groupCd=touchGroup_imt.get('GRP_CD'),
@@ -334,7 +279,6 @@ def InterfaceView(request):
                     touchGroup_pktmkt.save()
 
         ## items_item
-        brandCd = store.brandCd.brandCd
         url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brandCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
@@ -343,10 +287,10 @@ def InterfaceView(request):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for item_imt in response_body_json:
-                brand = Brand.objects.get(brandCd=item_imt.get('BRAND_CD'))
+                brand = Brand.objects.get(brandCd=brandCd)
                 item_pktmkt, flag = Item.objects.get_or_create(itemCd=item_imt.get('ITEM_CD'),
                                                                defaults={
-                                                                   'brandCd' : brand,
+                                                                   'brandCd': brand,
                                                                    'itemName': item_imt.get('ITEM_NM'),
                                                                    'price': item_imt.get('PRIC'),
                                                                    'takeOutPrice': item_imt.get('TAKE_OUT_PRICE'),
@@ -379,6 +323,33 @@ def InterfaceView(request):
                     item_pktmkt.modDt = item_imt.get('MOD_DT')
                     item_pktmkt.modUs = item_imt.get('MOD_US')
                     item_pktmkt.save()
+
+        ## items_set
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsSet?compCd=" + compCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for brand_imt in response_body_json:
+                brand_pktmkt, flag = Brand.objects.get_or_create(brandCd=brand_imt.get('BRAND_CD'),
+                                                                 defaults={
+                                                                     'brandName': brand_imt.get('BRAND_NM'),
+                                                                     'useYn': brand_imt.get('USE_YN'),
+                                                                     'insDt': brand_imt.get('INS_DT'),
+                                                                     'insUs': brand_imt.get('INS_US'),
+                                                                     'modDt': brand_imt.get('MOD_DT'),
+                                                                     'modUs': brand_imt.get('MOD_US')
+                                                                 })
+                if not flag:
+                    brand_pktmkt.brandName = brand_imt.get('BRAND_NM')
+                    brand_pktmkt.useYn = brand_imt.get('USE_YN')
+                    brand_pktmkt.insDt = brand_imt.get('INS_DT')
+                    brand_pktmkt.insUs = brand_imt.get('INS_US')
+                    brand_pktmkt.modDt = brand_imt.get('MOD_DT')
+                    brand_pktmkt.modUs = brand_imt.get('MOD_US')
+                    brand_pktmkt.save()
 
         else:
             print("Error Code:" + rescode)
