@@ -8,8 +8,9 @@ from keymaps.models import StoreKeymap
 from keymaps.models import TouchGroup
 from items.models import Item
 from items.models import Set
+from items.models import SetOpt
 
-
+##todo get or create 구문에서 비교조건이 pk와 동일한지 체크
 def InterfaceView(request):
     try:
         ## constant
@@ -338,8 +339,8 @@ def InterfaceView(request):
                 setItemCd = Item.objects.get(itemCd=set_imt.get('SET_ITEM_CD'))
                 set_pktmkt, flag = Set.objects.get_or_create(setItemCd=setItemCd,
                                                              seq=set_imt.get('SEQ'),
+                                                             subItemCd=set_imt.get('SUB_ITEM_CD'),
                                                              defaults={
-                                                                 'subItemCd': set_imt.get('SUB_ITEM_CD'),
                                                                  'subItemQty': set_imt.get('SUB_ITEM_QTY'),
                                                                  'subItemPrice': set_imt.get('SUB_ITEM_PRIC'),
                                                                  'insDt': set_imt.get('INS_DT'),
@@ -348,7 +349,6 @@ def InterfaceView(request):
                                                                  'modUs': set_imt.get('MOD_US')
                                                              })
                 if not flag:
-                    set_pktmkt.subItemCd = set_imt.get('SUB_ITEM_CD')
                     set_pktmkt.subItemQty = set_imt.get('SUB_ITEM_QTY')
                     set_pktmkt.subItemPrice = set_imt.get('SUB_ITEM_PRIC')
                     set_pktmkt.insDt = set_imt.get('INS_DT')
@@ -356,6 +356,30 @@ def InterfaceView(request):
                     set_pktmkt.modDt = set_imt.get('MOD_DT')
                     set_pktmkt.modUs = set_imt.get('MOD_US')
                     set_pktmkt.save()
+
+        ##todo : set와 마찬가지로 삭제됐을 때 어떻게?
+
+        ## brands_brand
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsSetopt?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for setOpt_imt in response_body_json:
+                subItem = Item.objects.get(itemCd=setOpt_imt.get('SUB_ITEM_CD'))
+                setOpt_pktmkt, flag = SetOpt.objects.get_or_create(storeCd=store,
+                                                                   subItemCd=subItem,
+                                                                   changeItemCd=setOpt_imt.get('CHNG_ITEM_CD'),
+                                                                   defaults={
+                                                                       'insDt': setOpt_imt.get('INS_DT'),
+                                                                       'insUs': setOpt_imt.get('INS_US')
+                                                                   })
+                if not flag:
+                    setOpt_pktmkt.insDt = setOpt_imt.get('INS_DT')
+                    setOpt_pktmkt.insUs = setOpt_imt.get('INS_US')
+                    setOpt_pktmkt.save()
 
         else:
             print("Error Code:" + rescode)
