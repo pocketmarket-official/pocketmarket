@@ -25,7 +25,7 @@ class InfiniteScroll extends React.Component {
                         </div>
                         {this.props.data.comments.map((content) => {
                             return (
-                                <div>{content}</div>
+                                <div key={this.props.data.comments.indexOf(content)} >{content}</div>
                             );
                         })}
                     </div>
