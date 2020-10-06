@@ -7,6 +7,7 @@ from stores.models import Pos
 from keymaps.models import StoreKeymap
 from keymaps.models import TouchGroup
 from items.models import Item
+from items.models import Set
 
 
 def InterfaceView(request):
@@ -238,7 +239,7 @@ def InterfaceView(request):
             pos_pktmkt.save()
 
         ##keymaps_Tgrp
-        keymapCd = pos_pktmkt.keymapCd
+        keymapCd = pos_pktmkt.keymapCd.keymapCd
         url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsTgrp?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + keymapCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
@@ -324,6 +325,7 @@ def InterfaceView(request):
                     item_pktmkt.modUs = item_imt.get('MOD_US')
                     item_pktmkt.save()
 
+        ## TODO : set 구성상품 하나 삭제 했을 때 지울 방법이 없는데 그건 어떻게 처리함? - 질문해두었음
         ## items_set
         url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsSet?compCd=" + compCd  # json 결과
         request = urllib.request.Request(url)
@@ -332,24 +334,28 @@ def InterfaceView(request):
         if (rescode == 200):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
-            for brand_imt in response_body_json:
-                brand_pktmkt, flag = Brand.objects.get_or_create(brandCd=brand_imt.get('BRAND_CD'),
-                                                                 defaults={
-                                                                     'brandName': brand_imt.get('BRAND_NM'),
-                                                                     'useYn': brand_imt.get('USE_YN'),
-                                                                     'insDt': brand_imt.get('INS_DT'),
-                                                                     'insUs': brand_imt.get('INS_US'),
-                                                                     'modDt': brand_imt.get('MOD_DT'),
-                                                                     'modUs': brand_imt.get('MOD_US')
-                                                                 })
+            for set_imt in response_body_json:
+                setItemCd = Item.objects.get(itemCd=set_imt.get('SET_ITEM_CD'))
+                set_pktmkt, flag = Set.objects.get_or_create(setItemCd=setItemCd,
+                                                             seq=set_imt.get('SEQ'),
+                                                             defaults={
+                                                                 'subItemCd': set_imt.get('SUB_ITEM_CD'),
+                                                                 'subItemQty': set_imt.get('SUB_ITEM_QTY'),
+                                                                 'subItemPrice': set_imt.get('SUB_ITEM_PRIC'),
+                                                                 'insDt': set_imt.get('INS_DT'),
+                                                                 'insUs': set_imt.get('INS_US'),
+                                                                 'modDt': set_imt.get('MOD_DT'),
+                                                                 'modUs': set_imt.get('MOD_US')
+                                                             })
                 if not flag:
-                    brand_pktmkt.brandName = brand_imt.get('BRAND_NM')
-                    brand_pktmkt.useYn = brand_imt.get('USE_YN')
-                    brand_pktmkt.insDt = brand_imt.get('INS_DT')
-                    brand_pktmkt.insUs = brand_imt.get('INS_US')
-                    brand_pktmkt.modDt = brand_imt.get('MOD_DT')
-                    brand_pktmkt.modUs = brand_imt.get('MOD_US')
-                    brand_pktmkt.save()
+                    set_pktmkt.subItemCd = set_imt.get('SUB_ITEM_CD')
+                    set_pktmkt.subItemQty = set_imt.get('SUB_ITEM_QTY')
+                    set_pktmkt.subItemPrice = set_imt.get('SUB_ITEM_PRIC')
+                    set_pktmkt.insDt = set_imt.get('INS_DT')
+                    set_pktmkt.insUs = set_imt.get('INS_US')
+                    set_pktmkt.modDt = set_imt.get('MOD_DT')
+                    set_pktmkt.modUs = set_imt.get('MOD_US')
+                    set_pktmkt.save()
 
         else:
             print("Error Code:" + rescode)
