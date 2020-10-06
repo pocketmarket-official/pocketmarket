@@ -9,6 +9,9 @@ from keymaps.models import TouchGroup
 from items.models import Item
 from items.models import Set
 from items.models import SetOpt
+from items.models import ItemAdd
+from items.models import AddCat
+
 
 ##todo get or create 구문에서 비교조건이 pk와 동일한지 체크
 def InterfaceView(request):
@@ -359,7 +362,7 @@ def InterfaceView(request):
 
         ##todo : set와 마찬가지로 삭제됐을 때 어떻게?
 
-        ## brands_brand
+        ## items SetOpt
         url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsSetopt?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
@@ -380,6 +383,57 @@ def InterfaceView(request):
                     setOpt_pktmkt.insDt = setOpt_imt.get('INS_DT')
                     setOpt_pktmkt.insUs = setOpt_imt.get('INS_US')
                     setOpt_pktmkt.save()
+
+        ## todo : 얘도 삭제 안됨
+        ## items ItemAdd
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsItemadd?compCd=" + compCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for itemAdd_imt in response_body_json:
+                itemCd = Item.objects.get(itemCd=itemAdd_imt.get('ITEM_CD'))
+                itemAdd_pktmkt, flag = ItemAdd.objects.get_or_create(itemCd=itemCd,
+                                                                     itemAddCd=itemAdd_imt.get('ADD_ITEM_CD'),
+                                                                     defaults={
+                                                                         'itemSort': itemAdd_imt.get('ITEM_SORT'),
+                                                                         'insDt': itemAdd_imt.get('INS_DT'),
+                                                                         'insUs': itemAdd_imt.get('INS_US')
+                                                                     })
+                if not flag:
+                    itemAdd_pktmkt.itemSort = itemAdd_imt.get('ITEM_SORT')
+                    itemAdd_pktmkt.insDt = itemAdd_imt.get('INS_DT')
+                    itemAdd_pktmkt.insUs = itemAdd_imt.get('INS_US')
+                    itemAdd_pktmkt.save()
+
+        ## items AddCat
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsAddcat?compCd=" + compCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for addCat_imt in response_body_json:
+                addCat_pktmkt, flag = AddCat.objects.get_or_create(addCatCd=addCat_imt.get('ADD_CAT_CD'),
+                                                                   defaults={
+                                                                       'addCatName': addCat_imt.get('ADD_CAT_NM'),
+                                                                       'useYn': addCat_imt.get('USE_YN'),
+                                                                       'insDt': addCat_imt.get('INS_DT'),
+                                                                       'insUs': addCat_imt.get('INS_US'),
+                                                                       'modDt': addCat_imt.get('MOD_DT'),
+                                                                       'modUs': addCat_imt.get('MOD_US')
+                                                                   })
+                if not flag:
+                    addCat_pktmkt.addCatName = addCat_imt.get('ADD_CAT_NM')
+                    addCat_pktmkt.useYn = addCat_imt.get('USE_YN')
+                    addCat_pktmkt.insDt = addCat_imt.get('INS_DT')
+                    addCat_pktmkt.insUs = addCat_imt.get('INS_US')
+                    addCat_pktmkt.modDt = addCat_imt.get('MOD_DT')
+                    addCat_pktmkt.modUs = addCat_imt.get('MOD_US')
+                    addCat_pktmkt.save()
 
         else:
             print("Error Code:" + rescode)
