@@ -33,6 +33,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Brand.objects.filter(compCd=compCd).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for brand_imt in response_body_json:
@@ -60,6 +61,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Store.objects.filter(compCd=compCd, storeCd=storeCd).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for store_imt in response_body_json:
@@ -124,7 +126,7 @@ def InterfaceView(request):
                     store_pktmkt.save()
             ## parameters about store
             store = store_pktmkt
-            brandCd = store.brandCd.brandCd
+            brand = store.brandCd
 
         ##stores_funset
         url = "http://asp-test.imtsoft.me/api/pocketMarket/storesFunset?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
@@ -132,6 +134,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Funset.objects.filter(compCd=compCd, storeCd=store).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for funset_imt in response_body_json:
@@ -183,6 +186,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            StoreKeymap.objects.filter(compCd=compCd, storeCd=storeCd).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for storeKeymap_imt in response_body_json:
@@ -221,6 +225,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Pos.objects.filter(compCd=compCd, storeCd=store, posNo=posNo).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for pos_imt in response_body_json:
@@ -247,13 +252,14 @@ def InterfaceView(request):
             pos_pktmkt.useYn = pos_imt.get('USE_YN')
             pos_pktmkt.save()
 
-        ##keymaps_Tgrp
+        ##keymaps_TouchGroup
         storeKeymap = pos_pktmkt.keymapCd
         url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsTgrp?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + storeKeymap.keymapCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            TouchGroup.objects.filter(compCd=compCd, storeCd=store, keymapCd=storeKeymap).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for touchGroup_imt in response_body_json:
@@ -289,15 +295,15 @@ def InterfaceView(request):
                     touchGroup_pktmkt.save()
 
         ## items_item
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brandCd  # json 결과
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brand.brandCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Item.objects.filter(compCd=compCd, storeCd=store, brandCd=brand).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for item_imt in response_body_json:
-                brand = Brand.objects.get(brandCd=brandCd)
                 item_pktmkt, flag = Item.objects.get_or_create(itemCd=item_imt.get('ITEM_CD'),
                                                                defaults={
                                                                    'brandCd': brand,
@@ -341,6 +347,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Set.objects.filter(compCd=compCd).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for set_imt in response_body_json:
@@ -373,6 +380,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            SetOpt.objects.filter(compCd=compCd, storeCd=store).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for setOpt_imt in response_body_json:
@@ -396,6 +404,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            ItemAdd.objects.filter(compCd=compCd).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for itemAdd_imt in response_body_json:
@@ -419,6 +428,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            AddCat.objects.filter(compCd=compCd).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for addCat_imt in response_body_json:
@@ -447,6 +457,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Add.objects.filter(compCd=compCd).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for add_imt in response_body_json:
@@ -473,6 +484,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Cprt.objects.filter(compCd=compCd, storeCd=store).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for cprt_imt in response_body_json:
@@ -501,6 +513,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Group.objects.filter(compCd=compCd, storeCd=store).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for group_imt in response_body_json:
@@ -529,6 +542,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Relation.objects.filter(compCd=compCd, storeCd=store).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for relation_imt in response_body_json:
@@ -556,6 +570,7 @@ def InterfaceView(request):
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
         if (rescode == 200):
+            Keymap.objects.filter(compCd=compCd, storeCd=store, keymapCd=storeKeymap.keymapCd).delete()
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for keymap_imt in response_body_json:
