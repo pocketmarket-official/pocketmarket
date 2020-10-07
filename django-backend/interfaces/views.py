@@ -513,7 +513,7 @@ def InterfaceView(request):
                                                                      'insUs': group_imt.get('INS_US'),
                                                                      'modDt': group_imt.get('MOD_DT'),
                                                                      'modUs': group_imt.get('MOD_US')
-                                                                 })
+                                                                 }) 
                 if not flag:
                     group_pktmkt.cprtGroupName = group_imt.get('RPRT_GRP_NM')
                     group_pktmkt.useYn = group_imt.get('USE_YN')
