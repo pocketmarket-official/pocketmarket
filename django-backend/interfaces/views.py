@@ -297,7 +297,7 @@ def InterfaceView(request):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for keymap_imt in response_body_json:
-                touchGroup = TouchGroup.objects.get(touchGroupCd=keymap_imt.get('GRP_CD'))
+                touchGroup = TouchGroup.objects.get(keymapCd=storeKeymap, touchGroupCd=keymap_imt.get('GRP_CD'))
                 item = Item.objects.get(itemCd=keymap_imt.get('ITEM_CD'))
                 keymap_pktmkt, flag = Keymap.objects.get_or_create(storeCd=store,
                                                                    keymapCd=storeKeymap,
@@ -310,7 +310,6 @@ def InterfaceView(request):
                                                                        'cprtGroupCd': keymap_imt.get('RPRT_GRP_CD'),
                                                                        'dispYn': keymap_imt.get('DISP_YN'),
                                                                        'expectCnt': keymap_imt.get('EXPECT_CNT'),
-                                                                       'useYn': keymap_imt.get('USE_YN'),
                                                                        'insDt': keymap_imt.get('INS_DT'),
                                                                        'insUs': keymap_imt.get('INS_US'),
                                                                        'modDt': keymap_imt.get('MOD_DT'),
@@ -321,7 +320,6 @@ def InterfaceView(request):
                     keymap_pktmkt.cprtGroupCd = keymap_imt.get('RPRT_GRP_CD')
                     keymap_pktmkt.dispYn = keymap_imt.get('DISP_YN')
                     keymap_pktmkt.expectCnt = keymap_imt.get('EXPECT_CNT')
-                    keymap_pktmkt.useYn = keymap_imt.get('USE_YN')
                     keymap_pktmkt.insDt = keymap_imt.get('INS_DT')
                     keymap_pktmkt.insUs = keymap_imt.get('INS_US')
                     keymap_pktmkt.modDt = keymap_imt.get('MOD_DT')
