@@ -29,7 +29,47 @@ class MainStoreContent extends React.Component {
                 comment: '커피커피',
                 like_count: 14,
                 latlong: [126.95351, 37.38997]
-            }
+            },
+            {
+                id: 4,
+                store_nm: '강남 카페베네',
+                image: '',
+                comment: '커피커피',
+                like_count: 42,
+                latlong: [127.02866, 37.49858]
+            },
+            {
+                id: 5,
+                store_nm: '강남 파리바게트',
+                image: '',
+                comment: '맛있는 빵',
+                like_count: 7,
+                latlong: [127.02861, 37.49781]
+            },
+            {
+                id: 6,
+                store_nm: '노브랜드버거 고려대점',
+                image: '',
+                comment: '버거버거버거',
+                like_count: 27,
+                latlong: [127.02961, 37.58385]
+            },
+            {
+                id: 7,
+                store_nm: '서브웨이 안암',
+                image: '',
+                comment: '샌드위치',
+                like_count: 3,
+                latlong: [127.02898, 37.58609]
+            },
+            {
+                id: 8,
+                store_nm: '비야 부대찌개 본점',
+                image: '',
+                comment: '부대찌개 안암',
+                like_count: 33,
+                latlong: [127.02937, 37.58820]
+            },
         ];
 
         this.state = {
@@ -38,8 +78,21 @@ class MainStoreContent extends React.Component {
             temp: temp,
         }
 
+        this.calcDistance = this.calcDistance.bind(this);
+        this.sortData = this.sortData.bind(this);
+        this.getPosition = this.getPosition.bind(this);
+
         let lat;
         let long;
+
+        // get current location
+        this.getPosition().then((position) => {
+            this.setState({
+                lat1: position.coords.latitude,
+                long1: position.coords.longitude,
+            })
+        })
+        .catch((e) => console.log(e));
     }
 
     calcDistance(latitude1, longitude1, latitude2, longitude2) {
@@ -78,13 +131,9 @@ class MainStoreContent extends React.Component {
         return (a.distance - b.distance);
     }
 
-    componentWillMount() {
-        // get current location
-        navigator.geolocation.getCurrentPosition((position) => {
-            this.setState({
-                lat1: position.coords.latitude,
-                long1: position.coords.longitude,
-            })
+    getPosition(options) {
+        return new Promise(function(resolve, reject) {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options);
         });
     }
 
