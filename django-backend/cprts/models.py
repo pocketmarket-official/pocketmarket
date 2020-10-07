@@ -30,7 +30,6 @@ class Group(models.Model):
 class Relation(models.Model):
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
     cprtGroupCd = models.ForeignKey('cprts.Group', on_delete=models.CASCADE, default=1)
-    seq = models.IntegerField(default=1)
     cprtCd = models.ForeignKey('cprts.Cprt', on_delete=models.CASCADE, default=1)
     insDt = models.DateTimeField(default=datetime.now())
     insUs = models.CharField(max_length=30, default='defaultValue')

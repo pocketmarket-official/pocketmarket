@@ -513,7 +513,7 @@ def InterfaceView(request):
                                                                      'insUs': group_imt.get('INS_US'),
                                                                      'modDt': group_imt.get('MOD_DT'),
                                                                      'modUs': group_imt.get('MOD_US')
-                                                                 }) 
+                                                                 })
                 if not flag:
                     group_pktmkt.cprtGroupName = group_imt.get('RPRT_GRP_NM')
                     group_pktmkt.useYn = group_imt.get('USE_YN')
@@ -522,6 +522,33 @@ def InterfaceView(request):
                     group_pktmkt.modDt = group_imt.get('MOD_DT')
                     group_pktmkt.modUs = group_imt.get('MOD_US')
                     group_pktmkt.save()
+
+        ## cprts_relation
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/cprtsCprt?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for relation_imt in response_body_json:
+                group = Group.objects.get(cprtGroupCd=relation_imt.get('RPRT_GRP_CD'))
+                cprt = Cprt.objects.get(cprtCd=relation_imt.get('RPRT_CD'))
+                relation_pktmkt, flag = Relation.objects.get_or_create(storeCd=store,
+                                                                       cprtGroupCd=group,
+                                                                       cprtCd=cprt,
+                                                                       defaults={
+                                                                           'insDt': relation_imt.get('INS_DT'),
+                                                                           'insUs': relation_imt.get('INS_US'),
+                                                                           'modDt': relation_imt.get('MOD_DT'),
+                                                                           'modUs': relation_imt.get('MOD_US')
+                                                                       })
+                if not flag:
+                    relation_pktmkt.insDt = relation_imt.get('INS_DT')
+                    relation_pktmkt.insUs = relation_imt.get('INS_US')
+                    relation_pktmkt.modDt = relation_imt.get('MOD_DT')
+                    relation_pktmkt.modUs = relation_imt.get('MOD_US')
+                    relation_pktmkt.save()
 
         ## keymaps_keymap
         url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsKeymap?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + storeKeymap.keymapCd  # json 결과
