@@ -6,11 +6,16 @@ from stores.models import Funset
 from stores.models import Pos
 from keymaps.models import StoreKeymap
 from keymaps.models import TouchGroup
+from keymaps.models import Keymap
 from items.models import Item
 from items.models import Set
 from items.models import SetOpt
 from items.models import ItemAdd
 from items.models import AddCat
+from items.models import Add
+from cprts.models import Cprt
+from cprts.models import Group
+from cprts.models import Relation
 
 
 ##todo get or create 구문에서 비교조건이 pk와 동일한지 체크
@@ -243,8 +248,8 @@ def InterfaceView(request):
             pos_pktmkt.save()
 
         ##keymaps_Tgrp
-        keymapCd = pos_pktmkt.keymapCd.keymapCd
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsTgrp?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + keymapCd  # json 결과
+        storeKeymap = pos_pktmkt.keymapCd
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsTgrp?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + storeKeymap.keymapCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -252,11 +257,11 @@ def InterfaceView(request):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for touchGroup_imt in response_body_json:
-                keymap = StoreKeymap.objects.get(storeCd=store, keymapCd=keymapCd)
-                touchGroup_pktmkt, flag = TouchGroup.objects.get_or_create(storeCd=store, keymapCd=keymap,
-                                                                           groupCd=touchGroup_imt.get('GRP_CD'),
+                touchGroup_pktmkt, flag = TouchGroup.objects.get_or_create(storeCd=store,
+                                                                           keymapCd=storeKeymap,
+                                                                           touchGroupCd=touchGroup_imt.get('GRP_CD'),
                                                                            defaults={
-                                                                               'groupName': touchGroup_imt.get(
+                                                                               'touchGroupName': touchGroup_imt.get(
                                                                                    'GRP_NM'),
                                                                                'imgUrl': touchGroup_imt.get('IMG_URL'),
                                                                                'imgUseYn': touchGroup_imt.get(
@@ -271,7 +276,7 @@ def InterfaceView(request):
                                                                                'modUs': touchGroup_imt.get('MOD_US')
                                                                            })
                 if not flag:
-                    touchGroup_pktmkt.groupName = touchGroup_imt.get('GRP_NM')
+                    touchGroup_pktmkt.touchGroupName = touchGroup_imt.get('GRP_NM')
                     touchGroup_pktmkt.imgUrl = touchGroup_imt.get('IMG_URL')
                     touchGroup_pktmkt.imgUseYn = touchGroup_imt.get('IMG_USE_YN')
                     touchGroup_pktmkt.posPage = touchGroup_imt.get('POS_PG')
@@ -282,6 +287,46 @@ def InterfaceView(request):
                     touchGroup_pktmkt.modDt = touchGroup_imt.get('MOD_DT')
                     touchGroup_pktmkt.modUs = touchGroup_imt.get('MOD_US')
                     touchGroup_pktmkt.save()
+
+        ## keymaps_keymap
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsKeymap?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + storeKeymap.keymapCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for keymap_imt in response_body_json:
+                touchGroup = TouchGroup.objects.get(touchGroupCd=keymap_imt.get('GRP_CD'))
+                item = Item.objects.get(itemCd=keymap_imt.get('ITEM_CD'))
+                keymap_pktmkt, flag = Keymap.objects.get_or_create(storeCd=store,
+                                                                   keymapCd=storeKeymap,
+                                                                   touchGroupCd=touchGroup,
+                                                                   posPage=keymap_imt.get('POS_PG'),
+                                                                   posIndex=keymap_imt.get('POS_IX'),
+                                                                   itemCd=item,
+                                                                   defaults={
+                                                                       'soldOutYn': keymap_imt.get('SOLD_OUT_YN'),
+                                                                       'cprtGroupCd': keymap_imt.get('RPRT_GRP_CD'),
+                                                                       'dispYn': keymap_imt.get('DISP_YN'),
+                                                                       'expectCnt': keymap_imt.get('EXPECT_CNT'),
+                                                                       'useYn': keymap_imt.get('USE_YN'),
+                                                                       'insDt': keymap_imt.get('INS_DT'),
+                                                                       'insUs': keymap_imt.get('INS_US'),
+                                                                       'modDt': keymap_imt.get('MOD_DT'),
+                                                                       'modUs': keymap_imt.get('MOD_US')
+                                                                   })
+                if not flag:
+                    keymap_pktmkt.soldOutYn = keymap_imt.get('SOLD_OUT_YN')
+                    keymap_pktmkt.cprtGroupCd = keymap_imt.get('RPRT_GRP_CD')
+                    keymap_pktmkt.dispYn = keymap_imt.get('DISP_YN')
+                    keymap_pktmkt.expectCnt = keymap_imt.get('EXPECT_CNT')
+                    keymap_pktmkt.useYn = keymap_imt.get('USE_YN')
+                    keymap_pktmkt.insDt = keymap_imt.get('INS_DT')
+                    keymap_pktmkt.insUs = keymap_imt.get('INS_US')
+                    keymap_pktmkt.modDt = keymap_imt.get('MOD_DT')
+                    keymap_pktmkt.modUs = keymap_imt.get('MOD_US')
+                    keymap_pktmkt.save()
 
         ## items_item
         url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brandCd  # json 결과
@@ -434,6 +479,60 @@ def InterfaceView(request):
                     addCat_pktmkt.modDt = addCat_imt.get('MOD_DT')
                     addCat_pktmkt.modUs = addCat_imt.get('MOD_US')
                     addCat_pktmkt.save()
+
+        ## todo : 얘도 삭제 안됨
+        ## itmes_Add
+        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsAdd?compCd=" + compCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for add_imt in response_body_json:
+                addCat = AddCat.objects.get(addCatCd=add_imt.get('ADD_CAT_CD'))
+                addItem = Item.objects.get(itemCd=add_imt.get('ADD_ITEM_CD'))
+                add_pktmkt, flag = Add.objects.get_or_create(addCatCd=addCat,
+                                                             addItemCd=addItem,
+                                                             defaults={
+                                                                 'insDt': add_imt.get('INS_DT'),
+                                                                 'insUs': add_imt.get('INS_US'),
+                                                                 'modDt': add_imt.get('MOD_DT'),
+                                                                 'modUs': add_imt.get('MOD_US')
+                                                             })
+                if not flag:
+                    add_pktmkt.insDt = add_imt.get('INS_DT')
+                    add_pktmkt.insUs = add_imt.get('INS_US')
+                    add_pktmkt.modDt = add_imt.get('MOD_DT')
+                    add_pktmkt.modUs = add_imt.get('MOD_US')
+                    add_pktmkt.save()
+        #
+        # ## brands_brand
+        # url = "http://asp-test.imtsoft.me/api/pocketMarket/cprtsMaster?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        # request = urllib.request.Request(url)
+        # response = urllib.request.urlopen(request)
+        # rescode = response.getcode()
+        # if (rescode == 200):
+        #     response_body = response.read().decode('euc-kr')
+        #     response_body_json = json.loads(response_body)
+        #     for cprt_imt in response_body_json:
+        #         cprt_pktmkt, flag = Brand.objects.get_or_create(cprtCd=cprt_imt.get('BRAND_CD'),
+        #                                                         defaults={
+        #                                                             'cprtName': cprt_imt.get('BRAND_NM'),
+        #                                                             'useYn': cprt_imt.get('USE_YN'),
+        #                                                             'insDt': cprt_imt.get('INS_DT'),
+        #                                                             'insUs': cprt_imt.get('INS_US'),
+        #                                                             'modDt': cprt_imt.get('MOD_DT'),
+        #                                                             'modUs': cprt_imt.get('MOD_US')
+        #                                                         })
+        #         if not flag:
+        #             cprt_pktmkt.cprtName = cprt_imt.get('BRAND_NM')
+        #             cprt_pktmkt.useYn = cprt_imt.get('USE_YN')
+        #             cprt_pktmkt.insDt = cprt_imt.get('INS_DT')
+        #             cprt_pktmkt.insUs = cprt_imt.get('INS_US')
+        #             cprt_pktmkt.modDt = cprt_imt.get('MOD_DT')
+        #             cprt_pktmkt.modUs = cprt_imt.get('MOD_US')
+        #             cprt_pktmkt.save()
 
         else:
             print("Error Code:" + rescode)

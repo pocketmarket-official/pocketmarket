@@ -60,7 +60,7 @@ class ItemAdd(models.Model):
 
 class AddCat(models.Model):
     addCatCd = models.CharField(max_length=5, default='00000')
-    addCatNm = models.CharField(max_length=20, default='')
+    addCatName = models.CharField(max_length=20, default='')
     useYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
