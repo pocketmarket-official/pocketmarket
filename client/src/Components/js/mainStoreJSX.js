@@ -4,25 +4,24 @@ import { Link } from 'react-router-dom';
 
 class StoreJSX extends React.Component {
     render() {
+        let d = this.props.data.show_dist;
+        let data = this.props.data
         return(
-            this.props.place.temp.map((data) => {
-                let d = data.show_dist;
-                return (
                 <div className="content__store">
                     <Link to={{
-                        pathname: `/main/store/${data.id}`,
+                        pathname: `/main/store/${this.props.data.id}`,
                         state: {data, d}
                     }}>
                     <div className="store__store">
-                        <img className="store__image" src={data.image}></img>
+                        <img className="store__image" src={this.props.data.image}></img>
                         <div className="store__detail">
                             <div className="detail__title">
-                                <div className="detail__name">{data.store_nm}</div>
-                                <div className="detail__distance">{data.show_dist}</div>
-                                <div className="detail__likes">{data.like_count}</div>
+                                <div className="detail__name">{this.props.data.store_nm}</div>
+                                <div className="detail__distance">{this.props.data.show_dist}</div>
+                                <div className="detail__likes">{this.props.data.like_count}</div>
                             </div>
                             <div className="detail__description">
-                                {data.comment}
+                                {this.props.data.comment}
                             </div>
                         </div>
                     </div>
@@ -32,9 +31,7 @@ class StoreJSX extends React.Component {
                         <div className="review__likes">리뷰 좋아요</div>
                     </div>
                 </div>
-                );
-            }
-        ));
+        );
     }
 }
 

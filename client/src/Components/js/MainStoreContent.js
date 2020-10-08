@@ -1,11 +1,12 @@
 import React from 'react';
 import StoreJSX from './mainStoreJSX';
+import Loading from './Loading';
 
 
 class MainStoreContent extends React.Component {
     constructor(props) {
         super(props);
-        let temp = [
+        this.temp = [
             {
                 id: 1,
                 store_nm: '스타벅스',
@@ -75,22 +76,32 @@ class MainStoreContent extends React.Component {
         this.state = {
             lat1: 0,
             long1: 0,
-            temp: temp,
+            loading: false,
+            temp: this.temp,
+            data: this.temp.slice(0, 5),
+            gap: 5,
+            preItems: 0,
+            items: 5,
         }
 
         this.calcDistance = this.calcDistance.bind(this);
         this.sortData = this.sortData.bind(this);
         this.getPosition = this.getPosition.bind(this);
-
-        let lat;
-        let long;
+        this.sortCallback = this.sortCallback.bind(this);
+        this.sortCallbackUpdate = this.sortCallbackUpdate.bind(this);
+        this._getData = this._getData.bind(this);
+        this._infiniteScroll = this._infiniteScroll.bind(this);
 
         // get current location
         this.getPosition().then((position) => {
             this.setState({
                 lat1: position.coords.latitude,
                 long1: position.coords.longitude,
-            })
+                loading: true,
+
+            },
+                () => this.sortCallback()
+            )
         })
         .catch((e) => console.log(e));
     }
@@ -137,6 +148,30 @@ class MainStoreContent extends React.Component {
         });
     }
 
+    _getData() {
+        let result = this.state.temp.slice(this.state.preItems, this.state.items);
+        this.setState({
+            data: this.state.data.concat(result),
+            page: this.state.page + 1,
+        });
+        return result;
+    }
+
+    _infiniteScroll() {
+        let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+        let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+        let clientHeight = document.documentElement.clientHeight;
+
+        if( 10 >= scrollHeight - scrollTop - clientHeight ) {
+            this.setState({
+                preItems: this.state.items,
+                items: this.state.items + this.state.gap,
+            },
+                () => this._getData()
+            );
+        }
+    }
+
     componentDidMount() {
         let addressContainer = document.getElementById("btn__address");
 
@@ -145,9 +180,48 @@ class MainStoreContent extends React.Component {
                 this.setState({
                     lat1: this.props.place[1],
                     long1: this.props.place[0],
-                });
+                    loading: true,
+                },
+                    () => this.sortCallback()
+                );
             }
         }
+
+        window.addEventListener("scroll", this._infiniteScroll, true);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this._infiniteScroll, true);
+    }
+
+    sortCallback() {
+        this.state.temp.forEach((data) => {
+            let d = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[1];
+            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[0];
+            data["distance"] = d;
+            data["show_dist"] = dist;
+        });
+
+        this.state.temp.sort(this.sortData);
+        this.setState({loading: false});
+    }
+
+    sortCallbackUpdate() {
+        this.state.temp.forEach((data) => {
+            let d = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[1];
+            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[0];
+            data["distance"] = d;
+            data["show_dist"] = dist;
+        });
+
+        this.state.temp.sort(this.sortData);
+        this.setState({
+            loading: false,
+            data: this.temp.slice(0, 5),
+            preItems: 0,
+            items: 5,
+
+        });
     }
 
     componentDidUpdate() {
@@ -159,24 +233,29 @@ class MainStoreContent extends React.Component {
                     this.setState({
                         lat1: this.props.place[1],
                         long1: this.props.place[0],
-                    });
+                        loading: true,
+                    },
+                        () => this.sortCallbackUpdate()
+                    );
                 }
             }
         }
     }
 
     render() {
-        this.state.temp.map((data) => {
-            let d = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[1];
-            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[0];
-            data["distance"] = d;
-            data["show_dist"] = dist;
-        });
-
-        this.state.temp.sort(this.sortData);
-
+        const isLoading = this.state.loading;
         return (
-            <StoreJSX place={this.state} />
+            <div>
+            {
+                isLoading ? (
+                    <Loading />
+                ) : (
+                    this.state.data.map((data) => (
+                        <StoreJSX data={data} key={data.id} />
+                    ))
+                )
+            }
+            </div>
         );
     }
 }
