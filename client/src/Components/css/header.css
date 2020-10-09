@@ -1,7 +1,9 @@
 .header__box {
+    width: 90%;
+    top: 0;
     display: flex;
     justify-content: space-between;
-    position: inherit;
+    position: fixed;
     margin-top: 0px;
     font-size: 32px;
     height: 50px;

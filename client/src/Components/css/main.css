@@ -9,6 +9,7 @@
     margin: 10px 50px;
     position: fixed;
     width: 90%;
+    top: 50px;
 }
 .main__btns .btn__right {
     margin-left: auto;
@@ -94,12 +95,14 @@
 }
 .mainmapcontent,
 #main_map {
+    position: fixed;
+    left: 25px;
     display: flex;
     margin: auto auto;
-    margin-top: 20px;
+    margin-top: 50px;
     width: 90%;
     height: 80%;
 }
 #storeContent {
-    margin-top: 100px;
+    margin-top: 150px;
 }
