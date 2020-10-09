@@ -1,12 +1,16 @@
 .main {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .main__btns {
     display: flex;
     margin: 10px 50px;
+    position: fixed;
+    width: 90%;
 }
-.main__btns .btn__current {
+.main__btns .btn__right {
     margin-left: auto;
 }
 .main__navigation {
@@ -19,6 +23,9 @@
     padding: 5px 0px;
     margin: 0 50px;
     margin-top: 25px;
+    position: fixed;
+    width: 90%;
+    top: 70px;
 }
 .main__navigation button {
     font-size: 24px;
@@ -81,7 +88,7 @@
     justify-content: flex-start;
     padding: 20px 50px;
     padding-left: 30%;
-    position: absolute;
+    position: fixed;
     width: 100%;
     z-index: 1;
 }
@@ -92,4 +99,7 @@
     margin-top: 20px;
     width: 90%;
     height: 80%;
+}
+#storeContent {
+    margin-top: 100px;
 }

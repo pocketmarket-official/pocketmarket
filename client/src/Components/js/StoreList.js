@@ -166,9 +166,9 @@ class StoreList extends React.Component {
         this.state = {
             temp: this.temp,
             data: this.temp.slice(0, 5),
-            gap: 5,
+            gap: 4,
             preItems: 0,
-            items: 5,
+            items: 4,
             page: 1,
         };
 

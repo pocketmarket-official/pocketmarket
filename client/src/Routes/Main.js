@@ -13,6 +13,8 @@ class Main extends React.Component {
         this.handlePage0Render = this.handlePage0Render.bind(this);
         this.handlePage1Render = this.handlePage1Render.bind(this);
         this.handlePage2Render = this.handlePage2Render.bind(this);
+        this.handleTop = this.handleTop.bind(this);
+        this.handleRefresh = this.handleRefresh.bind(this);
 
         // fake data
         let temp = [
@@ -117,7 +119,23 @@ class Main extends React.Component {
         }
     }
 
+    handleRefresh() {
+        const btn = document.getElementById("refresh");
+        btn.onclick = () => {
+            window.location.reload(true);
+        };
+    }
+
+    handleTop() {
+        const btn = document.getElementById("top");
+        btn.onclick = () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    }
+
     async componentDidMount() {
+        this.handleRefresh();
+        this.handleTop();
         try {
             const res = await fetch("http://localhost:8000/api/stores_store/");
             const res2 = await fetch("http://localhost:8000/api/brands_brand/");
@@ -135,14 +153,17 @@ class Main extends React.Component {
             <>
                 <Header />
                 <div className="main">
-                    {this.state.current !== 0 ?
                     <div className="main__btns">
-                        <button className="btn__current"><Link to="/mypage/myplace/search">현위치</Link></button>
-                        <button className="btn__address" id="btn__address" onClick={this.handleAddress}>주소지</button>
-                        <button className="btn__map_list" id="btn__map_list" onClick={() => this.handleBtn()}>목록</button>
+                        <div className="btn_left">
+                            <button id="refresh">refresh</button>
+                            <button id="top">Top</button>
+                        </div>
+                        <div className="btn__right">
+                            <button className="btn__current"><Link to="/mypage/myplace/search">현위치</Link></button>
+                            <button className="btn__address" id="btn__address" onClick={this.handleAddress}>주소지</button>
+                            <button className="btn__map_list" id="btn__map_list" onClick={() => this.handleBtn()}>목록</button>
+                        </div>
                     </div>
-                    : null
-                    }
                     <div className="modal__address hidden" id="modal__address">
                         {this.state.temp.map((data) => {
                             let contentId = `modal__content${data.id}`;
