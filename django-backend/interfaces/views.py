@@ -21,11 +21,11 @@ from cprts.models import Relation
 ##todo get or create 구문에서 비교조건이 pk와 동일한지 체크
 def InterfaceView(request):
     try:
-        ## constant
-        compCd = 'C0028'
+        ## values
+        compCd = 'C0001'
         posNo = '01'
         ## parameter
-        storeCd = 'S0002'
+        storeCd = '00001'
 
         ##todo : brand down은 따로 나누기
 
