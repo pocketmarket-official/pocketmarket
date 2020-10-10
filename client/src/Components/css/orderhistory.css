@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 100px;
 }
 .orderhistory .orderhistory__search {
     margin-top: 50px;

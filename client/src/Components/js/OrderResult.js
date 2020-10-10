@@ -2,7 +2,7 @@ import React from 'react';
 
 
 class OrderResult extends React.Component {
-    componentDidUpdate() {
+    componentDidMount() {
         let result = this.props.result;
         result.forEach((data) => {
             let eltId = "orderhistory" + data.id;
