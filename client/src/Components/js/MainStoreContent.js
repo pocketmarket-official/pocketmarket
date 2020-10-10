@@ -203,7 +203,12 @@ class MainStoreContent extends React.Component {
         });
 
         this.state.temp.sort(this.sortData);
-        this.setState({loading: false});
+        this.setState({
+            loading: false,
+            data: this.temp.slice(0, 5),
+            preItems: 0,
+            items: 5,
+        });
     }
 
     sortCallbackUpdate() {
@@ -220,7 +225,6 @@ class MainStoreContent extends React.Component {
             data: this.temp.slice(0, 5),
             preItems: 0,
             items: 5,
-
         });
     }
 
@@ -245,7 +249,7 @@ class MainStoreContent extends React.Component {
     render() {
         const isLoading = this.state.loading;
         return (
-            <div>
+            <div id="storeContent">
             {
                 isLoading ? (
                     <Loading />
