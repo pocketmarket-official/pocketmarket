@@ -51,7 +51,7 @@ class Funset(models.Model):
     alrUrl = models.CharField(max_length=100, null=True)
     kktAlrCallId = models.CharField(max_length=20, null=True)
     kktAlrAccessKey = models.CharField(max_length=255, null=True)
-    kktAlrFailFg = models.CharField(max_length=1, default='0')
+    kktAlrFailFg = models.CharField(max_length=1, null=True)
     kktAlrId = models.CharField(max_length=50, null=True)
     kktAlrPw = models.CharField(max_length=50, null=True)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
