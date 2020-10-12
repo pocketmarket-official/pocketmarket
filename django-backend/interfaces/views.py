@@ -22,10 +22,10 @@ from cprts.models import Relation
 def InterfaceView(request):
     try:
         ## values
-        compCd = 'C0001'
-        posNo = '01'
+        compCd = 'C0028'
+        posNo = '02'
         ## parameter
-        storeCd = '00001'
+        storeCd = 'C0001'
 
         ##todo : brand down은 따로 나누기
 
@@ -209,16 +209,16 @@ def InterfaceView(request):
                                                                                  'modUs': storeKeymap_imt.get(
                                                                                      'MOD_US')
                                                                              })
-        if not flag:
-            storeKeymap_pktmkt.keymapName = storeKeymap_imt.get('KEYMAP_NM')
-            storeKeymap_pktmkt.blankimgUrl = storeKeymap_imt.get(
-                'BLANK_IMG_URL')
-            storeKeymap_pktmkt.useYn = storeKeymap_imt.get('USE_YN')
-            storeKeymap_pktmkt.insDt = storeKeymap_imt.get('INS_DT')
-            storeKeymap_pktmkt.insUs = storeKeymap_imt.get('INS_US')
-            storeKeymap_pktmkt.modDt = storeKeymap_imt.get('MOD_DT')
-            storeKeymap_pktmkt.modUs = storeKeymap_imt.get('MOD_US')
-            storeKeymap_pktmkt.save()
+                if not flag:
+                    storeKeymap_pktmkt.keymapName = storeKeymap_imt.get('KEYMAP_NM')
+                    storeKeymap_pktmkt.blankimgUrl = storeKeymap_imt.get(
+                        'BLANK_IMG_URL')
+                    storeKeymap_pktmkt.useYn = storeKeymap_imt.get('USE_YN')
+                    storeKeymap_pktmkt.insDt = storeKeymap_imt.get('INS_DT')
+                    storeKeymap_pktmkt.insUs = storeKeymap_imt.get('INS_US')
+                    storeKeymap_pktmkt.modDt = storeKeymap_imt.get('MOD_DT')
+                    storeKeymap_pktmkt.modUs = storeKeymap_imt.get('MOD_US')
+                    storeKeymap_pktmkt.save()
 
         ##stores_pos
         url = "http://asp-test.imtsoft.me/api/pocketMarket/storesPos?compCd=" + compCd + "&storCd=" + storeCd + "&posNo=" + posNo  # json 결과
@@ -230,7 +230,7 @@ def InterfaceView(request):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for pos_imt in response_body_json:
-                storeKeymap = StoreKeymap.objects.get(keymapCd=pos_imt.get('KEYMAP_CD'))
+                storeKeymap = StoreKeymap.objects.get(storeCd=store, keymapCd=pos_imt.get('KEYMAP_CD'))
                 pos_pktmkt, flag = Pos.objects.get_or_create(storeCd=store,
                                                              defaults={
                                                                  'keymapCd': storeKeymap,
@@ -242,16 +242,16 @@ def InterfaceView(request):
                                                                  'callNoYn': pos_imt.get('CALL_NO_YN'),
                                                                  'useYn': pos_imt.get('USE_YN')
                                                              })
-        if not flag:
-            pos_pktmkt.keymapCd = storeKeymap
-            pos_pktmkt.ordStartNo = pos_imt.get('ORD_ST_NO')
-            pos_pktmkt.ordEndNo = pos_imt.get('ORD_END_NO')
-            pos_pktmkt.cntPayYn = pos_imt.get('CNT_PAY_YN')
-            pos_pktmkt.kktAlrTmplCd = pos_imt.get('KKT_ALR_TMPL_CD')
-            pos_pktmkt.takeOutYn = pos_imt.get('TAKE_OUT_YN')
-            pos_pktmkt.callNoYn = pos_imt.get('CALL_NO_YN')
-            pos_pktmkt.useYn = pos_imt.get('USE_YN')
-            pos_pktmkt.save()
+                if not flag:
+                    pos_pktmkt.keymapCd = storeKeymap
+                    pos_pktmkt.ordStartNo = pos_imt.get('ORD_ST_NO')
+                    pos_pktmkt.ordEndNo = pos_imt.get('ORD_END_NO')
+                    pos_pktmkt.cntPayYn = pos_imt.get('CNT_PAY_YN')
+                    pos_pktmkt.kktAlrTmplCd = pos_imt.get('KKT_ALR_TMPL_CD')
+                    pos_pktmkt.takeOutYn = pos_imt.get('TAKE_OUT_YN')
+                    pos_pktmkt.callNoYn = pos_imt.get('CALL_NO_YN')
+                    pos_pktmkt.useYn = pos_imt.get('USE_YN')
+                    pos_pktmkt.save()
 
         ##keymaps_TouchGroup
         storeKeymap = pos_pktmkt.keymapCd
@@ -543,8 +543,8 @@ def InterfaceView(request):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for relation_imt in response_body_json:
-                group = Group.objects.get(cprtGroupCd=relation_imt.get('RPRT_GRP_CD'))
-                cprt = Cprt.objects.get(cprtCd=relation_imt.get('RPRT_CD'))
+                group = Group.objects.get(storeCd=store, cprtGroupCd=relation_imt.get('RPRT_GRP_CD'))
+                cprt = Cprt.objects.get(storeCd=store, cprtCd=relation_imt.get('RPRT_CD'))
                 relation_pktmkt, flag = Relation.objects.get_or_create(storeCd=store,
                                                                        cprtGroupCd=group,
                                                                        cprtCd=cprt,
