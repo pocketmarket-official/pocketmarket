@@ -54,6 +54,7 @@ PROJECT_APPS = [
     'items.apps.ItemsConfig',
     'cprts.apps.CprtsConfig',
     'keymaps.apps.KeymapsConfig',
+    'trades.apps.TradesConfig',
     'interfaces'
 ]
 

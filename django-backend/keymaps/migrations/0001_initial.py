@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('posPage', models.IntegerField(default=0)),
                 ('posIndex', models.IntegerField(default=0)),
-                ('soldOutYn', models.CharField(default='N', max_length=1)),
+                ('soldoutYn', models.CharField(default='N', max_length=1)),
                 ('cprtGroupCd', models.CharField(default='000', max_length=5)),
                 ('dispYn', models.CharField(default='Y', max_length=1)),
                 ('expectCnt', models.IntegerField(default=0)),

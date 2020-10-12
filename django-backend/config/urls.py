@@ -31,7 +31,9 @@ from replies import views as reply_views
 from items import views as item_views
 from cprts import views as cprt_views
 from keymaps import views as keymap_views
+from trades import views as trade_views
 from interfaces import views as interface_views
+
 
 router = routers.DefaultRouter()
 
@@ -59,6 +61,15 @@ router.register(r'cprts_relation', cprt_views.RelationView, 'relation')
 router.register(r'keymaps_storeKeymap', keymap_views.StoreKeymapView, 'storeKeymap')
 router.register(r'keymaps_touchGroup', keymap_views.TouchGroupView, 'touchGroup')
 router.register(r'keymaps_keymap', keymap_views.KeymapView, 'keymap')
+router.register(r'trades_saleHeader', trade_views.SaleHeaderView, 'saleHeader')
+router.register(r'trades_saleDetail', trade_views.SaleDetailView, 'saleDetail')
+router.register(r'trades_cashLog', trade_views.CashLogView, 'cashLog')
+router.register(r'trades_cardLog', trade_views.CardLogView, 'cardLog')
+router.register(r'trades_etcLog', trade_views.EtcLogView, 'etcLog')
+router.register(r'trades_standardLog', trade_views.StandardLogView, 'standardLog')
+router.register(r'trades_purchaseLog', trade_views.PurchaseLogView, 'purchaseLog')
+router.register(r'trades_soldoutLog', trade_views.SoldoutLogView, 'soldoutLog')
+router.register(r'trades_cornerStateLog', trade_views.CornerStateLogView, 'cornerStateLog')
 
 
 

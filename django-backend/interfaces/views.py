@@ -581,7 +581,7 @@ def InterfaceView(request):
                                                                    posIndex=keymap_imt.get('POS_IX'),
                                                                    itemCd=item,
                                                                    defaults={
-                                                                       'soldOutYn': keymap_imt.get(
+                                                                       'soldoutYn': keymap_imt.get(
                                                                            'SOLD_OUT_YN'),
                                                                        'cprtGroupCd': keymap_imt.get(
                                                                            'RPRT_GRP_CD'),
@@ -594,7 +594,7 @@ def InterfaceView(request):
                                                                        'modUs': keymap_imt.get('MOD_US')
                                                                    })
                 if not flag:
-                    keymap_pktmkt.soldOutYn = keymap_imt.get('SOLD_OUT_YN')
+                    keymap_pktmkt.soldoutYn = keymap_imt.get('SOLD_OUT_YN')
                     keymap_pktmkt.cprtGroupCd = keymap_imt.get('RPRT_GRP_CD')
                     keymap_pktmkt.dispYn = keymap_imt.get('DISP_YN')
                     keymap_pktmkt.expectCnt = keymap_imt.get('EXPECT_CNT')

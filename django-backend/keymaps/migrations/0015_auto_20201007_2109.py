@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='keymap',
-            name='soldOutYn',
+            name='soldoutYn',
             field=models.CharField(max_length=1, null=True),
         ),
         migrations.AlterField(

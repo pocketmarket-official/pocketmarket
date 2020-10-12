@@ -42,7 +42,7 @@ class Keymap(models.Model):
     posPage = models.IntegerField(default=0)
     posIndex = models.IntegerField(default=0)
     itemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
-    soldOutYn = models.CharField(max_length=1, null=True)
+    soldoutYn = models.CharField(max_length=1, null=True)
     cprtGroupCd = models.CharField(max_length=5, null=True)
     dispYn = models.CharField(max_length=1, default='Y')
     expectCnt = models.IntegerField(default=0)

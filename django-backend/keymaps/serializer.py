@@ -51,7 +51,7 @@ class KeymapSerializer(serializers.ModelSerializer):
             'posPage',
             'posIndex',
             'itemCd',
-            'soldOutYn',
+            'soldoutYn',
             'cprtGroupCd',
             'dispYn',
             'expectCnt',
