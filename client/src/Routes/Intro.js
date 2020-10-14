@@ -13,7 +13,7 @@ const axios = require('axios');
  * when error on video playing, show login button immediately
  */
 function Intro({authenticated, login, location}) {
-    const [playingVideo, setPlayingVideo] = useState(false);
+    const [playingVideo, setPlayingVideo] = useState(true);
 
     const responseKaKao = (res) => {
         const email = res.profile.kakao_account.email;
