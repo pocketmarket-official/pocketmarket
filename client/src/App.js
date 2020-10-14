@@ -46,39 +46,39 @@ function App() {
         <Route exact path="/" >
               <Redirect to={"/login"} />
         </Route>
-        <AuthRoute authenticated={authenticated} exact path="/main" component={Main} />
-        <AuthRoute authenticated={authenticated} exact path="/main/festival/:id" component={FestivalStore} />
+        <Route authenticated={authenticated} exact path="/main" component={Main} />
+        <Route authenticated={authenticated} exact path="/main/festival/:id" component={FestivalStore} />
         <Switch>
-          <AuthRoute exact path="/main/store/:storeId/order" component={Order} />
-          <AuthRoute exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
+          <Route exact path="/main/store/:storeId/order" component={Order} />
+          <Route exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
         </Switch>
-        <AuthRoute authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
-        <AuthRoute authenticated={authenticated} exact path="/order/review" component={ReviewWrite} />
-        <AuthRoute authenticated={authenticated} exact path="/order/complete" component={OrderComplete} />
-        <AuthRoute authenticated={authenticated} exact path="/order/status" component={OrderStatus} />
-        <AuthRoute authenticated={authenticated} exact path="/order/status/:storeId" component={BigStatus} />
-        <AuthRoute authenticated={authenticated} exact path="/review" component={ReviewList} />
-        <AuthRoute authenticated={authenticated} exact path="/mypage" component={Mypage} />
-        <AuthRoute authenticated={authenticated} exact path="/mypage/fastorder" component={Fastorder} />
-        <AuthRoute authenticated={authenticated} exact path="/mypage/myplace" component={Myplace} />
-        <AuthRoute authenticated={authenticated} exact path="/mypage/myplace/search" component={MyplaceDetail} />
-        <AuthRoute authenticated={authenticated} exact path="/mypage/order" component={OrderHistory} />
-        <AuthRoute authenticated={authenticated} exact path="/mypage/point" component={PointHistory} />
-        <AuthRoute authenticated={authenticated} exact path="/mypage/questions" component={QuestionsHistory} />
-        <AuthRoute authenticated={authenticated} exact path="/mypage/questions/write" component={QuestionWrite} />
-        <AuthRoute authenticated={authenticated} exact path="/biz/certification" component={BizCertification} />
-        <AuthRoute authenticated={authenticated} exact path="/biz/mypage" component={BizMypage} />
-        <AuthRoute authenticated={authenticated} exact path="/biz/mypage/order" component={OrderHistory} />
-        <AuthRoute authenticated={authenticated} exact path="/biz/mypage/kitchen" component={BizKitchen} />
-        <AuthRoute authenticated={authenticated} exact path="/biz/master" component={BizMaster} />
-        <AuthRoute authenticated={authenticated} exact path="/biz/mypage/search/month" component={BizSearchMonth} />
-        <AuthRoute authenticated={authenticated} exact path="/biz/mypage/search/date" component={BizSearchDaily} />
-        <AuthRoute authenticated={authenticated} exact path="/biz/mypage/order/status" component={BizOrderStatus} />
-        <AuthRoute authenticated={authenticated} exact path="/biz/mypage/review" component={ReviewList} />
-        <AuthRoute authenticated={authenticated} exact path="/kds/main" component={KDSMain} />
-        <AuthRoute authenticated={authenticated} exact path="/kds/pickup" component={KDSPickup} />
-        <AuthRoute authenticated={authenticated} exact path="/kds/kitchen" component={KDSKitchen} />
-        <AuthRoute authenticated={authenticated} exact path="/kds/setting" component={KDSSetting} />
+        <Route authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
+        <Route authenticated={authenticated} exact path="/order/review" component={ReviewWrite} />
+        <Route authenticated={authenticated} exact path="/order/complete" component={OrderComplete} />
+        <Route authenticated={authenticated} exact path="/order/status" component={OrderStatus} />
+        <Route authenticated={authenticated} exact path="/order/status/:storeId" component={BigStatus} />
+        <Route authenticated={authenticated} exact path="/review" component={ReviewList} />
+        <Route authenticated={authenticated} exact path="/mypage" component={Mypage} />
+        <Route authenticated={authenticated} exact path="/mypage/fastorder" component={Fastorder} />
+        <Route authenticated={authenticated} exact path="/mypage/myplace" component={Myplace} />
+        <Route authenticated={authenticated} exact path="/mypage/myplace/search" component={MyplaceDetail} />
+        <Route authenticated={authenticated} exact path="/mypage/order" component={OrderHistory} />
+        <Route authenticated={authenticated} exact path="/mypage/point" component={PointHistory} />
+        <Route authenticated={authenticated} exact path="/mypage/questions" component={QuestionsHistory} />
+        <Route authenticated={authenticated} exact path="/mypage/questions/write" component={QuestionWrite} />
+        <Route authenticated={authenticated} exact path="/biz/certification" component={BizCertification} />
+        <Route authenticated={authenticated} exact path="/biz/mypage" component={BizMypage} />
+        <Route authenticated={authenticated} exact path="/biz/mypage/order" component={OrderHistory} />
+        <Route authenticated={authenticated} exact path="/biz/mypage/kitchen" component={BizKitchen} />
+        <Route authenticated={authenticated} exact path="/biz/master" component={BizMaster} />
+        <Route authenticated={authenticated} exact path="/biz/mypage/search/month" component={BizSearchMonth} />
+        <Route authenticated={authenticated} exact path="/biz/mypage/search/date" component={BizSearchDaily} />
+        <Route authenticated={authenticated} exact path="/biz/mypage/order/status" component={BizOrderStatus} />
+        <Route authenticated={authenticated} exact path="/biz/mypage/review" component={ReviewList} />
+        <Route authenticated={authenticated} exact path="/kds/main" component={KDSMain} />
+        <Route authenticated={authenticated} exact path="/kds/pickup" component={KDSPickup} />
+        <Route authenticated={authenticated} exact path="/kds/kitchen" component={KDSKitchen} />
+        <Route authenticated={authenticated} exact path="/kds/setting" component={KDSSetting} />
       </BrowserRouter>
   );
 }
