@@ -1,5 +1,6 @@
+@import '~normalize.css';
+@import 'Components/scss/base';
 @import './Components/css/header.css';
-@import './Components/css/login.css';
 @import './Components/css/main.css';
 @import './Components/css/mypage.css';
 @import './Components/css/festivalstore.css';
@@ -33,7 +34,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Nanum Gothic', 'MaplestoryOTFLight', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -47,6 +48,7 @@ code {
 
 html {
   box-sizing: border-box;
+  font-size: 15px;
 }
 html, body {
   width: 100%;
