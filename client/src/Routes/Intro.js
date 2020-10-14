@@ -47,7 +47,7 @@ function Intro({authenticated, login, location}) {
         <>
             <div className="bg">
                 {playingVideo ?
-                    <video className="bg__video" autoPlay={true} muted={true}
+                    <video className="bg__video" autoPlay={true} muted={true} playsInline={true}
                            onError={() => setPlayingVideo(false)}
                            onEnded={() => setPlayingVideo(false)}>
                         <source src={bgVideo} type={"video/mp4"}/>
