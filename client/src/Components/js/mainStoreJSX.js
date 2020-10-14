@@ -6,19 +6,20 @@ class StoreJSX extends React.Component {
     render() {
         let d = this.props.data.show_dist;
         let data = this.props.data
+        console.log(data);
         return(
                 <div className="content__store">
                     <Link to={{
-                        pathname: `/main/store/${this.props.data.id}`,
+                        pathname: `/main/store/${this.props.data.storeCd}`,
                         state: {data, d}
                     }}>
                     <div className="store__store">
-                        <img className="store__image" src={this.props.data.image}></img>
+                        <img className="store__image" src={this.props.data.imgLogoUrl}></img>
                         <div className="store__detail">
                             <div className="detail__title">
-                                <div className="detail__name">{this.props.data.store_nm}</div>
+                                <div className="detail__name">{this.props.data.storeName}</div>
                                 <div className="detail__distance">{this.props.data.show_dist}</div>
-                                <div className="detail__likes">{this.props.data.like_count}</div>
+                                <div className="detail__likes">{this.props.data.likeCount}</div>
                             </div>
                             <div className="detail__description">
                                 {this.props.data.comment}

@@ -133,19 +133,9 @@ class Main extends React.Component {
         };
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.handleRefresh();
         this.handleTop();
-        try {
-            const res = await fetch("http://localhost:8000/api/stores_store/");
-            const res2 = await fetch("http://localhost:8000/api/brands_brand/");
-            const stores = await res.json();
-            const brands = await res2.json();
-            console.log(stores);
-            console.log(brands);
-        } catch(e) {
-            console.log(e);
-        }
     }
 
     render() {

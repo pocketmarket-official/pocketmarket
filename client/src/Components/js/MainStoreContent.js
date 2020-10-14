@@ -1,89 +1,12 @@
 import React from 'react';
 import StoreJSX from './mainStoreJSX';
 import Loading from './Loading';
+import axios from 'axios';
 
 
 class MainStoreContent extends React.Component {
     constructor(props) {
         super(props);
-        this.temp = [
-            {
-                id: 1,
-                store_nm: '스타벅스',
-                image: '',
-                comment: '커피전문점 스타벅스입니다. ',
-                like_count: 21,
-                latlong: [126.95982, 37.38302]
-            },
-            {
-                id: 2,
-                store_nm: '강남핫도그',
-                image: '',
-                comment: '맛있는 핫도그',
-                like_count: 13,
-                latlong: [126.96062, 37.38362]
-            },
-            {
-                id: 3,
-                store_nm: '이디야커피',
-                image: '',
-                comment: '커피커피',
-                like_count: 14,
-                latlong: [126.95351, 37.38997]
-            },
-            {
-                id: 4,
-                store_nm: '강남 카페베네',
-                image: '',
-                comment: '커피커피',
-                like_count: 42,
-                latlong: [127.02866, 37.49858]
-            },
-            {
-                id: 5,
-                store_nm: '강남 파리바게트',
-                image: '',
-                comment: '맛있는 빵',
-                like_count: 7,
-                latlong: [127.02861, 37.49781]
-            },
-            {
-                id: 6,
-                store_nm: '노브랜드버거 고려대점',
-                image: '',
-                comment: '버거버거버거',
-                like_count: 27,
-                latlong: [127.02961, 37.58385]
-            },
-            {
-                id: 7,
-                store_nm: '서브웨이 안암',
-                image: '',
-                comment: '샌드위치',
-                like_count: 3,
-                latlong: [127.02898, 37.58609]
-            },
-            {
-                id: 8,
-                store_nm: '비야 부대찌개 본점',
-                image: '',
-                comment: '부대찌개 안암',
-                like_count: 33,
-                latlong: [127.02937, 37.58820]
-            },
-        ];
-
-        this.state = {
-            lat1: 0,
-            long1: 0,
-            loading: false,
-            temp: this.temp,
-            data: this.temp.slice(0, 5),
-            gap: 5,
-            preItems: 0,
-            items: 5,
-        }
-
         this.calcDistance = this.calcDistance.bind(this);
         this.sortData = this.sortData.bind(this);
         this.getPosition = this.getPosition.bind(this);
@@ -91,6 +14,26 @@ class MainStoreContent extends React.Component {
         this.sortCallbackUpdate = this.sortCallbackUpdate.bind(this);
         this._getData = this._getData.bind(this);
         this._infiniteScroll = this._infiniteScroll.bind(this);
+
+        this.state = {
+            lat1: 0,
+            long1: 0,
+            loading: false,
+            stores: [],
+            data: [],
+            gap: 5,
+            preItems: 0,
+            items: 5,
+        };
+
+        axios.get("http://localhost:8000/api/stores_store/")
+        .then((res) => {
+            const stores = res.data;
+            this.setState({
+                stores: stores,
+                data: stores.slice(0, 5),
+            });
+        });
 
         // get current location
         this.getPosition().then((position) => {
@@ -149,7 +92,7 @@ class MainStoreContent extends React.Component {
     }
 
     _getData() {
-        let result = this.state.temp.slice(this.state.preItems, this.state.items);
+        let result = this.state.stores.slice(this.state.preItems, this.state.items);
         this.setState({
             data: this.state.data.concat(result),
             page: this.state.page + 1,
@@ -195,34 +138,34 @@ class MainStoreContent extends React.Component {
     }
 
     sortCallback() {
-        this.state.temp.forEach((data) => {
-            let d = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[1];
-            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[0];
+        this.state.stores.forEach((data) => {
+            let d = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[1];
+            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[0];
             data["distance"] = d;
             data["show_dist"] = dist;
         });
 
-        this.state.temp.sort(this.sortData);
+        this.state.stores.sort(this.sortData);
         this.setState({
             loading: false,
-            data: this.temp.slice(0, 5),
+            data: this.state.stores.slice(0, 5),
             preItems: 0,
             items: 5,
         });
     }
 
     sortCallbackUpdate() {
-        this.state.temp.forEach((data) => {
-            let d = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[1];
-            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.latlong[1], data.latlong[0])[0];
+        this.state.stores.forEach((data) => {
+            let d = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[1];
+            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[0];
             data["distance"] = d;
             data["show_dist"] = dist;
         });
 
-        this.state.temp.sort(this.sortData);
+        this.state.stores.sort(this.sortData);
         this.setState({
             loading: false,
-            data: this.temp.slice(0, 5),
+            data: this.stores.slice(0, 5),
             preItems: 0,
             items: 5,
         });
