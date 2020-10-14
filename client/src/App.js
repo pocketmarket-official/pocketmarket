@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from './Routes/Login';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Main from './Routes/Main';
 import Mypage from './Routes/Mypage';
 import FestivalStore from './Routes/FestivalStore';
@@ -32,6 +31,7 @@ import KDSKitchen from './Routes/KDSKitchen';
 import KDSSetting from './Routes/KDSSetting';
 import './App.css';
 import AuthRoute from "./Security/AuthRoute";
+import Intro from "./Routes/Intro";
 
 
 function App() {
@@ -41,14 +41,16 @@ function App() {
   return (
       <BrowserRouter>
         <Route exact path="/login" render={props => (
-            <Login authenticated={authenticated} login={setUserInfo} {...props} />
+            <Intro authenticated={authenticated} login={setUserInfo} {...props} />
         )} />
-        <Route exact path="/" component={Main} />
-        <Route exact path="/main" component={Main} />
-        <Route exact path="/main/festival/:id" component={FestivalStore} />
+        <Route exact path="/" >
+              <Redirect to={"/login"} />
+        </Route>
+        <AuthRoute authenticated={authenticated} exact path="/main" component={Main} />
+        <AuthRoute authenticated={authenticated} exact path="/main/festival/:id" component={FestivalStore} />
         <Switch>
-          <Route exact path="/main/store/:storeId/order" component={Order} />
-          <Route exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
+          <AuthRoute exact path="/main/store/:storeId/order" component={Order} />
+          <AuthRoute exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
         </Switch>
         <AuthRoute authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
         <AuthRoute authenticated={authenticated} exact path="/order/review" component={ReviewWrite} />
