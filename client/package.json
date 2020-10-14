@@ -9,6 +9,7 @@
     "axios": "^0.20.0",
     "bootpay-js": "^3.2.6",
     "node-sass": "^4.14.1",
+    "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-kakao-login": "^1.2.2",
