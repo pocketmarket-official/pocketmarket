@@ -13,6 +13,10 @@
 }
 
 .bg {
+  .bg__video {
+    object-fit: cover;
+  }
+
   .bg__image {
     animation: intro-bg-show .3s ease-out;
   }
