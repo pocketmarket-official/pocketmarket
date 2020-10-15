@@ -165,7 +165,7 @@ class MainStoreContent extends React.Component {
         this.state.stores.sort(this.sortData);
         this.setState({
             loading: false,
-            data: this.stores.slice(0, 5),
+            data: this.state.stores.slice(0, 5),
             preItems: 0,
             items: 5,
         });
@@ -198,7 +198,7 @@ class MainStoreContent extends React.Component {
                     <Loading />
                 ) : (
                     this.state.data.map((data) => (
-                        <StoreJSX data={data} key={data.id} />
+                        <StoreJSX data={data} key={data.storeCd} />
                     ))
                 )
             }

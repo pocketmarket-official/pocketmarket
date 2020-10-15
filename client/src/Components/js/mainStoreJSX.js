@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 class StoreJSX extends React.Component {
     render() {
         let d = this.props.data.show_dist;
-        let data = this.props.data
-        console.log(data);
+        let data = this.props.data;
         return(
                 <div className="content__store">
                     <Link to={{
@@ -14,7 +13,7 @@ class StoreJSX extends React.Component {
                         state: {data, d}
                     }}>
                     <div className="store__store">
-                        <img className="store__image" src={this.props.data.imgLogoUrl}></img>
+                        <img className="store__image" src={this.props.data.imgLogoUrl} alt="store"></img>
                         <div className="store__detail">
                             <div className="detail__title">
                                 <div className="detail__name">{this.props.data.storeName}</div>

@@ -92,7 +92,6 @@ define festivals related models
 """
 from django.db import models
 
-
 class User(models.Model):
 
     """ User Model Definition """
