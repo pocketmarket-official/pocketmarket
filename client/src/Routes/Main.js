@@ -4,6 +4,9 @@ import Header from '../Components/js/Header';
 import Festival from '../Festival/FestivalInfo';
 import MainStoreContent from '../Components/js/MainStoreContent';
 import MainMapContent from '../Components/js/MainMapContent';
+import '../Components/scss/main.scss'
+
+import btnSearchImg from '../assets/common/btn_sceach.png';
 
 class Main extends React.Component {
     constructor(props) {
@@ -144,14 +147,14 @@ class Main extends React.Component {
                 <Header />
                 <div className="main">
                     <div className="main__btns">
-                        <div className="btn_left">
-                            <button id="refresh">refresh</button>
-                            <button id="top">Top</button>
+                        <div className="btn__left">
+                            <button id="refresh" className="btn__refresh"/>
+                            <button id="top" className="btn__goto-top"/>
                         </div>
                         <div className="btn__right">
-                            <button className="btn__current"><Link to="/mypage/myplace/search">현위치</Link></button>
+                            <Link to="/mypage/myplace/search"><button className="btn__current"/></Link>
                             <button className="btn__address" id="btn__address" onClick={this.handleAddress}>주소지</button>
-                            <button className="btn__map_list" id="btn__map_list" onClick={() => this.handleBtn()}>목록</button>
+                            <button className="btn__map_list" id="btn__map_list" onClick={() => this.handleBtn()}/>
                         </div>
                     </div>
                     <div className="modal__address hidden" id="modal__address">
@@ -163,8 +166,14 @@ class Main extends React.Component {
                         })}
                     </div>
                     <div className="main__navigation">
-                        <button onClick={this.handlePage0Render}>축제보기</button>
-                        <button onClick={this.handlePage1Render}>매장보기</button>
+                        <div className="navigation">
+                            <div className="navigation__btns">
+                                <button className="active" onClick={this.handlePage0Render}>축제</button>
+                                <button onClick={this.handlePage1Render}>매장</button>
+                            </div>
+                            <input type="text" className="navigation__query"/>
+                            <img className="navigation__search" src={btnSearchImg}/>
+                        </div>
                     </div>
                     {this.handlePageRender()}
                 </div>

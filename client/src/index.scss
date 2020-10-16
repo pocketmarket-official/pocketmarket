@@ -1,7 +1,5 @@
 @import '~normalize.css';
 @import 'Components/scss/base';
-@import './Components/css/header.css';
-@import './Components/css/main.css';
 @import './Components/css/mypage.css';
 @import './Components/css/festivalstore.css';
 @import './Components/css/store.css';
@@ -51,20 +49,20 @@ html {
   box-sizing: border-box;
   font-size: 15px;
 }
-html, body {
+html, body, #root {
   width: 100%;
-  height: 100%;
-}
-
-#root {
-  width: 100%;
-  height: 100%;
 }
 
 button {
   border: 0;
+  padding: 0;
 
   &:focus {
     outline: 0;
   }
+}
+
+input {
+  //remove iphone inset shadow
+  -webkit-appearance: none;
 }

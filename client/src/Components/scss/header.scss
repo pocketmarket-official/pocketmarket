@@ -1,0 +1,28 @@
+.header__box {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 9px;
+  box-sizing: border-box;
+  background: white;
+  border-bottom: 2px solid #eeeeee;
+
+  .header__menu {
+    width: 38px;
+    height: 38px;
+  }
+
+  .header__bi {
+    width: 172.5px;
+    height: 25px;
+  }
+
+  .header__alarm {
+    width: 38px;
+    height: 38px;
+  }
+}
