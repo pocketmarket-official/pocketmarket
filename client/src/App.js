@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import Index from './Routes/Index';
 import Main from './Routes/Main';
 import Mypage from './Routes/Mypage';
 import FestivalStore from './Routes/FestivalStore';
@@ -46,6 +47,7 @@ function App() {
         <Route exact path="/" >
               <Redirect to={"/login"} />
         </Route>
+        <Route authenticated={authenticated} exact path="/index" component={Index} />
         <Route authenticated={authenticated} exact path="/main" component={Main} />
         <Route authenticated={authenticated} exact path="/main/festival/:id" component={FestivalStore} />
         <Switch>
