@@ -4,6 +4,7 @@ import {Redirect} from "react-router-dom";
 // import bgVideo from "../assets/intro/intro.mp4";
 // import bgImage from "../assets/intro/bg.jpg";
 // import '../Components/scss/intro.scss';
+import Header from '../Components/js/Header';
 
 const axios = require('axios');
 
@@ -46,6 +47,7 @@ function Index({authenticated, login, location}) {
     return (
         <>
             <div>
+                <div>jumbotron</div>
                 <div>축제보기</div>
                 <div>매장보기</div>
                 <div>포켓맛집도감</div>
