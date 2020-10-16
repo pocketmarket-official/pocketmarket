@@ -5,6 +5,15 @@ import OptionModal from '../Components/js/OptionModal';
 
 
 class Order extends React.Component {
+    constructor(props) {
+        super(props);
+        const id = this.props.match.params.storeId;
+        const link = "/main/store/" + id + "/orderinfo";
+
+        this.state = {
+            link: link,
+        }
+    }
     render() {
         return (
             <>
@@ -72,7 +81,7 @@ class Order extends React.Component {
                                 금액
                                 <div className="cost__cost">12,000원</div>
                             </div>
-                            <div><Link to={this.link}>주문결제</Link></div>
+                            <div><Link to={this.state.link}>주문결제</Link></div>
                         </div>
                         <div className="order__detail">
                             <div className="order__item">

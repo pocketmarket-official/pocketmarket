@@ -7,8 +7,7 @@ import StoreList from '../Components/js/StoreList';
 class StoreView extends React.Component {
     constructor(props) {
         super(props);
-
-        const id = this.props.location.state.data.id;
+        const id = this.props.location.state.data.storeCd;
         const link = "/main/store/" + id + "/order";
 
         this.state = {
