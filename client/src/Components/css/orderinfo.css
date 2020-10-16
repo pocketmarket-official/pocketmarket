@@ -27,3 +27,7 @@
     justify-content: center;
     align-items: center;
 }
+.orderinfo .orderinfo__options .orderinfo__pay .pay__info {
+    display: flex;
+    justify-content: space-between;
+}

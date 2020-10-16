@@ -3,8 +3,7 @@ import BootPay from "bootpay-js";
 
 function pay() {
     BootPay.request({
-        price: '1000', //실제 결제되는 가격
-        tax_free: '0',
+        price: '1000',
         application_id: process.env.REACT_APP_BOOTPAY_APP_ID,
         name: '식당 이름',
         pg: 'kakao',
