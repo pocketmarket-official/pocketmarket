@@ -45,7 +45,12 @@ function Index({authenticated, login, location}) {
 
     return (
         <>
-            <div>index page</div>
+            <div>
+                <div>축제보기</div>
+                <div>매장보기</div>
+                <div>포켓맛집도감</div>
+                <div>주문상태</div>
+            </div>
         </>
     );
 }
