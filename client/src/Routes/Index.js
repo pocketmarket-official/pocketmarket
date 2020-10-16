@@ -40,7 +40,7 @@ function Index({authenticated, login, location}) {
         alert(err);
     };
 
-    const {from} = location.state || {from: {pathname: "/main"}};
+    const {from} = location.state || {from: {pathname: "/index"}};
     if (authenticated) return <Redirect to={from}/>;
 
     return (
