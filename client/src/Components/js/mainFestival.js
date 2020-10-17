@@ -28,6 +28,9 @@ class Festival extends React.Component {
 
         this.state = {
             temp: temp,
+            gap: 5,
+            preItems: 0,
+            items: 5,
         }
     }
 

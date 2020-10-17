@@ -157,13 +157,20 @@ class Main extends React.Component {
                             <button className="btn__map_list" id="btn__map_list" onClick={() => this.handleBtn()}/>
                         </div>
                     </div>
-                    <div className="modal__address hidden" id="modal__address">
-                        {this.state.temp.map((data) => {
-                            let contentId = `modal__content${data.id}`;
-                            return (
-                                <div id={contentId} key={contentId} onClick={(e) => this.handleModalContent(e)}>{data.name}: {data.address}</div>
-                            );
-                        })}
+                    <div className="modal__address hidden" id="modal__address" onClick={() => {
+                        const elt = document.getElementById("modal__address");
+                        elt.classList.add("hidden");
+                    }}>
+                        <div className="modal__modal" onClick={(e) => {
+                            e.stopPropagation();
+                        }}>
+                            {this.state.temp.map((data) => {
+                                let contentId = `modal__content${data.id}`;
+                                return (
+                                    <div id={contentId} key={contentId} onClick={(e) => this.handleModalContent(e)}>{data.name}: {data.address}</div>
+                                );
+                            })}
+                        </div>
                     </div>
                     <div className="main__navigation">
                         <div className="navigation">
