@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Components/js/Header';
-import Festival from '../Festival/FestivalInfo';
+import Festival from '../Components/js/mainFestival';
 import MainStoreContent from '../Components/js/MainStoreContent';
 import MainMapContent from '../Components/js/MainMapContent';
 import '../Components/scss/main.scss'
@@ -172,7 +172,7 @@ class Main extends React.Component {
                                 <button onClick={this.handlePage1Render}>매장</button>
                             </div>
                             <input type="text" className="navigation__query"/>
-                            <img className="navigation__search" src={btnSearchImg}/>
+                            <img className="navigation__search" src={btnSearchImg} alt="search button" />
                         </div>
                     </div>
                     {this.handlePageRender()}
