@@ -5,6 +5,7 @@ import Festival from '../Components/js/mainFestival';
 import MainStoreContent from '../Components/js/MainStoreContent';
 import MainMapContent from '../Components/js/MainMapContent';
 import '../Components/scss/main.scss'
+import axios from 'axios'
 
 import btnSearchImg from '../assets/common/btn_sceach.png';
 
@@ -20,6 +21,14 @@ class Main extends React.Component {
         this.handleRefresh = this.handleRefresh.bind(this);
 
         // fake data
+        axios.get('http://localhost:8000/api/stores_store/')
+            .then((res) => {
+               const data = res.data;
+               console.log(data);
+               // data[0].brandCd
+                // map-> return is needed, foreach
+            });
+
         let temp = [
             {
                 id: 1,
