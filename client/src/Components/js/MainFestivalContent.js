@@ -2,7 +2,7 @@ import React from 'react';
 import FestivalJSX from './mainFestivalJSX';
 
 
-class Festival extends React.Component {
+class MainFestivalContent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -62,4 +62,4 @@ class Festival extends React.Component {
     }
 }
 
-export default Festival;
+export default MainFestivalContent;

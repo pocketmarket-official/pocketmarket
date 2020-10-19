@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Components/js/Header';
-import Festival from '../Components/js/mainFestival';
+import MainFestivalContent from '../Components/js/MainFestivalContent';
 import MainStoreContent from '../Components/js/MainStoreContent';
 import MainMapContent from '../Components/js/MainMapContent';
 import '../Components/scss/main.scss'
@@ -55,7 +55,7 @@ class Main extends React.Component {
     // same as usestate in function component
     handlePageRender() {
         if(this.state.current === 0) {
-            return <Festival />;
+            return <MainFestivalContent />;
         } else if(this.state.current === 1) {
             return <MainStoreContent place={this.state.latlong} />;
         } else if(this.state.current === 2) {
@@ -175,8 +175,8 @@ class Main extends React.Component {
                     <div className="main__navigation">
                         <div className="navigation">
                             <div className="navigation__btns">
-                                <button className="active" onClick={this.handlePage0Render}>축제</button>
-                                <button onClick={this.handlePage1Render}>매장</button>
+                                <button className={this.state.current === 0 ? 'active' : undefined} onClick={this.handlePage0Render}>축제</button>
+                                <button className={this.state.current === 1 ? 'active' : undefined} onClick={this.handlePage1Render}>매장</button>
                             </div>
                             <input type="text" className="navigation__query"/>
                             <img className="navigation__search" src={btnSearchImg} alt="search button" />
