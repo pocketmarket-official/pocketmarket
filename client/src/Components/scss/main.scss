@@ -148,21 +148,32 @@
       }
     }
   }
+
+  .main__content {
+    padding: 0 11px;
+  }
+
+  .main__order-status {
+    position: fixed;
+    right: 6px;
+    bottom: 8px;
+    width: 64px;
+    height: 55px;
+    //border-radius: 15px;
+    //box-shadow: 2.8px 2.8px 10px 4.5px rgba(0, 0, 0, 0.15);
+    background-image: url("../../assets/common/ico_order.png");
+    background-size: 100%;
+
+    .order-status__count {
+      position: absolute;
+      left: 17px;
+      bottom: 12px;
+      color: white;
+      font-weight: bold;
+    }
+  }
 }
 
-.content__festival {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 50px;
-  font-size: 24px;
-}
-.content__festival .festival__detail {
-  margin-left: 15px;
-}
-.content__festival .festival__detail .detail__description {
-  margin-bottom: 10px;
-}
 .content__store {
   display: flex;
   flex-direction: column;

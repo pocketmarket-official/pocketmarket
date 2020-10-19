@@ -182,7 +182,12 @@ class Main extends React.Component {
                             <img className="navigation__search" src={btnSearchImg} alt="search button" />
                         </div>
                     </div>
-                    {this.handlePageRender()}
+                    <div className="main__content">
+                        {this.handlePageRender()}
+                    </div>
+                    <div className="main__order-status">
+                        <div className="order-status__count">1</div>
+                    </div>
                 </div>
             </>
         );
