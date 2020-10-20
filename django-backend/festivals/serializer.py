@@ -16,6 +16,7 @@ class FestivalSerializer(serializers.ModelSerializer):
             'descriptionDetail',
             'joinCount',
             'simulOperCount',
+            'imgUrl',
             'innerMapUrl',
             'addr1',
             'addr2',
