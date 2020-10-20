@@ -41,7 +41,6 @@ class MainStoreContent extends React.Component {
                 lat1: position.coords.latitude,
                 long1: position.coords.longitude,
                 loading: true,
-
             },
                 () => this.sortCallback()
             )
@@ -117,6 +116,7 @@ class MainStoreContent extends React.Component {
 
     componentDidMount() {
         let addressContainer = document.getElementById("btn__address");
+        let getPositionBtn = document.getElementById("btn__map_list");
 
         if(addressContainer.innerHTML !== "주소지") {
             if(this.props.place !== []) {
@@ -128,6 +128,20 @@ class MainStoreContent extends React.Component {
                     () => this.sortCallback()
                 );
             }
+        }
+
+        getPositionBtn.onclick = () => {
+            addressContainer.innerHTML = "주소지";
+            this.getPosition().then((position) => {
+                this.setState({
+                    lat1: position.coords.latitude,
+                    long1: position.coords.longitude,
+                    loading: true,
+                },
+                    () => this.sortCallback()
+                )
+            })
+            .catch((e) => console.log(e));
         }
 
         window.addEventListener("scroll", this._infiniteScroll, true);
@@ -165,9 +179,9 @@ class MainStoreContent extends React.Component {
         this.state.stores.sort(this.sortData);
         this.setState({
             loading: false,
-            data: this.state.stores.slice(0, 5),
+            data: this.state.stores.slice(0, 4),
             preItems: 0,
-            items: 5,
+            items: 4,
         });
     }
 

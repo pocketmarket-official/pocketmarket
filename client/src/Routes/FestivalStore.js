@@ -20,11 +20,11 @@ function FestivalStore( {location} ) {
                 <HeaderBack url='/mypage' />
                 <div className="festival-store">
                     <div className="festival__content">
-                        <div className="festival__image"><img src={festival.image} /></div>
+                        <div className="festival__image"><img src={festival.imgUrl} alt="festival" /></div>
                         <div className="festival__title">
-                            <div className="festival__name">{ festival.name }</div>
-                            <div className="festival__description">{ festival.description }</div>
-                            <div className="festival__address">{ festival.address }</div>
+                            <div className="festival__name">{ festival.festivalName }</div>
+                            <div className="festival__description">{ festival.descriptionHeader }</div>
+                            <div className="festival__address">{ festival.addr1 }</div>
 
                         </div>
                     </div>

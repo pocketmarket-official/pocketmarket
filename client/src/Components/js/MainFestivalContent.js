@@ -9,8 +9,12 @@ class MainFestivalContent extends React.Component {
 
         this._getData = this._getData.bind(this);
         this._infiniteScroll = this._infiniteScroll.bind(this);
+        this.sortCallback = this.sortCallback.bind(this);
+        this.getPosition = this.getPosition.bind(this);
 
         this.state = {
+            lat1: 0,
+            long1: 0,
             festivals: [],
             data: [],
             gap: 3,
@@ -25,6 +29,29 @@ class MainFestivalContent extends React.Component {
                 festivals: festivals,
                 data: festivals.slice(0, 4),
             });
+        });
+    }
+
+    getPosition(options) {
+        return new Promise(function(resolve, reject) {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options);
+        });
+    }
+
+    sortCallback() {
+        this.state.festivals.forEach((data) => {
+            let d = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[1];
+            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[0];
+            data["distance"] = d;
+            data["show_dist"] = dist;
+        });
+
+        this.state.festivals.sort(this.sortData);
+        this.setState({
+            loading: false,
+            data: this.state.festivals.slice(0, 4),
+            preItems: 0,
+            items: 4,
         });
     }
 
@@ -53,6 +80,22 @@ class MainFestivalContent extends React.Component {
     }
 
     componentDidMount() {
+        let addressContainer = document.getElementById("btn__address");
+        let getPositionBtn = document.getElementById("btn__map_list");
+
+        getPositionBtn.onclick = () => {
+            addressContainer.innerHTML = "주소지";
+            this.getPosition().then((position) => {
+                this.setState({
+                    lat1: position.coords.latitude,
+                    long1: position.coords.longitude,
+                },
+                    () => this.sortCallback()
+                )
+            })
+            .catch((e) => console.log(e));
+        }
+
         window.addEventListener("scroll", this._infiniteScroll, true);
     }
 

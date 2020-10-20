@@ -27,7 +27,7 @@ class FestivalJSX extends React.Component {
 
         return (
             <Link to={{
-                pathname : `/main/festival/${data.id}`,
+                pathname : `/main/festival/${data.festivalCd}`,
                 state : { data }
             }}>
                 <div className="content__festival">
@@ -36,7 +36,7 @@ class FestivalJSX extends React.Component {
                         <div className="header__enter">축제입장</div>
                     </div>
                     <div className="festival__detail">
-                        <img src={data.image} alt="festival" />
+                        <img src={data.imgUrl} alt="festival" />
                         <div className="detail__description">
                             <ul>
                                 <li>{startDt} ~ {endDt}</li>
