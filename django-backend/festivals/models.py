@@ -16,6 +16,7 @@ class Festival(models.Model):
     descriptionDetail = models.CharField(max_length=500, default='')
     joinCount = models.IntegerField(default=0)
     simulOperCount = models.IntegerField(default=0)
+    imgUrl = models.CharField(max_length=200, blank=True)
     innerMapUrl = models.CharField(max_length=200, blank=True)
     addr1 = models.CharField(max_length=200, default='')
     addr2 = models.CharField(max_length=200, default='')
