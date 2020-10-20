@@ -20,15 +20,6 @@ class Main extends React.Component {
         this.handleTop = this.handleTop.bind(this);
         this.handleRefresh = this.handleRefresh.bind(this);
 
-        // fake data
-        axios.get('http://localhost:8000/api/stores_store/')
-            .then((res) => {
-               const data = res.data;
-               console.log(data);
-               // data[0].brandCd
-                // map-> return is needed, foreach
-            });
-
         let temp = [
             {
                 id: 1,

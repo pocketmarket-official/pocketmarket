@@ -14,13 +14,13 @@ const ColoredLine = ({color}) => (
 );
 
 function FestivalStore( {location} ) {
-    const festival  = location.state.festival;
+    const festival  = location.state.data;
     return (
             <>
                 <HeaderBack url='/mypage' />
                 <div className="festival-store">
                     <div className="festival__content">
-                        <div className="festival__image"><img src={festival.imageUrl} /></div>
+                        <div className="festival__image"><img src={festival.image} /></div>
                         <div className="festival__title">
                             <div className="festival__name">{ festival.name }</div>
                             <div className="festival__description">{ festival.description }</div>
