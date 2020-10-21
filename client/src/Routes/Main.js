@@ -45,7 +45,7 @@ class Main extends React.Component {
 
         this.state = {
             temp: temp,
-            current: 0,
+            current: 1,
             latlong: [],
         }
     }

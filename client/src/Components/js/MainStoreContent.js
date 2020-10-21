@@ -2,7 +2,7 @@ import React from 'react';
 import StoreJSX from './mainStoreJSX';
 import Loading from './Loading';
 import axios from 'axios';
-
+import '../scss/mainStoreContent.scss';
 
 class MainStoreContent extends React.Component {
     constructor(props) {
@@ -211,9 +211,12 @@ class MainStoreContent extends React.Component {
                 isLoading ? (
                     <Loading />
                 ) : (
-                    this.state.data.map((data) => (
-                        <StoreJSX data={data} key={data.storeCd} />
-                    ))
+                    <>
+                        <div className="content__partition">50m 이내</div>
+                        {this.state.data.map((data) => (
+                            <StoreJSX data={data} key={data.storeCd} />
+                        ))}
+                    </>
                 )
             }
             </div>
