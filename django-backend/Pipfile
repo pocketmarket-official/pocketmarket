@@ -12,6 +12,7 @@ django-cors-headers = "*"
 djangorestframework = "*"
 mysqlclient = "*"
 django-dotenv = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"
