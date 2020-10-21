@@ -10,24 +10,24 @@
 
 행사장에 위치한 푸드트럭 정보 조회
 
-결재연동
+결제연동
 
-통합 포인트 제공 
+통합 포인트 제공
 
 주문 상태 실시간 모니터링
 
-주문,결재 이력 확인
+주문,결제 이력 확인
 
 
 사용 기술 스택 :
 
-frontend - react hooks, react router
+frontend - React
 
 backend - Django
 
 database - 
 
-hosting - 
+hosting - amazon aws
 
 vcs - github
 
@@ -38,7 +38,7 @@ vcs - github
 
 개발 - 노민철, 마진형, 손수훈
 
-배포 url : https://pocket-market-ddc08.firebaseapp.com/
+배포 url : 
 
 화면 정의서 : 
 

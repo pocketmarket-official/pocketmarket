@@ -75,6 +75,7 @@ router.register(r'trades_cornerStateLog', trade_views.CornerStateLogView, 'corne
 
 
 urlpatterns = [
+    path("", include("core.urls")),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('interfaces/', interface_views.InterfaceView, name='interface')
