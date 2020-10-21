@@ -91,10 +91,10 @@ class PocketmarketUser(AbstractBaseUser, PermissionMixin):
 define festivals related models
 """
 from django.contrib.auth.models import AbstractUser
-
+from django.db import models
 
 class User(AbstractUser):
-
+    # userName = models.CharField(max_length=40, default='')
     """ User Model Definition """
 
     pass
