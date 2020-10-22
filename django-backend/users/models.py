@@ -94,7 +94,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class User(AbstractUser):
-    # userName = models.CharField(max_length=40, default='')
     """ User Model Definition """
+    testField = models.CharField(max_length=30, default='')
 
     pass
