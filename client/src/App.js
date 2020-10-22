@@ -31,7 +31,6 @@ import KDSPickup from './Routes/KDSPickup';
 import KDSKitchen from './Routes/KDSKitchen';
 import KDSSetting from './Routes/KDSSetting';
 import './App.css';
-import AuthRoute from "./Security/AuthRoute";
 import Intro from "./Routes/Intro";
 
 

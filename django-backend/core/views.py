@@ -15,7 +15,7 @@ class KakaoException(Exception):
 def kakao_login(request):
     ''' use kakao oauth '''
     client_id = os.environ.get("KAKAO_KEY")
-    redirect_uri = "http://127.0.0.1:8000/login/kakao/callback"
+    redirect_uri = "http://13.124.90.138:8000/login/kakao/callback"
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
     )
@@ -27,7 +27,7 @@ def kakao_callback(request):
         code = request.GET.get("code", None)
         client_id = os.environ.get("KAKAO_KEY")
         client_secret = os.environ.get("KAKAO_SECRET")
-        redirect_uri = "http://127.0.0.1:8000/login/kakao/callback"
+        redirect_uri = "http://13.124.90.138:8000/login/kakao/callback"
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
