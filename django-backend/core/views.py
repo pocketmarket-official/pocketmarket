@@ -1,6 +1,7 @@
 import os
 import requests
 from django.contrib.auth import login
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import reverse
 from users.models import User
@@ -47,15 +48,13 @@ def kakao_callback(request):
                 profile_json = profile_request.json()
                 kakao_id = profile_json.get("id")
                 if kakao_id is not None:
-                    name = profile_json.get("properties")['nickname']
                     email = profile_json.get("kakao_account")["email"]
                     if email is None:
                         raise KakaoException()
                     try:
-                        user = User.objects.get(username=name)
+                        user = User.objects.get(email=email)
                     except User.DoesNotExist:
                         user = User.objects.create(
-                            username=name,
                             email=email,
                         )
                         user.set_unusable_password()
@@ -65,4 +64,4 @@ def kakao_callback(request):
                 else:
                     raise KakaoException()
     except KakaoException:
-        return redirect(reverse(""))
+        return HttpResponseRedirect("http://localhost:3000/login")
