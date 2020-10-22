@@ -53,14 +53,14 @@ def kakao_callback(request):
                         raise KakaoException()
                     try:
                         user = User.objects.get(email=email)
-                    except User.DoesNotExist:
+                    except:
                         user = User.objects.create(
                             email=email,
                         )
                         user.set_unusable_password()
                         user.save()
                     login(request, user)
-                    return redirect(reverse(""))
+                    return HttpResponseRedirect("http://localhost:3000/main")
                 else:
                     raise KakaoException()
     except KakaoException:
