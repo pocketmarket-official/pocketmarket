@@ -40,6 +40,15 @@ function Intro({authenticated, login, location}) {
         alert(err);
     };
 
+    const requestLogin = () => {
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener("load", () => {
+            console.log(xhr.responseText);
+        })
+        xhr.open("GET", "http://13.124.90.138:8000/login/kakao/");
+        xhr.send();
+    }
+
     const {from} = location.state || {from: {pathname: "/index"}};
     if (authenticated) return <Redirect to={from}/>;
 
@@ -52,7 +61,7 @@ function Intro({authenticated, login, location}) {
                            onEnded={() => setPlayingVideo(false)}>
                         <source src={bgVideo} type={"video/mp4"}/>
                     </video> :
-                    <img className="bg__image" src={bgImage}/>
+                    <img className="bg__image" src={bgImage} alt="bgimage" />
                 }
             </div>
             {!playingVideo && (
@@ -70,7 +79,7 @@ function Intro({authenticated, login, location}) {
                             //성공했을때 불러올 함수로서 fetch해서 localStorage에 저장할 함수를 여기로 저장
                             getProfile={true}
                         />
-                        <button className="login__sign-up">
+                        <button className="login__sign-up" onClick={requestLogin}>
                             카카오 회원가입 >
                         </button>
                     </div>
