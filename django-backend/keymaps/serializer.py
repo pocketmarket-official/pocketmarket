@@ -27,8 +27,8 @@ class TouchGroupSerializer(serializers.ModelSerializer):
         fields = (
             'storeCd',
             'keymapCd',
-            'groupCd',
-            'groupName',
+            'touchGroupCd',
+            'touchGroupName',
             'imgUrl',
             'imgUseYn',
             'posPage',

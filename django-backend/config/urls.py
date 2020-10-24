@@ -33,6 +33,7 @@ from cprts import views as cprt_views
 from keymaps import views as keymap_views
 from trades import views as trade_views
 from interfaces import views as interface_views
+from kdses import views as kds_views
 
 
 router = routers.DefaultRouter()
@@ -70,6 +71,8 @@ router.register(r'trades_standardLog', trade_views.StandardLogView, 'standardLog
 router.register(r'trades_purchaseLog', trade_views.PurchaseLogView, 'purchaseLog')
 router.register(r'trades_soldoutLog', trade_views.SoldoutLogView, 'soldoutLog')
 router.register(r'trades_cornerStateLog', trade_views.CornerStateLogView, 'cornerStateLog')
+router.register(r'kdses_master', kds_views.MasterView, 'master')
+router.register(r'kdses_setMaster', kds_views.SetMasterView, 'setMaster')
 
 
 
@@ -78,5 +81,6 @@ urlpatterns = [
     path("", include("core.urls")),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('interfaces/', interface_views.InterfaceView, name='interface')
+    path('interfaces/', interface_views.InterfaceView, name='interface'),
+
 ]

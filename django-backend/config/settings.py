@@ -55,7 +55,8 @@ PROJECT_APPS = [
     'cprts.apps.CprtsConfig',
     'keymaps.apps.KeymapsConfig',
     'trades.apps.TradesConfig',
-    'interfaces'
+    'interfaces',
+    'kdses'
 ]
 
 THIRD_PARTY_APPS = [
