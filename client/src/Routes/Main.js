@@ -184,9 +184,11 @@ class Main extends React.Component {
                     <div className="main__content">
                         {this.handlePageRender()}
                     </div>
-                    <div className="main__order-status">
-                        <div className="order-status__count">1</div>
-                    </div>
+                    <Link to="/order/status">
+                        <div className="main__order-status">
+                            <div className="order-status__count">1</div>
+                        </div>
+                    </Link>
                 </div>
             </>
         );

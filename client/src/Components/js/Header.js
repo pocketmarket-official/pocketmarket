@@ -9,9 +9,9 @@ import bi from '../../assets/common/BI.png';
 function Header() {
     return (
             <div className="header__box">
-                <Link to="/order/status"><img className="header__menu" src={btnMenuImg} alt="hamburger button" /></Link>
+                <Link to="/mypage"><img className="header__menu" src={btnMenuImg} alt="hamburger button" /></Link>
                 <Link to="/main"><img className="header__bi" src={bi} alt="logo" /></Link>
-                <Link to="/mypage"><img className="header__alarm" src={btnAlarm} alt="alarm" /></Link>
+                <Link to="/main"><img className="header__alarm" src={btnAlarm} alt="alarm" /></Link>
             </div>
         );
 }
