@@ -19,12 +19,16 @@ class StoreJSX extends React.Component {
                         state: {data, d}
                     }}>
                     <div className="store__store">
-                        <img className="store__image" src={storImg} alt="store"/>
+                        <img className="store__image" src={this.props.data.imgLogoUrl} alt="store"/>
                         <div className="store__detail">
                             <div className="detail__tags">
                                 <div className="tags__new">NEW</div>
                                 <div className="tags__tag">@반포 낭만달빛마켓</div>
-                                <div className="tags__likes">♥ 256</div>
+                                <button className="tags__likes" onClick={(e) => {
+                                    e.preventDefault();
+                                    console.log('hi');
+                                    // 좋아요 기능 추가 예정
+                                }}>♥ {this.props.data.likeCount}</button>
                             </div>
                             <div className="detail__title">
                                 <div className="detail__name">{this.props.data.storeName}</div>
@@ -50,9 +54,13 @@ class StoreJSX extends React.Component {
                                 한입 와앙! 물고 놨는데 한도끝도 없이 끊어지지 않고 늘어나는 치즈 (;;;)
                                 ㅋㅋㅋㅋ 사진으로 그게 표현이 안되는게 아쉽네..ㅜ?
                             </div>
-                            <div className="review__likes">
+                            <button className="review__likes" onClick={(e) => {
+                                e.preventDefault();
+                                console.log('hi');
+                                // 좋아요 기능 추가 예정
+                            }}>
                                 <p>♥</p> 56
-                            </div>
+                            </button>
                         </div>
                     </div>
                     </Link>
