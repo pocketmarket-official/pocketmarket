@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import '../scss/mainStoreJSX.scss';
 
 import storImg from '../../assets/store/img1.png';
+import star1 from '../../assets/store/star1.png';
+import star2 from '../../assets/store/star2.png';
+import star3 from '../../assets/store/star3.png';
 
 
 class StoreJSX extends React.Component {
@@ -33,12 +36,26 @@ class StoreJSX extends React.Component {
                                 사용하고 있으니 직접 한번 드셔보세요.
                             </div>
                         </div>
+                        <div className="store__stars">
+                            <img src={star1}/>
+                            <img src={star1}/>
+                            <img src={star1}/>
+                            <img src={star3}/>
+                            <img src={star2}/>
+                        </div>
+                        <div className="store__review">
+                            <div className="review__content">
+                                한입 와앙! 물고 놨는데 한도끝도 없이 끊어지지 않고 늘어나는 치즈 (;;;)
+                                ㅋㅋㅋㅋ 사진으로 그게 표현이 안되는게 아쉽네..ㅜ?
+                                한입 와앙! 물고 놨는데 한도끝도 없이 끊어지지 않고 늘어나는 치즈 (;;;)
+                                ㅋㅋㅋㅋ 사진으로 그게 표현이 안되는게 아쉽네..ㅜ?
+                            </div>
+                            <div className="review__likes">
+                                <p>♥</p> 56
+                            </div>
+                        </div>
                     </div>
                     </Link>
-                    <div className="store__review">
-                        리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
-                        <div className="review__likes">리뷰 좋아요</div>
-                    </div>
                 </div>
         );
     }
