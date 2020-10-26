@@ -1,0 +1,55 @@
+$headerHeight: 63px;
+
+.festival-store {
+  width: 100%;
+  margin-top: $headerHeight;
+  padding: 0 11px;
+  box-sizing: border-box;
+
+  .festival__content {
+    margin: 0 -11px;
+
+
+    $festivalImageWidth: 414px;
+    $festivalImageHeight: 210px;
+
+    .festival__image {
+      img {
+        width: $festivalImageWidth;
+        height: $festivalImageHeight;
+        filter: brightness(.5);
+      }
+    }
+
+    .festival__title {
+      position: absolute;
+      top: $headerHeight;
+      left: 0;
+      width: $festivalImageWidth;
+      height: $festivalImageHeight;
+      padding: 12px 10px;
+      color: #fa245a;
+      font-weight: bold;
+      font-size: .7rem;
+      font-family: "Nanum Gothic", sans-serif;
+      box-sizing: border-box;
+
+      .festival__name {
+        margin-left: 9px;
+        font-size: 1.83rem;
+        font-weight: 800;
+        letter-spacing: 1.39px;
+        color: #ffa800;
+      }
+
+      .festival__description {
+        margin-top: 13px;
+        margin-left: 35px;
+        width: calc(100% - 35px);
+        font-size: .86rem;
+        line-height: 1.5;
+        color: white;
+      }
+    }
+  }
+}

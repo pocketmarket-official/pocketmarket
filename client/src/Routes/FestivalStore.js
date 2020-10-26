@@ -1,17 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
+import StoreJSX from "../Components/js/mainStoreJSX";
+import '../Components/scss/festivalStore.scss';
 
-const ColoredLine = ({color}) => (
-    <hr
-        style={{
-            color: color, 
-            backgroundColor: color, 
-            height: 0.5, 
-            width: '50%'
-        }}
-    />
-);
+import bg from '../assets/festival_store/top_bg.jpg';
 
 function FestivalStore( {location} ) {
     const festival  = location.state.data;
@@ -20,55 +13,19 @@ function FestivalStore( {location} ) {
                 <HeaderBack url='/mypage' />
                 <div className="festival-store">
                     <div className="festival__content">
-                        <div className="festival__image"><img src={festival.imgUrl} alt="festival" /></div>
+                        <div className="festival__image"><img src={festival.imgUrl || bg} alt="festival" /></div>
                         <div className="festival__title">
-                            <div className="festival__name">{ festival.festivalName }</div>
-                            <div className="festival__description">{ festival.descriptionHeader }</div>
-                            <div className="festival__address">{ festival.addr1 }</div>
-
+                            Festival
+                            {/*<div className="festival__name">{ festival.festivalName }</div>*/}
+                            {/*<div className="festival__description">{ festival.descriptionHeader }</div>*/}
+                            {/*<div className="festival__address">{ festival.addr1 }</div>*/}
+                            <div className="festival__name">여의도 밤도깨비 야시장</div>
+                            <div className="festival__description">세계각국의 음식과 상품이 가득한 글로벌 야시장! 한강으로 하룻밤의 세계여행을 떠나보세요!</div>
                         </div>
                     </div>
-                    <ColoredLine color="black" />
-                    <div className="content__store">
-                        <div className="store__store">
-                            <Link to="/main/store/1">
-                            <div className="store__image">image</div>
-                            <div className="store__detail">
-                                <div className="detail__title">
-                                    <div className="detail__name">강남 핫도그</div>
-                                    <div className="detail__distance">0.7km</div>
-                                    <div className="detail__likes">좋아요</div>
-                                </div>
-                                <div className="detail__description">
-                                    설명설명설명설명설명설명설명설명설명설명설명
-                                </div>
-                            </div>
-                            </Link>
-                        </div>
-                        <div className="store__review">
-                            리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
-                            <div className="review__likes">리뷰 좋아요</div>
-                        </div>
-                    </div>
-                    <div className="content__store">
-                        <div className="store__store">
-                            <div className="store__image">image</div>
-                            <div className="store__detail">
-                                <div className="detail__title">
-                                    <div className="detail__name">강남 핫도그</div>
-                                    <div className="detail__distance">0.7km</div>
-                                    <div className="detail__likes">좋아요</div>
-                                </div>
-                                <div className="detail__description">
-                                    설명설명설명설명설명설명설명설명설명설명설명
-                                </div>
-                            </div>
-                        </div>
-                        <div className="store__review">
-                            리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
-                            <div className="review__likes">리뷰 좋아요</div>
-                        </div>
-                    </div>
+                    <StoreJSX data={festival}/>
+                    <StoreJSX data={festival}/>
+                    <StoreJSX data={festival}/>
                 </div>
             </>
         );

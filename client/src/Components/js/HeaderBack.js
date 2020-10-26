@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import '../scss/headerBack.scss';
+
+import btnBack from '../../assets/common/btn_bs.png';
+import btnAlarm from '../../assets/common/btn_alarm.png';
+import bi from '../../assets/common/BI.png';
 
 
 function HeaderBack(props) {
@@ -7,11 +12,9 @@ function HeaderBack(props) {
 
     return (
             <div className="header__box">
-                <div id="back-btn" onClick={() => {
-                    history.goBack();
-                }}>back</div>
-                <Link to="/main"><div>Pocket Market</div></Link>
-                <Link to={props.url}><div>my</div></Link>
+                <img className="header__back"  onClick={() => {history.goBack()}} src={btnBack}/>
+                <Link to="/main"><img className="header__bi" src={bi} alt="logo" /></Link>
+                <Link to={props.url}><img className="header__alarm" src={btnAlarm} alt="alarm" /></Link>
             </div>
         );
 }
