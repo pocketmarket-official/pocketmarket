@@ -1,26 +1,26 @@
 import React from 'react';
-import HeaderBack from '../Components/js/HeaderBack';
 import KakaoMap from '../Components/js/kakaomap';
+import {Link} from "react-router-dom";
+import '../Components/scss/myPlaceDetail.scss';
 
+import btnBack from '../assets/map/btn_back.png';
+import btnClocation from '../assets/map/btn_clocation.png';
+import btnPoc from '../assets/map/ico_poc.png';
 
 function MyplaceDetail() {
     return (
-        <>
-            <HeaderBack url='/mypage' />
-            <div className="myplacedetail">
-                <KakaoMap />
-                <div className="myplacedetail__api">
-                    <div>
-                        <div className="myplacedetail__address" id="myplacedetail__address"></div>
-                        <div className="myplacedetail__street" id="myplacedetail__street"></div>
-                    </div>
-                    <button id="addList">추가하기</button>
+        <div className="myplacedetail">
+            <div className="header__box">
+                <div className="box__left">
+                    <Link to="/main"><img className="header__back" src={btnBack} alt="BACK button" /></Link>
+                    <input className="header__search"/>
+                    <Link to="/main"><img className="header__mapLocation" src={btnClocation} alt="location" /></Link>
                 </div>
-                <input type="text" placeholder="상세주소를 입력하세요(건물명, 동 / 호수 등)" id="keyword__map" />
-                <input type="submit" value="완료" id="search__map" />
-                <div id="results"></div>
+                <Link to="/mypage"><img className="header__logo" src={btnPoc} alt="logo" /></Link>
             </div>
-        </>
+
+            <KakaoMap/>
+        </div>
     );
 }
 

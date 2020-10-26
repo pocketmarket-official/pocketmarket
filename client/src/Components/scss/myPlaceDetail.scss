@@ -1,0 +1,65 @@
+.myplacedetail {
+  width: 100%;
+  height: 100%;
+
+  .header__box {
+    height: 50px;
+    border: 0;
+    z-index: 3;
+    background-color: transparent;
+
+    >* {
+      z-index: 3;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      background-color: black;
+      z-index: 2;
+    }
+  }
+
+  .header__back {
+    width: 34px;
+    height: 34px;
+    margin-right: 8px;
+  }
+
+  .header__search {
+    width: 156px;
+    height: 26px;
+    margin-right: 10px;
+    border-radius: 8px;
+    vertical-align: top;
+    border: solid 2px #b4022f;
+    background-color: #ffffff;
+  }
+
+  .header__mapLocation {
+    width: 34px;
+    height: 34px;
+    border-radius: 16px;
+    background-color: #ffffff;
+  }
+
+  .header__logo {
+    width: 84px;
+    height: 38px;
+  }
+
+  .kakaomap {
+    width: 100%;
+    height: 100%;
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
