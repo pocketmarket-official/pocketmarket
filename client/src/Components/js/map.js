@@ -1,6 +1,7 @@
 /*global kakao*/
 import React from 'react';
 
+import markerImageSrc from '../../assets/map/map_store_ico.png';
 
 class MapContent extends React.Component {
     componentDidMount() {
@@ -12,7 +13,7 @@ class MapContent extends React.Component {
         let lat;
         let long;
         let markers = [];
- 
+
         const success = (pos) => {
             const coords = pos.coords;
             lat = coords.latitude;
@@ -37,8 +38,14 @@ class MapContent extends React.Component {
                     lat, long
                 );
 
+                let markerImage = new kakao.maps.MarkerImage(
+                    markerImageSrc,
+                    new kakao.maps.Size(41, 42),
+                );
+
                 let marker = new kakao.maps.Marker({
                     position: markerPosition,
+                    image: markerImage
                 });
 
                 marker.setMap(map);
@@ -60,10 +67,10 @@ class MapContent extends React.Component {
                         if (status === kakao.maps.services.Status.OK) {
                             let detailAddr = !!result[0].road_address ? '<div style="padding:5px;font-size:12px;">도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
                             detailAddr += '<div style="padding:5px; margin-bottom:5px;font-size:12px;">지번 주소 : ' + result[0].address.address_name + '</div>';
-                            
+
                             let content = '<div class="bAddr" style="padding:5px;font-size:12px;">' + detailAddr + '</div>';
 
-                            // 마커를 클릭한 위치에 표시합니다 
+                            // 마커를 클릭한 위치에 표시합니다
                             marker.setPosition(mouseEvent.latLng);
                             marker.setMap(map);
 
@@ -86,9 +93,9 @@ class MapContent extends React.Component {
                             catch {
                                 roadAddress = ""
                             }
-                            address.innerHTML = '지번 주소: ' + addressName;
-                            street.innerHTML = '도로명 주소: ' + roadAddress;
-                            btn.style.display = 'block';
+                            // address.innerHTML = '지번 주소: ' + addressName;
+                            // street.innerHTML = '도로명 주소: ' + roadAddress;
+                            // btn.style.display = 'block';
 
                             // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                             infowindow.setContent(content);
@@ -134,7 +141,7 @@ class MapContent extends React.Component {
                     const displayMarker = (place) => {
                         let marker = new kakao.maps.Marker({
                             map: map,
-                            position: new kakao.maps.LatLng(place.y, place.x) 
+                            position: new kakao.maps.LatLng(place.y, place.x)
                         });
 
                         markers.push(marker);
