@@ -3,9 +3,6 @@ import axios from "axios";
 
 
 function pay(sellItemList) {
-    console.log('=====1=======');
-    console.log(sellItemList);
-    console.log('=====1=======');
     BootPay.request({
         // price: trInfo.Price,
         price: '1000',
@@ -64,6 +61,7 @@ function pay(sellItemList) {
         let billNo = '0001';
 
         console.log('=====2=======');
+        console.log(data);
         console.log(sellItemList);
         console.log('=====2=======');
         // axios.post('http://127.0.0.1:8000/api/trades_saleHeader/', {
@@ -73,7 +71,6 @@ function pay(sellItemList) {
         //     billNo: billNo,
         // });
         // axios.post('http://127.0.0.1:8000/api/trades_saleHeader/', sellItemList);
-        console.log(data);
     });
 }
 
