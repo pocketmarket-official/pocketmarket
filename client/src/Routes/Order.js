@@ -10,8 +10,41 @@ class Order extends React.Component {
         const id = this.props.match.params.storeId;
         const link = "/main/store/" + id + "/orderinfo";
 
+        //trades info
+        //Trade common information
+        const posNo = this.props.match.params.posNo;
+        const saleFlag = '1';
+        //Trade Detail
+        let seq = 0;
+        let orderType = '';
+        let itemCd = '';
+        let itemName = '';
+        let qty = 0;
+        let itemSellGroup = '';
+        let itemSellLevel = '';
+        let itemSellType = '';
+        let tradesInfo= [];
+        for(let i=0; i<5; i++){
+            seq += 1;
+            let tradesInfoRow = {
+                storeId: id,
+                posNo: posNo,
+                saleFlag: saleFlag,
+                seq: seq,
+                orderType: orderType,
+                itemCd: itemCd,
+                itemName: itemName,
+                qty: qty,
+                itemSellGroup: itemSellGroup,
+                itemSellLevel: itemSellLevel,
+                itemSellType: itemSellType
+            };
+            tradesInfo.push(tradesInfoRow);
+        }
+
         this.state = {
             link: link,
+            sellItemList: tradesInfo,
         }
     }
     render() {

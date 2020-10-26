@@ -3,9 +3,11 @@ import pay from '../bootpay.js';
 import HeaderBack from '../Components/js/HeaderBack';
 
 
-class OrderInfo extends React.Component {
+class OrderInfo_test extends React.Component {
     constructor(props) {
         super(props);
+
+
     }
 
     render() {
@@ -56,4 +58,4 @@ class OrderInfo extends React.Component {
     }
 }
 
-export default OrderInfo;
+export default OrderInfo_test;

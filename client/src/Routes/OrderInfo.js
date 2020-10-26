@@ -6,7 +6,12 @@ import HeaderBack from '../Components/js/HeaderBack';
 class OrderInfo extends React.Component {
     constructor(props) {
         super(props);
-    }
+        const sellItemList = this.props.match.params.sellItemList;
+
+        this.state = {
+            sellItemList: sellItemList,
+        }
+    };
 
     render() {
         return (
@@ -48,7 +53,7 @@ class OrderInfo extends React.Component {
                         <div>3,500원</div>
                     </div>
                     <div className="orderinfo__btn">
-                        <div onClick={() => pay()}>결제하기</div>
+                        <div onClick={() => pay(this.state.sellItemList)}>결제하기</div>
                     </div>
                 </div>
             </>

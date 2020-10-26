@@ -1,13 +1,19 @@
 import BootPay from "bootpay-js";
+import axios from "axios";
 
 
-function pay() {
+function pay(sellItemList) {
+    console.log('=====1=======');
+    console.log(sellItemList);
+    console.log('=====1=======');
     BootPay.request({
+        // price: trInfo.Price,
         price: '1000',
         application_id: process.env.REACT_APP_BOOTPAY_APP_ID,
+        // name: trInfo.storeName,
         name: '식당 이름',
-        pg: 'kakao',
-        method: 'easy',
+        pg: 'nicepay',
+        // method: 'card',
         show_agree_window: 0,
         items: [
             {
@@ -24,6 +30,7 @@ function pay() {
             addr: '경기도 안양시',
             phone: '010-8222-9249'
         },
+        sellItemList: sellItemList,
         order_id: `${Date.now()}_사용자_이름`,
 //        params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
 //        account_expire_at: '2018-05-25', // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. )
@@ -48,8 +55,24 @@ function pay() {
         // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
         console.log(data);
     }).done(function (data) {
+        window.alert('success');
         //결제가 정상적으로 완료되면 수행됩니다
         //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
+        let storeCd = 'C0001';
+        let saleDt = '20201002';
+        let posNo = '03';
+        let billNo = '0001';
+
+        console.log('=====2=======');
+        console.log(sellItemList);
+        console.log('=====2=======');
+        // axios.post('http://127.0.0.1:8000/api/trades_saleHeader/', {
+        //     storeCd: storeCd,
+        //     saleDt: saleDt,
+        //     posNo: posNo,
+        //     billNo: billNo,
+        // });
+        // axios.post('http://127.0.0.1:8000/api/trades_saleHeader/', sellItemList);
         console.log(data);
     });
 }
