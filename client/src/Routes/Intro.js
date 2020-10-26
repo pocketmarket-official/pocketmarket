@@ -15,39 +15,14 @@ const axios = require('axios');
 function Intro({authenticated, login, location}) {
     const [playingVideo, setPlayingVideo] = useState(true);
 
-    const responseKaKao = (res) => {
-        const email = res.profile.kakao_account.email;
-        try {
-            login({email})
-        } catch (e) {
-            alert("Failed to login");
-        }
-        axios.get(`/users?email=${email}`)
-            .then(res => {
-                if (res.data.length === 0) {
-                    axios.post(`/users`, {
-                        email
-                    })
-                        .then(res => {
-                            console.log(email + '신규등록 되었습니다.');
-                        })
-                }
-                console.log(res);
-            })
+    // kakao login api built in django backend
+    const responseLogin = () => {
+        window.location.href = "http://13.124.90.138:8000/login/kakao/";
     };
 
     const responseFail = (err) => {
         alert(err);
     };
-
-    const requestLogin = () => {
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener("load", () => {
-            console.log(xhr.responseText);
-        })
-        xhr.open("GET", "http://13.124.90.138:8000/login/kakao/");
-        xhr.send();
-    }
 
     const {from} = location.state || {from: {pathname: "/index"}};
     if (authenticated) return <Redirect to={from}/>;
@@ -74,13 +49,13 @@ function Intro({authenticated, login, location}) {
                             //카카오에서 할당받은 jsKey를 입력
                             buttonText='카카오 로그인'
                             //로그인 버튼의 text를 입력
-                            onSuccess={responseKaKao}
+                            onSuccess={responseLogin}
                             onFailure={responseFail}
                             //성공했을때 불러올 함수로서 fetch해서 localStorage에 저장할 함수를 여기로 저장
                             getProfile={true}
                         />
-                        <button className="login__sign-up" onClick={requestLogin}>
-                            카카오 회원가입 >
+                        <button className="login__sign-up" onClick={responseLogin} type="button">
+                                카카오 회원가입 >
                         </button>
                     </div>
                     <div className="footer">all rights reserved pocketmarket</div>
