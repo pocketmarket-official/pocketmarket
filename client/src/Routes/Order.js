@@ -114,7 +114,12 @@ class Order extends React.Component {
                                 금액
                                 <div className="cost__cost">12,000원</div>
                             </div>
-                            <div><Link to={this.state.link}>주문결제</Link></div>
+                            <div><Link to={{
+                                pathname: this.state.link,
+                                state: {
+                                    sellItemList: this.state.sellItemList,
+                                }}
+                            }>주문결제</Link></div>
                         </div>
                         <div className="order__detail">
                             <div className="order__item">

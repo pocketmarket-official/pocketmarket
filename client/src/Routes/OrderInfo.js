@@ -6,7 +6,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 class OrderInfo extends React.Component {
     constructor(props) {
         super(props);
-        const sellItemList = this.props.match.params.sellItemList;
+        const sellItemList = this.props.location.sellItemList;
 
         this.state = {
             sellItemList: sellItemList,
@@ -14,6 +14,8 @@ class OrderInfo extends React.Component {
     };
 
     render() {
+        let sellItemList = this.state.sellItemList;
+        console.log(sellItemList);
         return (
             <>
                 <HeaderBack url='/mypage' />
@@ -53,7 +55,7 @@ class OrderInfo extends React.Component {
                         <div>3,500원</div>
                     </div>
                     <div className="orderinfo__btn">
-                        <div onClick={() => pay(this.state.sellItemList)}>결제하기</div>
+                        <div onClick={(sellItemList) => pay(sellItemList)}>결제하기</div>
                     </div>
                 </div>
             </>
