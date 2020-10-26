@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 import Index from './Routes/Index';
 import Main from './Routes/Main';
 import Mypage from './Routes/Mypage';
@@ -48,14 +49,14 @@ function App() {
               <Redirect to={"/login"} />
         </Route>
         <Route authenticated={authenticated} exact path="/index" component={Index} />
-        <Route authenticated={authenticated} exact path="/main" component={Main} />
-        <Route authenticated={authenticated} exact path="/main/festival/:id" component={FestivalStore} />
-        <Switch>
-          <Route exact path="/main/store/:storeId/order" component={Order} />
-          <Route exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
-          <Route exact path="/main/store/:storeId/orderinfo_test" component={OrderInfo_test} />
-        </Switch>
-        <Route authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
+        <CacheRoute authenticated={authenticated} exact path="/main" component={Main} />
+        <CacheRoute authenticated={authenticated} exact path="/main/festival/:id" component={FestivalStore} />
+        <CacheSwitch>
+          <CacheRoute exact path="/main/store/:storeId/order" component={Order} />
+          <CacheRoute exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
+          <CacheRoute exact path="/main/store/:storeId/orderinfo_test" component={OrderInfo_test} />
+        </CacheSwitch>
+        <CacheRoute authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
         <Route authenticated={authenticated} exact path="/order/review" component={ReviewWrite} />
         <Route authenticated={authenticated} exact path="/order/complete" component={OrderComplete} />
         <Route authenticated={authenticated} exact path="/order/status" component={OrderStatus} />
