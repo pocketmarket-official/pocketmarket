@@ -69,3 +69,4 @@ class CornerStateLogAdmin(admin.ModelAdmin):
     """ CornerStateLog Admin """
 
     pass
+

@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from drf_multiple_model.views import FlatMultipleModelAPIView
+
 from trades.models import SaleHeader
 from trades.serializer import SaleHeaderSerializer
 from trades.models import SaleDetail
@@ -62,3 +64,11 @@ class SoldoutLogView(viewsets.ModelViewSet):
 class CornerStateLogView(viewsets.ModelViewSet):
     serializer_class = CornerStateLogSerializer
     queryset = CornerStateLog.objects.all()
+#
+# class TradeMakerView(FlatMultipleModelAPIView):
+#     queryList = [
+#         {'queryset': SaleHeader.objects.all(), 'serializer_class':SaleHeaderSerializer},
+#         {'queryset': SaleDetail.objects.all(), 'serializer_class': SaleDetail},
+#         {'queryset': CashLog.objects.all(), 'serializer_class': CashLogSerializer},
+#         {'queryset': CardLog.objects.all(), 'serializer_class': CardLogSerializer}
+#     ]

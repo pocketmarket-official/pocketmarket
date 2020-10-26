@@ -13,10 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+#default
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
 from rest_framework import routers
+#masters
 from stores import views as store_views
 from festivals import views as festival_views
 from users import views as user_views
@@ -31,13 +33,18 @@ from replies import views as reply_views
 from items import views as item_views
 from cprts import views as cprt_views
 from keymaps import views as keymap_views
+#trades
 from trades import views as trade_views
-from interfaces import views as interface_views
+#kdses
 from kdses import views as kds_views
+#interfaces
+from interfaces import views as interface_views
+
 
 
 router = routers.DefaultRouter()
 
+#masters
 router.register(r'stores_store', store_views.StoreView, 'store')
 router.register(r'stores_funSset', store_views.FunsetView, 'funset')
 router.register(r'stores_pos', store_views.PosView, 'pos')
@@ -55,13 +62,14 @@ router.register(r'items_item', item_views.ItemView, 'item')
 router.register(r'items_set', item_views.SetView, 'set')
 router.register(r'items_setOpt', item_views.SetOptView, 'setOpt')
 router.register(r'items_itemAdd', item_views.ItemAddView, 'itemAdd')
-router.register(r'items_Add', item_views.AddView, 'add')
+router.register(r'items_add', item_views.AddView, 'add')
 router.register(r'cprts_cprt', cprt_views.CprtView, 'cprt')
 router.register(r'cprts_group', cprt_views.GroupView, 'group')
 router.register(r'cprts_relation', cprt_views.RelationView, 'relation')
 router.register(r'keymaps_storeKeymap', keymap_views.StoreKeymapView, 'storeKeymap')
 router.register(r'keymaps_touchGroup', keymap_views.TouchGroupView, 'touchGroup')
 router.register(r'keymaps_keymap', keymap_views.KeymapView, 'keymap')
+#trades
 router.register(r'trades_saleHeader', trade_views.SaleHeaderView, 'saleHeader')
 router.register(r'trades_saleDetail', trade_views.SaleDetailView, 'saleDetail')
 router.register(r'trades_cashLog', trade_views.CashLogView, 'cashLog')
@@ -71,10 +79,10 @@ router.register(r'trades_standardLog', trade_views.StandardLogView, 'standardLog
 router.register(r'trades_purchaseLog', trade_views.PurchaseLogView, 'purchaseLog')
 router.register(r'trades_soldoutLog', trade_views.SoldoutLogView, 'soldoutLog')
 router.register(r'trades_cornerStateLog', trade_views.CornerStateLogView, 'cornerStateLog')
+# router.register(r'trades_tradeMaker', trade_views.TradeMakerView, 'tradeMaker')
+#kdses
 router.register(r'kdses_master', kds_views.MasterView, 'master')
 router.register(r'kdses_setMaster', kds_views.SetMasterView, 'setMaster')
-
-
 
 
 urlpatterns = [

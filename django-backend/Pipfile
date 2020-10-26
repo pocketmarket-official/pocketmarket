@@ -13,6 +13,7 @@ djangorestframework = "*"
 mysqlclient = "*"
 django-dotenv = "*"
 requests = "*"
+django-rest-multiple-models = "*"
 
 [requires]
 python_version = "3.8"
