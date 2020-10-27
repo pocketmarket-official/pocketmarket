@@ -34,7 +34,7 @@ class StoreSerializer(serializers.ModelSerializer):
             'orgIf',
             'xPosition',
             'yPosition',
-            'likeCount',
+            'likeUser',
             'score',
             'description',
             'insDt',
