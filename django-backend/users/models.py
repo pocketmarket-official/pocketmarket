@@ -12,7 +12,6 @@ class User(AbstractUser):
 
     pass
 
-##todo : 왜 얘는 user_point가 아니라 points_point지? api 주소가
 class Point(models.Model):
     """ Point Model Definition """
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)

@@ -16,6 +16,14 @@ class ReviewAdmin(admin.ModelAdmin):
 @admin.register(models.ReviewImage)
 class ReviewImageAdmin(admin.ModelAdmin):
 
-    """ Review Admin """
+    """ ReviewImage Admin """
+
+    pass
+
+
+@admin.register(models.Reply)
+class ReplyAdmin(admin.ModelAdmin):
+
+    """ Reply Admin """
 
     pass
