@@ -25,7 +25,6 @@ from users import views as user_views
 from brands import views as brand_views
 from points import views as point_views
 from storeDics import views as storeDic_views
-from myplaces import views as myplace_views
 from reviews import views as review_views
 from reviewLikes import views as reviewLike_views
 from replies import views as reply_views
@@ -53,7 +52,6 @@ router.register(r'users_point', user_views.PointView, 'point')
 router.register(r'brands_brand', brand_views.BrandView, 'brand')
 router.register(r'points_point', point_views.PointView, 'point')
 router.register(r'storeDics_storeDic', storeDic_views.StoreDicView, 'storeDic')
-router.register(r'myplaces_myplace', myplace_views.MyplaceView, 'myplace')
 router.register(r'reviews_review', review_views.ReviewView, 'review')
 router.register(r'reviewLikes_reviewLike', reviewLike_views.ReviewLikeView, 'reviewLike')
 router.register(r'replies_reply', reply_views.ReplyView, 'reply')
