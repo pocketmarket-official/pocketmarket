@@ -60,7 +60,6 @@ PROJECT_APPS = [
 THIRD_PARTY_APPS = [
     'corsheaders',
     'rest_framework',
-    'drf_multiple_model',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
