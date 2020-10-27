@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import OptionModal from '../Components/js/OptionModal';
+import KeymapContainer from '../Components/js/KeymapContainer';
 
 
 class Order extends React.Component {
@@ -9,6 +10,8 @@ class Order extends React.Component {
         super(props);
         const id = this.props.match.params.storeId;
         const link = "/main/store/" + id + "/orderinfo";
+
+        this.getKeymap = this.getKeymap.bind(this);
 
         //trades info
         //Trade common information
@@ -24,6 +27,8 @@ class Order extends React.Component {
         let itemSellLevel = '';
         let itemSellType = '';
         let tradesInfo= [];
+
+        // sample data for trade
         for(let i=0; i<5; i++){
             seq += 1;
             let tradesInfoRow = {
@@ -42,67 +47,64 @@ class Order extends React.Component {
             tradesInfo.push(tradesInfoRow);
         }
 
+        // keymap -> 카테고리 가져오고 카테고리로 다시 메뉴 가져와야함
+        let touch_group = [
+            {
+                name: '음료',
+                code: 1,
+            },
+            {
+                name: '디저트',
+                code: 2,
+            },
+            {
+                name: '햄버거',
+                code: 3,
+            },
+            {
+                name: '기타',
+                code: 4,
+            },
+        ]
+
         this.state = {
             link: link,
             sellItemList: tradesInfo,
+            touch_group: touch_group,
+            keymap_Cd: 1,
         }
     }
+
+    getKeymap(e) {
+        this.setState({
+            keymap_Cd: e.target.id,
+        });
+    }
+
+    componentDidMount() {
+    }
+
+    componentDidUpdate() {
+    }
+
     render() {
         return (
             <>
                 <OptionModal />
+
                 <HeaderBack url='/mypage' />
                 <div className="orderpage">
                     <div className="order__category">
-                        <div className="category__content">음료</div>
-                        <div className="category__content">디저트</div>
-                        <div className="category__content">기타</div>
-                        <div className="category__content">기타</div>
-                        <div className="category__content">기타</div>
-                        <div className="category__content">기타</div>
-                        <div className="category__content">기타</div>
+                        {this.state.touch_group.map((data) => {
+                            return (
+                                <div className="category__content" id={data.code} onClick={(e) => this.getKeymap(e)}>{data.name}</div>
+                            );
+                        })}
                     </div>
                     <div className="order__menu">
-                        <div className="menu__container" onClick={() => {
-                                    const elt = document.getElementById("optionmodal");
-                                    elt.classList.remove("hidden");
-                                }}>
-                            <div className="menu__image">image</div>
-                            <div className="menu__name">아이스 아메리카노</div>
-                        </div>
-                        <div className="menu__container">
-                            <div className="menu__image">image</div>
-                            <div className="menu__name">아이스 아메리카노</div>
-                        </div>
-                        <div className="menu__container">
-                            <div className="menu__image">image</div>
-                            <div className="menu__name">아이스 아메리카노</div>
-                        </div>
-                        <div className="menu__container">
-                            <div className="menu__image">image</div>
-                            <div className="menu__name">아이스 아메리카노</div>
-                        </div>
-                        <div className="menu__container">
-                            <div className="menu__image">image</div>
-                            <div className="menu__name">아이스 아메리카노</div>
-                        </div>
-                        <div className="menu__container">
-                            <div className="menu__image">image</div>
-                            <div className="menu__name">아이스 아메리카노</div>
-                        </div>
-                        <div className="menu__container">
-                            <div className="menu__image">image</div>
-                            <div className="menu__name">아이스 아메리카노</div>
-                        </div>
-                        <div className="menu__container">
-                            <div className="menu__image">image</div>
-                            <div className="menu__name">아이스 아메리카노</div>
-                        </div>
-                        <div className="menu__container">
-                            <div className="menu__image">image</div>
-                            <div className="menu__name">아이스 아메리카노</div>
-                        </div>
+                        <KeymapContainer code={this.state.keymap_Cd} />
                     </div>
+
                     <div className="order__container">
                         <div className="order__result">
                             <div>초기화</div>
