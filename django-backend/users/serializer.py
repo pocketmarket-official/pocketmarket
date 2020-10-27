@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from users.models import User
 from users.models import Point
+from users.models import MyPlace
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -12,6 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 class PointSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Point
         fields = {
@@ -21,6 +23,27 @@ class PointSerializer(serializers.ModelSerializer):
             'totExchangePoint',
             'totSpendPoint',
             'lastExchangeDate',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs'
+        }
+
+class MyPlaceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MyPlace
+        fields = {
+            'user',
+            'seq',
+            'addrName',
+            'addr1',
+            'addr2',
+            'oldAddr',
+            'xPosition',
+            'yPosition',
+            'defaultYn',
+            'deleteYn',
             'insDt',
             'insUs',
             'modDt',
