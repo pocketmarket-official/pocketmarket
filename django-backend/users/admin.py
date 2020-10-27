@@ -11,3 +11,19 @@ class UserAdmin(admin.ModelAdmin):
     """ User Admin """
 
     pass
+
+
+@admin.register(models.Point)
+class PointAdmin(admin.ModelAdmin):
+
+    """ Point Admin """
+
+    pass
+
+
+@admin.register(models.MyPlace)
+class MyPlaceAdmin(admin.ModelAdmin):
+
+    """ MyPlace Admin """
+
+    pass

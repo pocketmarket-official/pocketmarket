@@ -44,13 +44,8 @@ PROJECT_APPS = [
     'users.apps.UsersConfig',
     'stores.apps.StoresConfig',
     'brands.apps.BrandsConfig',
-    'points.apps.PointsConfig',
-    'storeLikes.apps.StoreLikesConfig',
     'storeDics.apps.StoreDicsConfig',
-    'myplaces.apps.MyplacesConfig',
     'reviews.apps.ReviewsConfig',
-    'reviewLikes.apps.ReviewLikesConfig',
-    'replies.apps.RepliesConfig',
     'items.apps.ItemsConfig',
     'cprts.apps.CprtsConfig',
     'keymaps.apps.KeymapsConfig',
@@ -62,7 +57,6 @@ PROJECT_APPS = [
 THIRD_PARTY_APPS = [
     'corsheaders',
     'rest_framework',
-    'drf_multiple_model',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS

@@ -31,13 +31,16 @@ class Store(models.Model):
     orgIf = models.CharField(max_length=1000, null=True)
     xPosition = models.FloatField(null=True)
     yPosition = models.FloatField(null=True)
-    likeCount = models.IntegerField(default=0)
+    likeUser = models.ManyToManyField('users.User')
     score = models.FloatField(default=0.0)
     description = models.CharField(max_length=50, null=True)
     insDt = models.DateTimeField(default=datetime.now())
     insUs = models.CharField(max_length=30, default='defaultValue')
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
+
+    def likes_count(self):
+        return self.likes_count()
 
 class Funset(models.Model):
     storeCd = models.ForeignKey('store', on_delete=models.CASCADE, default=1)

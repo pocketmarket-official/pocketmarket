@@ -23,13 +23,8 @@ from stores import views as store_views
 from festivals import views as festival_views
 from users import views as user_views
 from brands import views as brand_views
-from points import views as point_views
-from storeLikes import views as storeLike_views
 from storeDics import views as storeDic_views
-from myplaces import views as myplace_views
 from reviews import views as review_views
-from reviewLikes import views as reviewLike_views
-from replies import views as reply_views
 from items import views as item_views
 from cprts import views as cprt_views
 from keymaps import views as keymap_views
@@ -49,15 +44,15 @@ router.register(r'stores_store', store_views.StoreView, 'store')
 router.register(r'stores_funSset', store_views.FunsetView, 'funset')
 router.register(r'stores_pos', store_views.PosView, 'pos')
 router.register(r'festivals_festival', festival_views.FestivalView, 'festival')
+router.register(r'festivals_join', festival_views.JoinView, 'join')
 router.register(r'users_user', user_views.UserView, 'user')
+router.register(r'users_point', user_views.PointView, 'point')
+router.register(r'users_myPlace', user_views.MyPlaceView, 'myPlace')
 router.register(r'brands_brand', brand_views.BrandView, 'brand')
-router.register(r'points_point', point_views.PointView, 'point')
-router.register(r'storeLikes_storelike', storeLike_views.StoreLikeView, 'storeLike')
 router.register(r'storeDics_storeDic', storeDic_views.StoreDicView, 'storeDic')
-router.register(r'myplaces_myplace', myplace_views.MyplaceView, 'myplace')
 router.register(r'reviews_review', review_views.ReviewView, 'review')
-router.register(r'reviewLikes_reviewLike', reviewLike_views.ReviewLikeView, 'reviewLike')
-router.register(r'replies_reply', reply_views.ReplyView, 'reply')
+router.register(r'reviews_reviewImage', review_views.ReviewImageView, 'reviewImage')
+router.register(r'reviews_reply', review_views.ReplyView, 'reply')
 router.register(r'items_item', item_views.ItemView, 'item')
 router.register(r'items_set', item_views.SetView, 'set')
 router.register(r'items_setOpt', item_views.SetOptView, 'setOpt')
