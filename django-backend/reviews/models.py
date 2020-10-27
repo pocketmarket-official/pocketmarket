@@ -22,3 +22,13 @@ class Review(models.Model):
 
     def likes_count(self):
         return self.likes_count()
+
+class ReviewImage(models.Model):
+    review = models.ForeignKey('reviews.review', on_delete=models.CASCADE, default=1)
+    seq = models.IntegerField(null=True)
+    url = models.CharField(max_length=200, null=True)
+    deleteYn = models.CharField(max_length=1, default='N')
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')

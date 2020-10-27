@@ -11,3 +11,11 @@ class ReviewAdmin(admin.ModelAdmin):
     """ Review Admin """
 
     pass
+
+
+@admin.register(models.ReviewImage)
+class ReviewImageAdmin(admin.ModelAdmin):
+
+    """ Review Admin """
+
+    pass
