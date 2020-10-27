@@ -31,7 +31,7 @@ class Store(models.Model):
     orgIf = models.CharField(max_length=1000, null=True)
     xPosition = models.FloatField(null=True)
     yPosition = models.FloatField(null=True)
-    likeUser = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
+    likeUser = models.ManyToManyField('users.User')
     score = models.FloatField(default=0.0)
     description = models.CharField(max_length=50, null=True)
     insDt = models.DateTimeField(default=datetime.now())

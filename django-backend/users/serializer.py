@@ -29,6 +29,7 @@ class PointSerializer(serializers.ModelSerializer):
             'modUs'
         }
 
+#todo : 왜안되는지 모르겠음
 class MyPlaceSerializer(serializers.ModelSerializer):
 
     class Meta:
