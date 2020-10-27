@@ -24,7 +24,6 @@ from festivals import views as festival_views
 from users import views as user_views
 from brands import views as brand_views
 from points import views as point_views
-from storeLikes import views as storeLike_views
 from storeDics import views as storeDic_views
 from myplaces import views as myplace_views
 from reviews import views as review_views
@@ -50,9 +49,9 @@ router.register(r'stores_funSset', store_views.FunsetView, 'funset')
 router.register(r'stores_pos', store_views.PosView, 'pos')
 router.register(r'festivals_festival', festival_views.FestivalView, 'festival')
 router.register(r'users_user', user_views.UserView, 'user')
+router.register(r'users_point', user_views.PointView, 'point')
 router.register(r'brands_brand', brand_views.BrandView, 'brand')
 router.register(r'points_point', point_views.PointView, 'point')
-router.register(r'storeLikes_storelike', storeLike_views.StoreLikeView, 'storeLike')
 router.register(r'storeDics_storeDic', storeDic_views.StoreDicView, 'storeDic')
 router.register(r'myplaces_myplace', myplace_views.MyplaceView, 'myplace')
 router.register(r'reviews_review', review_views.ReviewView, 'review')
