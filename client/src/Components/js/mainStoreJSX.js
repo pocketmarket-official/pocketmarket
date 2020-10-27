@@ -22,7 +22,7 @@ class StoreJSX extends React.Component {
                         <img className="store__image" src={this.props.data.imgLogoUrl} alt="store"/>
                         <div className="store__detail">
                             <div className="detail__tags">
-                                <div className="tags__new">NEW</div>
+                                {/* <div className="tags__new">NEW</div> */}
                                 <div className="tags__tag">@반포 낭만달빛마켓</div>
                                 <button className="tags__likes" onClick={(e) => {
                                     e.preventDefault();

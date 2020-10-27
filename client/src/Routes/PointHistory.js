@@ -1,10 +1,12 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
+import PointResult from '../Components/js/PointResult';
 
 
 class PointHistory extends React.Component {
     constructor(props) {
         super(props);
+        this.searchHistory = this.searchHistory.bind(this);
 
         let today = new Date();
         let month = today.getMonth();
@@ -21,10 +23,49 @@ class PointHistory extends React.Component {
         }
         let past = yyyy + '-' + mm + '-' + dd;
 
+        let temp = [
+            {
+                id: 1,
+                date: '2020-07-25',
+                point: [300, 200, 500],
+            },
+            {
+                id: 2,
+                date: '2020-08-25',
+                point: [500, 200, 100],
+            },
+            {
+                id: 3,
+                date: '2020-09-25',
+                point: [800, 100, 400],
+            },
+        ];
+
+        let search_result = [];
+        for (let t in temp) {
+            if(temp[t].date >= past && temp[t].date <= today) {
+                search_result.push(temp[t]);
+            }
+        }
+
         this.state = {
             today: today,
             past: past,
+            result: search_result,
+            temp: temp,
         }
+    }
+
+    searchHistory() {
+        const val1 = document.getElementById("date1").value;
+        const val2 = document.getElementById("date2").value;
+        let search_result = [];
+        for (let t in this.state.temp) {
+            if(this.state.temp[t].date >= val1 && this.state.temp[t].date <= val2) {
+                search_result.push(this.state.temp[t]);
+            }
+        }
+        this.setState({ result: search_result });
     }
 
     componentDidMount() {
@@ -32,9 +73,19 @@ class PointHistory extends React.Component {
         const date2 = document.getElementById("date2");
         date1.value = this.state.past;
         date2.value = this.state.today;
+        this.searchHistory();
     }
 
     render() {
+        let jsx;
+        if(this.state.result.length === 0) {
+            jsx =
+                <>
+                    <div>검색 결과가 없습니다.</div>
+                </>;
+        } else {
+            jsx = <PointResult result={this.state.result} />;
+        }
         return (
             <>
                 <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {
@@ -81,73 +132,10 @@ class PointHistory extends React.Component {
                         <div className="search__title">포인트 이력</div>
                         <div className="search__input">
                             <input type="date" id="date1" /> ~ <input type="date" id="date2" />
-                            <input type="submit" value="조회"/>
+                            <input type="submit" value="조회" onClick={this.searchHistory} />
                         </div>
                         <div className="pointhistory__result">
-                            <div className="result__date">2020년 7월 25일</div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__date">2020년 7월 25일</div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__date">2020년 7월 25일</div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__date">2020년 7월 25일</div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
-                            <div className="result__detail">
-                                <div className="result__conversion">전환</div>
-                                <div className="result__likes">-500 좋아요</div>
-                                <div className="result__point">+550PM</div>
-                            </div>
+                            {jsx}
                         </div>
                     </div>
                 </div>
