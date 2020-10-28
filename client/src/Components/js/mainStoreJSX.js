@@ -12,6 +12,7 @@ class StoreJSX extends React.Component {
     render() {
         let d = this.props.data.show_dist;
         let data = this.props.data;
+        console.log(data);
         return(
                 <div className="content__store">
                     <Link to={{
@@ -19,7 +20,7 @@ class StoreJSX extends React.Component {
                         state: {data, d}
                     }}>
                     <div className="store__store">
-                        <img className="store__image" src={this.props.data.imgLogoUrl} alt="store"/>
+                        <img className="store__image" src={data.imgLogoUrl} alt="store"/>
                         <div className="store__detail">
                             <div className="detail__tags">
                                 {/* <div className="tags__new">NEW</div> */}
@@ -28,11 +29,11 @@ class StoreJSX extends React.Component {
                                     e.preventDefault();
                                     console.log('hi');
                                     // 좋아요 기능 추가 예정
-                                }}>♥ {this.props.data.likeCount}</button>
+                                }}>♥ {data.likeUser.length}</button>
                             </div>
                             <div className="detail__title">
-                                <div className="detail__name">{this.props.data.storeName}</div>
-                                <div className="detail__distance">거리 {this.props.data.show_dist}</div>
+                                <div className="detail__name">{data.storeName}</div>
+                                <div className="detail__distance">거리 {data.show_dist}</div>
                             </div>
                             <div className="detail__description">
                                 백종원의 푸드트럭에서 가장 핫한 매장 중 하나인 바로

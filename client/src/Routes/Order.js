@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import OptionModal from '../Components/js/OptionModal';
-import KeymapContainer from '../Components/js/KeymapContainer';
 
 
 class Order extends React.Component {
@@ -65,13 +64,54 @@ class Order extends React.Component {
                 name: '기타',
                 code: 4,
             },
-        ]
+        ];
+
+        let keymap = [
+            {
+                group_cd: 1,
+                menu: '아이스아메리카노'
+            },
+            {
+                group_cd: 2,
+                menu: '초코케잌'
+            },
+            {
+                group_cd: 1,
+                menu: '아이스라떼'
+            },
+            {
+                group_cd: 3,
+                menu: '치즈버거'
+            },
+            {
+                group_cd: 2,
+                menu: '티라미수'
+            },
+            {
+                group_cd: 2,
+                menu: '쿠앤크'
+            },
+            {
+                group_cd: 1,
+                menu: '초콜릿라떼'
+            },
+            {
+                group_cd: 2,
+                menu: '생크림'
+            },
+            {
+                group_cd: 3,
+                menu: '빅맥'
+            },
+        ];
 
         this.state = {
             link: link,
             sellItemList: tradesInfo,
             touch_group: touch_group,
+            keymap: keymap,
             keymap_Cd: 1,
+            selected: "",
         }
     }
 
@@ -88,9 +128,10 @@ class Order extends React.Component {
     }
 
     render() {
+        let temp_list = this.state.keymap.filter((item) => item.group_cd == this.state.keymap_Cd);
         return (
             <>
-                <OptionModal />
+                <OptionModal menu={this.state.selected} />
 
                 <HeaderBack url='/mypage' />
                 <div className="orderpage">
@@ -102,7 +143,24 @@ class Order extends React.Component {
                         })}
                     </div>
                     <div className="order__menu">
-                        <KeymapContainer code={this.state.keymap_Cd} />
+                    {
+                        temp_list.map((data) => {
+                            return (
+                                <>
+                                    <div className="menu__container" onClick={() => {
+                                                const elt = document.getElementById("optionmodal");
+                                                this.setState({
+                                                    selected: data.menu,
+                                                });
+                                                elt.classList.remove("hidden");
+                                            }}>
+                                        <div className="menu__image">image</div>
+                                        <div className="menu__name">{data.menu}</div>
+                                    </div>
+                                </>
+                            );
+                        })
+                    }
                     </div>
 
                     <div className="order__container">
