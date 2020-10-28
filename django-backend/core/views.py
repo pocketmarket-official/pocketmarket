@@ -4,8 +4,17 @@ from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import reverse
+from datetime import datetime
 from users.models import User
 from items.models import Item
+from trades.models import SaleHeader
+from trades.models import SaleDetail
+from trades.models import CashLog
+from trades.models import CardLog
+from trades.models import StandardLog
+from trades.models import PurchaseLog
+from trades.models import SoldoutLog
+from trades.models import CornerStateLog
 
 # Create your views here.
 
@@ -69,8 +78,61 @@ def kakao_callback(request):
 
 
 def trade(request):
+    ##definition for trade variables
+    # sale_header
+    sale_header = []
+    header_tot_qty = 0
+    header_tot_sale_amt = 0.0
+    header_tot_sale_amt = 0.0
+    header_sup_amt = 0.0
+    header_tax_amt = 0.0
+    header_off_tax_amt = 0.0
+    header_tot_dc_amt = 0.0
+    header_norm_dc_amt = 0.0
+    header_pnt_dc_amt = 0.0
+    header_norm_dc_cnt = 0.0
+    header_pnt_dc_cnt = 0.0
+    header_cash_amt = 0.0
+    header_card_amt = 0.0
+    header_etc_amt = 0.0
+    # sale_detail
+    sale_detail = []
+    sale_detail_row = {}
+    detail_seq = 0
+    detail_order_type = ''
+    detail_item_cd = ''
+    detail_item_name = ''
+    detail_qty = 0
+    detail_item_sell_group = ''
+    detail_item_sell_level = ''
+    detail_item_sell_type = ''
+    detail_sale_cost = 0.0
+    detail_sale_pric = 0.0
+    detail_org_sale_pric = 0.0
+    detail_tot_sale_amt = 0.0
+    detail_sale_amt = 0.0
+    detail_sup_amt = 0.0
+    detail_tax_amt = 0.0
+    detail_off_tax_amt = 0.0
+    detail_tax_yn = 'N'
+    detail_tot_dc_amt = 0.0
+    detail_norm_dc_amt = 0.0
+    detail_pnt_dc_amt = 0.0
+    detail_sale_tm = '000000'
 
-    price = 0
+    # parameter from api
+    brandCd = '00001'
+    storeCd = 'C0001'
+    posNo = '01'
+    dcAmt = 0.0
+    # etc parameters
+    saleDt = datetime.today().strftime('%Y%m%d')
+    billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')[0]
+    if billNo:
+        billNo = f'{int(billNo) + 1:05}'
+    else:
+        billNo = '00001'
+
 
     # keymap으로부터 넘어올 결제 목록 데이터
     items = [
@@ -153,9 +215,29 @@ def trade(request):
     # for 문 돌린 각각에 대해서 Item에서 itemCd로 filter한 후에 
     # 그 item의 가격과 수량 곱해서 price에 더함
     # 결과는 총 가격 합계
+    i = 1
     for item in items:
-        target = Item.objects.filter(itemCd=item['itemCd'])
-        print(target[0].price)
-        print(dir(target))
-        price += target[0].price * item['qty']
-        print(price)
+        target = Item.objects.get(itemCd=item['itemCd'])
+        sale_detail_row = {
+            'seq': i,
+            'itemCd': target.itemCd,
+            'itemName': target.itemName,
+            'qty': item['qty'],
+            'itemSellGroup': item['itemSellGroup'],
+            'itemSellLeve': item['itemSellLeve'],
+            'itemSellType': item['itemSellType'],
+            'saleCost': target.price,
+            'salePrice': target.price - dcAmt,
+            'org_sale_pric': target.price,
+            'tot_sale_amt': target.price * item['qty'],
+            'sale_amt': (target.price * item['qty']) - dcAmt,
+            'sup_amt': ((target.price * item['qty']) - dcAmt)*1.1,
+            'tax_amt': target.price - dcAmt - (((target.price * item['qty']) - dcAmt)*1.1),
+            'off_tax_amt': 0.0,
+            'tax_yn': 'Y',
+            'tot_dc_amt': 0.0,
+            'norm_dc_amt': 0.0,
+            'pnt_dc_amt': 0.0,
+            'sale_tm': '090810',
+        }
+        sale_detail.push(sale_detail_row)
