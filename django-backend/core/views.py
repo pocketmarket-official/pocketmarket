@@ -79,52 +79,88 @@ def kakao_callback(request):
 
 def trade(request):
     ##definition for trade variables
-    # sale_header
-    sale_header = []
-    header_tot_qty = 0
-    header_tot_sale_amt = 0.0
-    header_tot_sale_amt = 0.0
-    header_sup_amt = 0.0
-    header_tax_amt = 0.0
-    header_off_tax_amt = 0.0
-    header_tot_dc_amt = 0.0
-    header_norm_dc_amt = 0.0
-    header_pnt_dc_amt = 0.0
-    header_norm_dc_cnt = 0.0
-    header_pnt_dc_cnt = 0.0
-    header_cash_amt = 0.0
-    header_card_amt = 0.0
-    header_etc_amt = 0.0
-    # sale_detail
-    sale_detail = []
-    sale_detail_row = {}
-    detail_seq = 0
-    detail_order_type = ''
-    detail_item_cd = ''
-    detail_item_name = ''
-    detail_qty = 0
-    detail_item_sell_group = ''
-    detail_item_sell_level = ''
-    detail_item_sell_type = ''
-    detail_sale_cost = 0.0
-    detail_sale_pric = 0.0
-    detail_org_sale_pric = 0.0
-    detail_tot_sale_amt = 0.0
-    detail_sale_amt = 0.0
-    detail_sup_amt = 0.0
-    detail_tax_amt = 0.0
-    detail_off_tax_amt = 0.0
-    detail_tax_yn = 'N'
-    detail_tot_dc_amt = 0.0
-    detail_norm_dc_amt = 0.0
-    detail_pnt_dc_amt = 0.0
-    detail_sale_tm = '000000'
+
+    # saleHeader
+    saleHeader = []
+    headerTotQty = 0
+    headerTotSaleAmt = 0.0
+    headerSaleAmt = 0.0
+    headerSupAmt = 0.0
+    headerTaxAmt = 0.0
+    headerOffTaxAmt = 0.0
+    headerTaxYn = 'Y'
+    headerTotDcAmt = 0.0
+    headerNormDcAmt = 0.0
+    headerPointDcAmt = 0.0
+    headerNormDcCnt = 0.0
+    headerPointDcCnt = 0.0
+    headerCashAmt = 0.0
+    headerCardAmt = 0.0
+    headerEtcAmt = 0.0
+
+    # saleDetail
+    saleDetail = []
+    saleDetailRow = {}
+    # detail_seq = 0
+    # detail_order_type = ''
+    # detail_item_cd = ''
+    # detail_item_name = ''
+    # detail_qty = 0
+    # detail_item_sell_group = ''
+    # detail_item_sell_level = ''
+    # detail_item_sell_type = ''
+    # detail_sale_cost = 0.0
+    # detail_sale_pric = 0.0
+    # detail_org_sale_pric = 0.0
+    # detail_tot_sale_amt = 0.0
+    # detail_sale_amt = 0.0
+    # detail_sup_amt = 0.0
+    # detail_tax_amt = 0.0
+    # detail_off_tax_amt = 0.0
+    # detail_tax_yn = 'N'
+    # detail_tot_dc_amt = 0.0
+    # detail_norm_dc_amt = 0.0
+    # detail_pnt_dc_amt = 0.0
+    # detail_sale_tm = '000000'
+
+    #cardLog
+    card_tranFlag = '1' #0:전체/1:일반/2:포인트충전
+    cardSeq = 1
+    cardCardAmt = 0.0
+    cardCardNo = ''
+    cardVanCd = ''
+    cardCardCd = ''
+    cardCardName = ''
+    cardBuyCardCd = '' #todo: 이거 뭐임?
+    cardBuyCardName = ''
+    cardApprNo = ''
+    cardApprDt = ''
+    cardApprTime = ''
+    cardApprFlag = '1' #1:정상승인/2:임의등록
+    cardSignYn = 'N'
+    cardInstFlag = '0' #0:일시불/1:
+    cardInstMont = 0
+    cardTerminalId = ''
+    cardRegisterNo = ''
+    cardReturnFlag = 'N'
+    # ORG_STOR_CD
+    # ORG_SALE_DT
+    # ORG_POS_NO
+    # ORG_BILL_NO
+    # ORG_SEQ
+    # ORG_APPR_NO
+    # REMARK
+    # INS_DT
+    # INS_US
+    # MOD_DT
+    # MOD_US
 
     # parameter from api
     brandCd = '00001'
     storeCd = 'C0001'
     posNo = '01'
     dcAmt = 0.0
+    saleFlag = '1'
     # etc parameters
     saleDt = datetime.today().strftime('%Y%m%d')
     billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')[0]
@@ -133,13 +169,33 @@ def trade(request):
     else:
         billNo = '00001'
 
+    payments = [
+        {
+            'seq': 1,
+            'type': 'pg',
+            'amount': 8600,
+            'cardNo': '0001000200030004',
+            'cardName': '하나카드',
+            'buyCardCd': '',
+            'buyCardName': '',
+            'apprNo': '00010002',
+            'apprDt': '',
+            'apprTime': '',
+            'terminalId': '',
+            'registerNo': '',
+        },
+        {
+            'seq': 2,
+            'type': 'point',
+            'amount': 2000
+        }
+    ]
 
     # keymap으로부터 넘어올 결제 목록 데이터
     items = [
         # 아메리카노 2잔
         {
             'seq': 1,
-            'saleFlag': '1',
             'ordType': '1',
             'itemCd': '00001',  # 아메리카노
             'qty': 2,
@@ -150,7 +206,6 @@ def trade(request):
         # 티라미스세트 1개
         {  # 티라미스 세트
             'seq': 2,
-            'saleFlag': '1',
             'ordType': '2',
             'itemCd': '00002',  # 티라미스 세트
             'qty': 1,
@@ -160,7 +215,6 @@ def trade(request):
         },
         {  # 티라미스
             'seq': 3,
-            'saleFlag': '1',
             'ordType': '2',  # 1?? 2??
             'itemCd': '00003',  # 티라미스
             'qty': 1,
@@ -180,7 +234,6 @@ def trade(request):
         },
         {  # 라떼
             'seq': 5,
-            'saleFlag': '1',
             'ordType': '2',  # 1?? 2??
             'itemCd': '00004',  # 라떼
             'qty': 1,
@@ -191,7 +244,6 @@ def trade(request):
         # 아메리카노 샷추가 1잔
         {  # 아메리카노
             'seq': 6,
-            'saleFlag': '1',
             'ordType': '1',
             'itemCd': '00001',  # 아메리카노
             'qty': 1,
@@ -201,7 +253,6 @@ def trade(request):
         },
         {  # 샷추가
             'seq': 7,
-            'saleFlag': '1',
             'ordType': '1',
             'itemCd': '00005',  # 샷추가
             'qty': 1,
@@ -215,10 +266,43 @@ def trade(request):
     # for 문 돌린 각각에 대해서 Item에서 itemCd로 filter한 후에 
     # 그 item의 가격과 수량 곱해서 price에 더함
     # 결과는 총 가격 합계
+    #todo:
+    #tot_sale_amt, sale_amt, dc_amt등 구할 때
+    #각 제품 금액 합계를 넣는지 아니면 결제 기준으로 넣는지
+    for payment in payments:
+        headerTotSaleAmt += payment['amount']
+        if payment['method'] == 'pg':
+            headerSaleAmt += payment['amount']
+            headerCardAmt += payment['amount']
+            cardCardAmt += payment['amount']
+            cardCardNo = payment['cardNo']
+            cardVanCd = payment['vanCd']
+            cardCardCd = payment['cardCd']
+            cardCardName = payment['cardName']
+            cardBuyCardCd = payment['buyCardCd']
+            cardBuyCardName = payment['buyCardName']
+            cardApprNo = payment['apprNo']
+            cardApprDt = payment['apprDt']
+            cardApprTime = payment['apprTime']
+            cardTerminalId = payment['terminalId']
+            cardRegisterNo = payment['registerNo']
+        elif payment['method'] == 'point':
+            headerTotDcAmt += payment['amount']
+            headerPointDcAmt += payment['amount']
+            headerPointDcCnt += 1
+
+    headerSupAmt = headerSaleAmt/1.1
+    headerTaxAmt = headerSaleAmt - headerSupAmt
+    headerOffTaxAmt = 0.0
+    #todo : 이런식으로 검증하는게 맞나? -> 이게 t_sale_err?
+    if headerTotSaleAmt - headerTotDcAmt != headerSaleAmt:
+        print('총매출액-총할인액!=실매출액')
+
     i = 1
     for item in items:
         target = Item.objects.get(itemCd=item['itemCd'])
-        sale_detail_row = {
+        headerTotQty += item['qty']
+        saleDetailRow = {
             'seq': i,
             'itemCd': target.itemCd,
             'itemName': target.itemName,
@@ -240,4 +324,4 @@ def trade(request):
             'pnt_dc_amt': 0.0,
             'sale_tm': '090810',
         }
-        sale_detail.push(sale_detail_row)
+        saleDetail.push(saleDetailRow)
