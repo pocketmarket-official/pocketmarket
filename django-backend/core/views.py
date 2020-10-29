@@ -270,16 +270,16 @@ def trade(request):
     #tot_sale_amt, sale_amt, dc_amt등 구할 때
     #각 제품 금액 합계를 넣는지 아니면 결제 기준으로 넣는지
     for payment in payments:
-        headerTotSaleAmt += payment['amount']
+        headerTotSaleAmt += payment['amount'] #sum(saleprice * qty)
         if payment['method'] == 'pg':
-            headerSaleAmt += payment['amount']
-            headerCardAmt += payment['amount']
+            headerSaleAmt += payment['amount'] #tot에서 할인을 뺌
+            headerCardAmt += payment['amount'] #카드결제금액 더해가는 방식
             cardCardAmt += payment['amount']
             cardCardNo = payment['cardNo']
             cardVanCd = payment['vanCd']
-            cardCardCd = payment['cardCd']
+            cardCardCd = payment['cardCd'] #발급사
             cardCardName = payment['cardName']
-            cardBuyCardCd = payment['buyCardCd']
+            cardBuyCardCd = payment['buyCardCd'] #매입사
             cardBuyCardName = payment['buyCardName']
             cardApprNo = payment['apprNo']
             cardApprDt = payment['apprDt']
