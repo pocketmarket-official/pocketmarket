@@ -16,7 +16,7 @@ class PointSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Point
-        fields = {
+        fields = (
             'user',
             'remainPoint',
             'totExchangeLike',
@@ -27,14 +27,13 @@ class PointSerializer(serializers.ModelSerializer):
             'insUs',
             'modDt',
             'modUs'
-        }
+        )
 
-#todo : 왜안되는지 모르겠음
 class MyPlaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MyPlace
-        fields = {
+        fields = (
             'user',
             'seq',
             'addrName',
@@ -49,4 +48,4 @@ class MyPlaceSerializer(serializers.ModelSerializer):
             'insUs',
             'modDt',
             'modUs'
-        }
+        )

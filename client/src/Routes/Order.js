@@ -11,6 +11,7 @@ class Order extends React.Component {
         const link = "/main/store/" + id + "/orderinfo";
 
         this.getKeymap = this.getKeymap.bind(this);
+        this.clearOrderList = this.clearOrderList.bind(this);
 
         //trades info
         //Trade common information
@@ -69,39 +70,48 @@ class Order extends React.Component {
         let keymap = [
             {
                 group_cd: 1,
-                menu: '아이스아메리카노'
+                menu: '아이스아메리카노',
+                price: 4500,
             },
             {
                 group_cd: 2,
-                menu: '초코케잌'
+                menu: '초코케잌',
+                price: 6500,
             },
             {
                 group_cd: 1,
-                menu: '아이스라떼'
+                menu: '아이스라떼',
+                price: 5500,
             },
             {
                 group_cd: 3,
-                menu: '치즈버거'
+                menu: '치즈버거',
+                price: 4000,
             },
             {
                 group_cd: 2,
-                menu: '티라미수'
+                menu: '티라미수',
+                price: 5000,
             },
             {
                 group_cd: 2,
-                menu: '쿠앤크'
+                menu: '쿠앤크',
+                price: 6500,
             },
             {
                 group_cd: 1,
-                menu: '초콜릿라떼'
+                menu: '초콜릿라떼',
+                price: 6000,
             },
             {
                 group_cd: 2,
-                menu: '생크림'
+                menu: '생크림',
+                price: 5500,
             },
             {
                 group_cd: 3,
-                menu: '빅맥'
+                menu: '빅맥',
+                price: 7500,
             },
         ];
 
@@ -112,6 +122,7 @@ class Order extends React.Component {
             keymap: keymap,
             keymap_Cd: 1,
             selected: "",
+            order_list: [],
         }
     }
 
@@ -127,12 +138,17 @@ class Order extends React.Component {
     componentDidUpdate() {
     }
 
+    clearOrderList() {
+        this.setState({
+            order_list: []
+        });
+    }
+
     render() {
         let temp_list = this.state.keymap.filter((item) => item.group_cd == this.state.keymap_Cd);
         return (
             <>
                 <OptionModal menu={this.state.selected} />
-
                 <HeaderBack url='/mypage' />
                 <div className="orderpage">
                     <div className="order__category">
@@ -165,7 +181,7 @@ class Order extends React.Component {
 
                     <div className="order__container">
                         <div className="order__result">
-                            <div>초기화</div>
+                            <div onClick={this.clearOrderList}>초기화</div>
                             <div className="order__quantity">
                                 수량
                                 <div className="order__total-quantity">8개</div>
