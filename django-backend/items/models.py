@@ -50,7 +50,7 @@ class SetOpt(models.Model):
 
 class ItemAdd(models.Model):
     itemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
-    itemAddCd = models.CharField(max_length=20, default='00000')
+    itemAddCd = models.ManyToManyField('items.Item', related_name='itemAddCd')
     itemSort = models.IntegerField(default=0)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
