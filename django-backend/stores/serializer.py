@@ -2,6 +2,7 @@ from rest_framework import serializers
 from stores.models import Store
 from stores.models import Funset
 from stores.models import Pos
+from stores.models import StoreDic
 
 
 class StoreSerializer(serializers.ModelSerializer):
@@ -85,4 +86,19 @@ class PosSerializer(serializers.ModelSerializer):
             'takeOutYn',
             'callNoYn',
             'useYn'
+        )
+
+class StoreDicSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StoreDic
+        fields = (
+            'id',
+            'user',
+            'dicType',
+            'store',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs'
         )

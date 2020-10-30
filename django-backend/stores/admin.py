@@ -26,3 +26,10 @@ class PosAdmin(admin.ModelAdmin):
 
     pass
 
+@admin.register(models.StoreDic)
+class StoreDicAdmin(admin.ModelAdmin):
+
+    """ StoreDic Admin """
+
+    pass
+
