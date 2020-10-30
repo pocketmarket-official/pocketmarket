@@ -78,263 +78,266 @@ def kakao_callback(request):
 
 
 def trade(request):
-    ##definition for trade variables
-    # saleHeader
-    headerTotQty = 0
-    headerTotSaleAmt = 0.0
-    headerSaleAmt = 0.0
-    headerSupAmt = 0.0
-    headerTaxAmt = 0.0
-    headerOffTaxAmt = 0.0
-    headerTaxYn = 'Y'
-    headerTotDcAmt = 0.0
-    # headerNormDcAmt = 0.0
-    headerPointDcAmt = 0.0
-    # headerNormDcCnt = 0.0
-    headerPointDcCnt = 0.0
-    # headerCashAmt = 0.0
-    headerCardAmt = 0.0
-    # headerEtcAmt = 0.0
+    try:
+        ##definition for trade variables
+        # saleHeader
+        headerTotQty = 0
+        headerTotSaleAmt = 0.0
+        headerSaleAmt = 0.0
+        headerSupAmt = 0.0
+        headerTaxAmt = 0.0
+        headerOffTaxAmt = 0.0
+        headerTaxYn = 'Y'
+        headerTotDcAmt = 0.0
+        # headerNormDcAmt = 0.0
+        headerPointDcAmt = 0.0
+        # headerNormDcCnt = 0.0
+        headerPointDcCnt = 0.0
+        # headerCashAmt = 0.0
+        headerCardAmt = 0.0
+        # headerEtcAmt = 0.0
 
-    # saleDetail
-    saleDetail = []
-    saleDetailRow = {}
+        # saleDetail
+        saleDetail = []
+        saleDetailRow = {}
 
-    #cardLog
-    card_tranFlag = '1' #0:전체/1:일반/2:포인트충전
-    cardSeq = 1
-    cardCardAmt = 0.0
-    cardCardNo = ''
-    cardVanCd = ''
-    cardCardCd = ''
-    cardCardName = ''
-    cardBuyCardCd = '' #todo: 이거 뭐임?
-    cardBuyCardName = ''
-    cardApprNo = ''
-    cardApprDt = ''
-    cardApprTime = ''
-    cardApprFlag = '1' #1:정상승인/2:임의등록
-    cardSignYn = 'N'
-    cardInstFlag = '0' #0:일시불/1:
-    cardInstMont = 0
-    cardTerminalId = ''
-    cardRegisterNo = ''
-    cardReturnFlag = 'N'
-    # ORG_STOR_CD
-    # ORG_SALE_DT
-    # ORG_POS_NO
-    # ORG_BILL_NO
-    # ORG_SEQ
-    # ORG_APPR_NO
-    # REMARK
-    # INS_DT
-    # INS_US
-    # MOD_DT
-    # MOD_US
+        #cardLog
+        card_tranFlag = '1' #0:전체/1:일반/2:포인트충전
+        cardSeq = 1
+        cardCardAmt = 0.0
+        cardCardNo = ''
+        cardVanCd = ''
+        cardCardCd = ''
+        cardCardName = ''
+        cardBuyCardCd = '' #todo: 이거 뭐임?
+        cardBuyCardName = ''
+        cardApprNo = ''
+        cardApprDt = ''
+        cardApprTime = ''
+        cardApprFlag = '1' #1:정상승인/2:임의등록
+        cardSignYn = 'N'
+        cardInstFlag = '0' #0:일시불/1:
+        cardInstMont = 0
+        cardTerminalId = ''
+        cardRegisterNo = ''
+        cardReturnFlag = 'N'
+        # ORG_STOR_CD
+        # ORG_SALE_DT
+        # ORG_POS_NO
+        # ORG_BILL_NO
+        # ORG_SEQ
+        # ORG_APPR_NO
+        # REMARK
+        # INS_DT
+        # INS_US
+        # MOD_DT
+        # MOD_US
 
-    # parameter from api
-    brandCd = '00001'
-    storeCd = 'C0001'
-    posNo = '01'
-    dcAmt = 0.0
-    saleFlag = '1'
-    # etc parameters
-    saleDt = datetime.today().strftime('%Y%m%d')
-    billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')[0]
-    if billNo:
-        billNo = f'{int(billNo) + 1:05}'
-    else:
-        billNo = '00001'
+        # parameter from api
+        brandCd = '00001'
+        storeCd = 'C0001'
+        posNo = '01'
+        dcAmt = 0.0
+        saleFlag = '1'
+        # etc parameters
+        saleDt = datetime.today().strftime('%Y%m%d')
+        billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')
+        if billNo:
+            billNo = f'{int(billNo[0]) + 1:05}'
+        else:
+            billNo = '00001'
 
-    payments = [
-        {
-            'seq': 1,
-            'type': 1, #1:결제/2:할인
-            'method': 'card', #pgJsonReturn _ method
-            'amount': 8600, #pgJsonReturn _ price
-            'cardNo': '0001000200030004', #pgJsonReturn _ payment_data['card_no']
-            'cardName': '하나카드', #pgJsonReturn _ payment_data['card_name']
-            'apprNo': '00010002', #pgJsonReturn _ payment_data['card_auth_no']
-            'apprDt': '', #pgJsonReturn _ payment_data['p_at']
-            'apprTime': '', #pgJsonReturn _ payment_data['p_at']
-            'terminalId': '', #pgJsonReturn _ payment_data['tid']
-            'registerNo': '', #todo: 이거뭐지?
-        },
-        {
-            'seq': 2,
-            'type': 2, #1:결제/2:할인
-            'method': 'pocketMoney',
-            'amount': 2000
+        payments = [
+            {
+                'seq': 1,
+                'type': 1, #1:결제/2:할인
+                'method': 'card', #pgJsonReturn _ method
+                'amount': 15000, #pgJsonReturn _ price
+                'cardNo': '0001000200030004', #pgJsonReturn _ payment_data['card_no']
+                'cardName': '하나카드', #pgJsonReturn _ payment_data['card_name']
+                'apprNo': '00010002', #pgJsonReturn _ payment_data['card_auth_no']
+                'apprDt': '20101002', #pgJsonReturn _ payment_data['p_at']
+                'apprTime': '092008', #pgJsonReturn _ payment_data['p_at']
+                'terminalId': '00030004', #pgJsonReturn _ payment_data['tid']
+                'registerNo': '00050006', #todo: 이거뭐지?
+            },
+            {
+                'seq': 2,
+                'type': 2, #1:결제/2:할인
+                'method': 'pocketMoney',
+                'amount': 2000
+            }
+        ]
+
+        # keymap으로부터 넘어올 결제 목록 데이터
+        items = [
+            # 아메리카노 2잔
+            {
+                'seq': 1,
+                'orderType': '1', #1:일반/2:세트
+                'itemCd': '00001',  # 아메리카노
+                'qty': 2,
+                'itemSellGroup': '1', #세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
+                'itemSellLevel': '1', #1:prent/2:child
+                'itemSellType': '1' #1:일반/2:옵션변경/3:옵션추가
+            },
+            # 티라미스세트 1개
+            {  # 티라미스 세트
+                'seq': 2,
+                'orderType': '2',
+                'itemCd': '00002',  # 티라미스 세트
+                'qty': 1,
+                'itemSellGroup': '2',
+                'itemSellLevel': '1',
+                'itemSellType': '1'
+            },
+            {  # 티라미스
+                'seq': 3,
+                'orderType': '2',  # todo: 1?? 2??
+                'itemCd': '00003',  # 티라미스
+                'qty': 1,
+                'itemSellGroup': '2',
+                'itemSellLevel': '2',
+                'itemSellType': '1'  # todo: 1?? 2??
+            },
+            {  # 아메리카노
+                'seq': 4,
+                'saleFlag': '1',
+                'orderType': '2',  # todo: 1?? 2??
+                'itemCd': '00001',  # 아메리카노
+                'qty': -1,
+                'itemSellGroup': '2',
+                'itemSellLevel': '2',
+                'itemSellType': '2'
+            },
+            {  # 라떼
+                'seq': 5,
+                'orderType': '2',  # todo: 1?? 2??
+                'itemCd': '00004',  # 라떼
+                'qty': 1,
+                'itemSellGroup': '2',
+                'itemSellLevel': '2',
+                'itemSellType': '2'
+            },
+            # 아메리카노 샷추가 1잔
+            {  # 아메리카노
+                'seq': 6,
+                'orderType': '1',
+                'itemCd': '00001',  # 아메리카노
+                'qty': 1,
+                'itemSellGroup': '3',
+                'itemSellLevel': '1',
+                'itemSellType': '1'
+            },
+            {  # 샷추가
+                'seq': 7,
+                'orderType': '1',
+                'itemCd': '00005',  # 샷추가
+                'qty': 1,
+                'itemSellGroup': '3',
+                'itemSellLevel': '2',
+                'itemSellType': '3'
+            },
+        ]
+
+        # python manage.py shell 에서 dir 찍어가면서 확인 가능
+
+        i = 1
+        for item in items:
+            target = Item.objects.get(itemCd=item['itemCd'])
+            headerTotSaleAmt += target.price*item['qty']  # sum(saleprice * qty)
+            headerTotQty += item['qty']
+            saleDetailRow = {
+                'seq': i,
+                'orderType': item['orderType'],
+                'itemCd': target.itemCd,
+                'itemName': target.itemName,
+                'qty': item['qty'],
+                'itemSellGroup': item['itemSellGroup'],
+                'itemSellLevel': item['itemSellLevel'],
+                'itemSellType': item['itemSellType'],
+                'saleCost': target.price,
+                'salePrice': target.price - dcAmt,
+                'org_sale_pric': target.price,
+                'tot_sale_amt': target.price * item['qty'],
+                'sale_amt': (target.price * item['qty']) - dcAmt,
+                'sup_amt': ((target.price * item['qty']) - dcAmt)*1.1,
+                'tax_amt': target.price - dcAmt - (((target.price * item['qty']) - dcAmt)*1.1),
+                'off_tax_amt': 0.0,
+                'tax_yn': 'Y',
+                'tot_dc_amt': 0.0,
+                'norm_dc_amt': 0.0,
+                'pnt_dc_amt': 0.0,
+                'sale_tm': '090810',
+            }
+            saleDetail.append(saleDetailRow)
+
+        for payment in payments:
+
+            if payment['type'] == 1:
+                # headerSaleAmt += headerTotSaleAmt- #tot에서 할인을 뺌
+                headerCardAmt += payment['amount'] #카드결제금액 더해가는 방식
+                cardCardAmt += payment['amount']
+                cardCardNo = payment['cardNo']
+                cardVanCd = 'nicePg' #todo: asp에 nice pg코드 등록
+                cardCardCd = '001' #발급사 #todo: asp cardCode와 맞추기
+                cardCardName = '하나카드' #todo: asp cardNamerhk 맞추기
+                cardBuyCardCd = '001' #매입사 #todo: asp cardCode와 맞추기
+                cardBuyCardName = '하나카드' #todo: asp cardNamerhk 맞추기
+                cardApprNo = payment['apprNo']
+                cardApprDt = payment['apprDt']
+                cardApprTime = payment['apprTime']
+                cardTerminalId = payment['terminalId']
+                cardRegisterNo = payment['registerNo']
+            elif payment['type'] == 2:
+                headerTotDcAmt += payment['amount']
+                headerPointDcAmt += payment['amount']
+                headerPointDcCnt += 1
+
+        headerSaleAmt = headerTotSaleAmt-headerTotDcAmt
+        headerSupAmt = headerSaleAmt/1.1
+        headerTaxAmt = headerSaleAmt - headerSupAmt
+        headerOffTaxAmt = 0.0
+
+
+        saleHeader = {
+            'headerTotQty': headerTotQty,
+            'headerTotSaleAmt': headerTotSaleAmt,
+            'headerSaleAmt': headerSaleAmt,
+            'headerSupAmt': headerSupAmt,
+            'headerTaxAmt': headerTaxAmt,
+            'headerOffTaxAmt': headerOffTaxAmt,
+            'headerTaxYn': headerTaxYn,
+            'headerTotDcAmt':  headerTotDcAmt,
+            'headerPointDcAmt': headerPointDcAmt,
+            'headerPointDcCnt': headerPointDcCnt,
+            'headerCardAmt': headerCardAmt
         }
-    ]
 
-    # keymap으로부터 넘어올 결제 목록 데이터
-    items = [
-        # 아메리카노 2잔
-        {
-            'seq': 1,
-            'ordType': '1', #1:일반/2:세트
-            'itemCd': '00001',  # 아메리카노
-            'qty': 2,
-            'itemSellGroup': '1', #세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
-            'itemSellLevel': '1', #1:prent/2:child
-            'itemSellType': '1' #1:일반/2:옵션변경/3:옵션추가
-        },
-        # 티라미스세트 1개
-        {  # 티라미스 세트
-            'seq': 2,
-            'ordType': '2',
-            'itemCd': '00002',  # 티라미스 세트
-            'qty': 1,
-            'itemSellGroup': '2',
-            'itemSellLevel': '1',
-            'itemSellType': '1'
-        },
-        {  # 티라미스
-            'seq': 3,
-            'ordType': '2',  # todo: 1?? 2??
-            'itemCd': '00003',  # 티라미스
-            'qty': 1,
-            'itemSellGroup': '2',
-            'itemSellLevel': '2',
-            'itemSellType': '1'  # todo: 1?? 2??
-        },
-        {  # 아메리카노
-            'seq': 4,
-            'saleFlag': '1',
-            'ordType': '2',  # todo: 1?? 2??
-            'itemCd': '00001',  # 아메리카노
-            'qty': -1,
-            'itemSellGroup': '2',
-            'itemSellLevel': '2',
-            'itemSellType': '2'
-        },
-        {  # 라떼
-            'seq': 5,
-            'ordType': '2',  # todo: 1?? 2??
-            'itemCd': '00004',  # 라떼
-            'qty': 1,
-            'itemSellGroup': '2',
-            'itemSellLevel': '2',
-            'itemSellType': '2'
-        },
-        # 아메리카노 샷추가 1잔
-        {  # 아메리카노
-            'seq': 6,
-            'ordType': '1',
-            'itemCd': '00001',  # 아메리카노
-            'qty': 1,
-            'itemSellGroup': '3',
-            'itemSellLevel': '1',
-            'itemSellType': '1'
-        },
-        {  # 샷추가
-            'seq': 7,
-            'ordType': '1',
-            'itemCd': '00005',  # 샷추가
-            'qty': 1,
-            'itemSellGroup': '3',
-            'itemSellLevel': '2',
-            'itemSellType': '3'
-        },
-    ]
-
-    # python manage.py shell 에서 dir 찍어가면서 확인 가능
-
-    i = 1
-    for item in items:
-        target = Item.objects.get(itemCd=item['itemCd'])
-        headerTotSaleAmt += target.price*item['qty']  # sum(saleprice * qty)
-        headerTotQty += item['qty']
-        saleDetailRow = {
-            'seq': i,
-            'orderType': item['orderType'],
-            'itemCd': target.itemCd,
-            'itemName': target.itemName,
-            'qty': item['qty'],
-            'itemSellGroup': item['itemSellGroup'],
-            'itemSellLeve': item['itemSellLeve'],
-            'itemSellType': item['itemSellType'],
-            'saleCost': target.price,
-            'salePrice': target.price - dcAmt,
-            'org_sale_pric': target.price,
-            'tot_sale_amt': target.price * item['qty'],
-            'sale_amt': (target.price * item['qty']) - dcAmt,
-            'sup_amt': ((target.price * item['qty']) - dcAmt)*1.1,
-            'tax_amt': target.price - dcAmt - (((target.price * item['qty']) - dcAmt)*1.1),
-            'off_tax_amt': 0.0,
-            'tax_yn': 'Y',
-            'tot_dc_amt': 0.0,
-            'norm_dc_amt': 0.0,
-            'pnt_dc_amt': 0.0,
-            'sale_tm': '090810',
+        cardLog = {
+            'card_tranFlag': card_tranFlag,
+            'cardSeq': cardSeq,
+            'cardCardAmt': cardCardAmt,
+            'cardCardNo': cardCardNo,
+            'cardVanCd': cardVanCd,
+            'cardCardCd': cardCardCd,
+            'cardCardName': cardCardName,
+            'cardBuyCardCd': cardBuyCardCd,
+            'cardBuyCardName': cardBuyCardName,
+            'cardApprNo': cardApprNo,
+            'cardApprDt': cardApprDt,
+            'cardApprTime': cardApprTime,
+            'cardApprFlag': cardApprFlag,
+            'cardSignYn': cardSignYn,
+            'cardInstFlag': cardInstFlag,
+            'cardInstMont': cardInstMont,
+            'cardTerminalId': cardTerminalId,
+            'cardRegisterNo': cardRegisterNo,
+            'cardReturnFlag': cardReturnFlag
         }
-        saleDetail.push(saleDetailRow)
 
-    for payment in payments:
-
-        if payment['type'] == 1:
-            # headerSaleAmt += headerTotSaleAmt- #tot에서 할인을 뺌
-            headerCardAmt += payment['amount'] #카드결제금액 더해가는 방식
-            cardCardAmt += payment['amount']
-            cardCardNo = payment['cardNo']
-            cardVanCd = payment['vanCd'] #todo: asp에 nice pg코드 등록
-            cardCardCd = payment['cardCd'] #발급사 #todo: asp cardCode와 맞추기
-            cardCardName = payment['cardName']
-            cardBuyCardCd = payment['buyCardCd'] #매입사
-            cardBuyCardName = payment['buyCardName']
-            cardApprNo = payment['apprNo']
-            cardApprDt = payment['apprDt']
-            cardApprTime = payment['apprTime']
-            cardTerminalId = payment['terminalId']
-            cardRegisterNo = payment['registerNo']
-        elif payment['type'] == '2':
-            headerTotDcAmt += payment['amount']
-            headerPointDcAmt += payment['amount']
-            headerPointDcCnt += 1
-
-    headerSaleAmt = headerTotSaleAmt-headerTotDcAmt
-    headerSupAmt = headerSaleAmt/1.1
-    headerTaxAmt = headerSaleAmt - headerSupAmt
-    headerOffTaxAmt = 0.0
-
-
-    saleHeader = {
-        'headerTotQty': headerTotQty,
-        'headerTotSaleAmt': headerTotSaleAmt,
-        'headerSaleAmt': headerSaleAmt,
-        'headerSupAmt': headerSupAmt,
-        'headerTaxAmt': headerTaxAmt,
-        'headerOffTaxAmt': headerOffTaxAmt,
-        'headerTaxYn': headerTaxYn,
-        'headerTotDcAmt':  headerTotDcAmt,
-        'headerPointDcAmt': headerPointDcAmt,
-        'headerPointDcCnt': headerPointDcCnt,
-        'headerCardAmt': headerCardAmt
-    }
-
-    cardLog = {
-        'card_tranFlag': card_tranFlag,
-        'cardSeq': cardSeq,
-        'cardCardAmt': cardCardAmt,
-        'cardCardNo': cardCardNo,
-        'cardVanCd': cardVanCd,
-        'cardCardCd': cardCardCd,
-        'cardCardName': cardCardName,
-        'cardBuyCardCd': cardBuyCardCd,
-        'cardBuyCardName': cardBuyCardName,
-        'cardApprNo': cardApprNo,
-        'cardApprDt': cardApprDt,
-        'cardApprTime': cardApprTime,
-        'cardApprFlag': cardApprFlag,
-        'cardSignYn': cardSignYn,
-        'cardInstFlag': cardInstFlag,
-        'cardInstMont': cardInstMont,
-        'cardTerminalId': cardTerminalId,
-        'cardRegisterNo': cardRegisterNo,
-        'cardReturnFlag': cardReturnFlag
-    }
-
-    print(saleHeader)
-    print(saleDetail)
-    print(cardLog)
+        print(saleHeader)
+        print(saleDetail)
+        print(cardLog)
+    except Exception as ex:
+        print(ex)
