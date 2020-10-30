@@ -174,12 +174,12 @@ def trade(request):
         # 아메리카노 2잔
         {
             'seq': 1,
-            'ordType': '1',
+            'ordType': '1', #1:일반/2:세트
             'itemCd': '00001',  # 아메리카노
             'qty': 2,
-            'itemSellGroup': '1',
-            'itemSellLevel': '1',
-            'itemSellType': '1'
+            'itemSellGroup': '1', #세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
+            'itemSellLevel': '1', #1:prent/2:child
+            'itemSellType': '1' #1:일반/2:옵션변경/3:옵션추가
         },
         # 티라미스세트 1개
         {  # 티라미스 세트
