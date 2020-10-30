@@ -47,80 +47,16 @@ class Order extends React.Component {
             tradesInfo.push(tradesInfoRow);
         }
 
-        // keymap -> 카테고리 가져오고 카테고리로 다시 메뉴 가져와야함
-        let touch_group = [
-            {
-                name: '음료',
-                code: 1,
-            },
-            {
-                name: '디저트',
-                code: 2,
-            },
-            {
-                name: '햄버거',
-                code: 3,
-            },
-            {
-                name: '기타',
-                code: 4,
-            },
-        ];
-
-        let keymap = [
-            {
-                group_cd: 1,
-                menu: '아이스아메리카노',
-                price: 4500,
-            },
-            {
-                group_cd: 2,
-                menu: '초코케잌',
-                price: 6500,
-            },
-            {
-                group_cd: 1,
-                menu: '아이스라떼',
-                price: 5500,
-            },
-            {
-                group_cd: 3,
-                menu: '치즈버거',
-                price: 4000,
-            },
-            {
-                group_cd: 2,
-                menu: '티라미수',
-                price: 5000,
-            },
-            {
-                group_cd: 2,
-                menu: '쿠앤크',
-                price: 6500,
-            },
-            {
-                group_cd: 1,
-                menu: '초콜릿라떼',
-                price: 6000,
-            },
-            {
-                group_cd: 2,
-                menu: '생크림',
-                price: 5500,
-            },
-            {
-                group_cd: 3,
-                menu: '빅맥',
-                price: 7500,
-            },
-        ];
-
         this.state = {
             link: link,
             sellItemList: tradesInfo,
-            touch_group: touch_group,
-            keymap: keymap,
-            keymap_Cd: 1,
+            storeId: "",
+            keymapCd: "",
+            touch_group: [],
+            keymap: [],
+            brandCd: "",
+            touchGroupCd: 71,
+            item_data: [],
             selected: "",
             order_list: [],
         }
@@ -129,6 +65,7 @@ class Order extends React.Component {
         axios.get("http://13.124.90.138:8000/api/items_item/")
         .then((res) => {
             let item_data = res.data;
+            this.setState({ item_data: item_data });
             axios.get("http://13.124.90.138:8000/api/items_itemAdd/")
             .then((res) => {
                 res.data.map((item) => {
@@ -150,16 +87,90 @@ class Order extends React.Component {
 
     }
 
-    getKeymap(e) {
-        this.setState({
-            keymap_Cd: e.target.id,
-        });
+    getKeymap(data) {
+        let touchGroupCd = data.id;
+        axios.get("http://13.124.90.138:8000/api/keymaps_keymap/")
+        .then((res) => {
+            let keymap = res.data.filter(
+                (elt) => {
+                    if(elt.storeCd === this.state.storeId && elt.keymapCd === this.state.keymapCd && elt.touchGroupCd === touchGroupCd) {
+                        return true;
+                    }
+                });
+            this.setState({
+                touchGroupCd: touchGroupCd,
+                keymap: keymap,
+            });
+        })
     }
 
     componentDidMount() {
-    }
+        let storeCd = this.props.history.location.pathname.split("/")[3];
+        axios.get("http://13.124.90.138:8000/api/stores_store/")
+        .then((res) => {
+            let store = res.data.find(
+                (elt) => {
+                    if (elt.storeCd === storeCd) {
+                        return true;
+                    }
+                }
+            );
+            let storeId = store.id;
+            let brandCd = store.brandCd;
+            axios.get("http://13.124.90.138:8000/api/stores_pos/")
+            .then((res) => {
+                let keymapCd = res.data.find(
+                    (elt) => {
+                        if(elt.id === storeId) {
+                            return true;
+                        }
+                    }
+                ).keymapCd;
+                axios.get("http://13.124.90.138:8000/api/keymaps_touchGroup/")
+                .then((res) => {
+                    let touch_group = res.data.filter(
+                        (elt) => {
+                            if(elt.storeCd === storeId && elt.keymapCd === keymapCd) {
+                                return true;
+                            }
+                        }
+                    );
+                    return [touch_group, storeId, keymapCd];
+                })
+                .then((arr) => {
+                    axios.get("http://13.124.90.138:8000/api/keymaps_keymap/")
+                    .then((res) => {
+                        let keymap = res.data.filter(
+                            (elt) => {
+                                if(elt.storeCd === arr[1] && elt.keymapCd === arr[2] && elt.touchGroupCd === this.state.touchGroupCd) {
+                                    return true;
+                                }
+                            });
+                        return keymap;
+                    })
+                    .then((keymap) => {
+                        this.setState({
+                            touch_group: arr[0],
+                            storeId: arr[1],
+                            keymapCd: arr[2],
+                            brandCd: brandCd,
+                            keymap: keymap,
+                        });
+                    })
+                })
+            });
+        });
 
-    componentDidUpdate() {
+        axios.get("http://13.124.90.138:8000/api/keymaps_keymap/")
+        .then((res) => {
+            let keymap = res.data.filter(
+                (elt) => {
+                    if(elt.storeCd === this.state.storeId && elt.keymapCd === this.state.keymapCd && elt.touchGroupCd === this.state.touchGroupCd) {
+                        return true;
+                    }
+                });
+            this.setState({ keymap : keymap });
+        });
     }
 
     clearOrderList() {
@@ -169,7 +180,13 @@ class Order extends React.Component {
     }
 
     render() {
-        let temp_list = this.state.keymap.filter((item) => item.group_cd == this.state.keymap_Cd);
+        let selected_touchgroup = this.state.item_data.filter((item) => {
+            for(let i in this.state.keymap) {
+                if(this.state.keymap[i].itemCd === item.id) {
+                    return true;
+                }
+            }
+        });
         return (
             <>
                 <div className="optionmodal hidden" id="optionmodal" onClick={() => {
@@ -244,13 +261,13 @@ class Order extends React.Component {
                     <div className="order__category">
                         {this.state.touch_group.map((data) => {
                             return (
-                                <div className="category__content" id={data.code} onClick={(e) => this.getKeymap(e)}>{data.name}</div>
+                                <div className="category__content" id={data.code} onClick={() => this.getKeymap(data)}>{data.touchGroupName}</div>
                             );
                         })}
                     </div>
                     <div className="order__menu">
                     {
-                        temp_list.map((data) => {
+                        selected_touchgroup.map((data) => {
                             return (
                                 <>
                                     <div className="menu__container" onClick={() => {
@@ -260,8 +277,8 @@ class Order extends React.Component {
                                                 });
                                                 elt.classList.remove("hidden");
                                             }}>
-                                        <div className="menu__image">image</div>
-                                        <div className="menu__name">{data.menu}</div>
+                                        <img className="menu__image" src={data.imgSmallUrl} />
+                                        <div className="menu__name">{data.itemName}</div>
                                         <div className="menu__price">{data.price}원</div>
                                     </div>
                                 </>
