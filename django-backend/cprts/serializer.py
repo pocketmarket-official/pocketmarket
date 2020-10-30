@@ -9,6 +9,7 @@ class CprtSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cprt
         fields = (
+            'id',
             'storeCd',
             'cprtCd',
             'cprtName',
@@ -25,6 +26,7 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = (
+            'id',
             'storeCd',
             'cprtGroupCd',
             'cprtGroupName',
@@ -41,6 +43,7 @@ class RelationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Relation
         fields = (
+            'id',
             'storeCd',
             'cprtGroupCd',
             'seq',

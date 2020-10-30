@@ -408,14 +408,17 @@ def InterfaceView(request):
             response_body_json = json.loads(response_body)
             for itemAdd_imt in response_body_json:
                 itemCd = Item.objects.get(itemCd=itemAdd_imt.get('ITEM_CD'))
+                itemAddCd = Item.objects.get(itemCd=itemAdd_imt.get('ADD_ITEM_CD'))
                 itemAdd_pktmkt, flag = ItemAdd.objects.get_or_create(itemCd=itemCd,
-                                                                     itemAddCd=itemAdd_imt.get('ADD_ITEM_CD'),
                                                                      defaults={
                                                                          'itemSort': itemAdd_imt.get('ITEM_SORT'),
                                                                          'insDt': itemAdd_imt.get('INS_DT'),
                                                                          'insUs': itemAdd_imt.get('INS_US')
                                                                      })
-                if not flag:
+                if flag :
+                    itemAdd_pktmkt.itemAddCd.add(itemAddCd)
+                else :
+                    itemAdd_pktmkt.itemAddCd.add(itemAddCd)
                     itemAdd_pktmkt.itemSort = itemAdd_imt.get('ITEM_SORT')
                     itemAdd_pktmkt.insDt = itemAdd_imt.get('INS_DT')
                     itemAdd_pktmkt.insUs = itemAdd_imt.get('INS_US')

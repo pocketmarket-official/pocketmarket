@@ -12,6 +12,7 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = (
+            'id',
             'brandCd',
             'itemCd',
             'itemName',
@@ -35,6 +36,7 @@ class SetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
         fields = (
+            'id',
             'setItemCd',
             'seq',
             'subItemCd',
@@ -51,6 +53,7 @@ class SetOptSerializer(serializers.ModelSerializer):
     class Meta:
         model = SetOpt
         fields = (
+            'id',
             'storeCd',
             'subItemCd',
             'changeItemCd',
@@ -65,6 +68,7 @@ class ItemAddSerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemAdd
         fields = (
+            'id',
             'itemCd',
             'itemAddCd',
             'itemSort',
@@ -79,6 +83,7 @@ class AddCatSerializer(serializers.ModelSerializer):
     class Meta:
         model = AddCat
         fields = (
+            'id',
             'addCatCd',
             'addCatName',
             'useYn',
@@ -93,6 +98,7 @@ class AddSerializer(serializers.ModelSerializer):
     class Meta:
         model = Add
         fields = (
+            'id',
             'addCatCd',
             'addItemCd',
             'insDt',

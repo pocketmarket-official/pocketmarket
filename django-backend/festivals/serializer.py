@@ -8,6 +8,7 @@ class FestivalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Festival
         fields = (
+            'id',
             'festivalCd',
             'festivalName',
             'startDt',
@@ -37,6 +38,7 @@ class JoinSerializer(serializers.ModelSerializer):
     class Meta:
         model = Join
         fields = (
+            'id',
             'festivalCd',
             'seq',
             'storeCd',
