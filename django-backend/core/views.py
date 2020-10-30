@@ -9,9 +9,9 @@ from users.models import User
 from items.models import Item
 from trades.models import SaleHeader
 from trades.models import SaleDetail
-from trades.models import CashLog
+# from trades.models import CashLog
 from trades.models import CardLog
-from trades.models import StandardLog
+# from trades.models import StandardLog
 from trades.models import PurchaseLog
 from trades.models import SoldoutLog
 from trades.models import CornerStateLog
@@ -80,7 +80,6 @@ def kakao_callback(request):
 def trade(request):
     ##definition for trade variables
     # saleHeader
-    saleHeader = []
     headerTotQty = 0
     headerTotSaleAmt = 0.0
     headerSaleAmt = 0.0
@@ -299,3 +298,43 @@ def trade(request):
     headerTaxAmt = headerSaleAmt - headerSupAmt
     headerOffTaxAmt = 0.0
 
+
+    saleHeader = {
+        'headerTotQty': headerTotQty,
+        'headerTotSaleAmt': headerTotSaleAmt,
+        'headerSaleAmt': headerSaleAmt,
+        'headerSupAmt': headerSupAmt,
+        'headerTaxAmt': headerTaxAmt,
+        'headerOffTaxAmt': headerOffTaxAmt,
+        'headerTaxYn': headerTaxYn,
+        'headerTotDcAmt':  headerTotDcAmt,
+        'headerPointDcAmt': headerPointDcAmt,
+        'headerPointDcCnt': headerPointDcCnt,
+        'headerCardAmt': headerCardAmt
+    }
+
+    cardLog = {
+        'card_tranFlag': card_tranFlag,
+        'cardSeq': cardSeq,
+        'cardCardAmt': cardCardAmt,
+        'cardCardNo': cardCardNo,
+        'cardVanCd': cardVanCd,
+        'cardCardCd': cardCardCd,
+        'cardCardName': cardCardName,
+        'cardBuyCardCd': cardBuyCardCd,
+        'cardBuyCardName': cardBuyCardName,
+        'cardApprNo': cardApprNo,
+        'cardApprDt': cardApprDt,
+        'cardApprTime': cardApprTime,
+        'cardApprFlag': cardApprFlag,
+        'cardSignYn': cardSignYn,
+        'cardInstFlag': cardInstFlag,
+        'cardInstMont': cardInstMont,
+        'cardTerminalId': cardTerminalId,
+        'cardRegisterNo': cardRegisterNo,
+        'cardReturnFlag': cardReturnFlag
+    }
+
+    print(saleHeader)
+    print(saleDetail)
+    print(cardLog)
