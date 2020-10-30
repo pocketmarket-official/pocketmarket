@@ -9,6 +9,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = (
+            'id',
             'storeCd',
             'saleDt',
             'billNo',
@@ -22,12 +23,12 @@ class ReviewSerializer(serializers.ModelSerializer):
             'modUs',
         )
 
-#todo : 얘도 안됨. 뭐지..
 class ReviewImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ReviewImage
         fields = {
+            'id',
             'review',
             'seq',
             'url',
@@ -38,12 +39,12 @@ class ReviewImageSerializer(serializers.ModelSerializer):
             'modUs',
         }
 
-#todo : 얘도 이상해. 뭐냐고..
 class ReplySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reply
         fields = {
+            'id',
             'storeCd',
             'saleDt',
             'billNo',

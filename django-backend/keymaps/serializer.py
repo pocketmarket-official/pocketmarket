@@ -9,6 +9,7 @@ class StoreKeymapSerializer(serializers.ModelSerializer):
     class Meta:
         model = StoreKeymap
         fields = (
+            'id',
             'storeCd',
             'keymapCd',
             'keymapName',
@@ -25,6 +26,7 @@ class TouchGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = TouchGroup
         fields = (
+            'id',
             'storeCd',
             'keymapCd',
             'touchGroupCd',
@@ -45,6 +47,7 @@ class KeymapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Keymap
         fields = (
+            'id',
             'storeCd',
             'keymapCd',
             'touchGroupCd',

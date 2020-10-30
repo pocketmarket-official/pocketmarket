@@ -9,6 +9,7 @@ class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
         fields = (
+            'id',
             'brandCd',
             'storeCd',
             'storeName',
@@ -48,6 +49,7 @@ class FunsetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Funset
         fields = (
+            'id',
             'storeCd',
             'tmnId',
             'normVanCd',
@@ -73,6 +75,7 @@ class PosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pos
         fields = (
+            'id',
             'storeCd',
             'keymapCd',
             'ordStartNo',

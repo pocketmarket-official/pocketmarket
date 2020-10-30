@@ -9,6 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            'id',
             'email',
         )
 
@@ -17,6 +18,7 @@ class PointSerializer(serializers.ModelSerializer):
     class Meta:
         model = Point
         fields = (
+            'id',
             'user',
             'remainPoint',
             'totExchangeLike',
@@ -34,6 +36,7 @@ class MyPlaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyPlace
         fields = (
+            'id',
             'user',
             'seq',
             'addrName',
