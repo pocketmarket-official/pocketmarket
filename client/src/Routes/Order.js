@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
-import OptionModal from '../Components/js/OptionModal';
+import axios from 'axios';
 
 
 class Order extends React.Component {
@@ -124,6 +124,30 @@ class Order extends React.Component {
             selected: "",
             order_list: [],
         }
+
+        // 각 item에 대해서 옵션 연결 성공
+        axios.get("http://13.124.90.138:8000/api/items_item/")
+        .then((res) => {
+            let item_data = res.data;
+            axios.get("http://13.124.90.138:8000/api/items_itemAdd/")
+            .then((res) => {
+                res.data.map((item) => {
+                    let itemAddCd = item.itemAddCd;
+                    let temp = item_data.find((element) => {if(element.id == item.itemCd) { return true;}});
+                    console.log(temp.itemName);
+                    itemAddCd.map((data) => {
+                        for(let i in item_data) {
+                            if(item_data[i].id == data) {
+                                console.log(item_data[i].itemName);
+                                break;
+                            }
+                        }
+                    });
+                });
+            });
+        });
+
+
     }
 
     getKeymap(e) {
@@ -148,7 +172,73 @@ class Order extends React.Component {
         let temp_list = this.state.keymap.filter((item) => item.group_cd == this.state.keymap_Cd);
         return (
             <>
-                <OptionModal menu={this.state.selected} />
+                <div className="optionmodal hidden" id="optionmodal" onClick={() => {
+                    const elt = document.getElementById("optionmodal");
+                    elt.classList.add("hidden");
+                }}>
+                    <div className="optionmodal__container" onClick={(e) => {
+                        e.stopPropagation();
+                    }}>
+                        <div className="optionmodal__header">
+                            <div>image</div>
+                            <div className="optionmodal__title">
+                                <div className="optionmodal__name">{this.state.selected}</div>
+                                <div className="optionmodal__content">item content</div>
+                            </div>
+                        </div>
+                        {/*
+                        <div className="optionmodal__category">
+                            {
+                                this.state.opt_cat.map((data) => {
+                                    return (
+                                        <div className="category__category">{data}</div>
+                                    );
+                                })
+                            }
+                        </div>
+                        */}
+                        <div className="optionmodal__options">
+                            <div className="options__option">
+                                <div>option</div>
+                                <div>option</div>
+                                <div>option</div>
+                            </div>
+                            <div className="options__option">
+                                <div>option</div>
+                                <div>option</div>
+                                <div>option</div>
+                            </div>
+                            <div className="options__option">
+                                <div>option</div>
+                                <div>option</div>
+                                <div>option</div>
+                            </div>
+                            <div className="options__option">
+                                <div>option</div>
+                                <div>option</div>
+                                <div>option</div>
+                            </div>
+                        </div>
+                        <div className="optionmodal__result">
+                            <div className="result__container">
+                                <div className="result__content">
+                                    <div>seq</div>
+                                    <div>옵션</div>
+                                    <input type="number" id="option__quantity" />
+                                    <button>X</button>
+                                </div>
+                            </div>
+                            <div className="optionmodal__btn">
+                                <button className="optionmodal__select">주문담기</button>
+                                <button className="optionmodal__clear" onClick={() => {
+                                    const elt = document.getElementById("optionmodal");
+                                    elt.classList.add("hidden");
+                                }}>초기화</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <HeaderBack url='/mypage' />
                 <div className="orderpage">
                     <div className="order__category">
@@ -172,6 +262,7 @@ class Order extends React.Component {
                                             }}>
                                         <div className="menu__image">image</div>
                                         <div className="menu__name">{data.menu}</div>
+                                        <div className="menu__price">{data.price}원</div>
                                     </div>
                                 </>
                             );
