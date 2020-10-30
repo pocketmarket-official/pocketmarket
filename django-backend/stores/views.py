@@ -6,6 +6,8 @@ from stores.serializer import FunsetSerializer
 from stores.models import Funset
 from stores.serializer import PosSerializer
 from stores.models import Pos
+from stores.serializer import StoreDicSerializer
+from stores.models import StoreDic
 
 
 class StoreView(viewsets.ModelViewSet):
@@ -22,3 +24,8 @@ class PosView(viewsets.ModelViewSet):
 
     serializer_class = PosSerializer
     queryset = Pos.objects.all()
+
+class StoreDicView(viewsets.ModelViewSet):
+
+    serializer_class = StoreDicSerializer
+    queryset = StoreDic.objects.all()
