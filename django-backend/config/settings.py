@@ -44,7 +44,6 @@ PROJECT_APPS = [
     'users.apps.UsersConfig',
     'stores.apps.StoresConfig',
     'brands.apps.BrandsConfig',
-    'storeDics.apps.StoreDicsConfig',
     'reviews.apps.ReviewsConfig',
     'items.apps.ItemsConfig',
     'cprts.apps.CprtsConfig',

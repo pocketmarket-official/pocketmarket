@@ -23,7 +23,6 @@ from stores import views as store_views
 from festivals import views as festival_views
 from users import views as user_views
 from brands import views as brand_views
-from storeDics import views as storeDic_views
 from reviews import views as review_views
 from items import views as item_views
 from cprts import views as cprt_views
@@ -49,7 +48,6 @@ router.register(r'users_user', user_views.UserView, 'user')
 router.register(r'users_point', user_views.PointView, 'point')
 router.register(r'users_myPlace', user_views.MyPlaceView, 'myPlace')
 router.register(r'brands_brand', brand_views.BrandView, 'brand')
-router.register(r'storeDics_storeDic', storeDic_views.StoreDicView, 'storeDic')
 router.register(r'reviews_review', review_views.ReviewView, 'review')
 router.register(r'reviews_reviewImage', review_views.ReviewImageView, 'reviewImage')
 router.register(r'reviews_reply', review_views.ReplyView, 'reply')
