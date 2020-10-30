@@ -52,14 +52,53 @@ class Order extends React.Component {
             sellItemList: tradesInfo,
             storeId: "",
             keymapCd: "",
+            touchGroupCd: 0,
+            brandCd: "",
             touch_group: [],
             keymap: [],
-            brandCd: "",
-            touchGroupCd: 71,
             item_data: [],
-            selected: "",
             order_list: [],
+            selected: "",
         }
+
+        // initialization of the touch group code
+        let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
+        axios.get("http://13.124.90.138:8000/api/stores_store/")
+        .then((res) => {
+            let store = res.data.find(
+                (elt) => {
+                    if (elt.storeCd === storeCd) {
+                        return true;
+                    }
+                }
+            );
+            let storeId = store.id;
+            axios.get("http://13.124.90.138:8000/api/stores_pos/")
+            .then((res) => {
+                let keymapCd = res.data.find(
+                    (elt) => {
+                        if(elt.id === storeId) {
+                            return true;
+                        }
+                    }
+                ).keymapCd;
+                axios.get("http://13.124.90.138:8000/api/keymaps_touchGroup/")
+                .then((res) => {
+                    let touch_group_id = res.data.find(
+                        (elt) => {
+                            if(elt.storeCd === storeId && elt.keymapCd === keymapCd) {
+                                return true;
+                            }
+                        }
+                    ).id;
+
+                    this.setState({
+                        touchGroupCd: touch_group_id
+                    })
+
+                })
+            });
+        });
 
         // 각 item에 대해서 옵션 연결 성공
         axios.get("http://13.124.90.138:8000/api/items_item/")
@@ -70,11 +109,11 @@ class Order extends React.Component {
             .then((res) => {
                 res.data.map((item) => {
                     let itemAddCd = item.itemAddCd;
-                    let temp = item_data.find((element) => {if(element.id == item.itemCd) { return true;}});
+                    let temp = item_data.find((element) => {if(element.id === item.itemCd) { return true;}});
                     console.log(temp.itemName);
                     itemAddCd.map((data) => {
                         for(let i in item_data) {
-                            if(item_data[i].id == data) {
+                            if(item_data[i].id === data) {
                                 console.log(item_data[i].itemName);
                                 break;
                             }
@@ -88,6 +127,7 @@ class Order extends React.Component {
     }
 
     getKeymap(data) {
+        // 각 카테고리를 누르면 메뉴가 바뀔 수 있도록 state 변경
         let touchGroupCd = data.id;
         axios.get("http://13.124.90.138:8000/api/keymaps_keymap/")
         .then((res) => {
@@ -105,7 +145,7 @@ class Order extends React.Component {
     }
 
     componentDidMount() {
-        let storeCd = this.props.history.location.pathname.split("/")[3];
+        let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
         axios.get("http://13.124.90.138:8000/api/stores_store/")
         .then((res) => {
             let store = res.data.find(
@@ -160,19 +200,9 @@ class Order extends React.Component {
                 })
             });
         });
-
-        axios.get("http://13.124.90.138:8000/api/keymaps_keymap/")
-        .then((res) => {
-            let keymap = res.data.filter(
-                (elt) => {
-                    if(elt.storeCd === this.state.storeId && elt.keymapCd === this.state.keymapCd && elt.touchGroupCd === this.state.touchGroupCd) {
-                        return true;
-                    }
-                });
-            this.setState({ keymap : keymap });
-        });
     }
 
+    // 초기화 버튼
     clearOrderList() {
         this.setState({
             order_list: []
@@ -277,7 +307,7 @@ class Order extends React.Component {
                                                 });
                                                 elt.classList.remove("hidden");
                                             }}>
-                                        <img className="menu__image" src={data.imgSmallUrl} />
+                                        <img className="menu__image" src={data.imgSmallUrl} alt="menu" />
                                         <div className="menu__name">{data.itemName}</div>
                                         <div className="menu__price">{data.price}원</div>
                                     </div>
