@@ -58,6 +58,7 @@ class Order extends React.Component {
             keymap: [],
             item_data: [],
             order_list: [],
+            options: {},
             selected: "",
         }
 
@@ -104,26 +105,29 @@ class Order extends React.Component {
         axios.get("http://13.124.90.138:8000/api/items_item/")
         .then((res) => {
             let item_data = res.data;
-            this.setState({ item_data: item_data });
+            let options = {}
             axios.get("http://13.124.90.138:8000/api/items_itemAdd/")
             .then((res) => {
                 res.data.map((item) => {
                     let itemAddCd = item.itemAddCd;
-                    let temp = item_data.find((element) => {if(element.id === item.itemCd) { return true;}});
-                    console.log(temp.itemName);
+                    let elt = item_data.find((element) => {if(element.id === item.itemCd) { return true;}});
+                    let option = []
                     itemAddCd.map((data) => {
                         for(let i in item_data) {
                             if(item_data[i].id === data) {
-                                console.log(item_data[i].itemName);
+                                option.push(item_data[i]);
                                 break;
                             }
                         }
+                        options[elt.id] = option;
                     });
+                });
+                this.setState({
+                    options: options,
+                    item_data: item_data,
                 });
             });
         });
-
-
     }
 
     getKeymap(data) {
@@ -217,6 +221,7 @@ class Order extends React.Component {
                 }
             }
         });
+        let options = this.state.options[this.state.selected.id] || [];
         return (
             <>
                 <div className="optionmodal hidden" id="optionmodal" onClick={() => {
@@ -227,10 +232,10 @@ class Order extends React.Component {
                         e.stopPropagation();
                     }}>
                         <div className="optionmodal__header">
-                            <div>image</div>
+                            <img src={this.state.selected.imgSmallUrl} alt="menu" />
                             <div className="optionmodal__title">
-                                <div className="optionmodal__name">{this.state.selected}</div>
-                                <div className="optionmodal__content">item content</div>
+                                <div className="optionmodal__name">{this.state.selected.itemName}</div>
+                                <div className="optionmodal__content">{this.state.selected.price}원</div>
                             </div>
                         </div>
                         {/*
@@ -245,26 +250,18 @@ class Order extends React.Component {
                         </div>
                         */}
                         <div className="optionmodal__options">
-                            <div className="options__option">
-                                <div>option</div>
-                                <div>option</div>
-                                <div>option</div>
-                            </div>
-                            <div className="options__option">
-                                <div>option</div>
-                                <div>option</div>
-                                <div>option</div>
-                            </div>
-                            <div className="options__option">
-                                <div>option</div>
-                                <div>option</div>
-                                <div>option</div>
-                            </div>
-                            <div className="options__option">
-                                <div>option</div>
-                                <div>option</div>
-                                <div>option</div>
-                            </div>
+                            {
+                                options.map((data) => {
+                                    return (
+                                        <>
+                                            <div className="options__option">
+                                                <div>{data.itemName}</div>
+                                                <div>{data.price}원</div>
+                                            </div>
+                                        </>
+                                    );
+                                })
+                            }
                         </div>
                         <div className="optionmodal__result">
                             <div className="result__container">
@@ -303,7 +300,7 @@ class Order extends React.Component {
                                     <div className="menu__container" onClick={() => {
                                                 const elt = document.getElementById("optionmodal");
                                                 this.setState({
-                                                    selected: data.menu,
+                                                    selected: data,
                                                 });
                                                 elt.classList.remove("hidden");
                                             }}>
