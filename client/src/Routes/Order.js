@@ -59,6 +59,7 @@ class Order extends React.Component {
             item_data: [],
             order_list: [],
             options: {},
+            modal_options: [],
             selected: "",
         }
 
@@ -227,6 +228,9 @@ class Order extends React.Component {
                 <div className="optionmodal hidden" id="optionmodal" onClick={() => {
                     const elt = document.getElementById("optionmodal");
                     elt.classList.add("hidden");
+                    this.setState({
+                        modal_options: []
+                    });
                 }}>
                     <div className="optionmodal__container" onClick={(e) => {
                         e.stopPropagation();
@@ -254,7 +258,12 @@ class Order extends React.Component {
                                 options.map((data) => {
                                     return (
                                         <>
-                                            <div className="options__option">
+                                            <div className="options__option" onClick={() => {
+                                                this.setState({
+                                                    modal_options: this.state.modal_options.concat([data])
+                                                });
+                                                console.log(data);
+                                            }}>
                                                 <div>{data.itemName}</div>
                                                 <div>{data.price}원</div>
                                             </div>
@@ -266,10 +275,17 @@ class Order extends React.Component {
                         <div className="optionmodal__result">
                             <div className="result__container">
                                 <div className="result__content">
-                                    <div>seq</div>
-                                    <div>옵션</div>
-                                    <input type="number" id="option__quantity" />
-                                    <button>X</button>
+                                    {
+                                        this.state.modal_options.map((item) => {
+                                            return (
+                                                <>
+                                                    <div>{item.itemName}</div>
+                                                    <input type="number" id="option__quantity" />
+                                                    <button>X</button>
+                                                </>
+                                            );
+                                        })
+                                    }
                                 </div>
                             </div>
                             <div className="optionmodal__btn">
