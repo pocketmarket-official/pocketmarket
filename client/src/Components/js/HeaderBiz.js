@@ -1,15 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import btnBack from "../../assets/common/btn_bs.png";
+import bi from "../../assets/common/BI.png";
+import btnMy from "../../assets/common/btn_my.png";
 
+import '../scss/headerMy.scss';
 
 function HeaderBiz() {
+    const history = useHistory();
+
     return (
-            <div className="header__box">
-                <div>=</div>
-                <Link to="/main"><div>Pocket Market</div></Link>
-                <Link to="/biz/mypage"><div>my</div></Link>
-            </div>
-        );
+        <div className="header__box">
+            <img className="header__back"  onClick={() => {history.goBack()}} src={btnBack}/>
+            <Link to="/main"><img className="header__bi" src={bi} alt="logo" /></Link>
+            <Link to="/biz/mypage"><img className="header__my" src={btnMy} alt="my" /></Link>
+        </div>
+    );
 }
+
 
 export default HeaderBiz;

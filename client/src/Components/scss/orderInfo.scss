@@ -1,0 +1,197 @@
+@mixin section() {
+  width: calc(100% - 20px);
+  margin: 0 10px;
+  padding: 12px 23px 12px 46px;
+  border: 1px solid #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 7px 1px rgba(119, 119, 119, .1);
+  box-sizing: border-box;
+  font-family: 'MaplestoryOTFBold', 'Nanum Gothic', sans-serif;
+}
+
+.orderinfo {
+  margin-top: 63px;
+  padding: 27px 34px;
+
+  * {
+    font-family: 'MaplestoryOTFLight', 'Nanum Gothic', sans-serif;
+  }
+
+  .orderinfo__options {
+    margin-bottom: 20px;
+
+    .orderinfo__title {
+      margin-bottom: 10px;
+      color: #b4022f;
+      font-size: 1.1rem;
+    }
+
+    .orderinfo__choices {
+      @include section();
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      color: #333333;
+
+      input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+
+        &:checked + label {
+          color: #333333;
+
+          &:after {
+            background: #bc3b3b;
+          }
+        }
+
+        & + label {
+          display: inline-block;
+          position: relative;
+          padding-left: 30px;
+          cursor: pointer;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          color: #818181;
+          font-family: 'MaplestoryOTFBold', 'Nanum Gothic', sans-serif;
+
+          &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -4px;
+            width: 23px;
+            height: 23px;
+            text-align: center;
+            background: white;
+            border: 1px solid #d2d2d2;
+            border-radius: 100%;
+          }
+
+          &:after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 6px;
+            width: 13px;
+            height: 13px;
+            background: #e8e8e8;
+            border-radius: 100%;
+          }
+        }
+      }
+
+      span {
+        font-family: "Nanum Gothic", sans-serif;
+        font-weight: 800;
+        font-size: 1.1rem;
+        color: #bd1f47;
+      }
+    }
+
+    .orderinfo__info {
+      @include section();
+
+      .info__store {
+        font-weight: bold;
+        letter-spacing: 1.3px;
+        color: #333333;
+        font-family: 'MaplestoryOTFBold', 'Nanum Gothic', sans-serif;
+      }
+
+      .info__item--main {
+        margin-top: 10px;
+        margin-left: 25px;
+        margin-bottom: 5px;
+      }
+
+      .info__item--option {
+        margin-left: 50px;
+        margin-bottom: 5px;
+      }
+    }
+
+    .orderinfo__pay {
+      @include section();
+
+      .pay__info {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        margin-bottom: 12px;
+
+        &:last-child {
+          margin: 0;
+        }
+
+        > *:first-child {
+          font-weight: bold;
+        }
+
+        > button {
+          margin-left: 5px;
+          padding: 4px 6px;
+          border-radius: 8px;
+          background: black;
+          font-weight: bold;
+          font-size: .8rem;
+          color: #ffa800;
+        }
+
+        > *:last-child {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+
+  .orderinfo__amount {
+    @include section();
+    box-shadow: none;
+    border: 1px solid #f4f4f4;
+    background-color: #bc3b3b;
+    padding: 17px 23px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+
+    .amount__title {
+      font-weight: bold;
+    }
+
+    .amount__amount {
+      font-size: 1.3rem;
+    }
+  }
+
+  .divide {
+    width: 100%;
+    height: 1px;
+    margin: 17px 0;
+    border-color: #e8e8e8;
+    background-color: #e8e8e8;
+    color: #e8e8e8;
+  }
+
+  .orderinfo__btn {
+    margin: 0 auto;
+    width: 155px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: black;
+    color: #ffa800;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+  }
+}
