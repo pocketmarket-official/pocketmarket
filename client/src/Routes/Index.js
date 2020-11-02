@@ -1,57 +1,72 @@
-import React, {useState} from "react";
-// import KaKaoLogin from "react-kakao-login";
-import {Redirect} from "react-router-dom";
-// import bgVideo from "../assets/intro/intro.mp4";
-// import bgImage from "../assets/intro/bg.jpg";
-// import '../Components/scss/intro.scss';
-import Header from '../Components/js/Header';
+import React, {useEffect, useRef, useState} from "react";
+import {Link, Redirect} from "react-router-dom";
+import HeaderBack from "../Components/js/HeaderBack";
+import '../Components/scss/index.scss';
+import Flicking from "@egjs/react-flicking";
 
-const axios = require('axios');
+import jumboImg from "../assets/index/index_ad.jpg";
+import showFestivalImg from "../assets/index/btn_index1.png";
+import showStoreImg from "../assets/index/btn_index2.png";
+import showCollectionImg from "../assets/index/btn_index3.png";
+import showOrderImg from "../assets/index/btn_index4.png";
 
-/**
- * Entry component
- *
- * when error on video playing, show login button immediately
- */
 function Index({authenticated, login, location}) {
-    const [playingVideo, setPlayingVideo] = useState(true);
+    const paginationElem = useRef(null);
 
-    const responseKaKao = (res) => {
-        const email = res.profile.kakao_account.email;
-        try {
-            login({email})
-        } catch (e) {
-            alert("Failed to login");
+    function onChangeJumboItem(e) {
+        for (let item of paginationElem.current.children) {
+            item.classList.remove('active');
         }
-        axios.get(`/users?email=${email}`)
-            .then(res => {
-                if (res.data.length === 0) {
-                    axios.post(`/users`, {
-                        email
-                    })
-                        .then(res => {
-                            console.log(email + '신규등록 되었습니다.');
-                        })
-                }
-                console.log(res);
-            })
-    };
-
-    const responseFail = (err) => {
-        alert(err);
-    };
+        paginationElem.current.children[e.index].classList.add('active');
+    }
 
     const {from} = location.state || {from: {pathname: "/index"}};
     if (authenticated) return <Redirect to={from}/>;
 
     return (
         <>
-            <div>
-                <div>jumbotron</div>
-                <div>축제보기</div>
-                <div>매장보기</div>
-                <div>포켓맛집도감</div>
-                <div>주문상태</div>
+            <HeaderBack/>
+            <div className="index">
+                <Flicking classPrefix="jumbo"
+                          hanger={0}
+                          anchor={0}
+                          zIndex={0}
+                          infinite={true}
+                          circular={true}
+                          onChange={onChangeJumboItem}
+                          className={"jumbotron"}>
+                    <img src={jumboImg}/>
+                    <img src={jumboImg}/>
+                    <img src={jumboImg}/>
+                    <img src={jumboImg}/>
+                </Flicking>
+                <div ref={paginationElem} className="pagination">
+                    <div className="pagination-item active"/>
+                    <div className="pagination-item"/>
+                    <div className="pagination-item"/>
+                    <div className="pagination-item"/>
+                </div>
+                <div className="content">
+                    <Link to="/main">
+                        <div className="content-item">
+                            <img src={showFestivalImg} alt=""/>
+                            <span>축제보기</span>
+                        </div>
+                    </Link>
+                    <div className="content-item">
+                        <img src={showStoreImg} alt=""/>
+                        <span>매장보기</span>
+                    </div>
+                    <div className="content-item">
+                        <img src={showCollectionImg} alt=""/>
+                        <span>포켓도감</span>
+                    </div>
+                    <div className="content-item">
+                        <img src={showOrderImg} alt=""/>
+                        <span>주문상태</span>
+                    </div>
+                </div>
+                <div className="footer">all rights reserved pocketmarket</div>
             </div>
         </>
     );
