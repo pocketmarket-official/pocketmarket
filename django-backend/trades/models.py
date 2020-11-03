@@ -8,20 +8,17 @@ class SaleHeader(models.Model):
     posNo = models.CharField(max_length=5, default='91')
     billNo = models.CharField(max_length=10, default='00000')
     saleFlag = models.CharField(max_length=3, default='000') #baseCode:050 [0:전체/1:정상/2:취소]
-    mealCd = models.CharField(max_length=3, default='000')
-    mealName = models.CharField(max_length=50, default='')
-    totalQty = models.IntegerField(default=0)
-    totalSaleAmt = models.FloatField(default=0.0) #할인이 적용되기 전 매출액
+    totQty = models.IntegerField(default=0)
+    totSaleAmt = models.FloatField(default=0.0) #할인이 적용되기 전 매출액
     saleAmt = models.FloatField(default=0.0) #할인이 적용된 실제 결제금액
-    supplyAmt = models.FloatField(default=0.0) #실매출-부가세(실매출액)
+    supAmt = models.FloatField(default=0.0) #실매출-부가세(실매출액)
     taxAmt = models.FloatField(default=0.0)
     offTaxAmt = models.FloatField(default=0.0)
-    totalDcAmt = models.FloatField(default=0.0)
+    totDcAmt = models.FloatField(default=0.0)
     pointDcAmt = models.FloatField(default=0.0)
     pointDcCnt = models.IntegerField(default=0)
-    cashAmt = models.FloatField(default=0.0)
     cardAmt = models.FloatField(default=0.0)
-    etcAmt = models.FloatField(default=0.0)
+    kkmAmt = models.FloatField(default=0.0)
 
 class SaleDetail(models.Model):
     storeCd = models.CharField(max_length=10, default='00000')

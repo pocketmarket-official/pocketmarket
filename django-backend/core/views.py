@@ -79,6 +79,16 @@ def kakao_callback(request):
 
 def trade(request):
     try:
+        # parameter from api
+        brandCd = '00001'
+        storeCd = 'C0001'
+        posNo = '01'
+        dcAmt = 0.0
+        saleFlag = '1'
+        # etc parameters
+        saleDt = datetime.today().strftime('%Y%m%d')
+        billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')
+
         ##definition for trade variables
         # saleHeader
         headerTotQty = 0
@@ -133,15 +143,7 @@ def trade(request):
         # MOD_DT
         # MOD_US
 
-        # parameter from api
-        brandCd = '00001'
-        storeCd = 'C0001'
-        posNo = '01'
-        dcAmt = 0.0
-        saleFlag = '1'
-        # etc parameters
-        saleDt = datetime.today().strftime('%Y%m%d')
-        billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')
+
         if billNo:
             billNo = f'{int(billNo[0]) + 1:05}'
         else:
@@ -193,7 +195,7 @@ def trade(request):
             },
             {  # 티라미스
                 'seq': 3,
-                'orderType': '2',  # todo: 1?? 2??
+                'orderType': '1',  # todo: 1?? 2?? ->1
                 'itemCd': '00003',  # 티라미스
                 'qty': 1,
                 'itemSellGroup': '2',
@@ -203,7 +205,7 @@ def trade(request):
             {  # 아메리카노
                 'seq': 4,
                 'saleFlag': '1',
-                'orderType': '2',  # todo: 1?? 2??
+                'orderType': '1',  # todo: 1?? 2?? ->1
                 'itemCd': '00001',  # 아메리카노
                 'qty': -1,
                 'itemSellGroup': '2',
@@ -339,5 +341,24 @@ def trade(request):
         print(saleHeader)
         print(saleDetail)
         print(cardLog)
+
+        SaleHeader.objects.create(
+            storeCd = storeCd,
+            saleDt = saleDt,
+            posNo = posNo,
+            billNo = billNo,
+            saleFlag = saleFlag,
+            totQty = headerTotQty,
+            totSaleAmt = headerTotSaleAmt,
+            saleAmt = headerSaleAmt,
+            supAmt = headerSupAmt,
+            taxAmt = headerTaxAmt,
+            offTaxAmt = headerOffTaxAmt,
+            totDcAmt = headerTotDcAmt,
+            pointDcAmt = headerPointDcAmt,
+            pointDcCnt = headerPointDcCnt,
+            cardAmt = headerCardAmt,
+            kkmAmt = 0.0
+        )
     except Exception as ex:
         print(ex)
