@@ -36,7 +36,6 @@ class SaleDetail(models.Model):
     itemSellType = models.CharField(max_length=3, default='000') #[1:일반/2:옵션변경/3:옵션추가/4:1+1/5:사은품]
     saleCost = models.FloatField(default=0.0)
     salePrice = models.FloatField(default=0.0)
-    orgSalePrice = models.FloatField(null=True)
     totSaleAmt = models.FloatField(default=0.0)
     saleAmt = models.FloatField(default=0.0)
     supAmt = models.FloatField(default=0.0)
