@@ -1,5 +1,6 @@
 import os
 import requests
+from django.db import transaction
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
@@ -76,7 +77,7 @@ def kakao_callback(request):
     except KakaoException:
         return HttpResponseRedirect("http://13.124.90.138:3000/login")
 
-
+@transaction.atomic
 def trade(request):
     try:
         # parameter from api
@@ -146,7 +147,7 @@ def trade(request):
 
 
         if billNo:
-            billNo = f'{int(billNo[0]) + 1:05}'
+            billNo = f'{int(billNo[0].billNo) + 1:05}'
         else:
             billNo = '00001'
 
@@ -177,7 +178,7 @@ def trade(request):
             # 아메리카노 2잔
             {
                 'seq': 1,
-                'orderType': '1', #1:일반/2:세트
+                'orderTypeFlag': '1', #1:일반/2:세트
                 'itemCd': '00001',  # 아메리카노
                 'qty': 2,
                 'itemSellGroup': '1', #세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
@@ -187,7 +188,7 @@ def trade(request):
             # 티라미스세트 1개
             {  # 티라미스 세트
                 'seq': 2,
-                'orderType': '2',
+                'orderTypeFlag': '2',
                 'itemCd': '00002',  # 티라미스 세트
                 'qty': 1,
                 'itemSellGroup': '2',
@@ -196,7 +197,7 @@ def trade(request):
             },
             {  # 티라미스
                 'seq': 3,
-                'orderType': '1',  # todo: 1?? 2?? ->1
+                'orderTypeFlag': '1',  # todo: 1?? 2?? ->1
                 'itemCd': '00003',  # 티라미스
                 'qty': 1,
                 'itemSellGroup': '2',
@@ -206,7 +207,7 @@ def trade(request):
             {  # 아메리카노
                 'seq': 4,
                 'saleFlag': '1',
-                'orderType': '1',  # todo: 1?? 2?? ->1
+                'orderTypeFlag': '1',  # todo: 1?? 2?? ->1
                 'itemCd': '00001',  # 아메리카노
                 'qty': -1,
                 'itemSellGroup': '2',
@@ -215,7 +216,7 @@ def trade(request):
             },
             {  # 라떼
                 'seq': 5,
-                'orderType': '2',  # todo: 1?? 2??
+                'orderTypeFlag': '2',  # todo: 1?? 2??
                 'itemCd': '00004',  # 라떼
                 'qty': 1,
                 'itemSellGroup': '2',
@@ -225,7 +226,7 @@ def trade(request):
             # 아메리카노 샷추가 1잔
             {  # 아메리카노
                 'seq': 6,
-                'orderType': '1',
+                'orderTypeFlag': '1',
                 'itemCd': '00001',  # 아메리카노
                 'qty': 1,
                 'itemSellGroup': '3',
@@ -234,7 +235,7 @@ def trade(request):
             },
             {  # 샷추가
                 'seq': 7,
-                'orderType': '1',
+                'orderTypeFlag': '1',
                 'itemCd': '00005',  # 샷추가
                 'qty': 1,
                 'itemSellGroup': '3',
@@ -252,7 +253,7 @@ def trade(request):
             headerTotQty += item['qty']
             saleDetailRow = {
                 'seq': i,
-                'orderType': item['orderType'],
+                'orderTypeFlag': item['orderTypeFlag'],
                 'itemCd': target.itemCd,
                 'itemName': target.itemName,
                 'qty': item['qty'],
@@ -282,7 +283,7 @@ def trade(request):
                 headerCardAmt += payment['amount'] #카드결제금액 더해가는 방식
                 cardCardAmt += payment['amount']
                 cardCardNo = payment['cardNo']
-                cardVanCd = 'nicePg' #todo: asp에 nice pg코드 등록
+                cardVanCd = '001' #todo: asp에 nice pg코드 등록
                 cardCardCd = '001' #발급사 #todo: asp cardCode와 맞추기
                 cardCardName = '하나카드' #todo: asp cardNamerhk 맞추기
                 cardBuyCardCd = '001' #매입사 #todo: asp cardCode와 맞추기
@@ -343,7 +344,7 @@ def trade(request):
         # print(cardLog)
 
 
-        print(saleDetails)
+        # print(saleDetails)
 
 
         SaleHeader.objects.create(
@@ -371,29 +372,29 @@ def trade(request):
                 saleDt = saleDt,
                 posNo = posNo,
                 billNo = billNo,
-                seq = saleDetail.seq,
+                seq = saleDetail['seq'],
                 saleFlag = saleFlag,
-                orderTypeFlag = saleDetail.orderTypeflag,
-                itemCd = saleDetail.itemCd,
-                itemName = saleDetail.itemName,
-                qty = saleDetail.qty,
-                itemSellGroup = saleDetail.itemSellGroup,
-                itemSellLevel = saleDetail.itemSellLevel,
-                itemSellType = saleDetail.itemSellType,
-                saleCost = saleDetail.saleCost,
-                salePrice = saleDetail.salePrice,
-                totSaleAmt = saleDetail.totSaleAmt,
-                saleAmt = saleDetail.saleAmt,
-                supAmt = saleDetail.supAmt,
-                taxAmt = saleDetail.taxAmt,
-                offTaxAmt = saleDetail.offTaxAmt,
-                taxFlag = saleDetail.taxFlag,
-                totDcAmt = saleDetail.totDcAmt,
-                pointDcAmt = saleDetail.pointDcAmt,
-                saleTime = saleDetail.saleTime
+                orderTypeFlag = saleDetail['orderTypeFlag'],
+                itemCd = saleDetail['itemCd'],
+                itemName = saleDetail['itemName'],
+                qty = saleDetail['qty'],
+                itemSellGroup = saleDetail['itemSellGroup'],
+                itemSellLevel = saleDetail['itemSellLevel'],
+                itemSellType = saleDetail['itemSellType'],
+                saleCost = saleDetail['saleCost'],
+                salePrice = saleDetail['salePrice'],
+                totSaleAmt = saleDetail['totSaleAmt'],
+                saleAmt = saleDetail['saleAmt'],
+                supAmt = saleDetail['supAmt'],
+                taxAmt = saleDetail['taxAmt'],
+                offTaxAmt = saleDetail['offTaxAmt'],
+                taxFlag = saleDetail['taxFlag'],
+                totDcAmt = saleDetail['totDcAmt'],
+                pointDcAmt = saleDetail['pointDcAmt'],
+                saleTime = saleDetail['saleTime']
             )
 
-        CardLog.objects.creqte(
+        CardLog.objects.create(
             storeCd = storeCd,
             saleDt = saleDt,
             posNo = posNo,
