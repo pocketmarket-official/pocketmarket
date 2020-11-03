@@ -34,6 +34,7 @@ import KDSKitchen from './Routes/KDSKitchen';
 import KDSSetting from './Routes/KDSSetting';
 import './App.css';
 import Intro from "./Routes/Intro";
+import OrderInfoPayMethod from "./Routes/OrderInfoPayMethod";
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
         <CacheSwitch>
           <CacheRoute exact path="/main/store/:storeId/order" component={Order} />
           <CacheRoute exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
+          <CacheRoute exact path="/main/store/:storeId/orderinfo/payMethod" component={OrderInfoPayMethod} />
           <CacheRoute exact path="/main/store/:storeId/orderinfo_test" component={OrderInfo_test} />
         </CacheSwitch>
         <CacheRoute authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />

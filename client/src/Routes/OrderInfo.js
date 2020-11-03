@@ -1,6 +1,7 @@
 import React from 'react';
 import pay from '../bootpay.js';
 import HeaderBiz from "../Components/js/HeaderBiz";
+import {Link} from "react-router-dom";
 
 import '../Components/scss/orderInfo.scss';
 
@@ -21,7 +22,7 @@ class OrderInfo extends React.Component {
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">포장선택</div>
                         <div className="orderinfo__choices" style={{paddingLeft: '26px'}}>
-                            <input id="eatIn" type="radio" name="where" value="Eat in" checked /><label htmlFor="eatIn">Eat-in</label>
+                            <input id="eatIn" type="radio" name="where" value="Eat in" defaultChecked={true} /><label htmlFor="eatIn">Eat-in</label>
                             <input id="takeOut" type="radio" name="where" value="Take out" /><label htmlFor="takeOut" style={{marginRight: '20px'}}>Take-out</label>
                         </div>
                     </div>
@@ -34,10 +35,12 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">결제수단선택</div>
-                        <div className="orderinfo__choices">
-                            <input type="checkbox" value="PG결제" />PG결제
-                            <span>></span>
-                        </div>
+                        <Link to="/main/store/C0001/orderinfo/payMethod">
+                            <div className="orderinfo__choices">
+                                <input type="checkbox" value="PG결제" />PG결제
+                                <span>></span>
+                            </div>
+                        </Link>
                     </div>
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">주문 내역</div>
