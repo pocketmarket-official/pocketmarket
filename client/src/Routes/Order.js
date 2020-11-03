@@ -290,7 +290,14 @@ class Order extends React.Component {
                                                 <>
                                                     <div>{item[0].itemName}</div>
                                                     <input type="number" id="option__quantity" value={item[1]} />
-                                                    <button>X</button>
+                                                    <button onClick={() => {
+                                                        for(let i in this.state.modal_options) {
+                                                            if(this.state.modal_options[i][0] === item[0]) {
+                                                                this.state.modal_options.splice(i, 1);
+                                                                this.setState(this.state);
+                                                            }
+                                                        }
+                                                    }}>X</button>
                                                 </>
                                             );
                                         })
