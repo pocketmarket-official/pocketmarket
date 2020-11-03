@@ -1,0 +1,223 @@
+@import "mixins";
+
+$headerHeight: 63px;
+
+.storeGrid-store {
+  width: 100%;
+  margin-top: $headerHeight;
+  padding: 0 11px;
+  box-sizing: border-box;
+
+  .storeGrid__content {
+    margin: 0 -11px;
+
+    $storeGridImageWidth: 414px;
+    $storeGridImageHeight: 210px;
+
+    .storeGrid__image {
+      img {
+        width: $storeGridImageWidth;
+        height: $storeGridImageHeight;
+        filter: brightness(.3);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        max-width: 100%;
+        display: block;
+      }
+    }
+    .storeGrid__title {
+      position: absolute;
+      top: $headerHeight;
+      left: 0;
+      width: $storeGridImageWidth;
+      height: $storeGridImageHeight;
+      padding: 12px 10px;
+      color: #ffa800;
+      font-weight: bold;
+      font-size: .7rem;
+      font-family: "Nanum Gothic", sans-serif;
+      box-sizing: border-box;
+      letter-spacing: 1.03px;
+
+      .storeGrid__name {
+        margin-left: 9px;
+        font-size: 1.83rem;
+        font-weight: 800;
+        letter-spacing: 1.39px;
+        color: #fa245a;
+        letter-spacing: 0px;
+      }
+
+      .storeGrid__description {
+        margin-top: 13px;
+        margin-left: 35px;
+        width: calc(100% - 35px);
+        font-size: 14px;
+        font-weight: 100;
+        line-height: 1.5;
+        color: white;
+        font-family: "MaplestoryOTFLight";
+        letter-spacing: 0px;
+      }
+
+      .storeGrid__likes{
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 62px;
+        height: 20px;
+        line-height: 20px;
+        border-radius: 21.5px;
+        color: white;
+        font-weight: bold;
+        font-size: .8rem;
+        background-color: #ffa800;
+        @include stroke(#653c10, 1px);
+        .likesButton{
+          float: left;
+          width: 25px;
+          height: 20px;
+          font-family: "MaplestoryOTFLight", sans-serif;
+          font-size: 14px;
+          font-weight: 300;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 22px;
+          letter-spacing: 0.5px;
+          text-align: center;
+          margin: 0;
+          color: #ffffff;
+        }
+      }
+    }
+
+    .button__container{
+      height: 27px;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 2px;
+      .slide{
+        width: 44px;
+        height: 21px;
+        border-radius: 19.5px;
+        background-color: #343434;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .subslide{
+          width: 34px;
+          height: 13px;
+          border-radius: 19.5px;
+          background-color: #131313;
+          display: flex;
+          align-items: center;
+          .slideBall{
+            width: 15px;
+            height: 15px;
+            background-color: #fa245a;
+            border-radius: 50%;
+          }
+        }
+      }
+      button {
+        background-color: #ffffff;
+        .simple{
+          font-size: 10px;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          letter-spacing: 1.9px;
+          color: #535353;
+        }
+        .detail{
+          font-size: 10px;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          letter-spacing: 1.9px;
+          color: #535353;
+          margin-right: 5px;
+        }
+      }
+
+    }
+  }
+
+  .store__review__grid {
+    margin: 0 -11px;
+    width: 414px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+
+    .storeGridMenu{
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content:space-between;
+
+      div{
+        position: relative;
+        flex: 1;
+        height: 100%;
+        padding: 1px;
+
+        &.photo {
+
+          &:after {
+            position: absolute;
+            background-repeat: no-repeat;
+            content: '';
+            background: url('../../assets/store_grid/photo_ico.png');
+            top: 7px;
+            right: 7px;
+            background-size: contain;
+            width:20px;
+            height: 15px;
+          }
+        }
+
+        img {
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          max-width: 100%;
+          height: auto;
+          display: block;
+        }
+      }
+    }
+  }
+
+}
+
+.order{
+  width: 155px;
+  height: 51px;
+  border-radius: 15px;
+  background-color: black;
+  position: fixed;
+  left: calc((414px - 155px) / 2);
+  bottom: 9px;
+  .orderButton{
+    width: 99px;
+    height: 51px;
+    margin: auto;
+    font-family: NanumGothic, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 51px;
+    letter-spacing: 0.68px;
+    text-align: center;
+    color: #ffa800;
+  }
+}

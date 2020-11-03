@@ -1,6 +1,7 @@
 import React from 'react';
 import InfiniteScroll from './InfiniteScroll';
-
+import '../scss/storeList.scss';
+import menu from '../../assets/store_list/grid_img1.jpg';
 
 class StoreList extends React.Component {
     constructor(props) {
@@ -216,9 +217,26 @@ class StoreList extends React.Component {
 
     render() {
         return(
-            this.state.data.map((data) => (
-                <InfiniteScroll data={data} key={data.id} />
-            ))
+            //this.state.data.map((data) => (
+            //    <InfiniteScroll data={data} key={data.id} />))
+            //this.state.temp.forEach(it => {
+                <div className="storeList__grid">
+                    <div className="storeList__box">
+                        <div className="storeList_publisherBox">
+                            <div className="storeList__photo"><img src={menu}/></div>
+                            <div className="storeList__name">홍길동길동</div>
+                            <div className="storeList__likes"><p className="listLikesButton">♥</p>53</div>
+                            <div className="storeList__publisher">Hong**** 20.09.20 [치즈핫도그, 콘핫도그x2] </div>
+                            <div className="storeList__description">한입 와앙! 물고 놨는데 한도끝도 없이 끊어지지 않고 늘어나는 치즈 (;;;) ㅋㅋㅋㅋ 사진으로 그게 표현이 안되는게 아쉽네..ㅜ? </div>
+                        </div>
+                        <div className="storeList__replyBox">
+                            <div className="storeList__replyButton"><p className="replyButton">답글</p></div>
+                            <div className="storeList__replyId">KinS**** </div>
+                            <div className="storeList__replyDescription">아 여기 치즈는 ㄹㅇ 인정이져. 핫도그 안에 치즈 생산공장 들엇는줄 </div>
+                        </div>
+                    </div>
+                </div>
+            //})
         );
     }
 }
