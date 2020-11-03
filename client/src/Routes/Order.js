@@ -259,10 +259,19 @@ class Order extends React.Component {
                                     return (
                                         <>
                                             <div className="options__option" onClick={() => {
-                                                this.setState({
-                                                    modal_options: this.state.modal_options.concat([data])
-                                                });
-                                                console.log(data);
+                                                let flag = false;
+                                                for (let i in this.state.modal_options) {
+                                                    if(this.state.modal_options[i][0] === data) {
+                                                        this.state.modal_options[i][1] += 1
+                                                        this.setState(this.state);
+                                                        flag = true;
+                                                    }
+                                                }
+                                                if(!flag) {
+                                                    this.setState({
+                                                        modal_options: this.state.modal_options.concat([[data, 1]])
+                                                    });
+                                                }
                                             }}>
                                                 <div>{data.itemName}</div>
                                                 <div>{data.price}원</div>
@@ -279,8 +288,8 @@ class Order extends React.Component {
                                         this.state.modal_options.map((item) => {
                                             return (
                                                 <>
-                                                    <div>{item.itemName}</div>
-                                                    <input type="number" id="option__quantity" />
+                                                    <div>{item[0].itemName}</div>
+                                                    <input type="number" id="option__quantity" value={item[1]} />
                                                     <button>X</button>
                                                 </>
                                             );
@@ -292,7 +301,9 @@ class Order extends React.Component {
                                 <button className="optionmodal__select">주문담기</button>
                                 <button className="optionmodal__clear" onClick={() => {
                                     const elt = document.getElementById("optionmodal");
-                                    elt.classList.add("hidden");
+                                    this.setState({
+                                        modal_options: []
+                                    });
                                 }}>초기화</button>
                             </div>
                         </div>
@@ -317,8 +328,11 @@ class Order extends React.Component {
                                                 const elt = document.getElementById("optionmodal");
                                                 this.setState({
                                                     selected: data,
+                                                }, () => {
+                                                    if(this.state.options[this.state.selected.id]) {
+                                                        elt.classList.remove("hidden"); // option 있는 뇨속만 modal 띄우기 없는 녀석은 바로 추가
+                                                    }
                                                 });
-                                                elt.classList.remove("hidden");
                                             }}>
                                         <img className="menu__image" src={data.imgSmallUrl} alt="menu" />
                                         <div className="menu__name">{data.itemName}</div>
