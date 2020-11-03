@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import axios from 'axios';
+import '../Components/scss/order.scss';
 
 
 class Order extends React.Component {
@@ -319,7 +320,15 @@ class Order extends React.Component {
 
                 <HeaderBack url='/mypage' />
                 <div className="orderpage">
+                    <div className="order__wait__box">
+                        <div className="order__wait__message_box">
+                            <div className="order__store">storeName</div>
+                            <div className="order__store__wait">waiting</div>
+                        </div>
+                    </div>
                     <div className="order__category">
+                        <div className="category__left"><span>{"<"}</span></div>
+                        <div className="category__right"><span>{">"}</span></div>
                         {this.state.touch_group.map((data) => {
                             return (
                                 <div className="category__content" id={data.code} onClick={() => this.getKeymap(data)}>{data.touchGroupName}</div>
@@ -353,21 +362,28 @@ class Order extends React.Component {
 
                     <div className="order__container">
                         <div className="order__result">
-                            <div onClick={this.clearOrderList}>초기화</div>
-                            <div className="order__quantity">
-                                수량
-                                <div className="order__total-quantity">8개</div>
+                            <div className="order__result__box">
+                                <div className="reset__button">
+                                    <div onClick={this.clearOrderList}>초기화</div>
+                                </div>
+                                <div className="result__box">
+                                    <div className="order__quantity">
+                                        수량
+                                        <div className="order__total-quantity">8개</div>
+                                    </div>
+                                    <div className="order__cost">
+                                        금액
+                                        <div className="cost__cost">12,000원</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="order__cost">
-                                금액
-                                <div className="cost__cost">12,000원</div>
-                            </div>
-                            <div><Link to={{
+                            <Link to={{
                                 pathname: this.state.link,
                                 state: {
                                     sellItemList: this.state.sellItemList,
-                                }}
-                            }>주문결제</Link></div>
+                                }}}>
+                                <div className="order__pass">주문결제</div>
+                            </Link>
                         </div>
                         <div className="order__detail">
                             <div className="order__item">
@@ -380,9 +396,20 @@ class Order extends React.Component {
                                 <button>X</button>
                             </div>
                             <div className="order__item">
+                                <div className="item__list">1</div>
                                 <div className="item__name">상품명</div>
-                                <div>옵션변경</div>
-                                <input type="number" name="quantity" id="quantity" />
+                                <div className="item__option__box">
+                                    <div className="item__option">옵션변경</div>
+                                </div>
+                                <div className="item__decrease__button">
+                                    <div className="item__decrease">-</div>
+                                </div>
+                                <div className="item__quantity">
+                                    2
+                                </div>
+                                <div className="item__increase__button">
+                                    <div className="item__increase">+</div>
+                                </div>
                                 <button>X</button>
                             </div>
                             <div className="order__item">
