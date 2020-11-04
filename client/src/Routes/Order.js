@@ -232,6 +232,11 @@ class Order extends React.Component {
         for(let index in this.state.order_list) {
             cnt += this.state.order_list[index][1];
             price += this.state.order_list[index][0].price * this.state.order_list[index][1];
+            if(this.state.order_list[index][0].option) {
+                for(let item in this.state.order_list[index][0].option) {
+                    price += this.state.order_list[index][0].option[item][0].price * this.state.order_list[index][0].option[item][1]
+                }
+            }
         }
         console.log(this.state);
         return (
@@ -316,9 +321,16 @@ class Order extends React.Component {
                                 </div>
                             </div>
                             <div className="optionmodal__btn">
-                                <button className="optionmodal__select">주문담기</button>
-                                <button className="optionmodal__clear" onClick={() => {
+                                <button className="optionmodal__select" onClick={() => {
+                                    this.state.selected["option"] = this.state.modal_options;
+                                    this.setState({
+                                        order_list: this.state.order_list.concat([[this.state.selected, 1]]),
+                                        modal_options: [],
+                                    });
                                     const elt = document.getElementById("optionmodal");
+                                    elt.classList.add("hidden");
+                                }}>주문담기</button>
+                                <button className="optionmodal__clear" onClick={() => {
                                     this.setState({
                                         modal_options: []
                                     });
