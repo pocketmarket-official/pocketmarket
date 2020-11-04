@@ -1,4 +1,5 @@
 import urllib.request
+import requests
 import json
 from brands.models import Brand
 from stores.models import Store
@@ -16,10 +17,14 @@ from items.models import Add
 from cprts.models import Cprt
 from cprts.models import Group
 from cprts.models import Relation
+from trades.models import SaleHeader
+from trades.models import SaleDetail
+from trades.models import CardLog
+
 
 
 ##todo get or create 구문에서 비교조건이 pk와 동일한지 체크
-def InterfaceView(request):
+def MasterDownView(request):
     try:
         ## values
         compCd = 'C0028'
@@ -616,3 +621,26 @@ def InterfaceView(request):
 
 # class InterfaceView(viewsets.ModelViewSet):
 #     compCd = '1'
+
+def TradeUploadView(request):
+    try:
+        saleHeader = []
+        saleHeaderRow = {}
+        saleDetail = []
+        saleDetailRow = {}
+        cardLog = []
+        cardLogRow = {}
+
+        saleHeader.append(saleHeaderRow)
+        saleDetail.append(saleDetailRow)
+        cardLog.append(cardLogRow)
+
+        trData = {
+            'T_SALE_H': saleHeader,
+            'T_SALE_D': saleDetail,
+            'cardLog': cardLog
+        }
+        request = requests.post('/api/outer/sale', data=saleHeader)
+
+    except Exception as ex:
+        print(ex)

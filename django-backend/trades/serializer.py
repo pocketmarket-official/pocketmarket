@@ -46,7 +46,7 @@ class SaleDetailSerializer(serializers.ModelSerializer):
             'billNo',
             'seq',
             'saleFlag',
-            'orderTypeFlag',
+            'orderType',
             'mealCd',
             'mealName',
             'itemCd',

@@ -27,7 +27,7 @@ class SaleDetail(models.Model):
     billNo = models.CharField(max_length=10, default='00000')
     seq = models.IntegerField(default=1)
     saleFlag = models.CharField(max_length=3, default='000') #baseCode:050 [0:전체/1:정상/2:취소]
-    orderTypeFlag = models.CharField(max_length=3, default='000') #baseCode:062 [1:단품/2:세트]
+    orderType = models.CharField(max_length=3, default='000') #baseCode:062 [1:단품/2:세트]
     itemCd = models.CharField(max_length=20, default='00000')
     itemName = models.CharField(max_length=200, default='')
     qty = models.IntegerField(default=1)
@@ -36,6 +36,7 @@ class SaleDetail(models.Model):
     itemSellType = models.CharField(max_length=3, default='000') #[1:일반/2:옵션변경/3:옵션추가/4:1+1/5:사은품]
     saleCost = models.FloatField(default=0.0)
     salePrice = models.FloatField(default=0.0)
+    orgSalePrice = models.FloatField(default=0.0)
     totSaleAmt = models.FloatField(default=0.0)
     saleAmt = models.FloatField(default=0.0)
     supAmt = models.FloatField(default=0.0)
@@ -60,7 +61,7 @@ class CashLog(models.Model):
     cashAmt = models.FloatField(default=0.0)
     returnYn = models.CharField(max_length=1, default='N')
     orgStoreCd = models.CharField(max_length=10, null=True)
-    orgSaleDate = models.CharField(max_length=8, null=True)
+    orgSaleDt = models.CharField(max_length=8, null=True)
     orgPosNo = models.CharField(max_length=5, null=True)
     orgBillNo = models.CharField(max_length=10, null=True)
     orgSeq = models.IntegerField(default=1, null=True)
@@ -85,7 +86,7 @@ class CardLog(models.Model):
     buyCardCd = models.CharField(max_length=3, default='000')
     buyCardName = models.CharField(max_length=50, default='')
     apprNo = models.CharField(max_length=20, default='0000000000000000')
-    apprDate = models.CharField(max_length=8, default='00000000')
+    apprDt = models.CharField(max_length=8, default='00000000')
     apprTime = models.CharField(max_length=6, default='000000')
     apprFlag = models.CharField(max_length=1, default=1) #[1:정상승인/2:임의등록]
     signYn = models.CharField(max_length=1, default='N')

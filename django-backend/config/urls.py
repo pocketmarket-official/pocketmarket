@@ -90,6 +90,6 @@ urlpatterns = [
     path("", include("core.urls")),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('interfaces/', interface_views.InterfaceView, name='interface'),
+    path('masterDown/', interface_views.MasterDownView, name='masterDown'),
 
 ]
