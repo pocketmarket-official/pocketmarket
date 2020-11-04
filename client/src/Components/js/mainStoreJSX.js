@@ -12,7 +12,6 @@ class StoreJSX extends React.Component {
     render() {
         let d = this.props.data.show_dist;
         let data = this.props.data;
-        console.log(data);
         return(
                 <div className="content__store">
                     <Link to={{

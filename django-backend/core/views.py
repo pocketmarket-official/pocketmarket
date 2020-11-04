@@ -1,5 +1,6 @@
 import os
 import requests
+from django.db import transaction
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
@@ -76,9 +77,19 @@ def kakao_callback(request):
     except KakaoException:
         return HttpResponseRedirect("http://13.124.90.138:3000/login")
 
-
+@transaction.atomic
 def trade(request):
     try:
+        # parameter from api
+        brandCd = '00001'
+        storeCd = 'C0001'
+        posNo = '01'
+        dcAmt = 0.0
+        saleFlag = '1'
+        # etc parameters
+        saleDt = datetime.today().strftime('%Y%m%d')
+        billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')
+
         ##definition for trade variables
         # saleHeader
         headerTotQty = 0
@@ -96,9 +107,10 @@ def trade(request):
         # headerCashAmt = 0.0
         headerCardAmt = 0.0
         # headerEtcAmt = 0.0
+        headerKkmAmt = 0.0
 
         # saleDetail
-        saleDetail = []
+        saleDetails = []
         saleDetailRow = {}
 
         #cardLog
@@ -112,7 +124,7 @@ def trade(request):
         cardBuyCardCd = '' #todo: 이거 뭐임?
         cardBuyCardName = ''
         cardApprNo = ''
-        cardApprDt = ''
+        cardApprDate = ''
         cardApprTime = ''
         cardApprFlag = '1' #1:정상승인/2:임의등록
         cardSignYn = 'N'
@@ -120,7 +132,7 @@ def trade(request):
         cardInstMont = 0
         cardTerminalId = ''
         cardRegisterNo = ''
-        cardReturnFlag = 'N'
+        cardReturnYn = 'N'
         # ORG_STOR_CD
         # ORG_SALE_DT
         # ORG_POS_NO
@@ -133,17 +145,9 @@ def trade(request):
         # MOD_DT
         # MOD_US
 
-        # parameter from api
-        brandCd = '00001'
-        storeCd = 'C0001'
-        posNo = '01'
-        dcAmt = 0.0
-        saleFlag = '1'
-        # etc parameters
-        saleDt = datetime.today().strftime('%Y%m%d')
-        billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')
+
         if billNo:
-            billNo = f'{int(billNo[0]) + 1:05}'
+            billNo = f'{int(billNo[0].billNo) + 1:05}'
         else:
             billNo = '00001'
 
@@ -174,7 +178,7 @@ def trade(request):
             # 아메리카노 2잔
             {
                 'seq': 1,
-                'orderType': '1', #1:일반/2:세트
+                'orderTypeFlag': '1', #1:일반/2:세트
                 'itemCd': '00001',  # 아메리카노
                 'qty': 2,
                 'itemSellGroup': '1', #세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
@@ -184,7 +188,7 @@ def trade(request):
             # 티라미스세트 1개
             {  # 티라미스 세트
                 'seq': 2,
-                'orderType': '2',
+                'orderTypeFlag': '2',
                 'itemCd': '00002',  # 티라미스 세트
                 'qty': 1,
                 'itemSellGroup': '2',
@@ -193,7 +197,7 @@ def trade(request):
             },
             {  # 티라미스
                 'seq': 3,
-                'orderType': '2',  # todo: 1?? 2??
+                'orderTypeFlag': '1',  # todo: 1?? 2?? ->1
                 'itemCd': '00003',  # 티라미스
                 'qty': 1,
                 'itemSellGroup': '2',
@@ -203,7 +207,7 @@ def trade(request):
             {  # 아메리카노
                 'seq': 4,
                 'saleFlag': '1',
-                'orderType': '2',  # todo: 1?? 2??
+                'orderTypeFlag': '1',  # todo: 1?? 2?? ->1
                 'itemCd': '00001',  # 아메리카노
                 'qty': -1,
                 'itemSellGroup': '2',
@@ -212,7 +216,7 @@ def trade(request):
             },
             {  # 라떼
                 'seq': 5,
-                'orderType': '2',  # todo: 1?? 2??
+                'orderTypeFlag': '2',  # todo: 1?? 2??
                 'itemCd': '00004',  # 라떼
                 'qty': 1,
                 'itemSellGroup': '2',
@@ -222,7 +226,7 @@ def trade(request):
             # 아메리카노 샷추가 1잔
             {  # 아메리카노
                 'seq': 6,
-                'orderType': '1',
+                'orderTypeFlag': '1',
                 'itemCd': '00001',  # 아메리카노
                 'qty': 1,
                 'itemSellGroup': '3',
@@ -231,7 +235,7 @@ def trade(request):
             },
             {  # 샷추가
                 'seq': 7,
-                'orderType': '1',
+                'orderTypeFlag': '1',
                 'itemCd': '00005',  # 샷추가
                 'qty': 1,
                 'itemSellGroup': '3',
@@ -249,7 +253,7 @@ def trade(request):
             headerTotQty += item['qty']
             saleDetailRow = {
                 'seq': i,
-                'orderType': item['orderType'],
+                'orderTypeFlag': item['orderTypeFlag'],
                 'itemCd': target.itemCd,
                 'itemName': target.itemName,
                 'qty': item['qty'],
@@ -258,19 +262,19 @@ def trade(request):
                 'itemSellType': item['itemSellType'],
                 'saleCost': target.price,
                 'salePrice': target.price - dcAmt,
-                'org_sale_pric': target.price,
-                'tot_sale_amt': target.price * item['qty'],
-                'sale_amt': (target.price * item['qty']) - dcAmt,
-                'sup_amt': ((target.price * item['qty']) - dcAmt)*1.1,
-                'tax_amt': target.price - dcAmt - (((target.price * item['qty']) - dcAmt)*1.1),
-                'off_tax_amt': 0.0,
-                'tax_yn': 'Y',
-                'tot_dc_amt': 0.0,
-                'norm_dc_amt': 0.0,
-                'pnt_dc_amt': 0.0,
-                'sale_tm': '090810',
+                'orgSalePrice': target.price,
+                'totSaleAmt': target.price * item['qty'],
+                'saleAmt': (target.price * item['qty']) - dcAmt,
+                'supAmt': ((target.price * item['qty']) - dcAmt)*1.1,
+                'taxAmt': target.price - dcAmt - (((target.price * item['qty']) - dcAmt)*1.1),
+                'offTaxAmt': 0.0,
+                'taxFlag': '1',
+                'totDcAmt': 0.0,
+                'normDcAmt': 0.0,
+                'pointDcAmt': 0.0,
+                'saleTime': '090810',
             }
-            saleDetail.append(saleDetailRow)
+            saleDetails.append(saleDetailRow)
 
         for payment in payments:
 
@@ -279,13 +283,13 @@ def trade(request):
                 headerCardAmt += payment['amount'] #카드결제금액 더해가는 방식
                 cardCardAmt += payment['amount']
                 cardCardNo = payment['cardNo']
-                cardVanCd = 'nicePg' #todo: asp에 nice pg코드 등록
+                cardVanCd = '001' #todo: asp에 nice pg코드 등록
                 cardCardCd = '001' #발급사 #todo: asp cardCode와 맞추기
                 cardCardName = '하나카드' #todo: asp cardNamerhk 맞추기
                 cardBuyCardCd = '001' #매입사 #todo: asp cardCode와 맞추기
                 cardBuyCardName = '하나카드' #todo: asp cardNamerhk 맞추기
                 cardApprNo = payment['apprNo']
-                cardApprDt = payment['apprDt']
+                cardApprDate = payment['apprDt']
                 cardApprTime = payment['apprTime']
                 cardTerminalId = payment['terminalId']
                 cardRegisterNo = payment['registerNo']
@@ -300,44 +304,120 @@ def trade(request):
         headerOffTaxAmt = 0.0
 
 
-        saleHeader = {
-            'headerTotQty': headerTotQty,
-            'headerTotSaleAmt': headerTotSaleAmt,
-            'headerSaleAmt': headerSaleAmt,
-            'headerSupAmt': headerSupAmt,
-            'headerTaxAmt': headerTaxAmt,
-            'headerOffTaxAmt': headerOffTaxAmt,
-            'headerTaxYn': headerTaxYn,
-            'headerTotDcAmt':  headerTotDcAmt,
-            'headerPointDcAmt': headerPointDcAmt,
-            'headerPointDcCnt': headerPointDcCnt,
-            'headerCardAmt': headerCardAmt
-        }
+        # saleHeader = {
+        #     'headerTotQty': headerTotQty,
+        #     'headerTotSaleAmt': headerTotSaleAmt,
+        #     'headerSaleAmt': headerSaleAmt,
+        #     'headerSupAmt': headerSupAmt,
+        #     'headerTaxAmt': headerTaxAmt,
+        #     'headerOffTaxAmt': headerOffTaxAmt,
+        #     'headerTaxYn': headerTaxYn,
+        #     'headerTotDcAmt':  headerTotDcAmt,
+        #     'headerPointDcAmt': headerPointDcAmt,
+        #     'headerPointDcCnt': headerPointDcCnt,
+        #     'headerCardAmt': headerCardAmt,
+        #     'kkmAmt': headerKkmAmt
+        # }
+        #print(saleHeader)
 
-        cardLog = {
-            'card_tranFlag': card_tranFlag,
-            'cardSeq': cardSeq,
-            'cardCardAmt': cardCardAmt,
-            'cardCardNo': cardCardNo,
-            'cardVanCd': cardVanCd,
-            'cardCardCd': cardCardCd,
-            'cardCardName': cardCardName,
-            'cardBuyCardCd': cardBuyCardCd,
-            'cardBuyCardName': cardBuyCardName,
-            'cardApprNo': cardApprNo,
-            'cardApprDt': cardApprDt,
-            'cardApprTime': cardApprTime,
-            'cardApprFlag': cardApprFlag,
-            'cardSignYn': cardSignYn,
-            'cardInstFlag': cardInstFlag,
-            'cardInstMont': cardInstMont,
-            'cardTerminalId': cardTerminalId,
-            'cardRegisterNo': cardRegisterNo,
-            'cardReturnFlag': cardReturnFlag
-        }
+        # cardLog = {
+        #     'card_tranFlag': card_tranFlag,
+        #     'cardSeq': cardSeq,
+        #     'cardCardAmt': cardCardAmt,
+        #     'cardCardNo': cardCardNo,
+        #     'cardVanCd': cardVanCd,
+        #     'cardCardCd': cardCardCd,
+        #     'cardCardName': cardCardName,
+        #     'cardBuyCardCd': cardBuyCardCd,
+        #     'cardBuyCardName': cardBuyCardName,
+        #     'cardApprNo': cardApprNo,
+        #     'cardApprDate': cardApprDate,
+        #     'cardApprTime': cardApprTime,
+        #     'cardApprFlag': cardApprFlag,
+        #     'cardSignYn': cardSignYn,
+        #     'cardInstFlag': cardInstFlag,
+        #     'cardInstMont': cardInstMont,
+        #     'cardTerminalId': cardTerminalId,
+        #     'cardRegisterNo': cardRegisterNo,
+        #     'cardReturnYn': cardReturnYn
+        # }
+        # print(cardLog)
 
-        print(saleHeader)
-        print(saleDetail)
-        print(cardLog)
+
+        # print(saleDetails)
+
+
+        SaleHeader.objects.create(
+            storeCd = storeCd,
+            saleDt = saleDt,
+            posNo = posNo,
+            billNo = billNo,
+            saleFlag = saleFlag,
+            totQty = headerTotQty,
+            totSaleAmt = headerTotSaleAmt,
+            saleAmt = headerSaleAmt,
+            supAmt = headerSupAmt,
+            taxAmt = headerTaxAmt,
+            offTaxAmt = headerOffTaxAmt,
+            totDcAmt = headerTotDcAmt,
+            pointDcAmt = headerPointDcAmt,
+            pointDcCnt = headerPointDcCnt,
+            cardAmt = headerCardAmt,
+            kkmAmt = headerKkmAmt
+        )
+
+        for saleDetail in saleDetails:
+            SaleDetail.objects.create(
+                storeCd = storeCd,
+                saleDt = saleDt,
+                posNo = posNo,
+                billNo = billNo,
+                seq = saleDetail['seq'],
+                saleFlag = saleFlag,
+                orderTypeFlag = saleDetail['orderTypeFlag'],
+                itemCd = saleDetail['itemCd'],
+                itemName = saleDetail['itemName'],
+                qty = saleDetail['qty'],
+                itemSellGroup = saleDetail['itemSellGroup'],
+                itemSellLevel = saleDetail['itemSellLevel'],
+                itemSellType = saleDetail['itemSellType'],
+                saleCost = saleDetail['saleCost'],
+                salePrice = saleDetail['salePrice'],
+                totSaleAmt = saleDetail['totSaleAmt'],
+                saleAmt = saleDetail['saleAmt'],
+                supAmt = saleDetail['supAmt'],
+                taxAmt = saleDetail['taxAmt'],
+                offTaxAmt = saleDetail['offTaxAmt'],
+                taxFlag = saleDetail['taxFlag'],
+                totDcAmt = saleDetail['totDcAmt'],
+                pointDcAmt = saleDetail['pointDcAmt'],
+                saleTime = saleDetail['saleTime']
+            )
+
+        CardLog.objects.create(
+            storeCd = storeCd,
+            saleDt = saleDt,
+            posNo = posNo,
+            billNo = billNo,
+            seq = cardSeq,
+            saleFlag = saleFlag,
+            cardAmt = cardCardAmt,
+            cardNo = cardCardNo,
+            vanCd = cardVanCd,
+            cardCd = cardCardCd,
+            cardName = cardCardName,
+            buyCardCd = cardBuyCardCd,
+            buyCardName = cardBuyCardName,
+            apprNo = cardApprNo,
+            apprDate = cardApprDate,
+            apprTime = cardApprTime,
+            apprFlag = cardApprFlag,
+            instMonth = cardInstMont,
+            terminalId = cardTerminalId,
+            registerNo = cardRegisterNo,
+            returnYn = cardReturnYn
+        )
+
+
     except Exception as ex:
         print(ex)

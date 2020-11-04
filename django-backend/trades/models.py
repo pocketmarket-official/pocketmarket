@@ -8,20 +8,17 @@ class SaleHeader(models.Model):
     posNo = models.CharField(max_length=5, default='91')
     billNo = models.CharField(max_length=10, default='00000')
     saleFlag = models.CharField(max_length=3, default='000') #baseCode:050 [0:전체/1:정상/2:취소]
-    mealCd = models.CharField(max_length=3, default='000')
-    mealName = models.CharField(max_length=50, default='')
-    totalQty = models.IntegerField(default=0)
-    totalSaleAmt = models.FloatField(default=0.0) #할인이 적용되기 전 매출액
+    totQty = models.IntegerField(default=0)
+    totSaleAmt = models.FloatField(default=0.0) #할인이 적용되기 전 매출액
     saleAmt = models.FloatField(default=0.0) #할인이 적용된 실제 결제금액
-    supplyAmt = models.FloatField(default=0.0) #실매출-부가세(실매출액)
+    supAmt = models.FloatField(default=0.0) #실매출-부가세(실매출액)
     taxAmt = models.FloatField(default=0.0)
     offTaxAmt = models.FloatField(default=0.0)
-    totalDcAmt = models.FloatField(default=0.0)
+    totDcAmt = models.FloatField(default=0.0)
     pointDcAmt = models.FloatField(default=0.0)
     pointDcCnt = models.IntegerField(default=0)
-    cashAmt = models.FloatField(default=0.0)
     cardAmt = models.FloatField(default=0.0)
-    etcAmt = models.FloatField(default=0.0)
+    kkmAmt = models.FloatField(default=0.0)
 
 class SaleDetail(models.Model):
     storeCd = models.CharField(max_length=10, default='00000')
@@ -31,8 +28,6 @@ class SaleDetail(models.Model):
     seq = models.IntegerField(default=1)
     saleFlag = models.CharField(max_length=3, default='000') #baseCode:050 [0:전체/1:정상/2:취소]
     orderTypeFlag = models.CharField(max_length=3, default='000') #baseCode:062 [1:단품/2:세트]
-    mealCd = models.CharField(max_length=3, default='000')
-    mealName = models.CharField(max_length=50, default='')
     itemCd = models.CharField(max_length=20, default='00000')
     itemName = models.CharField(max_length=200, default='')
     qty = models.IntegerField(default=1)
@@ -41,14 +36,13 @@ class SaleDetail(models.Model):
     itemSellType = models.CharField(max_length=3, default='000') #[1:일반/2:옵션변경/3:옵션추가/4:1+1/5:사은품]
     saleCost = models.FloatField(default=0.0)
     salePrice = models.FloatField(default=0.0)
-    orgSalePrice = models.FloatField(null=True)
-    totalSaleAmt = models.FloatField(default=0.0)
+    totSaleAmt = models.FloatField(default=0.0)
     saleAmt = models.FloatField(default=0.0)
-    supplyAmt = models.FloatField(default=0.0)
+    supAmt = models.FloatField(default=0.0)
     taxAmt = models.FloatField(default=0.0)
     offTaxAmt = models.FloatField(default=0.0)
     taxFlag = models.CharField(max_length=1) #[1:과세/2:면세]
-    totalDcAmt = models.FloatField(default=0.0)
+    totDcAmt = models.FloatField(default=0.0)
     pointDcAmt = models.FloatField(default=0.0)
     saleTime = models.CharField(max_length=6)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
@@ -90,23 +84,16 @@ class CardLog(models.Model):
     cardName = models.CharField(max_length=50, default='')
     buyCardCd = models.CharField(max_length=3, default='000')
     buyCardName = models.CharField(max_length=50, default='')
-    approvalNo = models.CharField(max_length=20, default='0000000000000000')
-    approvalDate = models.CharField(max_length=8, default='00000000')
-    approvalTime = models.CharField(max_length=6, default='000000')
-    approvalFlag = models.CharField(max_length=1, default=1) #[1:정상승인/2:임의등록]
+    apprNo = models.CharField(max_length=20, default='0000000000000000')
+    apprDate = models.CharField(max_length=8, default='00000000')
+    apprTime = models.CharField(max_length=6, default='000000')
+    apprFlag = models.CharField(max_length=1, default=1) #[1:정상승인/2:임의등록]
     signYn = models.CharField(max_length=1, default='N')
     instFlag = models.CharField(max_length=1, default='0') #[0:할부없음/1:할부]
     instMonth = models.CharField(max_length=2, default='00')
     terminalId = models.CharField(max_length=20, default='')
     registerNo = models.CharField(max_length=20, default='')
     returnYn = models.CharField(max_length=1, default='N')
-    orgStoreCd = models.CharField(max_length=10, null=True)
-    orgSaleDate = models.CharField(max_length=8, null=True)
-    orgPosNo = models.CharField(max_length=5, null=True)
-    orgBillNo = models.CharField(max_length=10, null=True)
-    orgSeq = models.IntegerField(default=1, null=True)
-    orgApprovalNo = models.CharField(max_length=20, null=True)
-    remark = models.CharField(max_length=255, null=True)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
@@ -123,11 +110,6 @@ class EtcLog(models.Model):
     etcPayCatCd = models.CharField(max_length=5, default='000')
     etcPayCd = models.CharField(max_length=5, default='000')
     remark = models.CharField(max_length=255, null=True)
-    orgStoreCd = models.CharField(max_length=10, null=True)
-    orgSaleDate = models.CharField(max_length=8, null=True)
-    orgPosNo = models.CharField(max_length=5, null=True)
-    orgBillNo = models.CharField(max_length=10, null=True)
-    orgSeq = models.IntegerField(default=1, null=True)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
