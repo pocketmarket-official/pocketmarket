@@ -92,12 +92,10 @@ class StoreView extends React.Component {
                             <div className="storeGrid__image"><img src={bg}/></div>
                             <div className="storeGrid__detail">
                                 <div className="storeGrid__title">
-                                    <div className="storeGrid__name">{this.props.location.state.data.store_nm}</div>
+                                    <div className="storeGrid__name">{this.props.location.state.data.storeName}</div>
                                     <div className="storeGrid__distance">{this.props.location.state.d}</div>
                                     <div className="storeGrid__likes"><p className="likesButton">♥</p>{this.props.location.state.data.like_count || 123}</div>
-                                    Store
-                                    <div className="storeGrid__name">강남핫도그</div>
-                                    <div className="storeGrid__description">백종원의 푸드트럭에서 가장 핫한 매장중 하나인 바로 그 강남 핫도그입니다. 최고급 수제소세지와 치즈를 사용하고 있으니 직접 한번 드셔보세요.</div>
+                                    <div className="storeGrid__description">{this.props.location.state.data.description}</div>
                                 </div>
                                 <div className="storeGrid__description">
                                     {this.props.location.state.data.comment}
@@ -116,8 +114,11 @@ class StoreView extends React.Component {
                     </div>
                     {this.handlePageRender()}
                 </div>
-                <div className="order"><Link to={this.state.link}>
-                    <p className="orderButton">주문하기</p></Link></div>
+                <div className="order">
+                    <Link to={this.state.link}>
+                        <p className="orderButton">주문하기</p>
+                    </Link>
+                </div>
             </>
         );
     }

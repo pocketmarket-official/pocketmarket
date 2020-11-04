@@ -51,6 +51,7 @@ class Order extends React.Component {
         this.state = {
             link: link,
             sellItemList: tradesInfo,
+            storeName: "",
             storeId: "",
             keymapCd: "",
             touchGroupCd: 0,
@@ -96,7 +97,8 @@ class Order extends React.Component {
                     ).id;
 
                     this.setState({
-                        touchGroupCd: touch_group_id
+                        touchGroupCd: touch_group_id,
+                        storeName: store.storeName,
                     })
 
                 })
@@ -224,6 +226,14 @@ class Order extends React.Component {
             }
         });
         let options = this.state.options[this.state.selected.id] || [];
+        // 수량 가격
+        let cnt = 0;
+        let price = 0;
+        for(let index in this.state.order_list) {
+            cnt += this.state.order_list[index][1];
+            price += this.state.order_list[index][0].price * this.state.order_list[index][1];
+        }
+        console.log(this.state);
         return (
             <>
                 <div className="optionmodal hidden" id="optionmodal" onClick={() => {
@@ -322,7 +332,7 @@ class Order extends React.Component {
                 <div className="orderpage">
                     <div className="order__wait__box">
                         <div className="order__wait__message_box">
-                            <div className="order__store">storeName</div>
+                            <div className="order__store">{this.state.storeName}</div>
                             <div className="order__store__wait">waiting</div>
                         </div>
                     </div>
@@ -346,7 +356,22 @@ class Order extends React.Component {
                                                     selected: data,
                                                 }, () => {
                                                     if(this.state.options[this.state.selected.id]) {
-                                                        elt.classList.remove("hidden"); // option 있는 뇨속만 modal 띄우기 없는 녀석은 바로 추가
+                                                        elt.classList.remove("hidden");
+                                                    } else {
+                                                        let flag = false;
+                                                        for(let i in this.state.order_list) {
+                                                            if(this.state.order_list[i][0] === data) {
+                                                                this.state.order_list[i][1] += 1;
+                                                                this.setState(this.state);
+                                                                flag = true;
+                                                            }
+                                                        }
+
+                                                        if(!flag) {
+                                                            this.setState({
+                                                                order_list: this.state.order_list.concat([[data, 1]]),
+                                                            })
+                                                        }
                                                     }
                                                 });
                                             }}>
@@ -369,11 +394,11 @@ class Order extends React.Component {
                                 <div className="result__box">
                                     <div className="order__quantity">
                                         수량
-                                        <div className="order__total-quantity">8개</div>
+                                        <div className="order__total-quantity">{cnt}개</div>
                                     </div>
                                     <div className="order__cost">
                                         금액
-                                        <div className="cost__cost">12,000원</div>
+                                        <div className="cost__cost">{price}원</div>
                                     </div>
                                 </div>
                             </div>
@@ -386,68 +411,46 @@ class Order extends React.Component {
                             </Link>
                         </div>
                         <div className="order__detail">
-                            <div className="order__item">
-                                <div className="item__name">상품명</div>
-                                <div onClick={() => {
-                                    const elt = document.getElementById("optionmodal");
-                                    elt.classList.remove("hidden");
-                                }}>옵션변경</div>
-                                <input type="number" name="quantity" id="quantity" />
-                                <button>X</button>
-                            </div>
-                            <div className="order__item">
-                                <div className="item__list">1</div>
-                                <div className="item__name">상품명</div>
-                                <div className="item__option__box">
-                                    <div className="item__option">옵션변경</div>
-                                </div>
-                                <div className="item__decrease__button">
-                                    <div className="item__decrease">-</div>
-                                </div>
-                                <div className="item__quantity">
-                                    2
-                                </div>
-                                <div className="item__increase__button">
-                                    <div className="item__increase">+</div>
-                                </div>
-                                <button>X</button>
-                            </div>
-                            <div className="order__item">
-                                <div className="item__name">상품명</div>
-                                <div>옵션변경</div>
-                                <input type="number" name="quantity" id="quantity" />
-                                <button>X</button>
-                            </div>
-                            <div className="order__item">
-                                <div className="item__name">상품명</div>
-                                <div>옵션변경</div>
-                                <input type="number" name="quantity" id="quantity" />
-                                <button>X</button>
-                            </div>
-                            <div className="order__item">
-                                <div className="item__name">상품명</div>
-                                <div>옵션변경</div>
-                                <input type="number" name="quantity" id="quantity" />
-                                <button>X</button>
-                            </div>
-                            <div className="order__item">
-                                <div className="item__name">상품명</div>
-                                <div>옵션변경</div>
-                                <input type="number" name="quantity" id="quantity" />
-                                <button>X</button>
-                            </div>
-                            <div className="order__item">
-                                <div className="item__name">상품명</div>
-                                <div>옵션변경</div>
-                                <input type="number" name="quantity" id="quantity" />
-                                <button>X</button>
-                            </div>
-                            <div className="order__item">
-                                <div className="item__name">상품명</div>
-                                <div>옵션변경</div>
-                                <input type="number" name="quantity" id="quantity" />
-                                <button>X</button>
-                            </div>
+                            {
+                                this.state.order_list.map((data) => {
+                                    return (
+                                        <div className="order__item">
+                                            <div className="item__list">1</div>
+                                            <div className="item__name">{data[0].itemName}</div>
+                                            <div className="item__option__box">
+                                                <div className="item__option">옵션변경</div>
+                                            </div>
+                                            <div className="item__decrease__button" onClick={() => {
+                                                for (let i in this.state.order_list) {
+                                                    if(this.state.order_list[i][0] === data[0]) {
+                                                        this.state.order_list[i][1] -= 1;
+                                                        if(this.state.order_list[i][1] === 0) {
+                                                            this.state.order_list.splice(i, 1);
+                                                        }
+                                                        this.setState(this.state);
+                                                    }
+                                                }
+                                            }}>
+                                                <div className="item__decrease">-</div>
+                                            </div>
+                                            <div className="item__quantity">
+                                                {data[1]}
+                                            </div>
+                                            <div className="item__increase__button" onClick={() => {
+                                                for (let i in this.state.order_list) {
+                                                    if(this.state.order_list[i][0] === data[0]) {
+                                                        this.state.order_list[i][1] += 1;
+                                                        this.setState(this.state);
+                                                    }
+                                                }
+                                            }}>
+                                                <div className="item__increase">+</div>
+                                            </div>
+                                            <button>X</button>
+                                        </div>
+                                    );
+                                })
+                            }
                         </div>
                     </div>
                 </div>
