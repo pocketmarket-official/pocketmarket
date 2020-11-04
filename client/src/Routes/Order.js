@@ -326,6 +326,7 @@ class Order extends React.Component {
                                     this.setState({
                                         order_list: this.state.order_list.concat([[this.state.selected, 1]]),
                                         modal_options: [],
+                                        selected: "",
                                     });
                                     const elt = document.getElementById("optionmodal");
                                     elt.classList.add("hidden");
@@ -433,15 +434,12 @@ class Order extends React.Component {
                                                 <div className="item__option">옵션변경</div>
                                             </div>
                                             <div className="item__decrease__button" onClick={() => {
-                                                for (let i in this.state.order_list) {
-                                                    if(this.state.order_list[i][0] === data[0]) {
-                                                        this.state.order_list[i][1] -= 1;
-                                                        if(this.state.order_list[i][1] === 0) {
-                                                            this.state.order_list.splice(i, 1);
-                                                        }
-                                                        this.setState(this.state);
-                                                    }
+                                                data[1] -= 1;
+                                                if(data[1] === 0) {
+                                                    const idx = this.state.order_list.indexOf(data);
+                                                    this.state.order_list.splice(idx, 1);
                                                 }
+                                                this.setState(this.state);
                                             }}>
                                                 <div className="item__decrease">-</div>
                                             </div>
@@ -449,12 +447,8 @@ class Order extends React.Component {
                                                 {data[1]}
                                             </div>
                                             <div className="item__increase__button" onClick={() => {
-                                                for (let i in this.state.order_list) {
-                                                    if(this.state.order_list[i][0] === data[0]) {
-                                                        this.state.order_list[i][1] += 1;
-                                                        this.setState(this.state);
-                                                    }
-                                                }
+                                                data[1] += 1
+                                                this.setState(this.state);
                                             }}>
                                                 <div className="item__increase">+</div>
                                             </div>
