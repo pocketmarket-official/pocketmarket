@@ -15,45 +15,8 @@ class Order extends React.Component {
         this.getKeymap = this.getKeymap.bind(this);
         this.clearOrderList = this.clearOrderList.bind(this);
 
-        //trades info
-        //Trade common information
-        const posNo = this.props.match.params.posNo;
-        const saleFlag = '1';
-        //Trade Detail
-        let seq = 0;
-        let orderType = '';
-        let itemCd = '';
-        let itemName = '';
-        let qty = 0;
-        let itemSellGroup = '';
-        let itemSellLevel = '';
-        let itemSellType = '';
-        let tradesInfo= [];
-
-        // sample data for trade
-        // tradeinfo에 결제 데이터 추가해서 넘기고
-        // 주문 내역 결제 금액까지
-        for(let i=0; i<5; i++){
-            seq += 1;
-            let tradesInfoRow = {
-                storeId: id,
-                posNo: posNo,
-                saleFlag: saleFlag,
-                seq: seq,
-                orderType: orderType,
-                itemCd: itemCd,
-                itemName: itemName,
-                qty: qty,
-                itemSellGroup: itemSellGroup,
-                itemSellLevel: itemSellLevel,
-                itemSellType: itemSellType
-            };
-            tradesInfo.push(tradesInfoRow);
-        }
-
         this.state = {
             link: link,
-            sellItemList: tradesInfo, // tradeinfo
             storeName: "",
             storeId: "",
             keymapCd: "",
@@ -238,7 +201,7 @@ class Order extends React.Component {
             price += this.state.order_list[index][0].price * this.state.order_list[index][1];
             if(this.state.order_list[index][0].option) {
                 for(let item in this.state.order_list[index][0].option) {
-                    price += this.state.order_list[index][0].option[item][0].price * this.state.order_list[index][0].option[item][1]
+                    price += this.state.order_list[index][0].option[item][0].price * this.state.order_list[index][0].option[item][1] * this.state.order_list[index][1];
                 }
             }
         }
@@ -425,7 +388,6 @@ class Order extends React.Component {
                             <Link to={{
                                 pathname: this.state.link,
                                 state: {
-                                    sellItemList: this.state.sellItemList,
                                     order: this.state.order_list,
                                     storeName: this.state.storeName,
                                     storeId: this.state.storeId,

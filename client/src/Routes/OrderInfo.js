@@ -29,7 +29,7 @@ class OrderInfo extends React.Component {
             price += this.state.order[index][0].price * this.state.order[index][1];
             if(this.state.order[index][0].option) {
                 for(let item in this.state.order[index][0].option) {
-                    price += this.state.order[index][0].option[item][0].price * this.state.order[index][0].option[item][1]
+                    price += this.state.order[index][0].option[item][0].price * this.state.order[index][0].option[item][1] * this.state.order[index][1];
                 }
             }
 
@@ -59,7 +59,7 @@ class OrderInfo extends React.Component {
                         orderType: 1,
                         itemCd: this.state.order[idx][0].option[i][0].itemCd,
                         itemName: this.state.order[idx][0].option[i][0].itemName,
-                        qty: this.state.order[idx][0].option[i][1],
+                        qty: this.state.order[idx][0].option[i][1] * this.state.order[idx][1],
                         itemSellGroup: sellGroup,
                         itemSellLevel: 2,
                         itemSellType: option,
@@ -81,8 +81,6 @@ class OrderInfo extends React.Component {
             sellGroup += 1;
             tradesInfo.push(tradesInfoRow);
         }
-
-        console.log(tradesInfo);
 
         return (
             <>
@@ -158,7 +156,7 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="divide"/>
                     <div className="orderinfo__btn"
-                         onClick={({sellItemList}) => pay({sellItemList: this.state.sellItemList})}>
+                         onClick={({sellItemList}) => pay({sellItemList: tradesInfo})}>
                         결제하기
                     </div>
                 </div>
