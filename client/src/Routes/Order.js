@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import axios from 'axios';
+import lodash from 'lodash';
 import '../Components/scss/order.scss';
 
 
@@ -30,6 +31,8 @@ class Order extends React.Component {
         let tradesInfo= [];
 
         // sample data for trade
+        // tradeinfo에 결제 데이터 추가해서 넘기고
+        // 주문 내역 결제 금액까지
         for(let i=0; i<5; i++){
             seq += 1;
             let tradesInfoRow = {
@@ -50,7 +53,7 @@ class Order extends React.Component {
 
         this.state = {
             link: link,
-            sellItemList: tradesInfo,
+            sellItemList: tradesInfo, // tradeinfo
             storeName: "",
             storeId: "",
             keymapCd: "",
@@ -229,6 +232,7 @@ class Order extends React.Component {
         // 수량 가격
         let cnt = 0;
         let price = 0;
+        let order = [];
         for(let index in this.state.order_list) {
             cnt += this.state.order_list[index][1];
             price += this.state.order_list[index][0].price * this.state.order_list[index][1];
@@ -238,7 +242,7 @@ class Order extends React.Component {
                 }
             }
         }
-        console.log(this.state);
+
         return (
             <>
                 <div className="optionmodal hidden" id="optionmodal" onClick={() => {
@@ -322,11 +326,14 @@ class Order extends React.Component {
                             </div>
                             <div className="optionmodal__btn">
                                 <button className="optionmodal__select" onClick={() => {
-                                    this.state.selected["option"] = this.state.modal_options;
+                                    let menu = lodash.cloneDeep(this.state.selected);
+                                    menu["option"] = lodash.cloneDeep(this.state.modal_options);
                                     this.setState({
-                                        order_list: this.state.order_list.concat([[this.state.selected, 1]]),
+                                        order_list: this.state.order_list.concat([[menu, 1]]),
                                         modal_options: [],
                                         selected: "",
+                                        price: price,
+                                        order: order,
                                     });
                                     const elt = document.getElementById("optionmodal");
                                     elt.classList.add("hidden");
@@ -419,6 +426,9 @@ class Order extends React.Component {
                                 pathname: this.state.link,
                                 state: {
                                     sellItemList: this.state.sellItemList,
+                                    order: this.state.order_list,
+                                    storeName: this.state.storeName,
+                                    storeId: this.state.storeId,
                                 }}}>
                                 <div className="order__pass">주문결제</div>
                             </Link>
