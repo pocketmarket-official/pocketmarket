@@ -229,41 +229,36 @@ def trade(request):
             target = Item.objects.get(itemCd=item['itemCd'])
             headerTotSaleAmt += target.price * item['qty']  # sum(saleprice * qty)
             headerTotQty += item['qty']
-            saleDetailRow = {
-                "COMP_CD": compCd,
-                "STOR_CD": storeCd,
-                "SALE_DT": saleDt,
-                "POS_NO": posNo,
-                "BILL_NO": billNo,
-                "SEQ": i,
-                "SALE_FG": saleFlag,
-                "ORD_TP": item['orderType'],
-                "MEAL_CD": mealCd,
-                "MEAL_NM": mealName,
-                "CNR_CD": "",  # todo:nullable/blank True
-                "CNR_NM": "",  # todo:nullable/blank True
-                "ITEM_CD": item['itemCd'],
-                "ITEM_NM": target.itemName,
-                "QTY": item['qty'],
-                "ITEM_SELL_GRP": item['itemSellGroup'],
-                "ITEM_SELL_LV": item['itemSellLevel'],
-                "ITEM_SELL_TY": item['itemSellType'],
-                "SALE_COST": target.price,
-                "SALE_PRIC": target.price - dcAmt,
-                "ORG_SALE_PRIC": target.price,
-                "TOT_SALE_AMT": target.price * item['qty'],
-                "SALE_AMT": (target.price * item['qty']) - dcAmt,
-                "SUP_AMT": ((target.price * item['qty']) - dcAmt) * 1.1,
-                "TAX_AMT": target.price - dcAmt - (((target.price * item['qty']) - dcAmt) * 1.1),
-                "OFF_TAX_AMT": 0.0,
-                "TAX_YN": "1",
-                "TOT_DC_AMT": 0.0,  # todo: 로직 생각하기
-                "NORM_DC_AMT": 0.0,
-                "PNT_DC_AMT": 0.0,
-                "SALE_TM": saleTime,
-                "SALE_YN": "Y",  # 매출포함여부
-            }
-            saleDetailList.append(saleDetailRow)
+            saleDetailObj = SaleDetail.objects.create(
+                storeCd=storeCd,
+                saleDt=saleDt,
+                posNo=posNo,
+                billNo=billNo,
+                seq=i,
+                saleFlag=saleFlag,
+                orderType=item['orderType'],
+                itemCd=item['itemCd'],
+                itemName=target.itemName,
+                qty=item['qty'],
+                itemSellGroup=item['itemSellGroup'],
+                itemSellLevel=item['itemSellLevel'],
+                itemSellType=item['itemSellType'],
+                saleCost=target.price,
+                salePrice=target.price - dcAmt,
+                orgSalePrice=target.price,
+                totSaleAmt=target.price * item['qty'],
+                saleAmt=(target.price * item['qty']) - dcAmt,
+                supAmt=((target.price * item['qty']) - dcAmt) * 1.1,
+                taxAmt=target.price - dcAmt - (((target.price * item['qty']) - dcAmt) * 1.1),
+                offTaxAmt=0.0,
+                taxYn="Y",
+                totDcAmt=0.0,
+                pointDcAmt=0.0,
+                saleTime=saleTime,
+                sendYn='N',
+            )
+            saleDetailObjList.append(saleDetailObj)
+
             i += 1
 
         i = 1
@@ -415,6 +410,43 @@ def trade(request):
             "ETC_AMT": 0.0
         }
 
+        for saleDetailObj in saleDetailObjList:
+            saleDetailRow = {
+                "COMP_CD": saleDetailObj['compCd'],
+                "STOR_CD": saleDetailObj['storeCd'],
+                "SALE_DT": saleDetailObj['saleDt'],
+                "POS_NO": saleDetailObj['posNo'],
+                "BILL_NO": saleDetailObj['billNo'],
+                "SEQ": saleDetailObj['seq'],
+                "SALE_FG": saleDetailObj['saleFlag'],
+                "ORD_TP": saleDetailObj['orderType'],
+                "MEAL_CD": mealCd,
+                "MEAL_NM": mealName,
+                "CNR_CD": "",
+                "CNR_NM": "",
+                "ITEM_CD": saleDetailObj['itemCd'],
+                "ITEM_NM": saleDetailObj['itemName'],
+                "QTY": saleDetailObj['qty'],
+                "ITEM_SELL_GRP": saleDetailObj['itemSellGroup'],
+                "ITEM_SELL_LV": saleDetailObj['itemSellLevel'],
+                "ITEM_SELL_TY": saleDetailObj['itemSellType'],
+                "SALE_COST": saleDetailObj['saleCost'],
+                "SALE_PRIC": saleDetailObj['salePrice'],
+                "ORG_SALE_PRIC": saleDetailObj['orgSalePrice'],
+                "TOT_SALE_AMT": saleDetailObj['totSaleAmt'],
+                "SALE_AMT": saleDetailObj['saleAmt'],
+                "SUP_AMT": saleDetailObj['supAmt'],
+                "TAX_AMT": saleDetailObj['taxAmt'],
+                "OFF_TAX_AMT": saleDetailObj['offTaxAmt'],
+                "TAX_YN": saleDetailObj['taxYn'],
+                "TOT_DC_AMT": saleDetailObj['totDcAmt'],  # todo: 로직 생각하기
+                "NORM_DC_AMT": 0.0,
+                "PNT_DC_AMT": saleDetailObj['pointDcAmt'],
+                "SALE_TM": saleDetailObj['saleTime'],
+                "SALE_YN": "Y",  # 매출포함여부
+            }
+            saleDetailList.append(saleDetailRow)
+
         cardLogRow = {
             "COMP_CD": cardLogObj.compCd,
             "STOR_CD": cardLogObj.storeCd,
@@ -460,11 +492,13 @@ def trade(request):
         }
         request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data=trData)
         if request.status_code == 200:
-            saleHeaderRow = SaleHeader.objects.get(storeCd=storeCd, saleDt=saleDt, posNo=posNo, billNo=billNo)
-            saleHeaderRow.sendYn = 'Y'
-            saleHeaderRow.save()
-            saleDetailList = SaleDetail.objects.filter(storeCd=storeCd, saleDt=saleDt, posNo=posNo, billNo=billNo)
-            print('success to send')
+            saleHeaderObj.sendYn = 'Y'
+            saleHeaderObj.save()
+            for saleDetailObj in saleDetailObjList:
+                saleDetailObj.sendYn = 'Y'
+                saleDetailObj.save()
+            cardLogObj.sendYn = 'Y'
+            cardLogObj.save()
 
 
     except Exception as ex:

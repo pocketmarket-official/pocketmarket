@@ -51,7 +51,7 @@ class SaleDetail(models.Model):
     supAmt = models.FloatField(default=0.0)
     taxAmt = models.FloatField(default=0.0)
     offTaxAmt = models.FloatField(default=0.0)
-    taxFlag = models.CharField(max_length=1) #[1:과세/2:면세]
+    taxYn = models.CharField(max_length=1, default='Y')
     totDcAmt = models.FloatField(default=0.0)
     pointDcAmt = models.FloatField(default=0.0)
     saleTime = models.CharField(max_length=6)
