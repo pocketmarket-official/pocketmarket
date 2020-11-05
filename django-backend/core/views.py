@@ -82,21 +82,18 @@ def kakao_callback(request):
 def trade(request):
     try:
         # variable defintion
-        saleHeaders = []
-        saleHeaderRow = {}
-        saleDetails = []
-        saleDetailRow = {}
-        cardLogs = []
-        cardLogRow = {}
+        saleHeaderList = []
+        saleDetailList = []
+        cardLogList = []
+        saleDetailObjList = []
         # constant
         compCd = 'C0028'
-        vanCd = '001'#todo: vanCd 맞추기
-        vanName = 'Nice'#todo: vanName 맞추기
+        vanCd = '11'
         # parameter from api
-        brandCd = '00001'
         storeCd = 'C0001'
         posNo = '01'
         dcAmt = 0.0
+
         # etc variables
         saleDt = datetime.today().strftime('%Y%m%d')
         weekday = ((datetime.today().weekday())+2)%7
@@ -104,61 +101,25 @@ def trade(request):
             weekday=7
         saleTime = strftime("%H%M%S", gmtime())
         saleFlag = '1'
-        mealCd = '001'#todo: 기타 식구분 코드 넣기
-        mealName = '기타' #todo: 기타 식구분명 넣기
+        mealCd = '9'
+        mealName = '기타'
         billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')
 
         ##definition for trade variables
         # saleHeader
         headerTotQty = 0
         headerTotSaleAmt = 0.0
-        headerSaleAmt = 0.0
-        headerSupAmt = 0.0
-        headerTaxAmt = 0.0
-        headerOffTaxAmt = 0.0
-        headerTaxYn = 'Y'
         headerTotDcAmt = 0.0
-        # headerNormDcAmt = 0.0
         headerPointDcAmt = 0.0
-        # headerNormDcCnt = 0.0
         headerPointDcCnt = 0.0
-        # headerCashAmt = 0.0
         headerCardAmt = 0.0
-        # headerEtcAmt = 0.0
         headerKkmAmt = 0.0
 
         #cardLog
-        card_tranFlag = '1' #0:전체/1:일반/2:포인트충전
         cardSeq = 1
         cardCardAmt = 0.0
-        cardCardNo = ''
-        cardVanCd = ''
-        cardCardCd = ''
-        cardCardName = ''
-        cardBuyCardCd = '' #todo: 이거 뭐임?
-        cardBuyCardName = ''
-        cardApprNo = ''
-        cardApprDt = ''
-        cardApprTime = ''
-        cardApprFlag = '1' #1:정상승인/2:임의등록
-        cardSignYn = 'N'
-        cardInstFlag = '0' #0:일시불/1:
+        cardInstFlag = 'N'
         cardInstMont = 0
-        cardTerminalId = ''
-        cardRegisterNo = ''
-        cardReturnYn = 'N'
-        # ORG_STOR_CD
-        # ORG_SALE_DT
-        # ORG_POS_NO
-        # ORG_BILL_NO
-        # ORG_SEQ
-        # ORG_APPR_NO
-        # REMARK
-        # INS_DT
-        # INS_US
-        # MOD_DT
-        # MOD_US
-
 
         if billNo:
             billNo = f'{int(billNo[0].billNo) + 1:04}'
@@ -276,8 +237,8 @@ def trade(request):
                 "ORD_TP": item['orderType'],
                 "MEAL_CD": mealCd,
                 "MEAL_NM": mealName,
-                "CNR_CD": "6", #todo : 키오스크에서 코너 사용 안해도 되느걸로 알고있는데 이거 필수임?
-                "CNR_NM": "7", #todo : 키오스크에서 코너 사용 안해도 되느걸로 알고있는데 이거 필수임?
+                "CNR_CD": "",#todo:nullable/blank True
+                "CNR_NM": "",#todo:nullable/blank True
                 "ITEM_CD": item['itemCd'],
                 "ITEM_NM": target.itemName,
                 "QTY": item['qty'],
@@ -299,7 +260,7 @@ def trade(request):
                 "SALE_TM": saleTime,
                 "SALE_YN": "Y", # 매출포함여부
             }
-            saleDetails.append(saleDetailRow)
+            saleDetailList.append(saleDetailRow)
             i += 1
 
         i=1
@@ -332,7 +293,7 @@ def trade(request):
         headerTaxAmt = headerSaleAmt - headerSupAmt
         headerOffTaxAmt = 0.0
 
-        SaleHeader.objects.create(
+        saleHeaderObj = SaleHeader.objects.create(
             storeCd = storeCd,
             saleDt = saleDt,
             posNo = posNo,
@@ -351,8 +312,8 @@ def trade(request):
             kkmAmt = headerKkmAmt
         )
 
-        for saleDetail in saleDetails:
-            SaleDetail.objects.create(
+        for saleDetail in saleDetailList:
+            saleDetailObj = SaleDetail.objects.create(
                 storeCd = storeCd,
                 saleDt = saleDt,
                 posNo = posNo,
@@ -379,8 +340,9 @@ def trade(request):
                 pointDcAmt = saleDetail['PNT_DC_AMT'],
                 saleTime = saleDetail['SALE_TM']
             )
+            saleDetailObjList.append(saleDetailObj)
 
-        CardLog.objects.create(
+        cardLogObj = CardLog.objects.create(
             storeCd = storeCd,
             saleDt = saleDt,
             posNo = posNo,
@@ -397,19 +359,19 @@ def trade(request):
             apprNo = cardApprNo,
             apprDt = cardApprDt,
             apprTime = cardApprTime,
-            apprFlag = cardApprFlag,
+            apprFlag = '1',
             instMonth = cardInstMont,
             terminalId = cardTerminalId,
             registerNo = cardRegisterNo,
-            returnYn = cardReturnYn
+            returnYn = 'N'
         )
 
         saleHeaderRow = {
-            "COMP_CD" : compCd,
-            "STOR_CD" : storeCd,
-            "SALE_DT" : saleDt,
-            "POS_NO" : posNo,
-            "BILL_NO" : billNo,
+            "COMP_CD" : saleHeaderObj.compCd,
+            "STOR_CD" : saleHeaderObj.storCd,
+            "SALE_DT" : saleHeaderObj.saleDt,
+            "POS_NO" : saleHeaderObj.posNo,
+            "BILL_NO" : saleHeaderObj.billNo,
             "SALE_TP" : "2", #판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
             "ONOFF_TP" : "1", #온라인 오프라인 형태, 온라인주문일경우 1
             "ORD_FG" : "4", #주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
@@ -417,9 +379,9 @@ def trade(request):
             "SALE_DAY" : weekday, #일요일 1 부터 7까지
             "SALE_TM_CD" : "01", #시간코드 공통코드 045번 참조 #todo: 뭔솔?
             "RETURN_FG" : "N", #반품플레그(원거래에도 업데이트 해줘야함)
-            "SALE_FG" : saleFlag,
-            "MEAL_CD" : "2",#todo : 기타 식구분 코드 확인
-            "MEAL_NM" : "3",#todo : 기타로 넣으면 되나?
+            "SALE_FG" : saleHeaderObj.saleFlag,
+            "MEAL_CD" : mealCd,
+            "MEAL_NM" : mealName,
             "TOT_QTY" : headerTotQty,
             "TOT_SALE_AMT" : headerTotSaleAmt,
             "SALE_AMT" : headerSaleAmt,
@@ -442,7 +404,7 @@ def trade(request):
             "SALE_DT": saleDt,
             "POS_NO": posNo,
             "BILL_NO": billNo,
-            "TRAN_FG": "1", #todo: 이게뭐지
+            "TRAN_FG": "1",
             "SEQ": cardSeq,
             "SALE_FG": saleFlag,
             "CARD_AMT": cardCardAmt,
@@ -455,32 +417,36 @@ def trade(request):
             "APPR_NO": cardApprNo,
             "APPR_DT": cardApprDt,
             "APPR_TM": cardApprTime,
-            "APPR_FG": cardApprFlag,
-            "SIGN_YN": cardSignYn,
+            "APPR_FG": '1',
+            "SIGN_YN": 'N',
             "INST_FG": cardInstFlag,
             "INST_MON": cardInstMont,
             "TERMINAL_ID": cardTerminalId,
             "REGISTER_NO": cardRegisterNo,
-            "RETURN_FG": cardReturnYn,
-            "ORG_STOR_CD": "0", #Todo : 원거래이ㅡ 경우 어ㄸ헣게?
-            "ORG_SALE_DT": "0", #Todo : 원거래이ㅡ 경우 어ㄸ헣게?
-            "ORG_POS_NO": "0", #Todo : 원거래이ㅡ 경우 어ㄸ헣게?
-            "ORG_BILL_NO": "0", #Todo : 원거래이ㅡ 경우 어ㄸ헣게?
-            "ORG_SEQ": "0", #Todo : 원거래이ㅡ 경우 어ㄸ헣게?
-            "ORG_APPR_NO": "0", #Todo : 원거래이ㅡ 경우 어ㄸ헣게?
+            "RETURN_FG": 'N',
+            "ORG_STOR_CD": "",
+            "ORG_SALE_DT": "",
+            "ORG_POS_NO": "",
+            "ORG_BILL_NO": "",
+            "ORG_SEQ": "",
+            "ORG_APPR_NO": "",
             "REMARK": "",
         }
 
-        saleHeaders.append(saleHeaderRow)
-        cardLogs.append(cardLogRow)
+        saleHeaderList.append(saleHeaderRow)
+        cardLogList.append(cardLogRow)
 
         trData = {
-            'T_SALE_H': saleHeaders,
-            'T_SALE_D': saleDetails,
-            'cardLog': cardLogs
+            'T_SALE_H': saleHeaderList,
+            'T_SALE_D': saleDetailList,
+            'T_CARD_L': cardLogList
         }
         request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data=trData)
         if request.status_code == 200:
+            saleHeaderRow = SaleHeader.objects.get(storeCd=storeCd, saleDt=saleDt, posNo=posNo, billNo=billNo)
+            saleHeaderRow.sendYn = 'Y'
+            saleHeaderRow.save()
+            saleDetailList = SaleDetail.objects.filter(storeCd=storeCd, saleDt=saleDt, posNo=posNo, billNo=billNo)
             print('success to send')
 
 

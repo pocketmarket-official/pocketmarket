@@ -19,6 +19,10 @@ class SaleHeader(models.Model):
     pointDcCnt = models.IntegerField(default=0)
     cardAmt = models.FloatField(default=0.0)
     kkmAmt = models.FloatField(default=0.0)
+    sendYn = models.CharField(max_length=1, default='N')
+    orderStatus = models.CharField(max_length=1, default=1)#1:주문중/2:주문완료/3:제조완료/4:픽업완료/5:리뷰작성완료
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
+
 
 class SaleDetail(models.Model):
     storeCd = models.CharField(max_length=10, default='00000')
@@ -46,6 +50,7 @@ class SaleDetail(models.Model):
     totDcAmt = models.FloatField(default=0.0)
     pointDcAmt = models.FloatField(default=0.0)
     saleTime = models.CharField(max_length=6)
+    sendYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
@@ -95,6 +100,7 @@ class CardLog(models.Model):
     terminalId = models.CharField(max_length=20, default='')
     registerNo = models.CharField(max_length=20, default='')
     returnYn = models.CharField(max_length=1, default='N')
+    sendYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
