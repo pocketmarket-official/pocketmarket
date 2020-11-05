@@ -41,7 +41,7 @@ class CardLogAdmin(admin.ModelAdmin):
 #     """ EtcLog Admin """
 #
 #     pass
-# 
+#
 # @admin.register(models.StandardLog)
 # class StandardLogAdmin(admin.ModelAdmin):
 #
