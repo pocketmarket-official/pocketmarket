@@ -18,11 +18,13 @@ from trades.models import PurchaseLog
 from trades.models import SoldoutLog
 from trades.models import CornerStateLog
 
+
 # Create your views here.
 
 
 class KakaoException(Exception):
     pass
+
 
 def kakao_login(request):
     ''' use kakao oauth '''
@@ -78,6 +80,7 @@ def kakao_callback(request):
     except KakaoException:
         return HttpResponseRedirect("http:#13.124.90.138:3000/login")
 
+
 @transaction.atomic
 def trade(request):
     try:
@@ -96,9 +99,9 @@ def trade(request):
 
         # etc variables
         saleDt = datetime.today().strftime('%Y%m%d')
-        weekday = ((datetime.today().weekday())+2)%7
-        if weekday==0:
-            weekday=7
+        weekday = ((datetime.today().weekday()) + 2) % 7
+        if weekday == 0:
+            weekday = 7
         saleTime = strftime("%H%M%S", gmtime())
         saleFlag = '1'
         mealCd = '9'
@@ -115,7 +118,7 @@ def trade(request):
         headerCardAmt = 0.0
         headerKkmAmt = 0.0
 
-        #cardLog
+        # cardLog
         cardSeq = 1
         cardCardAmt = 0.0
         cardInstFlag = 'N'
@@ -129,20 +132,20 @@ def trade(request):
         payments = [
             {
                 'seq': 1,
-                'type': 1, #1:결제/2:할인
-                'method': 'card', #pgJsonReturn _ method
-                'amount': 15000, #pgJsonReturn _ price
-                'cardNo': '0001000200030004', #pgJsonReturn _ payment_data['card_no']
-                'cardName': '하나카드', #pgJsonReturn _ payment_data['card_name']
-                'apprNo': '00010002', #pgJsonReturn _ payment_data['card_auth_no']
-                'apprDt': '20101002', #pgJsonReturn _ payment_data['p_at']
-                'apprTime': '092008', #pgJsonReturn _ payment_data['p_at']
-                'terminalId': '00030004', #pgJsonReturn _ payment_data['tid']
-                'registerNo': '00050006', #todo: 이거뭐지?
+                'type': 1,  # 1:결제/2:할인
+                'method': 'card',  # pgJsonReturn _ method
+                'amount': 15000,  # pgJsonReturn _ price
+                'cardNo': '0001000200030004',  # pgJsonReturn _ payment_data['card_no']
+                'cardName': '하나카드',  # pgJsonReturn _ payment_data['card_name']
+                'apprNo': '00010002',  # pgJsonReturn _ payment_data['card_auth_no']
+                'apprDt': '20101002',  # pgJsonReturn _ payment_data['p_at']
+                'apprTime': '092008',  # pgJsonReturn _ payment_data['p_at']
+                'terminalId': '00030004',  # pgJsonReturn _ payment_data['tid']
+                'registerNo': '00050006',  # todo: 이거뭐지?
             },
             {
                 'seq': 2,
-                'type': 2, #1:결제/2:할인
+                'type': 2,  # 1:결제/2:할인
                 'method': 'pocketMoney',
                 'amount': 2000
             }
@@ -153,12 +156,12 @@ def trade(request):
             # 아메리카노 2잔
             {
                 'seq': 1,
-                'orderType': '1', #1:일반/2:세트
+                'orderType': '1',  # 1:일반/2:세트
                 'itemCd': '00001',  # 아메리카노
                 'qty': 2,
-                'itemSellGroup': '1', #세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
-                'itemSellLevel': '1', #1:prent/2:child
-                'itemSellType': '1' #1:일반/2:옵션변경/3:옵션추가
+                'itemSellGroup': '1',  # 세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
+                'itemSellLevel': '1',  # 1:prent/2:child
+                'itemSellType': '1'  # 1:일반/2:옵션변경/3:옵션추가
             },
             # 티라미스세트 1개
             {  # 티라미스 세트
@@ -224,7 +227,7 @@ def trade(request):
         i = 1
         for item in items:
             target = Item.objects.get(itemCd=item['itemCd'])
-            headerTotSaleAmt += target.price*item['qty']  # sum(saleprice * qty)
+            headerTotSaleAmt += target.price * item['qty']  # sum(saleprice * qty)
             headerTotQty += item['qty']
             saleDetailRow = {
                 "COMP_CD": compCd,
@@ -237,8 +240,8 @@ def trade(request):
                 "ORD_TP": item['orderType'],
                 "MEAL_CD": mealCd,
                 "MEAL_NM": mealName,
-                "CNR_CD": "",#todo:nullable/blank True
-                "CNR_NM": "",#todo:nullable/blank True
+                "CNR_CD": "",  # todo:nullable/blank True
+                "CNR_NM": "",  # todo:nullable/blank True
                 "ITEM_CD": item['itemCd'],
                 "ITEM_NM": target.itemName,
                 "QTY": item['qty'],
@@ -250,32 +253,30 @@ def trade(request):
                 "ORG_SALE_PRIC": target.price,
                 "TOT_SALE_AMT": target.price * item['qty'],
                 "SALE_AMT": (target.price * item['qty']) - dcAmt,
-                "SUP_AMT": ((target.price * item['qty']) - dcAmt)*1.1,
-                "TAX_AMT": target.price - dcAmt - (((target.price * item['qty']) - dcAmt)*1.1),
+                "SUP_AMT": ((target.price * item['qty']) - dcAmt) * 1.1,
+                "TAX_AMT": target.price - dcAmt - (((target.price * item['qty']) - dcAmt) * 1.1),
                 "OFF_TAX_AMT": 0.0,
                 "TAX_YN": "1",
-                "TOT_DC_AMT": 0.0, #todo: 로직 생각하기
+                "TOT_DC_AMT": 0.0,  # todo: 로직 생각하기
                 "NORM_DC_AMT": 0.0,
                 "PNT_DC_AMT": 0.0,
                 "SALE_TM": saleTime,
-                "SALE_YN": "Y", # 매출포함여부
+                "SALE_YN": "Y",  # 매출포함여부
             }
             saleDetailList.append(saleDetailRow)
             i += 1
 
-        i=1
+        i = 1
         for payment in payments:
 
             if payment['type'] == 1:
-                headerCardAmt += payment['amount'] #카드결제금액 더해가는 방식
+                headerCardAmt += payment['amount']  # 카드결제금액 더해가는 방식
                 cardSeq = i
                 cardCardAmt += payment['amount']
                 cardCardNo = payment['cardNo']
-                cardVanCd = '001' #todo: asp에 nice pg코드 등록
-                cardCardCd = '001' #발급사 #todo: asp cardCode와 맞추기
-                cardCardName = '하나카드' #todo: asp cardNamerhk 맞추기
-                cardBuyCardCd = '001' #매입사 #todo: asp cardCode와 맞추기
-                cardBuyCardName = '하나카드' #todo: asp cardNamerhk 맞추기
+                cardVanCd = '001'  # todo: asp에 nice pg코드 등록
+                cardCardCd = '001'  # 발급사 #todo: asp cardCode와 맞추기
+                cardCardName = '하나카드'  # todo: asp cardNamerhk 맞추기
                 cardApprNo = payment['apprNo']
                 cardApprDt = payment['apprDt']
                 cardApprTime = payment['apprTime']
@@ -288,149 +289,165 @@ def trade(request):
 
             i += 1
 
-        headerSaleAmt = headerTotSaleAmt-headerTotDcAmt
-        headerSupAmt = headerSaleAmt/1.1
+        headerSaleAmt = headerTotSaleAmt - headerTotDcAmt
+        headerSupAmt = headerSaleAmt / 1.1
         headerTaxAmt = headerSaleAmt - headerSupAmt
         headerOffTaxAmt = 0.0
 
         saleHeaderObj = SaleHeader.objects.create(
-            storeCd = storeCd,
-            saleDt = saleDt,
-            posNo = posNo,
-            billNo = billNo,
-            saleFlag = saleFlag,
-            totQty = headerTotQty,
-            totSaleAmt = headerTotSaleAmt,
-            saleAmt = headerSaleAmt,
-            supAmt = headerSupAmt,
-            taxAmt = headerTaxAmt,
-            offTaxAmt = headerOffTaxAmt,
-            totDcAmt = headerTotDcAmt,
-            pointDcAmt = headerPointDcAmt,
-            pointDcCnt = headerPointDcCnt,
-            cardAmt = headerCardAmt,
-            kkmAmt = headerKkmAmt
+            storeCd=storeCd,
+            saleDt=saleDt,
+            posNo=posNo,
+            billNo=billNo,
+            saleFlag=saleFlag,
+            totQty=headerTotQty,
+            totSaleAmt=headerTotSaleAmt,
+            saleAmt=headerSaleAmt,
+            supAmt=headerSupAmt,
+            taxAmt=headerTaxAmt,
+            offTaxAmt=headerOffTaxAmt,
+            totDcAmt=headerTotDcAmt,
+            pointDcAmt=headerPointDcAmt,
+            pointDcCnt=headerPointDcCnt,
+            cardAmt=headerCardAmt,
+            kkmAmt=headerKkmAmt,
+            returnYn='N',
+            orgStoreCd='',
+            orgSaleDt='',
+            orgPosNo='',
+            orgBillNo='',
+            sendYn='N',
+            orderStatus='2',
+            # user = 1
         )
 
         for saleDetail in saleDetailList:
             saleDetailObj = SaleDetail.objects.create(
-                storeCd = storeCd,
-                saleDt = saleDt,
-                posNo = posNo,
-                billNo = billNo,
-                seq = saleDetail['SEQ'],
-                saleFlag = saleFlag,
-                orderType = saleDetail['ORD_TP'],
-                itemCd = saleDetail['ITEM_CD'],
-                itemName = saleDetail['ITEM_NM'],
-                qty = saleDetail['QTY'],
-                itemSellGroup = saleDetail['ITEM_SELL_GRP'],
-                itemSellLevel = saleDetail['ITEM_SELL_LV'],
-                itemSellType = saleDetail['ITEM_SELL_TY'],
-                saleCost = saleDetail['SALE_COST'],
-                salePrice = saleDetail['SALE_PRIC'],
-                orgSalePrice = saleDetail['ORG_SALE_PRIC'],
-                totSaleAmt = saleDetail['TOT_SALE_AMT'],
-                saleAmt = saleDetail['SALE_AMT'],
-                supAmt = saleDetail['SUP_AMT'],
-                taxAmt = saleDetail['TAX_AMT'],
-                offTaxAmt = saleDetail['OFF_TAX_AMT'],
-                taxFlag = saleDetail['TAX_YN'],
-                totDcAmt = saleDetail['TOT_DC_AMT'],
-                pointDcAmt = saleDetail['PNT_DC_AMT'],
-                saleTime = saleDetail['SALE_TM']
+                storeCd=storeCd,
+                saleDt=saleDt,
+                posNo=posNo,
+                billNo=billNo,
+                seq=saleDetail['SEQ'],
+                saleFlag=saleFlag,
+                orderType=saleDetail['ORD_TP'],
+                itemCd=saleDetail['ITEM_CD'],
+                itemName=saleDetail['ITEM_NM'],
+                qty=saleDetail['QTY'],
+                itemSellGroup=saleDetail['ITEM_SELL_GRP'],
+                itemSellLevel=saleDetail['ITEM_SELL_LV'],
+                itemSellType=saleDetail['ITEM_SELL_TY'],
+                saleCost=saleDetail['SALE_COST'],
+                salePrice=saleDetail['SALE_PRIC'],
+                orgSalePrice=saleDetail['ORG_SALE_PRIC'],
+                totSaleAmt=saleDetail['TOT_SALE_AMT'],
+                saleAmt=saleDetail['SALE_AMT'],
+                supAmt=saleDetail['SUP_AMT'],
+                taxAmt=saleDetail['TAX_AMT'],
+                offTaxAmt=saleDetail['OFF_TAX_AMT'],
+                taxFlag=saleDetail['TAX_YN'],
+                totDcAmt=saleDetail['TOT_DC_AMT'],
+                pointDcAmt=saleDetail['PNT_DC_AMT'],
+                saleTime=saleDetail['SALE_TM'],
+                sendYn='N',
             )
             saleDetailObjList.append(saleDetailObj)
 
         cardLogObj = CardLog.objects.create(
-            storeCd = storeCd,
-            saleDt = saleDt,
-            posNo = posNo,
-            billNo = billNo,
-            seq = cardSeq,
-            saleFlag = saleFlag,
-            cardAmt = cardCardAmt,
-            cardNo = cardCardNo,
-            vanCd = cardVanCd,
-            cardCd = cardCardCd,
-            cardName = cardCardName,
-            buyCardCd = cardBuyCardCd,
-            buyCardName = cardBuyCardName,
-            apprNo = cardApprNo,
-            apprDt = cardApprDt,
-            apprTime = cardApprTime,
-            apprFlag = '1',
-            instMonth = cardInstMont,
-            terminalId = cardTerminalId,
-            registerNo = cardRegisterNo,
-            returnYn = 'N'
+            storeCd=storeCd,
+            saleDt=saleDt,
+            posNo=posNo,
+            billNo=billNo,
+            seq=cardSeq,
+            saleFlag=saleFlag,
+            cardAmt=cardCardAmt,
+            cardNo=cardCardNo,
+            vanCd=cardVanCd,
+            cardCd=cardCardCd,
+            cardName=cardCardName,
+            apprNo=cardApprNo,
+            apprDt=cardApprDt,
+            apprTime=cardApprTime,
+            apprFlag='1',
+            instFlag=cardInstFlag,
+            instMonth=cardInstMont,
+            terminalId=cardTerminalId,
+            registerNo=cardRegisterNo,
+            returnYn='N',
+            orgStoreCd='',
+            orgSaleDt='',
+            orgPosNo='',
+            orgBillNo='',
+            orgSeq='',
+            orgApprNo='',
+            remark='',
+            sendYn='N',
         )
 
         saleHeaderRow = {
-            "COMP_CD" : saleHeaderObj.compCd,
-            "STOR_CD" : saleHeaderObj.storCd,
-            "SALE_DT" : saleHeaderObj.saleDt,
-            "POS_NO" : saleHeaderObj.posNo,
-            "BILL_NO" : saleHeaderObj.billNo,
-            "SALE_TP" : "2", #판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
-            "ONOFF_TP" : "1", #온라인 오프라인 형태, 온라인주문일경우 1
-            "ORD_FG" : "4", #주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
-            "SALE_TM" : saleTime,#판매시간(시간분초)
-            "SALE_DAY" : weekday, #일요일 1 부터 7까지
-            "SALE_TM_CD" : "01", #시간코드 공통코드 045번 참조 #todo: 뭔솔?
-            "RETURN_FG" : "N", #반품플레그(원거래에도 업데이트 해줘야함)
-            "SALE_FG" : saleHeaderObj.saleFlag,
-            "MEAL_CD" : mealCd,
-            "MEAL_NM" : mealName,
-            "TOT_QTY" : headerTotQty,
-            "TOT_SALE_AMT" : headerTotSaleAmt,
-            "SALE_AMT" : headerSaleAmt,
-            "SUP_AMT" : headerSupAmt,
-            "TAX_AMT" : headerTaxAmt,
-            "OFF_TAX_AMT" : headerOffTaxAmt,
-            "TOT_DC_AMT" : headerTotDcAmt,
-            "NORM_DC_AMT" : 0.0,
-            "PNT_DC_AMT" : headerPointDcAmt,
-            "NORM_DC_CNT" : 0,
-            "PNT_DC_CNT" : headerPointDcCnt,
-            "CASH_AMT" : 0.0,
-            "CARD_AMT" : headerCardAmt,
-            "ETC_AMT" : 0.0
+            "COMP_CD": saleHeaderObj.compCd,
+            "STOR_CD": saleHeaderObj.storCd,
+            "SALE_DT": saleHeaderObj.saleDt,
+            "POS_NO": saleHeaderObj.posNo,
+            "BILL_NO": saleHeaderObj.billNo,
+            "SALE_TP": "2",  # 판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
+            "ONOFF_TP": "1",  # 온라인 오프라인 형태, 온라인주문일경우 1
+            "ORD_FG": "4",  # 주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
+            "SALE_TM": saleTime,  # 판매시간(시간분초)
+            "SALE_DAY": weekday,  # 일요일 1 부터 7까지
+            "SALE_TM_CD": "01",  # 시간코드 공통코드 045번 참조 #todo: 뭔솔?
+            "RETURN_FG": saleHeaderObj.returnYn,  # 반품플레그(원거래에도 업데이트 해줘야함)
+            "SALE_FG": saleHeaderObj.saleFlag,
+            "MEAL_CD": mealCd,
+            "MEAL_NM": mealName,
+            "TOT_QTY": saleHeaderObj.totQty,
+            "TOT_SALE_AMT": saleHeaderObj.totSaleAmt,
+            "SALE_AMT": saleHeaderObj.saleAmt,
+            "SUP_AMT": saleHeaderObj.supAmt,
+            "TAX_AMT": saleHeaderObj.taxAmt,
+            "OFF_TAX_AMT": saleHeaderObj.offTaxAmt,
+            "TOT_DC_AMT": saleHeaderObj.totDcAmt,
+            "NORM_DC_AMT": 0.0,
+            "PNT_DC_AMT": saleHeaderObj.pointDcAmt,
+            "NORM_DC_CNT": 0,
+            "PNT_DC_CNT": saleHeaderObj.pointDcCnt,
+            "CASH_AMT": 0.0,
+            "CARD_AMT": saleHeaderObj.cardAmt,
+            "ETC_AMT": 0.0
         }
 
         cardLogRow = {
-            "COMP_CD": compCd,
-            "STOR_CD": storeCd,
-            "SALE_DT": saleDt,
-            "POS_NO": posNo,
-            "BILL_NO": billNo,
-            "TRAN_FG": "1",
-            "SEQ": cardSeq,
-            "SALE_FG": saleFlag,
-            "CARD_AMT": cardCardAmt,
-            "CARD_NO": cardCardNo,
-            "VAN_CD": vanCd,
-            "CARD_CD": cardCardCd,
-            "CARD_NM": cardCardName,
-            "BUY_CARD_CD": cardBuyCardCd,
-            "BUY_CARD_NM": cardBuyCardName,
-            "APPR_NO": cardApprNo,
-            "APPR_DT": cardApprDt,
-            "APPR_TM": cardApprTime,
-            "APPR_FG": '1',
+            "COMP_CD": cardLogObj.compCd,
+            "STOR_CD": cardLogObj.storeCd,
+            "SALE_DT": cardLogObj.saleDt,
+            "POS_NO": cardLogObj.posNo,
+            "BILL_NO": cardLogObj.billNo,
+            "TRAN_FG": "1",  # 0:전체 1:일반 / 2: 포인트충전 / 3:후결제 / 4:선결제 / 5:RF 충전
+            "SEQ": cardLogObj.seq,
+            "SALE_FG": cardLogObj.saleFlag,
+            "CARD_AMT": cardLogObj.cardAmt,
+            "CARD_NO": cardLogObj.CardNo,
+            "VAN_CD": cardLogObj.vanCd,
+            "CARD_CD": cardLogObj.CardCd,
+            "CARD_NM": cardLogObj.CardName,
+            "BUY_CARD_CD": cardLogObj.CardCd,
+            "BUY_CARD_NM": cardLogObj.CardName,
+            "APPR_NO": cardLogObj.ApprNo,
+            "APPR_DT": cardLogObj.ApprDt,
+            "APPR_TM": cardLogObj.ApprTime,
+            "APPR_FG": cardLogObj.apprFlag,
             "SIGN_YN": 'N',
-            "INST_FG": cardInstFlag,
-            "INST_MON": cardInstMont,
-            "TERMINAL_ID": cardTerminalId,
-            "REGISTER_NO": cardRegisterNo,
-            "RETURN_FG": 'N',
-            "ORG_STOR_CD": "",
-            "ORG_SALE_DT": "",
-            "ORG_POS_NO": "",
-            "ORG_BILL_NO": "",
-            "ORG_SEQ": "",
-            "ORG_APPR_NO": "",
-            "REMARK": "",
+            "INST_FG": cardLogObj.InstFlag,
+            "INST_MON": cardLogObj.InstMont,
+            "TERMINAL_ID": cardLogObj.TerminalId,
+            "REGISTER_NO": cardLogObj.RegisterNo,
+            "RETURN_FG": cardLogObj.returnFlag,
+            "ORG_STOR_CD": cardLogObj.orgStoreCd,
+            "ORG_SALE_DT": cardLogObj.orgSaleDt,
+            "ORG_POS_NO": cardLogObj.orgPosNo,
+            "ORG_BILL_NO": cardLogObj.orgBillNo,
+            "ORG_SEQ": cardLogObj.orgSeq,
+            "ORG_APPR_NO": cardLogObj.orgApprNo,
+            "REMARK": cardLogObj.remark,
         }
 
         saleHeaderList.append(saleHeaderRow)

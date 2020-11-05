@@ -30,6 +30,11 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
             'pointDcCnt',
             'cardAmt',
             'kkmAmt',
+            'returnYn',
+            'orgStoreCd',
+            'orgSaleDate',
+            'orgPosNo',
+            'orgBillNo',
             'sendYn',
             'orderStatus',
             'user'

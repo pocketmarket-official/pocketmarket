@@ -19,6 +19,7 @@ class SaleHeader(models.Model):
     pointDcCnt = models.IntegerField(default=0)
     cardAmt = models.FloatField(default=0.0)
     kkmAmt = models.FloatField(default=0.0)
+    returnYn = models.CharField(max_length=1, default='N')
     orgStoreCd = models.CharField(max_length=10, null=True)
     orgSaleDt = models.CharField(max_length=8, null=True)
     orgPosNo = models.CharField(max_length=5, null=True)
@@ -92,13 +93,10 @@ class CardLog(models.Model):
     vanCd = models.CharField(max_length=3, default='000')
     cardCd = models.CharField(max_length=3, default='000')
     cardName = models.CharField(max_length=50, default='')
-    buyCardCd = models.CharField(max_length=3, default='000')
-    buyCardName = models.CharField(max_length=50, default='')
     apprNo = models.CharField(max_length=20, default='0000000000000000')
     apprDt = models.CharField(max_length=8, default='00000000')
     apprTime = models.CharField(max_length=6, default='000000')
     apprFlag = models.CharField(max_length=1, default=1) #[1:정상승인/2:임의등록]
-    signYn = models.CharField(max_length=1, default='N')
     instFlag = models.CharField(max_length=1, default='0') #[0:할부없음/1:할부]
     instMonth = models.CharField(max_length=2, default='00')
     terminalId = models.CharField(max_length=20, default='')
