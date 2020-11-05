@@ -118,8 +118,6 @@ class CardLogSerializer(serializers.ModelSerializer):
             'vanCd',
             'cardCd',
             'cardName',
-            'buyCardCd',
-            'buyCardName',
             'apprNo',
             'apprDt',
             'apprTime',
