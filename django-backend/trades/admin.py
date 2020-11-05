@@ -20,13 +20,13 @@ class SaleDetailAdmin(admin.ModelAdmin):
 
     pass
 
-
-@admin.register(models.CashLog)
-class CashLogAdmin(admin.ModelAdmin):
-
-    """ CashLog Admin """
-
-    pass
+#
+# @admin.register(models.CashLog)
+# class CashLogAdmin(admin.ModelAdmin):
+#
+#     """ CashLog Admin """
+#
+#     pass
 
 @admin.register(models.CardLog)
 class CardLogAdmin(admin.ModelAdmin):
@@ -35,19 +35,19 @@ class CardLogAdmin(admin.ModelAdmin):
 
     pass
 
-@admin.register(models.EtcLog)
-class EtcLogAdmin(admin.ModelAdmin):
-
-    """ EtcLog Admin """
-
-    pass
-
-@admin.register(models.StandardLog)
-class StandardLogAdmin(admin.ModelAdmin):
-
-    """ StandardLog Admin """
-
-    pass
+# @admin.register(models.EtcLog)
+# class EtcLogAdmin(admin.ModelAdmin):
+#
+#     """ EtcLog Admin """
+#
+#     pass
+#
+# @admin.register(models.StandardLog)
+# class StandardLogAdmin(admin.ModelAdmin):
+#
+#     """ StandardLog Admin """
+#
+#     pass
 
 @admin.register(models.PurchaseLog)
 class PurchaseLogAdmin(admin.ModelAdmin):

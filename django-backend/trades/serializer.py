@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from trades.models import SaleHeader
 from trades.models import SaleDetail
-from trades.models import CashLog
+# from trades.models import CashLog
 from trades.models import CardLog
-from trades.models import EtcLog
-from trades.models import StandardLog
+# from trades.models import EtcLog
+# from trades.models import StandardLog
 from trades.models import PurchaseLog
 from trades.models import SoldoutLog
 from trades.models import CornerStateLog
@@ -19,20 +19,25 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
             'posNo',
             'billNo',
             'saleFlag',
-            'mealCd',
-            'mealName',
-            'totalQty',
-            'totalSaleAmt',
+            'totQty',
+            'totSaleAmt',
             'saleAmt',
-            'supplyAmt',
+            'supAmt',
             'taxAmt',
             'offTaxAmt',
-            'totalDcAmt',
+            'totDcAmt',
             'pointDcAmt',
-            'pointDcAmt',
-            'cashAmt',
+            'pointDcCnt',
             'cardAmt',
-            'etcAmt'
+            'kkmAmt',
+            'returnYn',
+            'orgStoreCd',
+            'orgSaleDate',
+            'orgPosNo',
+            'orgBillNo',
+            'sendYn',
+            'orderStatus',
+            'user'
         )
 
 
@@ -47,8 +52,6 @@ class SaleDetailSerializer(serializers.ModelSerializer):
             'seq',
             'saleFlag',
             'orderType',
-            'mealCd',
-            'mealName',
             'itemCd',
             'itemName',
             'qty',
@@ -58,45 +61,46 @@ class SaleDetailSerializer(serializers.ModelSerializer):
             'saleCost',
             'salePrice',
             'orgSalePrice',
-            'totalSaleAmt',
+            'totSaleAmt',
             'saleAmt',
-            'supplyAmt',
+            'supAmt',
             'taxAmt',
             'offTaxAmt',
             'taxFlag',
-            'totalDcAmt',
+            'totDcAmt',
             'pointDcAmt',
             'saleTime',
+            'sendYn',
             'insDt',
             'insUs',
             'modDt',
             'modUs'
         )
 
-
-class CashLogSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CashLog
-        fields = (
-            'storeCd',
-            'saleDt',
-            'posNo',
-            'billNo',
-            'seq',
-            'saleFlag',
-            'cashAmt',
-            'returnYn',
-            'orgStoreCd',
-            'orgSaleDate',
-            'orgPosNo',
-            'orgBillNo',
-            'orgSeq',
-            'saleTime',
-            'insDt',
-            'insUs',
-            'modDt',
-            'modUs'
-        )
+#
+# class CashLogSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = CashLog
+#         fields = (
+#             'storeCd',
+#             'saleDt',
+#             'posNo',
+#             'billNo',
+#             'seq',
+#             'saleFlag',
+#             'cashAmt',
+#             'returnYn',
+#             'orgStoreCd',
+#             'orgSaleDate',
+#             'orgPosNo',
+#             'orgBillNo',
+#             'orgSeq',
+#             'saleTime',
+#             'insDt',
+#             'insUs',
+#             'modDt',
+#             'modUs'
+#         )
 
 
 class CardLogSerializer(serializers.ModelSerializer):
@@ -114,12 +118,10 @@ class CardLogSerializer(serializers.ModelSerializer):
             'vanCd',
             'cardCd',
             'cardName',
-            'buyCardCd',
-            'buyCardName',
-            'approvalNo',
-            'approvalDate',
-            'approvalTime',
-            'approvalFlag',
+            'apprNo',
+            'apprDt',
+            'apprTime',
+            'apprFlag',
             'signYn',
             'instFlag',
             'instMonth',
@@ -131,64 +133,65 @@ class CardLogSerializer(serializers.ModelSerializer):
             'orgPosNo',
             'orgBillNo',
             'orgSeq',
-            'orgApprovalNo',
+            'orgApprNo',
             'remark',
+            'sendYn',
             'insDt',
             'insUs',
             'modDt',
             'modUs'
         )
 
+#
+# class EtcLogSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = EtcLog
+#         fields = (
+#             'storeCd',
+#             'saleDt',
+#             'posNo',
+#             'billNo',
+#             'seq',
+#             'saleFlag',
+#             'etcAmt',
+#             'etcPayCatCd',
+#             'etcPayCd',
+#             'remark',
+#             'orgStoreCd',
+#             'orgSaleDate',
+#             'orgPosNo',
+#             'orgBillNo',
+#             'orgSeq',
+#             'insDt',
+#             'insUs',
+#             'modDt',
+#             'modUs'
+#         )
 
-class EtcLogSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = EtcLog
-        fields = (
-            'storeCd',
-            'saleDt',
-            'posNo',
-            'billNo',
-            'seq',
-            'saleFlag',
-            'etcAmt',
-            'etcPayCatCd',
-            'etcPayCd',
-            'remark',
-            'orgStoreCd',
-            'orgSaleDate',
-            'orgPosNo',
-            'orgBillNo',
-            'orgSeq',
-            'insDt',
-            'insUs',
-            'modDt',
-            'modUs'
-        )
-
-
-class StandardLogSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = StandardLog
-        fields = (
-            'storeCd',
-            'saleDt',
-            'posNo',
-            'billNo',
-            'seq',
-            'cdmtSeq',
-            'saleFlag',
-            'cdmtCd',
-            'useUnit',
-            'cdmtQty',
-            'cost',
-            'standardQty',
-            'itemCd',
-            'qty',
-            'insDt',
-            'insUs',
-            'modDt',
-            'modUs'
-        )
+#
+# class StandardLogSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = StandardLog
+#         fields = (
+#             'storeCd',
+#             'saleDt',
+#             'posNo',
+#             'billNo',
+#             'seq',
+#             'cdmtSeq',
+#             'saleFlag',
+#             'cdmtCd',
+#             'useUnit',
+#             'cdmtQty',
+#             'cost',
+#             'standardQty',
+#             'itemCd',
+#             'qty',
+#             'insDt',
+#             'insUs',
+#             'modDt',
+#             'modUs'
+#         )
 
 
 class PurchaseLogSerializer(serializers.ModelSerializer):
