@@ -1,0 +1,180 @@
+.biz__certification{
+  width: 100%;
+  margin-top: 63px;
+
+  .Bizinfomation__box{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin:0 auto;
+    border-bottom: solid 2px #b4022f;
+    .biz__certification__img{
+      height: 210px;
+      margin-top: 19px;
+
+      img{
+        margin-left: 20px;
+        width: 149px;
+        height: 150px;
+      }
+      p{
+        color: #b4022f;
+        font-family: NanumGothicExtraBold;
+      }
+    }
+
+    .biz__message{
+      margin: 5px 24px 30px;
+      background: #b4022f;
+      border-radius: 9px;
+      color: #ffffff;
+      text-align: left;
+      font-size: 11px;
+      font-family: NanumGothicExtraBold;
+      padding: 4px 18px;
+      line-height: 17px;
+
+    }
+  }
+
+  .Bizinput__box{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin:0 auto;
+    border-bottom: solid 2px #b4022f;
+
+    .biz__detail{
+      height: 493px;
+      margin: 10px auto;
+      line-height: 23px;
+      font-family: NanumGothicExtraBold;
+      font-size: 14px;
+
+
+      input{
+        border: solid 1px #b0b0b0;
+        width: 177.5px;
+        height: 20px;
+      }
+
+      .stor__name{
+        float: left;
+        margin-bottom: 10px;
+        margin-right: 10px;
+
+
+      }
+      .manager__name{
+        input{
+          border: solid 1px #b0b0b0;
+          width: 122.5px;
+        }
+      }
+      .open__date{
+        margin-top: 10px;
+      }
+      .stor__no{
+        margin-top: 10px;
+      }
+      .stor__address{
+        margin-top: 10px;
+        input{
+          border: solid 1px #b0b0b0;
+          width: 273px;
+        }
+      }
+      .bonstor__address{
+        margin-top: 10px;
+        input{
+          border: solid 1px #b0b0b0;
+          width: 273px;
+        }
+      }
+      .stor__gun{
+        margin-top: 10px;
+      }
+
+      .account_num{
+        float: left;
+        margin-right: 10px;
+        margin-top: 10px;
+      }
+      .stor__bank{
+        margin-top: 10px;
+
+        input{
+          border: solid 1px #b0b0b0;
+          width: 122.5px;
+        }
+      }
+      .account_num{
+        margin-top: 10px;
+      }
+
+      .button__two{
+        margin-top: 80px;
+        margin-left: 85px;
+        font-size: 10px;
+        button {
+          font-family: NanumGothicExtraBold;
+          font-weight: bold;
+          color: white;
+          width: 125px; height: 30px;
+          background: #1c1c1c;
+          box-shadow: 0px 8px 15.1px 1.9px rgba(119, 119, 119, 0.1);
+          border: solid 1px #f4f4f4;
+          border-radius: 5px;
+        }
+      }
+
+
+
+
+
+
+    }
+  }
+
+  .biz__button{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin:0 auto;
+
+    .button__three{
+      margin: 70px auto 10px auto;
+
+
+
+      button{
+        font-size: 12px;
+        font-family: NanumGothic;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        color: #b4022f;
+        width: 180px; height: 44px;
+        border-radius: 5px;
+        border: solid 1px #cbcbcb;
+        background-color: #ffffff;
+        letter-spacing: 2.4px;
+        margin: 3px;
+      }
+      img{
+        width: 12px;
+        height: 12px;
+      }
+
+    }
+  }
+
+
+
+  }
