@@ -244,7 +244,7 @@ class Order extends React.Component {
                                             <div className="options__option" onClick={() => {
                                                 let flag = false;
                                                 for (let i in this.state.modal_options) {
-                                                    if(this.state.modal_options[i][0] === data) {
+                                                    if(lodash.isEqual(this.state.modal_options[i][0], data)) {
                                                         this.state.modal_options[i][1] += 1
                                                         this.setState(this.state);
                                                         flag = true;
@@ -403,7 +403,20 @@ class Order extends React.Component {
                                             <div className="item__list">1</div>
                                             <div className="item__name">{data[0].itemName}</div>
                                             <div className="item__option__box">
-                                                <div className="item__option">옵션변경</div>
+                                                <div className="item__option" onClick={() => {
+                                                    if(data[0].option) {
+                                                        const elt = document.getElementById("optionmodal");
+                                                        console.log(data[0].option);
+                                                        this.setState({
+                                                            selected: data[0],
+                                                            modal_options: data[0].option,
+                                                        }, () => {
+                                                            const idx = this.state.order_list.indexOf(data);
+                                                            this.state.order_list.splice(idx, 1);
+                                                            elt.classList.remove("hidden");
+                                                        })
+                                                    }
+                                                }}>옵션변경</div>
                                             </div>
                                             <div className="item__decrease__button" onClick={() => {
                                                 data[1] -= 1;
