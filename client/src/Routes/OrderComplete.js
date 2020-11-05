@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HeaderBack from '../Components/js/HeaderBack';
+import HeaderBiz from '../Components/js/HeaderBiz';
+import '../Components/scss/orderComplete.scss';
 
 
 function OrderComplete() {
@@ -20,19 +21,22 @@ function OrderComplete() {
                     </div>
                 </div>
             </div>
-            <HeaderBack url='/mypage' />
+            <HeaderBiz/>
             <div className="ordercomplete">
+                <div className="ordercomplete__close"><p>주문완료</p></div>
                 <div className="ordercomplete__text">
-                    <div className="ordercomplete__line1">스타벅스에</div>
-                    <div className="ordercomplete__line2">order list 결제가 완료되었습니다. </div>
-                    <div className="ordercomplete__line3">마진형님 앞에는 n명의 고객님이 대기중이십니다.</div>
+                    <div className="ordercomplete__line1">· 매장 <p>강남핫도그</p></div>
+                    <div className="ordercomplete__line2">· 주문 <p>치즈핫도그 1개, 콘핫도그 2개</p> </div>
+                    <div className="ordercomplete__line3">· 가격 <p>4,800원</p></div>
+                    <div className="ordercomplete__line"></div>
+                    <div className="ordercomplete__line4"><p>홍길동님의 호출번호는 <b>0024</b> 이며 3명의 고객이 대기중입니다.</p> </div>
                 </div>
                 <div className="ordercomplete__container">
-                    <div className="ordercomplete__confirm"><Link to="/order/status">확인</Link></div>
+                    <div className="ordercomplete__confirm"><Link to="/order/status"><p>선택완료</p></Link></div>
                     <div className="ordercomplete__fastorder" onClick={() => {
                         const elt = document.getElementById("modal__fastorder");
                         elt.classList.remove("hidden");
-                    }}>Fast order에 추가</div>
+                    }}><p>도감추가</p></div>
                 </div>
             </div>
         </>

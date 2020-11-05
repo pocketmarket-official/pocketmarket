@@ -1,0 +1,237 @@
+$headerHeight: 63px;
+
+.ordercomplete{
+    width: 100%;
+    height: 100%;
+    margin-top: $headerHeight;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .ordercomplete__close{
+        width: 100%;
+        //margin-bottom: 15px;
+
+        p{
+            position: relative;
+            left: 40px;
+            width: 100%;
+            height: 16px;
+            margin:0;
+            font-family: 'MaplestoryOTFLight', sans-serif, sans-serif;
+            font-size: 17px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: 1.5px;
+            color: #be234a;
+        }
+    }
+
+    .ordercomplete__text{
+        width: 80%;
+        height: 36%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin:0 auto;
+        border-radius: 10px;
+        box-shadow: 0px 8px 15.1px 1.9px rgba(119, 119, 119, 0.1);
+        border: solid 1px #f4f4f4;
+        background-color: #ffffff;
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        .ordercomplete__line1{
+            height: 24px;
+            width: 80%;
+            font-family: 'Nanum Gothic', sans-serif, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: 1.2px;
+            text-align: left;
+            color: #b4022f;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            //margin-top: 10px;
+            margin-bottom: 10px;
+
+            p{
+                height: 24px;
+                font-family: 'Nanum Gothic', sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                letter-spacing: 1.2px;
+                text-align: left;
+                color: #373737;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin: 0 0 0 3%;
+            }
+        }
+
+        .ordercomplete__line2{
+            height: 24px;
+            width: 80%;
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: 1.2px;
+            text-align: left;
+            color: #b4022f;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            p{
+                height: 24px;
+                font-family: 'Nanum Gothic', sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                letter-spacing: 1.2px;
+                text-align: left;
+                color: #373737;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin: 0 0 0 3%;
+            }
+        }
+
+        .ordercomplete__line3{
+            height: 24px;
+            width: 80%;
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: 1.2px;
+            text-align: left;
+            color: #b4022f;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 10px;
+            //margin-bottom: 10px;
+
+            p{
+                height: 24px;
+                font-family: 'Nanum Gothic', sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                letter-spacing: 1.2px;
+                text-align: left;
+                color: #373737;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin: 0 0 0 3%;
+            }
+        }
+
+        .ordercomplete__line{
+            width: 90%;
+            height: 50px;
+            margin:0 auto;
+
+            border-bottom: 3px solid #e0e0e0;
+        }
+
+        .ordercomplete__line4{
+            width: 260px;
+            height: 86px;
+            font-family: 'MaplestoryOTFLight', sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: 1.8px;
+            text-align: left;
+            color: #494949;
+            line-height: 2;
+
+            b{
+                width: 85px;
+                height: 30px;
+                font-family: 'MaplestoryOTFLight', sans-serif;
+                font-size: 30px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                letter-spacing: 2.4px;
+                //text-align: left;
+                color: #b4022f;
+                margin: 0;
+            }
+        }
+    }
+
+    .ordercomplete__container{
+        width: 90%;
+        height: 91px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 35px;
+        border-top: 1px solid #e8e8e8;
+
+        .ordercomplete__confirm{
+            width: 155px;
+            height: 51px;
+            border-radius: 15px;
+            background-color: black;
+            margin-right: 20px;
+
+            p{
+                width: 155px;
+                height: 51px;
+                font-family: 'Nanum Gothic', sans-serif;
+                font-size: 17px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                letter-spacing: normal;
+                text-align: center;
+                color: #ffa800;
+            }
+        }
+
+        .ordercomplete__fastorder{
+            width: 155px;
+            height: 51px;
+            border-radius: 15px;
+            background-color: black;
+
+            p{
+                width: 155px;
+                height: 51px;
+                font-family: 'Nanum Gothic', sans-serif;
+                font-size: 17px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                letter-spacing: normal;
+                text-align: center;
+                color: #e61b4e;
+            }
+        }
+    }
+}
