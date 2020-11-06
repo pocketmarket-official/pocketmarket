@@ -164,6 +164,11 @@ $headerHeight: 63px;
 
     &.close{
       transform: translateY(118px);
+
+      .container__controller {
+        transform: rotate(270deg) !important;
+        margin-top:0 !important;
+      }
     }
     .container__control__box {
       position:absolute;
@@ -184,11 +189,6 @@ $headerHeight: 63px;
         color:#ededed;
         font-family: "Nanum Gothic",sans-serif;
         font-weight: bold;
-        &.close {
-          transform: rotate(270deg);
-          margin-top:0;
-
-        }
       }
     }
     .order__result {

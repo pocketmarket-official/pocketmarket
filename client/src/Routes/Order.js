@@ -29,7 +29,8 @@ class Order extends React.Component {
             options: {},
             modal_options: [],
             selected: "",
-        }
+            orderContainerClosed: false,
+        };
 
         // initialization of the touch group code
         let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
@@ -320,15 +321,17 @@ class Order extends React.Component {
                         </div>
                     </div>
                     <div className="order__category">
-                        <div className="category__left"><span>{"<"}</span></div>
+                        <div className="category__left scroll"><span>{"<"}</span></div>
+                        {/*<div className="category__left"><span>{"<"}</span></div>*/}
                         <div className="content__box">
                             {this.state.touch_group.map((data) => {
                                 return (
-                                    <div className="category__content" id={data.code} onClick={() => this.getKeymap(data)}>{data.touchGroupName}</div>
+                                    <div className="category__content" id={data.id} key={data.id} onClick={() => this.getKeymap(data)}>{data.touchGroupName}</div>
                                 );
                             })}
                         </div>
                         <div className="category__right"><span>{">"}</span></div>
+                        {/*<div className="category__right scroll"><span>{">"}</span></div>*/}
                     </div>
                     <div className="order__menu">
                     {
@@ -370,8 +373,8 @@ class Order extends React.Component {
                     }
                     </div>
 
-                    <div className="order__container">
-                        <div className="container__control__box">
+                    <div className={"order__container " + (this.state.orderContainerClosed ? 'close' : '')}>
+                        <div className="container__control__box" onClick={() => this.setState({orderContainerClosed: !this.state.orderContainerClosed})}>
                             <div className="container__controller">{">"}</div>
                         </div>
                         <div className="order__result">
