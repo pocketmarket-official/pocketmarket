@@ -5,6 +5,7 @@ from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import reverse
+import json
 from datetime import datetime
 from time import gmtime, strftime
 from users.models import User
@@ -372,7 +373,7 @@ def trade(request):
             orgSaleDt='',
             orgPosNo='',
             orgBillNo='',
-            # orgSeq='',
+            orgSeq=None,
             orgApprNo='',
             remark='',
             sendYn='N',
@@ -384,12 +385,12 @@ def trade(request):
             "SALE_DT": saleHeaderObj.saleDt,
             "POS_NO": saleHeaderObj.posNo,
             "BILL_NO": saleHeaderObj.billNo,
-            "SALE_TP": "2",  # 판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
-            "ONOFF_TP": "1",  # 온라인 오프라인 형태, 온라인주문일경우 1
-            "ORD_FG": "4",  # 주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
+            "SALE_TP": '2',  # 판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
+            "ONOFF_TP": '1',  # 온라인 오프라인 형태, 온라인주문일경우 1
+            "ORD_FG": '4',  # 주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
             "SALE_TM": saleTime,  # 판매시간(시간분초)
             "SALE_DAY": weekday,  # 일요일 1 부터 7까지
-            "SALE_TM_CD": "01",  # 시간코드 공통코드 045번 참조 #todo: 뭔솔?
+            "SALE_TM_CD": '01',  # 시간코드 공통코드 045번 참조 #todo: 뭔솔?
             "RETURN_FG": saleHeaderObj.returnYn,  # 반품플레그(원거래에도 업데이트 해줘야함)
             "SALE_FG": saleHeaderObj.saleFlag,
             "MEAL_CD": mealCd,
@@ -422,8 +423,8 @@ def trade(request):
                 "ORD_TP": saleDetailObj.orderType,
                 "MEAL_CD": mealCd,
                 "MEAL_NM": mealName,
-                "CNR_CD": "",
-                "CNR_NM": "",
+                "CNR_CD": '',
+                "CNR_NM": '',
                 "ITEM_CD": saleDetailObj.itemCd,
                 "ITEM_NM": saleDetailObj.itemName,
                 "QTY": saleDetailObj.qty,
@@ -443,9 +444,12 @@ def trade(request):
                 "NORM_DC_AMT": 0.0,
                 "PNT_DC_AMT": saleDetailObj.pointDcAmt,
                 "SALE_TM": saleDetailObj.saleTime,
-                "SALE_YN": "Y",  # 매출포함여부
+                "SALE_YN": 'Y',  # 매출포함여부
             }
             saleDetailList.append(saleDetailRow)
+
+        if not cardLogObj.orgSeq:
+            cardLogObj.orgSeq = ''
 
         cardLogRow = {
             "COMP_CD": compCd,
@@ -453,7 +457,7 @@ def trade(request):
             "SALE_DT": cardLogObj.saleDt,
             "POS_NO": cardLogObj.posNo,
             "BILL_NO": cardLogObj.billNo,
-            "TRAN_FG": "1",  # 0:전체 1:일반 / 2: 포인트충전 / 3:후결제 / 4:선결제 / 5:RF 충전
+            "TRAN_FG": '1',  # 0:전체 1:일반 / 2: 포인트충전 / 3:후결제 / 4:선결제 / 5:RF 충전
             "SEQ": cardLogObj.seq,
             "SALE_FG": cardLogObj.saleFlag,
             "CARD_AMT": cardLogObj.cardAmt,
@@ -486,11 +490,15 @@ def trade(request):
         cardLogList.append(cardLogRow)
 
         trData = {
-            'T_SALE_H': saleHeaderList,
-            'T_SALE_D': saleDetailList,
-            'T_CARD_L': cardLogList
+            '"T_SALE_H': saleHeaderList,
+            "T_SALE_D": saleDetailList,
+            "T_CARD_L": cardLogList
         }
-        request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data=trData)
+        trDataEncoded = json.dumps(trData, ensure_ascii=False)
+        trDataDecoded = trDataEncoded.encode('utf8').decode()
+        trUtf = trDataDecoded.encode('utf8').decode('utf8')
+
+        request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data=trUtf)
         if request.status_code == 200:
             saleHeaderObj.sendYn = 'Y'
             saleHeaderObj.save()
@@ -498,6 +506,8 @@ def trade(request):
                 saleDetailObj.sendYn = 'Y'
                 saleDetailObj.save()
             cardLogObj.sendYn = 'Y'
+            if cardLogObj.orgSeq == '':
+                cardLogObj.orgSeq = None
             cardLogObj.save()
 
 
