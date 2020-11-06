@@ -156,7 +156,7 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="divide"/>
                     <div className="orderinfo__btn"
-                         onClick={({sellItemList}) => pay({sellItemList: tradesInfo})}>
+                         onClick={({sellItemList}) => pay(tradesInfo, price, this.state.storeName)}>
                         결제하기
                     </div>
                 </div>
