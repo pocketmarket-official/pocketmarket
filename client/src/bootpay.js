@@ -1,26 +1,16 @@
 import BootPay from "bootpay-js";
-import axios from "axios";
 
 
-function pay(sellItemList) {
+function pay(sellItemList, price, storeName) {
     BootPay.request({
         // price: trInfo.Price,
-        price: '1000',
+        price: price,
         application_id: process.env.REACT_APP_BOOTPAY_APP_ID,
         // name: trInfo.storeName,
-        name: '식당 이름',
+        name: storeName,
         pg: 'nicepay',
         // method: 'card',
         show_agree_window: 0,
-        items: [
-            {
-                item_name: '아이스 아메리카노',
-                qty: 1,
-                unique: '123', //해당 상품을 구분짓는 primary key
-                price: 1000,
-                cat1: '음료',
-            }
-        ],
         user_info: {
             username: '노민철',
             email: 'rmc2@naver.com',
