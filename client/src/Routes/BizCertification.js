@@ -4,6 +4,7 @@ import '../Components/scss/BizCertification.scss';
 import biz from '../assets/map/btn_clocation.png';
 import logout from '../assets/my_page/ico_logout.png';
 import mode from '../assets/common/btn_sceach.png';
+import {Link} from "react-router-dom";
 
 function BizCertification() {
     return (
@@ -86,7 +87,7 @@ function BizCertification() {
                 <div className="biz__button">
                     <div className="button__three">
                         {/*<button className="">문의하기</button>*/}
-                        <button className=""><img src={mode}/> 사용자모드</button>
+                        <Link to="/"><button className=""><img src={mode}/>사용자 모드</button></Link>
                         <button className=""><img src={mode}/> 로그아웃</button>
                     </div>
                 </div>
