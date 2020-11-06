@@ -1,3 +1,5 @@
+@import "mixins";
+
 $headerHeight: 63px;
 
 .orderpage {
@@ -62,52 +64,45 @@ $headerHeight: 63px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    overflow: scroll;
     width: 414px;
     height: 55px;
+    position: relative;
     background-color: #000000;
     .category__left {
-      width: 8.5px;
-      height: 15.5px;
-      position: absolute;
-      left: 8px;
-      top: 101.5px;
-      font-family: MaplestoryOTFLight,sans-serif;
+      margin-left:8px;
+      font-family: MaplestoryOTFBold, sans-serif;
       font-size: 15.5px;
-      font-weight: 300;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: 1.365;
-      letter-spacing: 0.775px;
-      text-align: left;
       color: #606060;
+      &.scroll {
+        color: #b4022f;
+      }
     }
     .category__right {
-      width: 8.5px;
-      height: 15.5px;
-      position: absolute;
-      right: 7.5px;
-      top: 101.5px;
-      font-family: MaplestoryOTFLight,sans-serif;
+      margin-right:8px;
+      font-family: MaplestoryOTFBold, sans-serif;
       font-size: 15.5px;
-      font-weight: 300;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: 1.365;
-      letter-spacing: 0.775px;
-      text-align: left;
-      color: #b4022f;
+      color: #606060;
+      &.scroll {
+        color: #b4022f;
+      }
     }
-    .category__content {
-      min-width: 60px;
-      margin: 5px 20px;
-      color: #ffffff;
-      font-family: MaplestoryOTFLight,sans-serif;
-      font-size: 15.5px;
-      /*
-      border-width:2px;
-      border-color:#ca0000;
-      */
+    .content__box {
+      overflow: scroll;
+      display: flex;
+      height: 100%;
+      justify-content: space-between;
+      align-items: center;
+      .category__content {
+        min-width: 60px;
+        margin: 5px 20px;
+        color: #ffffff;
+        font-family: MaplestoryOTFLight,sans-serif;
+        font-size: 15.5px;
+
+        &.active {
+          @include stroke(#ca0000)
+        }
+      }
     }
   }
   .order__menu {
@@ -153,23 +148,59 @@ $headerHeight: 63px;
   .order__container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     left: 8.5px;
     width: 397px;
     height: 166.5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0.5px 0.5px 5px 0.5px gray;
     background-color: #ffffff;
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
+    transition: ease-in-out .2s;
+    z-index: 2;
+
+    &.close{
+      transform: translateY(118px);
+
+      .container__controller {
+        transform: rotate(270deg) !important;
+        margin-top:0 !important;
+      }
+    }
+    .container__control__box {
+      position:absolute;
+      top: -20px;
+      width: 32px;
+      height: 19px;
+      display: flex;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      box-shadow: 0.5px 0.5px 5px 0.5px gray;
+      background-color: #d31142;
+      z-index: 1;
+      justify-content: center;
+
+      .container__controller {
+        margin-top: 4px;
+        transform: rotate(90deg);
+        color:#ededed;
+        font-family: "Nanum Gothic",sans-serif;
+        font-weight: bold;
+      }
+    }
     .order__result {
       display: flex;
+      padding-top: 5px;
+      height:38.5px;
       .order__result__box {
         border-radius:10px;
         background-color: #d31142;
         width: 294.5px;
-        height:38.5px;
         display: flex;
-        justify-content: space-around;
+        justify-content: start;
         align-items: center;
         font-family: NanumGothic,sans-serif;
         font-size: 13.5px;
@@ -181,13 +212,22 @@ $headerHeight: 63px;
         text-align: left;
         color: #ffffff;
         .reset__button {
-          position: fixed;
-          left: 20px;
+          width: 27px;
+          height: 27px;
+          border-radius: 7.5px;
+          margin-left:6px;
+          margin-top: 2px;
+          background-image: linear-gradient(to top, rgba(65, 65, 65, 1), #010101);
+          .reset__image {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+          }
         }
         .result__box {
-          position: fixed;
           display: flex;
-          left: 151.5px;
+          margin-left: auto;
+          margin-right: 18.5px;
           .order__quantity {
             display: flex;
             .order__total-quantity {
@@ -196,6 +236,7 @@ $headerHeight: 63px;
           }
           .order__cost {
             display: flex;
+            margin-left: 15px;
             .cost__cost {
               margin-left: 5px;
             }
@@ -207,6 +248,9 @@ $headerHeight: 63px;
         height: 38.5px;
         border-radius: 10px;
         background-color: #1c1c1c;
+        font-weight: bold;
+        font-family: "Nanum Gothic",sans-serif;
+        margin-left: 4px;
         color:#ffffff;
         display: flex;
         justify-content:center;
@@ -224,22 +268,25 @@ $headerHeight: 63px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        height:29.5px;
         width: 100%;
-        margin: 10px 0;
+        margin: 5px 5px;
         .item__list {
-          margin-left: 15px;
+          float: left;
+          font-family: NanumGothic,sans-serif;
+          font-size: 13.5px;
+          font-weight: 800;
+          text-align: left;
+          color: #333333;
+          margin-left: 10px;
           width: 5px
         }
         .item__name {
           float: left;
-          width: 44px;
-          height: 10px;
+          width: 120px;
           font-family: NanumGothic,sans-serif;
           font-size: 13.5px;
           font-weight: 800;
-          font-stretch: normal;
-          font-style: normal;
-          line-height: 1.48;
           letter-spacing: 0.68px;
           text-align: left;
           color: #333333;
@@ -247,80 +294,76 @@ $headerHeight: 63px;
         .item__option__box {
           width: 52.5px;
           height: 25.5px;
-          //position: absolute;
-          //left:160.5px;
           border-radius: 7.5px;
           border: solid 2px #cc1744;
           background-color: #ffffff;
           display: flex;
           justify-content:center;
           .item__option {
-            width: 39.5px;
-            height: 9.5px;
             font-family: NanumGothic,sans-serif;
             font-size: 10.5px;
             font-weight: bold;
-            font-stretch: normal;
-            font-style: normal;
             line-height: 2.5;
             letter-spacing: 0.53px;
-            text-align: left;
             color: #6c0d0d;
           }
         }
-        .item__decrease__button {
-          width: 23px;
-          height: 23px;
-          //position: absolute;
-          //left:247px;
-          border-radius: 11.5px;
-          background-color: #333333;
+        .item__quantity__box{
           display: flex;
-          justify-content:center;
-
-          .item__decrease {
-            width: 9.5px;
-            height: 2.5px;
-            font-family: MaplestoryOTFBold,sans-serif;
-            font-size: 20px;
-            font-weight: 300;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 1;
-            letter-spacing: 0.5px;
-            text-align: left;
-            color: #ffffff;
+          align-items: center;
+          .item__decrease__button {
+            width: 23px;
+            height: 23px;
+            border-radius: 50%;
+            background-color: #333333;
+            display: flex;
+            justify-content:center;
+            .item__decrease {
+              font-family: MaplestoryOTFBold,sans-serif;
+              font-size: 20px;
+              font-weight: 300;
+              color: #ffffff;
+            }
           }
-        }
-        .item__quantity {
-          width: 20px
-        }
-        .item__increase__button {
-          width: 23px;
-          height: 23px;
-          //position: absolute;
-          //left: 296px;
-          border-radius: 11.5px;
-          background-color: #333333;
-          display: flex;
-          justify-content:center;
-          .item__increase {
-            width: 9.5px;
-            height: 2.5px;
-            font-family: MaplestoryOTFBold,sans-serif;
-            font-size: 20px;
-            font-weight: 300;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 1;
-            letter-spacing: 0.5px;
-            text-align: left;
-            color: #ffffff;
+          .item__quantity {
+            margin: 0 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            font-family: "Nanum Gothic",sans-serif;
+          }
+          .item__increase__button {
+            width: 23px;
+            height: 23px;
+            border-radius: 50%;
+            background-color: #333333;
+            display: flex;
+            justify-content:center;
+            .item__increase {
+              font-family: MaplestoryOTFBold,sans-serif;
+              font-size: 20px;
+              font-weight: 300;
+              color: #ffffff;
+            }
           }
         }
 
+        .cancel__button {
+          display: flex;
+          padding-right:18px;
+          font-size: 0.9rem;
+          font-family: MaplestoryOTFBold, sans-serif;
+          font-weight: bold;
+        }
+      }
+      .item__line {
+        width: 379px;
+        height: 0.5px;
+        border-bottom: solid 0.5px #ffceda;
+        background-color: #ffceda;
 
-        //옵션변경 모달
+        &:last-child {
+          display: none;
+        }
       }
     }
   }

@@ -1,0 +1,103 @@
+.bizorderstatus{
+  margin-top: 63px;
+  width: 100%;
+
+  font-family: NanumGothic;
+
+
+  .bizorderstatus__stor__container{
+    hheight: 18px;
+    width: 100%;
+    background: black;
+    padding: 4px 0;
+    .bizorderstatus__stor__name{
+      width: 50%;
+      height: 90%;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      p{
+        color: #b4022f;
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        margin-block-start: 0;
+        margin-block-end: 0;
+      }
+    }
+  }
+
+  .bizorderstatus__container{
+    width: 80%;
+    margin: 20px auto;
+    .bizorderstatus__status{
+
+      font-size: 12px;
+      font-weight: 800;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 0.67;
+      text-align: left;
+      padding: 4px 2px;
+      border-bottom: 2px solid #b4022f;
+
+      display: flex;
+      align-items: center;
+
+
+      .bizorderstatus__status__number{
+        background: black;
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        color: white;
+        font-size: 15px;
+        margin-left: 4px;
+        p{
+          margin: 7px;
+        }
+      }
+
+      .red{
+        background: #b4022f;
+      }
+
+    }
+    .red{
+      color: #b4022f;
+    }
+
+    .bizorderstatus__detail{
+      width: 100%;
+
+      font-size: 10px;
+      .bizorderstatus__order{
+        border: 1px solid #cbcbcb;
+        margin-top: 5px;
+        padding: 10px 10px;
+        .bizorderstatus__order__detail{
+          display: flex;
+          align-items: center;
+          font-weight: bold;
+          .namebox{
+            height: 15px;
+            width: 45px;
+            border: 1px solid #cbcbcb;
+            font-weight: bold;
+            border-radius: 3px;
+            text-align-last: center;
+            color: #3e3e3e;
+            margin: 6px;
+          }
+          .red{
+            color: #b4022f;
+          }
+        }
+
+      }
+    }
+
+  }
+}
