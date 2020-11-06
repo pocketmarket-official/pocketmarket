@@ -498,17 +498,17 @@ def trade(request):
         trDataDecoded = trDataEncoded.encode('utf8').decode()
         trUtf = trDataDecoded.encode('utf8').decode('utf8')
 
-        request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data=trUtf)
-        if request.status_code == 200:
-            saleHeaderObj.sendYn = 'Y'
-            saleHeaderObj.save()
-            for saleDetailObj in saleDetailObjList:
-                saleDetailObj.sendYn = 'Y'
-                saleDetailObj.save()
-            cardLogObj.sendYn = 'Y'
-            if cardLogObj.orgSeq == '':
-                cardLogObj.orgSeq = None
-            cardLogObj.save()
+        # request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data=trUtf)
+        # if request.status_code == 200:
+        #     saleHeaderObj.sendYn = 'Y'
+        #     saleHeaderObj.save()
+        #     for saleDetailObj in saleDetailObjList:
+        #         saleDetailObj.sendYn = 'Y'
+        #         saleDetailObj.save()
+        #     cardLogObj.sendYn = 'Y'
+        #     if cardLogObj.orgSeq == '':
+        #         cardLogObj.orgSeq = None
+        #     cardLogObj.save()
 
 
     except Exception as ex:
