@@ -321,12 +321,14 @@ class Order extends React.Component {
                     </div>
                     <div className="order__category">
                         <div className="category__left"><span>{"<"}</span></div>
+                        <div className="content__box">
+                            {this.state.touch_group.map((data) => {
+                                return (
+                                    <div className="category__content" id={data.code} onClick={() => this.getKeymap(data)}>{data.touchGroupName}</div>
+                                );
+                            })}
+                        </div>
                         <div className="category__right"><span>{">"}</span></div>
-                        {this.state.touch_group.map((data) => {
-                            return (
-                                <div className="category__content" id={data.code} onClick={() => this.getKeymap(data)}>{data.touchGroupName}</div>
-                            );
-                        })}
                     </div>
                     <div className="order__menu">
                     {
@@ -369,10 +371,15 @@ class Order extends React.Component {
                     </div>
 
                     <div className="order__container">
+                        <div className="container__control__box">
+                            <div className="container__controller">{">"}</div>
+                        </div>
                         <div className="order__result">
                             <div className="order__result__box">
                                 <div className="reset__button">
-                                    <div onClick={this.clearOrderList}>초기화</div>
+                                    <div className="reset__image">
+                                        <div onClick={this.clearOrderList}>⟳</div>
+                                    </div>
                                 </div>
                                 <div className="result__box">
                                     <div className="order__quantity">
@@ -399,46 +406,53 @@ class Order extends React.Component {
                             {
                                 this.state.order_list.map((data) => {
                                     return (
-                                        <div className="order__item">
-                                            <div className="item__list">1</div>
-                                            <div className="item__name">{data[0].itemName}</div>
-                                            <div className="item__option__box">
-                                                <div className="item__option" onClick={() => {
-                                                    if(data[0].option) {
-                                                        const elt = document.getElementById("optionmodal");
-                                                        console.log(data[0].option);
-                                                        this.setState({
-                                                            selected: data[0],
-                                                            modal_options: data[0].option,
-                                                        }, () => {
+                                        <>
+                                            <div className="order__item">
+                                                <div className="item__list">1</div>
+                                                <div className="item__name">{data[0].itemName}</div>
+                                                <div className="item__option__box">
+                                                    <div className="item__option" onClick={() => {
+                                                        if(data[0].option) {
+                                                            const elt = document.getElementById("optionmodal");
+                                                            console.log(data[0].option);
+                                                            this.setState({
+                                                                selected: data[0],
+                                                                modal_options: data[0].option,
+                                                            }, () => {
+                                                                const idx = this.state.order_list.indexOf(data);
+                                                                this.state.order_list.splice(idx, 1);
+                                                                elt.classList.remove("hidden");
+                                                            })
+                                                        }
+                                                    }}>옵션변경</div>
+                                                </div>
+                                                <div className="item__quantity__box">
+                                                    <div className="item__decrease__button" onClick={() => {
+                                                        data[1] -= 1;
+                                                        if(data[1] === 0) {
                                                             const idx = this.state.order_list.indexOf(data);
                                                             this.state.order_list.splice(idx, 1);
-                                                            elt.classList.remove("hidden");
-                                                        })
-                                                    }
-                                                }}>옵션변경</div>
+                                                        }
+                                                        this.setState(this.state);
+                                                    }}>
+                                                        <div className="item__decrease">-</div>
+                                                    </div>
+                                                    <div className="item__quantity">
+                                                        {data[1]}
+                                                    </div>
+                                                    <div className="item__increase__button" onClick={() => {
+                                                        data[1] += 1;
+                                                        this.setState(this.state);
+                                                    }}>
+                                                        <div className="item__increase">+</div>
+                                                    </div>
+                                                </div>
+                                                <div className="cancel__button">
+                                                    X
+                                                </div>
                                             </div>
-                                            <div className="item__decrease__button" onClick={() => {
-                                                data[1] -= 1;
-                                                if(data[1] === 0) {
-                                                    const idx = this.state.order_list.indexOf(data);
-                                                    this.state.order_list.splice(idx, 1);
-                                                }
-                                                this.setState(this.state);
-                                            }}>
-                                                <div className="item__decrease">-</div>
-                                            </div>
-                                            <div className="item__quantity">
-                                                {data[1]}
-                                            </div>
-                                            <div className="item__increase__button" onClick={() => {
-                                                data[1] += 1
-                                                this.setState(this.state);
-                                            }}>
-                                                <div className="item__increase">+</div>
-                                            </div>
-                                            <button>X</button>
-                                        </div>
+                                            <div className="item__line"></div>
+                                        </>
                                     );
                                 })
                             }
