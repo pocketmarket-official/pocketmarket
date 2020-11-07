@@ -1,6 +1,8 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
 import PointResult from '../Components/js/PointResult';
+import '../Components/scss/PointHistory.scss';
+import search from '../assets/my_place_full/ico_search.png';
 
 
 class PointHistory extends React.Component {
@@ -27,7 +29,7 @@ class PointHistory extends React.Component {
             {
                 id: 1,
                 date: '2020-07-25',
-                point: [300, 200, 500],
+                point: [300, 200, "쉬림프킹"],
             },
             {
                 id: 2,
@@ -81,7 +83,7 @@ class PointHistory extends React.Component {
         if(this.state.result.length === 0) {
             jsx =
                 <>
-                    <div>검색 결과가 없습니다.</div>
+                    <div className="result__nodata">검색 결과가 없습니다.</div>
                 </>;
         } else {
             jsx = <PointResult result={this.state.result} />;
@@ -95,49 +97,83 @@ class PointHistory extends React.Component {
                     <div className="modal__modal" onClick={(e) => {
                         e.stopPropagation();
                     }}>
-                        <div className="modal__header"></div>
-                        <div className="modal__detail">100 likes -> 100 PM</div>
-                        <button>전환</button>
+                        <div className="modal__header">
+                            보유 정보
+                        </div>
+                        <div className="modal__convert__info__container">
+                            <div className="modal__convert__info divide">좋아요<p>(개)</p></div>
+                            <div className="modal__convert__info divide">포켓머니<p>(PM)</p></div>
+                            <div className="modal__convert__info divide">3500</div>
+                            <div className="modal__convert__info divide">2500</div>
+                        </div>
+                        <div className="modal__header">
+                            포인트 전환
+                        </div>
+                        <div className="modal__detail__container">
+                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />100개 => 100 PM</div>
+                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />500개 => 500 PM</div>
+                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />1000개 => 1300 PM</div>
+                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />2000개 => 3000 PM</div>
+                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />5000개 => 8500 PM</div>
+                        </div>
+                        <button className="modal__convert__button">전환하기</button>
                     </div>
                 </div>
+
+
                 <HeaderBack url='/mypage' />
                 <div className="pointhistory">
-                    <div className="pointhistory__container">
-                        <div className="pointhistory__data">
-                            <div className="pointhistory__title">현재까지 총 좋아요 수</div>
-                            <div className="pointhistory__point">6054개</div>
+                    <div className="pointhistory__info__container">
+                        <div className="pointhistory__info__title">포인트 정보</div>
+                        <div className="pointhistory__point__container">
+                            <div className="pointhistory__data">
+                                <div className="pointhistory__title">현재까지 총 좋아요 수</div>
+                                <div className="pointhistory__point">96054</div>
+                                <div className="pointhistory__unit">개</div>
+                            </div>
+                            <div className="pointhistory__data">
+                                <div className="pointhistory__title">포인트 전환한 좋아요 수</div>
+                                <div className="pointhistory__point">95000</div>
+                                <div className="pointhistory__unit">개</div>
+                            </div>
+                            <div className="pointhistory__data">
+                                <div className="pointhistory__title">현재까지 전환한 총 포인트</div>
+                                <div className="pointhistory__point">96000</div>
+                                <div className="pointhistory__unit">PM</div>
+                            </div>
+                            <div className="pointhistory__data">
+                                <div className="pointhistory__title">현재까지 사용한 총 포인트</div>
+                                <div className="pointhistory__point red">94500</div>
+                                <div className="pointhistory__unit">PM</div>
+                            </div>
+                            <div className="pointhistory__data">
+                                <div className="pointhistory__title">잔여 포인트</div>
+                                <div className="pointhistory__point red2">91500</div>
+                                <div className="pointhistory__unit">PM</div>
+                            </div>
+                            <button className="pointhistory__conversion" onClick={() => {
+                                const elt = document.getElementById("modal__conversion");
+                                elt.classList.remove("hidden");
+                            }}>포인트 전환</button>
                         </div>
-                        <div className="pointhistory__data">
-                            <div className="pointhistory__title">포인트 전환한 좋아요 수</div>
-                            <div className="pointhistory__point">5000개</div>
-                        </div>
-                        <div className="pointhistory__data">
-                            <div className="pointhistory__title">현재까지 전환한 총 포인트</div>
-                            <div className="pointhistory__point">6000PM</div>
-                        </div>
-                        <div className="pointhistory__data">
-                            <div className="pointhistory__title">현재까지 사용한 총 포인트</div>
-                            <div className="pointhistory__point">4500PM</div>
-                        </div>
-                        <div className="pointhistory__data">
-                            <div className="pointhistory__title">잔여 포인트</div>
-                            <div className="pointhistory__point">1500PM</div>
-                        </div>
+
                     </div>
-                    <button className="pointhistory__conversion" onClick={() => {
-                            const elt = document.getElementById("modal__conversion");
-                            elt.classList.remove("hidden");
-                        }}>포인트 전환</button>
-                    <div className="pointhistory__search">
+
+                    <div className="pointhistory__search__container">
                         <div className="search__title">포인트 이력</div>
                         <div className="search__input">
-                            <input type="date" id="date1" /> ~ <input type="date" id="date2" />
-                            <input type="submit" value="조회" onClick={this.searchHistory} />
-                        </div>
-                        <div className="pointhistory__result">
-                            {jsx}
+                            <input type="date" id="date1" value="2000-07-25" /> ~ <input type="date" id="date2" />
+                            <input type="image" src={search} value="조회" id="search" onClick={this.searchHistory}/>
                         </div>
                     </div>
+                    <div className="pointhistory__result__container">
+                        <div className="pointhistory__search">
+                            <div className="pointhistory__result">
+                                {jsx}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </>
         );
