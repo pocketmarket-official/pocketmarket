@@ -1,7 +1,7 @@
 import BootPay from "bootpay-js";
+import axios from "axios";
 
-
-function pay(sellItemList, price, storeName) {
+function pay(sellItemList, price, storeName, storeId) {
     BootPay.request({
         // price: trInfo.Price,
         price: price,
@@ -40,7 +40,7 @@ function pay(sellItemList, price, storeName) {
         }
     }).close(function (data) {
         // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-        console.log(data);
+        // console.log(data);
     }).done(function (data) {
         window.alert('success');
         //결제가 정상적으로 완료되면 수행됩니다
@@ -60,7 +60,7 @@ function pay(sellItemList, price, storeName) {
         //     posNo: posNo,
         //     billNo: billNo,
         // });
-        // axios.post('http://127.0.0.1:8000/api/trades_saleHeader/', sellItemList);
+        axios.post('/trade/', data, sellItemList, storeId);
     });
 }
 

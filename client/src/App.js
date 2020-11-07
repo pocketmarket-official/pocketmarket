@@ -9,7 +9,6 @@ import StoreView from './Routes/Store';
 import ReviewList from './Routes/ReviewList';
 import Order from './Routes/Order';
 import OrderInfo from './Routes/OrderInfo';
-import OrderInfo_test from './Routes/OrderInfo_test';
 import OrderComplete from './Routes/OrderComplete';
 import OrderStatus from './Routes/OrderStatus';
 import Fastorder from './Routes/Fastorder';
@@ -56,7 +55,6 @@ function App() {
           <Route exact path="/main/store/:storeId/order" component={Order} />
           <Route exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
           <Route exact path="/main/store/:storeId/orderinfo/payMethod" component={OrderInfoPayMethod} />
-          <Route exact path="/main/store/:storeId/orderinfo_test" component={OrderInfo_test} />
         </Switch>
         <CacheRoute authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
         <Route authenticated={authenticated} exact path="/order/review" component={ReviewWrite} />
