@@ -3,11 +3,11 @@ from datetime import datetime
 
 # Create your models here.
 class SaleHeader(models.Model):
-    storeCd = models.CharField(max_length=10, default='00000')
-    saleDt = models.CharField(max_length=8, default='00000000')
+    storeCd = models.CharField(max_length=10, default='')
+    saleDt = models.CharField(max_length=8, default='')
     posNo = models.CharField(max_length=5, default='91')
-    billNo = models.CharField(max_length=10, default='0000')
-    saleFlag = models.CharField(max_length=3, default='000') #baseCode:050 [0:전체/1:정상/2:취소]
+    billNo = models.CharField(max_length=10, default='')
+    saleFlag = models.CharField(max_length=3, default='') #baseCode:050 [0:전체/1:정상/2:취소]
     totQty = models.IntegerField(default=0)
     totSaleAmt = models.FloatField(default=0.0) #할인이 적용되기 전 매출액
     saleAmt = models.FloatField(default=0.0) #할인이 적용된 실제 결제금액
@@ -30,19 +30,19 @@ class SaleHeader(models.Model):
 
 
 class SaleDetail(models.Model):
-    storeCd = models.CharField(max_length=10, default='00000')
-    saleDt = models.CharField(max_length=8, default='00000000')
+    storeCd = models.CharField(max_length=10, default='')
+    saleDt = models.CharField(max_length=8, default='')
     posNo = models.CharField(max_length=5, default='91')
-    billNo = models.CharField(max_length=10, default='0000')
+    billNo = models.CharField(max_length=10, default='')
     seq = models.IntegerField(default=1)
-    saleFlag = models.CharField(max_length=3, default='000') #baseCode:050 [0:전체/1:정상/2:취소]
-    orderType = models.CharField(max_length=3, default='000') #baseCode:062 [1:단품/2:세트]
-    itemCd = models.CharField(max_length=20, default='00000')
+    saleFlag = models.CharField(max_length=3, default='') #baseCode:050 [0:전체/1:정상/2:취소]
+    orderType = models.CharField(max_length=3, default='') #baseCode:062 [1:단품/2:세트]
+    itemCd = models.CharField(max_length=20, default='')
     itemName = models.CharField(max_length=200, default='')
     qty = models.IntegerField(default=1)
-    itemSellGroup = models.CharField(max_length=3, default='000')
-    itemSellLevel = models.CharField(max_length=3, default='000') #[1:Parent/2:Child]
-    itemSellType = models.CharField(max_length=3, default='000') #[1:일반/2:옵션변경/3:옵션추가/4:1+1/5:사은품]
+    itemSellGroup = models.CharField(max_length=3, default='')
+    itemSellLevel = models.CharField(max_length=3, default='') #[1:Parent/2:Child]
+    itemSellType = models.CharField(max_length=3, default='') #[1:일반/2:옵션변경/3:옵션추가/4:1+1/5:사은품]
     saleCost = models.FloatField(default=0.0)
     salePrice = models.FloatField(default=0.0)
     orgSalePrice = models.FloatField(default=0.0)
@@ -82,32 +82,32 @@ class SaleDetail(models.Model):
 #     modUs = models.CharField(max_length=30, default='defaultValue', null=True)
 
 class CardLog(models.Model):
-    storeCd = models.CharField(max_length=10, default='00000')
-    saleDt = models.CharField(max_length=8, default='00000000')
+    storeCd = models.CharField(max_length=10, default='')
+    saleDt = models.CharField(max_length=8, default='')
     posNo = models.CharField(max_length=5, default='91')
-    billNo = models.CharField(max_length=10, default='0000')
+    billNo = models.CharField(max_length=10, default='')
     seq = models.IntegerField(default=1)
-    saleFlag = models.CharField(max_length=3, default='000')  # baseCode:050 [0:전체/1:정상/2:취소]
+    saleFlag = models.CharField(max_length=3, default='1')  # baseCode:050 [0:전체/1:정상/2:취소]
     cardAmt = models.FloatField(default=0.0)
-    cardNo = models.CharField(max_length=20, default='0000000000000000')
-    vanCd = models.CharField(max_length=3, default='000')
-    cardCd = models.CharField(max_length=3, default='000')
+    cardNo = models.CharField(max_length=20, default='')
+    vanCd = models.CharField(max_length=3, default='')
+    cardCd = models.CharField(max_length=3, default='')
     cardName = models.CharField(max_length=50, default='')
-    apprNo = models.CharField(max_length=20, default='0000000000000000')
-    apprDt = models.CharField(max_length=8, default='00000000')
-    apprTime = models.CharField(max_length=6, default='000000')
+    apprNo = models.CharField(max_length=20, default='')
+    apprDt = models.CharField(max_length=8, default='')
+    apprTime = models.CharField(max_length=6, default='')
     apprFlag = models.CharField(max_length=1, default=1) #[1:정상승인/2:임의등록]
     instFlag = models.CharField(max_length=1, default='0') #[0:할부없음/1:할부]
     instMonth = models.CharField(max_length=2, default='00')
     terminalId = models.CharField(max_length=20, default='')
     registerNo = models.CharField(max_length=20, default='')
     returnYn = models.CharField(max_length=1, default='N')
-    orgStoreCd = models.CharField(max_length=10, default='00000')
-    orgSaleDt = models.CharField(max_length=8, default='00000000')
+    orgStoreCd = models.CharField(max_length=10, default='')
+    orgSaleDt = models.CharField(max_length=8, default='')
     orgPosNo = models.CharField(max_length=5, default='91')
-    orgBillNo = models.CharField(max_length=10, default='0000')
+    orgBillNo = models.CharField(max_length=10, default='')
     orgSeq = models.IntegerField(null=True)
-    orgApprNo = models.CharField(max_length=8, default='00000000')
+    orgApprNo = models.CharField(max_length=8, default='')
     remark = models.CharField(max_length=255, default='')
     sendYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
@@ -152,24 +152,24 @@ class CardLog(models.Model):
 #     modUs = models.CharField(max_length=30, default='defaultValue', null=True)
 
 class PurchaseLog(models.Model):
-    storeCd = models.CharField(max_length=10, default='00000')
-    purchaseDt = models.CharField(max_length=8, default='00000000')
-    registerNo = models.CharField(max_length=20, default='00000')
+    storeCd = models.CharField(max_length=10, default='')
+    purchaseDt = models.CharField(max_length=8, default='')
+    registerNo = models.CharField(max_length=20, default='')
     seq = models.IntegerField(default=1)
-    purchaseFlag = models.CharField(max_length=3, default='000')
-    cdmtCd = models.CharField(max_length=20, default='000')
-    orderUnit = models.CharField(max_length=5, default='000')
+    purchaseFlag = models.CharField(max_length=3, default='')
+    cdmtCd = models.CharField(max_length=20, default='')
+    orderUnit = models.CharField(max_length=5, default='')
     purchaseQty = models.IntegerField(default=0)
-    approvalFlag = models.CharField(max_length=3, default='000')
+    approvalFlag = models.CharField(max_length=3, default='')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
     modUs = models.CharField(max_length=30, default='defaultValue', null=True)
 
 class SoldoutLog(models.Model):
-    storeCd = models.CharField(max_length=10, default='00000')
-    saleDt = models.CharField(max_length=8, default='00000000')
-    itemCd = models.CharField(max_length=20, default='00000')
+    storeCd = models.CharField(max_length=10, default='')
+    saleDt = models.CharField(max_length=8, default='')
+    itemCd = models.CharField(max_length=20, default='')
     soldoutYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
@@ -177,10 +177,10 @@ class SoldoutLog(models.Model):
     modUs = models.CharField(max_length=30, default='defaultValue', null=True)
 
 class CornerStateLog(models.Model):
-    storeCd = models.CharField(max_length=10, default='00000')
-    saleDt = models.CharField(max_length=8, default='00000000')
-    keymapCd = models.CharField(max_length=10, default='000')
-    groupCd = models.CharField(max_length=3, default='000')
+    storeCd = models.CharField(max_length=10, default='')
+    saleDt = models.CharField(max_length=8, default='')
+    keymapCd = models.CharField(max_length=10, default='')
+    groupCd = models.CharField(max_length=3, default='')
     stateFlag = models.CharField(max_length=1, default='1') #[1:원활/2:혼잡/3:주문불가]
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
