@@ -8,7 +8,9 @@ from datetime import datetime
 
 class User(AbstractUser):
     """ User Model Definition """
-    testField = models.CharField(max_length=30, default='')
+    profileName = models.CharField(max_length=30, default='')
+    profileImage = models.CharField(max_length=255, default='')
+
 
     pass
 
