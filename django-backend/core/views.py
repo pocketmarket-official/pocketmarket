@@ -43,8 +43,6 @@ def kakao_callback(request):
         client_id = os.environ.get("KAKAO_KEY")
         client_secret = os.environ.get("KAKAO_SECRET")
         redirect_uri = "http://13.124.90.138:8000/login/kakao/callback"
-        print('=============code===============')
-        print(code)
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -53,8 +51,6 @@ def kakao_callback(request):
             result_json = request_api.json()
             error = result_json.get("error", None)
             if error is not None:
-                print('=============error===============')
-                print(error)
 
                 raise KakaoException()
             else:
@@ -67,8 +63,6 @@ def kakao_callback(request):
                 )
                 profile_json = profile_request.json()
                 kakao_id = profile_json.get("id")
-                print('=============profile===============')
-                print(profile_json)
 
                 if kakao_id is not None:
                     email = profile_json.get("kakao_account")["email"]
@@ -93,7 +87,9 @@ def kakao_callback(request):
 
 @transaction.atomic
 def trade(request):
+    print(request)
     try:
+        print("sadfdsf")
         # variable defintion
         saleHeaderList = []
         saleDetailList = []
@@ -273,7 +269,7 @@ def trade(request):
 
         i = 1
         for payment in payments:
-
+            print(payment)
             if payment['type'] == 1:
                 headerCardAmt += payment['amount']  # 카드결제금액 더해가는 방식
                 cardSeq = i
@@ -326,7 +322,9 @@ def trade(request):
             # user = 1
         )
 
+        print(saleHeaderObj)
         for saleDetail in saleDetailList:
+            print(saleDetail)
             saleDetailObj = SaleDetail.objects.create(
                 storeCd=storeCd,
                 saleDt=saleDt,
@@ -357,6 +355,7 @@ def trade(request):
             )
             saleDetailObjList.append(saleDetailObj)
 
+        print(saleDetailObj)
         cardLogObj = CardLog.objects.create(
             storeCd=storeCd,
             saleDt=saleDt,
@@ -387,6 +386,7 @@ def trade(request):
             remark='',
             sendYn='N',
         )
+        print(cardLogObj)
 
         saleHeaderRow = {
             "COMP_CD": compCd,
