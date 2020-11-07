@@ -31,6 +31,7 @@ def kakao_login(request):
     ''' use kakao oauth '''
     client_id = os.environ.get("KAKAO_KEY")
     redirect_uri = "/login/kakao/callback"
+    print("ppppppppprrrrrrrrrrrriiiiiiiii")
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
     )
@@ -43,6 +44,8 @@ def kakao_callback(request):
         client_id = os.environ.get("KAKAO_KEY")
         client_secret = os.environ.get("KAKAO_SECRET")
         redirect_uri = "/login/kakao/callback"
+        print('=============code===============')
+        print(code)
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -51,6 +54,9 @@ def kakao_callback(request):
             result_json = request_api.json()
             error = result_json.get("error", None)
             if error is not None:
+                print('=============error===============')
+                print(error)
+
                 raise KakaoException()
             else:
                 access_token = result_json.get("access_token")
@@ -62,6 +68,9 @@ def kakao_callback(request):
                 )
                 profile_json = profile_request.json()
                 kakao_id = profile_json.get("id")
+                print('=============profile===============')
+                print(profile_json)
+
                 if kakao_id is not None:
                     email = profile_json.get("kakao_account")["email"]
                     if email is None:
@@ -70,6 +79,7 @@ def kakao_callback(request):
                         user = User.objects.get(email=email)
                     except:
                         user = User.objects.create(
+                            username = email,
                             email=email,
                         )
                         user.set_unusable_password()
