@@ -67,7 +67,6 @@ class Order extends React.Component {
                         touchGroupCd: touch_group_id,
                         storeName: store.storeName,
                     })
-
                 })
             });
         });

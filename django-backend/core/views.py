@@ -30,9 +30,9 @@ class KakaoException(Exception):
 def kakao_login(request):
     ''' use kakao oauth '''
     client_id = os.environ.get("KAKAO_KEY")
-    redirect_uri = "http:#13.124.90.138:8000/login/kakao/callback"
+    redirect_uri = "http://13.124.90.138:8000/login/kakao/callback"
     return redirect(
-        f"https:#kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
+        f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
     )
 
 
@@ -42,11 +42,11 @@ def kakao_callback(request):
         code = request.GET.get("code", None)
         client_id = os.environ.get("KAKAO_KEY")
         client_secret = os.environ.get("KAKAO_SECRET")
-        redirect_uri = "http:#13.124.90.138:8000/login/kakao/callback"
+        redirect_uri = "http://13.124.90.138:8000/login/kakao/callback"
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
-                f"https:#kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}",
+                f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}",
             )
             result_json = request_api.json()
             error = result_json.get("error", None)
@@ -55,7 +55,7 @@ def kakao_callback(request):
             else:
                 access_token = result_json.get("access_token")
                 profile_request = requests.get(
-                    "https:#kapi.kakao.com/v2/user/me",
+                    "https://kapi.kakao.com/v2/user/me",
                     headers={
                         "Authorization": f"Bearer {access_token}",
                     },
@@ -75,11 +75,11 @@ def kakao_callback(request):
                         user.set_unusable_password()
                         user.save()
                     login(request, user)
-                    return HttpResponseRedirect("http:#13.124.90.138:3000/main")
+                    return HttpResponseRedirect("http://13.124.90.138:3000/main")
                 else:
                     raise KakaoException()
     except KakaoException:
-        return HttpResponseRedirect("http:#13.124.90.138:3000/login")
+        return HttpResponseRedirect("http://13.124.90.138:3000/login")
 
 
 @transaction.atomic
