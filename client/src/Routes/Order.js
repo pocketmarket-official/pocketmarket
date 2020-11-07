@@ -34,7 +34,7 @@ class Order extends React.Component {
 
         // initialization of the touch group code
         let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
-        axios.get("http://13.124.90.138:8000/api/stores_store/")
+        axios.get("/api/stores_store/")
         .then((res) => {
             let store = res.data.find(
                 (elt) => {
@@ -44,7 +44,7 @@ class Order extends React.Component {
                 }
             );
             let storeId = store.id;
-            axios.get("http://13.124.90.138:8000/api/stores_pos/")
+            axios.get("/api/stores_pos/")
             .then((res) => {
                 let keymapCd = res.data.find(
                     (elt) => {
@@ -53,7 +53,7 @@ class Order extends React.Component {
                         }
                     }
                 ).keymapCd;
-                axios.get("http://13.124.90.138:8000/api/keymaps_touchGroup/")
+                axios.get("/api/keymaps_touchGroup/")
                 .then((res) => {
                     let touch_group_id = res.data.find(
                         (elt) => {
@@ -72,11 +72,11 @@ class Order extends React.Component {
         });
 
         // 각 item에 대해서 옵션 연결 성공
-        axios.get("http://13.124.90.138:8000/api/items_item/")
+        axios.get("/api/items_item/")
         .then((res) => {
             let item_data = res.data;
             let options = {}
-            axios.get("http://13.124.90.138:8000/api/items_itemAdd/")
+            axios.get("/api/items_itemAdd/")
             .then((res) => {
                 res.data.map((item) => {
                     let itemAddCd = item.itemAddCd;
@@ -103,7 +103,7 @@ class Order extends React.Component {
     getKeymap(data) {
         // 각 카테고리를 누르면 메뉴가 바뀔 수 있도록 state 변경
         let touchGroupCd = data.id;
-        axios.get("http://13.124.90.138:8000/api/keymaps_keymap/")
+        axios.get("/api/keymaps_keymap/")
         .then((res) => {
             let keymap = res.data.filter(
                 (elt) => {
@@ -120,7 +120,7 @@ class Order extends React.Component {
 
     componentDidMount() {
         let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
-        axios.get("http://13.124.90.138:8000/api/stores_store/")
+        axios.get("/api/stores_store/")
         .then((res) => {
             let store = res.data.find(
                 (elt) => {
@@ -131,7 +131,7 @@ class Order extends React.Component {
             );
             let storeId = store.id;
             let brandCd = store.brandCd;
-            axios.get("http://13.124.90.138:8000/api/stores_pos/")
+            axios.get("/api/stores_pos/")
             .then((res) => {
                 let keymapCd = res.data.find(
                     (elt) => {
@@ -140,7 +140,7 @@ class Order extends React.Component {
                         }
                     }
                 ).keymapCd;
-                axios.get("http://13.124.90.138:8000/api/keymaps_touchGroup/")
+                axios.get("/api/keymaps_touchGroup/")
                 .then((res) => {
                     let touch_group = res.data.filter(
                         (elt) => {
@@ -152,7 +152,7 @@ class Order extends React.Component {
                     return [touch_group, storeId, keymapCd];
                 })
                 .then((arr) => {
-                    axios.get("http://13.124.90.138:8000/api/keymaps_keymap/")
+                    axios.get("/api/keymaps_keymap/")
                     .then((res) => {
                         let keymap = res.data.filter(
                             (elt) => {
