@@ -17,7 +17,7 @@ function Intro({authenticated, login, location}) {
 
     // kakao login api built in django backend
     const responseLogin = () => {
-        window.location.href = "/login/kakao/";
+        window.location.href = "http://13.124.90.138:8000/login/kakao/";
     };
 
     const responseFail = (err) => {
