@@ -62,7 +62,7 @@ function pay(sellItemList, price, storeName, storeId) {
         //     billNo: billNo,
         // });
         transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId};
-        axios.post('http://13.124.90.138:8000/trade', transData);
+        axios.post('/trade', transData);
     });
 }
 
