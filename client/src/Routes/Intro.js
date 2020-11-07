@@ -21,7 +21,7 @@ function Intro({authenticated, login, location}) {
     };
 
     const responseFail = (err) => {
-        alert(err);
+        console.log(err);
     };
 
     const {from} = location.state || {from: {pathname: "/index"}};
