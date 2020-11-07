@@ -26,7 +26,7 @@ class MainStoreContent extends React.Component {
             items: 5,
         };
 
-        axios.get("http://13.124.90.138:8000/api/stores_store/")
+        axios.get("/api/stores_store/")
         .then((res) => {
             const stores = res.data;
             this.setState({

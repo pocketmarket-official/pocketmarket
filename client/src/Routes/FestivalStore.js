@@ -15,7 +15,7 @@ class FestivalStore extends React.Component {
         let festivalCd = this.props.location.state.data.festivalCd;
         let stores = [];
 
-        axios.get("http://13.124.90.138:8000/api/festivals_join/")
+        axios.get("/api/festivals_join/")
         .then((res) => {
             stores = res.data.filter(
                 (elt) => {
