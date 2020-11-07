@@ -87,9 +87,7 @@ def kakao_callback(request):
 
 @transaction.atomic
 def trade(request):
-    print(request)
     try:
-        print("sadfdsf")
         # variable defintion
         saleHeaderList = []
         saleDetailList = []
@@ -269,7 +267,6 @@ def trade(request):
 
         i = 1
         for payment in payments:
-            print(payment)
             if payment['type'] == 1:
                 headerCardAmt += payment['amount']  # 카드결제금액 더해가는 방식
                 cardSeq = i
@@ -322,9 +319,7 @@ def trade(request):
             # user = 1
         )
 
-        print(saleHeaderObj)
         for saleDetail in saleDetailList:
-            print(saleDetail)
             saleDetailObj = SaleDetail.objects.create(
                 storeCd=storeCd,
                 saleDt=saleDt,
@@ -355,7 +350,6 @@ def trade(request):
             )
             saleDetailObjList.append(saleDetailObj)
 
-        print(saleDetailObj)
         cardLogObj = CardLog.objects.create(
             storeCd=storeCd,
             saleDt=saleDt,
@@ -386,7 +380,6 @@ def trade(request):
             remark='',
             sendYn='N',
         )
-        print(cardLogObj)
 
         saleHeaderRow = {
             "COMP_CD": compCd,
