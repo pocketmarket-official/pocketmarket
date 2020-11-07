@@ -75,11 +75,11 @@ def kakao_callback(request):
                         user.set_unusable_password()
                         user.save()
                     login(request, user)
-                    return HttpResponseRedirect("http://13.124.90.138:3000/main")
+                    return HttpResponseRedirect("/main")
                 else:
                     raise KakaoException()
     except KakaoException:
-        return HttpResponseRedirect("http://13.124.90.138:3000/login")
+        return HttpResponseRedirect("/login")
 
 
 @transaction.atomic
