@@ -49,6 +49,7 @@ function pay(sellItemList, price, storeName, storeId) {
         let saleDt = '20201002';
         let posNo = '03';
         let billNo = '0001';
+        let transData = {};
 
         console.log('=====2=======');
         console.log(data);
@@ -60,7 +61,8 @@ function pay(sellItemList, price, storeName, storeId) {
         //     posNo: posNo,
         //     billNo: billNo,
         // });
-        axios.post('/trade/', data, sellItemList, storeId);
+        transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId};
+        axios.post('http://13.124.90.138:8000/trade', transData);
     });
 }
 
