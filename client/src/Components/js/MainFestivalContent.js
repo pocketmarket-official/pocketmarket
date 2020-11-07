@@ -22,7 +22,7 @@ class MainFestivalContent extends React.Component {
             items: 4,
         };
 
-        axios.get("http://13.124.90.138:8000/api/festivals_festival/")
+        axios.get("/api/festivals_festival/")
         .then((res) => {
             const festivals = res.data;
             this.setState({
