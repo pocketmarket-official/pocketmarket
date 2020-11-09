@@ -3,6 +3,9 @@ import HeaderBack from '../Components/js/HeaderBack';
 import PointResult from '../Components/js/PointResult';
 import '../Components/scss/PointHistory.scss';
 import search from '../assets/my_place_full/ico_search.png';
+import close from '../assets/order_status_pop/btn_close.png';
+
+
 
 
 class PointHistory extends React.Component {
@@ -91,8 +94,7 @@ class PointHistory extends React.Component {
         return (
             <>
                 <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {
-                    const elt = document.getElementById("modal__conversion");
-                    elt.classList.add("hidden");
+
                 }}>
                     <div className="modal__modal" onClick={(e) => {
                         e.stopPropagation();
@@ -100,6 +102,10 @@ class PointHistory extends React.Component {
                         <div className="modal__header">
                             보유 정보
                         </div>
+                        <div className="modal__close__btn" id="modal__close__btn" onClick={() =>{
+                            const elt = document.getElementById("modal__conversion");
+                            elt.classList.add("hidden");
+                        }}><img src={close}/></div>
                         <div className="modal__convert__info__container">
                             <div className="modal__convert__info divide">좋아요<p>(개)</p></div>
                             <div className="modal__convert__info divide">포켓머니<p>(PM)</p></div>
@@ -110,11 +116,13 @@ class PointHistory extends React.Component {
                             포인트 전환
                         </div>
                         <div className="modal__detail__container">
-                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />100개 => 100 PM</div>
-                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />500개 => 500 PM</div>
-                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />1000개 => 1300 PM</div>
-                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />2000개 => 3000 PM</div>
-                            <div className="modal__convert__unit"><input type="radio" name="chk_info" />5000개 => 8500 PM</div>
+                            <div className="orderinfo__choices">
+                                <input id="pg" name="A" type="radio" value="PG결제" defaultChecked={true}/><label htmlFor="pg"><span> 100 개 </span><span className="red"> ➜ </span> <span> 100 PM</span></label>
+                                <input id="easy" name="A" type="radio" value="간편결제" /><label htmlFor="easy"><span> 500 개 </span><span className="red"> ➜ </span> <span> 600 PM</span></label>
+                                <input id="transfer" name="A" type="radio" value="계좌이체" /><label htmlFor="transfer"><span> 1000 개 </span><span className="red"> ➜ </span> <span> 1300 PM</span></label>
+                                <input id="withoutBankbook" name="A" type="radio" value="무통장입금" /><label htmlFor="withoutBankbook"><span> 2000 개 </span><span className="red"> ➜ </span> <span> 3000 PM</span></label>
+                                <input id="phone" name="A" type="radio" value="휴대폰" /><label htmlFor="phone"><span> 5000 개 </span><span className="red"> ➜ </span> <span> 8500 PM</span></label>
+                            </div>
                         </div>
                         <button className="modal__convert__button">전환하기</button>
                     </div>
