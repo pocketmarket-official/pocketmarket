@@ -503,24 +503,24 @@ def trade(request):
             "T_SALE_D": saleDetailList,
             "T_CARD_L": cardLogList
         }
-        trDataEncoded = json.dumps(trData, ensure_ascii=False)
+        # trDataEncoded = json.dumps(trData, ensure_ascii=False)
         # trDataDecoded = trDataEncoded.encode('utf8').decode()
         # trUtf = trDataDecoded.encode('utf8').decode('utf8')
 
-        headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
-        request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data= trDataEncoded,  verify=False, headers=headers)
+        # headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
+        # request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data= trDataEncoded,  verify=False, headers=headers)
 #'''params={'result': trDataEncoded},'''
         # request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data=trData)
-        if request.status_code == 200:
-            saleHeaderObj.sendYn = 'Y'
-            saleHeaderObj.save()
-            for saleDetailObj in saleDetailObjList:
-                saleDetailObj.sendYn = 'Y'
-                saleDetailObj.save()
-            cardLogObj.sendYn = 'Y'
-            if cardLogObj.orgSeq == '':
-                cardLogObj.orgSeq = None
-            cardLogObj.save()
+        # if request.status_code == 200:
+        #     saleHeaderObj.sendYn = 'Y'
+        #     saleHeaderObj.save()
+        #     for saleDetailObj in saleDetailObjList:
+        #         saleDetailObj.sendYn = 'Y'
+        #         saleDetailObj.save()
+        #     cardLogObj.sendYn = 'Y'
+        #     if cardLogObj.orgSeq == '':
+        #         cardLogObj.orgSeq = None
+        #     cardLogObj.save()
 
 
     except Exception as ex:
