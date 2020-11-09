@@ -151,8 +151,6 @@
     .button__three{
       margin: 70px auto 10px auto;
 
-
-
       button{
         font-size: 12px;
         font-family: NanumGothic;
@@ -165,11 +163,23 @@
         border: solid 1px #cbcbcb;
         background-color: #ffffff;
         letter-spacing: 2.4px;
+        display: inline-flex;
         margin: 3px;
       }
       img{
         width: 12px;
         height: 12px;
+        margin-right: 5px;
+      }
+
+      .usermode{
+        padding-top: 15px;
+        padding-left: 45px;
+
+      }
+      .logout{
+        padding-top: 15px;
+        padding-left: 53px;
       }
 
     }

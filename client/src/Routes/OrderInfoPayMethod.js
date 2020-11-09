@@ -34,6 +34,8 @@ const OrderInfoPayMethod = () => {
                         <input id="point4" name="B" type="checkbox" value="전용포인트" /><label htmlFor="point4">전용포인트</label>
                     </div>
                 </div>
+                <div className="divide"/>
+                <div className="ok">선택완료</div>
             </div>
         </>
     );

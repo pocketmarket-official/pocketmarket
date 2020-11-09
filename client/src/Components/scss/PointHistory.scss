@@ -1,3 +1,5 @@
+
+
 .modal__conversion.hidden {
   display: none;
 }
@@ -13,7 +15,7 @@
 }
 .modal__conversion .modal__modal {
   min-width: 300px;
-  min-height: 500px;
+  height: 450px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -23,9 +25,18 @@
 
   .modal__header{
     width: 85%;
-    margin: 15px auto;
+    margin: 20px auto;
     font-family: MaplestoryOTFLight;
     color: #2e2e2e;
+  }
+  .modal__close__btn{
+    position: absolute;
+    right: 10%;
+    top: 16%;
+    img{
+      height: 32px;
+      width: 32px;
+    }
 
   }
   .modal__convert__info__container{
@@ -70,16 +81,97 @@
 
     }
 
+    .orderinfo__choices {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #333333;
+
+        input {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          border: 0;
+
+          &:checked + label {
+            color: #333333;
+
+            &:after {
+              background: #bc3b3b;
+            }
+          }
+
+          & + label {
+            display: inline-block;
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            //color: #818181;
+            font-family: 'MaplestoryOTFBold', 'Nanum Gothic', sans-serif;
+            margin-bottom: 20px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: -4px;
+              width: 23px;
+              height: 23px;
+              text-align: right;
+              background: white;
+              border: 1px solid #d2d2d2;
+              border-radius: 100%;
+            }
+
+            &:after {
+              content: '';
+              position: absolute;
+              top: 2px;
+              left: 6px;
+              width: 13px;
+              height: 13px;
+              background: #e8e8e8;
+              border-radius: 100%;
+            }
+          }
+        }
+
+        span {
+          display: inline-block;
+          font-family:'MaplestoryOTFBold', 'Nanum Gothic', sans-serif;
+          font-weight: 800;
+          width:70px;
+          height: 20px;
+          text-align: right;
+          &.red{
+            text-align: center;
+            width: 25px;
+            color: #bd1f47;
+          }
+        }
+      }
+
   }
   .modal__convert__button{
     width: 95%;
-    height: 30px;
+    height: 40px;
     color: #ffffff;
     font-family: MaplestoryOTFLight;
     font-weight: bold;
     background: #b4022f;
     border-radius: 5px;
-    margin-top: 10px;
+    margin: 10px auto;
 
   }
 }

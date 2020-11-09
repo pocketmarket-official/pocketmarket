@@ -87,8 +87,8 @@ function BizCertification() {
                 <div className="biz__button">
                     <div className="button__three">
                         {/*<button className="">문의하기</button>*/}
-                        <Link to="/"><button className=""><img src={mode}/>사용자 모드</button></Link>
-                        <button className=""><img src={mode}/> 로그아웃</button>
+                        <Link to="/"><button className="usermode"><img src={mode}/>사용자 모드</button></Link>
+                        <button className="logout"><img src={mode}/> 로그아웃</button>
                     </div>
                 </div>
             </div>
