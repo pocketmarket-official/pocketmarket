@@ -2,6 +2,7 @@ import os
 import requests
 from django.db import transaction
 from django.contrib.auth import login
+from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import reverse
@@ -51,7 +52,6 @@ def kakao_callback(request):
             result_json = request_api.json()
             error = result_json.get("error", None)
             if error is not None:
-
                 raise KakaoException()
             else:
                 access_token = result_json.get("access_token")
@@ -65,6 +65,8 @@ def kakao_callback(request):
                 kakao_id = profile_json.get("id")
 
                 if kakao_id is not None:
+                    name = profile_json.get("properties")['nickname']
+                    picture = profile_json.get("properties")['profile_image']
                     email = profile_json.get("kakao_account")["email"]
                     if email is None:
                         raise KakaoException()
@@ -72,11 +74,16 @@ def kakao_callback(request):
                         user = User.objects.get(email=email)
                     except:
                         user = User.objects.create(
-                            username = email,
+                            username=email,
                             email=email,
+                            profileName=name,
                         )
                         user.set_unusable_password()
                         user.save()
+                        # get image file from the url
+                        if picture is not None:
+                            photo_request = requests.get(picture)
+                            user.profileImage.save(f"{name}_avatar", ContentFile(photo_request.content))
                     login(request, user)
                     return HttpResponseRedirect("http://13.124.90.138:3000/main")
                 else:
