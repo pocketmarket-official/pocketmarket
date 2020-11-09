@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "bootpay-js": "^3.2.6",
+    "http-proxy-middleware": "^1.0.6",
     "lodash": "^4.17.20",
     "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
@@ -40,6 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://13.124.90.138:8000/"
+  }
 }
