@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0:3000', '0.0.0.0:8000', 'localhost', '127.0.0.1', '13.124.90.138']
+ALLOWED_HOSTS = ['0.0.0.0:8000', 'localhost', '127.0.0.1', '13.124.90.138']
 
 
 # Application definition
@@ -61,11 +61,11 @@ THIRD_PARTY_APPS = [
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -110,7 +110,7 @@ DATABASES = {
         'USER' : 'admin',
         'PASSWORD' : os.environ.get("DB_ADMIN_PASSWORD"),
         'PORT' : '3306',
-        'HOST' : 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
+        'HOST' : 'localhost',
         'OPTIONS' : {
             'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
         },
@@ -157,10 +157,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = False
-
-CORS_ALLOWED_ORIGINS = (
+CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://localhost:8000',
     'http://127.0.0.1:3000',
