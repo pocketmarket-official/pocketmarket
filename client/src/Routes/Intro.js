@@ -4,6 +4,7 @@ import {Redirect} from "react-router-dom";
 import bgVideo from "../assets/intro/intro.mp4";
 import bgImage from "../assets/intro/bg.jpg";
 import '../Components/scss/intro.scss';
+import storage from '../storage.js';
 
 const axios = require('axios');
 
@@ -16,8 +17,11 @@ function Intro({authenticated, login, location}) {
     const [playingVideo, setPlayingVideo] = useState(true);
 
     // kakao login api built in django backend
-    const responseLogin = () => {
-        window.location.href = "http://localhost:8000/login/kakao/";
+    const responseLogin = (res) => {
+//        window.location.href = "http://localhost:8000/login/kakao/";
+//        let access_token = res.response.access_token;
+//       let email = res.profile.kakao_account.email;
+//        storage.add(access_token, email);
     };
 
     const responseFail = (err) => {
