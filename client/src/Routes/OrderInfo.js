@@ -95,10 +95,12 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">할인선택</div>
-                        <div className="orderinfo__choices">
-                            <input type="checkbox" value="쿠폰할인" />쿠폰할인
-                            <span>></span>
-                        </div>
+                        <Link to="/main/store/C0001/orderinfo/payMethod">
+                            <div className="orderinfo__choices">
+                                <input type="checkbox" value="쿠폰할인" />쿠폰할인
+                                <span>></span>
+                            </div>
+                        </Link>
                     </div>
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">결제수단선택</div>
