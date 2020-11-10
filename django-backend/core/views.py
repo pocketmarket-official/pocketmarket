@@ -19,6 +19,7 @@ from trades.models import CardLog
 from trades.models import PurchaseLog
 from trades.models import SoldoutLog
 from trades.models import CornerStateLog
+from rest_framework.decorators import api_view
 
 
 # Create your views here.
