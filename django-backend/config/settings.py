@@ -27,14 +27,14 @@ AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 #AWS Setting
 AWS_REGION = 'ap-northeast-2'
 AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_SECURE_URLS = False       # use http instead of https
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_HOST = 's3.%s.amazonaws.com' % AWS_REGION
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-DEFAULT_FILE_STORAGE = 'django-backend.storages.S3DefaultStorage'
-STATICFILES_STORAGE = 'django-backend.storages.S3StaticStorage'
+# DEFAULT_FILE_STORAGE = 'django-backend.storages.S3DefaultStorage'
+# STATICFILES_STORAGE = 'django-backend.storages.S3StaticStorage'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -169,8 +169,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+# STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #media file (as a upload file)
 MEDIA_URL = '/media/'
