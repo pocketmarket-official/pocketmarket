@@ -2,6 +2,7 @@ import os
 import requests
 from django.db import transaction
 from django.contrib.auth import login
+from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import reverse
@@ -29,42 +30,43 @@ class KakaoException(Exception):
 
 def kakao_login(request):
     ''' use kakao oauth '''
-    client_id = os.environ.get("KAKAO_KEY")
-    redirect_uri = "http://13.124.90.138:8000/login/kakao/callback"
+    client_id = os.environ.get('KAKAO_KEY')
+    redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
     return redirect(
-        f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
+        f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
     )
 
 
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
     try:
-        code = request.GET.get("code", None)
-        client_id = os.environ.get("KAKAO_KEY")
-        client_secret = os.environ.get("KAKAO_SECRET")
-        redirect_uri = "http://13.124.90.138:8000/login/kakao/callback"
+        code = request.GET.get('code', None)
+        client_id = os.environ.get('KAKAO_KEY')
+        client_secret = os.environ.get('KAKAO_SECRET')
+        redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
-                f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}",
+                f'https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}',
             )
             result_json = request_api.json()
-            error = result_json.get("error", None)
+            error = result_json.get('error', None)
             if error is not None:
-
                 raise KakaoException()
             else:
-                access_token = result_json.get("access_token")
+                access_token = result_json.get('access_token')
                 profile_request = requests.get(
-                    "https://kapi.kakao.com/v2/user/me",
+                    'https://kapi.kakao.com/v2/user/me',
                     headers={
-                        "Authorization": f"Bearer {access_token}",
+                        'Authorization': f'Bearer {access_token}',
                     },
                 )
                 profile_json = profile_request.json()
-                kakao_id = profile_json.get("id")
+                kakao_id = profile_json.get('id')
 
                 if kakao_id is not None:
+                    name = profile_json.get("properties")['nickname']
+                    picture = profile_json.get("properties")['profile_image']
                     email = profile_json.get("kakao_account")["email"]
                     if email is None:
                         raise KakaoException()
@@ -72,17 +74,22 @@ def kakao_callback(request):
                         user = User.objects.get(email=email)
                     except:
                         user = User.objects.create(
-                            username = email,
+                            username=email,
                             email=email,
+                            profileName=name,
                         )
                         user.set_unusable_password()
                         user.save()
+                        # get image file from the url
+                        if picture is not None:
+                            photo_request = requests.get(picture)
+                            user.profileImage.save(f"{name}_avatar", ContentFile(photo_request.content))
                     login(request, user)
-                    return HttpResponseRedirect("http://13.124.90.138:3000/main")
+                    return HttpResponseRedirect('http://13.124.90.138:3000/main')
                 else:
                     raise KakaoException()
     except KakaoException:
-        return HttpResponseRedirect("http://13.124.90.138:3000/login")
+        return HttpResponseRedirect('http://13.124.90.138:3000/login')
 
 
 @transaction.atomic
@@ -106,7 +113,7 @@ def trade(request):
         weekday = ((datetime.today().weekday()) + 2) % 7
         if weekday == 0:
             weekday = 7
-        saleTime = strftime("%H%M%S", gmtime())
+        saleTime = strftime('%H%M%S', gmtime())
         saleFlag = '1'
         mealCd = '9'
         mealName = '기타'
@@ -255,7 +262,7 @@ def trade(request):
                 supAmt=((target.price * item['qty']) - dcAmt) * 1.1,
                 taxAmt=target.price - dcAmt - (((target.price * item['qty']) - dcAmt) * 1.1),
                 offTaxAmt=0.0,
-                taxYn="Y",
+                taxYn='Y',
                 totDcAmt=0.0,
                 pointDcAmt=0.0,
                 saleTime=saleTime,
@@ -387,12 +394,12 @@ def trade(request):
             "SALE_DT": saleHeaderObj.saleDt,
             "POS_NO": saleHeaderObj.posNo,
             "BILL_NO": saleHeaderObj.billNo,
-            "SALE_TP": '2',  # 판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
-            "ONOFF_TP": '1',  # 온라인 오프라인 형태, 온라인주문일경우 1
-            "ORD_FG": '4',  # 주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
+            "SALE_TP": "2",  # 판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
+            "ONOFF_TP": "1",  # 온라인 오프라인 형태, 온라인주문일경우 1
+            "ORD_FG": "4",  # 주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
             "SALE_TM": saleTime,  # 판매시간(시간분초)
             "SALE_DAY": weekday,  # 일요일 1 부터 7까지
-            "SALE_TM_CD": '01',  # 시간코드 공통코드 045번 참조 #todo: 뭔솔?
+            "SALE_TM_CD": "01",  # 시간코드 공통코드 045번 참조 #todo: 뭔솔?
             "RETURN_FG": saleHeaderObj.returnYn,  # 반품플레그(원거래에도 업데이트 해줘야함)
             "SALE_FG": saleHeaderObj.saleFlag,
             "MEAL_CD": mealCd,
@@ -425,8 +432,8 @@ def trade(request):
                 "ORD_TP": saleDetailObj.orderType,
                 "MEAL_CD": mealCd,
                 "MEAL_NM": mealName,
-                "CNR_CD": '',
-                "CNR_NM": '',
+                "CNR_CD": "",
+                "CNR_NM": "",
                 "ITEM_CD": saleDetailObj.itemCd,
                 "ITEM_NM": saleDetailObj.itemName,
                 "QTY": saleDetailObj.qty,
@@ -446,12 +453,12 @@ def trade(request):
                 "NORM_DC_AMT": 0.0,
                 "PNT_DC_AMT": saleDetailObj.pointDcAmt,
                 "SALE_TM": saleDetailObj.saleTime,
-                "SALE_YN": 'Y',  # 매출포함여부
+                "SALE_YN": "Y",  # 매출포함여부
             }
             saleDetailList.append(saleDetailRow)
 
         if not cardLogObj.orgSeq:
-            cardLogObj.orgSeq = ''
+            cardLogObj.orgSeq = ""
 
         cardLogRow = {
             "COMP_CD": compCd,
@@ -459,7 +466,7 @@ def trade(request):
             "SALE_DT": cardLogObj.saleDt,
             "POS_NO": cardLogObj.posNo,
             "BILL_NO": cardLogObj.billNo,
-            "TRAN_FG": '1',  # 0:전체 1:일반 / 2: 포인트충전 / 3:후결제 / 4:선결제 / 5:RF 충전
+            "TRAN_FG": "1",  # 0:전체 1:일반 / 2: 포인트충전 / 3:후결제 / 4:선결제 / 5:RF 충전
             "SEQ": cardLogObj.seq,
             "SALE_FG": cardLogObj.saleFlag,
             "CARD_AMT": cardLogObj.cardAmt,
@@ -473,7 +480,7 @@ def trade(request):
             "APPR_DT": cardLogObj.apprDt,
             "APPR_TM": cardLogObj.apprTime,
             "APPR_FG": cardLogObj.apprFlag,
-            "SIGN_YN": 'N',
+            "SIGN_YN": "N",
             "INST_FG": cardLogObj.instFlag,
             "INST_MON": cardLogObj.instMonth,
             "TERMINAL_ID": cardLogObj.terminalId,
@@ -492,15 +499,18 @@ def trade(request):
         cardLogList.append(cardLogRow)
 
         trData = {
-            '"T_SALE_H': saleHeaderList,
+            "T_SALE_H": saleHeaderList,
             "T_SALE_D": saleDetailList,
             "T_CARD_L": cardLogList
         }
-        trDataEncoded = json.dumps(trData, ensure_ascii=False)
-        trDataDecoded = trDataEncoded.encode('utf8').decode()
-        trUtf = trDataDecoded.encode('utf8').decode('utf8')
+        # trDataEncoded = json.dumps(trData, ensure_ascii=False)
+        # trDataDecoded = trDataEncoded.encode('utf8').decode()
+        # trUtf = trDataDecoded.encode('utf8').decode('utf8')
 
-        # request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data=trUtf)
+        # headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
+        # request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data= trDataEncoded,  verify=False, headers=headers)
+#'''params={'result': trDataEncoded},'''
+        # request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data=trData)
         # if request.status_code == 200:
         #     saleHeaderObj.sendYn = 'Y'
         #     saleHeaderObj.save()
