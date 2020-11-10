@@ -52,7 +52,7 @@ class MapContent extends React.Component {
 
                 // zoom control
                 let zoomControl = new kakao.maps.ZoomControl();
-                map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+                map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
 
                 let infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
