@@ -14,6 +14,8 @@ mysqlclient = "*"
 django-dotenv = "*"
 requests = "*"
 django-rest-multiple-models = "*"
+boto3 = "*"
+django-storages = "*"
 
 [requires]
 python_version = "3.8"
