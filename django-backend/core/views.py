@@ -31,7 +31,7 @@ class KakaoException(Exception):
 def kakao_login(request):
     ''' use kakao oauth '''
     client_id = os.environ.get('KAKAO_KEY')
-    redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
+    redirect_uri = 'http://localhost:8000/login/kakao/callback'
     return redirect(
         f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
     )
@@ -43,7 +43,7 @@ def kakao_callback(request):
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
-        redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
+        redirect_uri = 'http://localhost:8000/login/kakao/callback'
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -66,7 +66,10 @@ def kakao_callback(request):
 
                 if kakao_id is not None:
                     name = profile_json.get("properties")['nickname']
-                    picture = profile_json.get("properties")['profile_image']
+                    try:
+                        picture = profile_json.get("properties")['profile_image']
+                    except:
+                        picture = None
                     email = profile_json.get("kakao_account")["email"]
                     if email is None:
                         raise KakaoException()
@@ -85,11 +88,11 @@ def kakao_callback(request):
                             photo_request = requests.get(picture)
                             user.profileImage.save(f"{name}_avatar", ContentFile(photo_request.content))
                     login(request, user)
-                    return HttpResponseRedirect('http://13.124.90.138:3000/main')
+                    return HttpResponseRedirect('http://localhost:3000/main')
                 else:
                     raise KakaoException()
     except KakaoException:
-        return HttpResponseRedirect('http://13.124.90.138:3000/login')
+        return HttpResponseRedirect('http://localhost:3000/login')
 
 
 @transaction.atomic
@@ -232,8 +235,6 @@ def trade(request):
                 'itemSellType': '3'
             },
         ]
-
-        # python manage.py shell 에서 dir 찍어가면서 확인 가능
 
         i = 1
         for item in items:
