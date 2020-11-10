@@ -110,7 +110,7 @@ DATABASES = {
         'USER' : 'admin',
         'PASSWORD' : os.environ.get("DB_ADMIN_PASSWORD"),
         'PORT' : '3306',
-        'HOST' : 'localhost',
+        'HOST' : 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
         'OPTIONS' : {
             'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
         },
