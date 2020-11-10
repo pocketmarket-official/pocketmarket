@@ -62,7 +62,13 @@ function pay(sellItemList, price, storeName, storeId) {
         //     billNo: billNo,
         // });
         transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId};
-        axios.post('/trade', transData);
+        // axios.post('/trade', transData);
+        // transData = {"data": data, "sellItemList": sellItemList, 'storeId': storeId};
+        // axios.post('http://localhost:8000/trade', transData)
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/trade', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send({'key':'value'})
     });
 }
 
