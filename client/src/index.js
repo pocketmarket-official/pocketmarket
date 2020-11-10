@@ -17,7 +17,4 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-axios.defaults.headers['Access-Control-Allow-Headers'] = '*';
-
 axios.post('http://localhost:8000/trade/', {'key':'value'});
