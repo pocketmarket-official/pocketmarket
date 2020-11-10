@@ -42,3 +42,6 @@ class MyPlace(models.Model):
     insUs = models.CharField(max_length=30, default='defaultValue')
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
+
+class ImageTest(models.Model):
+    image = models.ImageField(upload_to="image")

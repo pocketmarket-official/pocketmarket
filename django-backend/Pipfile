@@ -16,6 +16,7 @@ requests = "*"
 django-rest-multiple-models = "*"
 boto3 = "*"
 django-storages = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"
