@@ -1,5 +1,6 @@
-
-
+.react-datepicker-wrapper{
+  width: 100%;
+}
 .modal__conversion.hidden {
   display: none;
 }
@@ -220,6 +221,7 @@
         }
         .pointhistory__point{
           width: 35%;
+
           font-size: 25px;
           font-weight: bold;
           text-align: right;
@@ -234,6 +236,7 @@
 
         .pointhistory__unit{
           width: 10%;
+          margin-left: 3px;
         }
       }
       .pointhistory__conversion{
@@ -269,21 +272,54 @@
       margin: 17px 0;
       display: flex;
       align-items: center;
-
-      #date1, #date2{
-        font-size: 15px;
+      .react-datepicker__input-container{
+        font-size: 14px;
         text-align: center;
-        width: 38%;
-        height: 42px;
-        margin: 0 auto;
+        width: 100%;
+
+      }
+
+
+      //.dd{
+      //  display: inline-block;
+      //  background: #3d3d3d;
+      //  width: 42px;
+      //  height: 42px;
+      //  border: none;
+      //  border-radius:10px 0px 0px 10px;
+      //  img{
+      //    width: 23px;
+      //    height: 23px;
+      //    padding: 10px;
+      //  }
+      //}
+      #date1, #date2{
+        font-size: 14px;
+        text-align: center;
+        width: 100%;
+        height: 39px;
+
         border: solid 1px #d3d3d3;
       }
-      #date1{
-        margin-right: 10px;
+      span{
+        display: inline-block;
+        background: #3d3d3d;
+        width: 42px;
+        height: 42px;
+        border-radius:10px 0px 0px 10px;
+        img{
+          width: 23px;
+          height: 23px;
+          padding: 10px;
+        }
       }
-      #date2{
-        margin-left: 10px;
+      img{
+        display: inline-block;
+        width: 23px;
+        height: 23px;
+        padding: 10px;
       }
+
       #search{
         width: 24px;
         height: 24px;
@@ -315,7 +351,7 @@
           margin-top: 20px;
           text-align: center;
           font-family: NanumGothic;
-          font-size: 25px;
+          font-size: 17x;
           color: #b4022f;
           font-weight: bold;
           font-stretch: normal;

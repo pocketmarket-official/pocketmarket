@@ -13,6 +13,7 @@ const OrderInfoPayMethod = () => {
                         <div className="orderinfo__title">결제수단 선택 A</div>
                         <input id="payADefault" type="checkbox" className="orderinfo__default" /><label htmlFor="payADefault">기본결제수단으로 사용</label>
                     </div>
+
                     <div className="orderinfo__choices">
                         <input id="pg" name="A" type="radio" value="PG결제" defaultChecked={true}/><label htmlFor="pg">PG결제</label>
                         <input id="easy" name="A" type="radio" value="간편결제" /><label htmlFor="easy">간편결제</label>

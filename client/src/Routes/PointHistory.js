@@ -1,14 +1,18 @@
 import React from 'react';
-import HeaderBack from '../Components/js/HeaderBack';
+import HeaderBiz from "../Components/js/HeaderBiz";
 import PointResult from '../Components/js/PointResult';
 import '../Components/scss/PointHistory.scss';
 import search from '../assets/my_place_full/ico_search.png';
 import close from '../assets/order_status_pop/btn_close.png';
+import calendar from '../assets/order_status_pop/btn_close.png';
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import { ko } from "date-fns/esm/locale";
 
-
-
+import "react-datepicker/dist/react-datepicker.css";
 
 class PointHistory extends React.Component {
+
+
     constructor(props) {
         super(props);
         this.searchHistory = this.searchHistory.bind(this);
@@ -129,7 +133,7 @@ class PointHistory extends React.Component {
                 </div>
 
 
-                <HeaderBack url='/mypage' />
+                <HeaderBiz url='/biz/mypage' />
                 <div className="pointhistory">
                     <div className="pointhistory__info__container">
                         <div className="pointhistory__info__title">포인트 정보</div>
@@ -137,12 +141,12 @@ class PointHistory extends React.Component {
                             <div className="pointhistory__data">
                                 <div className="pointhistory__title">현재까지 총 좋아요 수</div>
                                 <div className="pointhistory__point">96054</div>
-                                <div className="pointhistory__unit">개</div>
+                                <div className="pointhistory__unit"> 개</div>
                             </div>
                             <div className="pointhistory__data">
                                 <div className="pointhistory__title">포인트 전환한 좋아요 수</div>
                                 <div className="pointhistory__point">95000</div>
-                                <div className="pointhistory__unit">개</div>
+                                <div className="pointhistory__unit"> 개</div>
                             </div>
                             <div className="pointhistory__data">
                                 <div className="pointhistory__title">현재까지 전환한 총 포인트</div>
@@ -170,7 +174,19 @@ class PointHistory extends React.Component {
                     <div className="pointhistory__search__container">
                         <div className="search__title">포인트 이력</div>
                         <div className="search__input">
-                            <input type="date" id="date1" value="2000-07-25" /> ~ <input type="date" id="date2" />
+                            <span><img src={calendar}/></span>
+                            <DatePicker className="dd" id="date1" value="2020.01.01"
+                                        locale={ko}	// 언어설정 기본값은 영어
+                                        dateFormat="yyyy.MM.dd"	// 날짜 형식 설정
+                            ></DatePicker>
+                            {/*<input type="text" id="date1"/>*/}
+                            &nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+                            <span><img src={calendar}/></span>
+
+                            <DatePicker className="dd" id="date2" value="2020.10.10"
+                                        locale={ko}	// 언어설정 기본값은 영어
+                                        dateFormat="yyyy.MM.dd"	// 날짜 형식 설정
+                            ></DatePicker>
                             <input type="image" src={search} value="조회" id="search" onClick={this.searchHistory}/>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import reverse
+from django.views.decorators.csrf import csrf_exempt
 import json
 from datetime import datetime
 from time import gmtime, strftime
@@ -19,6 +20,7 @@ from trades.models import CardLog
 from trades.models import PurchaseLog
 from trades.models import SoldoutLog
 from trades.models import CornerStateLog
+from rest_framework.decorators import api_view
 
 
 # Create your views here.
@@ -95,6 +97,7 @@ def kakao_callback(request):
         return HttpResponseRedirect('http://localhost:3000/login')
 
 
+@csrf_exempt
 @transaction.atomic
 def trade(request):
     try:

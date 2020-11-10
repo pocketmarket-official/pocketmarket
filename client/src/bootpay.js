@@ -55,20 +55,22 @@ function pay(sellItemList, price, storeName, storeId) {
         console.log(data);
         console.log(sellItemList);
         console.log('=====2=======');
-        // axios.post('http://127.0.0.1:8000/api/trades_saleHeader/', {
+        axios.post('http://127.0.0.1:8000/trade', {'key':'value'});
         //     storeCd: storeCd,
         //     saleDt: saleDt,
         //     posNo: posNo,
         //     billNo: billNo,
         // });
-        transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId};
+        // transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId};
         // axios.post('/trade', transData);
         // transData = {"data": data, "sellItemList": sellItemList, 'storeId': storeId};
         // axios.post('http://localhost:8000/trade', transData)
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", '/trade', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send({'key':'value'})
+        // var xhr = new XMLHttpRequest();
+        // xhr.open("GET", 'http://localhost:8000/trade', true);
+        // xhr.withCredentials=true;
+        // xhr.setRequestHeader("Access-Control-Allow-Headers", "*");
+        // xhr.setRequestHeader('Content-Type', 'application/json');
+        // xhr.send({'key':'value'})
     });
 }
 
