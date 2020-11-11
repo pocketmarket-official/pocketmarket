@@ -109,6 +109,7 @@ $headerHeight: 63px;
         justify-content: center;
         align-items: center;
         .subslide{
+          position: relative;
           width: 34px;
           height: 13px;
           border-radius: 19.5px;
@@ -120,10 +121,16 @@ $headerHeight: 63px;
             height: 15px;
             background-color: #fa245a;
             border-radius: 50%;
+
+            &.right {
+              position: absolute;
+              right: 0;
+            }
           }
         }
       }
       button {
+        margin: 0 5px;
         background-color: #ffffff;
         .simple{
           font-size: 10px;
