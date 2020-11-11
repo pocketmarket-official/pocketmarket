@@ -3,14 +3,45 @@ import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import home from '../assets/map/btn_clocation.png';
 import logout from '../assets/map/btn_clocation.png';
-import '../Components/scss/BizMypage.scss';
+import changelogo from '../assets/map/ico_poc.png';
+import close from "../assets/order_status_pop/btn_close.png";
 
+import '../Components/scss/BizMypage.scss';
 
 function BizMypage() {
     return (
         <>
+            <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {
+
+            }}>
+                <div className="modal__user_change" onClick={(e) => {
+                    e.stopPropagation();
+                }}>
+                    <div className="modal__header">
+                        <div className="modal__header_img"><img src={changelogo} /></div>
+                        <div className="">사용자를 변경합니다. 원하는 사용자를 선택해주세요.</div>
+
+                    </div>
+                    <div className="modal__close__btn" id="modal__close__btn" onClick={() =>{
+                        const elt = document.getElementById("modal__conversion");
+                        elt.classList.add("hidden");
+                    }}><img src={close}/></div>
+
+                    <div className="modal__user__container">
+                        <div className="user__choices">
+                            <input id="100" name="A" type="radio" value="100" defaultChecked={true}/><label htmlFor="100"><span> 소비자 </span> </label>
+                            <input id="200" name="A" type="radio" value="200" /><label htmlFor="200"><span> 포켓떡볶이 강남점 </span> </label>
+                            <input id="300" name="A" type="radio" value="300"/><label htmlFor="300"><span> 포켓떡볶이 안양점 </span> </label>
+
+
+                        </div>
+                    </div>
+                    <button className="modal__user_change__button">선택</button>
+                </div>
+            </div>
+
             <HeaderBiz />
-            <div className="mypage">
+            <div className="bizmypage">
                 <div className="bizmypage__stor__container">
                     <div className="bizmypage__stor__name">
                         <p>포켓 떡볶이 강남점</p>
@@ -23,7 +54,7 @@ function BizMypage() {
                         <button><p className="off">불가</p></button>
                         <div className="slide">
                             <div className="subslide">
-                                <div className="slideBall"><div className="slideBall2"></div></div>
+                                <div className="slideBall on"><div className="slideBall2"></div></div>
                             </div>
                         </div>
                         <button><p className="on">가능</p></button>
@@ -40,12 +71,15 @@ function BizMypage() {
                 </div>
 
                 <div className="bizsetting__box">
-                    <div className="bizsetting__list">
+                    <button className="bizsetting__list">
                         <Link to="/"><img src={home}/>사용자 모드</Link>
-                    </div>
-                    <div className="bizsetting__list">
-                        <Link to="/"><img src={logout}/>로그아웃</Link>
-                    </div>
+                    </button>
+                    <button className="bizsetting__list" onClick={() => {
+                        const elt = document.getElementById("modal__conversion");
+                        elt.classList.remove("hidden");
+                    }}>
+                        <Link><img src={logout}/>로그아웃</Link>
+                    </button>
                 </div>
             </div>
         </>
