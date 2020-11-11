@@ -1,0 +1,154 @@
+
+$headerHeight: 63px;
+
+.reviewwrite {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin-top: $headerHeight;
+  justify-content: flex-start;
+  .review__write__box {
+    width: 398px;
+    margin: 30px 8px;
+    .review__write__caption {
+      width: 70px;
+      height: 21px;
+      border-radius: 7.5px;
+      background-color: #b4022f;
+      font-family: Maplestory,sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
+      line-height: 2;
+      color: #ffffff;
+    }
+    .reviewwrite__context {
+      width: 381.5px;
+      height: 118px;
+      margin: 11px 8px;
+      box-sizing: border-box;
+      padding: 8px;
+      border: solid 3px #4a4a4a;
+      border-radius: 0;
+      font-size: 12px;
+      box-shadow: 2.8px 5.3px 8px 2px rgba(0, 0, 0, 0.1);
+      font-family: Nanum Gothic, sans-serif;
+      resize: none;
+    }
+  }
+  .review__content__box {
+    width: 398px;
+    margin: 30px 8px;
+    .review__content__caption {
+      width: 70px;
+      height: 21px;
+      border-radius: 7.5px;
+      background-color: #b4022f;
+      font-family: Maplestory,sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
+      line-height: 2;
+      color: #ffffff;
+    }
+    .review__content {
+      margin: 10px 20px;
+      height: 100%;
+      width: 358px;
+      .input__container {
+        display: flex;
+        margin: 10px 0;
+        .menu__name {
+          font-family: MaplestoryOTFL,sans-serif;
+          font-size: 14px;
+          font-weight: 800;
+          width: 115px;
+        }
+        .review__controll {
+          width:165px;
+          height: 2px;
+          border-radius: 1px;
+          background-color: #4a4a4a;
+        }
+        .review__point {
+          margin: 0 25px 0 0;
+          font-family: Nanum Gothic, sans-serif;
+          font-size: 16px;
+          font-weight: 600;
+          color: #eb1a4f;
+        }
+      }
+
+
+    }
+  }
+  .photo__upload__box {
+    width:398px;
+    margin: 30px 8px;
+    .photo__upload__caption {
+      width: 70px;
+      height: 21px;
+      border-radius: 7.5px;
+      background-color: #b4022f;
+      font-family: Maplestory,sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 2;
+      text-align: center;
+      color: #ffffff;
+    }
+    .photo__upload {
+      .upperline {
+        width: 385px;
+        height: 1.5px;
+        background-color: #f3f3f3;
+        margin: 12px 14px 12px;
+      }
+      .fileupload {
+        display: grid;
+        justify-content: center;
+        justify-items: center;
+        align-content: center;
+        align-items: center;
+        grid-template-columns: 82px 82px 82px 82px 82px;
+        grid-template-rows: 75px;
+        .file__image__box {
+          width: 72px;
+          height: 72px;
+          margin: 12px 3px;
+          border: solid 1px #f3f3f3;
+          &.empty{
+            .image{
+              margin: 27px 23px;
+              width: 26px;
+              height: 18px;
+            }
+          }
+
+        }
+      }
+      .underline {
+        width: 385px;
+        height: 1.5px;
+        background-color: #f3f3f3;
+        margin: 12px 14px 12px;
+      }
+      .submit {
+        border-radius: 15px;
+        background-color: #000000;
+
+        width: 99px;
+        height: 51px;
+        margin: auto;
+        font-family: NanumGothic, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 51px;
+        letter-spacing: 0.68px;
+        text-align: center;
+        color: #ffa800;
+      }
+    }
+  }
+}

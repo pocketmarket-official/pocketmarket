@@ -67,3 +67,11 @@ input {
 *:link, *:visited {
   text-decoration: none;
 }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #fa245a;
+  cursor: pointer;
+  height: 16px; width: 16px;
+  border-radius: 50%;
+}
