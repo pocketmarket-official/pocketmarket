@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from datetime import datetime
 from time import gmtime, strftime
+from stores.models import Store
 from users.models import User
 from items.models import Item
 from trades.models import SaleHeader
@@ -108,9 +109,10 @@ def trade(request):
         saleDetailObjList = []
         # constant
         compCd = 'C0028'
+        terminalId = '0001000200'
         vanCd = '11'
         # parameter from api
-        storeCd = 'C0001'
+        storeCd = Store.objects.get(id=json.loads(request.body)['storeId']).storeCd
         posNo = '01'
         dcAmt = 0.0
 
@@ -146,101 +148,102 @@ def trade(request):
         else:
             billNo = '00001'
 
-        payments = [
-            {
-                'seq': 1,
-                'type': 1,  # 1:결제/2:할인
-                'method': 'card',  # pgJsonReturn _ method
-                'amount': 15000,  # pgJsonReturn _ price
-                'cardNo': '0001000200030004',  # pgJsonReturn _ payment_data['card_no']
-                'cardName': '하나카드',  # pgJsonReturn _ payment_data['card_name']
-                'apprNo': '00010002',  # pgJsonReturn _ payment_data['card_auth_no']
-                'apprDt': '20101002',  # pgJsonReturn _ payment_data['p_at']
-                'apprTime': '092008',  # pgJsonReturn _ payment_data['p_at']
-                'terminalId': '00030004',  # pgJsonReturn _ payment_data['tid']
-                'registerNo': '00050006',  # todo: 이거뭐지?
-            },
-            {
-                'seq': 2,
-                'type': 2,  # 1:결제/2:할인
-                'method': 'pocketMoney',
-                'amount': 2000
-            }
-        ]
-
-        # keymap으로부터 넘어올 결제 목록 데이터
-        items = [
-            # 아메리카노 2잔
-            {
-                'seq': 1,
-                'orderType': '1',  # 1:일반/2:세트
-                'itemCd': '00001',  # 아메리카노
-                'qty': 2,
-                'itemSellGroup': '1',  # 세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
-                'itemSellLevel': '1',  # 1:prent/2:child
-                'itemSellType': '1'  # 1:일반/2:옵션변경/3:옵션추가
-            },
-            # 티라미스세트 1개
-            {  # 티라미스 세트
-                'seq': 2,
-                'orderType': '2',
-                'itemCd': '00002',  # 티라미스 세트
-                'qty': 1,
-                'itemSellGroup': '2',
-                'itemSellLevel': '1',
-                'itemSellType': '1'
-            },
-            {  # 티라미스
-                'seq': 3,
-                'orderType': '1',  # todo: 1?? 2?? ->1
-                'itemCd': '00003',  # 티라미스
-                'qty': 1,
-                'itemSellGroup': '2',
-                'itemSellLevel': '2',
-                'itemSellType': '1'  # todo: 1?? 2??
-            },
-            {  # 아메리카노
-                'seq': 4,
-                'saleFlag': '1',
-                'orderType': '1',  # todo: 1?? 2?? ->1
-                'itemCd': '00001',  # 아메리카노
-                'qty': -1,
-                'itemSellGroup': '2',
-                'itemSellLevel': '2',
-                'itemSellType': '2'
-            },
-            {  # 라떼
-                'seq': 5,
-                'orderType': '2',  # todo: 1?? 2??
-                'itemCd': '00004',  # 라떼
-                'qty': 1,
-                'itemSellGroup': '2',
-                'itemSellLevel': '2',
-                'itemSellType': '2'
-            },
-            # 아메리카노 샷추가 1잔
-            {  # 아메리카노
-                'seq': 6,
-                'orderType': '1',
-                'itemCd': '00001',  # 아메리카노
-                'qty': 1,
-                'itemSellGroup': '3',
-                'itemSellLevel': '1',
-                'itemSellType': '1'
-            },
-            {  # 샷추가
-                'seq': 7,
-                'orderType': '1',
-                'itemCd': '00005',  # 샷추가
-                'qty': 1,
-                'itemSellGroup': '3',
-                'itemSellLevel': '2',
-                'itemSellType': '3'
-            },
-        ]
+        #
+        # payments = [
+        #     {
+        #         'seq': 1,
+        #         'type': 1,  # 1:결제/2:할인
+        #         'method': 'card',  # pgJsonReturn _ method
+        #         'amount': '',  # pgJsonReturn _ price
+        #         'cardNo': '0001000200030004',  # pgJsonReturn _ payment_data['card_no']
+        #         'cardName': '하나카드',  # pgJsonReturn _ payment_data['card_name']
+        #         'apprNo': '00010002',  # pgJsonReturn _ payment_data['card_auth_no']
+        #         'apprDt': '20101002',  # pgJsonReturn _ payment_data['p_at']
+        #         'apprTime': '092008',  # pgJsonReturn _ payment_data['p_at']
+        #         'terminalId': '00030004',  # pgJsonReturn _ payment_data['tid']
+        #         'registerNo': '00050006',  # todo: 이거뭐지?
+        #     },
+        #     {
+        #         'seq': 2,
+        #         'type': 2,  # 1:결제/2:할인
+        #         'method': 'pocketMoney',
+        #         'amount': 2000
+        #     }
+        # ]
+        #
+        # # keymap으로부터 넘어올 결제 목록 데이터
+        # items = [
+        #     # 아메리카노 2잔
+        #     {
+        #         'seq': 1,
+        #         'orderType': '1',  # 1:일반/2:세트
+        #         'itemCd': '00001',  # 아메리카노
+        #         'qty': 2,
+        #         'itemSellGroup': '1',  # 세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
+        #         'itemSellLevel': '1',  # 1:prent/2:child
+        #         'itemSellType': '1'  # 1:일반/2:옵션변경/3:옵션추가
+        #     },
+        #     # 티라미스세트 1개
+        #     {  # 티라미스 세트
+        #         'seq': 2,
+        #         'orderType': '2',
+        #         'itemCd': '00002',  # 티라미스 세트
+        #         'qty': 1,
+        #         'itemSellGroup': '2',
+        #         'itemSellLevel': '1',
+        #         'itemSellType': '1'
+        #     },
+        #     {  # 티라미스
+        #         'seq': 3,
+        #         'orderType': '1',  # todo: 1?? 2?? ->1
+        #         'itemCd': '00003',  # 티라미스
+        #         'qty': 1,
+        #         'itemSellGroup': '2',
+        #         'itemSellLevel': '2',
+        #         'itemSellType': '1'  # todo: 1?? 2??
+        #     },
+        #     {  # 아메리카노
+        #         'seq': 4,
+        #         'saleFlag': '1',
+        #         'orderType': '1',  # todo: 1?? 2?? ->1
+        #         'itemCd': '00001',  # 아메리카노
+        #         'qty': -1,
+        #         'itemSellGroup': '2',
+        #         'itemSellLevel': '2',
+        #         'itemSellType': '2'
+        #     },
+        #     {  # 라떼
+        #         'seq': 5,
+        #         'orderType': '2',  # todo: 1?? 2??
+        #         'itemCd': '00004',  # 라떼
+        #         'qty': 1,
+        #         'itemSellGroup': '2',
+        #         'itemSellLevel': '2',
+        #         'itemSellType': '2'
+        #     },
+        #     # 아메리카노 샷추가 1잔
+        #     {  # 아메리카노
+        #         'seq': 6,
+        #         'orderType': '1',
+        #         'itemCd': '00001',  # 아메리카노
+        #         'qty': 1,
+        #         'itemSellGroup': '3',
+        #         'itemSellLevel': '1',
+        #         'itemSellType': '1'
+        #     },
+        #     {  # 샷추가
+        #         'seq': 7,
+        #         'orderType': '1',
+        #         'itemCd': '00005',  # 샷추가
+        #         'qty': 1,
+        #         'itemSellGroup': '3',
+        #         'itemSellLevel': '2',
+        #         'itemSellType': '3'
+        #     },
+        # ]
 
         i = 1
-        for item in items:
+        for item in json.loads(request.body)['sellItemList']:
             target = Item.objects.get(itemCd=item['itemCd'])
             headerTotSaleAmt += target.price * item['qty']  # sum(saleprice * qty)
             headerTotQty += item['qty']
@@ -277,20 +280,24 @@ def trade(request):
             i += 1
 
         i = 1
-        for payment in payments:
+        for payment in json.loads(request.body)['data']:
             if payment['type'] == 1:
-                headerCardAmt += payment['amount']  # 카드결제금액 더해가는 방식
+                headerCardAmt += payment['price']  # 카드결제금액 더해가는 방식
                 cardSeq = i
-                cardCardAmt += payment['amount']
-                cardCardNo = payment['cardNo']
+                cardCardAmt += payment['price']
+                cardCardNo = payment['card_no']
                 cardVanCd = '001'  # todo: asp에 nice pg코드 등록
                 cardCardCd = '001'  # 발급사 #todo: asp cardCode와 맞추기
-                cardCardName = '하나카드'  # todo: asp cardNamerhk 맞추기
-                cardApprNo = payment['apprNo']
-                cardApprDt = payment['apprDt']
-                cardApprTime = payment['apprTime']
-                cardTerminalId = payment['terminalId']
-                cardRegisterNo = payment['registerNo']
+                cardCardName = 'card_code'  # todo: asp cardNamerhk 맞추기
+                cardApprNo = payment['order_id'].split('_')['0']
+                cardApprDt = payment['order_id'].split('_')['0'].split['-'][0]\
+                             + payment['order_id'].split('_')['0'].split['-'][1]\
+                             + payment['order_id'].split('_')['0'].split['-'][2]
+                cardApprTime = payment['order_id'].split('_')['1'].split[':'][0]\
+                             + payment['order_id'].split('_')['1'].split[':'][1]\
+                             + payment['order_id'].split('_')['1'].split[':'][2]
+                cardTerminalId = terminalId
+                cardRegisterNo = payment['receipt_no'] #todo: 이거뭐임?
             elif payment['type'] == 2:
                 headerTotDcAmt += payment['amount']
                 headerPointDcAmt += payment['amount']
