@@ -15,10 +15,13 @@ class Order extends React.Component {
         this.getKeymap = this.getKeymap.bind(this);
         this.clearOrderList = this.clearOrderList.bind(this);
 
+        let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
+
         this.state = {
             link: link,
             storeName: "",
             storeId: "",
+            storeCd: storeCd,
             keymapCd: "",
             touchGroupCd: 0,
             brandCd: "",
@@ -33,7 +36,6 @@ class Order extends React.Component {
         };
 
         // initialization of the touch group code
-        let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
         axios.get("/api/stores_store/")
         .then((res) => {
             let store = res.data.find(
@@ -400,6 +402,7 @@ class Order extends React.Component {
                                     order: this.state.order_list,
                                     storeName: this.state.storeName,
                                     storeId: this.state.storeId,
+                                    storeCd: this.state.storeCd,
                                 }}}>
                                 <div className="order__pass">주문결제</div>
                             </Link>

@@ -12,11 +12,13 @@ class OrderInfo extends React.Component {
         const order = this.props.location.state.order;
         const storeName = this.props.location.state.storeName;
         const storeId = this.props.location.state.storeId;
+        const storeCd = this.props.location.state.storeCd;
         this.state = {
             sellItemList: sellItemList,
             order: order,
             storeName: storeName,
             storeId: storeId,
+            storeCd: storeCd,
         }
      };
 
@@ -158,7 +160,7 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="divide"/>
                     <div className="orderinfo__btn"
-                         onClick={({sellItemList}) => pay(tradesInfo, price, this.state.storeName, this.state.storeId)}>
+                         onClick={({sellItemList}) => pay(tradesInfo, price, this.state.storeName, this.state.storeId, this.state.storeCd)}>
                         결제하기
                     </div>
                 </div>
