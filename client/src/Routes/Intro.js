@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import KaKaoLogin from "react-kakao-login";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import cookie from 'react-cookies';
 import bgVideo from "../assets/intro/intro.mp4";
 import bgImage from "../assets/intro/bg.jpg";
 import '../Components/scss/intro.scss';
@@ -18,10 +19,18 @@ function Intro({authenticated, login, location}) {
 
     // kakao login api built in django backend
     const responseLogin = (res) => {
-//        window.location.href = "http://localhost:8000/login/kakao/";
-//        let access_token = res.response.access_token;
-//       let email = res.profile.kakao_account.email;
-//        storage.add(access_token, email);
+        let access_token = res.response.access_token;
+        let email = res.profile.kakao_account.email;
+
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 1);
+
+        cookie.save("access_token", access_token, {
+            path: '/',
+            expires: expires,
+        });
+        storage.add(access_token, email);
+        window.location.href = "http://localhost:8000/login/kakao/";
     };
 
     const responseFail = (err) => {
