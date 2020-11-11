@@ -112,7 +112,8 @@ def trade(request):
         terminalId = '0001000200'
         vanCd = '11'
         # parameter from api
-        storeCd = Store.objects.get(id=json.loads(request.body)['storeId']).storeCd
+        # storeCd = Store.objects.get(id=json.loads(request.body)['storeId']).storeCd
+        storeCd = json.loads(request.body)['storeCd']
         posNo = '01'
         dcAmt = 0.0
 
@@ -148,100 +149,6 @@ def trade(request):
         else:
             billNo = '0001'
 
-        #
-        # payments = [
-        #     {
-        #         'seq': 1,
-        #         'type': 1,  # 1:결제/2:할인
-        #         'method': 'card',  # pgJsonReturn _ method
-        #         'amount': '',  # pgJsonReturn _ price
-        #         'cardNo': '0001000200030004',  # pgJsonReturn _ payment_data['card_no']
-        #         'cardName': '하나카드',  # pgJsonReturn _ payment_data['card_name']
-        #         'apprNo': '00010002',  # pgJsonReturn _ payment_data['card_auth_no']
-        #         'apprDt': '20101002',  # pgJsonReturn _ payment_data['p_at']
-        #         'apprTime': '092008',  # pgJsonReturn _ payment_data['p_at']
-        #         'terminalId': '00030004',  # pgJsonReturn _ payment_data['tid']
-        #         'registerNo': '00050006',  # todo: 이거뭐지?
-        #     },
-        #     {
-        #         'seq': 2,
-        #         'type': 2,  # 1:결제/2:할인
-        #         'method': 'pocketMoney',
-        #         'amount': 2000
-        #     }
-        # ]
-        #
-        # # keymap으로부터 넘어올 결제 목록 데이터
-        # items = [
-        #     # 아메리카노 2잔
-        #     {
-        #         'seq': 1,
-        #         'orderType': '1',  # 1:일반/2:세트
-        #         'itemCd': '00001',  # 아메리카노
-        #         'qty': 2,
-        #         'itemSellGroup': '1',  # 세트나 옵션추가 시 한 그룹임을 명시하기 위해 부여하는 그룹코드
-        #         'itemSellLevel': '1',  # 1:prent/2:child
-        #         'itemSellType': '1'  # 1:일반/2:옵션변경/3:옵션추가
-        #     },
-        #     # 티라미스세트 1개
-        #     {  # 티라미스 세트
-        #         'seq': 2,
-        #         'orderType': '2',
-        #         'itemCd': '00002',  # 티라미스 세트
-        #         'qty': 1,
-        #         'itemSellGroup': '2',
-        #         'itemSellLevel': '1',
-        #         'itemSellType': '1'
-        #     },
-        #     {  # 티라미스
-        #         'seq': 3,
-        #         'orderType': '1',  # todo: 1?? 2?? ->1
-        #         'itemCd': '00003',  # 티라미스
-        #         'qty': 1,
-        #         'itemSellGroup': '2',
-        #         'itemSellLevel': '2',
-        #         'itemSellType': '1'  # todo: 1?? 2??
-        #     },
-        #     {  # 아메리카노
-        #         'seq': 4,
-        #         'saleFlag': '1',
-        #         'orderType': '1',  # todo: 1?? 2?? ->1
-        #         'itemCd': '00001',  # 아메리카노
-        #         'qty': -1,
-        #         'itemSellGroup': '2',
-        #         'itemSellLevel': '2',
-        #         'itemSellType': '2'
-        #     },
-        #     {  # 라떼
-        #         'seq': 5,
-        #         'orderType': '2',  # todo: 1?? 2??
-        #         'itemCd': '00004',  # 라떼
-        #         'qty': 1,
-        #         'itemSellGroup': '2',
-        #         'itemSellLevel': '2',
-        #         'itemSellType': '2'
-        #     },
-        #     # 아메리카노 샷추가 1잔
-        #     {  # 아메리카노
-        #         'seq': 6,
-        #         'orderType': '1',
-        #         'itemCd': '00001',  # 아메리카노
-        #         'qty': 1,
-        #         'itemSellGroup': '3',
-        #         'itemSellLevel': '1',
-        #         'itemSellType': '1'
-        #     },
-        #     {  # 샷추가
-        #         'seq': 7,
-        #         'orderType': '1',
-        #         'itemCd': '00005',  # 샷추가
-        #         'qty': 1,
-        #         'itemSellGroup': '3',
-        #         'itemSellLevel': '2',
-        #         'itemSellType': '3'
-        #     },
-        # ]
-
         i = 1
         for item in json.loads(request.body)['sellItemList']:
             target = Item.objects.get(itemCd=item['itemCd'])
@@ -265,9 +172,9 @@ def trade(request):
                 salePrice=target.price - dcAmt,
                 orgSalePrice=target.price,
                 totSaleAmt=target.price * item['qty'],
-                saleAmt=(target.price * item['qty']) - dcAmt,
-                supAmt=((target.price * item['qty']) - dcAmt) * 1.1,
-                taxAmt=target.price - dcAmt - (((target.price * item['qty']) - dcAmt) * 1.1),
+                saleAmt=(target.price * item['qty']) - dcAmt, #totSaleAmt - dcAmt
+                supAmt=((target.price * item['qty']) - dcAmt) / 1.1, #saleAmt*1.1
+                taxAmt=((target.price * item['qty']) - dcAmt) - (((target.price * item['qty']) - dcAmt) / 1.1), #saleAmt-supAmt
                 offTaxAmt=0.0,
                 taxYn='Y',
                 totDcAmt=0.0,
@@ -280,28 +187,47 @@ def trade(request):
             i += 1
 
         i = 1
-        for payment in json.loads(request.body)['data']:
-            if payment['type'] == 1:
-                headerCardAmt += payment['price']  # 카드결제금액 더해가는 방식
-                cardSeq = i
-                cardCardAmt += payment['price']
-                cardCardNo = payment['card_no']
-                cardVanCd = '001'  # todo: asp에 nice pg코드 등록
-                cardCardCd = '001'  # 발급사 #todo: asp cardCode와 맞추기
-                cardCardName = 'card_code'  # todo: asp cardNamerhk 맞추기
-                cardApprNo = payment['order_id'].split('_')['0']
-                cardApprDt = payment['order_id'].split('_')['0'].split['-'][0]\
-                             + payment['order_id'].split('_')['0'].split['-'][1]\
-                             + payment['order_id'].split('_')['0'].split['-'][2]
-                cardApprTime = payment['order_id'].split('_')['1'].split[':'][0]\
-                             + payment['order_id'].split('_')['1'].split[':'][1]\
-                             + payment['order_id'].split('_')['1'].split[':'][2]
-                cardTerminalId = terminalId
-                cardRegisterNo = payment['receipt_no'] #todo: 이거뭐임?
-            elif payment['type'] == 2:
-                headerTotDcAmt += payment['amount']
-                headerPointDcAmt += payment['amount']
-                headerPointDcCnt += 1
+        payment = json.loads(request.body)['data']
+        if payment['method'] == 'card':
+            headerCardAmt += payment['price']  # 카드결제금액 더해가는 방식
+            cardSeq = i
+            cardCardAmt += payment['price']
+            cardCardNo = payment['card_no']
+            cardVanCd = '001'  # todo: asp에 nice pg코드 등록
+            cardCardCd = '001'  # 발급사 #todo: asp cardCode와 맞추기
+            cardCardName = payment['card_code']  # todo: asp cardNamerhk 맞추기
+            cardApprNo = payment['order_id'].split('_')[0]
+            cardApprDt = payment['purchased_at'].split(' ')[0].split('-')[0] \
+                         + payment['purchased_at'].split(' ')[0].split('-')[1] \
+                         + payment['purchased_at'].split(' ')[0].split('-')[2]
+            cardApprTime = payment['purchased_at'].split(' ')[1].split(':')[0] \
+                           + payment['purchased_at'].split(' ')[1].split(':')[1] \
+                           + payment['purchased_at'].split(' ')[1].split(':')[2]
+            cardTerminalId = terminalId
+            # cardRegisterNo =  payment['receipt_id']  # todo: 이거뭐임?
+            cardRegisterNo = ''
+        # for payment in json.loads(request.body)['data']:
+        #     if payment['method'] == 'card':
+        #         headerCardAmt += payment['price']  # 카드결제금액 더해가는 방식
+        #         cardSeq = i
+        #         cardCardAmt += payment['price']
+        #         cardCardNo = payment['card_no']
+        #         cardVanCd = '001'  # todo: asp에 nice pg코드 등록
+        #         cardCardCd = '001'  # 발급사 #todo: asp cardCode와 맞추기
+        #         cardCardName = 'card_code'  # todo: asp cardNamerhk 맞추기
+        #         cardApprNo = payment['order_id'].split('_')['0']
+        #         cardApprDt = payment['order_id'].split('_')['0'].split['-'][0]\
+        #                      + payment['order_id'].split('_')['0'].split['-'][1]\
+        #                      + payment['order_id'].split('_')['0'].split['-'][2]
+        #         cardApprTime = payment['order_id'].split('_')['1'].split[':'][0]\
+        #                      + payment['order_id'].split('_')['1'].split[':'][1]\
+        #                      + payment['order_id'].split('_')['1'].split[':'][2]
+        #         cardTerminalId = terminalId
+        #         cardRegisterNo = payment['receipt_no'] #todo: 이거뭐임?
+        #     elif payment['method'] == '':
+        #         headerTotDcAmt += payment['amount']
+        #         headerPointDcAmt += payment['amount']
+        #         headerPointDcCnt += 1
 
             i += 1
 
@@ -336,37 +262,6 @@ def trade(request):
             orderStatus='2',
             # user = 1
         )
-
-        for saleDetail in saleDetailList:
-            saleDetailObj = SaleDetail.objects.create(
-                storeCd=storeCd,
-                saleDt=saleDt,
-                posNo=posNo,
-                billNo=billNo,
-                seq=saleDetail['SEQ'],
-                saleFlag=saleFlag,
-                orderType=saleDetail['ORD_TP'],
-                itemCd=saleDetail['ITEM_CD'],
-                itemName=saleDetail['ITEM_NM'],
-                qty=saleDetail['QTY'],
-                itemSellGroup=saleDetail['ITEM_SELL_GRP'],
-                itemSellLevel=saleDetail['ITEM_SELL_LV'],
-                itemSellType=saleDetail['ITEM_SELL_TY'],
-                saleCost=saleDetail['SALE_COST'],
-                salePrice=saleDetail['SALE_PRIC'],
-                orgSalePrice=saleDetail['ORG_SALE_PRIC'],
-                totSaleAmt=saleDetail['TOT_SALE_AMT'],
-                saleAmt=saleDetail['SALE_AMT'],
-                supAmt=saleDetail['SUP_AMT'],
-                taxAmt=saleDetail['TAX_AMT'],
-                offTaxAmt=saleDetail['OFF_TAX_AMT'],
-                taxFlag=saleDetail['TAX_YN'],
-                totDcAmt=saleDetail['TOT_DC_AMT'],
-                pointDcAmt=saleDetail['PNT_DC_AMT'],
-                saleTime=saleDetail['SALE_TM'],
-                sendYn='N',
-            )
-            saleDetailObjList.append(saleDetailObj)
 
         cardLogObj = CardLog.objects.create(
             storeCd=storeCd,
