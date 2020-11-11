@@ -106,10 +106,10 @@ $headerHeight: 63px;
     }
   }
   .order__menu {
-    padding: 0 11px;
+    padding: 0 11px 40px;
+    box-sizing: border-box;
     overflow: scroll;
     width: 100%;
-    min-height: 60%;
     display: grid;
     justify-content: center;
     justify-items: center;
