@@ -1,7 +1,7 @@
 import BootPay from "bootpay-js";
 import axios from "axios";
 
-function pay(sellItemList, price, storeName, storeId, storeCd) {
+function pay(sellItemList, price, storeName, storeCd) {
     BootPay.request({
         // price: trInfo.Price,
         price: price,
@@ -51,7 +51,7 @@ function pay(sellItemList, price, storeName, storeId, storeCd) {
         let billNo = '0001';
         let transData = {};
 
-        transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId};
+        transData = {"data":data, "sellItemList":sellItemList, 'storeCd':storeCd};
         axios.post('http://localhost:8000/trade/', transData);
     });
 }
