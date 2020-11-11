@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import cookie from 'react-cookies';
+import storage from '../storage.js';
 import Header from '../Components/js/Header';
 import MainFestivalContent from '../Components/js/MainFestivalContent';
 import MainStoreContent from '../Components/js/MainStoreContent';
@@ -42,6 +44,10 @@ class Main extends React.Component {
                 latlong: [127.027810, 37.496971],
             },
         ];
+
+        let cookie_token = cookie.load("access_token");
+        console.log(cookie_token);
+        console.log(storage.get(cookie_token));
 
         this.state = {
             temp: temp,
