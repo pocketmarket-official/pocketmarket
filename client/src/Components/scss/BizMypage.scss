@@ -1,7 +1,9 @@
-.mypage{
+.bizmypage{
+  width: 100%;
+  margin-top: 63px;
+
   .bizmypage__stor__container{
     height: 23px;
-    width: 100%;
     background: black;
     padding: 4px 0 1px 0;
     .bizmypage__stor__name{
@@ -68,6 +70,7 @@
             height: 25px;
             background-color: #ffffff;
             border-radius: 50%;
+            box-shadow: 0 0 9px 1px rgba(0, 0, 0, 0.15);
             .slideBall2{
               margin: 6px auto;
               width: 12px;
@@ -76,9 +79,13 @@
               border-radius: 50%;
             }
 
-            &.right {
+            &.on {
               position: absolute;
-              right: 0;
+              right: -3px;
+            }
+            &.off {
+              position: absolute;
+              right: 25px;
             }
           }
         }
@@ -155,7 +162,7 @@
     display: flex;
     align-items: center;
     width: 85%;
-    margin: 120px auto 0;
+    margin: 215px auto 0;
     .bizsetting__list{
       display: flex;
       align-items: center;
@@ -164,6 +171,7 @@
       height: 42px;
       border-radius: 5px;
       border: solid 1px #cbcbcb;
+      background: #ffffff;
       img{
         position: relative;
         top: 6px;
@@ -189,4 +197,165 @@
 
   }
 
+}
+
+
+.modal__conversion.hidden {
+  display: none;
+}
+.modal__conversion {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+}
+.modal__conversion .modal__user_change {
+  min-width: 300px;
+  min-height: 300px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  position: absolute;
+  top: 18%;
+
+  .modal__header{
+    width: 90%;
+    margin: 0 auto;
+    font-family: MaplestoryOTFLight;
+    color: #b4022f;
+    font-weight: bold;
+    font-size: 13px;
+    .modal__header_img{
+      width: 39%;
+      margin: 17px auto;
+      img{
+        margin: 0 auto;
+        width: 100px;
+        height: 50px;
+      }
+    }
+
+  }
+  .modal__close__btn{
+    position: absolute;
+    right: -5%;
+    top: -5%;
+    img{
+      height: 50px;
+      width: 50px;
+    }
+
+  }
+
+  .modal__user__container{
+    width: 90%;
+    margin: 20px 0;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    border: solid 2px #eaeaea;
+    padding: 25px 0;
+
+    .user__choices {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #333333;
+
+      input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+
+        &:checked + label {
+          color: #333333;
+
+          &:after {
+            background: #bc3b3b;
+          }
+        }
+
+        & + label {
+          margin: 10px 0;
+          display: inline-block;
+          position: relative;
+          padding-left: 40px;
+          cursor: pointer;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          //color: #818181;
+          font-family: 'MaplestoryOTFBold', 'Nanum Gothic', sans-serif;
+          margin-bottom: 20px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -4px;
+            width: 23px;
+            height: 23px;
+            text-align: right;
+            background: white;
+            border: 1px solid #d2d2d2;
+            border-radius: 100%;
+          }
+
+          &:after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 6px;
+            width: 13px;
+            height: 13px;
+            background: #e8e8e8;
+            border-radius: 100%;
+          }
+        }
+      }
+
+      span {
+        display: inline-block;
+        font-family:'MaplestoryOTFBold', 'Nanum Gothic', sans-serif;
+        font-weight: 800;
+        width: 112px;
+        height: 21px;
+        text-align: left;
+        &.red{
+          text-align: center;
+          width: 25px;
+          color: #bd1f47;
+        }
+      }
+    }
+
+  }
+  .modal__user_change__button{
+    width: 31%;
+    height: 40px;
+    color: #ffa800;
+    font-family: MaplestoryOTFLight;
+    font-weight: bold;
+    background: #333333;
+    border-radius: 11px;
+    margin: 10px auto;
+
+  }
 }
