@@ -29,17 +29,12 @@ class StoreView extends React.Component {
             link: link,
         };
 
-        this.handlePageGrid = this.handlePageGrid.bind(this);
-        this.handlePageList = this.handlePageList.bind(this);
+        this.handlePageSlide = this.handlePageSlide.bind(this);
         this.handlePageRender = this.handlePageRender.bind(this);
     }
 
-    handlePageGrid() {
-        this.setState(() => ({ current: 0 }));
-    }
-
-    handlePageList() {
-        this.setState(() => ({ current: 1 }));
+    handlePageSlide() {
+        this.setState((prev) => ({ current: (prev.current + 1) % 2 }));
     }
 
     handlePageRender() {
@@ -102,14 +97,14 @@ class StoreView extends React.Component {
                                 </div>
                             </div>
                         {/*</div>*/}
-                        <div className="button__container">
-                            <button onClick={this.handlePageGrid}><p className="simple">간단</p></button>
+                        <div className="button__container" onClick={this.handlePageSlide}>
+                            <button><p className="simple">간단</p></button>
                             <div className="slide">
                                 <div className="subslide">
-                                    <div className="slideBall"></div>
+                                    <div className={"slideBall " + (this.state.current === 1 ? 'right' : '')}/>
                                 </div>
                             </div>
-                            <button onClick={this.handlePageList}><p className="detail">상세</p></button>
+                            <button><p className="detail">상세</p></button>
                         </div>
                     </div>
                     {this.handlePageRender()}
