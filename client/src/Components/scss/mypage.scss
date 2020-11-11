@@ -9,11 +9,11 @@ $headerHeight: 63px;
     .mypage__box{
         width: 90%;
         height: 50%;
-        display: flex;     
+        display: flex;
         justify-content: center;
-        align-items: center;   
+        align-items: center;
         flex-direction: column;
-        margin:0 auto; 
+        margin:0 auto;
 
         border-bottom: 2px solid #d3d3d3;
 
@@ -29,11 +29,11 @@ $headerHeight: 63px;
             display: flex;
             flex-direction: row;
             align-items: center;
-            
+
             p{
                 width: 5px;
                 height: 12px;
-                font-family: Maplestory;
+                font-family: 'MaplestoryOTFLight', sans-serif;
                 font-size: 13px;
                 font-weight: bold;
                 font-stretch: normal;
@@ -42,7 +42,7 @@ $headerHeight: 63px;
             }
 
             a{
-                font-family: Maplestory;
+                font-family: 'MaplestoryOTFLight', sans-serif;
                 font-size: 13px;
                 font-weight: bold;
                 font-stretch: normal;
@@ -60,13 +60,13 @@ $headerHeight: 63px;
     .setting__box{
         height: 45%;
         width: 90%;
-        display: flex;     
+        display: flex;
         justify-content: flex-start;
-        align-items: center;   
+        align-items: center;
         flex-direction: column;
-        margin:0 auto; 
+        margin:0 auto;
         margin-top: 25px;
-        
+
         .setting__list{
             width: 325px;
             height: 42px;
@@ -90,7 +90,7 @@ $headerHeight: 63px;
 
             &:nth-child(2){
                 background-color: #2f2f2f;
-                
+
                 img{
                     width: 17px;
                     height: 17px;
@@ -98,7 +98,7 @@ $headerHeight: 63px;
             }
 
             a{
-                font-family: Maplestory;
+                font-family: 'MaplestoryOTFLight', sans-serif;
                 font-size: 13px;
                 font-weight: bold;
                 font-stretch: normal;
@@ -111,8 +111,8 @@ $headerHeight: 63px;
                 color: #ffffff;
             }
 
-            p{            
-                font-family: Maplestory;
+            p{
+                font-family: 'MaplestoryOTFLight', sans-serif;
                 font-size: 13px;
                 font-weight: bold;
                 font-stretch: normal;
