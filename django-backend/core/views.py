@@ -146,7 +146,7 @@ def trade(request):
         if billNo:
             billNo = f'{int(billNo[0].billNo) + 1:04}'
         else:
-            billNo = '00001'
+            billNo = '0001'
 
         #
         # payments = [
@@ -254,13 +254,13 @@ def trade(request):
                 billNo=billNo,
                 seq=i,
                 saleFlag=saleFlag,
-                orderType=item['orderType'],
+                orderType=str(item['orderType']),
                 itemCd=item['itemCd'],
                 itemName=target.itemName,
                 qty=item['qty'],
-                itemSellGroup=item['itemSellGroup'],
-                itemSellLevel=item['itemSellLevel'],
-                itemSellType=item['itemSellType'],
+                itemSellGroup=str(item['itemSellGroup']),
+                itemSellLevel=str(item['itemSellLevel']),
+                itemSellType=str(item['itemSellType']),
                 saleCost=target.price,
                 salePrice=target.price - dcAmt,
                 orgSalePrice=target.price,
