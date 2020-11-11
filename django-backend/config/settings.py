@@ -21,53 +21,32 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 #AWS Setting
-AWS_REGION = 'ap-northeast-2'
-AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
-AWS_S3_SECURE_URLS = False       # use http instead of https
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+# AWS_ACCESS_KEY_ID = "AKIATNCEDZSHBJVTOZMH"
+# AWS_SECRET_ACCESS_KEY = "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"
+AWS_REGION_NAME = 'ap-northeast-2'
 AWS_QUERYSTRING_AUTH = False
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-#S3 Setting
-
-# STATIC_URL = "/static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-# 각 media file에 대한 URL prefix
-# MEDIA_URL = '/media/'
-# 미디어 파일을 관리할 루트 media 디렉터리
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+AWS_DEFAULT_ACL = None
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#S3 setting
+AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
+AWS_S3_SECURE_URLS = False       # use http instead of https
+AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
 
-if DEBUG:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    # MEDIA_URL = '/upload_files/'  # 항상 / 로 끝나도록 설정
-    MEDIA_URL = '/media/'
-    # MEDIA_URL = 'http://static.myservice.com/media/' 다른 서버로 media 파일 복사시
-    # 업로드된 파일을 저장할 디렉토리 경로
-    # MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-else:
-    AWS_DEFAULT_ACL = None
-    AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-    }
+DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
 
-    DEFAULT_FILE_STORAGE = 'django-backend.storage_backends.MediaStorage'
-    STATICFILES_STORAGE = 'django-backend.storage_backends.StaticStorage'
-
-    STATIC_URL = 'https://%s/%s/static/' % (AWS_S3_HOST, AWS_STORAGE_BUCKET_NAME)
-    MEDIA_URL = 'https://%s/%s/media/' % (AWS_S3_HOST, AWS_STORAGE_BUCKET_NAME)
-
+STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
 
 ALLOWED_HOSTS = ['0.0.0.0:8000', 'localhost', '127.0.0.1', '13.124.90.138']
@@ -136,17 +115,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 ##2020.09.26 _ jhonny Cloche Ma
 DATABASES = {
@@ -218,7 +186,3 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "users.User"
-
-#variable for S3
-#AWS_xxx variables are being for aws-S3, boto3 module
-
