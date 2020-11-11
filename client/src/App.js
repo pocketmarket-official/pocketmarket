@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import CacheRoute from 'react-router-cache-route';
+import cookie from 'react-cookies';
+import storage from './storage.js';
 import Index from './Routes/Index';
 import Main from './Routes/Main';
 import Mypage from './Routes/Mypage';
@@ -37,13 +39,17 @@ import OrderInfoPayMethod from "./Routes/OrderInfoPayMethod";
 
 
 function App() {
-  const [user, setUser] = useState(null);
-  const authenticated = user != null;
-  const setUserInfo = ({ email }) => setUser({ email });
+  let cookie_token = cookie.load("access_token");
+  let storage_email = storage.get(cookie_token);
+  let authenticated = false;
+  if(storage_email) {
+    authenticated = true;
+  }
+
   return (
       <BrowserRouter>
         <Route exact path="/login" render={props => (
-            <Intro authenticated={authenticated} login={setUserInfo} {...props} />
+            <Intro authenticated={authenticated} {...props} />
         )} />
         <Route exact path="/" >
               <Redirect to={"/login"} />

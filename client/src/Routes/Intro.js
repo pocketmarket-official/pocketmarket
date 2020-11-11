@@ -28,6 +28,8 @@ function Intro({authenticated, login, location}) {
         cookie.save("access_token", access_token, {
             path: '/',
             expires: expires,
+//            httpOnly: true,
+//            secure: true,
         });
         storage.add(access_token, email);
         window.location.href = "http://localhost:8000/login/kakao/";
