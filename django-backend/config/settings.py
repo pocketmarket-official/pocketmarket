@@ -22,22 +22,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
+#AWS Setting
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 # AWS_ACCESS_KEY_ID = "AKIATNCEDZSHBJVTOZMH"
 # AWS_SECRET_ACCESS_KEY = "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"
-
-#AWS Setting
 AWS_REGION_NAME = 'ap-northeast-2'
-AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
-AWS_S3_SECURE_URLS = False       # use http instead of https
 AWS_QUERYSTRING_AUTH = False
+AWS_DEFAULT_ACL = None
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-AWS_DEFAULT_ACL = None
+#S3 setting
+AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
+AWS_S3_SECURE_URLS = False       # use http instead of https
 AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
@@ -117,17 +116,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 ##2020.09.26 _ jhonny Cloche Ma
 DATABASES = {
     'default' : {
@@ -198,7 +186,3 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "users.User"
-
-#variable for S3
-#AWS_xxx variables are being for aws-S3, boto3 module
-
