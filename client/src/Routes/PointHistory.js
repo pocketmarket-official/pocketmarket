@@ -175,17 +175,17 @@ class PointHistory extends React.Component {
                         <div className="search__title">포인트 이력</div>
                         <div className="search__input">
                             <span><img src={calendar}/></span>
-                            <DatePicker className="dd" id="date1" value="2020.01.01"
+                            <DatePicker className="dd" id="date1" value="2020-01-01"
                                         locale={ko}	// 언어설정 기본값은 영어
-                                        dateFormat="yyyy.MM.dd"	// 날짜 형식 설정
+                                        dateFormat="yyyy-MM-dd"	// 날짜 형식 설정
                             ></DatePicker>
                             {/*<input type="text" id="date1"/>*/}
                             &nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
                             <span><img src={calendar}/></span>
 
-                            <DatePicker className="dd" id="date2" value="2020.10.10"
+                            <DatePicker className="dd" id="date2" value="2020-10-10"
                                         locale={ko}	// 언어설정 기본값은 영어
-                                        dateFormat="yyyy.MM.dd"	// 날짜 형식 설정
+                                        dateFormat="yyyy-MM-dd"	// 날짜 형식 설정
                             ></DatePicker>
                             <input type="image" src={search} value="조회" id="search" onClick={this.searchHistory}/>
                         </div>
