@@ -1,6 +1,13 @@
 .react-datepicker-wrapper{
   width: 100%;
 }
+
+.react-datepicker{
+  left: -67px;
+}
+
+
+
 .modal__conversion.hidden {
   display: none;
 }
@@ -23,6 +30,7 @@
   //justify-content: space-around;
   align-items: center;
   border-radius: 10px;
+  position: absolute;
 
   .modal__header{
     width: 85%;
@@ -32,8 +40,8 @@
   }
   .modal__close__btn{
     position: absolute;
-    right: 10%;
-    top: 16%;
+    right: -5%;
+    top: -5%;
     img{
       height: 32px;
       width: 32px;

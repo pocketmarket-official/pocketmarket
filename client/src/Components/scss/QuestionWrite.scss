@@ -1,18 +1,19 @@
-
 $headerHeight: 63px;
 
-.reviewwrite {
+.questionwrite {
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  flex-direction: column;
   margin-top: $headerHeight;
   justify-content: flex-start;
-  .review__write__box {
+
+  .question__write__box {
     width: 398px;
     margin: 30px 8px;
-    .review__write__caption {
+    height: 300px;
+    .question__write__caption {
       width: 70px;
       height: 21px;
       border-radius: 7.5px;
@@ -24,9 +25,9 @@ $headerHeight: 63px;
       line-height: 2;
       color: #ffffff;
     }
-    .reviewwrite__context {
+    .questionwrite__context {
       width: 381.5px;
-      height: 118px;
+      height: 250px;
       margin: 11px 8px;
       box-sizing: border-box;
       padding: 8px;
@@ -38,58 +39,10 @@ $headerHeight: 63px;
       resize: none;
     }
   }
-  .review__content__box {
-    width: 398px;
-    margin: 30px 8px;
-    .review__content__caption {
-      width: 70px;
-      height: 21px;
-      border-radius: 7.5px;
-      background-color: #b4022f;
-      font-family: Maplestory,sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      text-align: center;
-      line-height: 2;
-      color: #ffffff;
-    }
-    .review__content {
-      margin: 10px 20px;
-      height: 100%;
-      width: 358px;
-      .input__container {
-        display: flex;
-        margin: 10px 0;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        .menu__name {
-          font-family: MaplestoryOTFLight,sans-serif;
-          font-size: 14px;
-          font-weight: 800;
-          width: 115px;
-        }
-        .review__controll {
-          width:165px;
-          height: 2px;
-          border-radius: 1px;
-          background-color: #4a4a4a;
-        }
-        .review__point {
-          margin: 0 25px 0 0;
-          font-family: Nanum Gothic, sans-serif;
-          font-size: 16px;
-          font-weight: 600;
-          color: #eb1a4f;
-        }
-      }
-
-
-    }
-  }
   .photo__upload__box {
     width:398px;
     margin: 30px 8px;
+    height: 300px;
     .photo__upload__caption {
       width: 70px;
       height: 21px;
@@ -155,4 +108,6 @@ $headerHeight: 63px;
       }
     }
   }
+
+
 }

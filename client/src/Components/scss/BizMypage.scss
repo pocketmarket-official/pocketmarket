@@ -1,0 +1,192 @@
+.mypage{
+  .bizmypage__stor__container{
+    height: 23px;
+    width: 100%;
+    background: black;
+    padding: 4px 0 1px 0;
+    .bizmypage__stor__name{
+      width: 50%;
+      height: 90%;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      p{
+        color: #b4022f;
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        margin-block-start: 0;
+        margin-block-end: 0;
+      }
+    }
+  }
+
+  .bizmypage__silder_container{
+    display: flex;
+    align-items: center;
+    width: 75%;
+    margin: 35px auto;
+    height: 45px;
+    border-radius: 45px;
+    border: solid 1px #efefef;
+
+    .bizmypage__order__text{
+      margin: auto;
+      font-weight: bold;
+      font-size: 20px;
+      color: #b4022f;
+    }
+
+    .button__container{
+      height: 23px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+
+
+      .slide{
+        width: 44px;
+        height: 19px;
+        border-radius: 19.5px;
+        background-color: #bc3b3b;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .subslide{
+          position: relative;
+          width: 50px;
+          height: 15px;
+          border-radius: 19.5px;
+          background-color: #bc3b3b;
+          display: flex;
+          align-items: center;
+          .slideBall{
+            width: 25px;
+            height: 25px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            .slideBall2{
+              margin: 6px auto;
+              width: 12px;
+              height: 12px;
+              background-color: #bc3b3b;
+              border-radius: 50%;
+            }
+
+            &.right {
+              position: absolute;
+              right: 0;
+            }
+          }
+        }
+      }
+      button {
+        margin: 0 5px;
+        background-color: #ffffff;
+        .off{
+          font-size: 13px;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          letter-spacing: 1.9px;
+          color: #535353;
+        }
+        .on{
+          font-size: 13px;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          letter-spacing: 1.9px;
+          color: #535353;
+          margin-right: 5px;
+        }
+      }
+
+    }
+  }
+
+  .bizmypage__box{
+    width: 90%;
+
+    margin: 0 auto;
+    border-top: 2px solid #b4022f;
+    border-bottom: 2px solid #b4022f;
+    .bizmypage__list{
+      width: 70%;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
+      border: solid 1px #cbcbcb;
+      margin: 25px auto;
+
+      p{
+        height: 50%;
+        font-family: NanumGothic;
+        font-size: 16px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        color: #b4022f;
+      }
+
+      a{
+        font-family: Maplestory;
+        font-size: 13px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 3.1;
+        letter-spacing: 2.7px;
+        position: relative;
+        left: 20px;
+        width: 87%;
+        color: #333333;
+      }
+
+    }
+
+  }
+
+  .bizsetting__box{
+    display: flex;
+    align-items: center;
+    width: 85%;
+    margin: 120px auto 0;
+    .bizsetting__list{
+      display: flex;
+      align-items: center;
+      width: 48%;
+      margin: 0 auto;
+      height: 42px;
+      border-radius: 5px;
+      border: solid 1px #cbcbcb;
+      img{
+        position: relative;
+        top: 6px;
+        width: 23px;
+        height: 23px;
+        margin-right: 10px;
+      }
+      a{
+        font-family: Maplestory;
+        color: #b4022f;
+        font-size: 13px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 3.1;
+        letter-spacing: 2.7px;
+        position: relative;
+        margin: 0 auto;
+      }
+
+
+    }
+
+  }
+
+}

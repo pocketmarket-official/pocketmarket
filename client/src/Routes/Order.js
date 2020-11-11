@@ -325,7 +325,7 @@ class Order extends React.Component {
                         <div className="content__box">
                             {this.state.touch_group.map((data) => {
                                 return (
-                                    <div className="category__content" id={data.id} key={data.id} onClick={() => this.getKeymap(data)}>{data.touchGroupName}</div>
+                                    <div className={"category__content " + (this.state.touchGroupCd === data.id ? 'active' : '')} id={data.id} key={data.id} onClick={() => this.getKeymap(data)}>{data.touchGroupName}</div>
                                 );
                             })}
                         </div>
