@@ -1,0 +1,159 @@
+@import "mixins";
+$headerHeight: 63px;
+
+.bizkitchen {
+  width: 100%;
+  height: 100%;
+  margin-top: $headerHeight;
+  box-sizing: border-box;
+  .bizkitchen__store__box {
+    width: 100%;
+    height:25px;
+    display: flex;
+    background-color:#2f2f2f;
+    border-bottom: solid;
+    border-bottom-color: #d73434;
+    border-bottom-width:3px;
+    align-items: center;
+    justify-content: center;
+    .bizkitchen__store {
+      display: flex;
+      width: 50%;
+      height: 20px;
+      border-radius: 10px;
+      background-color: #ffffff;
+      align-items: center;
+      color: #b4022f;
+      font-family: Nanum Gothic, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      justify-content: center;
+    }
+  }
+  .bizkitchen__category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 414px;
+    height: 55px;
+    position: relative;
+    background-color: #000000;
+    .category__left {
+      margin-left:8px;
+      font-family: MaplestoryOTFBold, sans-serif;
+      font-size: 15.5px;
+      color: #606060;
+      &.scroll {
+        color: #b4022f;
+      }
+    }
+    .category__right {
+      margin-right:8px;
+      font-family: MaplestoryOTFBold, sans-serif;
+      font-size: 15.5px;
+      color: #606060;
+      &.scroll {
+        color: #b4022f;
+      }
+    }
+    .content__box {
+      overflow: scroll;
+      display: flex;
+      height: 100%;
+      justify-content: space-between;
+      align-items: center;
+      .category__content {
+        min-width: 60px;
+        margin: 5px 20px;
+        color: #ffffff;
+        font-family: MaplestoryOTFLight,sans-serif;
+        font-size: 13.5px;
+        transform: translateY(6px);
+        text-align: center;
+        .category__status {
+          transform: translateY(-30px);
+          margin: auto;
+          color: black;
+          font-size: 8.5px !important;
+          width:40px;
+          height:13px;
+          border-radius: 5px;
+          text-align: center;
+          line-height: 1.3;
+        }
+
+        &.active {
+          @include stroke(#ca0000);
+          .category__status {
+            text-shadow: none;
+          }
+        }
+        &.busy {
+          color: #ffa800 !important;
+          .category__status{
+            background-color: #ffa800;
+            color:black;
+          }
+        }
+        &.done {
+          color: #505050 !important;
+          .category__status {
+            background-color: #b4022f;
+            color: #ffffff;
+          }
+
+        }
+      }
+    }
+  }
+
+  .bizkitchen__menu {
+    padding: 0 11px 40px;
+    box-sizing: border-box;
+    overflow: scroll;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(200px, auto);
+
+    .menu__container {
+      display: flex;
+      align-content: center;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+
+      .menu__image {
+        width:135px;
+        height: 118.5px;
+      }
+      .menu__name {
+        font-family: MaplestoryOTFLight,sans-serif;
+        font-size: 14px;
+        text-align: center;
+      }
+      .menu__price {
+        font-family: Nanum Gothic,sans-serif;
+        font-size: 11.5px;
+        text-align: center;
+      }
+      .menu__done {
+        width:0;
+        height: 0;
+      }
+      &.done {
+        .menu__done {
+          position: absolute;
+          top:18px;
+          left:27px;
+          width: 82px !important;
+          height:82px !important;
+        }
+      }
+    }
+  }
+}
