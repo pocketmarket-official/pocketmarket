@@ -4,6 +4,9 @@ import HeaderBack from '../Components/js/HeaderBack';
 import axios from 'axios';
 import lodash from 'lodash';
 import '../Components/scss/order.scss';
+import '../Components/scss/optionModal.scss';
+
+import closeBtn from '../assets/order_status_pop/btn_close.png';
 
 
 class Order extends React.Component {
@@ -220,24 +223,33 @@ class Order extends React.Component {
                     <div className="optionmodal__container" onClick={(e) => {
                         e.stopPropagation();
                     }}>
+                        <img className="optionmodal__close" src={closeBtn} onClick={() => {
+                            const elt = document.getElementById("optionmodal");
+                            elt.classList.add("hidden");
+                            this.setState({
+                                modal_options: []
+                            });
+                        }}/>
                         <div className="optionmodal__header">
                             <img src={this.state.selected.imgSmallUrl} alt="menu" />
                             <div className="optionmodal__title">
                                 <div className="optionmodal__name">{this.state.selected.itemName}</div>
-                                <div className="optionmodal__content">{this.state.selected.price}원</div>
+                                <div className="optionmodal__description">처음부터 끝까지 모자렐라 치즈의 풍미를 즐길 수 있는 핫도그</div>
+                                {/*<div className="optionmodal__content">{this.state.selected.price}원</div>*/}
                             </div>
                         </div>
-                        {/*
                         <div className="optionmodal__category">
-                            {
-                                this.state.opt_cat.map((data) => {
-                                    return (
-                                        <div className="category__category">{data}</div>
-                                    );
-                                })
-                            }
+                            <div className="category__category active">소스</div>
+                            <div className="category__category">토핑</div>
+                            <div className="category__category">치즈</div>
+                            {/*{*/}
+                            {/*    this.state.opt_cat.map((data) => {*/}
+                            {/*        return (*/}
+                            {/*            <div className="category__category">{data}</div>*/}
+                            {/*        );*/}
+                            {/*    })*/}
+                            {/*}*/}
                         </div>
-                        */}
                         <div className="optionmodal__options">
                             {
                                 options.map((data) => {
@@ -258,8 +270,7 @@ class Order extends React.Component {
                                                     });
                                                 }
                                             }}>
-                                                <div>{data.itemName}</div>
-                                                <div>{data.price}원</div>
+                                                {data.itemName}
                                             </div>
                                         </>
                                     );
@@ -268,47 +279,51 @@ class Order extends React.Component {
                         </div>
                         <div className="optionmodal__result">
                             <div className="result__container">
-                                <div className="result__content">
-                                    {
-                                        this.state.modal_options.map((item) => {
-                                            return (
-                                                <>
-                                                    <div>{item[0].itemName}</div>
-                                                    <input type="number" id="option__quantity" value={item[1]} />
-                                                    <button onClick={() => {
+                                {
+                                    this.state.modal_options.map((item, index) => {
+                                        return (
+                                            <div className="result__content">
+                                                <div className="seq">{index + 1}</div>
+                                                <div className="name">{item[0].itemName}</div>
+                                                <div className="decrease">-</div>
+                                                <div className="qty">{item[1]}</div>
+                                                <div className="increase">+</div>
+                                                <div className="remove__box">
+                                                    <div className="remove" onClick={() => {
                                                         for(let i in this.state.modal_options) {
                                                             if(this.state.modal_options[i][0] === item[0]) {
                                                                 this.state.modal_options.splice(i, 1);
                                                                 this.setState(this.state);
                                                             }
                                                         }
-                                                    }}>X</button>
-                                                </>
-                                            );
-                                        })
-                                    }
-                                </div>
+                                                    }}>X</div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })
+                                }
                             </div>
-                            <div className="optionmodal__btn">
-                                <button className="optionmodal__select" onClick={() => {
-                                    let menu = lodash.cloneDeep(this.state.selected);
-                                    menu["option"] = lodash.cloneDeep(this.state.modal_options);
-                                    this.setState({
-                                        order_list: this.state.order_list.concat([[menu, 1]]),
-                                        modal_options: [],
-                                        selected: "",
-                                        price: price,
-                                        order: order,
-                                    });
-                                    const elt = document.getElementById("optionmodal");
-                                    elt.classList.add("hidden");
-                                }}>주문담기</button>
-                                <button className="optionmodal__clear" onClick={() => {
-                                    this.setState({
-                                        modal_options: []
-                                    });
-                                }}>초기화</button>
-                            </div>
+                        </div>
+                        <div className="optionmodal__btn">
+                            <button className="optionmodal__clear" onClick={() => {
+                                this.setState({
+                                    modal_options: []
+                                });
+                            }}>초기화</button>
+                            <button className="optionmodal__select" onClick={() => {
+                                let menu = lodash.cloneDeep(this.state.selected);
+                                menu["option"] = lodash.cloneDeep(this.state.modal_options);
+                                this.setState({
+                                    order_list: this.state.order_list.concat([[menu, 1]]),
+                                    modal_options: [],
+                                    selected: "",
+                                    price: price,
+                                    order: order,
+                                });
+                                const elt = document.getElementById("optionmodal");
+                                elt.classList.add("hidden");
+                            }}>주문담기</button>
+                            <div className="optionmodal__occupant"/>
                         </div>
                     </div>
                 </div>
