@@ -1,0 +1,221 @@
+$headerHeight: 63px;
+
+.orderstatus {
+  width: 100%;
+  height: 100%;
+  margin-top: $headerHeight;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .orderstatus__card {
+    width:83%;
+    border-radius: 15px;
+    border: solid 2px #b4022f;
+    box-shadow: 3.5px 6.6px 12px 3px rgba(0,0,0,0.2);
+    margin: 32.5px auto 15px;
+    position: relative;
+
+    .card__info {
+      display: flex;
+      justify-content: space-between;
+      margin : 5px 10px;
+      line-height: 1.7;
+      border-bottom: solid 0.5px #e9e9e9;
+      .card__title {
+        margin-left: 10px;
+        font-family: MaplestoryOTFLight,sans-serif;
+        font-size: 17px;
+        font-weight: 300;
+        color: #404040;
+      }
+      .card__title__info {
+        display: flex;
+        justify-content: space-between;
+        .order__date {
+          margin-right: 10px;
+          font-family: Nanum Gothic, sans-serif;
+          font-size: 10px;
+          font-weight: bold;
+          align-items: center;
+          display: flex;
+          .cal {
+            width: 10px;
+            height: 11px;
+            margin-right: 4px;
+          }
+        }
+        .card__delete {
+          margin-left: 5px;
+          background-color: #ffffff;
+        }
+      }
+    }
+    .card__info__detail {
+      width: 80%;
+      margin: 5px auto;
+      line-height: 1.9;
+      display:flex;
+      flex-direction: column;
+      text-align: center;
+      .order__list {
+        display: flex;
+        margin: 3px 0;
+        .line__title{
+          font-size: 9px;
+          width:75px;
+          height: 20px;
+          border: solid 0.5px #e1e1e1;
+          border-radius: 7.5px;
+          font-family: Nanum Gothic, sans-serif;
+          font-weight: bold;
+          color: #666666;
+          margin-left: 7px;
+        }
+        .line__detail{
+          font-size: 12px;
+          margin-left: 10px;
+          font-family: Nanum Gothic, sans-serif;
+          font-weight: 900;
+          color: #1a1a1a;
+        }
+      }
+      .order__status {
+        display: flex;
+        margin: 3px 0;
+        .line__title{
+          font-size: 9px;
+          width:75px;
+          height: 20px;
+          border: solid 0.5px #e1e1e1;
+          border-radius: 7.5px;
+          font-family: Nanum Gothic, sans-serif;
+          font-weight: bold;
+          color: #666666;
+          margin-left: 7px;
+        }
+        .line__detail{
+          font-size: 12px;
+          margin-left: 10px;
+          font-family: Nanum Gothic, sans-serif;
+          font-weight: 900;
+          color: #1a1a1a;
+        }
+      }
+      .order__time {
+        font-size: 0;
+      }
+      .order__number {
+        font-size: 0;
+      }
+
+      &.cooked {
+        .order__time {
+          display: flex;
+          margin: 3px 0;
+          .line__title{
+            font-size: 9px;
+            width:75px;
+            height: 20px;
+            border: solid 0.5px #e1e1e1;
+            border-radius: 7.5px;
+            font-family: Nanum Gothic, sans-serif;
+            font-weight: bold;
+            color: #666666;
+            margin-left: 7px;
+          }
+          .line__detail{
+            font-size: 12px;
+            margin-left: 10px;
+            font-family: Nanum Gothic, sans-serif;
+            font-weight: 900;
+            color: #1a1a1a;
+          }
+        }
+        .order__number {
+          display: flex;
+          margin: 3px 0;
+          .line__title{
+            font-size: 9px;
+            width:75px;
+            height: 20px;
+            border: solid 0.5px #e1e1e1;
+            border-radius: 7.5px;
+            font-family: Nanum Gothic, sans-serif;
+            font-weight: bold;
+            color: #666666;
+            margin-left: 7px;
+          }
+          .line__detail{
+            font-size: 12px;
+            margin-left: 10px;
+            font-family: Nanum Gothic, sans-serif;
+            font-weight: 900;
+            color: #1a1a1a;
+          }
+        }
+      }
+    }
+    .pickup {
+      font-size:0;
+      &.active {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5px;
+        .pickup__message {
+          font-family: Nanum Gothic, sans-serif;
+          font-size: 8.5px;
+          font-weight: bold;
+          text-align: left;
+          color: #8c8c8c;
+          margin: 13px 0 13px 13px;
+        }
+        .pickup__btn {
+          width: 88px;
+          height: 30px;
+          border-radius: 10px;
+          background-color: #b4022f;
+          font-size: 12px;
+          font-family: Nanum Gothic, sans-serif;
+          font-weight: bold;
+          color: #ffffff;
+          text-align: center;
+          margin-right: 4px;
+        }
+      }
+    }
+    .writereview {
+      font-size:0;
+
+      &.active {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5px;
+        .review__message {
+          font-family: Nanum Gothic, sans-serif;
+          font-size: 8.5px;
+          font-weight: bold;
+          text-align: left;
+          color: #8c8c8c;
+          margin: 13px 0 13px 13px;
+        }
+        .review__btn {
+          width: 88px;
+          height: 30px;
+          border-radius: 10px;
+          background-color: #b4022f;
+          font-size: 12px;
+          font-family: Nanum Gothic, sans-serif;
+          font-weight: bold;
+          color: #ffffff;
+          text-align: center;
+          margin-right: 4px;
+        }
+      }
+
+    }
+  }
+}

@@ -1,102 +1,157 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
-
+import '../Components/scss/orderStatus.scss';
+import btnCal from '../assets/order_status/btn_date.png'
 
 function OrderStatus() {
     return (
         <>
             <HeaderBack url='/mypage' />
             <div className="orderstatus">
-                <Link to="/order/status/1">
                 <div className="orderstatus__card">
-                    <button className="card__delete hidden" onClick={(e) => {
-                        e.preventDefault();
-                    }}>X</button>
-                    <div className="card__contents">
-                        <div className="card__title">점포명: </div>
-                        <div className="card__detail">스타벅스</div>
-                    </div>
-                    <div className="card__contents">
-                        <div className="card__title">주문번호: </div>
-                        <div className="card__detail">Receipt no</div>
-                    </div>
-                    <div className="card__contents">
-                        <div className="card__title">주문목록: </div>
-                        <div className="card__detail">아이스 아메리카노 1잔</div>
-                    </div>
-                    <div className="card__contents">
-                        <div className="card__title">상태: </div>
-                        <div className="card__detail">제조중</div>
-                    </div>
-                    <div className="card__contents">
-                        <div className="card__title">주문완료시간: </div>
-                        <div className="card__detail">hh:mm</div>
-                    </div>
-                    <div className="card__contents" >
-                        <div className="card__title">현재 대기인원: </div>
-                        <div className="card__detail">3명</div>
-                    </div>
-                    <button id="pickup" onClick={(e) => {
-                        e.preventDefault();
-                    }}>픽업처리</button>
-                </div>
-                </Link>
-                <div className="orderstatus__card">
-                    <button className="card__delete hidden">X</button>
-                    <div className="card__contents">
-                        <div className="card__title">점포명: </div>
-                        <div className="card__detail">스타벅스</div>
-                    </div>
-                    <div className="card__contents">
-                        <div className="card__title">주문번호: </div>
-                        <div className="card__detail">Receipt no</div>
-                    </div>
-                    <div className="card__contents">
-                        <div className="card__title">주문목록: </div>
-                        <div className="card__detail">아이스 아메리카노 1잔</div>
-                    </div>
-                    <div className="card__contents">
-                        <div className="card__title">상태: </div>
-                        <div className="card__detail">제조중</div>
-                    </div>
-                    <div className="card__contents">
-                        <div className="card__title">주문완료시간: </div>
-                        <div className="card__detail">hh:mm</div>
-                    </div>
-                    <div className="card__contents">
-                        <div className="card__title">현재 대기인원: </div>
-                        <div className="card__detail">3명</div>
-                    </div>
-                    <button id="pickup">픽업처리</button>
+                    <Link to="/order/status/1">
+                        <div className="card__info">
+                            <div className="card__title">서초강산 Story</div>
+                            <div className="card__title__info">
+                                <div className="order__date">
+                                    <img className="cal" src={btnCal}/>
+                                    2020.10.27
+                                </div>
+                                <button className="card__delete" onClick={(e) => {
+                                    e.preventDefault();
+                                }}>X</button>
+                            </div>
+                        </div>
+                        <div className="card__info__detail">
+                            <div className="order__list">
+                                <div className="line__title">주문목록: </div>
+                                <div className="line__detail">아이스 아메리카노 1잔</div>
+                            </div>
+                            <div className="order__number">
+                                <div className="line__title">주문번호: </div>
+                                <div className="line__detail">Receipt no</div>
+                            </div>
+
+                            <div className="order__status">
+                                <div className="line__title">상태: </div>
+                                <div className="line__detail">제조중</div>
+                            </div>
+                            <div className="order__time">
+                                <div className="line__title">주문완료시간: </div>
+                                <div className="line__detail">hh:mm</div>
+                            </div>
+                            <div className="pickup">
+                                <button id="pickup" onClick={(e) => {
+                                    e.preventDefault();
+                                }}>픽업완료</button>
+                            </div>
+                            <div className="writereview">
+                                div.
+                                <button id="review" onClick={(e) => {
+                                    e.preventDefault();
+                                }}>리뷰작성</button>
+                            </div>
+                        </div>
+                    </Link>
                 </div>
                 <div className="orderstatus__card">
-                    <button className="card__delete">X</button>
-                    <div className="card__contents">
-                        <div className="card__title">점포명: </div>
-                        <div className="card__detail">스타벅스</div>
+                    <div className="card__info">
+                        <div className="card__title">조폭닭꼬치</div>
+                        <div className="card__title__info">
+                            <div className="order__date">
+                                <img className="cal" src={btnCal}/>
+                                2020. 10. 27
+                            </div>
+                            <button className="card__delete" onClick={(e) => {
+                                e.preventDefault();
+                            }}>X</button>
+                        </div>
                     </div>
-                    <div className="card__contents">
-                        <div className="card__title">주문번호: </div>
-                        <div className="card__detail">Receipt no</div>
+                    <div className="card__info__detail cooked">
+                        <div className="order__list">
+                            <div className="line__title">주문목록</div>
+                            <div className="line__detail">핵닭꼬치 2개, 조폭닭꼬치 1개</div>
+                        </div>
+                        <div className="order__number">
+                            <div className="line__title">주문번호</div>
+                            <div className="line__detail">202456</div>
+                        </div>
+
+                        <div className="order__status">
+                            <div className="line__title">주문상태</div>
+                            <div className="line__detail">조리완료</div>
+                        </div>
+                        <div className="order__time">
+                            <div className="line__title">완료시간</div>
+                            <div className="line__detail">19:25</div>
+                        </div>
                     </div>
-                    <div className="card__contents">
-                        <div className="card__title">주문목록: </div>
-                        <div className="card__detail">아이스 아메리카노 1잔</div>
+                    <div className="pickup active">
+                        <div className="pickup__message">
+                            주문한 음식을 수령하셨다면 픽업완료를 눌러주세요 ▶
+                        </div>
+                        <button className="pickup__btn" onClick={(e) => {
+                            e.preventDefault();
+                        }}>픽업완료</button>
                     </div>
-                    <div className="card__contents">
-                        <div className="card__title">상태: </div>
-                        <div className="card__detail">제조중</div>
+                    <div className="writereview">
+                        <div className="review__message">
+                            리뷰를 등록하면 다양한 혜택을 누리실 수 있습니다 ▶
+                        </div>
+                        <button className="review__btn" onClick={(e) => {
+                            e.preventDefault();
+                        }}>리뷰작성</button>
                     </div>
-                    <div className="card__contents">
-                        <div className="card__title">주문완료시간: </div>
-                        <div className="card__detail">hh:mm</div>
+                </div>
+                <div className="orderstatus__card">
+                    <div className="card__info">
+                        <div className="card__title">조폭닭꼬치</div>
+                        <div className="card__title__info">
+                            <div className="order__date">
+                                <img className="cal" src={btnCal}/>
+                                2020. 10. 27
+                            </div>
+                            <button className="card__delete" onClick={(e) => {
+                                e.preventDefault();
+                            }}>X</button>
+                        </div>
                     </div>
-                    <div className="card__contents">
-                        <div className="card__title">현재 대기인원: </div>
-                        <div className="card__detail">3명</div>
+                    <div className="card__info__detail cooked">
+                        <div className="order__list">
+                            <div className="line__title">주문목록</div>
+                            <div className="line__detail">핵닭꼬치 2개, 조폭닭꼬치 1개</div>
+                        </div>
+                        <div className="order__number">
+                            <div className="line__title">주문번호</div>
+                            <div className="line__detail">202456</div>
+                        </div>
+
+                        <div className="order__status">
+                            <div className="line__title">주문상태</div>
+                            <div className="line__detail">조리완료</div>
+                        </div>
+                        <div className="order__time">
+                            <div className="line__title">완료시간</div>
+                            <div className="line__detail">19:25</div>
+                        </div>
                     </div>
-                    <button id="pickup">픽업처리</button>
+                    <div className="pickup">
+                        <div className="pickup__message">
+                            주문한 음식을 수령하셨다면 픽업완료를 눌러주세요 ▶
+                        </div>
+                        <button className="pickup__btn" onClick={(e) => {
+                            e.preventDefault();
+                        }}>픽업완료</button>
+                    </div>
+                    <div className="writereview active">
+                        <div className="review__message">
+                            리뷰를 등록하면 다양한 혜택을 누리실 수 있습니다 ▶
+                        </div>
+                        <button className="review__btn" onClick={(e) => {
+                            e.preventDefault();
+                        }}>리뷰작성</button>
+                    </div>
                 </div>
             </div>
         </>

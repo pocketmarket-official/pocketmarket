@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
-import home from '../assets/map/btn_clocation.png';
+
 import logout from '../assets/business_mypage/ico_logout.png';
 import userchg from '../assets/business_mypage/ico_user_chg.png';
 import changelogo from '../assets/business_mypage_pop/img_pop_user_chg.png';
