@@ -167,7 +167,7 @@
       display: flex;
       align-items: center;
       width: 48%;
-      margin: 0 auto;
+      margin: 10px auto;
       height: 42px;
       border-radius: 5px;
       border: solid 1px #cbcbcb;
@@ -232,12 +232,12 @@
     font-weight: bold;
     font-size: 13px;
     .modal__header_img{
-      width: 39%;
+      width: 20%;
       margin: 17px auto;
       img{
         margin: 0 auto;
-        width: 100px;
-        height: 50px;
+        width: 70px;
+        height: 35px;
       }
     }
 
@@ -348,7 +348,7 @@
 
   }
   .modal__user_change__button{
-    width: 31%;
+    width: 40%;
     height: 40px;
     color: #ffa800;
     font-family: MaplestoryOTFLight;

@@ -2,9 +2,11 @@ import React from 'react';
 import DatePicker, { } from "react-datepicker";
 import HeaderBiz from "../Components/js/HeaderBiz";
 import PointResult from '../Components/js/PointResult';
-import search from '../assets/my_place_full/ico_search.png';
+
+import search from '../assets/point_history/ico_search.png';
 import close from '../assets/order_status_pop/btn_close.png';
-import calendar from '../assets/order_status/btn_date.png';
+import calendar from '../assets/point_history/ico_date.png';
+import arw from '../assets/point_history_conversion/ico_arw.png';
 import { ko } from "date-fns/esm/locale";
 
 
@@ -122,11 +124,11 @@ class PointHistory extends React.Component {
                         </div>
                         <div className="modal__detail__container">
                             <div className="orderinfo__choices">
-                                <input id="pg" name="A" type="radio" value="100" defaultChecked={true}/><label htmlFor="pg"><span> 100 개 </span><span className="red"> ➜ </span> <span> 100 PM</span></label>
-                                <input id="easy" name="A" type="radio" value="500" /><label htmlFor="easy"><span> 500 개 </span><span className="red"> ➜ </span> <span> 600 PM</span></label>
-                                <input id="transfer" name="A" type="radio" value="1000" /><label htmlFor="transfer"><span> 1000 개 </span><span className="red"> ➜ </span> <span> 1300 PM</span></label>
-                                <input id="withoutBankbook" name="A" type="radio" value="2000" /><label htmlFor="withoutBankbook"><span> 2000 개 </span><span className="red"> ➜ </span> <span> 3000 PM</span></label>
-                                <input id="phone" name="A" type="radio" value="5000" /><label htmlFor="phone"><span> 5000 개 </span><span className="red"> ➜ </span> <span> 8500 PM</span></label>
+                                <input id="pg" name="A" type="radio" value="100" defaultChecked={true}/><label htmlFor="pg"><span> 100 개 </span><span className="red"><img src={arw}/> </span>  <span> 100 PM</span></label>
+                                <input id="easy" name="A" type="radio" value="500" /><label htmlFor="easy"><span> 500 개 </span><span className="red"><img src={arw}/></span> <span> 600 PM</span></label>
+                                <input id="transfer" name="A" type="radio" value="1000" /><label htmlFor="transfer"><span> 1000 개 </span><span className="red"><img src={arw}/></span> <span> 1300 PM</span></label>
+                                <input id="withoutBankbook" name="A" type="radio" value="2000" /><label htmlFor="withoutBankbook"><span> 2000 개 </span><span className="red"><img src={arw}/></span> <span> 3000 PM</span></label>
+                                <input id="phone" name="A" type="radio" value="5000" /><label htmlFor="phone"><span> 5000 개 </span><span className="red"><img src={arw}/></span> <span> 8500 PM</span></label>
                             </div>
                         </div>
                         <button className="modal__convert__button">전환하기</button>

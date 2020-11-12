@@ -31,10 +31,11 @@
   align-items: center;
   border-radius: 10px;
   position: absolute;
+  top: 18%;
 
   .modal__header{
     width: 85%;
-    margin: 20px auto;
+    margin: 17px auto;
     font-family: MaplestoryOTFLight;
     color: #2e2e2e;
   }
@@ -43,8 +44,8 @@
     right: -5%;
     top: -5%;
     img{
-      height: 32px;
-      width: 32px;
+      height: 40px;
+      width: 40px;
     }
 
   }
@@ -107,6 +108,7 @@
           border: 0;
 
           &:checked + label {
+            display: flex;
             color: #333333;
 
             &:after {
@@ -165,8 +167,12 @@
           text-align: right;
           &.red{
             text-align: center;
-            width: 25px;
+            width: 40px;
             color: #bd1f47;
+            img{
+              width: 15px;
+              height: 15px;
+            }
           }
         }
       }
@@ -288,19 +294,7 @@
       }
 
 
-      //.dd{
-      //  display: inline-block;
-      //  background: #3d3d3d;
-      //  width: 42px;
-      //  height: 42px;
-      //  border: none;
-      //  border-radius:10px 0px 0px 10px;
-      //  img{
-      //    width: 23px;
-      //    height: 23px;
-      //    padding: 10px;
-      //  }
-      //}
+
       #date1, #date2{
         font-size: 14px;
         text-align: center;

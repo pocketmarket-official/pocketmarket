@@ -1,9 +1,9 @@
 import React from 'react';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import '../Components/scss/BizCertification.scss';
-import biz from '../assets/map/btn_clocation.png';
-import logout from '../assets/my_page/ico_logout.png';
-import mode from '../assets/common/btn_sceach.png';
+import biz from '../assets/business_certification/top_img.png';
+import userchg from '../assets/business_certification/ico_user_chg.png';
+import logout from '../assets/business_certification/ico_logout.png';
 import {Link} from "react-router-dom";
 
 function BizCertification() {
@@ -87,8 +87,8 @@ function BizCertification() {
                 <div className="biz__button">
                     <div className="button__three">
                         {/*<button className="">문의하기</button>*/}
-                        <Link to="/"><button className="usermode"><img src={mode}/>사용자 모드</button></Link>
-                        <button className="logout"><img src={mode}/> 로그아웃</button>
+                        <Link to="/"><button className="usermode"><img src={userchg}/>사용자 모드</button></Link>
+                        <button className="logout"><img src={logout}/> 로그아웃</button>
                     </div>
                 </div>
             </div>

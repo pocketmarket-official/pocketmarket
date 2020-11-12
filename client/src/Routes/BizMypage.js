@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import home from '../assets/map/btn_clocation.png';
-import logout from '../assets/map/btn_clocation.png';
-import changelogo from '../assets/map/ico_poc.png';
-import close from "../assets/order_status_pop/btn_close.png";
+import logout from '../assets/business_mypage/ico_logout.png';
+import userchg from '../assets/business_mypage/ico_user_chg.png';
+import changelogo from '../assets/business_mypage_pop/img_pop_user_chg.png';
+import close from "../assets/business_mypage_pop/btn_close.png";
 
 import '../Components/scss/BizMypage.scss';
 
@@ -72,7 +73,7 @@ function BizMypage() {
 
                 <div className="bizsetting__box">
                     <button className="bizsetting__list">
-                        <Link to="/"><img src={home}/>사용자 모드</Link>
+                        <Link to="/"><img src={userchg}/>사용자 모드</Link>
                     </button>
                     <button className="bizsetting__list" onClick={() => {
                         const elt = document.getElementById("modal__conversion");
