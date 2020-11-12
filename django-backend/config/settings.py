@@ -40,6 +40,7 @@ AWS_S3_SECURE_URLS = False       # use http instead of https
 AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
+    'ACL': 'public-read'
 }
 
 DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
