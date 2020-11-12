@@ -9,19 +9,24 @@ class QuestionResult extends React.Component {
             result.map((data) => {
                 return (
                     <>
-                        <div className="result__container">
-                            <div className="result__date">{data.date}</div>
-                            <div className="result__question">{data.question}</div>
-                            {data.answer.map((content) => {
-                                return (
-                                    <>
-                                        <div className="result__answer" key={data.answer.indexOf(content)} >{content}</div>
-                                    </>
-                                );
-                            })}
-                            <div className="result__input">
-                                <input type="text" placeholder="댓글달기" id="input__comment" /><input type="submit" value="전송" />
-                            </div>
+                        <div className="result__date">{data.date}</div>
+                        <div className="result__question">
+                            <div className="result__text Q">Q<p>문의내용</p></div>
+                            <div className="result__text quest"> {data.question}</div>
+                        </div>
+                        {data.answer.map((content) => {
+                            return (
+                                <>
+                                    <div className="result__question" key={data.answer.indexOf(content)} >
+                                        <div className="result__text A">A<p>답변내용</p></div>
+                                        <div className="result__text answer"> {content}</div>
+                                    </div>
+                                </>
+                            );
+                        })}
+                        <div className="result__input">
+                            <input type="text" placeholder="댓글달기" id="input__comment" />
+                            <input type="submit" value="전송" id="input__btn"/>
                         </div>
                     </>
                 );

@@ -1,7 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HeaderBack from '../Components/js/HeaderBack';
+import HeaderBiz from '../Components/js/HeaderBiz';
 import QuestionResult from '../Components/js/QuestionResult';
+
+import '../Components/scss/QuestionsHistory.scss';
+import calendar from "../assets/point_history/ico_date.png";
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import search from "../assets/point_history/ico_search.png";
+
+import ko from "date-fns/locale/ko";
+registerLocale('ko', ko);
 
 
 class QuestionsHistory extends React.Component {
@@ -22,26 +30,26 @@ class QuestionsHistory extends React.Component {
         else {
             mm = String(month).padStart(2, '0');
         }
-        let past = yyyy + '-' + mm + '-' + dd;
+        let past = yyyy + '.' + mm + '.' + dd;
 
         let temp = [
                 {
                     id: 1,
-                    date: "2020-08-01",
+                    date: "2020.08.01",
                     writer: "마진형",
-                    question: "결제 오류가 있어요",
+                    question: "좋아요 포켓머니로 전환을 하였는데 300PM이 사라졌습니다. \n 포인트 돌려주세요~ \n 돌려주세요~ 돌려주세요~ 돌려주세요~ ",
                     answer: ['저도요', '문의주셔서 감사합니다'],
                 },
                 {
                     id: 2,
-                    date: "2020-08-26",
+                    date: "2020.08.26",
                     writer: "마진형",
                     question: "점주 등록은 어떻게 하나요?",
                     answer: ['전화주세요'],
                 },
                 {
                     id: 3,
-                    date: "2020-09-17",
+                    date: "2020.09.17",
                     writer: "마진형",
                     question: "버그가 있어요",
                     answer: ['감사합니다'],
@@ -82,29 +90,44 @@ class QuestionsHistory extends React.Component {
         date2.value = this.state.today;
         this.searchHistory();
     }
-
     render() {
         let jsx;
         if(this.state.result.length === 0) {
             jsx =
                 <>
-                    <div>검색 결과가 없습니다.</div>
+                    <div className="result__nodata">검색 결과가 없습니다.</div>
                 </>;
         } else {
             jsx = <QuestionResult result={this.state.result} />;
         }
+
         return (
             <>
-                <HeaderBack url='/mypage' />
+                <HeaderBiz url='/mypage' />
                 <div className="question">
-                    <div className="question__search">
-                        <input type="date" id="date1" /> ~ <input type="date" id="date2" />
-                        <input type="submit" value="조회" onClick={this.searchHistory} />
+                    <div className="pointhistory__search__container">
+                        <div className="search__input">
+                            <span><img src={calendar}/></span>
+                            <DatePicker className="dd" id="date1" value="2020.01.01"
+                                        locale="ko"	// 언어설정 기본값은 영어
+                                        dateFormat="yyyy-MM-dd"	// 날짜 형식 설정
+                            ></DatePicker>
+                            {/*<input type="text" id="date1"/>*/}
+                            &nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+                            <span><img src={calendar}/></span>
+
+                            <DatePicker className="dd" id="date2" value="2020.10.10"
+                                        locale="ko"		// 언어설정 기본값은 영어
+                                        dateFormat="yyyy-MM-dd"	// 날짜 형식 설정
+                            ></DatePicker>
+                            <input type="image" src={search} value="조회" id="search" onClick={this.searchHistory}/>
+                        </div>
                     </div>
-                    <div className="question__result">
+
+                    <div className="question__result__container">
                         {jsx}
                     </div>
-                    <div className="question__add"><Link to="/mypage/questions/write">추가</Link></div>
+                    <div className="question__add"><Link to="/mypage/questions/write">문의하기</Link></div>
                 </div>
             </>
         );
