@@ -49,20 +49,22 @@ function Index({authenticated, login, location}) {
                 <div className="content">
                     <Link to="/main">
                         <div className="content-item">
-                            <img src={showFestivalImg} alt=""/>
+                            <img src={showFestivalImg} alt="축제보기" />
                             <span>축제보기</span>
                         </div>
                     </Link>
+                    <Link to={{pathname: "/main", state: { current: 1 }}}>
+                        <div className="content-item">
+                            <img src={showStoreImg} alt="매장보기" />
+                            <span>매장보기</span>
+                        </div>
+                    </Link>
                     <div className="content-item">
-                        <img src={showStoreImg} alt=""/>
-                        <span>매장보기</span>
-                    </div>
-                    <div className="content-item">
-                        <img src={showCollectionImg} alt=""/>
+                        <img src={showCollectionImg} alt="포켓도감" />
                         <span>포켓도감</span>
                     </div>
                     <div className="content-item">
-                        <img src={showOrderImg} alt=""/>
+                        <img src={showOrderImg} alt="주문상태" />
                         <span>주문상태</span>
                     </div>
                 </div>

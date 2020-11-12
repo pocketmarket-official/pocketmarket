@@ -21,6 +21,15 @@ class Main extends React.Component {
         this.handleTop = this.handleTop.bind(this);
         this.handleRefresh = this.handleRefresh.bind(this);
 
+
+        let current;
+
+        try {
+            current = this.props.location.state.current;
+        } catch(e) {
+            current = 0;
+        }
+
         let temp = [
             {
                 id: 1,
@@ -50,7 +59,7 @@ class Main extends React.Component {
 
         this.state = {
             temp: temp,
-            current: 0,
+            current: current,
             latlong: [],
         }
     }
