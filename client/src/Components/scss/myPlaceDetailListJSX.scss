@@ -1,0 +1,41 @@
+.myplace__container {
+  width: 90%;
+  margin: 20px auto;
+  padding-bottom: 20px;
+  border-bottom: 2px #dcdcdc solid;
+  .myplace__name {
+    margin-bottom: 15px;
+    font-size: 13px;
+    color: #3e3e3e;
+  }
+  .myplace__address1{
+    font-size: 11px;
+    color: #797979;
+  }
+  .myplace__address2{
+    font-size: 11px;
+    margin-top: 8px;
+    color: #797979;
+  }
+  .myplace__write {
+    font-size: 11px;
+    color: #797979;
+  }
+  .myplace__roadname_icon {
+    float: left;
+    width: 42px;
+    height: 18px;
+    font-size: 2px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    text-align: center;
+    margin-top: 4px;
+    margin-right: 3px;
+    padding: 0px;
+    letter-spacing: 0.48px;
+    background-color: white;
+    border:#d3d3d3 solid 1px;
+    color: #d3d3d3;
+  }
+}
