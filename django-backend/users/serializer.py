@@ -2,7 +2,6 @@ from rest_framework import serializers
 from users.models import User
 from users.models import Point
 from users.models import MyPlace
-from users.models import ImageTest
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -53,11 +52,3 @@ class MyPlaceSerializer(serializers.ModelSerializer):
             'modDt',
             'modUs'
         )
-
-class ImageTestSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ImageTest
-        fields = [
-            'image'
-        ]
