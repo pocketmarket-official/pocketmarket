@@ -50,7 +50,6 @@ router.register(r'festivals_join', festival_views.JoinView, 'join')
 router.register(r'users_user', user_views.UserView, 'user')
 router.register(r'users_point', user_views.PointView, 'point')
 router.register(r'users_myPlace', user_views.MyPlaceView, 'myPlace')
-router.register(r'users_imageTest', user_views.ImageTestView, 'imageTest')
 
 router.register(r'brands_brand', brand_views.BrandView, 'brand')
 

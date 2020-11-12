@@ -25,8 +25,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 #AWS Setting
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-# AWS_ACCESS_KEY_ID = "AKIATNCEDZSHBJVTOZMH"
-# AWS_SECRET_ACCESS_KEY = "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"
 AWS_REGION_NAME = 'ap-northeast-2'
 AWS_QUERYSTRING_AUTH = False
 AWS_DEFAULT_ACL = None
@@ -40,6 +38,7 @@ AWS_S3_SECURE_URLS = False       # use http instead of https
 AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
+    'ACL': 'public-read'
 }
 
 DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'

@@ -27,10 +27,3 @@ class MyPlaceAdmin(admin.ModelAdmin):
     """ MyPlace Admin """
 
     pass
-
-@admin.register(models.ImageTest)
-class ImageTestAdmin(admin.ModelAdmin):
-
-    """ MyPlace Admin """
-
-    pass

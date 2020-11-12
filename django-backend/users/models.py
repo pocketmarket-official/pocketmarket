@@ -9,7 +9,7 @@ from datetime import datetime
 class User(AbstractUser):
     """ User Model Definition """
     profileName = models.CharField(max_length=30, default='')
-    profileImage = models.CharField(max_length=255, default='')
+    profileImage = models.ImageField(upload_to="image")
 
 
     pass
@@ -42,6 +42,3 @@ class MyPlace(models.Model):
     insUs = models.CharField(max_length=30, default='defaultValue')
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
-
-class ImageTest(models.Model):
-    image = models.ImageField(upload_to="image")
