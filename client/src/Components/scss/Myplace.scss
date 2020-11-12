@@ -1,3 +1,5 @@
+$headerHeight: 63px;
+
 .myplace__modal {
   position: absolute;
   top: 0;
@@ -95,4 +97,255 @@
       }
     }
   }
+}
+
+.myplace {
+  position: absolute;
+  top: $headerHeight;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .myplace__favorite {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    text-align: center;
+    align-items: center;
+
+    .myplace__title {
+      width: 100%;
+      height: 30px;
+
+      margin-top: $headerHeight;
+
+      background-color: #b4022f;
+
+      font-family: MaplestoryOTFBold, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 0.8px;
+      text-align: center;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .myplace__savePlace {
+      font-family: MaplestoryOTFLight;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+
+      width: 85%;
+      border-collapse: collapse;
+      margin-top: 20px;
+
+      .myplace__content {
+        width: 100%;
+        height: 50px;
+
+        .myplace__name {
+          width: 13%;
+
+          font-size: 10.5px;
+          font-weight: bold;
+          color: #b4022f;
+
+          div {
+            height: 19px;
+            border: solid 1px #dfdfdf;
+            background-color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+        .myplace__address {
+          text-align: left;
+          font-size: 12px;
+        }
+
+        .myplace__button {
+          display: contents;
+
+          .myplace__write {
+            img {
+              width: 13px;
+              height: 13px;
+            }
+          }
+
+          .myplace__delete {
+            img {
+              width: 13px;
+              height: 13px;
+            }
+          }
+        }
+      }
+
+      th td {
+        border: 0;
+        font-family: MaplestoryOTFBold;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 2;
+        letter-spacing: 1.35px;
+        text-align: left;
+        color: #1e1e1e;
+      }
+
+      th {
+        border-bottom: 3px solid #b4022f;
+      }
+
+      td {
+        border-bottom: 1.5px solid #bebebe;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+    }
+
+    .myplace__addressSave {
+      font-family: NanumGothic, sans-serif;
+
+      width: 85%;
+      border-collapse: collapse;
+      margin-top: 20px;
+
+      display: flex;
+      flex-direction: column;
+
+      .myplace__content {
+        width: 100%;
+        border-top: 1.5px solid #dcdcdc;
+
+        .myplace__addrSearch {
+          display: flex;
+          flex-direction: row;
+          input {
+            width: 300px;
+            height: 40px;
+            border-radius: 15px;
+            border: solid 1px #d3d3d3;
+            background-color: white;
+          }
+        }
+      }
+
+      th td {
+        border: 0;
+        font-family: MaplestoryOTFBold;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 2;
+        letter-spacing: 1.35px;
+        text-align: left;
+        color: #1e1e1e;
+      }
+
+      th {
+        border-bottom: 3px solid black;
+        margin-bottom: 20px;
+      }
+    }
+
+    .myplace__recentAddress {
+      font-family: NanumGothic, sans-serif;
+
+      width: 85%;
+      border-collapse: collapse;
+      margin-top: 20px;
+
+
+      .myplace__content {
+        width: 100%;
+        height: 62px;
+        border-top: 1.5px solid #dcdcdc;
+
+        .myplace__address {
+          font-size: 13px;
+          line-height: 1.48;
+          text-align: left;
+          color: #3e3e3e;
+
+
+          padding-left: 5px;
+          padding-right: 10px;
+        }
+        .myplace__button {
+          img {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+
+      .myplace__content2 {
+        .myplace__newZipCdNm {
+          font-size: 9.5px;
+          line-height: 1.05;
+          letter-spacing: 0.24px;
+          color: #c7c7c7;
+
+
+          padding-left: 5px;
+
+          div {
+            width: 90%;
+            border: solid 1px #d3d3d3;
+            background-color: white;
+          }
+
+          padding-bottom: 15px;
+        }
+        .myplace__newZipCd {
+          font-size: 10.5px;
+          line-height: 0.95;
+          text-align: left;
+          color: #797979;
+
+          padding-bottom: 15px;
+        }
+      }
+
+      th td {
+        border: 0;
+        font-family: MaplestoryOTFBold;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 2;
+        letter-spacing: 1.35px;
+        text-align: left;
+        color: #1e1e1e;
+      }
+
+      th {
+        border-bottom: 3px solid black;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+    }
+  }
+
+
 }
