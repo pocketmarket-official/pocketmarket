@@ -33,20 +33,20 @@ class MainStoreContent extends React.Component {
             this.setState({
                 stores: stores,
                 data: stores.slice(0, 5),
+            }, () => {
+                // get current location
+                this.getPosition().then((position) => {
+                    this.setState({
+                        lat1: position.coords.latitude,
+                        long1: position.coords.longitude,
+                        loading: true,
+                    },
+                        () => this.sortCallback()
+                    )
+                })
+                .catch((e) => console.log(e));
             });
         });
-
-        // get current location
-        this.getPosition().then((position) => {
-            this.setState({
-                lat1: position.coords.latitude,
-                long1: position.coords.longitude,
-                loading: true,
-            },
-                () => this.sortCallback()
-            )
-        })
-        .catch((e) => console.log(e));
     }
 
     calcDistance(latitude1, longitude1, latitude2, longitude2) {
@@ -183,9 +183,9 @@ class MainStoreContent extends React.Component {
         this.state.stores.sort(this.sortData);
         this.setState({
             loading: false,
-            data: this.state.stores.slice(0, 4),
+            data: this.state.stores.slice(0, 5),
             preItems: 0,
-            items: 4,
+            items: 5,
         });
     }
 
@@ -194,20 +194,19 @@ class MainStoreContent extends React.Component {
         let value = elt.value;
         elt.value = "";
 
-        axios.get("http://13.124.90.138:8000/api/stores_store/")
-        .then(
-            (res) => {
-                let searched = res.data.filter(
-                    (elt) => {
-                        if(elt.storeName.indexOf(value) > -1 && elt.storeName.toLowerCase().indexOf(value.toLowerCase()) > -1) {
-                            return true;
-                        }
-                    }
-                );
-                this.setState({
-                    data: searched,
-                });
-            });
+        let searched = this.state.stores.filter(
+            (elt) => {
+                if(elt.storeName.indexOf(value) > -1 && elt.storeName.toLowerCase().indexOf(value.toLowerCase()) > -1) {
+                    return true;
+                }
+            }
+        );
+
+        window.removeEventListener("scroll", this._infiniteScroll, true);
+
+        this.setState({
+            data: searched,
+        });
     }
 
     componentDidUpdate() {
@@ -229,6 +228,9 @@ class MainStoreContent extends React.Component {
     }
 
     render() {
+        console.log('========================');
+        console.log(this.state);
+        console.log('========================');
         const isLoading = this.state.loading;
         return (
             <div id="storeContent">

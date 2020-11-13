@@ -21,13 +21,16 @@ class Main extends React.Component {
         this.handleTop = this.handleTop.bind(this);
         this.handleRefresh = this.handleRefresh.bind(this);
 
-
         let current;
 
         try {
             current = this.props.location.state.current;
         } catch(e) {
             current = 0;
+        }
+
+        if(window.sessionStorage.getItem("current")) {
+            current = parseInt(window.sessionStorage.getItem("current"));
         }
 
         let temp = [
@@ -80,7 +83,8 @@ class Main extends React.Component {
 
     // define functions that change state
     handlePage0Render() {
-        this.setState(() => ({ current: 0 }));
+        window.sessionStorage.setItem('current', 0);
+        this.setState({ current: 0 });
     }
 
     handlePage1Render() {
@@ -88,10 +92,12 @@ class Main extends React.Component {
         if(this.state.current === 2) {
             btn.innerHTML = "목록";
         }
-        this.setState(() => ({ current: 1 }));
+        window.sessionStorage.setItem('current', 1);
+        this.setState({ current: 1 });
     }
 
     handlePage2Render() {
+        window.sessionStorage.setItem('current', 2);
         this.setState(() => ({ current: 2 }));
     }
 
