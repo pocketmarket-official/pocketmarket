@@ -101,7 +101,7 @@ $headerHeight: 63px;
 
 .myplace {
   position: absolute;
-  top: 0;
+  top: $headerHeight;
   left: 0;
   right: 0;
   bottom: 0;
@@ -126,6 +126,8 @@ $headerHeight: 63px;
     .myplace__title {
       width: 100%;
       height: 30px;
+
+      margin-top: $headerHeight;
 
       background-color: #b4022f;
 
