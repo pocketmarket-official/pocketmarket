@@ -3,9 +3,19 @@ from stores.models import Store
 from stores.models import Funset
 from stores.models import Pos
 from stores.models import StoreDic
+from users.models import User
+
+
+class LikeUserSerializer(serializers.RelatedField):
+    def to_representation(self, value):
+        return value.name
+
+    class Meta:
+        model = User
 
 
 class StoreSerializer(serializers.ModelSerializer):
+    likeUser = LikeUserSerializer(read_only=True, many=True)
 
     class Meta:
         model = Store
