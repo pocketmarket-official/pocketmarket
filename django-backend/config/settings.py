@@ -49,6 +49,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
 #STATIC_ROOT = os.path.join(BASE_DIR, 'client/')
+# https://blog.hannal.com/2015/04/start_with_django_webframework_06/
 
 ALLOWED_HOSTS = ['0.0.0.0:8000', 'localhost', '127.0.0.1', '13.124.90.138']
 
