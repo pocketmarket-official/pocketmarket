@@ -25,20 +25,20 @@ let temp = [
         stor_addr2: '엘에스로91번길 16-17',
         title: '경기도 안양시 동안구 호계동 1027-6',
     },
-]
+];
 
-function MyplaceJSX() {
+function MyplaceDetailListJSX() {
     return (
         temp.map((data) => {
             return (
                 <>
-                    <div className="myplace__container">
-                        <div className="myplace__content">
-                            <div className="myplace__name">{data.title}</div>
-                            <div className="myplace__address1">{data.stor_addr1}</div>
-                            <input className="myplace__roadname_icon" readonly="readonly" value="도로명" />
-                            <div className="myplace__address2">{data.stor_addr2}</div>
-                            <div className="myplace__button">
+                    <div className="myplace__detail__container">
+                        <div className="myplace__detail__content">
+                            <div className="myplace__detail__name">{data.title}</div>
+                            <div className="myplace__detail__address1">{data.stor_addr1}</div>
+                            <input className="myplace__detail__roadname_icon" readOnly="readOnly" value="도로명" />
+                            <div className="myplace__detail__address2">{data.stor_addr2}</div>
+                            <div className="myplace__detail__button">
                               {/*<div className="myplace__delete">X</div>*/}
                             </div>
                         </div>
@@ -49,4 +49,4 @@ function MyplaceJSX() {
     );
 }
 
-export default MyplaceJSX;
+export default MyplaceDetailListJSX;
