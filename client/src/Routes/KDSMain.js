@@ -1,100 +1,233 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import KDSHeader from "../Components/js/KDSHeader";
+import '../Components/scss/KDSMain.scss'
+import bg from '../assets/kds/B_img.png';
+import timer from '../assets/kds/ic_timer.svg';
 
 function KDSMain() {
     return (
-        <>
-            <div className="kds">
-                <div className="kds__cell" id="kds__cell-1">
-                    <div className="cell__receipt">receipt no</div>
-                    <div className="cell__time">경과시간</div>
-                    <div className="cell__container">
-                        <div className="cell__item">item nm</div>
-                        <div className="cell__options">
-                            <div className="cell__option">opt add</div>
-                            <div className="cell__option">opt add</div>
+        <div className="kds">
+            <KDSHeader/>
+
+            <div className="body">
+                <div className="order">
+                    <div className="lane">
+                        {/*ORDER_BOX*/}
+                        <div className="orderBox">
+                            <div className="orderWrap">
+                                <div className="orderHeader">
+                                    <div className="wrap">
+                                        <div className="left">
+                                            <div className="billNo">0001</div>
+                                            <div className="elapsedTime">
+                                                <img src={timer} alt=""/>
+                                                <div className="step1">00:59</div>
+                                            </div>
+                                        </div>
+                                        <div className="right">
+                                            <div>94</div>
+                                            <div>EAT-IN</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/*DETAIL*/}
+                                <div className="orderDetail">
+                                    <div className="itemGroup">
+                                        <div className="item">
+                                            <div className="quantity">1</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item negative">
+                                            <div className="quantity">-1</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item indent">
+                                            <div className="quantity">0</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item">
+                                            <div className="quantity">0</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item">
+                                            <div className="quantity">0</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/*END*/}
+
+                        {/*ORDER_BOX*/}
+                        <div className=" orderBox">
+                            <div className=" orderWrap">
+                                <div className=" orderHeader void">
+                                    <div className=" wrap">
+                                        <div className=" left">
+                                            <div className=" billNo">0001</div>
+                                            <div className=" elapsedTime">
+                                                <img src={timer} alt=""/>
+                                                <div className=" step2">02:00</div>
+                                            </div>
+                                        </div>
+                                        <div className=" right">
+                                            <div>94</div>
+                                            <div>VOID</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/*DETAIL*/}
+                                <div className="orderDetail">
+                                    <div className="itemGroup">
+                                        <div className="item">
+                                            <div className="quantity">1</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item negative">
+                                            <div className="quantity">-1</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item indent">
+                                            <div className="quantity">0</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item">
+                                            <div className="quantity">0</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item">
+                                            <div className="quantity">0</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/*END*/}
+                        {/*ORDER_BOX*/}
+                        <div className=" orderBox">
+                            <div className=" orderWrap">
+                                <div className=" orderHeader revert">
+                                    <div className=" wrap">
+                                        <div className=" left">
+                                            <div className=" billNo">0001</div>
+                                            <div className=" elapsedTime">
+                                                <img src={timer} alt=""/>
+                                                <div className=" step3">03:00</div>
+                                            </div>
+                                        </div>
+                                        <div className=" right">
+                                            <div>94</div>
+                                            <div>REVERT</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/*DETAIL*/}
+                                <div className="orderDetail">
+                                    <div className="itemGroup">
+                                        <div className="item">
+                                            <div className="quantity">1</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item negative">
+                                            <div className="quantity">-1</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item indent">
+                                            <div className="quantity">0</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item">
+                                            <div className="quantity">0</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                        <div className="item">
+                                            <div className="quantity">0</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                    </div>
+                                    <div className="itemGroup">
+                                        <div className="item">
+                                            <div className="quantity">1</div>
+                                            <div className="name">TEST</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/*END*/}
+                        <div className=" bg">
+                            <img src={bg} alt=""/>
+                        </div>
+                    </div>
+
+                    <div className=" lane">
+                        <div className=" bg">
+                            <img src={bg} alt=""/>
+                        </div>
+                        <div className=" bg">
+                            <img src={bg} alt=""/>
+                        </div>
+                        <div className=" bg">
+                            <img src={bg} alt=""/>
+                        </div>
+                        <div className=" bg">
+                            <img src={bg} alt=""/>
                         </div>
                     </div>
                 </div>
-                <div className="kds__cell" id="kds__cell-2">
-                    <div className="cell__receipt">receipt no</div>
-                    <div className="cell__time">경과시간</div>
-                    <div className="cell__container">
-                        <div className="cell__item">item nm</div>
-                        <div className="cell__options">
-                            <div className="cell__option">opt add</div>
-                            <div className="cell__option">opt add</div>
+
+                <div className="total-order">
+                    <div className="order">
+                        <div className="orderHeader">
+                            <div className="info1">
+                                <span>Summary</span>
+                            </div>
+                        </div>
+
+                        <div className="orderDetail">
+                            <div className="itemGroup">
+                                <div className="item">
+                                    <div className="quantity">1</div>
+                                    <div className="name">TEST</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="kds__cell" id="kds__cell-3">
-                    <div className="cell__receipt">receipt no</div>
-                    <div className="cell__time">경과시간</div>
-                    <div className="cell__container">
-                        <div className="cell__item">item nm</div>
-                        <div className="cell__options">
-                            <div className="cell__option">opt add</div>
-                            <div className="cell__option">opt add</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="kds__cell" id="kds__cell-4">
-                    <div className="cell__receipt">receipt no</div>
-                    <div className="cell__time">경과시간</div>
-                    <div className="cell__container">
-                        <div className="cell__item">item nm</div>
-                        <div className="cell__options">
-                            <div className="cell__option">opt add</div>
-                            <div className="cell__option">opt add</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="kds__cell" id="kds__cell-5">
-                    <div className="cell__receipt">receipt no</div>
-                    <div className="cell__time">경과시간</div>
-                    <div className="cell__container">
-                        <div className="cell__item">item nm</div>
-                        <div className="cell__options">
-                            <div className="cell__option">opt add</div>
-                            <div className="cell__option">opt add</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="kds__cell" id="kds__cell-6">
-                    <div className="cell__receipt">receipt no</div>
-                    <div className="cell__time">경과시간</div>
-                    <div className="cell__container">
-                        <div className="cell__item">item nm</div>
-                        <div className="cell__options">
-                            <div className="cell__option">opt add</div>
-                            <div className="cell__option">opt add</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="kds__cell" id="kds__cell-7">
-                    <div className="cell__summary">Summary</div>
-                    <div className="cell__container">
-                        <div className="cell__item">item nm</div>
-                        <div className="cell__options">
-                            <div className="cell__option">opt add</div>
-                            <div className="cell__option">opt add</div>
-                        </div>
-                    </div>
-                    <div className="cell__btns">
-                        <div className="cell__left">&lt;-</div>
-                        <div className="cell__right">-&gt;</div>
-                    </div>
-                </div>
-                <div className="kds__cell" id="kds__cell-8">
-                    <div className="cell-8__btn">픽업처리</div>
-                    <div className="cell-8__btn"><Link to="/kds/kitchen">품절처리</Link></div>
-                    <div className="cell-8__btn">주문현황</div>
-                    <div className="cell-8__btn"><Link to="/kds/setting">환경설정</Link></div>
-                    <div className="cell-8__btn">종료</div>
+
                 </div>
             </div>
-        </>
+
+            <div className=" tail">
+                <div className=" info">
+                    <div className=" msg1">
+                        <span>P.M</span><br/>
+                    </div>
+                    <div className=" msg2">
+                        <span>Help</span>
+                    </div>
+                    <div className=" msg2">
+                        <span>010-1010-1010</span>
+                    </div>
+                </div>
+
+                <div className=" techCtl">
+                    <button className=" myButton cnrStats">LABEL_CNR_STATS</button>
+                    <button className=" myButton soldout">LABEL_SOLDOUT</button>
+                    <button className=" myButton summary">LABEL_STATISTICS</button>
+                </div>
+                <div className=" pageCtl">
+                    <button className=" myButton">
+                        이전
+                    </button>
+                    <div className=" page">
+                        <span>1/2</span>
+                    </div>
+                    <button className=" myButton active">다음</button>
+                </div>
+            </div>
+        </div>
     );
 }
 
