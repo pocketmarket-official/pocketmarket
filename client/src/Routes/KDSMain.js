@@ -215,7 +215,6 @@ function KDSMain() {
                 <div className=" techCtl">
                     <button className=" myButton cnrStats">LABEL_CNR_STATS</button>
                     <button className=" myButton soldout">LABEL_SOLDOUT</button>
-                    <button className=" myButton summary">LABEL_STATISTICS</button>
                 </div>
                 <div className=" pageCtl">
                     <button className=" myButton">

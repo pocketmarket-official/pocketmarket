@@ -429,17 +429,6 @@
       }
     }
 
-    &.summary {
-      background: linear-gradient(to bottom, #0984e3, darken(#0984e3, 30));
-      box-shadow: 0 1px 3px 1px lighten(#0984e3, 10);
-      border: 1px solid lighten(#0984e3, 10);
-
-      &:active {
-        background: linear-gradient(to top, gray, darken(#0984e3, 30));
-        position: relative;
-        top: 1px;
-      }
-    }
 
     &.active {
       background: linear-gradient(to bottom, #92cb52, darken(#92cb52, 30));
