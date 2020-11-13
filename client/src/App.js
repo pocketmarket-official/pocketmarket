@@ -32,6 +32,7 @@ import BizSearchMonth from './Routes/BizSearchMonth';
 import BizSearchDaily from './Routes/BizSearchDaily';
 import BizOrderStatus from './Routes/BizOrderStatus';
 import KDSMain from './Routes/KDSMain';
+import KDSCnrStats from './Routes/KDSCnrStats';
 import KDSPickup from './Routes/KDSPickup';
 import KDSKitchen from './Routes/KDSKitchen';
 import KDSSetting from './Routes/KDSSetting';
@@ -90,6 +91,7 @@ function App() {
         <Route authenticated={authenticated} exact path="/biz/mypage/order/status" component={BizOrderStatus} />
         <Route authenticated={authenticated} exact path="/biz/mypage/review" component={ReviewList} />
         <Route authenticated={authenticated} exact path="/kds/main" component={KDSMain} />
+        <Route authenticated={authenticated} exact path="/kds/cnrstats" component={KDSCnrStats} />
         <Route authenticated={authenticated} exact path="/kds/pickup" component={KDSPickup} />
         <Route authenticated={authenticated} exact path="/kds/kitchen" component={KDSKitchen} />
         <Route authenticated={authenticated} exact path="/kds/setting" component={KDSSetting} />
