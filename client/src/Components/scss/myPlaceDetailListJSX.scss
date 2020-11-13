@@ -1,27 +1,27 @@
-.myplace__container {
+.myplace__detail__container {
   width: 90%;
   margin: 20px auto;
   padding-bottom: 20px;
   border-bottom: 2px #dcdcdc solid;
-  .myplace__name {
+  .myplace__detail__name {
     margin-bottom: 15px;
     font-size: 13px;
     color: #3e3e3e;
   }
-  .myplace__address1{
+  .myplace__detail__address1{
     font-size: 11px;
     color: #797979;
   }
-  .myplace__address2{
+  .myplace__detail__address2{
     font-size: 11px;
     margin-top: 8px;
     color: #797979;
   }
-  .myplace__write {
+  .myplace__detail__write {
     font-size: 11px;
     color: #797979;
   }
-  .myplace__roadname_icon {
+  .myplace__detail__roadname_icon {
     float: left;
     width: 42px;
     height: 18px;

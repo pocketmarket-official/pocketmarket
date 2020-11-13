@@ -30,7 +30,7 @@ function Myplace() {
                 </div>
             </div>
             <HeaderBiz url='/mypage' />
-            <div className="myplace">
+            <div className="myplaceDetailList">
                 <div className="myplace__favorite">
 
                     <div className="myplace__search__container">
