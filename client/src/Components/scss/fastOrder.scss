@@ -42,7 +42,7 @@ $headerHeight: 63px;
         font-size: 12px;
         font-weight: bold;
         text-align: right;
-        line-height: 2.3;
+        padding-top: 9px;
       }
       .selector {
         background-color: #ffffff;
@@ -55,6 +55,7 @@ $headerHeight: 63px;
       min-width: 60%;
       text-align: center;
       margin-left: 10px;
+      padding-top: 10px;
       .region__store {
         display: flex;
         .store {
@@ -62,7 +63,7 @@ $headerHeight: 63px;
           font-size: 11px;
           font-weight: bold;
           text-align: left;
-          line-height: 2.7;
+          line-height: 1.7;
         }
         .store__number {
           margin-left: 7px;
@@ -70,7 +71,6 @@ $headerHeight: 63px;
           font-size: 17px;
           font-weight: bolder;
           color: #b4022f;
-          line-height: 1.85;
         }
       }
       .region__nice {
@@ -80,7 +80,7 @@ $headerHeight: 63px;
           font-size: 11px;
           font-weight: bold;
           text-align: left;
-          line-height: 2.7;
+          line-height: 1.7;
         }
         .nice__number {
           margin-left: 7px;
@@ -88,7 +88,6 @@ $headerHeight: 63px;
           font-size: 17px;
           font-weight: bolder;
           color: #b4022f;
-          line-height: 1.85;
         }
       }
       .region__visit {
@@ -98,7 +97,7 @@ $headerHeight: 63px;
           font-size: 11px;
           font-weight: bold;
           text-align: left;
-          line-height: 2.7;
+          line-height: 1.7;
         }
         .visit__number {
           margin-left: 7px;
@@ -106,7 +105,6 @@ $headerHeight: 63px;
           font-size: 17px;
           font-weight: bolder;
           color: #b4022f;
-          line-height: 1.85;
         }
       }
     }
