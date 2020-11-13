@@ -128,8 +128,11 @@
           font-size: 10px;
         }
         &.review__start{
-          font-size: 10px;
-          color: #b4022f;
+          a{
+            font-size: 10px;
+            color: #b4022f;
+          }
+
 
         }
         &.review__end{

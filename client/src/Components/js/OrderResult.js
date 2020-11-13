@@ -37,44 +37,59 @@ class OrderResult extends React.Component {
                     total += (data.order[i][1] * data.order[i][2])
                 }
                 total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                // if(data.review == "N"){
-                //     const review = document.getElementById("orderhistory__btn__review");
-                //     console.log(review);
-                //     console.log("22");
-                //     review.classList.add("review__start");
-                //     review_txt = "리뷰쓰기";
-                // }else{
-                //     const review = document.getElementById("orderhistory__btn__review")
-                //    review.classList.add("review__end")
-                //     console.log(review);
-                //     review_txt = "작성완료";
-                // }
-                return (
-                    <>
-                        <div className="orderhistory__date">{data.date}</div>
+                {
+                    if (data.review == "N") {
+                        return (
+                            <>
+                                <div className="orderhistory__date">{data.date}</div>
 
-                        <div className="orderhistory__content" id={contentId}>
+                                <div className="orderhistory__content" id={contentId}>
 
-                            <div className="orderhistory__detail">
-                                <div className="orderhistory__name">{data.place}</div>
-                                <div className="orderhistory__price">{total}원</div>
-                                <button className="orderhistory__btn info" onClick={() => {
-                                    const elt = document.getElementById("modal__conversion");
-                                    elt.classList.remove("hidden")
-                                }}>구매내역</button>
-                                <button className="orderhistory__btn__review review__start"  id="orderhistory__btn__review" onClick={() => {
-                                    const review = document.getElementById("orderhistory__btn__review");
-                                        console.log(review);
-                                }}>
-                                    <Link to="/order/review">{review_txt}</Link>
-                                    리뷰쓰기
-                                </button>
-                            </div>
-                            <button className="orderhistory__btn rebuy"><img src={order}/></button>
-                        </div>
+                                    <div className="orderhistory__detail">
+                                        <div className="orderhistory__name">{data.place}</div>
+                                        <div className="orderhistory__price">{total}원</div>
+                                        <button className="orderhistory__btn info" onClick={() => {
+                                            const elt = document.getElementById("modal__conversion");
+                                            elt.classList.remove("hidden")
+                                        }}>구매내역
+                                        </button>
+                                        <button className="orderhistory__btn__review review__start" onClick={() => {
 
-                    </>
-                );
+                                        }}>
+                                            <Link to="/order/review">{review_txt}리뷰쓰기</Link>
+                                        </button>
+                                    </div>
+                                    <button className="orderhistory__btn rebuy"><img src={order}/></button>
+                                </div>
+
+                            </>
+                        );
+                    } else {
+                        return (
+                            <>
+                                <div className="orderhistory__date">{data.date}</div>
+
+                                <div className="orderhistory__content" id={contentId}>
+
+                                    <div className="orderhistory__detail">
+                                        <div className="orderhistory__name">{data.place}</div>
+                                        <div className="orderhistory__price">{total}원</div>
+                                        <button className="orderhistory__btn info" onClick={() => {
+                                            const elt = document.getElementById("modal__conversion");
+                                            elt.classList.remove("hidden")
+                                        }}>구매내역
+                                        </button>
+                                        <button className="orderhistory__btn__review review__end">
+                                           작성완료
+                                        </button>
+                                    </div>
+                                    <button className="orderhistory__btn rebuy"><img src={order}/></button>
+                                </div>
+
+                            </>
+                        );
+                    }
+                }
             })
         );
     }

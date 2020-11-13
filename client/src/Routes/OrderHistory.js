@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderBack from '../Components/js/HeaderBack';
+import HeaderBiz from '../Components/js/HeaderBiz';
 import OrderResult from '../Components/js/OrderResult';
 
 import '../Components/scss/OrderHistory.scss';
@@ -9,7 +9,6 @@ import search from "../assets/point_history/ico_search.png";
 import close from "../assets/order_status_pop/btn_close.png";
 import bill_icon from "../assets/order_status/btn_date.png";
 import bill from "../assets/order_history_apprv/img_receipt.jpg";
-import arw from "../assets/point_history_conversion/ico_arw.png";
 
 class OrderHistory extends React.Component {
     constructor(props) {
@@ -127,7 +126,7 @@ class OrderHistory extends React.Component {
                     </div>
                 </div>
 
-                <HeaderBack url='/mypage' />
+                <HeaderBiz url='/mypage' />
                 <div className="orderhistory">
                     <div className="orderhistory__search__container">
                         <div className="search__input">
