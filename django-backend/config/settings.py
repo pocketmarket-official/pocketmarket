@@ -44,12 +44,18 @@ AWS_S3_OBJECT_PARAMETERS = {
 DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
 STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
 
-STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+# STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+STATIC_URL = '/static/'
 MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
+#STATIC_ROOT = os.path.join(BASE_DIR, 'client/')
 
 ALLOWED_HOSTS = ['0.0.0.0:8000', 'localhost', '127.0.0.1', '13.124.90.138']
 
+#readct deployment
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'client/static/'),
+]
 
 # Application definition
 
@@ -100,7 +106,9 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'client',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -185,3 +193,5 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "users.User"
+
+# SITE_URL = "http://127.0.0.1:8000"

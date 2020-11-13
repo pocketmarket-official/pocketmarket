@@ -1,5 +1,7 @@
 import os
 import requests
+from django.shortcuts import render
+
 from django.db import transaction
 from django.contrib.auth import login
 from django.core.files.base import ContentFile
@@ -430,3 +432,6 @@ def trade(request):
 
     except Exception as ex:
         print(ex)
+
+def index(request):
+    return render(request, '../client/index.html')
