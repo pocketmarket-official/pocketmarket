@@ -199,31 +199,31 @@ function KDSMain() {
                 </div>
             </div>
 
-            <div className=" tail">
-                <div className=" info">
-                    <div className=" msg1">
+            <div className="tail">
+                <div className="info">
+                    <div className="msg1">
                         <span>P.M</span><br/>
                     </div>
-                    <div className=" msg2">
+                    <div className="msg2">
                         <span>Help</span>
                     </div>
-                    <div className=" msg2">
+                    <div className="msg2">
                         <span>010-1010-1010</span>
                     </div>
                 </div>
 
-                <div className=" techCtl">
-                    <button className=" myButton cnrStats">LABEL_CNR_STATS</button>
-                    <button className=" myButton soldout">LABEL_SOLDOUT</button>
+                <div className="techCtl">
+                    <button className="myButton cnrStats">LABEL_CNR_STATS</button>
+                    <button className="myButton soldout">LABEL_SOLDOUT</button>
                 </div>
-                <div className=" pageCtl">
-                    <button className=" myButton">
+                <div className="pageCtl">
+                    <button className="myButton">
                         이전
                     </button>
-                    <div className=" page">
+                    <div className="page">
                         <span>1/2</span>
                     </div>
-                    <button className=" myButton active">다음</button>
+                    <button className="myButton active">다음</button>
                 </div>
             </div>
         </div>
