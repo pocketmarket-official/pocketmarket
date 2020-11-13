@@ -54,7 +54,7 @@ function Myplace() {
                             <td className="myplace__addrSearch">
                                 <form>
                                     <input type="text" placeholder="예) 배민동 12-3 또는 배민아파트"></input>
-                                    <Link to="/mypage/myplace/search">
+                                    <Link to="/mypage/myplace/detailList">
                                         <button type="submit"><img src={search}/></button>
                                     </Link>
                                 </form>

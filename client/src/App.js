@@ -23,6 +23,7 @@ import BigStatus from './Routes/BigStatus';
 import Myplace from './Routes/Myplace';
 import MyplaceDetail from './Routes/MyplaceDetail';
 import MyplaceDetailList from './Routes/MyplaceDetailList';
+import MyplaceDetailMap from './Routes/MyplaceDetailMap'
 import BizCertification from './Routes/BizCertification';
 import BizMypage from './Routes/BizMypage';
 import BizMaster from './Routes/BizMaster';
@@ -73,6 +74,7 @@ function App() {
         <Route authenticated={authenticated} exact path="/mypage/fastorder" component={Fastorder} />
         <Route authenticated={authenticated} exact path="/mypage/myplace" component={Myplace} />
         <Route authenticated={authenticated} exact path="/mypage/myplace/detailList" component={MyplaceDetailList} />
+        <Route authenticated={authenticated} exact path="/mypage/myplace/detailMap" component={MyplaceDetailMap} />
         <Route authenticated={authenticated} exact path="/mypage/myplace/search" component={MyplaceDetail} />
         <Route authenticated={authenticated} exact path="/mypage/order" component={OrderHistory} />
         <Route authenticated={authenticated} exact path="/mypage/point" component={PointHistory} />

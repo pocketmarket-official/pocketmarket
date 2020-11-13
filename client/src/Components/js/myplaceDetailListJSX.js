@@ -1,6 +1,7 @@
 import React from 'react';
 
 import '../scss/myPlaceDetailListJSX.scss';
+import {Link} from "react-router-dom";
 
 
 let temp = [
@@ -33,15 +34,17 @@ function MyplaceDetailListJSX() {
             return (
                 <>
                     <div className="myplace__detail__container">
-                        <div className="myplace__detail__content">
-                            <div className="myplace__detail__name">{data.title}</div>
-                            <div className="myplace__detail__address1">{data.stor_addr1}</div>
-                            <input className="myplace__detail__roadname_icon" readOnly="readOnly" value="도로명" />
-                            <div className="myplace__detail__address2">{data.stor_addr2}</div>
-                            <div className="myplace__detail__button">
-                              {/*<div className="myplace__delete">X</div>*/}
+                        <Link to="/mypage/myplace/detailMap">
+                            <div className="myplace__detail__content">
+                                <div className="myplace__detail__name">{data.title}</div>
+                                <div className="myplace__detail__address1">{data.stor_addr1}</div>
+                                <input className="myplace__detail__roadname_icon" readOnly="readOnly" value="도로명" />
+                                <div className="myplace__detail__address2">{data.stor_addr2}</div>
+                                <div className="myplace__detail__button">
+                                  {/*<div className="myplace__delete">X</div>*/}
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 </>
             );

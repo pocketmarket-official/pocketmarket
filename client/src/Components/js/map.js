@@ -13,6 +13,20 @@ class MapContent extends React.Component {
         let lat;
         let long;
         let markers = [];
+        let markerImageSrc;
+
+        try {
+            markerImageSrc = this.props.icon;
+            if(markerImageSrc === undefined) {
+                import('../../assets/map/map_store_ico.png').then(img => {
+                    markerImageSrc = img.default;
+                })
+            }
+        } catch {
+            import('../../assets/map/map_store_ico.png').then(img => {
+                markerImageSrc = img.default;
+            })
+        }
 
         const success = (pos) => {
             const coords = pos.coords;
@@ -40,7 +54,7 @@ class MapContent extends React.Component {
 
                 let markerImage = new kakao.maps.MarkerImage(
                     markerImageSrc,
-                    new kakao.maps.Size(41, 42),
+                    new kakao.maps.Size(20, 22),
                 );
 
                 let marker = new kakao.maps.Marker({
