@@ -26,6 +26,7 @@ $headerHeight: 63px;
         display: block;
       }
     }
+
     .storeGrid__title {
       position: absolute;
       top: $headerHeight;
@@ -61,7 +62,7 @@ $headerHeight: 63px;
         letter-spacing: 0px;
       }
 
-      .storeGrid__likes{
+      .storeGrid__likes {
         position: absolute;
         top: 8px;
         right: 8px;
@@ -74,7 +75,8 @@ $headerHeight: 63px;
         font-size: .8rem;
         background-color: #ffa800;
         @include stroke(#653c10, 1px);
-        .likesButton{
+
+        .likesButton {
           float: left;
           width: 25px;
           height: 20px;
@@ -92,7 +94,7 @@ $headerHeight: 63px;
       }
     }
 
-    .button__container{
+    .button__container {
       height: 27px;
       display: flex;
       flex-direction: row;
@@ -100,7 +102,8 @@ $headerHeight: 63px;
       justify-content: flex-end;
       align-items: center;
       margin-bottom: 2px;
-      .slide{
+
+      .slide {
         width: 44px;
         height: 21px;
         border-radius: 19.5px;
@@ -108,7 +111,8 @@ $headerHeight: 63px;
         display: flex;
         justify-content: center;
         align-items: center;
-        .subslide{
+
+        .subslide {
           position: relative;
           width: 34px;
           height: 13px;
@@ -116,7 +120,8 @@ $headerHeight: 63px;
           background-color: #131313;
           display: flex;
           align-items: center;
-          .slideBall{
+
+          .slideBall {
             width: 15px;
             height: 15px;
             background-color: #fa245a;
@@ -129,10 +134,12 @@ $headerHeight: 63px;
           }
         }
       }
+
       button {
         margin: 0 5px;
         background-color: #ffffff;
-        .simple{
+
+        .simple {
           font-size: 10px;
           font-weight: bold;
           font-stretch: normal;
@@ -140,7 +147,8 @@ $headerHeight: 63px;
           letter-spacing: 1.9px;
           color: #535353;
         }
-        .detail{
+
+        .detail {
           font-size: 10px;
           font-weight: bold;
           font-stretch: normal;
@@ -160,17 +168,17 @@ $headerHeight: 63px;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 
-    .storeGridMenu{
+    .storeGridMenu {
       width: 100%;
       flex: 1;
       display: flex;
       flex-direction: row;
-      justify-content:space-between;
+      justify-content: space-between;
 
-      div{
+      div {
         position: relative;
         flex: 1;
         height: 100%;
@@ -186,7 +194,7 @@ $headerHeight: 63px;
             top: 7px;
             right: 7px;
             background-size: contain;
-            width:20px;
+            width: 20px;
             height: 15px;
           }
         }
@@ -203,28 +211,28 @@ $headerHeight: 63px;
     }
   }
 
-}
-
-.order{
-  width: 155px;
-  height: 51px;
-  border-radius: 15px;
-  background-color: black;
-  position: fixed;
-  left: calc((414px - 155px) / 2);
-  bottom: 9px;
-  .orderButton{
-    width: 99px;
+  .order {
+    width: 155px;
     height: 51px;
-    margin: auto;
-    font-family: NanumGothic, sans-serif;
-    font-size: 13px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 51px;
-    letter-spacing: 0.68px;
-    text-align: center;
-    color: #ffa800;
+    border-radius: 15px;
+    background-color: black;
+    position: fixed;
+    left: calc((414px - 155px) / 2);
+    bottom: 9px;
+
+    .orderButton {
+      width: 99px;
+      height: 51px;
+      margin: auto;
+      font-family: NanumGothic, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 51px;
+      letter-spacing: 0.68px;
+      text-align: center;
+      color: #ffa800;
+    }
   }
 }
