@@ -10,6 +10,7 @@ class QuestionResult extends React.Component {
                 return (
                     <>
                         <div className="result__date">{data.date}</div>
+
                         <div className="result__question">
                             <div className="result__text Q">Q<p>문의내용</p></div>
                             <div className="result__text quest"> {data.question}</div>
