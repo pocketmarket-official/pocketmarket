@@ -2,10 +2,10 @@ import React from "react";
 import MapContent from "./map";
 
 
-function KakaoMap() {
+function KakaoMap(props) {
     return (
         <div className="kakaomap">
-            <MapContent />
+            <MapContent icon={props.icon} />
         </div>
     );
 }

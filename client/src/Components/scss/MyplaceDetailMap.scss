@@ -1,0 +1,178 @@
+$headerHeight: 63px;
+
+.MyplaceDetailMap {
+  position: absolute;
+  top: $headerHeight;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  margin: 0 auto;
+  width: 90%;
+  height: 100%;
+
+  .myplacedetailmap__kakaomap {
+    margin-top: 15px;
+    height: 50%;
+
+    .kakaomap {
+      width: 100%;
+      height: 100%;
+
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    img {
+      width: 20px;
+      height: 25px;
+    }
+  }
+
+  .myplaceDetailMap__address {
+    width: 85%;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+    .myplace__recentAddress {
+      font-family: NanumGothic, sans-serif;
+
+      width: 85%;
+      border-collapse: collapse;
+      margin-left: 10px;
+
+
+      .myplace__content {
+        width: 100%;
+        height: 15px;
+
+        .myplace__address {
+          font-size: 12px;
+          line-height: 1.67;
+          text-align: left;
+          color: black;
+
+          padding-left: 5px;
+          padding-right: 10px;
+        }
+
+        .myplace__button {
+          img {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+
+      .myplace__content2 {
+        .myplace__newZipCdNm {
+          font-size: 9.5px;
+          line-height: 1.05;
+          letter-spacing: 0.24px;
+          color: #c7c7c7;
+
+          padding-left: 5px;
+          width: 15.5%;
+
+          div {
+            width: 90%;
+            border: solid 1px #d3d3d3;
+            background-color: white;
+          }
+
+          padding-bottom: 15px;
+        }
+
+        .myplace__newZipCd {
+          font-size: 10.5px;
+          line-height: 0.95;
+          text-align: left;
+          color: black;
+
+          padding-bottom: 15px;
+        }
+      }
+
+      th td {
+        border: 0;
+        font-family: MaplestoryOTFBold;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 2;
+        letter-spacing: 1.35px;
+        text-align: left;
+        color: #1e1e1e;
+      }
+
+      th {
+        border-bottom: 3px solid black;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .myplaceDetailMap__searchForm {
+    width: 100%;
+    height: 100%;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        width: 100%;
+        height: 40px;
+        border-radius: 12px;
+        border: solid 1px #d3d3d3;
+        background-color: white;
+      }
+
+      input::placeholder {
+        font-size: 13px;
+        color: #b0b0b0;
+        text-align: left;
+        letter-spacing: 0.7px;
+        text-indent: 10px;
+      }
+
+      button {
+        width: 39px;
+        height: 39px;
+        background-color: #b4022f;
+        margin-left: -40px;
+        border-radius: 0 12px 12px 0;
+
+        img {
+          width: 17px;
+          height: 17px;
+        }
+      }
+    }
+  }
+
+  .myplaceDetailMap__addButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22px;
+    .myplaceDetailMap__submit {
+      width: 154px;
+      height: 51px;
+      border-radius: 15px;
+      background-color: black;
+
+      font-family: NanumGothic, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      line-height: 0.7;
+      letter-spacing: 0.34px;
+      color: #ffa800;
+    }
+  }
+}

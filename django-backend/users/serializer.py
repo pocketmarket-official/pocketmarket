@@ -11,6 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'email',
+            'profileName',
+            'profileImage',
         )
 
 class PointSerializer(serializers.ModelSerializer):

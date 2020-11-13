@@ -1,77 +1,95 @@
 import React from 'react';
-
+import order from "../../assets/order_history/ico_order.png";
+import { Link } from 'react-router-dom';
+import close from "../../assets/order_status_pop/btn_close.png";
+import arw from "../../assets/point_history_conversion/ico_arw.png";
+import btnMenuImg from "../../assets/common/btn_menu.png";
 
 class OrderResult extends React.Component {
-    componentDidMount() {
-        let result = this.props.result;
-        result.forEach((data) => {
-            let eltId = "orderhistory" + data.id;
-            let contentId = "content" + data.id;
-            const elt = document.getElementById(eltId);
-            const content = document.getElementById(contentId);
-            if(elt) {
-                if(content) {
-                    content.onclick = () => {
-                        elt.classList.toggle("hidden");
-                    };
-                }
-            }
-        });
-    }
+    // componentDidMount() {
+    //     let result = this.props.result;
+    //     result.forEach((data) => {
+    //         let eltId = "orderhistory" + data.id;
+    //         let contentId = "content" + data.id;
+    //         const elt = document.getElementById(eltId);
+    //         const content = document.getElementById(contentId);
+    //         if(elt) {
+    //             if(content) {
+    //                 content.onclick = () => {
+    //                     elt.classList.toggle("hidden");
+    //                 };
+    //             }
+    //         }
+    //     });
+    // }
 
     render() {
         let result = this.props.result;
+        console.log(result);
         return (
             result.map((data) => {
                 let contentId = "content" + data.id;
                 let eltId = "orderhistory" + data.id;
                 let total = 0
+                const review = "";
+                let review_txt ="";
                 for(let i in data.order) {
                     total += (data.order[i][1] * data.order[i][2])
                 }
-                return (
-                    <>
-                        <div className="orderhistory__container">
-                            <div className="orderhistory__date">{data.date}</div>
-                            <div className="orderhistory__content" id={contentId}>
-                                <div className="orderhistory__detail">
-                                    <div className="orderhistory__name">{data.place}</div>
-                                    <div className="orderhistory__price">{total} 원</div>
+                total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                {
+                    if (data.review == "N") {
+                        return (
+                            <>
+                                <div className="orderhistory__date">{data.date}</div>
+
+                                <div className="orderhistory__content" id={contentId}>
+
+                                    <div className="orderhistory__detail">
+                                        <div className="orderhistory__name">{data.place}</div>
+                                        <div className="orderhistory__price">{total}원</div>
+                                        <button className="orderhistory__btn info" onClick={() => {
+                                            const elt = document.getElementById("modal__conversion");
+                                            elt.classList.remove("hidden")
+                                        }}>구매내역
+                                        </button>
+                                        <button className="orderhistory__btn__review review__start" onClick={() => {
+
+                                        }}>
+                                            <Link to="/order/review">{review_txt}리뷰쓰기</Link>
+                                        </button>
+                                    </div>
+                                    <button className="orderhistory__btn rebuy"><img src={order}/></button>
                                 </div>
-                                <div className="orderhistory__btn">재주문</div>
-                            </div>
-                            <div className="orderhistory__menu hidden" id={eltId}>
-                                {data.order.map((content) => {
-                                    return (
-                                        <>
-                                            <div className="menu__detail">
-                                                <div className="menu__name">{content[0]}</div>
-                                                <div className="menu__count">{content[2]} 개</div>
-                                                <div className="menu__price">{content[1]} 원</div>
-                                                <div className="menu__button-container">
-                                                    <button>리뷰</button>
-                                                    <button>재주문</button>
-                                                </div>
-                                            </div>
-                                        </>
-                                    );
-                                })}
-                                <div className="menu__receipt" onClick={() => {
-                                    const elt = document.getElementById("receipt1");
-                                    elt.classList.remove("hidden");
-                                }}>승인전표조회</div>
-                                <div className="receipt__container hidden" id="receipt1" onClick={() => {
-                                    const elt = document.getElementById("receipt1");
-                                    elt.classList.add("hidden");
-                                }}>
-                                    <div className="receipt__image" onClick={(e) => {
-                                        e.stopPropagation();
-                                    }}>영수증 이미지</div>
+
+                            </>
+                        );
+                    } else {
+                        return (
+                            <>
+                                <div className="orderhistory__date">{data.date}</div>
+
+                                <div className="orderhistory__content" id={contentId}>
+
+                                    <div className="orderhistory__detail">
+                                        <div className="orderhistory__name">{data.place}</div>
+                                        <div className="orderhistory__price">{total}원</div>
+                                        <button className="orderhistory__btn info" onClick={() => {
+                                            const elt = document.getElementById("modal__conversion");
+                                            elt.classList.remove("hidden")
+                                        }}>구매내역
+                                        </button>
+                                        <button className="orderhistory__btn__review review__end">
+                                           작성완료
+                                        </button>
+                                    </div>
+                                    <button className="orderhistory__btn rebuy"><img src={order}/></button>
                                 </div>
-                            </div>
-                        </div>
-                    </>
-                );
+
+                            </>
+                        );
+                    }
+                }
             })
         );
     }
