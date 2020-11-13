@@ -191,8 +191,8 @@ class Main extends React.Component {
                                 <button className={this.state.current === 0 ? 'active' : undefined} onClick={this.handlePage0Render}>축제</button>
                                 <button className={this.state.current === 1 ? 'active' : undefined} onClick={this.handlePage1Render}>매장</button>
                             </div>
-                            <input type="text" className="navigation__query"/>
-                            <img className="navigation__search" src={btnSearchImg} alt="search button" />
+                            <input type="text" className="navigation__query" id="navigation__query" />
+                            <img className="navigation__search" id="navigation__search" src={btnSearchImg} alt="search button" />
                         </div>
                     </div>
                     <div className="main__content">

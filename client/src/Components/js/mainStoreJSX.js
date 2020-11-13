@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import cookie from 'react-cookies';
+import storage from '../../storage.js';
 import '../scss/mainStoreJSX.scss';
 
 import storImg from '../../assets/store/img1.png';
@@ -26,7 +29,11 @@ class StoreJSX extends React.Component {
                                 <div className="tags__tag">@반포 낭만달빛마켓</div>
                                 <button className="tags__likes" onClick={(e) => {
                                     e.preventDefault();
-                                    console.log('hi');
+                                    let cookie_token = cookie.load("access_token");
+                                    let user_email = storage.get(cookie_token);
+                                    console.log('______________');
+                                    console.log(data);
+                                    console.log('______________');
                                     // 좋아요 기능 추가 예정
                                 }}>♥ {data.likeUser.length}</button>
                             </div>

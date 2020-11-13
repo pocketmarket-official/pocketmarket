@@ -14,6 +14,7 @@ class MainStoreContent extends React.Component {
         this.sortCallbackUpdate = this.sortCallbackUpdate.bind(this);
         this._getData = this._getData.bind(this);
         this._infiniteScroll = this._infiniteScroll.bind(this);
+        this.searchData = this.searchData.bind(this);
 
         this.state = {
             lat1: 0,
@@ -145,6 +146,9 @@ class MainStoreContent extends React.Component {
         }
 
         window.addEventListener("scroll", this._infiniteScroll, true);
+
+        const elt = document.getElementById("navigation__search");
+        elt.onclick = () => this.searchData();
     }
 
     componentWillUnmount() {
@@ -183,6 +187,27 @@ class MainStoreContent extends React.Component {
             preItems: 0,
             items: 4,
         });
+    }
+
+    searchData() {
+        const elt = document.getElementById("navigation__query");
+        let value = elt.value;
+        elt.value = "";
+
+        axios.get("http://13.124.90.138:8000/api/stores_store/")
+        .then(
+            (res) => {
+                let searched = res.data.filter(
+                    (elt) => {
+                        if(elt.storeName.indexOf(value) > -1 && elt.storeName.toLowerCase().indexOf(value.toLowerCase()) > -1) {
+                            return true;
+                        }
+                    }
+                );
+                this.setState({
+                    data: searched,
+                });
+            });
     }
 
     componentDidUpdate() {
