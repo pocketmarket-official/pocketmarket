@@ -1,0 +1,194 @@
+$headerHeight: 63px;
+
+.fastorder {
+  width: 100%;
+  height: 100%;
+  margin-top: $headerHeight;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .nicemaster {
+    margin : 5px auto;
+    width: 398px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #b4022f;
+    text-align: center;
+    color: #fdeded;
+    font-family: MaplestoryOTFLight,sans-serif;
+    //font-weight: bold;
+    font-size: 16.5px;
+    line-height: 1.8;
+  }
+
+  .fastorder__regionbox {
+    display: flex;
+    border-bottom: solid 2px #b4022f;
+    margin-top: 10px;
+    .fastorder__region {
+      display:flex;
+      width:117px;
+      height: 29px;
+      border-left: solid 2px #b4022f;
+      border-top: solid 2px #b4022f;
+      border-right: solid 2px #b4022f;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      justify-content: flex-end;
+      margin-left: 9px;
+      .region__box {
+        font-family: Nanum Gothic, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: right;
+        line-height: 2.3;
+      }
+      .selector {
+        background-color: #ffffff;
+        margin: 0 9px;
+      }
+    }
+    .fastorder__region__status {
+      display: flex;
+      justify-content: space-around;
+      min-width: 60%;
+      text-align: center;
+      margin-left: 10px;
+      .region__store {
+        display: flex;
+        .store {
+          font-family: Nanum Gothic, sans-serif;
+          font-size: 11px;
+          font-weight: bold;
+          text-align: left;
+          line-height: 2.7;
+        }
+        .store__number {
+          margin-left: 7px;
+          font-family: MaplestoryOTFBold,sans-serif;
+          font-size: 17px;
+          font-weight: bolder;
+          color: #b4022f;
+          line-height: 1.85;
+        }
+      }
+      .region__nice {
+        display: flex;
+        .nice {
+          font-family: Nanum Gothic, sans-serif;
+          font-size: 11px;
+          font-weight: bold;
+          text-align: left;
+          line-height: 2.7;
+        }
+        .nice__number {
+          margin-left: 7px;
+          font-family: MaplestoryOTFBold,sans-serif;
+          font-size: 17px;
+          font-weight: bolder;
+          color: #b4022f;
+          line-height: 1.85;
+        }
+      }
+      .region__visit {
+        display: flex;
+        .visit {
+          font-family: Nanum Gothic, sans-serif;
+          font-size: 11px;
+          font-weight: bold;
+          text-align: left;
+          line-height: 2.7;
+        }
+        .visit__number {
+          margin-left: 7px;
+          font-family: MaplestoryOTFBold,sans-serif;
+          font-size: 17px;
+          font-weight: bolder;
+          color: #b4022f;
+          line-height: 1.85;
+        }
+      }
+    }
+  }
+  .fastorder__store {
+    display: grid;
+    box-sizing: border-box;
+    overflow: scroll;
+    grid-template-columns: 98px 98px 98px 98px;
+
+    margin: 12px 10px;
+
+
+    .store__grid {
+
+      position: relative;
+      padding: 5.5px;
+
+      .store__image{
+        width: 87px;
+        height: 87px;
+      }
+      .mark {
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 9px;
+        left: 9px;
+      }
+      .none {
+        position:absolute;
+        width:20px;
+        height:19px;
+        top: 35.5px;
+        left: 39px;
+      }
+      .store__code {
+        position: absolute;
+        top: 63px;
+        left: 36px;
+        font-family: Nanum Gothic, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        color: #ffffff;
+
+      }
+      &.visit {
+        .none {
+          width: 0;
+          height: 0;
+        }
+        .store__code {
+          font-size: 0;
+        }
+      }
+      &.nice{
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        .none {
+          width: 0;
+          height: 0;
+        }
+        .store__code {
+          font-size: 0;
+        }
+      }//흑백필터 적용
+      &.comment {
+        .mark {
+          width: 22.5px;
+          height: 24px;
+        }
+        .none {
+          width: 0;
+          height: 0;
+        }
+        .store__code {
+          font-size: 0;
+        }
+      }
+
+    }
+  }
+
+}
