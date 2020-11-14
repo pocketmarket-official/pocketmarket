@@ -79,7 +79,7 @@ class StoreView extends React.Component {
 
     render() {
         return (
-            <>
+            <div className='page__store'>
                 <HeaderBack url='/mypage' />
                 <div className="storeGrid-store">
                     <div className="storeGrid__content">
@@ -114,7 +114,7 @@ class StoreView extends React.Component {
                         <p className="orderButton">주문하기</p>
                     </Link>
                 </div>
-            </>
+            </div>
         );
     }
 }
