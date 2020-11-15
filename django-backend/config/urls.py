@@ -89,6 +89,8 @@ router.register(r'trades_cornerStateLog', trade_views.CornerStateLogView, 'corne
 #kdses
 router.register(r'kdses_master', kds_views.MasterView, 'master')
 router.register(r'kdses_setMaster', kds_views.SetMasterView, 'setMaster')
+router.register(r'kdses_kdsHeader', kds_views.KdsHeaderView, 'kdsHeader')
+router.register(r'kdses_kdsDetail', kds_views.KdsDetailView, 'kdsDetail')
 
 
 urlpatterns = [

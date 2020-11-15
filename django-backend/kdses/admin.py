@@ -18,3 +18,17 @@ class SetMasterAdmin(admin.ModelAdmin):
     """ Set Admin """
 
     pass
+
+@admin.register(models.KdsHeader)
+class KdsHeaderAdmin(admin.ModelAdmin):
+
+    """ KdsHeader Admin """
+
+    pass
+
+@admin.register(models.KdsDetail)
+class KdsDetailAdmin(admin.ModelAdmin):
+
+    """ KdsDetail Admin """
+
+    pass

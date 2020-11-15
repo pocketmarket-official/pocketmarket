@@ -4,6 +4,10 @@ from kdses.serializer import MasterSerializer
 from kdses.models import Master
 from kdses.serializer import SetMasterSerializer
 from kdses.models import SetMaster
+from kdses.serializer import KdsHeaderSerializer
+from kdses.models import KdsHeader
+from kdses.serializer import KdsDetailSerializer
+from kdses.models import KdsDetail
 
 
 class MasterView(viewsets.ModelViewSet):
@@ -15,3 +19,13 @@ class SetMasterView(viewsets.ModelViewSet):
 
     serializer_class = SetMasterSerializer
     queryset = SetMaster.objects.all()
+
+class KdsHeaderView(viewsets.ModelViewSet):
+
+    serializer_class = KdsHeaderSerializer
+    queryset = KdsHeader.objects.all()
+
+class KdsDetailView(viewsets.ModelViewSet):
+
+    serializer_class = KdsDetailSerializer
+    queryset = KdsDetail.objects.all()
