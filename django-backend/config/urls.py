@@ -17,11 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
-from django.urls import re_path
+# from django.urls import re_path
 from rest_framework import routers
 #react deployment
-from django.views.generic import TemplateView
-from core import views
+# from django.views.generic import TemplateView
+# from core import views
 #masters
 from stores import views as store_views
 from festivals import views as festival_views
@@ -91,7 +91,8 @@ router.register(r'kdses_setMaster', kds_views.SetMasterView, 'setMaster')
 
 
 urlpatterns = [
-    re_path(r'^$', views.index),
+    # re_path(r'^$', views.index),
+    # path('', TemplateView.as_view(template_name="index.html")),
     path("", include("core.urls")),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),

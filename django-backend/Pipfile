@@ -17,6 +17,7 @@ django-rest-multiple-models = "*"
 boto3 = "*"
 django-storages = "*"
 pillow = "*"
+django-webpack-loader = "*"
 
 [requires]
 python_version = "3.8"
