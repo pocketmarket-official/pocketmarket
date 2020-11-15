@@ -287,7 +287,6 @@ class Order extends React.Component {
                                                 <div className="name">{item[0].itemName}</div>
                                                 <div className="decrease" onClick={() => {
                                                     item[1] -= 1;
-                                                    // 0일 경우
                                                     if(item[1] === 0) {
                                                         this.state.modal_options.splice(index, 1);
                                                     }
@@ -297,7 +296,6 @@ class Order extends React.Component {
                                                 <div className="increase" onClick={() => {
                                                     item[1] += 1;
                                                     this.setState(this.state);
-                                                    console.log(item);
                                                 }}>+</div>
                                                 <div className="remove__box">
                                                     <div className="remove" onClick={() => {
