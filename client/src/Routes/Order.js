@@ -223,7 +223,7 @@ class Order extends React.Component {
                     <div className="optionmodal__container" onClick={(e) => {
                         e.stopPropagation();
                     }}>
-                        <img className="optionmodal__close" src={closeBtn} onClick={() => {
+                        <img className="optionmodal__close" alt="close button"  src={closeBtn} onClick={() => {
                             const elt = document.getElementById("optionmodal");
                             elt.classList.add("hidden");
                             this.setState({
@@ -285,9 +285,20 @@ class Order extends React.Component {
                                             <div className="result__content">
                                                 <div className="seq">{index + 1}</div>
                                                 <div className="name">{item[0].itemName}</div>
-                                                <div className="decrease">-</div>
+                                                <div className="decrease" onClick={() => {
+                                                    item[1] -= 1;
+                                                    // 0일 경우
+                                                    if(item[1] === 0) {
+                                                        this.state.modal_options.splice(index, 1);
+                                                    }
+                                                    this.setState(this.state);
+                                                }}>-</div>
                                                 <div className="qty">{item[1]}</div>
-                                                <div className="increase">+</div>
+                                                <div className="increase" onClick={() => {
+                                                    item[1] += 1;
+                                                    this.setState(this.state);
+                                                    console.log(item);
+                                                }}>+</div>
                                                 <div className="remove__box">
                                                     <div className="remove" onClick={() => {
                                                         for(let i in this.state.modal_options) {
