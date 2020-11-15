@@ -11,14 +11,11 @@ class MainStoreContent extends React.Component {
         this.sortData = this.sortData.bind(this);
         this.getPosition = this.getPosition.bind(this);
         this.sortCallback = this.sortCallback.bind(this);
-        this.sortCallbackUpdate = this.sortCallbackUpdate.bind(this);
         this._getData = this._getData.bind(this);
         this._infiniteScroll = this._infiniteScroll.bind(this);
         this.searchData = this.searchData.bind(this);
 
         this.state = {
-            lat1: 0,
-            long1: 0,
             loading: false,
             stores: [],
             data: [],
@@ -36,13 +33,9 @@ class MainStoreContent extends React.Component {
             }, () => {
                 // get current location
                 this.getPosition().then((position) => {
-                    this.setState({
-                        lat1: position.coords.latitude,
-                        long1: position.coords.longitude,
-                        loading: true,
-                    },
-                        () => this.sortCallback()
-                    )
+                    window.sessionStorage.setItem("latitude", position.coords.latitude);
+                    window.sessionStorage.setItem("longitude", position.coords.longitude);
+                    this.sortCallback();
                 })
                 .catch((e) => console.log(e));
             });
@@ -121,26 +114,18 @@ class MainStoreContent extends React.Component {
 
         if(addressContainer.innerHTML !== "주소지") {
             if(this.props.place !== []) {
-                this.setState({
-                    lat1: this.props.place[1],
-                    long1: this.props.place[0],
-                    loading: true,
-                },
-                    () => this.sortCallback()
-                );
+                window.sessionStorage.setItem("longitude", this.props.place[0]);
+                window.sessionStorage.setItem("latitude", this.props.place[1]);
+                this.sortCallback();
             }
         }
 
         getPositionBtn.onclick = () => {
             addressContainer.innerHTML = "주소지";
             this.getPosition().then((position) => {
-                this.setState({
-                    lat1: position.coords.latitude,
-                    long1: position.coords.longitude,
-                    loading: true,
-                },
-                    () => this.sortCallback()
-                )
+                window.sessionStorage.setItem("latitude", position.coords.latitude);
+                window.sessionStorage.setItem("longitude", position.coords.longitude);
+                this.sortCallback();
             })
             .catch((e) => console.log(e));
         }
@@ -157,25 +142,9 @@ class MainStoreContent extends React.Component {
 
     sortCallback() {
         this.state.stores.forEach((data) => {
-            let d = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[1];
-            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[0];
-            data["distance"] = d;
-            data["show_dist"] = dist;
-        });
-
-        this.state.stores.sort(this.sortData);
-        this.setState({
-            loading: false,
-            data: this.state.stores.slice(0, 5),
-            preItems: 0,
-            items: 5,
-        });
-    }
-
-    sortCallbackUpdate() {
-        this.state.stores.forEach((data) => {
-            let d = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[1];
-            let dist = this.calcDistance(this.state.lat1, this.state.long1, data.xPosition, data.yPosition)[0];
+            let calc = this.calcDistance(window.sessionStorage.getItem("latitude"), window.sessionStorage.getItem("longitude"), data.xPosition, data.yPosition);
+            let d = calc[1];
+            let dist = calc[0];
             data["distance"] = d;
             data["show_dist"] = dist;
         });
@@ -211,17 +180,29 @@ class MainStoreContent extends React.Component {
 
     componentDidUpdate() {
         let addressContainer = document.getElementById("btn__address");
+        let prev = window.sessionStorage.getItem("latitude");
 
         if(addressContainer.innerHTML !== "주소지") {
             if(this.props.place !== []) {
-                if(this.state.lat1 !== this.props.place[1]) {
-                    this.setState({
-                        lat1: this.props.place[1],
-                        long1: this.props.place[0],
-                        loading: true,
-                    },
-                        () => this.sortCallbackUpdate()
-                    );
+                if(window.sessionStorage.getItem("latitude") !== this.props.place[1]) {
+                    window.sessionStorage.setItem("longitude", this.props.place[0]);
+                    window.sessionStorage.setItem("latitude", this.props.place[1]);
+
+                    this.state.stores.forEach((data) => {
+                        let calc = this.calcDistance(window.sessionStorage.getItem("latitude"), window.sessionStorage.getItem("longitude"), data.xPosition, data.yPosition);
+                        let d = calc[1];
+                        let dist = calc[0];
+                        data["distance"] = d;
+                        data["show_dist"] = dist;
+                    });
+
+                    this.state.stores.sort(this.sortData);
+
+                    if(prev !== window.sessionStorage.getItem("latitude")) {
+                        this.setState({
+                            data: this.state.stores.slice(0, 5)
+                        });
+                    }
                 }
             }
         }

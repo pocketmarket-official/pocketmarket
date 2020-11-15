@@ -48,11 +48,13 @@ class StoreJSX extends React.Component {
                             </div>
                         </div>
                         <div className="store__stars">
+                    {/*
                             <img src={star1}/>
                             <img src={star1}/>
                             <img src={star1}/>
                             <img src={star3}/>
                             <img src={star2}/>
+                    */}
                         </div>
                         <div className="store__review">
                             <div className="review__content">
