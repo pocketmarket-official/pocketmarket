@@ -2,6 +2,7 @@ from rest_framework import serializers
 from users.models import User
 from users.models import Point
 from users.models import MyPlace
+from users.models import Business
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -49,6 +50,27 @@ class MyPlaceSerializer(serializers.ModelSerializer):
             'yPosition',
             'defaultYn',
             'deleteYn',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs'
+        )
+
+class BusinessSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Business
+        fields = (
+            'user',
+            'seq',
+            'store',
+            'bizNo',
+            'bizName',
+            'openDttm',
+            'registerNo',
+            'bizAddr',
+            'storeAddr',
+            'orderYn',
             'insDt',
             'insUs',
             'modDt',

@@ -6,6 +6,8 @@ from users.models import Point
 from users.serializer import PointSerializer
 from users.models import MyPlace
 from users.serializer import MyPlaceSerializer
+from users.models import Business
+from users.serializer import BusinessSerializer
 
 
 class UserView(viewsets.ModelViewSet):
@@ -23,3 +25,8 @@ class MyPlaceView(viewsets.ModelViewSet):
 
     serializer_class = MyPlaceSerializer
     queryset = MyPlace.objects.all()
+
+class BusinessView(viewsets.ModelViewSet):
+
+    serializer_class = BusinessSerializer
+    queryset = Business.objects.all()
