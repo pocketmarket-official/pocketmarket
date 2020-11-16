@@ -41,7 +41,6 @@ import './App.css';
 import Intro from "./Routes/Intro";
 import OrderInfoPayMethod from "./Routes/OrderInfoPayMethod";
 
-
 function App() {
   let cookie_token = cookie.load("access_token");
   let storage_email = storage.get(cookie_token);

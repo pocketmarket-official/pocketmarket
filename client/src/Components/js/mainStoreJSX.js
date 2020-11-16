@@ -39,22 +39,21 @@ class StoreJSX extends React.Component {
                                                 return true;
                                             }
                                         });
-                                        if(!data.likeUser.includes(user)) {
-                                            data.likeUser.push(user);
-                                        }
-                                        console.log("----------");
-                                        console.log(data.likeUser);
-                                        console.log("----------");
-                                        axios.put(`http://localhost:8000/api/stores_store/${id}/`, data)
+
+                                        axios.post("/api/stores_storeLike/", {
+                                            store: data,
+                                            user: user,
+                                        })
                                         .then((res) => {
                                             console.log(res);
                                         })
                                         .catch((err) => {
                                             console.log(err);
                                         })
+
                                     });
                                     // 좋아요 기능 추가 예정
-                                }}>♥ {data.likeUser.length}</button>
+                                }}>♥ 0</button>
                             </div>
                             <div className="detail__title">
                                 <div className="detail__name">{data.storeName}</div>
