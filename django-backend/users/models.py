@@ -9,7 +9,7 @@ from datetime import datetime
 class User(AbstractUser):
     """ User Model Definition """
     profileName = models.CharField(max_length=30, default='')
-    profileImage = models.ImageField(upload_to="image")
+    profileImage = models.ImageField(upload_to="image", null=True)
 
 
     pass

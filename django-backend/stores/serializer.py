@@ -5,19 +5,19 @@ from stores.models import Pos
 from stores.models import StoreDic
 from users.models import User
 from users.serializer import UserSerializer
-
-
+#
+#
 # class LikeUserSerializer(serializers.RelatedField):
 #     def to_representation(self, value):
 #         return value.id
 #
 #     class Meta:
-#         model = likeUser
-
+#         model = User
+#
 
 class StoreSerializer(serializers.ModelSerializer):
     likeUser = UserSerializer(read_only=False, many=True)
-    # likeUser = serializers.StringRelatedField(many=True)
+    # likeUser = LikeUserSerializer(read_only=True, many=True)
 
     class Meta:
         model = Store
@@ -56,6 +56,14 @@ class StoreSerializer(serializers.ModelSerializer):
             'modDt',
             'modUs'
         )
+
+    def update(self, instance, validated_data):
+        store=instance
+        tmpUser = User.objects.get(id=2)
+        tmpUserList = []
+        tmpUserList.append(tmpUser)
+        store.likeUser.set(tmpUserList)
+        store.save()
 
 class FunsetSerializer(serializers.ModelSerializer):
 
