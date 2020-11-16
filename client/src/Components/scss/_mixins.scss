@@ -9,3 +9,46 @@
           -#{$size}  #{$size} 0 $color,
           -#{$size}  0        0 $color;
 }
+
+@mixin borderColor($colorName) {
+        $backColor: var($colorName);
+        $borderColor: var($colorName+"_BORDER");
+
+        border: 1px solid black;
+
+        .orderHeader {
+                background-color:$backColor
+        }
+}
+
+@mixin buttonColor($color) {
+        $color1: $color;
+        $color2: darken($color, 7);
+        $borderColor: lighten($color, 10);
+        background: linear-gradient(to bottom, $color1, $color2);
+        box-shadow: 0 1px 3px 1px $borderColor inset;
+        border: 1px solid $borderColor;
+
+        &:active {
+                background: linear-gradient(to top, $color1, $color2);;
+                position:relative;
+                top:1px;
+        }
+}
+
+@mixin buttonColorOptions($color, $darkness, $lighten, $activeFlag) {
+        $color1: $color;
+        $color2: darken($color, $darkness);
+        $borderColor: lighten($color, $lighten);
+        background: linear-gradient(to bottom, $color1, $color2);
+        box-shadow: 0 1px 3px 1px $borderColor inset;
+        border: 1px solid $borderColor;
+
+        @if $activeFlag == "true" {
+                &:active {
+                        background: linear-gradient(to top, $color1, $color2);;
+                        position: relative;
+                        top: 1px;
+                }
+        }
+}
