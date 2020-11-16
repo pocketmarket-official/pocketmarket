@@ -71,8 +71,8 @@ class Pos(models.Model):
 
 class StoreDic(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
+    store = models.ForeignKey('Store', on_delete=models.CASCADE, default=1)
     dicType = models.CharField(max_length=1, default='1') #1:구매이력 있음/2:리뷰이력 있음
-    store = models.ManyToManyField('store')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
