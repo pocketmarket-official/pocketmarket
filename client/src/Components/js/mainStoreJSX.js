@@ -42,7 +42,9 @@ class StoreJSX extends React.Component {
                                         if(!data.likeUser.includes(user)) {
                                             data.likeUser.push(user);
                                         }
-                                        data.storeName = "나사렛꼬치";
+                                        console.log("----------");
+                                        console.log(data.likeUser);
+                                        console.log("----------");
                                         axios.put(`http://localhost:8000/api/stores_store/${id}/`, data)
                                         .then((res) => {
                                             console.log(res);
