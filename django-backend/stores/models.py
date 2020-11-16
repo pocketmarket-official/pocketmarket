@@ -34,9 +34,9 @@ class Store(models.Model):
     likeUser = models.ManyToManyField('users.User')
     score = models.FloatField(default=0.0)
     description = models.CharField(max_length=50, null=True)
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue')
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=datetime.now(), null=True)
     modUs = models.CharField(max_length=30, default='defaultValue')
 
     def likes_count(self):
