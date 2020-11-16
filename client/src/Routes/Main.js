@@ -57,8 +57,8 @@ class Main extends React.Component {
             },
         ];
 
-        let cookie_token = cookie.load("access_token");
-        console.log(storage.get(cookie_token));
+        // let cookie_token = cookie.load("access_token");
+        // console.log(storage.get(cookie_token));
 
         this.state = {
             temp: temp,

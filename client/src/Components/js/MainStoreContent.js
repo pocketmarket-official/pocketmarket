@@ -209,9 +209,6 @@ class MainStoreContent extends React.Component {
     }
 
     render() {
-        console.log('========================');
-        console.log(this.state);
-        console.log('========================');
         const isLoading = this.state.loading;
         return (
             <div id="storeContent">

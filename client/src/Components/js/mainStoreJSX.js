@@ -15,6 +15,8 @@ class StoreJSX extends React.Component {
     render() {
         let d = this.props.data.show_dist;
         let data = this.props.data;
+        let cookie_token = cookie.load("access_token");
+        let user_email = storage.get(cookie_token);
         return(
                 <div className="content__store">
                     <Link to={{
@@ -29,11 +31,26 @@ class StoreJSX extends React.Component {
                                 <div className="tags__tag">@반포 낭만달빛마켓</div>
                                 <button className="tags__likes" onClick={(e) => {
                                     e.preventDefault();
-                                    let cookie_token = cookie.load("access_token");
-                                    let user_email = storage.get(cookie_token);
-                                    console.log('______________');
-                                    console.log(data);
-                                    console.log('______________');
+                                    let id = data.id;
+                                    axios.get("/api/users_user/")
+                                    .then((res) => {
+                                        let user = res.data.find((elt) => {
+                                            if(elt.email === user_email) {
+                                                return true;
+                                            }
+                                        });
+                                        if(!data.likeUser.includes(user)) {
+                                            data.likeUser.push(user);
+                                        }
+                                        data.storeName = "MMMMa";
+                                        axios.put(`/api/stores_store/${id}/`, data)
+                                        .then((res) => {
+                                            console.log(res);
+                                        })
+                                        .catch((err) => {
+                                            console.log(err);
+                                        })
+                                    });
                                     // 좋아요 기능 추가 예정
                                 }}>♥ {data.likeUser.length}</button>
                             </div>
