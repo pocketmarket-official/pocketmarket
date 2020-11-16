@@ -1,5 +1,4 @@
 import React from 'react';
-import KDSHeader from "../Components/js/KDSHeader";
 import '../Components/scss/KDSMain.scss'
 import bg from '../assets/kds/B_img.png';
 import timer from '../assets/kds/ic_timer.svg';
@@ -7,8 +6,19 @@ import timer from '../assets/kds/ic_timer.svg';
 function KDSMain() {
     return (
         <div className="kds">
-            <KDSHeader/>
-
+            <div className="header">
+                <div>
+                    <span>POCKET MARKET</span>
+                </div>
+                <div>
+                    <span>01. 주방KDS</span>
+                </div>
+                <div>
+                    <span>2020.11.11</span>
+                    <span>AM</span>
+                    <span>11:11:11</span>
+                </div>
+            </div>
             <div className="body">
                 <div className="order">
                     <div className="lane">
