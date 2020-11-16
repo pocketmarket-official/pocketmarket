@@ -13,15 +13,20 @@ class Review(models.Model):
     billNo = models.CharField(max_length=10, null=True)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
     context = models.TextField(null=True)
-    likeUser = models.ManyToManyField('users.User', related_name='likeUser')
     deleteYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now())
     insUs = models.CharField(max_length=30, default='defaultValue')
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, default='defaultValue')
 
-    def likes_count(self):
-        return self.likes_count()
+class ReviewLike(models.Model):
+    review = models.ForeignKey('Review', on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
+    likeYn = models.CharField(max_length=1, default='Y')
+    insDt = models.DateTimeField(default=datetime.now())
+    insUs = models.CharField(max_length=30, default='defaultValue')
+    modDt = models.DateTimeField(default=datetime.now())
+    modUs = models.CharField(max_length=30, default='defaultValue')
 
 class ReviewImage(models.Model):
     review = models.ForeignKey('reviews.Review', on_delete=models.CASCADE, default=1)

@@ -81,7 +81,7 @@ class StoreDic(models.Model):
 class StoreLike(models.Model):
     store = models.ForeignKey('store', on_delete=models.CASCADE, default=1)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
-    activeYn = models.CharField(max_length=1, default='Y')
+    likeYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)

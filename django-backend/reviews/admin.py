@@ -12,6 +12,13 @@ class ReviewAdmin(admin.ModelAdmin):
 
     pass
 
+@admin.register(models.ReviewLike)
+class ReviewLikeAdmin(admin.ModelAdmin):
+
+    """ ReviewLike Admin """
+
+    pass
+
 
 @admin.register(models.ReviewImage)
 class ReviewImageAdmin(admin.ModelAdmin):
@@ -27,3 +34,4 @@ class ReplyAdmin(admin.ModelAdmin):
     """ Reply Admin """
 
     pass
+
