@@ -5,6 +5,7 @@ from stores.models import Pos
 from stores.models import StoreDic
 from users.models import User
 from users.serializer import UserSerializer
+from django.shortcuts import redirect
 #
 #
 # class LikeUserSerializer(serializers.RelatedField):
@@ -59,11 +60,11 @@ class StoreSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         store=instance
-        tmpUser = User.objects.get(id=2)
+        tmpUser = User.objects.get(id=1)
         tmpUserList = []
         tmpUserList.append(tmpUser)
         store.likeUser.set(tmpUserList)
-        store.save()
+        return redirect("/")
 
 class FunsetSerializer(serializers.ModelSerializer):
 
