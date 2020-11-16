@@ -3,22 +3,9 @@ from stores.models import Store
 from stores.models import Funset
 from stores.models import Pos
 from stores.models import StoreDic
-from users.models import User
-from users.serializer import UserSerializer
-from django.shortcuts import redirect
-#
-#
-# class LikeUserSerializer(serializers.RelatedField):
-#     def to_representation(self, value):
-#         return value.id
-#
-#     class Meta:
-#         model = User
-#
+from stores.models import StoreLike
 
 class StoreSerializer(serializers.ModelSerializer):
-    likeUser = UserSerializer(read_only=False, many=True)
-    # likeUser = LikeUserSerializer(read_only=True, many=True)
 
     class Meta:
         model = Store
@@ -49,7 +36,6 @@ class StoreSerializer(serializers.ModelSerializer):
             'orgIf',
             'xPosition',
             'yPosition',
-            'likeUser',
             'score',
             'description',
             'insDt',
@@ -58,13 +44,6 @@ class StoreSerializer(serializers.ModelSerializer):
             'modUs'
         )
 
-    def update(self, instance, validated_data):
-        store=instance
-        tmpUser = User.objects.get(id=1)
-        tmpUserList = []
-        tmpUserList.append(tmpUser)
-        store.likeUser.set(tmpUserList)
-        return redirect("/")
 
 class FunsetSerializer(serializers.ModelSerializer):
 
@@ -118,6 +97,20 @@ class StoreDicSerializer(serializers.ModelSerializer):
             'user',
             'dicType',
             'store',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs'
+        )
+
+class StoreLikeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StoreLike
+        fields = (
+            'store',
+            'user',
+            'activeYn',
             'insDt',
             'insUs',
             'modDt',

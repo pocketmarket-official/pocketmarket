@@ -47,6 +47,7 @@ router.register(r'stores_store', store_views.StoreView, 'store')
 router.register(r'stores_funSset', store_views.FunsetView, 'funset')
 router.register(r'stores_pos', store_views.PosView, 'pos')
 router.register(r'stores_storeDic', store_views.StoreDicView, 'storeDic')
+router.register(r'stores_storeLike', store_views.StoreLikeView, 'storeLike')
 
 router.register(r'festivals_festival', festival_views.FestivalView, 'festival')
 router.register(r'festivals_join', festival_views.JoinView, 'join')

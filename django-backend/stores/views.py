@@ -8,6 +8,9 @@ from stores.serializer import PosSerializer
 from stores.models import Pos
 from stores.serializer import StoreDicSerializer
 from stores.models import StoreDic
+from stores.serializer import StoreLikeSerializer
+from stores.models import StoreLike
+
 
 
 class StoreView(viewsets.ModelViewSet):
@@ -29,3 +32,8 @@ class StoreDicView(viewsets.ModelViewSet):
 
     serializer_class = StoreDicSerializer
     queryset = StoreDic.objects.all()
+
+class StoreLikeView(viewsets.ModelViewSet):
+
+    serializer_class = StoreLikeSerializer
+    queryset = StoreLike.objects.all()

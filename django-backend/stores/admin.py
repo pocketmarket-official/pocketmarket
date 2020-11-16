@@ -33,3 +33,9 @@ class StoreDicAdmin(admin.ModelAdmin):
 
     pass
 
+@admin.register(models.StoreLike)
+class StoreLikeAdmin(admin.ModelAdmin):
+
+    """ StoreLike Admin """
+
+    pass
