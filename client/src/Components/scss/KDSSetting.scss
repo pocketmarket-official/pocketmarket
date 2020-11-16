@@ -1,0 +1,134 @@
+@import "mixins";
+
+.kdssetting {
+  width:100%;
+  height:100%;
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    background: #161616;
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      background: #161616;
+      margin: 5px 5px 0;
+      padding: .5rem;
+      border-radius: 15px;
+      color: #E9E9E9;
+      font-size: 1.5rem;
+      height: 2.5rem;
+      border: 1px solid black;
+
+      div {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .content-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+
+      .guide {
+        font-size: 1.5rem;
+        font-weight: normal;
+        color: #E3E3E3;
+        label {
+          color:red;
+        }
+      }
+
+      .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 2rem;
+        padding: 2rem;
+        width: 80vw;
+        border: 1px solid black;
+        border-radius: 10px;
+        background: #1C1C1C;
+
+        > div {
+          width: 45%;
+
+          > div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 1rem;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            input, select {
+              width: 50%;
+              height: 2.5rem;
+            }
+
+            > div {
+              width: 40%;
+              height: 3rem;
+              padding: 1rem;
+              background: #252525;
+              border: 1px solid black;
+              color: #E3E3E3;
+              font-weight: bold;
+              font-size: 1rem;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+        }
+      }
+
+      .button-container {
+        button {
+          padding: 1.5rem;
+          height: 5rem;
+          font-size: 1.5rem;
+          width: 150px;
+          color: #E3E3E3;
+          background: #212121;
+          border: 1px solid black;
+
+          &:first-child {
+            margin-right: 2rem;
+            color: red;
+          }
+        }
+      }
+    }
+
+    .bottom {
+      padding-left: 1rem;
+      height: 6rem;
+      width: 100%;
+
+      div {
+        height:70px;
+        font-size: 25px;
+        width: 180px;
+        color: #E3E3E3;
+        background: #151515;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
