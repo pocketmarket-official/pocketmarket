@@ -110,7 +110,7 @@ class StoreLikeSerializer(serializers.ModelSerializer):
         fields = (
             'store',
             'user',
-            'activeYn',
+            'likeYn',
             'insDt',
             'insUs',
             'modDt',
