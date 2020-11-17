@@ -10,6 +10,7 @@ from users.models import Business
 from users.serializer import BusinessSerializer
 
 
+
 class UserView(viewsets.ModelViewSet):
 
     serializer_class = UserSerializer

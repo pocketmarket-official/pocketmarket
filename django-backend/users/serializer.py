@@ -5,6 +5,7 @@ from users.models import MyPlace
 from users.models import Business
 
 
+
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:

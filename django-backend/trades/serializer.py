@@ -8,6 +8,7 @@ from trades.models import CardLog
 from trades.models import PurchaseLog
 from trades.models import SoldoutLog
 from trades.models import CornerStateLog
+from trades.models import Test
 
 
 class SaleHeaderSerializer(serializers.ModelSerializer):
@@ -242,4 +243,13 @@ class CornerStateLogSerializer(serializers.ModelSerializer):
             'insUs',
             'modDt',
             'modUs'
+        )
+
+
+class TestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Test
+        fields = (
+            'data',
         )

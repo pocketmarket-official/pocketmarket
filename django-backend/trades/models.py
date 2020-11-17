@@ -187,3 +187,6 @@ class CornerStateLog(models.Model):
     modDt = models.DateTimeField(default=datetime.now(), null=True)
     modUs = models.CharField(max_length=30, default='defaultValue', null=True)
 
+
+class Test(models.Model):
+    data = models.CharField(max_length=10, blank=True)
