@@ -14,14 +14,46 @@ import star3 from '../../assets/store/star3.png';
 class StoreJSX extends React.Component {
     constructor(props) {
         super(props);
-        let data = this.props.data;
-        let like;
-
 
         this.state = {
-            like: like,
+            like: 0,
+            storeId: 0,
+            userId: 0,
         }
     }
+
+    componentWillMount() {
+        let data = this.props.data;
+        let cookie_token = cookie.load("access_token");
+        let user_email = storage.get(cookie_token);
+
+        axios.get("/api/users_user/")
+        .then((res) => {
+            let user = res.data.find((elt) => {
+                if(elt.email === user_email) {
+                    return true;
+                }
+            });
+            
+            let transData = {
+              "storeId":data.id, "userId":user.id
+            };
+            
+            axios.post('http://localhost:8000/storeLike/', transData)
+            .then((res) => {
+                let like = res.data.likeCnt;
+                this.setState({
+                    like: like,
+                    storeId: data.id,
+                    userId: user.id,
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        });
+    }
+
     render() {
         let d = this.props.data.show_dist;
         let data = this.props.data;
@@ -41,33 +73,28 @@ class StoreJSX extends React.Component {
                                 <div className="tags__tag">@반포 낭만달빛마켓</div>
                                 <button className="tags__likes" onClick={(e) => {
                                     e.preventDefault();
-                                    let id = data.id;
-                                    axios.get("/api/users_user/")
-                                    .then((res) => {
-                                        let user = res.data.find((elt) => {
-                                            if(elt.email === user_email) {
-                                                return true;
-                                            }
-                                        });
-
-                                        let transData = {
-                                          "storeId":data.id, "userId":user.id
-                                        };
-                                        // axios.post("http://localhost:8000/api/stores_storeLike/");
-                                        // axios.post("http://localhost:8000/storeLike/", {
-                                        //     storeId: data.id,
-                                        //     userId: user.id,
-                                        // })
-                                        axios.post('http://localhost:8000/storeLike/', transData)
+                                    axios.post("http://localhost:8000/api/stores_storeLike/", {
+                                        "store": this.state.storeId,
+                                        "user": this.state.userId,
+                                        "likeYn": 'y',
+                                    })
+                                    .then(() => {
+                                    {/* 좋아요 개수 가져오기 */}
+                                        axios.post('http://localhost:8000/storeLike/', {
+                                            "storeId": this.state.storeId,
+                                            "userId": this.state.userId,
+                                        })
                                         .then((res) => {
-                                            this.setState({ like: res.data.likeCnt });
+                                            let like = res.data.likeCnt;
+                                            this.setState({
+                                                like: like,
+                                            });
                                         })
                                         .catch((err) => {
                                             console.log(err);
                                         })
-
                                     });
-                                    // 좋아요 기능 추가 예정
+
                                 }}>♥ {this.state.like}</button>
                             </div>
                             <div className="detail__title">
