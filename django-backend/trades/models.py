@@ -164,7 +164,7 @@ class PurchaseLog(models.Model):
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 
 class SoldoutLog(models.Model):
     storeCd = models.CharField(max_length=10, default='')
@@ -172,9 +172,9 @@ class SoldoutLog(models.Model):
     itemCd = models.CharField(max_length=20, default='')
     soldoutYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 
 class CornerStateLog(models.Model):
     storeCd = models.CharField(max_length=10, default='')
@@ -183,9 +183,9 @@ class CornerStateLog(models.Model):
     groupCd = models.CharField(max_length=3, default='')
     stateFlag = models.CharField(max_length=1, default='1') #[1:원활/2:혼잡/3:주문불가]
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 
 
 class Test(models.Model):

@@ -23,9 +23,9 @@ class Point(models.Model):
     totSpendPoint = models.IntegerField(null=True)
     lastExchangeDate = models.CharField(max_length=8, null=True)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 
 class MyPlace(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)

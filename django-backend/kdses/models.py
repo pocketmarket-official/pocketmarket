@@ -45,9 +45,9 @@ class KdsHeader(models.Model):
     orderStatus = models.CharField(max_length=1, blank=True)
     saleTime = models.CharField(max_length=8, blank=True)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 
 class KdsDetail(models.Model):
     storeCd = models.CharField(max_length=10, null=True)
@@ -61,6 +61,6 @@ class KdsDetail(models.Model):
     itemSellLevel=models.CharField(max_length=3, blank=True)
     itemSellType=models.CharField(max_length=3, blank=True)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
