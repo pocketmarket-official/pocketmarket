@@ -80,7 +80,7 @@ class StoreView extends React.Component {
     render() {
         return (
             <div className='page__store'>
-                <HeaderBack url='/mypage' />
+                <HeaderBack />
                 <div className="storeGrid-store">
                     <div className="storeGrid__content">
                         {/*<div className="store__store">*/}

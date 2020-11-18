@@ -21,8 +21,6 @@ class Main extends React.Component {
         this.handleTop = this.handleTop.bind(this);
         this.handleRefresh = this.handleRefresh.bind(this);
 
-        console.log(props);
-
         let current;
 
         try {
