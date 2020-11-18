@@ -65,10 +65,12 @@ function Index({authenticated, login, location}) {
                             <span>포켓도감</span>
                         </div>
                     </Link>
-                    <div className="content-item">
-                        <img src={showOrderImg} alt="주문상태" />
-                        <span>주문상태</span>
-                    </div>
+                    <Link to="/order/status">
+                        <div className="content-item">
+                            <img src={showOrderImg} alt="주문상태" />
+                            <span>주문상태</span>
+                        </div>
+                    </Link>
                 </div>
                 <div className="footer">all rights reserved pocketmarket</div>
             </div>

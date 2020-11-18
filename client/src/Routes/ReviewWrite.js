@@ -12,7 +12,8 @@ function ReviewWrite() {
                     <div className="review__write__caption">리뷰쓰기</div>
                     <textarea className="reviewwrite__context"></textarea>
                 </div>
-                <div className="review__content__box">
+                {/*
+                    <div className="review__content__box">
                     <div className="review__content__caption">리뷰평가</div>
                     <div className="review__content">
                         <div className="input__container">
@@ -41,10 +42,11 @@ function ReviewWrite() {
                             <div className="review__point">1.5</div>
                         </div>
                         <div className="image__container" id="image__container">
-                            {/* need to show image preview */}
+                            need to show image preview 
                         </div>
                     </div>
                 </div>
+                */}
                 <div className="photo__upload__box">
                     <div className="photo__upload__caption">사진업로드</div>
                     <div className="photo__upload">
