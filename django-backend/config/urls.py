@@ -21,7 +21,7 @@ from django.urls import path
 from rest_framework import routers
 #react deployment
 # from django.views.generic import TemplateView
-# from core import views
+from core import views as core_views
 #masters
 from stores import views as store_views
 from festivals import views as festival_views
@@ -41,6 +41,9 @@ from interfaces import views as interface_views
 
 
 router = routers.DefaultRouter()
+
+#storeLike
+path("storeLike/", core_views.storeLike),
 
 #masters
 router.register(r'stores_store', store_views.StoreView, 'store')
@@ -102,5 +105,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('masterDown/', interface_views.MasterDownView, name='masterDown'),
+    path('storeLike/', core_views.MasterDownView, name='masterDown'),
 
 ]
