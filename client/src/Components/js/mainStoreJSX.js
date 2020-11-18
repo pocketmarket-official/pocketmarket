@@ -40,10 +40,9 @@ class StoreJSX extends React.Component {
                                             }
                                         });
 
-                                        axios.post("http://localhost:8000/api/stores_storeLike/", {
+                                        axios.post("http://localhost:8000/storeLike/", {
                                             store: data.id,
                                             user: user.id,
-                                            LikeYn: 'y',
                                         })
                                         .then((res) => {
                                             console.log(res);
