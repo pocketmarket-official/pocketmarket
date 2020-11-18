@@ -39,9 +39,9 @@ class MyPlace(models.Model):
     defaultYn = models.CharField(max_length=1, default='N')
     deleteYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)
 
 class Business(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
@@ -55,6 +55,6 @@ class Business(models.Model):
     storeAddr = models.CharField(max_length=100, blank=True)
     orderYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)

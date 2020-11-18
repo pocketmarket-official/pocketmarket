@@ -34,9 +34,9 @@ class Store(models.Model):
     score = models.FloatField(default=0.0)
     description = models.CharField(max_length=50, null=True)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)
 
 class Funset(models.Model):
     storeCd = models.ForeignKey('store', on_delete=models.CASCADE, default=1)
