@@ -433,11 +433,12 @@ def trade(request):
         print(ex)
 
 def storeLike(request):
-    data = json.loads(request.body)['data']
+    # data = json.loads(request.body)['data']
+
     returnList = []
 
-    user = User.objects.get(id=data.userId)
-    store = Store.Objects.get(id=data.storeId)
+    user = User.objects.get(id=request.body['userId'])
+    store = Store.Objects.get(id=request.body['storeId'])
 
     likeYn = StoreLike.objects.filter(store=store, user=user).values('likeYn')
     likeCnt = StoreLike.objects.filter(store=store, likeYn='Y').count()
