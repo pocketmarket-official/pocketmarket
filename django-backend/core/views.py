@@ -22,8 +22,14 @@ from items.models import Item
 from trades.models import SaleHeader
 from trades.models import SaleDetail
 from trades.models import CardLog
-from rest_framework.decorators import api_view
 
+
+
+
+##
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 # Create your views here.
 
@@ -432,20 +438,20 @@ def trade(request):
     except Exception as ex:
         print(ex)
 
+@csrf_exempt
 def storeLike(request):
-    # data = json.loads(request.body)['data']
+    data = json.loads(request.body)
 
-    returnList = []
-
-    user = User.objects.get(id=request.body['userId'])
-    store = Store.Objects.get(id=request.body['storeId'])
+    user = User.objects.get(id=data['userId'])
+    store = Store.objects.get(id=data['storeId'])
 
     likeYn = StoreLike.objects.filter(store=store, user=user).values('likeYn')
     likeCnt = StoreLike.objects.filter(store=store, likeYn='Y').count()
-    returnRow = {'likeYn':likeYn, 'likeCnt':likeCnt}
-    returnList.append(returnRow)
+    returnRow = {'likeCnt':likeCnt}
 
-    return(returnList)
+
+    response = JsonResponse(returnRow)
+    return response
 
 def index(request):
     return render(request, '../client/index.html')
