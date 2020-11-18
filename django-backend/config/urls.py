@@ -105,6 +105,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('masterDown/', interface_views.MasterDownView, name='masterDown'),
-    path('storeLike/', core_views.MasterDownView, name='masterDown'),
+    path('storeLike/', core_views.storeLike, name='storeLike'),
 
 ]
