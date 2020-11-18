@@ -445,16 +445,18 @@ def storeLike(request):
     user = User.objects.get(id=data['userId'])
     store = Store.objects.get(id=data['storeId'])
 
-    like = StoreLike.objects.filter(store=store, user=user).values('likeYn')
+    like = StoreLike.objects.get(store=store, user=user).values('id', 'likeYn')
     likeCnt = StoreLike.objects.filter(store=store, likeYn='Y').count()
 
 
     if not like:
         likeYn = 'N'
+        likeId = ''
     else:
         likeYn = 'Y'
+        likeId = like.id
 
-    returnRow = {'likeCnt': likeCnt, 'likeYn':likeYn}
+    returnRow = {'likeCnt': likeCnt, 'likeYn':likeYn, 'likeId':likeId}
 
     response = JsonResponse(returnRow)
     return response
