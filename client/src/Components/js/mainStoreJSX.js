@@ -12,6 +12,16 @@ import star3 from '../../assets/store/star3.png';
 
 
 class StoreJSX extends React.Component {
+    constructor(props) {
+        super(props);
+        let data = this.props.data;
+        let like;
+
+
+        this.state = {
+            like: like,
+        }
+    }
     render() {
         let d = this.props.data.show_dist;
         let data = this.props.data;
@@ -40,12 +50,17 @@ class StoreJSX extends React.Component {
                                             }
                                         });
 
-                                        axios.post("http://localhost:8000/storeLike/", {
-                                            store: data.id,
-                                            user: user.id,
-                                        })
+                                        let transData = {
+                                          "storeId":data.id, "userId":user.id
+                                        };
+                                        // axios.post("http://localhost:8000/api/stores_storeLike/");
+                                        // axios.post("http://localhost:8000/storeLike/", {
+                                        //     storeId: data.id,
+                                        //     userId: user.id,
+                                        // })
+                                        axios.post('http://localhost:8000/storeLike/', transData)
                                         .then((res) => {
-                                            console.log(res);
+                                            this.setState({ like: res.data.likeCnt });
                                         })
                                         .catch((err) => {
                                             console.log(err);
@@ -53,7 +68,7 @@ class StoreJSX extends React.Component {
 
                                     });
                                     // 좋아요 기능 추가 예정
-                                }}>♥ 0</button>
+                                }}>♥ {this.state.like}</button>
                             </div>
                             <div className="detail__title">
                                 <div className="detail__name">{data.storeName}</div>
