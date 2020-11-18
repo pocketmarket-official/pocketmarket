@@ -10,8 +10,8 @@ function Header() {
     return (
             <div className="header__box">
                 <Link to="/mypage"><img className="header__menu" src={btnMenuImg} alt="hamburger button" /></Link>
-                <Link to="/main"><img className="header__bi" src={bi} alt="logo" /></Link>
-                <Link to="/main"><img className="header__alarm" src={btnAlarm} alt="alarm" /></Link>
+                <Link to="/index"><img className="header__bi" src={bi} alt="logo" /></Link>
+                <img className="header__alarm" src={btnAlarm} alt="alarm" />
             </div>
         );
 }
