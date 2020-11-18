@@ -15,17 +15,13 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from datetime import datetime
 from time import gmtime, strftime
+from stores.models import StoreLike
 from stores.models import Store
 from users.models import User
 from items.models import Item
 from trades.models import SaleHeader
 from trades.models import SaleDetail
-# from trades.models import CashLog
 from trades.models import CardLog
-# from trades.models import StandardLog
-from trades.models import PurchaseLog
-from trades.models import SoldoutLog
-from trades.models import CornerStateLog
 from rest_framework.decorators import api_view
 
 
@@ -435,6 +431,20 @@ def trade(request):
 
     except Exception as ex:
         print(ex)
+
+def storeLike(request):
+    data = json.loads(request.body)['data']
+    returnList = []
+
+    user = User.objects.get(id=data.userId)
+    store = Store.Objects.get(id=data.storeId)
+
+    likeYn = StoreLike.objects.filter(store=store, user=user).values('likeYn')
+    likeCnt = StoreLike.objects.filter(store=store, likeYn='Y').count()
+    returnRow = {'likeYn':likeYn, 'likeCnt':likeCnt}
+    returnList.append(returnRow)
+
+    return(returnList)
 
 def index(request):
     return render(request, '../client/index.html')
