@@ -11,7 +11,7 @@ function Mypage() {
             <HeaderBiz/>
             <div className="mypage">
                 <div className="mypage__box">
-                    <div className="mypage__list"><Link to="/mypage/fastorder">포켓마켓도감</Link><p>{">"}</p></div>
+                    <div className="mypage__list"><Link to="/mypage/collections">포켓마켓도감</Link><p>{">"}</p></div>
                     <div className="mypage__list"><Link to="/mypage/myplace">주소관리</Link><p>{">"}</p></div>
                     <div className="mypage__list"><Link to="/mypage/order">주문 / 결재 이력</Link><p>{">"}</p></div>
                     <div className="mypage__list"><Link to="/mypage/point">포인트 / 좋아요 이력</Link><p>{">"}</p></div>
