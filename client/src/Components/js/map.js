@@ -123,7 +123,29 @@ class MapContent extends React.Component {
                     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
                 }
 
-                // 장소 검색하기
+                const toCurrent = document.getElementById("header__mapLocation");
+                toCurrent.onclick = () => {
+                    navigator.geolocation.getCurrentPosition(success);
+
+                    const geocoder = new kakao.maps.services.Geocoder();
+                    map.panTo(new kakao.maps.LatLng(lat, long));
+
+                    // 클릭해서 봤던 marker 삭제
+                    marker.setMap(null);
+
+                    marker = new kakao.maps.Marker({
+                        position: markerPosition,
+                        image: markerImage
+                    });
+
+                    marker.setMap(map);
+
+                    let content = '<div style="padding:5px;font-size:12px;">현위치</div>';
+                    infowindow.setContent(content);
+                    infowindow.open(map, marker);
+                };
+
+/*                // 장소 검색하기
                 btn.onclick = () => {
                     // 이전 검색 결과 마커 삭제
                     for(var i = 0; i < markers.length; i++) {
@@ -180,7 +202,7 @@ class MapContent extends React.Component {
                     }
 
                     places.keywordSearch(keyword, placesSearchCB);
-                }
+                }*/
             });
         }
     };

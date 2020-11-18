@@ -25,12 +25,14 @@ class Main extends React.Component {
 
         try {
             current = this.props.location.state.current;
+            window.sessionStorage.setItem("current", current);
         } catch(e) {
-            current = 0;
-        }
-
-        if(window.sessionStorage.getItem("current")) {
-            current = parseInt(window.sessionStorage.getItem("current"));
+            if(window.sessionStorage.getItem("current")) {
+                current = parseInt(window.sessionStorage.getItem("current"));
+            } else {
+                current = 0;
+                window.sessionStorage.setItem("current", current);
+            }
         }
 
         let temp = [
@@ -172,7 +174,7 @@ class Main extends React.Component {
                         </div>
                         <div className="btn__right">
                             <Link to="/mypage/myplace/search"><button className="btn__current"/></Link>
-                            <button className="btn__address" id="btn__address" onClick={this.handleAddress}>주소지</button>
+                            <button className="btn__address" id="btn__address" onClick={this.handleAddress}>현위치</button>
                             <button className="btn__map_list" id="btn__map_list" onClick={() => this.handleBtn()}/>
                         </div>
                     </div>

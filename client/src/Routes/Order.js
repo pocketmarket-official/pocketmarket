@@ -53,7 +53,7 @@ class Order extends React.Component {
             .then((res) => {
                 let keymapCd = res.data.find(
                     (elt) => {
-                        if(elt.id === storeId) {
+                        if(elt.storeCd === storeId) {
                             return true;
                         }
                     }
@@ -140,7 +140,7 @@ class Order extends React.Component {
             .then((res) => {
                 let keymapCd = res.data.find(
                     (elt) => {
-                        if(elt.id === storeId) {
+                        if(elt.storeCd === storeId) {
                             return true;
                         }
                     }

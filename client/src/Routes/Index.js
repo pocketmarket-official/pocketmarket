@@ -47,7 +47,7 @@ function Index({authenticated, login, location}) {
                     <div className="pagination-item"/>
                 </div>
                 <div className="content">
-                    <Link to="/main">
+                    <Link to={{pathname: "/main", state: { current: 0 }}}>
                         <div className="content-item">
                             <img src={showFestivalImg} alt="축제보기" />
                             <span>축제보기</span>
@@ -59,10 +59,12 @@ function Index({authenticated, login, location}) {
                             <span>매장보기</span>
                         </div>
                     </Link>
-                    <div className="content-item">
-                        <img src={showCollectionImg} alt="포켓도감" />
-                        <span>포켓도감</span>
-                    </div>
+                    <Link to="/mypage/collections">
+                        <div className="content-item">
+                            <img src={showCollectionImg} alt="포켓도감" />
+                            <span>포켓도감</span>
+                        </div>
+                    </Link>
                     <div className="content-item">
                         <img src={showOrderImg} alt="주문상태" />
                         <span>주문상태</span>

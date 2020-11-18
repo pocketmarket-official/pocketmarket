@@ -9,7 +9,7 @@ import img3 from '../assets/store_fastorder/24.jpg';
 import img4 from '../assets/store_fastorder/32.jpg';
 import base from '../assets/store_fastorder/store_base.jpg';
 
-function Fastorder() {
+function Collections() {
     return (
         <>
             <HeaderBack url='/mypage' />
@@ -87,4 +87,4 @@ function Fastorder() {
     );
 }
 
-export default Fastorder;
+export default Collections;

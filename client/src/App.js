@@ -13,7 +13,7 @@ import Order from './Routes/Order';
 import OrderInfo from './Routes/OrderInfo';
 import OrderComplete from './Routes/OrderComplete';
 import OrderStatus from './Routes/OrderStatus';
-import Fastorder from './Routes/Fastorder';
+import Collections from './Routes/Collections';
 import OrderHistory from './Routes/OrderHistory';
 import PointHistory from './Routes/PointHistory';
 import QuestionsHistory from './Routes/QuestionsHistory';
@@ -72,7 +72,7 @@ function App() {
         <Route authenticated={authenticated} exact path="/order/status/:storeId" component={BigStatus} />
         <Route authenticated={authenticated} exact path="/review" component={ReviewList} />
         <Route authenticated={authenticated} exact path="/mypage" component={Mypage} />
-        <Route authenticated={authenticated} exact path="/mypage/fastorder" component={Fastorder} />
+        <Route authenticated={authenticated} exact path="/mypage/collections" component={Collections} />
         <Route authenticated={authenticated} exact path="/mypage/myplace" component={Myplace} />
         <Route authenticated={authenticated} exact path="/mypage/myplace/detailList" component={MyplaceDetailList} />
         <Route authenticated={authenticated} exact path="/mypage/myplace/detailMap" component={MyplaceDetailMap} />

@@ -35,7 +35,7 @@ class FestivalStore extends React.Component {
     render() {
         return (
                 <>
-                    <HeaderBack url='/mypage' />
+                    <HeaderBack />
                     <div className="festival-store">
                         <div className="festival__content">
                             <div className="festival__image"><img src={this.state.festival.imgUrl || bg} alt="festival" /></div>
