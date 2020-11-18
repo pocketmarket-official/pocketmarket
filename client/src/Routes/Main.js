@@ -21,16 +21,20 @@ class Main extends React.Component {
         this.handleTop = this.handleTop.bind(this);
         this.handleRefresh = this.handleRefresh.bind(this);
 
+        console.log(props);
+
         let current;
 
         try {
             current = this.props.location.state.current;
+            window.sessionStorage.setItem("current", current);
         } catch(e) {
-            current = 0;
-        }
-
-        if(window.sessionStorage.getItem("current")) {
-            current = parseInt(window.sessionStorage.getItem("current"));
+            if(window.sessionStorage.getItem("current")) {
+                current = parseInt(window.sessionStorage.getItem("current"));
+            } else {
+                current = 0;
+                window.sessionStorage.setItem("current", current);
+            }
         }
 
         let temp = [
