@@ -445,7 +445,7 @@ def storeLike(request):
     user = User.objects.get(id=data['userId'])
     store = Store.objects.get(id=data['storeId'])
 
-    like = StoreLike.objects.get(store=store, user=user).values('id', 'likeYn')
+    like = StoreLike.objects.filter(store=store, user=user).values('id', 'likeYn')
     likeCnt = StoreLike.objects.filter(store=store, likeYn='Y').count()
 
 
