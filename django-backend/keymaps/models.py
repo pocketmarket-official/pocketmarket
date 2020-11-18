@@ -15,9 +15,9 @@ class StoreKeymap(models.Model):
     blankImgUrl = models.CharField(max_length=200, null=True)
     useYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)
 
 class TouchGroup(models.Model):
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
@@ -30,9 +30,9 @@ class TouchGroup(models.Model):
     posIndex = models.IntegerField(default=0)
     useYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)
 
 
 class Keymap(models.Model):
@@ -47,6 +47,6 @@ class Keymap(models.Model):
     dispYn = models.CharField(max_length=1, default='Y')
     expectCnt = models.IntegerField(default=0)
     insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)

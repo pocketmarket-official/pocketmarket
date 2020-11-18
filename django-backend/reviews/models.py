@@ -15,18 +15,18 @@ class Review(models.Model):
     context = models.TextField(null=True)
     deleteYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)
 
 class ReviewLike(models.Model):
     review = models.ForeignKey('Review', on_delete=models.CASCADE, default=1)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
     likeYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)
 
 class ReviewImage(models.Model):
     review = models.ForeignKey('reviews.Review', on_delete=models.CASCADE, default=1)
@@ -34,9 +34,9 @@ class ReviewImage(models.Model):
     url = models.CharField(max_length=200, null=True)
     deleteYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)
 
 class Reply(models.Model):
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
@@ -47,6 +47,6 @@ class Reply(models.Model):
     context = models.TextField(null=True)
     deleteYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, default='defaultValue')
+    insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, default='defaultValue')
+    modUs = models.CharField(max_length=30, null=True)

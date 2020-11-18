@@ -57,9 +57,9 @@ class SaleDetail(models.Model):
     saleTime = models.CharField(max_length=6)
     sendYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 #
 # class CashLog(models.Model):
 #     storeCd = models.CharField(max_length=10, default='00000')
@@ -77,9 +77,9 @@ class SaleDetail(models.Model):
 #     orgSeq = models.IntegerField(default=1, null=True)
 #     saleTime = models.CharField(max_length=6)
 #     insDt = models.DateTimeField(default=datetime.now(), null=True)
-#     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+#     insUs = models.CharField(max_length=30,  null=True)
 #     modDt = models.DateTimeField(default=datetime.now(), null=True)
-#     modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+#     modUs = models.CharField(max_length=30,  null=True)
 
 class CardLog(models.Model):
     storeCd = models.CharField(max_length=10, default='')
@@ -111,9 +111,9 @@ class CardLog(models.Model):
     remark = models.CharField(max_length=255, default='')
     sendYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 #
 # class EtcLog(models.Model):
 #     storeCd = models.CharField(max_length=10, default='00000')
@@ -127,9 +127,9 @@ class CardLog(models.Model):
 #     etcPayCd = models.CharField(max_length=5, default='000')
 #     remark = models.CharField(max_length=255, null=True)
 #     insDt = models.DateTimeField(default=datetime.now(), null=True)
-#     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+#     insUs = models.CharField(max_length=30,  null=True)
 #     modDt = models.DateTimeField(default=datetime.now(), null=True)
-#     modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+#     modUs = models.CharField(max_length=30,  null=True)
 #
 # class StandardLog(models.Model):
 #     storeCd = models.CharField(max_length=10, default='00000')
@@ -147,9 +147,9 @@ class CardLog(models.Model):
 #     itemCd = models.CharField(max_length=20, default='00000')
 #     qty = models.IntegerField(default=0)
 #     insDt = models.DateTimeField(default=datetime.now(), null=True)
-#     insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+#     insUs = models.CharField(max_length=30,  null=True)
 #     modDt = models.DateTimeField(default=datetime.now(), null=True)
-#     modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+#     modUs = models.CharField(max_length=30,  null=True)
 
 class PurchaseLog(models.Model):
     storeCd = models.CharField(max_length=10, default='')
@@ -162,9 +162,9 @@ class PurchaseLog(models.Model):
     purchaseQty = models.IntegerField(default=0)
     approvalFlag = models.CharField(max_length=3, default='')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 
 class SoldoutLog(models.Model):
     storeCd = models.CharField(max_length=10, default='')
@@ -172,9 +172,9 @@ class SoldoutLog(models.Model):
     itemCd = models.CharField(max_length=20, default='')
     soldoutYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 
 class CornerStateLog(models.Model):
     storeCd = models.CharField(max_length=10, default='')
@@ -183,9 +183,9 @@ class CornerStateLog(models.Model):
     groupCd = models.CharField(max_length=3, default='')
     stateFlag = models.CharField(max_length=1, default='1') #[1:원활/2:혼잡/3:주문불가]
     insDt = models.DateTimeField(default=datetime.now(), null=True)
-    insUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
-    modUs = models.CharField(max_length=30, default='defaultValue', null=True)
+    modUs = models.CharField(max_length=30,  null=True)
 
 
 class Test(models.Model):

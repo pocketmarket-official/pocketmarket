@@ -26,9 +26,9 @@ class Migration(migrations.Migration):
                 ('itemSellLevel', models.CharField(blank=True, max_length=3)),
                 ('itemSellType', models.CharField(blank=True, max_length=3)),
                 ('insDt', models.DateTimeField(default=datetime.datetime(2020, 11, 15, 23, 16, 12, 909192), null=True)),
-                ('insUs', models.CharField(default='defaultValue', max_length=30, null=True)),
+                ('insUs', models.CharField( max_length=30, null=True)),
                 ('modDt', models.DateTimeField(default=datetime.datetime(2020, 11, 15, 23, 16, 12, 909226), null=True)),
-                ('modUs', models.CharField(default='defaultValue', max_length=30, null=True)),
+                ('modUs', models.CharField( max_length=30, null=True)),
             ],
         ),
         migrations.CreateModel(
@@ -42,9 +42,9 @@ class Migration(migrations.Migration):
                 ('orderStatus', models.CharField(blank=True, max_length=1)),
                 ('saleTime', models.CharField(blank=True, max_length=8)),
                 ('insDt', models.DateTimeField(default=datetime.datetime(2020, 11, 15, 23, 16, 12, 908602), null=True)),
-                ('insUs', models.CharField(default='defaultValue', max_length=30, null=True)),
+                ('insUs', models.CharField( max_length=30, null=True)),
                 ('modDt', models.DateTimeField(default=datetime.datetime(2020, 11, 15, 23, 16, 12, 908640), null=True)),
-                ('modUs', models.CharField(default='defaultValue', max_length=30, null=True)),
+                ('modUs', models.CharField( max_length=30, null=True)),
             ],
         ),
         migrations.AlterField(

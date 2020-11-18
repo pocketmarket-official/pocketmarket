@@ -20,9 +20,9 @@ class Migration(migrations.Migration):
                 ('brandName', models.CharField(default='', max_length=100)),
                 ('useYn', models.CharField(default='Y', max_length=1)),
                 ('insDt', models.DateTimeField(default=datetime.datetime(2020, 10, 21, 22, 59, 24, 240682))),
-                ('insUs', models.CharField(default='defaultValue', max_length=30)),
+                ('insUs', models.CharField(null=True, max_length=30)),
                 ('modDt', models.DateTimeField(default=datetime.datetime(2020, 10, 21, 22, 59, 24, 240735))),
-                ('modUs', models.CharField(default='defaultValue', max_length=30)),
+                ('modUs', models.CharField(null=True, max_length=30)),
             ],
         ),
     ]

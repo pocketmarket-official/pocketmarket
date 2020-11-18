@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='review',
             name='insUs',
-            field=models.CharField(default='defaultValue', max_length=30),
+            field=models.CharField( max_length=30),
         ),
         migrations.AddField(
             model_name='review',
@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='review',
             name='modUs',
-            field=models.CharField(default='defaultValue', max_length=30),
+            field=models.CharField( max_length=30),
         ),
         migrations.AddField(
             model_name='review',
