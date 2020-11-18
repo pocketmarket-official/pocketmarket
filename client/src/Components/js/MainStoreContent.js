@@ -112,7 +112,7 @@ class MainStoreContent extends React.Component {
         let addressContainer = document.getElementById("btn__address");
         let getPositionBtn = document.getElementById("btn__map_list");
 
-        if(addressContainer.innerHTML !== "주소지") {
+        if(addressContainer.innerHTML !== "현위치") {
             if(this.props.place !== []) {
                 window.sessionStorage.setItem("longitude", this.props.place[0]);
                 window.sessionStorage.setItem("latitude", this.props.place[1]);
@@ -121,7 +121,7 @@ class MainStoreContent extends React.Component {
         }
 
         getPositionBtn.onclick = () => {
-            addressContainer.innerHTML = "주소지";
+            addressContainer.innerHTML = "현위치";
             this.getPosition().then((position) => {
                 window.sessionStorage.setItem("latitude", position.coords.latitude);
                 window.sessionStorage.setItem("longitude", position.coords.longitude);
@@ -182,7 +182,7 @@ class MainStoreContent extends React.Component {
         let addressContainer = document.getElementById("btn__address");
         let prev = window.sessionStorage.getItem("latitude");
 
-        if(addressContainer.innerHTML !== "주소지") {
+        if(addressContainer.innerHTML !== "현위치") {
             if(this.props.place !== []) {
                 if(window.sessionStorage.getItem("latitude") !== this.props.place[1]) {
                     window.sessionStorage.setItem("longitude", this.props.place[0]);

@@ -172,7 +172,7 @@ class Main extends React.Component {
                         </div>
                         <div className="btn__right">
                             <Link to="/mypage/myplace/search"><button className="btn__current"/></Link>
-                            <button className="btn__address" id="btn__address" onClick={this.handleAddress}>주소지</button>
+                            <button className="btn__address" id="btn__address" onClick={this.handleAddress}>현위치</button>
                             <button className="btn__map_list" id="btn__map_list" onClick={() => this.handleBtn()}/>
                         </div>
                     </div>
