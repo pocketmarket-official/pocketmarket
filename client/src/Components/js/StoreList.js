@@ -177,8 +177,6 @@ class StoreList extends React.Component {
         this._infiniteScroll = this._infiniteScroll.bind(this);
     }
 
-    // infitite scroll에서 다음 가져와야할 index 처리 후 동작
-    // react는 겹치는 부분은 알아서 rendering 안함 data 새로운거로 하면 기존에꺼 없어짐 기존에 있던거에 concat 시킬 것
     _getData() {
         let result = this.state.temp.slice(this.state.preItems, this.state.items);
         this.setState({
@@ -188,9 +186,6 @@ class StoreList extends React.Component {
         return result;
     }
 
-    // infinite scroll 계산하는 부분
-    // setstate로 아이템 갯수 관리한 후 callback으로 getdata 돌림
-    // setstate는 비동기로 맘대로 돌아가고 await도 사용 못하므로 주의 필요
     _infiniteScroll() {
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
@@ -206,7 +201,6 @@ class StoreList extends React.Component {
         }
     }
 
-    // event listener 등록
     componentDidMount() {
         window.addEventListener("scroll", this._infiniteScroll, true);
     }
@@ -217,9 +211,6 @@ class StoreList extends React.Component {
 
     render() {
         return(
-            //this.state.data.map((data) => (
-            //    <InfiniteScroll data={data} key={data.id} />))
-            //this.state.temp.forEach(it => {
                 <div className="storeList__grid">
                     <div className="storeList__box">
                         <div className="storeList_publisherBox">
@@ -236,7 +227,6 @@ class StoreList extends React.Component {
                         </div>
                     </div>
                 </div>
-            //})
         );
     }
 }

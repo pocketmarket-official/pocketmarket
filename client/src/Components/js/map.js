@@ -107,9 +107,6 @@ class MapContent extends React.Component {
                             catch {
                                 roadAddress = ""
                             }
-                            // address.innerHTML = '지번 주소: ' + addressName;
-                            // street.innerHTML = '도로명 주소: ' + roadAddress;
-                            // btn.style.display = 'block';
 
                             // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                             infowindow.setContent(content);
@@ -124,85 +121,28 @@ class MapContent extends React.Component {
                 }
 
                 const toCurrent = document.getElementById("header__mapLocation");
-                toCurrent.onclick = () => {
-                    navigator.geolocation.getCurrentPosition(success);
+                if(toCurrent) {
+                    toCurrent.onclick = () => {
+                        navigator.geolocation.getCurrentPosition(success);
 
-                    const geocoder = new kakao.maps.services.Geocoder();
-                    map.panTo(new kakao.maps.LatLng(lat, long));
+                        const geocoder = new kakao.maps.services.Geocoder();
+                        map.panTo(new kakao.maps.LatLng(lat, long));
 
-                    // 클릭해서 봤던 marker 삭제
-                    marker.setMap(null);
+                        // 클릭해서 봤던 marker 삭제
+                        marker.setMap(null);
 
-                    marker = new kakao.maps.Marker({
-                        position: markerPosition,
-                        image: markerImage
-                    });
-
-                    marker.setMap(map);
-
-                    let content = '<div style="padding:5px;font-size:12px;">현위치</div>';
-                    infowindow.setContent(content);
-                    infowindow.open(map, marker);
-                };
-
-/*                // 장소 검색하기
-                btn.onclick = () => {
-                    // 이전 검색 결과 마커 삭제
-                    for(var i = 0; i < markers.length; i++) {
-                        markers[i].setMap(null);
-                    }
-                    markers = [];
-                    const keyword = document.getElementById("keyword__map").value;
-                    const searchResult = document.getElementById("results");
-                    const btn = document.getElementById("addList");
-                    while(searchResult.hasChildNodes()) {
-                        searchResult.removeChild(searchResult.firstChild);
-                    }
-
-                    let places = new kakao.maps.services.Places();
-
-                    const placesSearchCB = (data, status, pagination) => {
-                        if (status === kakao.maps.services.Status.OK) {
-
-                            let bounds = new kakao.maps.LatLngBounds();
-
-                            for (let i = 0; i < data.length; i++) {
-                                displayMarker(data[i]);
-                                bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-                            }
-                            map.setBounds(bounds);
-                        }
-                    }
-
-                    const displayMarker = (place) => {
-                        let marker = new kakao.maps.Marker({
-                            map: map,
-                            position: new kakao.maps.LatLng(place.y, place.x)
+                        marker = new kakao.maps.Marker({
+                            position: markerPosition,
+                            image: markerImage
                         });
 
-                        markers.push(marker);
+                        marker.setMap(map);
 
-                        let elt = document.createElement("div");
-                        elt.innerHTML = `${place.place_name}`;
-
-                        function displayInfowindow() {
-                            infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-                            const address = document.getElementById("myplacedetail__address");
-                            const street = document.getElementById("myplacedetail__street");
-                            address.innerHTML = '지번 주소: ' + place.address_name;
-                            street.innerHTML = '도로명 주소: ' + place.road_address_name;
-                            btn.style.display = 'block';
-                            infowindow.open(map, marker);
-                        }
-
-                        kakao.maps.event.addListener(marker, 'click', displayInfowindow);
-                        elt.classList.add("search__result");
-                        elt.addEventListener("click", displayInfowindow);
-                        searchResult.appendChild(elt);
-                    }
-
-                    places.keywordSearch(keyword, placesSearchCB);
-                }*/
+                        let content = '<div style="padding:5px;font-size:12px;">현위치</div>';
+                        infowindow.setContent(content);
+                        infowindow.open(map, marker);
+                    };
+                }
             });
         }
     };

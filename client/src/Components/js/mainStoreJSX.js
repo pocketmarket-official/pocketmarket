@@ -44,52 +44,54 @@ class StoreJSX extends React.Component {
             .then((res) => {
                 let like = res.data.likeCnt;
                 let likeYn = res.data.likeYn;
-                this.setState({
-                    like: like,
-                    storeId: data.id,
-                    userId: user.id,
-                    likeYn: likeYn,
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-        });
-    }
-
-    componentDidUpdate() {
-        let data = this.props.data;
-        let cookie_token = cookie.load("access_token");
-        let user_email = storage.get(cookie_token);
-
-        axios.get("/api/users_user/")
-        .then((res) => {
-            let user = res.data.find((elt) => {
-                if(elt.email === user_email) {
-                    return true;
+                if(this.state.likeYn !== likeYn) {
+                    this.setState({
+                        like: like,
+                        storeId: data.id,
+                        userId: user.id,
+                        likeYn: likeYn,
+                    });
                 }
-            });
-            
-            let transData = {
-              "storeId":data.id, "userId":user.id
-            };
-            
-            axios.post('http://localhost:8000/storeLike/', transData)
-            .then((res) => {
-                let like = res.data.likeCnt;
-                let likeYn = res.data.likeYn;
-                this.setState({
-                    like: like,
-                    storeId: data.id,
-                    userId: user.id,
-                    likeYn: likeYn,
-                });
             })
             .catch((err) => {
                 console.log(err);
             })
         });
     }
+
+    // componentDidUpdate() {
+    //     let data = this.props.data;
+    //     let cookie_token = cookie.load("access_token");
+    //     let user_email = storage.get(cookie_token);
+
+    //     axios.get("/api/users_user/")
+    //     .then((res) => {
+    //         let user = res.data.find((elt) => {
+    //             if(elt.email === user_email) {
+    //                 return true;
+    //             }
+    //         });
+            
+    //         let transData = {
+    //           "storeId":data.id, "userId":user.id
+    //         };
+            
+    //         axios.post('http://localhost:8000/storeLike/', transData)
+    //         .then((res) => {
+    //             let like = res.data.likeCnt;
+    //             let likeYn = res.data.likeYn;
+    //             this.setState({
+    //                 like: like,
+    //                 storeId: data.id,
+    //                 userId: user.id,
+    //                 likeYn: likeYn,
+    //             });
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         })
+    //     });
+    // }
 
     render() {
         let d = this.props.data.show_dist;

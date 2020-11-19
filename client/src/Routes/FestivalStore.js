@@ -10,7 +10,6 @@ import bg from '../assets/festival_store/top_bg.jpg';
 class FestivalStore extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
 
         let festivalCd = this.props.location.state.data.festivalCd;
         let stores = [];

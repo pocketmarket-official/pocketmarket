@@ -1,11 +1,11 @@
 import React from "react";
-import MainMap from "./mainMap";
+import MapContent from "./map";
 
 
 function MainMapContent(props) {
     return (
         <div className="mainmapcontent">
-            <MainMap place={props} />
+            <MapContent place={props} />
         </div>
     );
 }
