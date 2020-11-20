@@ -39,9 +39,10 @@ class StoreSerializer(serializers.ModelSerializer):
             'description',
             'insDt',
             'insUs',
-            'modDt',
+            '1modDt',
             'modUs',
         )
+
 
 class StoreMinSerializer(serializers.ModelSerializer):
     class Meta:

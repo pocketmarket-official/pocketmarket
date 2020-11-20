@@ -15,3 +15,6 @@ class Brand(models.Model):
     insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, null=True)
+
+    def __str__(self):
+        return self.brandName

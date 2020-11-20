@@ -25,6 +25,9 @@ class Item(models.Model):
     modDt = models.DateTimeField(default=datetime.now(), null=True)
     modUs = models.CharField(max_length=30,  null=True)
 
+    def __str__(self):
+        return self.itemName
+
 
 class Set(models.Model):
     setItemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)

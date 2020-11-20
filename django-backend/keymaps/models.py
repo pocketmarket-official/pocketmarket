@@ -19,6 +19,9 @@ class StoreKeymap(models.Model):
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, null=True)
 
+    def __str__(self):
+        return self.keymapName
+
 class TouchGroup(models.Model):
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
     keymapCd = models.ForeignKey('keymaps.StoreKeymap', on_delete=models.CASCADE, default=1)
@@ -33,6 +36,9 @@ class TouchGroup(models.Model):
     insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, null=True)
+
+    def __str__(self):
+        return self.touchGroupName
 
 
 class Keymap(models.Model):
