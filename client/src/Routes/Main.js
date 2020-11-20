@@ -59,9 +59,6 @@ class Main extends React.Component {
             },
         ];
 
-        // let cookie_token = cookie.load("access_token");
-        // console.log(storage.get(cookie_token));
-
         this.state = {
             temp: temp,
             current: current,
@@ -70,7 +67,6 @@ class Main extends React.Component {
     }
 
     // renders jsx
-    // same as usestate in function component
     handlePageRender() {
         if(this.state.current === 0) {
             return <MainFestivalContent />;

@@ -23,23 +23,6 @@ class MainStoreContent extends React.Component {
             preItems: 0,
             items: 5,
         };
-
-        axios.get("/api/stores_store/")
-        .then((res) => {
-            const stores = res.data;
-            this.setState({
-                stores: stores,
-                data: stores.slice(0, 5),
-            }, () => {
-                // get current location
-                this.getPosition().then((position) => {
-                    window.sessionStorage.setItem("latitude", position.coords.latitude);
-                    window.sessionStorage.setItem("longitude", position.coords.longitude);
-                    this.sortCallback();
-                })
-                .catch((e) => console.log(e));
-            });
-        });
     }
 
     calcDistance(latitude1, longitude1, latitude2, longitude2) {
@@ -109,6 +92,24 @@ class MainStoreContent extends React.Component {
     }
 
     componentDidMount() {
+        axios.get("/api/stores_store/")
+        .then((res) => {
+            const stores = res.data;
+            this.setState({
+                loading: true,
+                stores: stores,
+                data: stores.slice(0, 5),
+            }, () => {
+                // get current location
+                this.getPosition().then((position) => {
+                    window.sessionStorage.setItem("latitude", position.coords.latitude);
+                    window.sessionStorage.setItem("longitude", position.coords.longitude);
+                    this.sortCallback();
+                })
+                .catch((e) => console.log(e));
+            });
+        });
+
         let addressContainer = document.getElementById("btn__address");
         let getPositionBtn = document.getElementById("btn__map_list");
 
@@ -218,9 +219,14 @@ class MainStoreContent extends React.Component {
                 ) : (
                     <>
                         <div className="content__partition">50m 이내</div>
-                        {this.state.data.map((data) => (
-                            <StoreJSX data={data} key={data.storeCd} />
-                        ))}
+                        {
+                            this.state.data !== undefined ?
+                            this.state.data.map((data) => (
+                                <StoreJSX data={data} key={data.storeCd} />
+                            ))
+                            :
+                            null
+                        }
                     </>
                 )
             }

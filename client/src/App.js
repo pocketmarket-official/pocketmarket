@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import CacheRoute from 'react-router-cache-route';
+import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 import cookie from 'react-cookies';
 import storage from './storage.js';
 import Index from './Routes/Index';
@@ -60,11 +60,11 @@ function App() {
         <Route authenticated={authenticated} exact path="/index" component={Index} />
         <CacheRoute authenticated={authenticated} exact path="/main" component={Main} />
         <CacheRoute authenticated={authenticated} exact path="/main/festival/:id" component={FestivalStore} />
-        <Switch>
-          <Route exact path="/main/store/:storeId/order" component={Order} />
-          <Route exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
-          <Route exact path="/main/store/:storeId/orderinfo/payMethod" component={OrderInfoPayMethod} />
-        </Switch>
+        <CacheSwitch>
+          <CacheRoute exact path="/main/store/:storeId/order" component={Order} />
+          <CacheRoute exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
+          <CacheRoute exact path="/main/store/:storeId/orderinfo/payMethod" component={OrderInfoPayMethod} />
+        </CacheSwitch>
         <CacheRoute authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
         <Route authenticated={authenticated} exact path="/order/review" component={ReviewWrite} />
         <Route authenticated={authenticated} exact path="/order/complete" component={OrderComplete} />

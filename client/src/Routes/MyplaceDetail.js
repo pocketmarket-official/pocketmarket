@@ -17,7 +17,7 @@ class MyplaceDetail extends React.Component {
                         <Link to="/mypage/myplace"><input className="header__search" readOnly/></Link>
                         <img className="header__mapLocation" id="header__mapLocation" src={btnClocation} alt="location" />
                     </div>
-                    <Link to="/mypage"><img className="header__logo" src={btnPoc} alt="logo" /></Link>
+                    <Link to="/index"><img className="header__logo" src={btnPoc} alt="logo" /></Link>
                 </div>
                 <KakaoMap />
             </div>

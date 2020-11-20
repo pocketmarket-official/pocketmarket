@@ -35,7 +35,7 @@ class Order extends React.Component {
             options: {},
             modal_options: [],
             selected: "",
-            orderContainerClosed: false,
+            orderContainerClosed: true,
         };
     }
 
