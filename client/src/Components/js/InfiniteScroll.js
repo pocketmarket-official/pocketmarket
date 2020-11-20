@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 
 class InfiniteScroll extends React.Component {
-
     render() {
         return (
             <>
