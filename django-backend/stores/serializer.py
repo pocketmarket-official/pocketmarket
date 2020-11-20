@@ -39,7 +39,7 @@ class StoreSerializer(serializers.ModelSerializer):
             'description',
             'insDt',
             'insUs',
-            '1modDt',
+            'modDt',
             'modUs',
         )
 
