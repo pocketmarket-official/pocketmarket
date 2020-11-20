@@ -14,8 +14,6 @@ import '../Components/scss/PointHistory.scss';
 import "react-datepicker/dist/react-datepicker.css";
 
 class PointHistory extends React.Component {
-
-
     constructor(props) {
         super(props);
         this.searchHistory = this.searchHistory.bind(this);

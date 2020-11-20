@@ -1,17 +1,23 @@
 /*global kakao*/
 import React from 'react';
-
 import markerImageSrc from '../../assets/map/map_store_ico.png';
 
 class MapContent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lat: this.props.lat,
+            long: this.props.long,
+        }
+    }
     componentDidMount() {
         // create and add script tag to the head
         const script = document.createElement("script");
         script.type = "text/javascript"
         script.src = "https://dapi.kakao.com/v2/maps/sdk.js?appkey=" + process.env.REACT_APP_KAKAO_KEY + "&autoload=false&libraries=services";
         document.head.appendChild(script);
-        let lat;
-        let long;
+        let lat = this.state.lat;
+        let long = this.state.long;
         let markers = [];
         let markerImageSrc;
 
@@ -34,9 +40,9 @@ class MapContent extends React.Component {
             long = coords.longitude;
         }
 
-        // get current location
+/*        // get current location
         navigator.geolocation.getCurrentPosition(success);
-
+*/
         script.onload = () => {
             kakao.maps.load(() => {
                 const geocoder = new kakao.maps.services.Geocoder();
