@@ -19,18 +19,20 @@ function Myplace() {
                 <div className="myplaceDetailMap__favorite">
                     <div className="myplaceDetailMap__address">
                         <table className="myplace__recentAddress">
-                            <tr className="myplace__content">
-                                <td colSpan="2" className="myplace__address">경기 안양시 동안구 호계동 1027</td>
-                                <td rowSpan="2" className="myplace__button">
-                                    <td className="myplace__delete"></td>
-                                </td>
-                            </tr>
-                            <tr className="myplace__content2">
-                                <td className="myplace__newZipCdNm">
-                                    <div>도로명</div>
-                                </td>
-                                <td className="myplace__newZipCd">엘에스로91번길 16-39</td>
-                            </tr>
+                            <tbody>
+                                <tr className="myplace__content">
+                                    <td colSpan="2" className="myplace__address">경기 안양시 동안구 호계동 1027</td>
+                                    <td rowSpan="2" className="myplace__button">
+                                        <td className="myplace__delete"></td>
+                                    </td>
+                                </tr>
+                                <tr className="myplace__content2">
+                                    <td className="myplace__newZipCdNm">
+                                        <div>도로명</div>
+                                    </td>
+                                    <td className="myplace__newZipCd">엘에스로91번길 16-39</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div className="myplaceDetailMap__searchForm">
