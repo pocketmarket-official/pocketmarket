@@ -5,7 +5,6 @@ import axios from 'axios';
 import lodash from 'lodash';
 import '../Components/scss/order.scss';
 import '../Components/scss/optionModal.scss';
-
 import closeBtn from '../assets/order_status_pop/btn_close.png';
 
 
@@ -26,10 +25,11 @@ class Order extends React.Component {
             storeId: "",
             storeCd: storeCd,
             keymapCd: "",
-            touchGroupCd: 0,
+            touchGroupCd: null,
             brandCd: "",
             touch_group: [],
             keymap: [],
+            keymaps: [],
             item_data: [],
             order_list: [],
             options: {},
@@ -37,99 +37,30 @@ class Order extends React.Component {
             selected: "",
             orderContainerClosed: false,
         };
-
-        // initialization of the touch group code
-        axios.get("/api/stores_store/")
-        .then((res) => {
-            let store = res.data.find(
-                (elt) => {
-                    if (elt.storeCd === storeCd) {
-                        return true;
-                    }
-                }
-            );
-            let storeId = store.id;
-            axios.get("/api/stores_pos/")
-            .then((res) => {
-                let keymapCd = res.data.find(
-                    (elt) => {
-                        if(elt.storeCd === storeId) {
-                            return true;
-                        }
-                    }
-                ).keymapCd;
-                axios.get("/api/keymaps_touchGroup/")
-                .then((res) => {
-                    let touch_group_id = res.data.find(
-                        (elt) => {
-                            if(elt.storeCd === storeId && elt.keymapCd === keymapCd) {
-                                return true;
-                            }
-                        }
-                    ).id;
-
-                    this.setState({
-                        touchGroupCd: touch_group_id,
-                        storeName: store.storeName,
-                    })
-                })
-            });
-        });
-
-        // 각 item에 대해서 옵션 연결 성공
-        axios.get("/api/items_item/")
-        .then((res) => {
-            let item_data = res.data;
-            let options = {}
-            axios.get("/api/items_itemAdd/")
-            .then((res) => {
-                res.data.map((item) => {
-                    let itemAddCd = item.itemAddCd;
-                    let elt = item_data.find((element) => {if(element.id === item.itemCd) { return true;}});
-                    let option = []
-                    itemAddCd.map((data) => {
-                        for(let i in item_data) {
-                            if(item_data[i].id === data) {
-                                option.push(item_data[i]);
-                                break;
-                            }
-                        }
-                        options[elt.id] = option;
-                    });
-                });
-                this.setState({
-                    options: options,
-                    item_data: item_data,
-                });
-            });
-        });
     }
 
     getKeymap(data) {
         // 각 카테고리를 누르면 메뉴가 바뀔 수 있도록 state 변경
         let touchGroupCd = data.id;
-        axios.get("/api/keymaps_keymap/")
-        .then((res) => {
-            let keymap = res.data.filter(
-                (elt) => {
-                    if(elt.storeCd === this.state.storeId && elt.keymapCd === this.state.keymapCd && elt.touchGroupCd === touchGroupCd) {
-                        return true;
-                    }
-                });
-            this.setState({
-                touchGroupCd: touchGroupCd,
-                keymap: keymap,
-            });
-        })
+        let keymap = this.state.keymaps.filter(
+            (elt) => {
+                if(elt.storeCd === this.state.storeId && elt.keymapCd === this.state.keymapCd && elt.touchGroupCd === touchGroupCd) {
+                    return true;
+                }
+            }
+        );
+        this.setState({
+            touchGroupCd: touchGroupCd,
+            keymap: keymap,
+        });
     }
 
     componentDidMount() {
-        let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
         axios.get("/api/stores_store/")
         .then((res) => {
             let store = res.data.find(
                 (elt) => {
-                    if (elt.storeCd === storeCd) {
+                    if (elt.storeCd === this.state.storeCd) {
                         return true;
                     }
                 }
@@ -161,22 +92,53 @@ class Order extends React.Component {
                     .then((res) => {
                         let keymap = res.data.filter(
                             (elt) => {
-                                if(elt.storeCd === arr[1] && elt.keymapCd === arr[2] && elt.touchGroupCd === this.state.touchGroupCd) {
+                                if(elt.storeCd === arr[1] && elt.keymapCd === arr[2] && elt.touchGroupCd === arr[0][0].id) {
                                     return true;
                                 }
-                            });
-                        return keymap;
-                    })
-                    .then((keymap) => {
+                            }
+                        );
+
+
                         this.setState({
                             touch_group: arr[0],
                             storeId: arr[1],
                             keymapCd: arr[2],
                             brandCd: brandCd,
+                            keymaps: res.data,
+                            touchGroupCd: arr[0][0].id,
                             keymap: keymap,
+                            storeName: store.storeName,
                         });
                     })
                 })
+            });
+        });
+
+        // 각 item에 대해서 옵션 연결 성공
+        axios.get("/api/items_item/")
+        .then((res) => {
+            let item_data = res.data;
+            let options = {}
+            axios.get("/api/items_itemAdd/")
+            .then((res) => {
+                res.data.map((item) => {
+                    let itemAddCd = item.itemAddCd;
+                    let elt = item_data.find((element) => {if(element.id === item.itemCd) { return true;}});
+                    let option = []
+                    itemAddCd.map((data) => {
+                        for(let i in item_data) {
+                            if(item_data[i].id === data) {
+                                option.push(item_data[i]);
+                                break;
+                            }
+                        }
+                        options[elt.id] = option;
+                    });
+                });
+                this.setState({
+                    options: options,
+                    item_data: item_data,
+                });
             });
         });
     }
@@ -235,21 +197,14 @@ class Order extends React.Component {
                             <div className="optionmodal__title">
                                 <div className="optionmodal__name">{this.state.selected.itemName}</div>
                                 <div className="optionmodal__description">처음부터 끝까지 모자렐라 치즈의 풍미를 즐길 수 있는 핫도그</div>
-                                {/*<div className="optionmodal__content">{this.state.selected.price}원</div>*/}
+                                <div className="optionmodal__content">{this.state.selected.price}원</div>
                             </div>
                         </div>
-                        <div className="optionmodal__category">
+                        {/*<div className="optionmodal__category">
                             <div className="category__category active">소스</div>
                             <div className="category__category">토핑</div>
                             <div className="category__category">치즈</div>
-                            {/*{*/}
-                            {/*    this.state.opt_cat.map((data) => {*/}
-                            {/*        return (*/}
-                            {/*            <div className="category__category">{data}</div>*/}
-                            {/*        );*/}
-                            {/*    })*/}
-                            {/*}*/}
-                        </div>
+                        </div>*/}
                         <div className="optionmodal__options">
                             {
                                 options.map((data) => {
@@ -285,6 +240,7 @@ class Order extends React.Component {
                                             <div className="result__content">
                                                 <div className="seq">{index + 1}</div>
                                                 <div className="name">{item[0].itemName}</div>
+                                                <div className="price">{item[0].price}원</div>
                                                 <div className="decrease" onClick={() => {
                                                     item[1] -= 1;
                                                     if(item[1] === 0) {

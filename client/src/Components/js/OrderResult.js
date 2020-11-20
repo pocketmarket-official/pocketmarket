@@ -25,7 +25,6 @@ class OrderResult extends React.Component {
 
     render() {
         let result = this.props.result;
-        console.log(result);
         return (
             result.map((data) => {
                 let contentId = "content" + data.id;

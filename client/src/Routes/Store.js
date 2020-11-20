@@ -22,11 +22,13 @@ class StoreView extends React.Component {
     constructor(props) {
         super(props);
         const id = this.props.location.state.data.storeCd;
+        const storeName = this.props.location.state.data.storeName;
         const link = "/main/store/" + id + "/order";
 
         this.state = {
             current: 0,
             link: link,
+            storeName: storeName,
         };
 
         this.handlePageSlide = this.handlePageSlide.bind(this);
