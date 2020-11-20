@@ -57,3 +57,4 @@ function pay(sellItemList, price, storeName, storeCd) {
 }
 
 export default pay;
+
