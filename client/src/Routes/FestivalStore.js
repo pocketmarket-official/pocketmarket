@@ -23,7 +23,7 @@ class FestivalStore extends React.Component {
                     }
                 }
             )
-        })
+        });
 
         this.state = {
             festival: this.props.location.state.data,

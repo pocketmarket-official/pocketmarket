@@ -9,6 +9,7 @@ import storImg from '../../assets/store/img1.png';
 import star1 from '../../assets/store/star1.png';
 import star2 from '../../assets/store/star2.png';
 import star3 from '../../assets/store/star3.png';
+import defaultImg from '../../assets/main/grayBI.png';
 
 
 class StoreJSX extends React.Component {
@@ -105,7 +106,7 @@ class StoreJSX extends React.Component {
                         state: {data, d}
                     }}>
                     <div className="store__store">
-                        <img className="store__image" src={data.imgLogoUrl} alt="store"/>
+                        <img className="store__image" src={data.imgLogoUrl || defaultImg} alt="store"/>
                         <div className="store__detail">
                             <div className="detail__tags">
                                 {/* <div className="tags__new">NEW</div> */}

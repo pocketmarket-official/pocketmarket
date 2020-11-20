@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/mainFestivalJSX.scss';
+import defaultImg from '../../assets/main/grayBI.png';
 
 
 class FestivalJSX extends React.Component {
@@ -36,7 +37,7 @@ class FestivalJSX extends React.Component {
                         <div className="header__enter">축제입장</div>
                     </div>
                     <div className="festival__detail">
-                        <img src={data.imgUrl} alt="festival" />
+                        <img src={data.imgUrl || defaultImg} alt="festival" />
                         <div className="detail__description">
                             <ul>
                                 <li>{startDt} ~ {endDt}</li>
