@@ -11,12 +11,6 @@ function pay(sellItemList, price, storeName, storeCd) {
         pg: 'nicepay',
         // method: 'card',
         show_agree_window: 0,
-        user_info: {
-            username: '노민철',
-            email: 'rmc2@naver.com',
-            addr: '경기도 안양시',
-            phone: '010-8222-9249'
-        },
         sellItemList: sellItemList,
         order_id: `${Date.now()}_사용자_이름`,
 //        params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
