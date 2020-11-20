@@ -36,26 +36,26 @@ class StoreJSX extends React.Component {
                 }
             });
             
-            let transData = {
-              "storeId":data.id, "userId":user.id
-            };
+            // let transData = {
+            //   "storeId":data.id, "userId":user.id
+            // };
             
-            axios.post('http://localhost:8000/storeLike/', transData)
-            .then((res) => {
-                let like = res.data.likeCnt;
-                let likeYn = res.data.likeYn;
-                if(this.state.likeYn !== likeYn) {
-                    this.setState({
-                        like: like,
-                        storeId: data.id,
-                        userId: user.id,
-                        likeYn: likeYn,
-                    });
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+            // axios.post('http://localhost:8000/storeLike/', transData)
+            // .then((res) => {
+            //     let like = res.data.likeCnt;
+            //     let likeYn = res.data.likeYn;
+            //     if(this.state.likeYn !== likeYn) {
+            //         this.setState({
+            //             like: like,
+            //             storeId: data.id,
+            //             userId: user.id,
+            //             likeYn: likeYn,
+            //         });
+            //     }
+            // })
+            // .catch((err) => {
+            //     console.log(err);
+            // })
         });
     }
 

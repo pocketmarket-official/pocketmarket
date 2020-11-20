@@ -42,18 +42,12 @@ function pay(sellItemList, price, storeName, storeCd) {
         // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
         // console.log(data);
     }).done(function (data) {
-        window.alert('success');
         //결제가 정상적으로 완료되면 수행됩니다
         //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
-        let storeCd = 'C0001';
-        let saleDt = '20201002';
-        let posNo = '03';
-        let billNo = '0001';
-        let transData = {};
-
-        transData = {"data":data, "sellItemList":sellItemList, 'storeCd':storeCd};
+        let transData = {"data":data, "sellItemList":sellItemList, 'storeCd':storeCd};
         axios.post('http://localhost:8000/trade/', transData);
     });
 }
 
 export default pay;
+
