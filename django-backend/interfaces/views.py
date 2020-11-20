@@ -21,6 +21,7 @@ from trades.models import SaleHeader
 from trades.models import SaleDetail
 from trades.models import CardLog
 
+from django.http import HttpResponse
 
 
 ##todo get or create 구문에서 비교조건이 pk와 동일한지 체크
@@ -28,9 +29,9 @@ def MasterDownView(request):
     try:
         ## values
         compCd = 'C0028'
-        posNo = '02'
+        posNo = '01'
         ## parameter
-        storeCd = 'C0001'
+        storeCd = request.GET['storeCd']
 
         ##todo : brand down은 따로 나누기
 
@@ -612,10 +613,10 @@ def MasterDownView(request):
                     keymap_pktmkt.modUs = keymap_imt.get('MOD_US')
                     keymap_pktmkt.save()
 
-
         else:
             print("Error Code:" + rescode)
-        return
+
+        return HttpResponse(store.storeName + '매장의 마스터 수신이 완료되었습니다.')
     except Exception as ex:
         print(ex)
 
@@ -644,93 +645,3 @@ def TradeUploadView(request):
 
     except Exception as ex:
         print(ex)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

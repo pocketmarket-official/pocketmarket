@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from stores.models import Store
+from stores.serializer import StoreMinSerializer
 from users.models import User
 from users.models import Point
 from users.models import MyPlace
@@ -72,6 +74,7 @@ class BusinessSerializer(serializers.ModelSerializer):
             'bizAddr',
             'storeAddr',
             'orderYn',
+            'BizRegi',
             'insDt',
             'insUs',
             'modDt',

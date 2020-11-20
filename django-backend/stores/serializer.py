@@ -6,7 +6,6 @@ from stores.models import StoreDic
 from stores.models import StoreLike
 
 class StoreSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Store
         fields = (
@@ -41,7 +40,14 @@ class StoreSerializer(serializers.ModelSerializer):
             'insDt',
             'insUs',
             'modDt',
-            'modUs'
+            'modUs',
+        )
+
+class StoreMinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Store
+        fields = (
+            'id',
         )
 
 

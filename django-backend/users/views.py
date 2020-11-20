@@ -9,6 +9,8 @@ from users.serializer import MyPlaceSerializer
 from users.models import Business
 from users.serializer import BusinessSerializer
 
+from rest_framework import permissions
+
 
 
 class UserView(viewsets.ModelViewSet):
@@ -31,3 +33,4 @@ class BusinessView(viewsets.ModelViewSet):
 
     serializer_class = BusinessSerializer
     queryset = Business.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)

@@ -9,7 +9,7 @@ from datetime import datetime
 class User(AbstractUser):
     """ User Model Definition """
     profileName = models.CharField(max_length=30, default='')
-    profileImage = models.ImageField(upload_to="image", null=True)
+    profileImage = models.ImageField(upload_to="images/userProfile", null=True)
 
 
     pass
@@ -46,7 +46,7 @@ class MyPlace(models.Model):
 class Business(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
     seq = models.IntegerField(default=1)
-    store = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
+    store = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1, related_name='stores')
     bizNo = models.CharField(max_length=15, blank=True)
     bizName = models.CharField(max_length=100, blank=True)
     openDttm = models.CharField(max_length=8, blank=True)
@@ -54,6 +54,7 @@ class Business(models.Model):
     bizAddr = models.CharField(max_length=100, blank=True)
     storeAddr = models.CharField(max_length=100, blank=True)
     orderYn = models.CharField(max_length=1, default='Y')
+    BizRegi = models.ImageField(null=True, upload_to='images/bizRegi')
     insDt = models.DateTimeField(default=datetime.now())
     insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
