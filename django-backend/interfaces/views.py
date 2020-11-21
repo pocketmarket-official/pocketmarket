@@ -97,7 +97,7 @@ def MasterDownView(request):
                                                                      'imgLogoUrl': store_imt.get(
                                                                          'IMG_LOGO_URL'),
                                                                      'orgIf': store_imt.get('ORG_IF'),
-                                                                     'useYn': store_imt.get('USE_YN'),
+                                                                     'useYn': {(store_imt.get('USE_YN')=='1'):'Y'}.get(True,'N'),
                                                                      'insDt': store_imt.get('INS_DT'),
                                                                      'insUs': store_imt.get('INS_US'),
                                                                      'modDt': store_imt.get('MOD_DT'),
@@ -125,7 +125,7 @@ def MasterDownView(request):
                     store_pktmkt.closeDt = store_imt.get('CLOSE_DT')
                     store_pktmkt.imgLogoUrl = store_imt.get('IMG_LOGO_URL')
                     store_pktmkt.orgIf = store_imt.get('ORG_IF')
-                    store_pktmkt.useYn = store_imt.get('USE_YN')
+                    store_pktmkt.useYn = {(store_imt.get('USE_YN')=='1'):'Y'}.get(True,'N')
                     store_pktmkt.insDt = store_imt.get('INS_DT')
                     store_pktmkt.insUs = store_imt.get('INS_US')
                     store_pktmkt.modDt = store_imt.get('MOD_DT')

@@ -38,7 +38,13 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
             'orgBillNo',
             'sendYn',
             'orderStatus',
-            'user'
+            'completeTime',
+            'pickupTime',
+            'user',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs'
         )
 
 

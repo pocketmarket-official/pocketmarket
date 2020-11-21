@@ -122,8 +122,9 @@ def trade(request):
         compCd = 'C0028'
         terminalId = '0001000200'
         vanCd = '11'
-        # parameter from api
+        # parameter fromrequest
         storeCd = Store.objects.get(id=json.loads(request.body)['storeId']).storeCd
+        user = User.objects.get(id=json.loads(request.body['userId']))
         # storeCd = f'{json.loads(request.body)["storeCd"]:05}'
         posNo = '01'
         dcAmt = 0.0
@@ -271,7 +272,7 @@ def trade(request):
             orgBillNo='',
             sendYn='N',
             orderStatus='2',
-            # user = 1
+            user = user
         )
 
         cardLogObj = CardLog.objects.create(
