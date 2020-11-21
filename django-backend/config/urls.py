@@ -64,7 +64,6 @@ router.register(r'users_question', user_views.QuestionView, 'question')
 router.register(r'brands_brand', brand_views.BrandView, 'brand')
 
 router.register(r'reviews_review', review_views.ReviewView, 'review')
-router.register(r'reviews_reviewImage', review_views.ReviewImageView, 'reviewImage')
 router.register(r'reviews_reply', review_views.ReplyView, 'reply')
 
 router.register(r'items_item', item_views.ItemView, 'item')
