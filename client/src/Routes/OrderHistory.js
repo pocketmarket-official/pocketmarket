@@ -2,7 +2,6 @@ import React from 'react';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import OrderResult from '../Components/js/OrderResult';
 
-import '../Components/scss/OrderHistory.scss';
 import calendar from "../assets/point_history/ico_date.png";
 import DatePicker from "react-datepicker";
 import search from "../assets/point_history/ico_search.png";

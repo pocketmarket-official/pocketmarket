@@ -10,7 +10,6 @@ import arw from '../assets/point_history_conversion/ico_arw.png';
 import { ko } from "date-fns/esm/locale";
 
 
-import '../Components/scss/PointHistory.scss';
 import "react-datepicker/dist/react-datepicker.css";
 
 class PointHistory extends React.Component {

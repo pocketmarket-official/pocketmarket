@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import StoreJSX from "../Components/js/mainStoreJSX";
 import axios from 'axios';
-import '../Components/scss/festivalStore.scss';
 
 import bg from '../assets/festival_store/top_bg.jpg';
 

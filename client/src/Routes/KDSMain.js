@@ -1,5 +1,4 @@
 import React from 'react';
-import '../Components/scss/KDSMain.scss'
 import bg from '../assets/kds/B_img.png';
 import timer from '../assets/kds/ic_timer.svg';
 

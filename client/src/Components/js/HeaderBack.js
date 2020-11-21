@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import '../scss/headerBack.scss';
 
 import btnBack from '../../assets/common/btn_bs.png';
 import btnAlarm from '../../assets/common/btn_alarm.png';

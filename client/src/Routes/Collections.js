@@ -1,6 +1,5 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
-import '../Components/scss/fastOrder.scss';
 import mark from '../assets/store_fastorder/btn_pket_ico.png';
 import emptymark from '../assets/store_fastorder/btn_code_store.png';
 import img1 from '../assets/store_fastorder/14.jpg';

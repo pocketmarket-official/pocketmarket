@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
-import '../Components/scss/orderComplete.scss';
 
 
 function OrderComplete() {

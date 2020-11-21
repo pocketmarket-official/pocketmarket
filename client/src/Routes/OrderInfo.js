@@ -3,7 +3,6 @@ import pay from '../bootpay.js';
 import HeaderBiz from "../Components/js/HeaderBiz";
 import {Link} from "react-router-dom";
 
-import '../Components/scss/orderInfo.scss';
 import axios from "axios";
 import cookie from "react-cookies";
 import storage from "../storage";

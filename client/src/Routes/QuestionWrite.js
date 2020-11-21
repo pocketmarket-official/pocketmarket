@@ -1,6 +1,5 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
-import '../Components/scss/QuestionWrite.scss';
 import img_ico from "../assets/review_write/img_up_ico.png";
 import cookie from 'react-cookies';
 import storage from '../storage.js';

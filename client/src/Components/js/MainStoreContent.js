@@ -2,7 +2,6 @@ import React from 'react';
 import StoreJSX from './mainStoreJSX';
 import Loading from './Loading';
 import axios from 'axios';
-import '../scss/mainStoreContent.scss';
 
 class MainStoreContent extends React.Component {
     constructor(props) {

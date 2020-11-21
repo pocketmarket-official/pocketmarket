@@ -1,6 +1,5 @@
 import React from 'react';
 
-import '../scss/myPlaceJSX.scss';
 
 import rewrite from '../../assets/my_place_full/ico_rewrite.png';
 import trash from '../../assets/my_place_full/ico_trash.png';

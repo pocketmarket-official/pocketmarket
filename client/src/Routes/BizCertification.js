@@ -1,6 +1,5 @@
 import React from 'react';
 import HeaderBiz from '../Components/js/HeaderBiz';
-import '../Components/scss/BizCertification.scss';
 import biz from '../assets/business_certification/top_img.png';
 import userchg from '../assets/business_certification/ico_user_chg.png';
 import logout from '../assets/business_certification/ico_logout.png';

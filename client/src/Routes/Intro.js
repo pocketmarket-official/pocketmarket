@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 import cookie from 'react-cookies';
 import bgVideo from "../assets/intro/intro.mp4";
 import bgImage from "../assets/intro/bg.jpg";
-import '../Components/scss/intro.scss';
 import storage from '../storage.js';
 
 const axios = require('axios');

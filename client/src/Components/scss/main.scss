@@ -2,11 +2,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 63px;
+  margin-top: $headerHeight;
 
   .main__btns {
     position: sticky;
-    top: 63px;
+    top: $headerHeight;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../scss/mainFestivalJSX.scss';
 import defaultImg from '../../assets/main/grayBI.png';
 
 

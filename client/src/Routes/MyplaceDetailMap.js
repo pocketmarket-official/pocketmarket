@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 
-import '../Components/scss/MyplaceDetailMap.scss';
 import KakaoMap from "../Components/js/kakaomap";
 import img_pick from "../assets/my_place_full/img_pick.png";
 import search from "../assets/my_place_full/btn_check_tmp.png";

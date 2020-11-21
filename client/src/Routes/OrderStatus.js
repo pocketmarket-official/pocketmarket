@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
-import '../Components/scss/orderStatus.scss';
 import btnCal from '../assets/order_status/btn_date.png'
 import axios from "axios";
 import cookie from "react-cookies";

@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import axios from 'axios';
 import lodash from 'lodash';
-import '../Components/scss/order.scss';
-import '../Components/scss/optionModal.scss';
 import closeBtn from '../assets/order_status_pop/btn_close.png';
 
 

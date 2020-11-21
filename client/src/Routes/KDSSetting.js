@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../Components/scss/KDSSetting.scss'
 
 function KDSSetting() {
     return (

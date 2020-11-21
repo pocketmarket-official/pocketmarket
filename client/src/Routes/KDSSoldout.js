@@ -1,5 +1,4 @@
 import React from 'react';
-import '../Components/scss/KDSSoldout.scss'
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";

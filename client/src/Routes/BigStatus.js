@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
-import '../Components/scss/bigStatus.scss';
 
 import reviewButton from '../assets/order_status_pop/bttm_bi.png';
 import market from '../assets/order_status_pop/top_bi.png';

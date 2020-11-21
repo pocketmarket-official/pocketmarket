@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../scss/mainStoreJSX.scss';
 
 import storImg from '../../assets/store/img1.png';
 import star1 from '../../assets/store/star1.png';

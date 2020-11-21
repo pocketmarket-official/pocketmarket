@@ -1,7 +1,6 @@
 import React from 'react';
 import KakaoMap from '../Components/js/kakaomap';
 import {Link} from "react-router-dom";
-import '../Components/scss/myPlaceDetail.scss';
 
 import btnBack from '../assets/map/btn_back.png';
 import btnClocation from '../assets/map/btn_clocation.png';

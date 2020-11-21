@@ -2,7 +2,6 @@ import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
 import HeaderBiz from '../Components/js/HeaderBiz';
 
-import '../Components/scss/BizOrderStatus.scss';
 
 function BizOrderStatus() {
     return (

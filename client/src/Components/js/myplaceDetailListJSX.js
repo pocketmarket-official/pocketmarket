@@ -1,6 +1,5 @@
 import React from 'react';
 
-import '../scss/myPlaceDetailListJSX.scss';
 import { Link } from "react-router-dom";
 
 

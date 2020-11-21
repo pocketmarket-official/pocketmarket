@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import StoreList from '../Components/js/StoreList';
-import '../Components/scss/storeGrid.scss';
 
 import bg from '../assets/store_grid/grid_top_bg.jpg';
 import menu1 from '../assets/store_grid/grid_img1.jpg';

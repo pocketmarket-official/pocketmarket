@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import MyplaceDetailListJSX from '../Components/js/myplaceDetailListJSX';
-import '../Components/scss/MyplaceDetailList.scss';
 import rewrite from '../assets/my_place_full/img_name.png';
 import close from "../assets/order_status_pop/btn_close.png";
 import search from '../assets/my_place_full/ico_search.png';

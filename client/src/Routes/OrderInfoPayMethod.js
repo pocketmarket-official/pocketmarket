@@ -1,7 +1,6 @@
 import HeaderBiz from "../Components/js/HeaderBiz";
 import React from "react";
 
-import '../Components/scss/orderInfoPayMethod.scss';
 
 const OrderInfoPayMethod = () => {
     return (

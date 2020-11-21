@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import MyplaceJSX from '../Components/js/myplaceJSX';
-import '../Components/scss/Myplace.scss';
 import rewrite from '../assets/my_place_full/img_name.png';
 import close from "../assets/my_place_full/btn_close.png";
 import ico_close from "../assets/my_place_full/ico_close.png";

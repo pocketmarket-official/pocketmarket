@@ -1,6 +1,5 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
-import '../Components/scss/ReviewWrite.scss';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import storage from '../storage.js';
@@ -109,7 +108,7 @@ class ReviewWrite extends React.Component {
                                 <div className="review__point">1.5</div>
                             </div>
                             <div className="image__container" id="image__container">
-                                need to show image preview 
+                                need to show image preview
                             </div>
                         </div>
                     </div>

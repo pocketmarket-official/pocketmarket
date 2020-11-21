@@ -4,8 +4,6 @@ import btnBack from "../../assets/common/btn_bs.png";
 import bi from "../../assets/common/BI.png";
 import btnMy from "../../assets/common/btn_my.png";
 
-import '../scss/headerMy.scss';
-
 function HeaderBiz() {
     const history = useHistory();
 

@@ -1,6 +1,5 @@
 import React, {useRef} from 'react';
 
-import '../scss/review.scss';
 import itemimg from "../../assets/review_list/list_img1.jpg";
 import userimg from "../../assets/review_list/ico_user1.png";
 import Flicking from "@egjs/react-flicking";

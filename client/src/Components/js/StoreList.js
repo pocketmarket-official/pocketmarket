@@ -1,6 +1,5 @@
 import React from 'react';
 import InfiniteScroll from './InfiniteScroll';
-import '../scss/storeList.scss';
 import menu from '../../assets/store_list/grid_img1.jpg';
 
 class StoreList extends React.Component {

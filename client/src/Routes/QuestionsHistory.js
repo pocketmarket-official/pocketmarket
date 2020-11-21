@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import QuestionResult from '../Components/js/QuestionResult';
 
-import '../Components/scss/QuestionsHistory.scss';
 import calendar from "../assets/point_history/ico_date.png";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import search from "../assets/point_history/ico_search.png";

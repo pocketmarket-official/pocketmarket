@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
-import '../Components/scss/mypage.scss';
 import logout from '../assets/my_page/ico_logout.png';
 import store from '../assets/my_page/ico_store.png';
 

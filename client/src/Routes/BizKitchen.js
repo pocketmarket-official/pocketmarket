@@ -1,6 +1,5 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
-import '../Components/scss/bizkitchen.scss';
 import img1 from '../assets/order/menu1.png'
 import img2 from '../assets/order/menu2.png'
 import done from '../assets/business_kitchen/img_soldout.png'

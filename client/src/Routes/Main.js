@@ -7,7 +7,6 @@ import Header from '../Components/js/Header';
 import MainFestivalContent from '../Components/js/MainFestivalContent';
 import MainStoreContent from '../Components/js/MainStoreContent';
 import MainMapContent from '../Components/js/MainMapContent';
-import '../Components/scss/main.scss';
 
 import btnSearchImg from '../assets/common/btn_sceach.png';
 
