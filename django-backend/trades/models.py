@@ -25,7 +25,7 @@ class SaleHeader(models.Model):
     orgPosNo = models.CharField(max_length=5, null=True)
     orgBillNo = models.CharField(max_length=10, null=True)
     sendYn = models.CharField(max_length=1, default='N')
-    orderStatus = models.CharField(max_length=1, default=1)#1:주문중/2:주문완료/3:제조완료/4:픽업완료/5:리뷰작성완료
+    orderStatus = models.CharField(max_length=1, default=1)#1:주문중/2:주문완료/3:제조완료/4:픽업완료/5:리뷰작성완료/6:리뷰작성취소
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
 
 

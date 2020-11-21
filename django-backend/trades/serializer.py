@@ -33,7 +33,7 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
             'kkmAmt',
             'returnYn',
             'orgStoreCd',
-            'orgSaleDate',
+            'orgSaleDt',
             'orgPosNo',
             'orgBillNo',
             'sendYn',
