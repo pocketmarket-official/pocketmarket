@@ -13,7 +13,7 @@ class MapContent extends React.Component {
     componentDidMount() {
         // create and add script tag to the head
         const script = document.createElement("script");
-        script.type = "text/javascript"
+        script.type = "text/javascript";
         script.src = "https://dapi.kakao.com/v2/maps/sdk.js?appkey=" + process.env.REACT_APP_KAKAO_KEY + "&autoload=false&libraries=services";
         document.head.appendChild(script);
         let lat = this.state.lat;
