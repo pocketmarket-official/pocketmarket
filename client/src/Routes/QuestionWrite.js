@@ -51,7 +51,6 @@ class QuestionWrite extends React.Component {
         return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
     };
 
-
     handleSubmit = () => {
         let form_data = new FormData();
         var date = new Date();
