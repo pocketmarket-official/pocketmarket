@@ -32,7 +32,7 @@ class Store(models.Model):
     xPosition = models.FloatField(null=True)
     yPosition = models.FloatField(null=True)
     score = models.FloatField(default=0.0)
-    description = models.CharField(max_length=50, null=True, blank=True)
+    description = models.CharField(max_length=250, null=True, blank=True)
     insDt = models.DateTimeField(default=datetime.now(), null=True, blank=True)
     insUs = models.CharField(max_length=30, null=True, blank=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True, blank=True)
