@@ -135,7 +135,15 @@ class MainStoreContent extends React.Component {
 
         const elt = document.getElementById("navigation__search");
         elt.onclick = () => this.searchData();
-    }
+
+/*        axios.post("http://localhost:8000/storeLike/", {
+            "storeId": 324,
+            "userId": 2,
+        })
+        .then((res) => {
+            console.log(res);
+        })
+*/    }
 
     componentWillUnmount() {
         window.removeEventListener("scroll", this._infiniteScroll, true);

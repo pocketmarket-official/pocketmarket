@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from "react";
-import {Link, Redirect} from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import HeaderBack from "../Components/js/HeaderBack";
 import '../Components/scss/index.scss';
 import Flicking from "@egjs/react-flicking";

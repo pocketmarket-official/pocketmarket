@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../scss/myPlaceDetailListJSX.scss';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 let temp = [

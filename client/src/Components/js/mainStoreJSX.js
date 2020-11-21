@@ -38,6 +38,14 @@ class StoreJSX extends React.Component {
                                 {/* <div className="tags__new">NEW</div> */}
                                 <div className="tags__tag">@반포 낭만달빛마켓</div>
                                 <button className="tags__likes" onClick={(e) => {
+                                e.preventDefault();
+                                axios.post("http://localhost:8000/storeLike/", {
+                                    "storeId": data.id,
+                                    "userId": 2,
+                                })
+                                .then((res) => {
+                                    console.log(res);
+                                })
                                     // 좋아요 개수 가져오기
                                     // 좋아요 기능 추가 예정
                                 }}>♥ {this.state.like}</button>
