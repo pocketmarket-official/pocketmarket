@@ -11,11 +11,13 @@ class QuestionWrite extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.getFormatDate = this.getFormatDate.bind(this);
+        this.handleImageChange = this.handleImageChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
         this.state = {
-            userId: 0,
+            userId: null,
             content: '',
-            image: null
+            image: [],
         }
     }
 
@@ -26,9 +28,18 @@ class QuestionWrite extends React.Component {
     };
 
     handleImageChange = (e) => {
+        let container = document.getElementById("fileupload");
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(e.target.files[0]);
+        fileReader.onload = function(e) {
+            let elt = document.createElement("img");
+            elt.className = "file__image__box";
+            elt.src = e.target.result;
+            container.appendChild(elt);
+        };
         this.setState({
-            image: e.target.files[0]
-        })
+            image: this.state.image.concat(e.target.files),
+        });
     };
 
     getFormatDate = (date) => {
@@ -41,8 +52,7 @@ class QuestionWrite extends React.Component {
     };
 
 
-    handleSubmit = (e) => {
-        e.preventDefault();
+    handleSubmit = () => {
         let form_data = new FormData();
         var date = new Date();
         date = this.getFormatDate(date);
@@ -74,17 +84,20 @@ class QuestionWrite extends React.Component {
                         return true;
                     }
                 }).id;
-                this.setState({userId:userId});
+                this.setState({ userId: userId });
             });
 
-
+        const elt = document.getElementById("select_image");
+        const elt2 = document.getElementById("hidden_select");
+        elt.onclick = () => {
+            elt2.click();
+        }
     }
 
     render() {
         return (
             <>
                 <HeaderBack url='/mypage'/>
-            <form onSubmit={this.handleSubmit}>
                 <div className="questionwrite">
                     <div className="question__write__box">
                         <div className="question__write__caption">문의하기</div>
@@ -95,26 +108,18 @@ class QuestionWrite extends React.Component {
                         <div className="photo__upload">
                             <div className="upperline"></div>
                             <input type="file" multiple accept="image/*" id="question__image" hidden/>
-                            <div className="fileupload">
-                                {/*<div className="file__image__box">IMAGE</div>*/}
-                                {/*<div className="file__image__box">IMAGE</div>*/}
-                                {/*<div className="file__image__box">IMAGE</div>*/}
-                                {/*<div className="file__image__box">IMAGE</div>*/}
+                            <div className="fileupload" id="fileupload">
                                 <div className="file__image__box empty" id="empty">
-                                    <label htmlFor="file-input">
-                                        <img src={img_ico} className="image"/>
-                                    </label>
-                                    <input id="file-input" type="file" accept="image/png, image/jpeg" hidden onChange={this.handleImageChange}/>
+                                    <img src={img_ico} alt="camera" className="image" id="select_image" />
+                                    <input type="file" accept="image/png, image/jpeg" id="hidden_select"  onChange={this.handleImageChange} hidden/>
                                 </div>
                             </div>
                             <div className="underline"></div>
-                            <div className="submit" onClick={(e)=>{
-                                this.handleSubmit(e);
-                            }}>등록하기</div>
+                            <input type="submit" value="submit" id="review__submit" hidden/>
+                            <div className="submit" onClick={() => this.handleSubmit()}>등록하기</div>
                         </div>
                     </div>
                 </div>
-            </form>
             </>
         );
     }
