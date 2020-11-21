@@ -124,7 +124,7 @@ def trade(request):
         vanCd = '11'
         # parameter fromrequest
         storeCd = Store.objects.get(id=json.loads(request.body)['storeId']).storeCd
-        user = User.objects.get(id=json.loads(request.body['userId']))
+        user = User.objects.get(id=json.loads(request.body)['userId'])
         # storeCd = f'{json.loads(request.body)["storeCd"]:05}'
         posNo = '01'
         dcAmt = 0.0
