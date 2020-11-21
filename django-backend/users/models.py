@@ -59,3 +59,14 @@ class Business(models.Model):
     insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=datetime.now())
     modUs = models.CharField(max_length=30, null=True)
+
+class Question(models.Model):
+    # user = models.ForeignKey('users.User', on_delete=models.CASCADE,default=1)
+    # questionDate = models.CharField(max_length=8, blank=True, null=True)
+    # seq = models.IntegerField(default=1)
+    content = models.TextField()
+    img = models.ImageField(upload_to='images/question')
+    # insDt = models.DateTimeField(default=datetime.now())
+    # insUs = models.CharField(max_length=30, null=True)
+    # modDt = models.DateTimeField(default=datetime.now())
+    # modUs = models.CharField(max_length=30, null=True)

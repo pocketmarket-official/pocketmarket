@@ -41,7 +41,8 @@ class KakaoException(Exception):
 def kakao_login(request):
     ''' use kakao oauth '''
     client_id = os.environ.get('KAKAO_KEY')
-    redirect_uri = 'http://localhost:8000/login/kakao/callback'
+    # redirect_uri = 'http://localhost:8000/login/kakao/callback'
+    redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
     return redirect(
         f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
     )
@@ -53,7 +54,8 @@ def kakao_callback(request):
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
-        redirect_uri = 'http://localhost:8000/login/kakao/callback'
+        # redirect_uri = 'http://localhost:8000/login/kakao/callback'
+        redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -98,11 +100,13 @@ def kakao_callback(request):
                             photo_request = requests.get(picture)
                             user.profileImage.save(f"{name}_avatar", ContentFile(photo_request.content))
                     login(request, user)
-                    return HttpResponseRedirect('http://localhost:3000/main')
+                    # return HttpResponseRedirect('http://localhost:3000/main')
+                    return HttpResponseRedirect('http://13.124.90.138:3000/main')
                 else:
                     raise KakaoException()
     except KakaoException:
-        return HttpResponseRedirect('http://localhost:3000/login')
+        # return HttpResponseRedirect('http://localhost:3000/login')
+        return HttpResponseRedirect('http://13.124.90.138:3000/login')
 
 
 @csrf_exempt
@@ -417,12 +421,10 @@ def trade(request):
             "T_CARD_L": cardLogList
         }
         # trDataEncoded = json.dumps(trData, ensure_ascii=False)
-        trDataEncoded = json.dumps(trData)
-        trDataDecoded = trDataEncoded.encode('utf8').decode()
-        trUtf = trDataDecoded.encode('utf8').decode('utf8')
+        trData = json.dumps(trData)
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
-        request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data= trDataEncoded,  verify=False, headers=headers)
+        request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data= trData,  verify=False, headers=headers)
         if request.status_code == 200:
             saleHeaderObj.sendYn = 'Y'
             saleHeaderObj.save()

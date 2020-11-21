@@ -5,6 +5,7 @@ from users.models import User
 from users.models import Point
 from users.models import MyPlace
 from users.models import Business
+from users.models import Question
 
 
 
@@ -79,4 +80,19 @@ class BusinessSerializer(serializers.ModelSerializer):
             'insUs',
             'modDt',
             'modUs'
+        )
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = (
+            # 'user',
+            # 'questionDate',
+            # 'seq',
+            'content',
+            'img',
+            # 'insDt',
+            # 'insUs',
+            # 'modDt',
+            # 'modUs',
         )

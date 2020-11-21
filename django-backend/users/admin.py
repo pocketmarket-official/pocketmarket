@@ -34,3 +34,10 @@ class BusinessAdmin(admin.ModelAdmin):
     """ Business Admin """
 
     pass
+
+@admin.register(models.Question)
+class QuestionAdmin(admin.ModelAdmin):
+
+    """ Question Admin """
+
+    pass

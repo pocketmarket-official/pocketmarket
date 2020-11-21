@@ -59,6 +59,7 @@ router.register(r'users_user', user_views.UserView, 'user')
 router.register(r'users_point', user_views.PointView, 'point')
 router.register(r'users_myPlace', user_views.MyPlaceView, 'myPlace')
 router.register(r'users_business', user_views.BusinessView, 'business')
+router.register(r'users_question', user_views.QuestionView, 'question')
 
 router.register(r'brands_brand', brand_views.BrandView, 'brand')
 
