@@ -11,6 +11,14 @@
   background: white;
   border-bottom: 2px solid #eeeeee;
 
+  >a {
+    display: block;
+
+    >img {
+      display: block;
+    }
+  }
+
   .header__menu {
     width: 38px;
     height: 38px;
