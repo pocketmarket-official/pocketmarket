@@ -3,18 +3,16 @@ $headerHeight: 63px;
 
 .mypage{
     width: 100%;
-    height: 100%;
     margin-top: $headerHeight;
 
     .mypage__box{
         width: 90%;
-        height: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         margin:0 auto;
-
+        padding: 25px 0;
         border-bottom: 2px solid #d3d3d3;
 
         .mypage__list{
@@ -58,7 +56,6 @@ $headerHeight: 63px;
     }
 
     .setting__box{
-        height: 45%;
         width: 90%;
         display: flex;
         justify-content: flex-start;
