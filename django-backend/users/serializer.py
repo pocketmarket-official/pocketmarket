@@ -86,13 +86,12 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = (
-            # 'user',
-            # 'questionDate',
-            # 'seq',
+            'user',
+            'questionDate',
             'content',
             'img',
-            # 'insDt',
-            # 'insUs',
-            # 'modDt',
-            # 'modUs',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs',
         )

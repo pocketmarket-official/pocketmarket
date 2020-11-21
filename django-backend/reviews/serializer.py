@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from reviews.models import Review
 from reviews.models import ReviewLike
-from reviews.models import ReviewImage
 from reviews.models import Reply
 
 
@@ -37,22 +36,6 @@ class ReviewLikeSerializer(serializers.ModelSerializer):
             'modDt',
             'modUs'
         )
-
-class ReviewImageSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ReviewImage
-        fields = {
-            'id',
-            'review',
-            'seq',
-            'url',
-            'deleteYn',
-            'insDt',
-            'insUs',
-            'modDt',
-            'modUs',
-        }
 
 class ReplySerializer(serializers.ModelSerializer):
 

@@ -20,14 +20,6 @@ class ReviewLikeAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(models.ReviewImage)
-class ReviewImageAdmin(admin.ModelAdmin):
-
-    """ ReviewImage Admin """
-
-    pass
-
-
 @admin.register(models.Reply)
 class ReplyAdmin(admin.ModelAdmin):
 
