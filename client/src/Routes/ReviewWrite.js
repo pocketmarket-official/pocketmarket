@@ -30,11 +30,11 @@ class ReviewWrite extends React.Component {
             elt.className = "file__image__box";
             elt.src = e.target.result;
             container.appendChild(elt);
-        }
+        };
         this.setState({
             image: this.state.image.concat(e.target.files),
         });
-    }
+    };
 
     componentDidMount() {
         let cookie_token = cookie.load("access_token");

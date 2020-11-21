@@ -19,7 +19,7 @@ let temp = [
 
     },
 
-]
+];
 
 function ReviewJSX() {
     const paginationElem = useRef(null);

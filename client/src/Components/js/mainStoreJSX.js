@@ -148,7 +148,6 @@ class StoreJSX extends React.Component {
                             </div>
                             <button className="review__likes" onClick={(e) => {
                                 e.preventDefault();
-                                console.log('hi');
                                 // 좋아요 기능 추가 예정
                             }}>
                                 <p>♥</p> 56
