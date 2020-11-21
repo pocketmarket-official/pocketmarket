@@ -119,8 +119,8 @@ def trade(request):
         terminalId = '0001000200'
         vanCd = '11'
         # parameter from api
-        # storeCd = Store.objects.get(id=json.loads(request.body)['storeId']).storeCd
-        storeCd = json.loads(request.body)['storeCd']
+        storeCd = Store.objects.get(id=json.loads(request.body)['storeId']).storeCd
+        # storeCd = f'{json.loads(request.body)["storeCd"]:05}'
         posNo = '01'
         dcAmt = 0.0
 
@@ -454,7 +454,7 @@ def storeLike(request):
         likeId = ''
     else:
         likeYn = 'Y'
-        likeId = like.id
+        likeId = like[0]['id']
 
     returnRow = {'likeCnt': likeCnt, 'likeYn':likeYn, 'likeId':likeId}
 
