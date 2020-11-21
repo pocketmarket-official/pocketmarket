@@ -31,18 +31,16 @@
 
     .ordercomplete__text{
         width: 80%;
-        height: 36%;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        margin:0 auto;
+        margin:10px auto 20px;
         border-radius: 10px;
         box-shadow: 0px 8px 15.1px 1.9px rgba(119, 119, 119, 0.1);
         border: solid 1px #f4f4f4;
         background-color: #ffffff;
-        margin-top: 10px;
-        margin-bottom: 20px;
+        padding: 41px;
 
         .ordercomplete__line1{
             height: 24px;
