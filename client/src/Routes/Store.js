@@ -43,31 +43,21 @@ class StoreView extends React.Component {
             return (
             <>
                 <div className="store__review__grid" id="review__container">
-                    <div className="storeGridMenu">
                         <div className="photo"><img src={menu1}/></div>
                         <div><img src={menu2}/></div>
                         <div><img src={menu3}/></div>
-                    </div>
-                    <div className="storeGridMenu">
                         <div><img src={menu4}/></div>
                         <div><img src={menu5}/></div>
                         <div><img src={menu6}/></div>
-                    </div>
-                    <div className="storeGridMenu">
                         <div><img src={menu7}/></div>
                         <div><img src={menu8}/></div>
                         <div><img src={menu9}/></div>
-                    </div>
-                    <div className="storeGridMenu">
                         <div><img src={menu10}/></div>
                         <div><img src={menu11}/></div>
                         <div><img src={menu12}/></div>
-                    </div>
-                    <div className="storeGridMenu">
                         <div><img src={menu4}/></div>
                         <div><img src={menu5}/></div>
                         <div><img src={menu6}/></div>
-                    </div>
                 </div>
             </>
             );
