@@ -11,7 +11,6 @@ class OrderStatus extends React.Component {
     constructor(props) {
         super(props);
 
-
         this.state = {
             userId: null,
             saleHeader: [],
@@ -23,38 +22,39 @@ class OrderStatus extends React.Component {
         let cookie_token = cookie.load("access_token");
         let user_email = storage.get(cookie_token);
 
-        axios.get('/api/users_user/')
+        axios.get('http://localhost:8000/api/users_user/')
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
                 }).id;
-                this.setState({userId:userId});
+                axios.get('http://localhost:8000/api/trades_saleHeader/')
+                .then((res) => {
+                    let saleHeader = res.data.filter((elt) => {
+                        if(elt.user === this.state.userId){
+                            return true;
+                        }
+                    });
+                    axios.get("http://localhost:8000/api/trades_saleDetail/")
+                    .then((res) => {
+                        let saleDetail = res.data.filter((elt) => {
+                            if(elt.user === this.state.userId){
+                                return true;
+                            }
+                        });
+                        this.setState({
+                            userId:userId,
+                            saleHeader: saleHeader,
+                            saleDetail: saleDetail,
+                        });
+                    });
+                });
             });
-
-        axios.get("/api/trades_saleHeader/")
-        .then((res) => {
-            let saleHeader = res.data.filter((elt) => {
-                if(elt.user === this.state.userId){
-                    return true;
-                }
-            });
-            this.setState({ saleHeader: this.state.saleHeader });
-        });
-
-        axios.get("/api/trades_saleDetail/")
-        .then((res) => {
-            let saleHeader = res.data.filter((elt) => {
-                if(elt.user === this.state.userId){
-                    return true;
-                }
-            });
-            this.setState({ saleDetail: this.state.saleHeader });
-        });
     }
 
     render() {
+        console.log(this.state);
         return (
             <>
                 <HeaderBack url='/mypage'/>
