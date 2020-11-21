@@ -63,12 +63,10 @@ class MainStoreContent extends React.Component {
     }
 
     getPosition(options) {
-        if(navigator.geolocation) {
-            return new Promise(function(resolve, reject) {
-                navigator.geolocation.getCurrentPosition(resolve, reject, options);
-            });
-        }
-    }
+/*        return new Promise(function(resolve, reject) {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options);
+        });
+*/    }
 
     _getData() {
         let result = this.state.stores.slice(this.state.preItems, this.state.items);
@@ -107,12 +105,13 @@ class MainStoreContent extends React.Component {
                 stores: stores,
             }, () => {
                 // get current location
-                this.getPosition().then((position) => {
+/*                this.getPosition().then((position) => {
                     window.sessionStorage.setItem("latitude", position.coords.latitude);
                     window.sessionStorage.setItem("longitude", position.coords.longitude);
                     this.sortCallback();
                 })
                 .catch((e) => console.log(e));
+*/                this.sortCallback();
             });
         });
 
