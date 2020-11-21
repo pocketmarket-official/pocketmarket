@@ -22,6 +22,7 @@ class MainStoreContent extends React.Component {
             gap: 5,
             preItems: 0,
             items: 5,
+            userId: this.props.userId,
         };
     }
 
@@ -98,7 +99,6 @@ class MainStoreContent extends React.Component {
             this.setState({
                 loading: true,
                 stores: stores,
-                data: stores.slice(0, 5),
             }, () => {
                 // get current location
                 this.getPosition().then((position) => {
@@ -135,15 +135,7 @@ class MainStoreContent extends React.Component {
 
         const elt = document.getElementById("navigation__search");
         elt.onclick = () => this.searchData();
-
-/*        axios.post("http://localhost:8000/storeLike/", {
-            "storeId": 324,
-            "userId": 2,
-        })
-        .then((res) => {
-            console.log(res);
-        })
-*/    }
+    }
 
     componentWillUnmount() {
         window.removeEventListener("scroll", this._infiniteScroll, true);
@@ -230,7 +222,7 @@ class MainStoreContent extends React.Component {
                         {
                             this.state.data !== undefined ?
                             this.state.data.map((data) => (
-                                <StoreJSX data={data} key={data.storeCd} />
+                                <StoreJSX data={data} key={data.storeCd} userId={this.state.userId} />
                             ))
                             :
                             null

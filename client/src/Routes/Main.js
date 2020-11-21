@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import cookie from 'react-cookies';
 import storage from '../storage.js';
 import Header from '../Components/js/Header';
@@ -63,6 +64,7 @@ class Main extends React.Component {
             temp: temp,
             current: current,
             latlong: [],
+            userId: null,
         }
     }
 
@@ -71,7 +73,9 @@ class Main extends React.Component {
         if(this.state.current === 0) {
             return <MainFestivalContent />;
         } else if(this.state.current === 1) {
-            return <MainStoreContent place={this.state.latlong} />;
+            if(this.state.userId) {
+                return <MainStoreContent place={this.state.latlong} userId={this.state.userId} />;
+            }
         } else if(this.state.current === 2) {
             return <MainMapContent place={this.state.latlong} />;
         } else {
@@ -156,6 +160,19 @@ class Main extends React.Component {
     componentDidMount() {
         this.handleRefresh();
         this.handleTop();
+
+        let cookie_token = cookie.load("access_token");
+        let user_email = storage.get(cookie_token);
+
+        axios.get("/api/users_user/")
+        .then((res) => {
+            let userId = res.data.find((elt) => {
+                if(elt.email === user_email) {
+                    return true;
+                }
+            }).id;
+            this.setState({ userId: userId });
+        });
     }
 
     render() {

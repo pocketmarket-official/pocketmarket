@@ -13,13 +13,26 @@ import defaultImg from '../../assets/main/grayBI.png';
 class StoreJSX extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            like: 0,
-            storeId: 0,
-            userId: 0,
-            likeYn: '',
+            like: null,
+            storeId: this.props.data.id,
+            userId: this.props.userId,
+            likeYn: null,
         }
+    }
+
+    componentDidMount() {
+        axios.post("http://localhost:8000/storeLike/", {
+            "storeId": this.props.data.id,
+            "userId": this.state.userId,
+        })
+        .then((res) => {
+            this.setState({
+                like: res.data.likeCnt,
+                likeYn: res.data.likeYn,
+                likeId: res.data.likeId,
+            });
+        })
     }
 
     render() {
@@ -37,18 +50,77 @@ class StoreJSX extends React.Component {
                             <div className="detail__tags">
                                 {/* <div className="tags__new">NEW</div> */}
                                 <div className="tags__tag">@반포 낭만달빛마켓</div>
-                                <button className="tags__likes" onClick={(e) => {
-                                e.preventDefault();
-                                axios.post("http://localhost:8000/storeLike/", {
-                                    "storeId": data.id,
-                                    "userId": 2,
-                                })
-                                .then((res) => {
-                                    console.log(res);
-                                })
-                                    // 좋아요 개수 가져오기
-                                    // 좋아요 기능 추가 예정
-                                }}>♥ {this.state.like}</button>
+                                {
+                                    this.state.like !== undefined ?
+                                    <button className="tags__likes" onClick={(e) => {
+                                        e.preventDefault();
+
+                                        let id = this.state.likeId;
+                                        if(id === "") {
+                                            axios.post("http://localhost:8000/api/stores_storeLike/", {
+                                                likeYn: 'Y',
+                                                user: this.state.userId,
+                                                store: this.state.storeId,
+                                            })
+                                            .then(() => {
+                                                axios.post("http://localhost:8000/storeLike/", {
+                                                    "storeId": this.props.data.id,
+                                                    "userId": this.state.userId,
+                                                })
+                                                .then((res) => {
+                                                    this.setState({
+                                                        like: res.data.likeCnt,
+                                                        likeYn: res.data.likeYn,
+                                                        likeId: res.data.likeId,
+                                                    });
+                                                })
+                                            })
+                                        } else {
+                                            if(this.state.likeYn === 'Y') {
+                                                axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, {
+                                                    likeYn: 'N',
+                                                    user: this.state.userId,
+                                                    store: this.state.storeId,
+                                                })
+                                                .then(() => {
+                                                    axios.post("http://localhost:8000/storeLike/", {
+                                                        "storeId": this.props.data.id,
+                                                        "userId": this.state.userId,
+                                                    })
+                                                    .then((res) => {
+                                                        this.setState({
+                                                            like: res.data.likeCnt,
+                                                            likeYn: res.data.likeYn,
+                                                            likeId: res.data.likeId,
+                                                        });
+                                                    })
+                                                })
+                                            } else if(this.state.likeYn === 'N') {
+                                                axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, {
+                                                    likeYn: 'Y',
+                                                    user: this.state.userId,
+                                                    store: this.state.storeId,
+                                                })
+                                                .then(() => {
+                                                    axios.post("http://localhost:8000/storeLike/", {
+                                                        "storeId": this.props.data.id,
+                                                        "userId": this.state.userId,
+                                                    })
+                                                    .then((res) => {
+                                                        this.setState({
+                                                            like: res.data.likeCnt,
+                                                            likeYn: res.data.likeYn,
+                                                            likeId: res.data.likeId,
+                                                        });
+                                                    })
+                                                })
+                                            }
+                                        }
+
+                                    }}>♥ {this.state.like}</button>
+                                    :
+                                    null
+                                }
                             </div>
                             <div className="detail__title">
                                 <div className="detail__name">{data.storeName}</div>
