@@ -455,7 +455,7 @@ def storeLike(request):
         likeYn = 'N'
         likeId = ''
     else:
-        likeYn = 'Y'
+        likeYn = like[0]['likeYn']
         likeId = like[0]['id']
 
     returnRow = {'likeCnt': likeCnt, 'likeYn':likeYn, 'likeId':likeId}
