@@ -32,14 +32,15 @@ class OrderStatus extends React.Component {
                 axios.get('http://localhost:8000/api/trades_saleHeader/')
                 .then((res) => {
                     let saleHeader = res.data.filter((elt) => {
-                        if(elt.user === this.state.userId){
+                        if(elt.user === userId){
                             return true;
                         }
                     });
                     axios.get("http://localhost:8000/api/trades_saleDetail/")
                     .then((res) => {
+                        console.log(res);
                         let saleDetail = res.data.filter((elt) => {
-                            if(elt.user === this.state.userId){
+                            if(elt.user === userId){
                                 return true;
                             }
                         });
