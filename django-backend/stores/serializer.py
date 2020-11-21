@@ -43,6 +43,7 @@ class StoreSerializer(serializers.ModelSerializer):
             'modUs',
         )
 
+
 class StoreMinSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store

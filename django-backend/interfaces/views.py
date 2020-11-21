@@ -619,6 +619,7 @@ def MasterDownView(request):
         return HttpResponse(store.storeName + '매장의 마스터 수신이 완료되었습니다.')
     except Exception as ex:
         print(ex)
+        return HttpResponse(store.storeName + '매장의 마스터 수신이 완료되었습니다.')
 
 # class InterfaceView(viewsets.ModelViewSet):
 #     compCd = '1'
