@@ -116,15 +116,15 @@ class ReviewWrite extends React.Component {
                     <div className="photo__upload__box">
                         <div className="photo__upload__caption">사진업로드</div>
                         <div className="photo__upload">
-                            <div className="upperline"></div>
+                            <div className="upperline"/>
                             <input type="file" multiple accept="image/*" id="review__image" hidden/>
                             <div className="fileupload" id="fileupload">
-                                <div className="file__image__box empty">
+                                <div className="file__image__box empty" onChange={this.handleImageChange}>
                                     <img src={img_ico} alt="camera" className="image" id="select_image" />
-                                    <input type="file" accept="image/png, image/jpeg" id="hidden_select"  onChange={this.handleImageChange} hidden/>
+                                    <input type="file" accept="image/png, image/jpeg" id="hidden_select"  hidden/>
                                 </div>
                             </div>
-                            <div className="underline"></div>
+                            <div className="underline"/>
                             <input type="submit" value="submit" id="review__submit" hidden/>
                             <div className="submit" onClick={() => this.handleSubmit()}>등록하기</div>
                         </div>

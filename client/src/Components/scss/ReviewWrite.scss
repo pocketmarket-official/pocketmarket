@@ -10,8 +10,9 @@
   margin-top: $headerHeight;
   justify-content: flex-start;
   .review__write__box {
-    width: 398px;
-    margin: 30px 8px;
+    width: 100%;
+    padding: 30px 8px;
+    box-sizing: border-box;
     .review__write__caption {
       width: 70px;
       height: 21px;
@@ -25,9 +26,10 @@
       color: #ffffff;
     }
     .reviewwrite__context {
-      width: 381.5px;
+      display: block;
+      width: 95%;
       height: 118px;
-      margin: 11px 8px;
+      margin: 11px auto;
       box-sizing: border-box;
       padding: 8px;
       border: solid 3px #4a4a4a;
@@ -39,8 +41,9 @@
     }
   }
   .review__content__box {
-    width: 398px;
-    margin: 30px 8px;
+    width: 100%;
+    padding: 30px 8px;
+    box-sizing: border-box;
     .review__content__caption {
       width: 70px;
       height: 21px;
@@ -54,9 +57,9 @@
       color: #ffffff;
     }
     .review__content {
-      margin: 10px 20px;
+      margin: 10px auto;
       height: 100%;
-      width: 358px;
+      width: 90%;
       .input__container {
         display: flex;
         margin: 10px 0;
@@ -88,8 +91,9 @@
     }
   }
   .photo__upload__box {
-    width:398px;
-    margin: 30px 8px;
+    width: 100%;
+    padding: 30px 8px;
+    box-sizing: border-box;
     .photo__upload__caption {
       width: 70px;
       height: 21px;
@@ -104,7 +108,7 @@
     }
     .photo__upload {
       .upperline {
-        width: 385px;
+        width: 95%;
         height: 1.5px;
         background-color: #f3f3f3;
         margin: 12px 14px 12px;
@@ -115,16 +119,27 @@
         justify-items: center;
         align-content: center;
         align-items: center;
-        grid-template-columns: 82px 82px 82px 82px 82px;
+        grid-template-columns: repeat(5, 1fr);
         grid-template-rows: 75px;
+        grid-gap: 6px;
         .file__image__box {
-          width: 72px;
-          height: 72px;
-          margin: 12px 3px;
+          position: relative;
+          width: 100%;
           border: solid 1px #f3f3f3;
+
+          &:before {
+            display: block;
+            content: '';
+            height: 1px;
+            padding-bottom: 100%;
+          }
+
           &.empty{
             .image{
-              margin: 27px 23px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
               width: 26px;
               height: 18px;
             }
@@ -133,7 +148,7 @@
         }
       }
       .underline {
-        width: 385px;
+        width: 95%;
         height: 1.5px;
         background-color: #f3f3f3;
         margin: 12px 14px 12px;
