@@ -2,14 +2,15 @@
 
 .orderStatus__Modal {
   position: absolute;
-  top: 30%;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: $headerHeight auto;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1;
 
   .bigstatus {
     position: absolute;
@@ -26,8 +27,8 @@
 
     .modal__close__btn{
       position: absolute;
-      right: -5%;
-      top: -5%;
+      right: -16px;
+      top: -16px;
       img{
         height: 32px;
         width: 32px;
@@ -43,7 +44,8 @@
     }
 
     .bigstatus__storeNm {
-      width: 325px;
+      width: fit-content;
+      padding: 0 20px;
       height: 57px;
       border-radius: 10px;
       background-color: #1e1e1e;
