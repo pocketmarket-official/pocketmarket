@@ -55,9 +55,7 @@ class StoreJSX extends React.Component {
                                 <div className="detail__distance">거리 {data.show_dist}</div>
                             </div>
                             <div className="detail__description">
-                                백종원의 푸드트럭에서 가장 핫한 매장 중 하나인 바로
-                                그 강남 핫도그입니다. 최고급 수제 소시지와 치즈를
-                                사용하고 있으니 직접 한번 드셔보세요.
+                                {data.description}
                             </div>
                         </div>
                         <div className="store__stars">

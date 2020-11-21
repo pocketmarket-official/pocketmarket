@@ -3,8 +3,17 @@ import HeaderBack from '../Components/js/HeaderBack';
 import '../Components/scss/QuestionWrite.scss';
 import img_ico from "../assets/review_write/img_up_ico.png";
 
-function QuestionWrite() {
-    return (
+class QuestionWrite extends React.Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+
+        }
+    }
+
+    render() {
+        return (
         <>
             <HeaderBack url='/mypage' />
             <div className="questionwrite">
@@ -33,7 +42,8 @@ function QuestionWrite() {
                 </div>
             </div>
         </>
-    );
+        );
+    }
 }
 
 export default QuestionWrite;
