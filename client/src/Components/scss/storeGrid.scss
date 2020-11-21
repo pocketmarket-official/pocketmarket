@@ -199,7 +199,8 @@
     border-radius: 15px;
     background-color: black;
     position: fixed;
-    left: calc((414px - 155px) / 2);
+    left: 50%;
+    transform: translate(-50%);
     bottom: 9px;
 
     .orderButton {
