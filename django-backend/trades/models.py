@@ -189,4 +189,5 @@ class CornerStateLog(models.Model):
 
 
 class Test(models.Model):
-    data = models.CharField(max_length=10, blank=True)
+    char = models.CharField(max_length=10, blank=True)
+    image = models.ImageField(upload_to="images/test", null=True)

@@ -251,5 +251,6 @@ class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields = (
-            'data',
+            'char',
+            'image',
         )
