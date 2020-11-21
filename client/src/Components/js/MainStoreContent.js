@@ -95,7 +95,11 @@ class MainStoreContent extends React.Component {
     componentDidMount() {
         axios.get("/api/stores_store/")
         .then((res) => {
-            const stores = res.data;
+            const stores = res.data.filter((elt) => {
+                if(elt.useYn === 'Y'){
+                    return true;
+                }
+            });
             this.setState({
                 loading: true,
                 stores: stores,
