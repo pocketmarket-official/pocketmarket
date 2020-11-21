@@ -4,6 +4,9 @@ import HeaderBack from '../Components/js/HeaderBack';
 import axios from 'axios';
 import lodash from 'lodash';
 import closeBtn from '../assets/order_status_pop/btn_close.png';
+import { faRedo } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HeaderOrder from "../Components/js/HeaderOrder";
 
 
 class Order extends React.Component {
@@ -11,9 +14,11 @@ class Order extends React.Component {
         super(props);
         const id = this.props.match.params.storeId;
         const link = "/main/store/" + id + "/orderinfo";
+        this.categoryScrollDom = null;
 
         this.getKeymap = this.getKeymap.bind(this);
         this.clearOrderList = this.clearOrderList.bind(this);
+        this.handleCategoryScroll = this.handleCategoryScroll.bind(this);
 
         let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
 
@@ -34,6 +39,8 @@ class Order extends React.Component {
             modal_options: [],
             selected: "",
             orderContainerClosed: true,
+            canScrollLeft: false,
+            canScrollRight: false,
         };
     }
 
@@ -107,6 +114,9 @@ class Order extends React.Component {
                             keymap: keymap,
                             storeName: store.storeName,
                         });
+
+                        // init category scroll handle state
+                        setTimeout(() => this.categoryScrollDom.dispatchEvent(new Event('scroll')));
                     })
                 })
             });
@@ -146,6 +156,20 @@ class Order extends React.Component {
         this.setState({
             order_list: []
         });
+    }
+
+    handleCategoryScroll(e) {
+        let scrollWidth = e.target.scrollWidth;
+        let domWidth = e.target.clientWidth;
+        let prevCanScrollLeft = this.state.canScrollLeft;
+        let prevCanScrollRight = this.state.canScrollRight;
+        let canScrollLeft = e.target.scrollLeft > 0;
+        let canScrollRight = domWidth + e.target.scrollLeft < scrollWidth;
+
+        if (prevCanScrollLeft !== canScrollLeft
+            || prevCanScrollRight !== canScrollRight) {
+            this.setState({canScrollLeft, canScrollRight});
+        }
     }
 
     render() {
@@ -291,26 +315,18 @@ class Order extends React.Component {
                     </div>
                 </div>
 
-                <HeaderBack url='/mypage' />
+                <HeaderOrder url='/mypage' storeName={this.state.storeName} />
                 <div className="orderpage">
-                    <div className="order__wait__box">
-                        <div className="order__wait__message_box">
-                            <div className="order__store">{this.state.storeName}</div>
-                            <div className="order__store__wait">waiting</div>
-                        </div>
-                    </div>
                     <div className="order__category">
-                        <div className="category__left scroll"><span>{"<"}</span></div>
-                        {/*<div className="category__left"><span>{"<"}</span></div>*/}
-                        <div className="content__box">
+                        <div className={`category__left ${this.state.canScrollLeft ? 'scroll' : ''}`}><span>{"<"}</span></div>
+                        <div ref={instance => this.categoryScrollDom = instance} className="content__box" onScroll={this.handleCategoryScroll}>
                             {this.state.touch_group.map((data) => {
                                 return (
                                     <div className={"category__content " + (this.state.touchGroupCd === data.id ? 'active' : '')} id={data.id} key={data.id} onClick={() => this.getKeymap(data)}>{data.touchGroupName}</div>
                                 );
                             })}
                         </div>
-                        <div className="category__right"><span>{">"}</span></div>
-                        {/*<div className="category__right scroll"><span>{">"}</span></div>*/}
+                        <div className={`category__right ${this.state.canScrollRight ? 'scroll' : ''}`}><span>{">"}</span></div>
                     </div>
                     <div className="order__menu">
                     {
@@ -360,7 +376,9 @@ class Order extends React.Component {
                             <div className="order__result__box">
                                 <div className="reset__button">
                                     <div className="reset__image">
-                                        <div onClick={this.clearOrderList}>⟳</div>
+                                        <div onClick={this.clearOrderList}>
+                                            <FontAwesomeIcon icon={faRedo}/>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="result__box">
@@ -430,7 +448,11 @@ class Order extends React.Component {
                                                         <div className="item__increase">+</div>
                                                     </div>
                                                 </div>
-                                                <div className="cancel__button">
+                                                <div className="cancel__button" onClick={() => {
+                                                    const idx = this.state.order_list.indexOf(data);
+                                                    this.state.order_list.splice(idx, 1);
+                                                    this.setState(this.state);
+                                                }}>
                                                     X
                                                 </div>
                                             </div>

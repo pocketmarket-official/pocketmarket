@@ -1,0 +1,58 @@
+.header__box {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 9px;
+  box-sizing: border-box;
+  background: white;
+  border-bottom: 2px solid #eeeeee;
+
+  >a {
+    display: block;
+
+    >img {
+      display: block;
+    }
+  }
+
+  .header__back {
+    width: 38px;
+    height: 38px;
+  }
+
+  .header__store-name {
+    font-size: 1.8rem;
+    font-family: "MaplestoryOTFBold", sans-serif;
+    margin-left: 10px;
+    margin-right: auto;
+  }
+
+  .header__waiting {
+    margin-right: 10px;
+    font-size: .8rem;
+    font-weight: bold;
+
+    .waiting__txt {
+
+      color: #595959;
+    }
+
+    .waiting__num {
+      margin-top: 4px;
+      padding: 2px;
+      border-radius: 5px;
+      background: #D73535;
+      color: white;
+      text-align: center;
+    }
+  }
+
+  .header__alarm {
+    width: 38px;
+    height: 38px;
+  }
+}

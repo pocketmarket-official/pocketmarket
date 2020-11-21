@@ -22,7 +22,8 @@
     padding: 9px 7px 4px;
     display: flex;
     flex-direction: column;
-    width: 325px;
+    width: 80%;
+    min-width: 325px;
     background: #f8f8f8;
 
     .optionmodal__close {

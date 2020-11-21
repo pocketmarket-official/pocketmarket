@@ -61,15 +61,16 @@
     }
   }
   .order__category {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 414px;
-    height: 55px;
     position: relative;
+    width: 100%;
+    height: 55px;
     background-color: #000000;
+    border-top: 2px solid #d73434;
     .category__left {
-      margin-left:8px;
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
       font-family: MaplestoryOTFBold, sans-serif;
       font-size: 15.5px;
       color: #606060;
@@ -78,7 +79,10 @@
       }
     }
     .category__right {
-      margin-right:8px;
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
       font-family: MaplestoryOTFBold, sans-serif;
       font-size: 15.5px;
       color: #606060;
@@ -87,11 +91,12 @@
       }
     }
     .content__box {
-      overflow: scroll;
       display: flex;
-      height: 100%;
-      justify-content: space-between;
       align-items: center;
+      margin: 0 auto;
+      width: calc(100% - 32px);
+      height: 100%;
+      overflow: scroll;
       .category__content {
         min-width: 60px;
         margin: 5px 20px;
@@ -151,7 +156,7 @@
     justify-content: flex-start;
     align-items: center;
     left: 8.5px;
-    width: 397px;
+    width: calc(100% - 16px);
     height: 166.5px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -161,13 +166,15 @@
     bottom: 0;
     transition: ease-in-out .2s;
     z-index: 2;
+    padding: 5px;
+    box-sizing: border-box;
 
     &.close{
       transform: translateY(118px);
 
       .container__controller {
         transform: rotate(270deg) !important;
-        margin-top:0 !important;
+        margin-top:2px !important;
       }
     }
     .container__control__box {
@@ -184,21 +191,25 @@
       justify-content: center;
 
       .container__controller {
-        margin-top: 4px;
+        @supports (-webkit-touch-callout: none) {
+          margin-top: 2px;
+        }
+        margin-top: -2px;
         transform: rotate(90deg);
         color:#ededed;
         font-family: "Nanum Gothic",sans-serif;
         font-weight: bold;
       }
     }
+
     .order__result {
       display: flex;
-      padding-top: 5px;
+      width: 100%;
       height:38.5px;
+      min-height: 38.5px;
       .order__result__box {
         border-radius:10px;
         background-color: #d31142;
-        width: 294.5px;
         display: flex;
         justify-content: start;
         align-items: center;
@@ -211,6 +222,7 @@
         letter-spacing: 0.34px;
         text-align: left;
         color: #ffffff;
+        flex: 1;
         .reset__button {
           width: 27px;
           height: 27px;
@@ -219,9 +231,10 @@
           margin-top: 2px;
           background-image: linear-gradient(to top, rgba(65, 65, 65, 1), #010101);
           .reset__image {
-            font-size: 20px;
+            font-size: 17px;
             font-weight: bold;
             text-align: center;
+            line-height: 1.7;
           }
         }
         .result__box {
@@ -258,19 +271,16 @@
       }
     }
     .order__detail {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      width: 397px;
+      width: 100%;
       overflow-y: scroll;
       .order__item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height:29.5px;
+        height:39.5px;
         width: 100%;
-        margin: 5px 5px;
+        padding: 5px;
+        box-sizing: border-box;
         .item__list {
           float: left;
           font-family: 'Nanum Gothic',sans-serif;
@@ -349,14 +359,13 @@
 
         .cancel__button {
           display: flex;
-          padding-right:18px;
           font-size: 0.9rem;
           font-family: MaplestoryOTFBold, sans-serif;
           font-weight: bold;
         }
       }
       .item__line {
-        width: 379px;
+        width: 100%;
         height: 0.5px;
         border-bottom: solid 0.5px #ffceda;
         background-color: #ffceda;
