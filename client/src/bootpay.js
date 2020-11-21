@@ -1,7 +1,7 @@
 import BootPay from "bootpay-js";
 import axios from "axios";
 
-function pay(sellItemList, price, storeName, storeId) {
+function pay(sellItemList, price, storeName, storeId, userId) {
     BootPay.request({
         // price: trInfo.Price,
         price: price,
@@ -38,7 +38,7 @@ function pay(sellItemList, price, storeName, storeId) {
     }).done(function (data) {
         //결제가 정상적으로 완료되면 수행됩니다
         //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
-        let transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId};
+        let transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId, 'userId':userId};
         axios.post('http://localhost:8000/trade/', transData);
     });
 }

@@ -25,8 +25,14 @@ class SaleHeader(models.Model):
     orgPosNo = models.CharField(max_length=5, null=True)
     orgBillNo = models.CharField(max_length=10, null=True)
     sendYn = models.CharField(max_length=1, default='N')
-    orderStatus = models.CharField(max_length=1, default=1)#1:주문중/2:주문완료/3:제조완료/4:픽업완료/5:리뷰작성완료/6:리뷰작성취소
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
+    orderStatus = models.CharField(max_length=1, default=1)#1:주문중/2:조리중/3:조리완료/4:픽업완료(User)/5:픽업완료(Store)/6:리뷰작성/7:리뷰취소
+    completeTime = models.CharField(max_length=8, null=True, blank=True)
+    pickupTime = models.CharField(max_length=8, null=True, blank=True)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, blank=True)
+    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insUs = models.CharField(max_length=30, null=True)
+    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modUs = models.CharField(max_length=30, null=True)
 
 
 class SaleDetail(models.Model):

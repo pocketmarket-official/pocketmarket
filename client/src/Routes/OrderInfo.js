@@ -4,6 +4,9 @@ import HeaderBiz from "../Components/js/HeaderBiz";
 import {Link} from "react-router-dom";
 
 import '../Components/scss/orderInfo.scss';
+import axios from "axios";
+import cookie from "react-cookies";
+import storage from "../storage";
 
 class OrderInfo extends React.Component {
     constructor(props) {
@@ -19,8 +22,24 @@ class OrderInfo extends React.Component {
             storeName: storeName,
             storeId: storeId,
             storeCd: storeCd,
+            userId: null,
         }
      };
+
+    componentDidMount(){
+        let cookie_token = cookie.load("access_token");
+        let user_email = storage.get(cookie_token);
+
+        axios.get("/api/users_user/")
+        .then((res) => {
+            let userId = res.data.find((elt) => {
+                if(elt.email === user_email) {
+                    return true;
+                }
+            }).id;
+            this.setState({ userId: userId });
+        });
+    }
 
     render() {
         let cnt = 0;
@@ -91,27 +110,27 @@ class OrderInfo extends React.Component {
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">포장선택</div>
                         <div className="orderinfo__choices" style={{paddingLeft: '26px'}}>
-                            <input id="eatIn" type="radio" name="where" value="Eat in" defaultChecked={true} /><label htmlFor="eatIn">Eat-in</label>
-                            <input id="takeOut" type="radio" name="where" value="Take out" /><label htmlFor="takeOut" style={{marginRight: '20px'}}>Take-out</label>
+                            <input id="eatIn" type="radio" name="where" value="Eat in" defaultChecked={true} /><label htmlFor="eatIn">현장식사</label>
+                            <input id="takeOut" type="radio" name="where" value="Take out" /><label htmlFor="takeOut" style={{marginRight: '20px'}}>방문포장</label>
                         </div>
                     </div>
-                    <div className="orderinfo__options">
-                        <div className="orderinfo__title">할인선택</div>
-                        <Link to="/main/store/C0001/orderinfo/payMethod">
-                            <div className="orderinfo__choices">
-                                <input type="checkbox" value="쿠폰할인" />쿠폰할인
-                                <span>></span>
-                            </div>
-                        </Link>
-                    </div>
+                    {/*<div className="orderinfo__options">*/}
+                    {/*    <div className="orderinfo__title">할인선택</div>*/}
+                    {/*    <Link to="/main/store/C0001/orderinfo/payMethod">*/}
+                    {/*        <div className="orderinfo__choices">*/}
+                    {/*            <input type="checkbox" value="쿠폰할인" />쿠폰할인*/}
+                    {/*            <span>></span>*/}
+                    {/*        </div>*/}
+                    {/*    </Link>*/}
+                    {/*</div>*/}
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">결제수단선택</div>
-                        <Link to="/main/store/C0001/orderinfo/payMethod">
+                        {/*<Link to="/main/store/C0001/orderinfo/payMethod">*/}
                             <div className="orderinfo__choices">
-                                <input type="checkbox" value="PG결제" />PG결제
+                                <input type="checkbox" value="PG결제"/>PG결제
                                 <span>></span>
                             </div>
-                        </Link>
+                        {/*</Link>*/}
                     </div>
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">주문 내역</div>
@@ -147,11 +166,11 @@ class OrderInfo extends React.Component {
                                 <div>총 금액</div>
                                 <div>{price}원</div>
                             </div>
-                            <div className="pay__info">
-                                <div>포켓머니</div>
-                                <button>전액 사용</button>
-                                <div>0원</div>
-                            </div>
+                            {/*<div className="pay__info">*/}
+                            {/*    <div>포켓머니</div>*/}
+                            {/*    <button>전액 사용</button>*/}
+                            {/*    <div>0원</div>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
                     <div className="orderinfo__amount">
@@ -160,7 +179,7 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="divide"/>
                     <div className="orderinfo__btn"
-                         onClick={({sellItemList}) => pay(tradesInfo, price, this.state.storeName, this.state.storeId, this.state.storeCd)}>
+                         onClick={({sellItemList}) => pay(tradesInfo, price, this.state.storeName, this.state.storeId, this.state.storeCd, this.state.userId)}>
                         결제하기
                     </div>
                 </div>
