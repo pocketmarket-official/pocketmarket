@@ -63,9 +63,11 @@ class MainStoreContent extends React.Component {
     }
 
     getPosition(options) {
-        return new Promise(function(resolve, reject) {
-            navigator.geolocation.getCurrentPosition(resolve, reject, options);
-        });
+        if(navigator.geolocation) {
+            return new Promise(function(resolve, reject) {
+                navigator.geolocation.getCurrentPosition(resolve, reject, options);
+            });
+        }
     }
 
     _getData() {

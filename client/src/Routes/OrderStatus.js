@@ -97,6 +97,7 @@ class OrderStatus extends React.Component {
                     this.state.matched.map((elt) => {
                         let status;
                         let button;
+                        let time = elt.completeTime;
                         if(elt.orderStatus === '1') {
                             status = "주문중";
                             button = (
@@ -208,7 +209,7 @@ class OrderStatus extends React.Component {
                                         </div>
                                         <div className="order__time">
                                             <div className="line__title">완료시간</div>
-                                            <div className="line__detail">19:25</div>
+                                            <div className="line__detail">{time}</div>
                                         </div>
                                     </div>
                                     {button}
