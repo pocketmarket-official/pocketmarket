@@ -36,7 +36,7 @@
   .modal__header{
     width: 85%;
     margin: 17px auto;
-    font-family: MaplestoryOTFLight;
+    font-family: 'MaplestoryOTFLight', sans-serif;
     color: #2e2e2e;
   }
   .modal__close__btn{
@@ -60,7 +60,7 @@
       float:left;
       text-align: center;
       font-size: 18px;
-      font-family: MaplestoryOTFLight;
+      font-family: 'MaplestoryOTFLight', sans-serif;
       font-weight: bold;
       &.divide{
         width: 50%;
@@ -86,7 +86,7 @@
       margin: 16px;
       text-align: right;
       font-size: 18px;
-      font-family: MaplestoryOTFLight;
+      font-family: 'MaplestoryOTFLight', sans-serif;
       font-weight: bold;
 
     }
@@ -182,7 +182,7 @@
     width: 95%;
     height: 40px;
     color: #ffffff;
-    font-family: MaplestoryOTFLight;
+    font-family: 'MaplestoryOTFLight', sans-serif;
     font-weight: bold;
     background: #b4022f;
     border-radius: 5px;
@@ -206,7 +206,7 @@
     margin: 0 auto;
     .pointhistory__info__title{
       padding: 34px 0 2px 0;
-      font-family: MaplestoryOTFLight;
+      font-family: 'MaplestoryOTFLight', sans-serif;
       font-size: 16px;
       font-weight: bold;
       font-stretch: normal;
@@ -227,7 +227,7 @@
         align-items: center;
         padding: 10px 10px;
 
-        font-family: MaplestoryOTFLight;
+        font-family: 'MaplestoryOTFLight', sans-serif;
         .pointhistory__title{
           width: 65%;
           font-weight: 300;
@@ -254,7 +254,7 @@
         }
       }
       .pointhistory__conversion{
-        font-family: MaplestoryOTFLight;
+        font-family: 'MaplestoryOTFLight', sans-serif;
         font-weight: bolder;
         width: 98%;
         height: 35px;
@@ -272,7 +272,7 @@
     border-bottom: 2px #b4022f solid;
     .search__title{
       padding: 15px 0 2px 0;
-      font-family: MaplestoryOTFLight;
+      font-family: 'MaplestoryOTFLight', sans-serif;
       font-size: 16px;
       font-weight: bold;
       font-stretch: normal;
@@ -352,7 +352,7 @@
         .result__nodata{
           margin-top: 20px;
           text-align: center;
-          font-family: NanumGothic;
+          font-family: 'Nanum Gothic', sans-serif;
           font-size: 17x;
           color: #b4022f;
           font-weight: bold;
@@ -363,7 +363,7 @@
           margin: 30px 0 0 0;
           padding-bottom: 10px;
 
-          font-family: NanumGothic;
+          font-family: 'Nanum Gothic', sans-serif;
           font-size: 17px;
           font-weight: 800;
           font-stretch: normal;

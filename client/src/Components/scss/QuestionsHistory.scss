@@ -75,7 +75,7 @@
       margin: 30px 0 0 0;
       padding-bottom: 10px;
 
-      font-family: NanumGothic;
+      font-family: 'Nanum Gothic', sans-serif;
       font-size: 17px;
       font-weight: 800;
       font-stretch: normal;
@@ -94,7 +94,7 @@
       background-color: #ffffff;
       margin: 10px 0;
       .result__text{
-        font-family: 'MaplestoryOTFLight';
+        font-family: 'MaplestoryOTFLight', sans-serif;
         width: 13%;
         font-size: 25px;
         font-weight: bold;
@@ -106,7 +106,7 @@
         }
         &.quest{
           width: 80%;
-          font-family: 'MaplestoryOTFLight';
+          font-family: 'MaplestoryOTFLight', sans-serif;
           font-weight: bold;
           font-size: 10px;
           line-height: 1.9;
@@ -115,7 +115,7 @@
           padding: 0;
         }
         &.answer{
-          font-family: NanumGothic;
+          font-family: 'Nanum Gothic', sans-serif;
            width: 80%;
            font-size: 10px;
           font-weight: normal;
@@ -170,7 +170,7 @@
     width: 40%;
     height: 50px;
     color: #ffa800;
-    font-family: MaplestoryOTFLight;
+    font-family: 'MaplestoryOTFLight', sans-serif;
     font-weight: bold;
     background: #333333;
     border-radius: 11px;
@@ -179,7 +179,7 @@
     align-items: center;
     a{
       color: #ffa800;
-      font-family: MaplestoryOTFLight;
+      font-family: 'MaplestoryOTFLight', sans-serif;
       font-weight: bold;
       background: #333333;
       border-radius: 11px;
@@ -194,7 +194,7 @@
 .result__nodata{
   margin-top: 20px;
   text-align: center;
-  font-family: NanumGothic;
+  font-family: 'Nanum Gothic', sans-serif;
   font-size: 17px;
   color: #b4022f;
   font-weight: bold;
