@@ -65,7 +65,7 @@ class SaleDetailSerializer(serializers.ModelSerializer):
             'totSaleAmt',
             'saleAmt',
             'supAmt',
-            'taxAmt',
+            'taxYn',
             'offTaxAmt',
             'taxFlag',
             'totDcAmt',
