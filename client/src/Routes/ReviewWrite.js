@@ -19,7 +19,20 @@ class ReviewWrite extends React.Component {
     }
 
     handleSubmit() {
-    }
+        const content = document.getElementById("reviewwrite__context");
+/*        axios.post("/api/reviews_review", {
+            storeCd: ,
+            saleDt: , // 판매 날짜 trading에서
+            billNo: ,
+            user: ,
+            context: content.value,
+            img1: ,
+            img2: ,
+            img3: ,
+            img4: ,
+            img5: ,
+        })
+*/    }
 
     handleImageChange = (e) => {
         let container = document.getElementById("fileupload");
@@ -64,7 +77,7 @@ class ReviewWrite extends React.Component {
                 <div className="reviewwrite">
                     <div className="review__write__box">
                         <div className="review__write__caption">리뷰쓰기</div>
-                        <textarea className="reviewwrite__context"></textarea>
+                        <textarea className="reviewwrite__context" id="reviewwrite__context"></textarea>
                     </div>
                     {/*
                         <div className="review__content__box">
@@ -114,7 +127,7 @@ class ReviewWrite extends React.Component {
                             </div>
                             <div className="underline"></div>
                             <input type="submit" value="submit" id="review__submit" hidden/>
-                            <div className="submit">등록하기</div>
+                            <div className="submit" onClick={() => this.handleSubmit()}>등록하기</div>
                         </div>
                     </div>
                 </div>
