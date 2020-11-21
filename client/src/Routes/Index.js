@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useMemo, useRef } from "react";
 import { Link, Redirect } from "react-router-dom";
 import HeaderBack from "../Components/js/HeaderBack";
 import '../Components/scss/index.scss';
 import Flicking from "@egjs/react-flicking";
+import { AutoPlay } from "@egjs/flicking-plugins";
 
 import jumboImg from "../assets/index/index_ad.jpg";
 import showFestivalImg from "../assets/index/btn_index1.png";
@@ -12,6 +13,12 @@ import showOrderImg from "../assets/index/btn_index4.png";
 
 function Index({authenticated, login, location}) {
     const paginationElem = useRef(null);
+    const autoPlayPlugin = useMemo(() => {
+        return new AutoPlay({
+            duration: 4000,
+            direction: "NEXT"
+        });
+    }, []);
 
     function onChangeJumboItem(e) {
         for (let item of paginationElem.current.children) {
@@ -31,10 +38,11 @@ function Index({authenticated, login, location}) {
                           hanger={0}
                           anchor={0}
                           zIndex={0}
-                          infinite={true}
                           circular={true}
                           onChange={onChangeJumboItem}
-                          className={"jumbotron"}>
+                          className={"jumbotron"}
+                          plugins={[autoPlayPlugin]}
+                          >
                     <img src={jumboImg}/>
                     <img src={jumboImg}/>
                     <img src={jumboImg}/>
