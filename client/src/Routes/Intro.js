@@ -42,7 +42,7 @@ function Intro({authenticated, login, location}) {
     if (authenticated) return <Redirect to={from}/>;
 
     return (
-        <>
+        <div className='intro'>
             <div className="bg">
                 {playingVideo ?
                     <video className="bg__video" autoPlay={true} muted={true} playsInline={true}
@@ -75,7 +75,7 @@ function Intro({authenticated, login, location}) {
                     <div className="footer">all rights reserved pocketmarket</div>
                 </>
             )}
-        </>
+        </div>
     );
 }
 
