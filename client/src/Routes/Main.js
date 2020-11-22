@@ -163,7 +163,7 @@ class Main extends React.Component {
 
         let cookie_token = cookie.load("access_token");
         let user_email = storage.get(cookie_token);
-        if(!user_email) window.location.href = 'http://http://13.124.90.138:3000/';
+        if(!user_email) window.location.href = 'http://13.124.90.138:3000/';
 
         axios.get("/api/users_user/")
             .then((res) => {
