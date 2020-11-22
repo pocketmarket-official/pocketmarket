@@ -42,7 +42,6 @@ function pay(sellItemList, price, storeName, storeId, userId) {
         // axios.post('http://localhost:8000/trade/', transData); URL EXCHANGE
         axios.post('/trade/', transData)
             .then((res)=>{
-                alert(res.data.url);
                 window.location.href = res.data.url;
             });
     });
