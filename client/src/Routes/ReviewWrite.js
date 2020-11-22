@@ -68,7 +68,7 @@ class ReviewWrite extends React.Component {
         const elt2 = document.getElementById("hidden_select");
         elt.onclick = () => {
             elt2.click();
-        }
+        };
 
         let cookie_token = cookie.load("access_token");
         let user_email = storage.get(cookie_token);
