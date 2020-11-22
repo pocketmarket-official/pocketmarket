@@ -32,7 +32,7 @@ function Intro({authenticated, login, location}) {
         });
         storage.add(access_token, email);
         // window.location.href = "http://localhost:8000/login/kakao/"; URL EXCHANGE
-        window.location.href = "/login/kakao/";
+        window.location.href = "http://13.124.90.138:8000/login/kakao/";
     };
 
     const responseFail = (err) => {
