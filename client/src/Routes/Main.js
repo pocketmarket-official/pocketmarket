@@ -178,7 +178,9 @@ class Main extends React.Component {
         return (
             <>
                 <Header />
+                asdfdsf
                 {this.state.userId}
+                asdfadsf
                 <div className="main">
                     <div className="main__btns">
                         <div className="btn__left">
