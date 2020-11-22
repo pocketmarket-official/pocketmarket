@@ -1,12 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import defaultImg from '../../assets/main/grayBI.png';
+import axios from "axios";
 
 
 class FestivalJSX extends React.Component {
     constructor(props) {
         super(props);
         this.formatDate = this.formatDate.bind(this);
+        this.state = {
+            festival: null,
+            festivalName: null,
+            startDate: null,
+            endDate: null,
+            descriptionHeader: null,
+            img: null,
+            userId: null,
+        }
     }
 
     formatDate(dateStr) {
@@ -36,7 +46,7 @@ class FestivalJSX extends React.Component {
                         <div className="header__enter">축제입장</div>
                     </div>
                     <div className="festival__detail">
-                        <img src={data.imgUrl || defaultImg} alt="festival" />
+                        <img src={data.img || defaultImg} alt="festival" />
                         <div className="detail__description">
                             <ul>
                                 <li>{startDt} ~ {endDt}</li>
