@@ -116,19 +116,6 @@ class OrderHistory extends React.Component {
                         axios.get('http://localhost:8000/api/trades_cardLog?ordering=saleDt,storeCd,billNo')
                             .then((res) => {
                                 let cardLogs = res.data;
-                                saleHeader.forEach((elt) => {
-                                    let cardLog = [];
-                                    for (let item in cardLog) {
-                                        if (cardLogs[item].saleDt === elt.saleDt) {
-                                            if (cardLogs[item].storeCd === elt.storeCd) {
-                                                if (cardLogs[item].billNo === elt.billNo) {
-                                                    cardLog.push(cardLogs[item]);
-                                                }
-                                            }
-                                        }
-                                    }
-                                    elt["card"] = cardLog;
-                                });
                                 axios.get("http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo")
                                     .then((res) => {
                                         let matched = [];
@@ -136,6 +123,7 @@ class OrderHistory extends React.Component {
                                         // sale dt 기준으로 정렬되어 있는 데이터
                                         saleHeader.forEach((elt) => {
                                             let detail = [];
+                                            let cardLog = [];
                                             for (let item in saleDetail) {
                                                 if (saleDetail[item].saleDt === elt.saleDt) {
                                                     if (saleDetail[item].storeCd === elt.storeCd) {
@@ -145,10 +133,18 @@ class OrderHistory extends React.Component {
                                                     }
                                                 }
                                             }
-                                            if (detail !== [] && elt.orderStatus !== '6' && elt.orderStatus !== '7') {
-                                                elt["detail"] = detail;
-                                                matched.push(elt);
+                                            for (let item in cardLogs) {
+                                                if (cardLogs[item].saleDt === elt.saleDt) {
+                                                    if (cardLogs[item].storeCd === elt.storeCd) {
+                                                        if (cardLogs[item].billNo === elt.billNo) {
+                                                            cardLog.push(cardLogs[item]);
+                                                        }
+                                                    }
+                                                }
                                             }
+                                            elt["card"] = cardLog;
+                                            elt["detail"] = detail;
+                                            matched.push(elt);
                                         });
                                         this.setState({
                                             userId: userId,
@@ -176,11 +172,12 @@ class OrderHistory extends React.Component {
             });
     }
 
-    componentDidUpdate(){
+/*    componentDidUpdate(){
         console.log(this.state.matched);
     }
-
+*/
     render(){
+        console.log(this.state);
         let jsx;
         if (this.state.result.length === 0) {
             jsx =
