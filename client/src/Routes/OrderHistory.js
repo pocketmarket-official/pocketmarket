@@ -78,15 +78,17 @@ class OrderHistory extends React.Component {
     }
 
     searchHistory() {
-        const val1 = document.getElementById("date1").value;
-        const val2 = document.getElementById("date2").value;
+        let val1 = document.getElementById("date1").value;
+        let val2 = document.getElementById("date2").value;
         let search_result = [];
-        for (let t in this.state.temp) {
-            if (this.state.temp[t].date >= val1 && this.state.temp[t].date <= val2) {
-                search_result.push(this.state.temp[t]);
+        for (let t in this.state.matched) {
+            let v1 = parseInt(val1.split(".").join(""));
+            let v2 = parseInt(val2.split(".").join(""));
+            if (this.state.matched[t].saleDt >= parseInt(v1) && this.state.matched[t].saleDt <= parseInt(v2)) {
+                search_result.push(this.state.matched[t]);
             }
         }
-        this.setState({result: search_result});
+        this.setState({ result: search_result });
     }
 
     componentDidMount() {
@@ -172,10 +174,6 @@ class OrderHistory extends React.Component {
             });
     }
 
-/*    componentDidUpdate(){
-        console.log(this.state.matched);
-    }
-*/
     render(){
         console.log(this.state);
         let jsx;
@@ -211,22 +209,11 @@ class OrderHistory extends React.Component {
                 <div className="orderhistory">
                     <div className="orderhistory__search__container">
                         <div className="search__input">
-                            <span><img src={calendar}/></span>
-                            <DatePicker className="dd" id="date1" value="2020.01.01"
-                                        locale="ko"    // 언어설정 기본값은 영어
-                                        dateFormat="yyyy-MM-dd"    // 날짜 형식 설정
-                            ></DatePicker>
-                            {/*<input type="text" id="date1"/>*/}
-                            &nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
-                            <span><img src={calendar}/></span>
-
-                            <DatePicker className="dd" id="date2" value="2020.10.10"
-                                        locale="ko"        // 언어설정 기본값은 영어
-                                        dateFormat="yyyy-MM-dd"    // 날짜 형식 설정
-                            ></DatePicker>
-                            <input type="image" src={search} value="조회" id="search" onClick={this.searchHistory}/>
+                            {/*<span><img src={calendar}/></span>*/}
+                            <input type="date" id="date1" /> ~ <input type="date" id="date2" />
                         </div>
                     </div>
+                    <input type="image" src={search} value="조회" id="search" onClick={this.searchHistory}/>
 
                     <div className="orderhistory__result__container">
                         {jsx}

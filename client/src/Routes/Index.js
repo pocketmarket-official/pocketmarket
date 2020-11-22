@@ -1,6 +1,7 @@
 import React, { useMemo, useRef } from "react";
 import { Link, Redirect } from "react-router-dom";
 import HeaderBack from "../Components/js/HeaderBack";
+import cookie from 'react-cookies';
 import Flicking from "@egjs/react-flicking";
 import { AutoPlay } from "@egjs/flicking-plugins";
 
