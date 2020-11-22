@@ -178,6 +178,7 @@ class Main extends React.Component {
         return (
             <>
                 <Header />
+                {this.state.userId}
                 <div className="main">
                     <div className="main__btns">
                         <div className="btn__left">
