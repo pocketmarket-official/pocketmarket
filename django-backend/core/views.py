@@ -14,7 +14,7 @@ from django.shortcuts import reverse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from datetime import datetime
-from time import gmtime, strftime
+from time import localtime, strftime
 from stores.models import StoreLike
 from stores.models import Store
 from users.models import User
@@ -136,7 +136,7 @@ def trade(request):
         weekday = ((datetime.today().weekday()) + 2) % 7
         if weekday == 0:
             weekday = 7
-        saleTime = strftime('%H%M%S', gmtime())
+        saleTime = strftime('%H%M%S', localtime())
         saleFlag = '1'
         mealCd = '9'
         mealName = '기타'
