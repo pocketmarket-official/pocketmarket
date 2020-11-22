@@ -32,7 +32,8 @@ class ReviewWrite extends React.Component {
         console.log('billNo: ', this.state.billNo);
         console.log('user: ', this.state.user);
         console.log('context: ', content.value);
-        axios.post("http://localhost:8000/api/reviews_review", {
+        // axios.post("http://localhost:8000/api/reviews_review", { URL EXCHANGE
+        axios.post("/api/reviews_review", {
             storeCd: this.state.storeCd,
             saleDt: this.state.saleDt, // 판매 날짜 trading에서
             billNo: this.state.billNo,
