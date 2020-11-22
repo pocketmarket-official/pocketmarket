@@ -71,12 +71,15 @@ class OrderStatus extends React.Component {
                             axios.get("/api/stores_store/")
                             .then((res) => {
                                 this.state.matched.forEach((elt) => {
-                                    let storeName = res.data.find((dt) => {
+                                    let store = res.data.find((dt) => {
                                         if(elt.storeCd === dt.storeCd) {
                                             return true;
                                         }
-                                    }).storeName;
+                                    });
+                                    let storeName = store.storeName
+                                    let storeId = store.id;
                                     elt["storeName"] = storeName;
+                                    elt["storeId"] = storeId;
                                 });
                                 this.setState({
                                     loading: false,
