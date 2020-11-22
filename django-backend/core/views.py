@@ -40,7 +40,6 @@ class KakaoException(Exception):
 
 def kakao_login(request):
     ''' use kakao oauth '''
-    print('ma')
     client_id = os.environ.get('KAKAO_KEY')
     # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
     redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
