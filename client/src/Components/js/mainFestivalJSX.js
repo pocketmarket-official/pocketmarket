@@ -37,7 +37,7 @@ class FestivalJSX extends React.Component {
 
         return (
             <Link to={{
-                pathname : `/main/festival/${data.festivalCd}`,
+                pathname : `/main/festival/${data.id}`,
                 state : { data }
             }}>
                 <div className="content__festival">
