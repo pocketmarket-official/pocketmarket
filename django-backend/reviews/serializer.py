@@ -15,6 +15,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             'saleDt',
             'billNo',
             'user',
+            'reviewDt',
             'context',
             'img1',
             'img2',
