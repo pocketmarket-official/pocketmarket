@@ -9,8 +9,6 @@ from django.db import transaction
 from django.contrib.auth import login
 from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
-from django.shortcuts import reverse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from datetime import datetime
@@ -441,7 +439,7 @@ def trade(request):
                 cardLogObj.orgSeq = None
             cardLogObj.save()
 
-        return redirect('http://13.124.90.138:3000/order/status')
+        return HttpResponseRedirect('http://13.124.90.138:3000/order/status')
 
     except Exception as ex:
         print(ex)
