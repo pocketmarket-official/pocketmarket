@@ -112,6 +112,7 @@ def kakao_callback(request):
 @csrf_exempt
 @transaction.atomic
 def trade(request):
+    errorPointFlag = 1
     try:
         # variable defintion
         saleHeaderList = []
@@ -166,6 +167,8 @@ def trade(request):
             target = Item.objects.get(itemCd=item['itemCd'])
             headerTotSaleAmt += target.price * item['qty']  # sum(saleprice * qty)
             headerTotQty += item['qty']
+            errorPointFlag = 2
+            print(errorPointFlag)
             saleDetailObj = SaleDetail.objects.create(
                 storeCd=storeCd,
                 saleDt=saleDt,
@@ -248,6 +251,9 @@ def trade(request):
         headerTaxAmt = headerSaleAmt - headerSupAmt
         headerOffTaxAmt = 0.0
 
+        errorPointFlag = 3
+        print(errorPointFlag)
+
         saleHeaderObj = SaleHeader.objects.create(
             storeCd=storeCd,
             saleDt=saleDt,
@@ -274,6 +280,9 @@ def trade(request):
             orderStatus='2',
             user = user
         )
+
+        errorPointFlag = 4
+        print(errorPointFlag)
 
         cardLogObj = CardLog.objects.create(
             storeCd=storeCd,
@@ -305,6 +314,9 @@ def trade(request):
             remark='',
             sendYn='N',
         )
+
+        errorPointFlag = 5
+        print(errorPointFlag)
 
         saleHeaderRow = {
             "COMP_CD": compCd,
@@ -424,6 +436,9 @@ def trade(request):
         # trDataEncoded = json.dumps(trData, ensure_ascii=False)
         trData = json.dumps(trData)
 
+        errorPointFlag = 6
+        print(errorPointFlag)
+
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
         request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data= trData,  verify=False, headers=headers)
         if request.status_code == 200:
@@ -439,6 +454,7 @@ def trade(request):
 
 
     except Exception as ex:
+        print('===================trade error==================')
         print(ex)
 
 @csrf_exempt
