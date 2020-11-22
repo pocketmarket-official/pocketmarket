@@ -40,7 +40,11 @@ function pay(sellItemList, price, storeName, storeId, userId) {
         //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
         let transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId, 'userId':userId};
         // axios.post('http://localhost:8000/trade/', transData); URL EXCHANGE
-        axios.post('/trade/', transData);
+        axios.post('/trade/', transData)
+            .then((res)=>{
+                alert(res.data.url);
+                location.href = res.data.url;
+            });
     });
 }
 
