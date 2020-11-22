@@ -10,24 +10,27 @@ class FestivalStore extends React.Component {
     constructor(props) {
         super(props);
 
-        let festivalCd = this.props.location.state.data.festivalCd;
+        let id = this.props.location.state.data.id;
         let stores = [];
 
         axios.get("/api/festivals_join/")
         .then((res) => {
             stores = res.data.filter(
                 (elt) => {
-                    if (elt.festivalCd === festivalCd) {
+                    if (elt.id === id) {
                         return true;
                     }
                 }
-            )
+            );
+            console.log(res);
+            console.log(stores);
         });
 
         this.state = {
             festival: this.props.location.state.data,
             stores: stores,
-        }
+        };
+
     }
 
     render() {
