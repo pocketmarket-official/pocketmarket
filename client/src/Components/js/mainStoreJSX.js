@@ -27,6 +27,8 @@ class StoreJSX extends React.Component {
         let user_email = storage.get(cookie_token);
         let userId;
 
+        if(!user_email) window.location.href = 'http://http://13.124.90.138:3000/';
+
         axios.get("/api/users_user/")
             .then((res) => {
                 userId = res.data.find((elt) => {
