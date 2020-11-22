@@ -58,7 +58,7 @@ function App() {
               <Redirect to={"/login"} />
         </Route>
         <Route authenticated={authenticated} exact path="/index" component={Index} />
-        <CacheRoute authenticated={authenticated} exact path="/main" component={Main} />
+        <Route authenticated={authenticated} exact path="/main" component={Main} />
         <CacheRoute authenticated={authenticated} exact path="/main/festival/:id" component={FestivalStore} />
         <CacheSwitch>
           <CacheRoute exact path="/main/store/:storeId/order" component={Order} />
