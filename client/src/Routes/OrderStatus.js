@@ -23,21 +23,24 @@ class OrderStatus extends React.Component {
         let cookie_token = cookie.load("access_token");
         let user_email = storage.get(cookie_token);
 
-        axios.get('http://localhost:8000/api/users_user/')
+        // axios.get('http://localhost:8000/api/users_user/') URL EXCHANGE
+        axios.get('/api/users_user/')
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
                 }).id;
-                axios.get('http://localhost:8000/api/trades_saleHeader/')
+                // axios.get('http://localhost:8000/api/trades_saleHeader/') URL EXCHANGE
+                axios.get('/api/trades_saleHeader/')
                 .then((res) => {
                     let saleHeader = res.data.filter((elt) => {
                         if(elt.user === userId){
                             return true;
                         }
                     });
-                    axios.get("http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo")
+                    // axios.get("http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") URL EXCHANGE
+                    axios.get("/api/trades_saleDetail?ordering=saleDt,storeCd,billNo")
                     .then((res) => {
                         let matched = [];
                         let saleDetail = res.data;
@@ -63,7 +66,8 @@ class OrderStatus extends React.Component {
                             saleHeader: saleHeader,
                             matched: matched,
                         }, () => {
-                            axios.get("http://localhost:8000/api/stores_store/")
+                            // axios.get("http://localhost:8000/api/stores_store/") URL EXCHANGE
+                            axios.get("/api/stores_store/")
                             .then((res) => {
                                 this.state.matched.forEach((elt) => {
                                     let storeName = res.data.find((dt) => {
@@ -134,7 +138,8 @@ class OrderStatus extends React.Component {
                                         <button className="pickup__btn" onClick={(e) => {
                                             e.preventDefault();
                                             let id = elt.id;
-                                            axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, {
+                                            // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { URL EXCHANGE
+                                            axios.put(`/api/trades_saleHeader/${id}/`, {
                                                 orderStatus: 4,
                                                 pickupTime: pickup_time,
                                             })

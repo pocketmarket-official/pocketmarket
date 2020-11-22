@@ -11,13 +11,12 @@ class ReviewWrite extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
 
-        let userId = this.props.location.state.userId || null;
         let billNo = this.props.location.state.billNo || null;
         let saleDt = this.props.location.state.saleDt || null;
         let storeCd = this.props.location.state.storeCd || null;
 
         this.state = {
-            userId: userId,
+            userId: null,
             billNo: billNo,
             saleDt: saleDt,
             storeCd: storeCd,
@@ -27,19 +26,28 @@ class ReviewWrite extends React.Component {
 
     handleSubmit() {
         const content = document.getElementById("reviewwrite__context");
-/*        axios.post("/api/reviews_review", {
-            storeCd: ,
-            saleDt: , // 판매 날짜 trading에서
-            billNo: ,
-            user: ,
+        console.log('=======================MA==============');
+        console.log('storeCd: ', this.state.storeCd);
+        console.log('saleDt: ', this.state.saleDt);
+        console.log('billNo: ', this.state.billNo);
+        console.log('user: ', this.state.user);
+        console.log('context: ', content.value);
+        // axios.post("http://localhost:8000/api/reviews_review", { URL EXCHANGE
+        axios.post("/api/reviews_review", {
+            storeCd: this.state.storeCd,
+            saleDt: this.state.saleDt, // 판매 날짜 trading에서
+            billNo: this.state.billNo,
+            user: this.state.userId,
             context: content.value,
-            img1: ,
-            img2: ,
-            img3: ,
-            img4: ,
-            img5: ,
-        })
-*/    }
+            // img1: this.state.image[0],
+            // img2: this.state.image[1],
+            // img3: this.state.image[2],
+            // img4: this.state.image[3],
+            // img5: this.state.image[4],
+        });
+
+
+    }
 
     handleImageChange = (e) => {
         let container = document.getElementById("fileupload");
@@ -61,7 +69,20 @@ class ReviewWrite extends React.Component {
         const elt2 = document.getElementById("hidden_select");
         elt.onclick = () => {
             elt2.click();
-        }
+        };
+
+        let cookie_token = cookie.load("access_token");
+        let user_email = storage.get(cookie_token);
+
+        axios.get('/api/users_user/')
+            .then((res) => {
+                let userId = res.data.find((elt) => {
+                    if (elt.email === user_email) {
+                        return true;
+                    }
+                }).id;
+                this.setState({ userId: userId });
+            });
     }
 
     render() {
