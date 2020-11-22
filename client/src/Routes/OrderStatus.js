@@ -16,6 +16,7 @@ class OrderStatus extends React.Component {
             saleDetail: [],
             matched: [],
             loading: true,
+            storeId: null,
         }
     };
 
@@ -165,7 +166,7 @@ class OrderStatus extends React.Component {
                                         <Link to={{pathname: '/order/review', state: {
                                             userId: this.state.userId,
                                             saleDt: elt.saleDt,
-                                            storeCd: elt.storeCd,
+                                            storeId: elt.id,
                                             billNo: elt.billNo,
                                         }}}><button className="pickup__btn">리뷰작성</button></Link>
                                     </div>

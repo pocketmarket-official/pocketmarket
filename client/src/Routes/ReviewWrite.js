@@ -13,13 +13,13 @@ class ReviewWrite extends React.Component {
 
         let billNo = this.props.location.state.billNo || null;
         let saleDt = this.props.location.state.saleDt || null;
-        let storeCd = this.props.location.state.storeCd || null;
+        let storeId = this.props.location.state.storeId || null;
 
         this.state = {
             userId: null,
             billNo: billNo,
             saleDt: saleDt,
-            storeCd: storeCd,
+            storeId: storeId,
             image: [],
         }
     }
@@ -27,26 +27,32 @@ class ReviewWrite extends React.Component {
     handleSubmit() {
         const content = document.getElementById("reviewwrite__context");
         console.log('=======================MA==============');
-        console.log('storeCd: ', this.state.storeCd);
+        console.log('storeId: ', 12);
         console.log('saleDt: ', this.state.saleDt);
         console.log('billNo: ', this.state.billNo);
         console.log('user: ', this.state.userId);
         console.log('context: ', content.value);
-        console.log('img1 :', this.state.image[0][0]);
+        // console.log('img1 :', (this.state.image[0][0])?(this.state.image[0][0]):'');
         //  this.state.image, this.state.image.name
         // axios.post("http://localhost:8000/api/reviews_review", { URL EXCHANGE
-        axios.post("/api/reviews_review", {
-            storeCd: this.state.storeCd,
-            saleDt: this.state.saleDt, // 판매 날짜 trading에서
-            billNo: this.state.billNo,
-            user: this.state.userId,
-            context: content.value,
-            img1: this.state.image[0][0],
-            // img2: this.state.image[1],
-            // img3: this.state.image[2],
-            // img4: this.state.image[3],
-            // img5: this.state.image[4],
-        });
+        axios.post("/api/reviews_review/", {
+                storeCd: this.state.storeId,
+                saleDt: this.state.saleDt, // 판매 날짜 trading에서
+                billNo: this.state.billNo,
+                user: this.state.userId,
+                context: content.value,
+                img1: this.state.image[0][0],
+                // img2: this.state.image[1],
+                // img3: this.state.image[2],
+                // img4: this.state.image[3],
+                // img5: this.state.image[4],
+            },
+            {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+        );
 
 
     }
