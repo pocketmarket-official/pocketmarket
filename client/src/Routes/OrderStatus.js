@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import btnCal from '../assets/order_status/btn_date.png'
 import axios from "axios";
@@ -84,7 +84,6 @@ class OrderStatus extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <>
                 <HeaderBack url='/mypage'/>
@@ -96,7 +95,8 @@ class OrderStatus extends React.Component {
                     this.state.matched.map((elt) => {
                         let status;
                         let button;
-                        let time = elt.completeTime;
+                        let time = "";
+                        let text = "";
                         if(elt.orderStatus === '1') {
                             status = "주문중";
                             button = (
@@ -120,6 +120,11 @@ class OrderStatus extends React.Component {
                             );
                         } else if(elt.orderStatus === '3') {
                             status = "조리완료";
+                            time = elt.completeTime;
+                            time = time.substring(0, 2) + ':' + time.substring(2, 4) + ':' + time.substring(4, 6);
+                            text = "완료시간";
+                            let d = new Date();
+                            let pickup_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
                             button = (
                                 <>
                                     <div className="pickup active">
@@ -128,6 +133,14 @@ class OrderStatus extends React.Component {
                                         </div>
                                         <button className="pickup__btn" onClick={(e) => {
                                             e.preventDefault();
+                                            let id = elt.id;
+                                            axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, {
+                                                orderStatus: 4,
+                                                pickupTime: pickup_time,
+                                            })
+                                            .then(() => {
+                                                window.location.reload();
+                                            })
                                         }}>픽업완료
                                         </button>
                                     </div>
@@ -135,31 +148,36 @@ class OrderStatus extends React.Component {
                             );
                         } else if(elt.orderStatus === '4') {
                             status = "픽업완료";
+                            time = elt.pickupTime;
+                            time = time.substring(0, 2) + ':' + time.substring(2, 4) + ':' + time.substring(4, 6);
+                            text = "픽업시간";
                             button = (
                                 <>
                                     <div className="pickup active">
                                         <div className="pickup__message">
                                             리뷰를 등록하면 다양한 혜택을 누리실 수 있습니다 ▶
                                         </div>
-                                        <button className="pickup__btn" onClick={(e) => {
-                                            e.preventDefault();
-                                        }}>리뷰작성
-                                        </button>
+                                        <Link to={{pathname: '/order/review', state: {
+                                            userId: this.state.userId,
+                                            saleDt: elt.saleDt,
+                                            storeCd: elt.storeCd,
+                                            billNo: elt.billNo,
+                                        }}}><button className="pickup__btn">리뷰작성</button></Link>
                                     </div>
                                 </>
                             );
                         } else if(elt.orderStatus === '5') {
                             status = "픽업완료";
+                            time = elt.pickupTime;
+                            time = time.substring(0, 2) + ':' + time.substring(2, 4) + ':' + time.substring(4, 6);
+                            text = "픽업시간";
                             button = (
                                 <>
                                     <div className="pickup active">
                                         <div className="pickup__message">
                                             리뷰를 등록하면 다양한 혜택을 누리실 수 있습니다 ▶
                                         </div>
-                                        <button className="pickup__btn" onClick={(e) => {
-                                            e.preventDefault();
-                                        }}>리뷰작성
-                                        </button>
+                                        <Link to={{pathname: '/order/review'}}><button className="pickup__btn">리뷰작성</button></Link>
                                     </div>
                                 </>
                             );
@@ -172,7 +190,7 @@ class OrderStatus extends React.Component {
                                         <div className="card__title">{elt.storeName}</div>
                                         <div className="card__title__info">
                                             <div className="order__date">
-                                                <img className="cal" src={btnCal}/>
+                                                <img className="cal" alt="calendar" src={btnCal}/>
                                                 {elt.saleDt}
                                             </div>
                                             <button className="card__delete" onClick={(e) => {
@@ -206,10 +224,15 @@ class OrderStatus extends React.Component {
                                             <div className="line__title">주문상태</div>
                                             <div className="line__detail">{status}</div>
                                         </div>
-                                        <div className="order__time">
-                                            <div className="line__title">완료시간</div>
-                                            <div className="line__detail">{time}</div>
-                                        </div>
+                                        {
+                                            time !== "" ?
+                                            <div className="order__time">
+                                                <div className="line__title">{text}</div>
+                                                <div className="line__detail">{time}</div>
+                                            </div>
+                                            :
+                                            null
+                                        }
                                     </div>
                                     {button}
                                 </div>

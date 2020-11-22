@@ -11,8 +11,16 @@ class ReviewWrite extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
 
+        let userId = this.props.location.state.userId || null;
+        let billNo = this.props.location.state.billNo || null;
+        let saleDt = this.props.location.state.saleDt || null;
+        let storeCd = this.props.location.state.storeCd || null;
+
         this.state = {
-            userId: null,
+            userId: userId,
+            billNo: billNo,
+            saleDt: saleDt,
+            storeCd: storeCd,
             image: [],
         }
     }
@@ -49,19 +57,6 @@ class ReviewWrite extends React.Component {
     };
 
     componentDidMount() {
-        let cookie_token = cookie.load("access_token");
-        let user_email = storage.get(cookie_token);
-
-        axios.get("/api/users_user/")
-        .then((res) => {
-            let userId = res.data.find((elt) => {
-                if(elt.email === user_email) {
-                    return true;
-                }
-            }).id;
-            this.setState({ userId: userId });
-        });
-
         const elt = document.getElementById("select_image");
         const elt2 = document.getElementById("hidden_select");
         elt.onclick = () => {
@@ -70,6 +65,7 @@ class ReviewWrite extends React.Component {
     }
 
     render() {
+        console.log(this.state);
         return (
             <>
                 <HeaderBack url='/mypage' />
