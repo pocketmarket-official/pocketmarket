@@ -41,10 +41,10 @@ class FestivalJSX extends React.Component {
         let endDt = end.getFullYear() + '년 ' + (end.getMonth() + 1) + '월 ' + end.getDate() + '일';
 
         return (
-            // <Link to={{
-            //     pathname : `/main/festival/${data.id}`,
-            //     state : { data }
-            // }}>
+            <Link to={{
+                pathname : `/main/festival/${data.id}`,
+                state : { data }
+            }}>
                 <div className="content__festival">
                     <div className="festival__header">
                         <div className="header__title">{data.festivalName}</div>
@@ -61,7 +61,7 @@ class FestivalJSX extends React.Component {
                         </div>
                     </div>
                 </div>
-            // </Link>
+            </Link>
         );
     }
 }
