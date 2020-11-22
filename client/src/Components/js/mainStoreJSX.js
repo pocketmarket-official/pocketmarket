@@ -57,7 +57,8 @@ class StoreJSX extends React.Component {
 
                                         let id = this.state.likeId;
                                         if(id === "") {
-                                            alert('1');
+                                            alert(this.state.userId);
+                                            alert(this.state.storeId);
                                             // axios.post("http://localhost:8000/api/stores_storeLike/", { URL EXCHANGE
                                                 axios.post("/api/stores_storeLike/", {
                                                 likeYn: 'Y',
