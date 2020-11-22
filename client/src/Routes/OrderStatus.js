@@ -169,7 +169,7 @@ class OrderStatus extends React.Component {
                                         <Link to={{pathname: '/order/review', state: {
                                             userId: this.state.userId,
                                             saleDt: elt.saleDt,
-                                            storeId: elt.id,
+                                            storeId: elt.storeId,
                                             billNo: elt.billNo,
                                         }}}><button className="pickup__btn">리뷰작성</button></Link>
                                     </div>
@@ -186,7 +186,12 @@ class OrderStatus extends React.Component {
                                         <div className="pickup__message">
                                             리뷰를 등록하면 다양한 혜택을 누리실 수 있습니다 ▶
                                         </div>
-                                        <Link to={{pathname: '/order/review'}}><button className="pickup__btn">리뷰작성</button></Link>
+                                        <Link to={{pathname: '/order/review', state: {
+                                            userId: this.state.userId,
+                                            saleDt: elt.saleDt,
+                                            storeId: elt.storeId,
+                                            billNo: elt.billNo,
+                                        }}}><button className="pickup__btn">리뷰작성</button></Link>
                                     </div>
                                 </>
                             );
