@@ -23,6 +23,7 @@ class OrderStatus extends React.Component {
     componentDidMount(){
         let cookie_token = cookie.load("access_token");
         let user_email = storage.get(cookie_token);
+        if(!user_email) window.location.href = '/login/';
 
         // axios.get('http://localhost:8000/api/users_user/') URL EXCHANGE
         axios.get('/api/users_user/')
