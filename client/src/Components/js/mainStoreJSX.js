@@ -74,8 +74,6 @@ class StoreJSX extends React.Component {
 
                                         let id = this.state.likeId;
                                         if(id === "") {
-                                            alert(this.state.userId);//4
-                                            alert(this.state.storeId);//409
                                             // axios.post("http://localhost:8000/api/stores_storeLike/", { URL EXCHANGE
                                                 axios.post("http://13.124.90.138:8000/api/stores_storeLike/", {
                                                 likeYn: 'Y',
@@ -83,7 +81,6 @@ class StoreJSX extends React.Component {
                                                 store: this.state.storeId,
                                             })
                                             .then(() => {
-                                                alert('2');
                                                 // axios.post("http://localhost:8000/storeLike/", { URL EXCHANGE
                                                 axios.post("http://13.124.90.138:8000/storeLike/", {
                                                     "storeId": this.props.data.id,
@@ -99,15 +96,13 @@ class StoreJSX extends React.Component {
                                             })
                                         } else {
                                             if(this.state.likeYn === 'Y') {
-                                                alert('3');
                                                 // axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, { URL EXCHANGE
-                                                axios.put(`/api/stores_storeLike/${id}/`, {
+                                                axios.put(`http://13.124.90.138:8000/api/stores_storeLike/${id}/`, {
                                                     likeYn: 'N',
                                                     user: this.state.userId,
                                                     store: this.state.storeId,
                                                 })
                                                 .then(() => {
-                                                    alert('4');
                                                     // axios.post("http://localhost:8000/storeLike/", { URL EXCHANGE
                                                     axios.post("http://13.124.90.138:8000/storeLike/", {
                                                         "storeId": this.props.data.id,
@@ -122,15 +117,13 @@ class StoreJSX extends React.Component {
                                                     })
                                                 })
                                             } else if(this.state.likeYn === 'N') {
-                                                alert('5');
                                                 // axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, { URL EXCHANGE
-                                                axios.put(`/api/stores_storeLike/${id}/`, {
+                                                axios.put(`http://13.124.90.138:8000/api/stores_storeLike/${id}/`, {
                                                     likeYn: 'Y',
                                                     user: this.state.userId,
                                                     store: this.state.storeId,
                                                 })
                                                 .then(() => {
-                                                    alert('6');
                                                     // axios.post("http://localhost:8000/storeLike/", { URL EXCHANGE
                                                     axios.post("http://13.124.90.138:8000/storeLike/", {
                                                         "storeId": this.props.data.id,
