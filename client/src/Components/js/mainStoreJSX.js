@@ -27,29 +27,29 @@ class StoreJSX extends React.Component {
 
         let cookie_token = cookie.load("access_token");
         let user_email = storage.get(cookie_token);
+        let userId;
 
         axios.get("/api/users_user/")
-        .then((res) => {
-            let userId = res.data.find((elt) => {
-                if(elt.email === user_email) {
-                    return true;
-                }
-            }).id;
-            this.setState({ userId: userId });
-        });
-
-        // axios.post("http://localhost:8000/storeLike/", {  URL EXCHANGE
-            axios.post("http://13.124.90.138:8000/storeLike/", {
-            "storeId": this.props.data.id,
-            "userId": userId,
-        })
-        .then((res) => {
-            this.setState({
-                like: res.data.likeCnt,
-                likeYn: res.data.likeYn,
-                likeId: res.data.likeId,
+            .then((res) => {
+                userId = res.data.find((elt) => {
+                    if (elt.email === user_email) {
+                        return true;
+                    }
+                }).id;
+                // axios.post("http://localhost:8000/storeLike/", {  URL EXCHANGE
+                axios.post("http://13.124.90.138:8000/storeLike/", {
+                    "storeId": this.props.data.id,
+                    "userId": userId,
+                })
+                    .then((res) => {
+                        this.setState({
+                            like: res.data.likeCnt,
+                            likeYn: res.data.likeYn,
+                            likeId: res.data.likeId,
+                        });
+                    });
+                this.setState({userId: userId});
             });
-        })
     }
 
     render() {
