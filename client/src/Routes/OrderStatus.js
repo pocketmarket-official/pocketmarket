@@ -59,6 +59,7 @@ class OrderStatus extends React.Component {
                             }
                             if(detail !== [] && elt.orderStatus !== '6' && elt.orderStatus !== '7') {
                                 elt["detail"] = detail;
+                                console.log(elt);
                                 matched.push(elt);
                             }
                         });
@@ -76,7 +77,7 @@ class OrderStatus extends React.Component {
                                             return true;
                                         }
                                     });
-                                    let storeName = store.storeName
+                                    let storeName = store.storeName;
                                     let storeId = store.id;
                                     elt["storeName"] = storeName;
                                     elt["storeId"] = storeId;
@@ -171,6 +172,7 @@ class OrderStatus extends React.Component {
                                             saleDt: elt.saleDt,
                                             storeId: elt.storeId,
                                             billNo: elt.billNo,
+                                                id: elt.id,
                                         }}}><button className="pickup__btn">리뷰작성</button></Link>
                                     </div>
                                 </>
@@ -191,6 +193,7 @@ class OrderStatus extends React.Component {
                                             saleDt: elt.saleDt,
                                             storeId: elt.storeId,
                                             billNo: elt.billNo,
+                                                id: elt.id,
                                         }}}><button className="pickup__btn">리뷰작성</button></Link>
                                     </div>
                                 </>

@@ -7,6 +7,8 @@ import star1 from '../../assets/store/star1.png';
 import star2 from '../../assets/store/star2.png';
 import star3 from '../../assets/store/star3.png';
 import defaultImg from '../../assets/main/grayBI.png';
+import cookie from "react-cookies";
+import storage from "../../storage";
 
 
 class StoreJSX extends React.Component {
@@ -15,16 +17,31 @@ class StoreJSX extends React.Component {
         this.state = {
             like: null,
             storeId: this.props.data.id,
-            userId: this.props.userId,
+            // userId: this.props.userId,
+            userId: '',
             likeYn: null,
         }
     }
 
     componentDidMount() {
+
+        let cookie_token = cookie.load("access_token");
+        let user_email = storage.get(cookie_token);
+
+        axios.get("/api/users_user/")
+        .then((res) => {
+            let userId = res.data.find((elt) => {
+                if(elt.email === user_email) {
+                    return true;
+                }
+            }).id;
+            this.setState({ userId: userId });
+        });
+
         // axios.post("http://localhost:8000/storeLike/", {  URL EXCHANGE
             axios.post("http://13.124.90.138:8000/storeLike/", {
             "storeId": this.props.data.id,
-            "userId": this.state.userId,
+            "userId": userId,
         })
         .then((res) => {
             this.setState({

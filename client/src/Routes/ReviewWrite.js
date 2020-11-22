@@ -9,56 +9,72 @@ class ReviewWrite extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.getFormatDate = this.getFormatDate.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
 
         let billNo = this.props.location.state.billNo || null;
         let saleDt = this.props.location.state.saleDt || null;
         let storeId = this.props.location.state.storeId || null;
+        let saleHeaderId = this.props.location.state.id || null;
+
+        console.log(this.props);
 
         this.state = {
             userId: null,
             billNo: billNo,
             saleDt: saleDt,
             storeId: storeId,
+            saleHeaderId: saleHeaderId,
             image: [],
         }
     }
 
+    getFormatDate = (date) => {
+        var year = date.getFullYear();              //yyyy
+        var month = (1 + date.getMonth());          //M
+        month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+        var day = date.getDate();                   //d
+        day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+        return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+    };
+
     handleSubmit() {
+        let form_data = new FormData();
+        var date = new Date();
+        date = this.getFormatDate(date);
         const content = document.getElementById("reviewwrite__context");
-        console.log('=======================MA==============');
-        console.log('storeId: ', 12);
-        console.log('saleDt: ', this.state.saleDt);
-        console.log('billNo: ', this.state.billNo);
-        console.log('user: ', this.state.userId);
-        console.log('context: ', content.value);
-        // console.log('img1 :', (this.state.image[0][0])?(this.state.image[0][0]):'');
-        //  this.state.image, this.state.image.name
-        // axios.post("http://localhost:8000/api/reviews_review", { URL EXCHANGE
-        axios.post("/api/reviews_review/", {
-                storeCd: this.state.storeId,
-                saleDt: this.state.saleDt, // 판매 날짜 trading에서
-                billNo: this.state.billNo,
-                user: this.state.userId,
-                context: content.value,
-                img1: this.state.image[0][0],
-                // img2: this.state.image[1],
-                // img3: this.state.image[2],
-                // img4: this.state.image[3],
-                // img5: this.state.image[4],
-            },
-            {
-                headers: {
-                    'content-type': 'multipart/form-data'
-                }
+
+        form_data.append('storeCd', this.state.storeId);
+        form_data.append('saleDt', this.state.saleDt);
+        form_data.append('billNo', this.state.billNo);
+        form_data.append('user', this.state.userId);
+        form_data.append('reviewDt', date);
+        form_data.append('context', content.value);
+        for(let i in this.state.image){
+            let j = parseInt(i);
+            form_data.append(`img${j + 1}`, this.state.image[i][0]);
+        }
+        axios.post('/api/reviews_review/', form_data, {
+            headers: {
+                'content-type': 'multipart/form-data'
             }
-        );
-
-
+        })
+            .then(res => {
+                axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{
+                    orderStatus: 6,
+                } );
+                console.log(res.data);
+            })
+            .catch(err => console.log(err))
     }
 
     handleImageChange = (e) => {
         let container = document.getElementById("fileupload");
+        const elt = document.getElementById("file__image__box");
+        if(container.childElementCount === 5) {
+            elt.style.display = "none";
+        }
+
         let fileReader = new FileReader();
         fileReader.readAsDataURL(e.target.files[0]);
         fileReader.onload = function(e) {
@@ -67,7 +83,7 @@ class ReviewWrite extends React.Component {
             elt.src = e.target.result;
             container.appendChild(elt);
         };
-        console.log(e.target.files);
+
         this.setState({
             image: this.state.image.concat(e.target.files),
         });
@@ -95,7 +111,6 @@ class ReviewWrite extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <>
                 <HeaderBack url='/mypage' />
@@ -145,7 +160,7 @@ class ReviewWrite extends React.Component {
                             <div className="upperline"/>
                             <input type="file" multiple accept="image/*" id="review__image" hidden/>
                             <div className="fileupload" id="fileupload">
-                                <div className="file__image__box empty" onChange={this.handleImageChange}>
+                                <div className="file__image__box empty" id="file__image__box" onChange={this.handleImageChange}>
                                     <img src={img_ico} alt="camera" className="image" id="select_image" />
                                     <input type="file" accept="image/png, image/jpeg" id="hidden_select"  hidden/>
                                 </div>

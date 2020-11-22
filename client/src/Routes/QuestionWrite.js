@@ -11,7 +11,6 @@ class QuestionWrite extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.getFormatDate = this.getFormatDate.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
-        this.handleChange = this.handleChange.bind(this);
 
         this.state = {
             userId: null,
@@ -19,27 +18,6 @@ class QuestionWrite extends React.Component {
             image: [],
         }
     }
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
-    };
-
-    handleImageChange = (e) => {
-        let container = document.getElementById("fileupload");
-        let fileReader = new FileReader();
-        fileReader.readAsDataURL(e.target.files[0]);
-        fileReader.onload = function(e) {
-            let elt = document.createElement("img");
-            elt.className = "file__image__box";
-            elt.src = e.target.result;
-            container.appendChild(elt);
-        };
-        this.setState({
-            image: this.state.image.concat(e.target.files),
-        });
-    };
 
     getFormatDate = (date) => {
         var year = date.getFullYear();              //yyyy
@@ -54,12 +32,16 @@ class QuestionWrite extends React.Component {
         let form_data = new FormData();
         var date = new Date();
         date = this.getFormatDate(date);
+        const content = document.getElementById("content");
 
         form_data.append('user', this.state.userId);
         form_data.append('questionDate', date);
-        form_data.append('content', this.state.content);
-        form_data.append('img', this.state.image, this.state.image.name);
-        // console.log(this.state.img);
+        form_data.append('content', content.value);
+        for(let i in this.state.image){
+            let j = parseInt(i);
+            form_data.append(`img${j + 1}`, this.state.image[i][0]);
+        }
+
         // axios.post('http://localhost:8000/api/users_question/', form_data, { URL EXCHANGE
         axios.post('/api/users_question/', form_data, {
             headers: {
@@ -70,6 +52,28 @@ class QuestionWrite extends React.Component {
                 console.log(res.data);
             })
             .catch(err => console.log(err))
+    };
+
+    handleImageChange = (e) => {
+        let container = document.getElementById("fileupload");
+        const elt = document.getElementById("empty");
+        if(container.childElementCount === 5) {
+            console.log(elt);
+            elt.style.display = "none";
+        }
+
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(e.target.files[0]);
+        fileReader.onload = function(e) {
+            let elt = document.createElement("img");
+            elt.className = "file__image__box";
+            elt.src = e.target.result;
+            container.appendChild(elt);
+        };
+
+        this.setState({
+            image: this.state.image.concat(e.target.files),
+        });
     };
 
 
@@ -101,7 +105,7 @@ class QuestionWrite extends React.Component {
                 <div className="questionwrite">
                     <div className="question__write__box">
                         <div className="question__write__caption">문의하기</div>
-                        <textarea placeholder='Content' className="questionwrite__context" id='content' value={this.state.content} onChange={this.handleChange} required/>
+                        <textarea placeholder='Content' className="questionwrite__context" id='content'  onChange={this.handleChange} required/>
                     </div>
                     <div className="photo__upload__box">
                         <div className="photo__upload__caption">사진업로드</div>
