@@ -43,7 +43,7 @@ class OrderStatus extends React.Component {
                         let saleDetail = res.data;
                         // sale dt 기준으로 정렬되어 있는 데이터
                         saleHeader.forEach((elt) => {
-                            let detail = []
+                            let detail = [];
                             for(let item in saleDetail) {
                                 if(saleDetail[item].saleDt === elt.saleDt) {
                                     if(saleDetail[item].storeCd === elt.storeCd) {
@@ -57,7 +57,7 @@ class OrderStatus extends React.Component {
                                 elt["detail"] = detail;
                                 matched.push(elt);
                             }
-                        })
+                        });
                         this.setState({
                             userId:userId,
                             saleHeader: saleHeader,
@@ -72,7 +72,7 @@ class OrderStatus extends React.Component {
                                         }
                                     }).storeName;
                                     elt["storeName"] = storeName;
-                                })
+                                });
                                 this.setState({
                                     loading: false,
                                 })
