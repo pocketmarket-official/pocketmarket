@@ -161,20 +161,20 @@ class StoreJSX extends React.Component {
                             <img src={star2}/>
                     */}
                         </div>
-                        <div className="store__review">
-                            <div className="review__content">
-                                한입 와앙! 물고 놨는데 한도끝도 없이 끊어지지 않고 늘어나는 치즈 (;;;)
-                                ㅋㅋㅋㅋ 사진으로 그게 표현이 안되는게 아쉽네..ㅜ?
-                                한입 와앙! 물고 놨는데 한도끝도 없이 끊어지지 않고 늘어나는 치즈 (;;;)
-                                ㅋㅋㅋㅋ 사진으로 그게 표현이 안되는게 아쉽네..ㅜ?
-                            </div>
-                            <button className="review__likes" onClick={(e) => {
-                                e.preventDefault();
-                                // 좋아요 기능 추가 예정
-                            }}>
-                                <p>♥</p> 56
-                            </button>
-                        </div>
+                        {/*<div className="store__review">*/}
+                        {/*    <div className="review__content">*/}
+                        {/*        한입 와앙! 물고 놨는데 한도끝도 없이 끊어지지 않고 늘어나는 치즈 (;;;)*/}
+                        {/*        ㅋㅋㅋㅋ 사진으로 그게 표현이 안되는게 아쉽네..ㅜ?*/}
+                        {/*        한입 와앙! 물고 놨는데 한도끝도 없이 끊어지지 않고 늘어나는 치즈 (;;;)*/}
+                        {/*        ㅋㅋㅋㅋ 사진으로 그게 표현이 안되는게 아쉽네..ㅜ?*/}
+                        {/*    </div>*/}
+                        {/*    <button className="review__likes" onClick={(e) => {*/}
+                        {/*        e.preventDefault();*/}
+                        {/*        // 좋아요 기능 추가 예정*/}
+                        {/*    }}>*/}
+                        {/*        <p>♥</p> 56*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
                     </div>
                     </Link>
                 </div>
