@@ -137,7 +137,7 @@ class StoreJSX extends React.Component {
                             </div>
                             <div className="detail__title">
                                 <div className="detail__name">{data.storeName}</div>
-                                <div className="detail__distance">거리 {data.show_dist}</div>
+                                {/*<div className="detail__distance">거리 {data.show_dist}</div>*/}
                             </div>
                             <div className="detail__description">
                                 {data.description}
