@@ -32,6 +32,8 @@ class ReviewWrite extends React.Component {
         console.log('billNo: ', this.state.billNo);
         console.log('user: ', this.state.userId);
         console.log('context: ', content.value);
+        console.log('img1 :', this.state.image[0][0]);
+        //  this.state.image, this.state.image.name
         // axios.post("http://localhost:8000/api/reviews_review", { URL EXCHANGE
         axios.post("/api/reviews_review", {
             storeCd: this.state.storeCd,
@@ -39,7 +41,7 @@ class ReviewWrite extends React.Component {
             billNo: this.state.billNo,
             user: this.state.userId,
             context: content.value,
-            // img1: this.state.image[0],
+            img1: this.state.image[0][0],
             // img2: this.state.image[1],
             // img3: this.state.image[2],
             // img4: this.state.image[3],
@@ -59,7 +61,7 @@ class ReviewWrite extends React.Component {
             elt.src = e.target.result;
             container.appendChild(elt);
         };
-        console.log(e.target.files)
+        console.log(e.target.files);
         this.setState({
             image: this.state.image.concat(e.target.files),
         });

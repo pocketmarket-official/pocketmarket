@@ -59,6 +59,7 @@ class QuestionWrite extends React.Component {
         form_data.append('questionDate', date);
         form_data.append('content', this.state.content);
         form_data.append('img', this.state.image, this.state.image.name);
+        // console.log(this.state.img);
         // axios.post('http://localhost:8000/api/users_question/', form_data, { URL EXCHANGE
         axios.post('/api/users_question/', form_data, {
             headers: {
