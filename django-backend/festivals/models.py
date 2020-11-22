@@ -18,7 +18,7 @@ class Festival(models.Model):
     joinCount = models.IntegerField(blank=True, null=True)
     simulOperCount = models.IntegerField(blank=True, null=True)
     img = models.ImageField(upload_to='images/festival/img', null=True)
-    innerMap = models.ImageField(upload_to='images/festival/innerMap', null=True)
+    innerMap = models.ImageField(upload_to='images/festival/innerMap', null=True, blank=True)
     addr1 = models.CharField(max_length=200, blank=True, null=True)
     addr2 = models.CharField(max_length=200, blank=True, null=True)
     oldAddr = models.CharField(max_length=200, blank=True, null=True)
@@ -26,10 +26,10 @@ class Festival(models.Model):
     organManager = models.CharField(max_length=10, blank=True, null=True)
     organPhone = models.CharField(max_length=20, blank=True, null=True)
     organMail = models.CharField(max_length=50, blank=True, null=True)
-    insDt = models.DateTimeField(default=datetime.now())
-    insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
-    modUs = models.CharField(max_length=30, null=True)
+    insDt = models.DateTimeField(default=datetime.now(), blank=True, null=True)
+    insUs = models.CharField(max_length=30, blank=True, null=True)
+    modDt = models.DateTimeField(default=datetime.now(), blank=True, null=True)
+    modUs = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
         return self.festivalName
