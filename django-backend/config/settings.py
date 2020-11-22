@@ -30,7 +30,7 @@ AWS_QUERYSTRING_AUTH = False
 AWS_DEFAULT_ACL = None
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 #S3 setting
 AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
