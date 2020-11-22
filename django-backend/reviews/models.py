@@ -12,6 +12,7 @@ class Review(models.Model):
     saleDt = models.CharField(max_length=8, null=True, blank=True)
     billNo = models.CharField(max_length=10, null=True, blank=True)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, blank=True)
+    reviewDt = models.CharField(max_length=8, null=True, blank=True)
     context = models.TextField(null=True, blank=True)
     img1 = models.ImageField(upload_to='images/review', null=True, blank=True)
     img2 = models.ImageField(upload_to='images/review', null=True, blank=True)
