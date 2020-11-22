@@ -41,7 +41,7 @@ def kakao_login(request):
     client_id = os.environ.get('KAKAO_KEY')
     # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
     redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
-    return redirect(
+    return HttpResponseRedirect(
         f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
     )
 
