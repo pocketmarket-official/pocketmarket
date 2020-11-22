@@ -269,7 +269,7 @@ class OrderHistory extends React.Component {
                     username: '노민철',
                     date: '2020.08.01',
                     place: '스타벅스',
-                    review: "N",
+                    review: "Y",
                     order: [['아메리카노', 4100, 2], ['아이스 라떼', 4900, 1]],
 
                 },
@@ -278,7 +278,7 @@ class OrderHistory extends React.Component {
                     username: '노민철',
                     date: '2020.08.27',
                     place: '강남핫도그',
-                    review: "N",
+                    review: "Y",
                     order: [['아메리카노', 4100, 1], ['티라미수', 5900, 1]],
                 },
                 {
