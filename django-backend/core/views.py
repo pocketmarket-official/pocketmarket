@@ -439,7 +439,10 @@ def trade(request):
                 cardLogObj.orgSeq = None
             cardLogObj.save()
 
-        return HttpResponseRedirect('http://13.124.90.138:3000/order/status')
+        data = {'url': 'http://13.124.90.138:3000/order/status'}
+
+        response = JsonResponse(data)
+        return response
 
     except Exception as ex:
         print(ex)
