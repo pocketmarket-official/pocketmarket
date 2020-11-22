@@ -113,6 +113,7 @@ def kakao_callback(request):
 @transaction.atomic
 def trade(request):
     errorPointFlag = 1
+    print(errorPointFlag)
     try:
         # variable defintion
         saleHeaderList = []
