@@ -22,7 +22,7 @@ class StoreJSX extends React.Component {
 
     componentDidMount() {
         // axios.post("http://localhost:8000/storeLike/", {  URL EXCHANGE
-            axios.post("/storeLike/", {
+            axios.post("http://13.124.90.138:8000/storeLike/", {
             "storeId": this.props.data.id,
             "userId": this.state.userId,
         })
@@ -65,7 +65,7 @@ class StoreJSX extends React.Component {
                                             })
                                             .then(() => {
                                                 // axios.post("http://localhost:8000/storeLike/", { URL EXCHANGE
-                                                axios.post("/storeLike/", {
+                                                axios.post("http://13.124.90.138:8000/storeLike/", {
                                                     "storeId": this.props.data.id,
                                                     "userId": this.state.userId,
                                                 })
@@ -87,7 +87,7 @@ class StoreJSX extends React.Component {
                                                 })
                                                 .then(() => {
                                                     // axios.post("http://localhost:8000/storeLike/", { URL EXCHANGE
-                                                    axios.post("/storeLike/", {
+                                                    axios.post("http://13.124.90.138:8000/storeLike/", {
                                                         "storeId": this.props.data.id,
                                                         "userId": this.state.userId,
                                                     })
@@ -108,7 +108,7 @@ class StoreJSX extends React.Component {
                                                 })
                                                 .then(() => {
                                                     // axios.post("http://localhost:8000/storeLike/", { URL EXCHANGE
-                                                    axios.post("/storeLike/", {
+                                                    axios.post("http://13.124.90.138:8000/storeLike/", {
                                                         "storeId": this.props.data.id,
                                                         "userId": this.state.userId,
                                                     })
