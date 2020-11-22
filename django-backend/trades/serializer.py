@@ -15,7 +15,7 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
     class Meta:
         model = SaleHeader
         fields = (
-            'Id',
+            'id',
             'storeCd',
             'saleDt',
             'posNo',
