@@ -17,7 +17,6 @@ class StoreJSX extends React.Component {
         this.state = {
             like: null,
             storeId: this.props.data.id,
-            // userId: this.props.userId,
             userId: '',
             likeYn: null,
         }

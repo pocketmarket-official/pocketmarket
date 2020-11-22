@@ -8,6 +8,7 @@ class FestivalJSX extends React.Component {
     constructor(props) {
         super(props);
         this.formatDate = this.formatDate.bind(this);
+        this.joinFestival = this.joinFestival.bind(this);
         this.state = {
             festival: null,
             festivalName: null,
@@ -17,6 +18,10 @@ class FestivalJSX extends React.Component {
             img: null,
             userId: null,
         }
+    }
+
+    joinFestival(){
+        alert('사회적 거리두기 2단계 시행에 따라 임시 휴장합니다.');
     }
 
     formatDate(dateStr) {
@@ -36,14 +41,14 @@ class FestivalJSX extends React.Component {
         let endDt = end.getFullYear() + '년 ' + (end.getMonth() + 1) + '월 ' + end.getDate() + '일';
 
         return (
-            <Link to={{
-                pathname : `/main/festival/${data.id}`,
-                state : { data }
-            }}>
+            // <Link to={{
+            //     pathname : `/main/festival/${data.id}`,
+            //     state : { data }
+            // }}>
                 <div className="content__festival">
                     <div className="festival__header">
                         <div className="header__title">{data.festivalName}</div>
-                        <div className="header__enter">축제입장</div>
+                        <div className="header__enter" onClick={() => this.joinFestival()}>축제입장</div>
                     </div>
                     <div className="festival__detail">
                         <img src={data.img || defaultImg} alt="festival" />
@@ -56,7 +61,7 @@ class FestivalJSX extends React.Component {
                         </div>
                     </div>
                 </div>
-            </Link>
+            // </Link>
         );
     }
 }
