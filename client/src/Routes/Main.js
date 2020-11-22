@@ -102,7 +102,7 @@ class Main extends React.Component {
         this.setState(() => ({ current: 2 }));
     }
 
-    // 목록과 지도 전환 버튼 컨트롤
+/*    // 목록과 지도 전환 버튼 컨트롤
     handleBtn() {
         const btn = document.getElementById("btn__map_list");
         const modal = document.getElementById("modal__address");
@@ -115,7 +115,7 @@ class Main extends React.Component {
             this.handlePage1Render();
         }
     }
-
+*/
     // handle modal
     handleAddress() {
         const btn = document.getElementById("btn__address");
@@ -185,9 +185,9 @@ class Main extends React.Component {
                             <button id="top" className="btn__goto-top"/>
                         </div>
                         <div className="btn__right">
-                            <Link to="/mypage/myplace/search"><button className="btn__current"/></Link>
-                            <button className="btn__address" id="btn__address" onClick={this.handleAddress}>현위치</button>
-                            <button className="btn__map_list" id="btn__map_list" onClick={() => this.handleBtn()}/>
+                            {/*<Link to="/mypage/myplace/search"><button className="btn__current"/></Link>*/}
+                            {/*<button className="btn__address" id="btn__address" onClick={this.handleAddress}>현위치</button>*/}
+                            {/*<button className="btn__map_list" id="btn__map_list" onClick={() => this.handleBtn()}/>*/}
                         </div>
                     </div>
                     <div className="modal__address hidden" id="modal__address" onClick={() => {

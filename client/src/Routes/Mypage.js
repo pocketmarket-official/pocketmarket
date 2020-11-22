@@ -19,7 +19,7 @@ function Mypage() {
                 </div>
                 <div className="setting__box">
                     <div className="setting__list"><Link to="/biz/certification">점주 페이지</Link><img src={store}/></div>
-                    <div className="setting__list"><p>로그아웃</p><img src={logout}/></div>
+                    {/*<div className="setting__list"><p>로그아웃</p><img src={logout}/></div>*/}
                 </div>
             </div>
         </>

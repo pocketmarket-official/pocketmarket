@@ -83,7 +83,7 @@ class MainFestivalContent extends React.Component {
         let addressContainer = document.getElementById("btn__address");
         let getPositionBtn = document.getElementById("btn__map_list");
 
-        getPositionBtn.onclick = () => {
+/*        getPositionBtn.onclick = () => {
             addressContainer.innerHTML = "주소지";
             this.getPosition().then((position) => {
                 this.setState({
@@ -95,7 +95,7 @@ class MainFestivalContent extends React.Component {
             })
             .catch((e) => console.log(e));
         }
-
+*/
         window.addEventListener("scroll", this._infiniteScroll, true);
     }
 

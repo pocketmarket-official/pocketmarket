@@ -117,15 +117,15 @@ class MainStoreContent extends React.Component {
         let addressContainer = document.getElementById("btn__address");
         let getPositionBtn = document.getElementById("btn__map_list");
 
-        if(addressContainer.innerHTML !== "현위치") {
+/*        if(addressContainer.innerHTML !== "현위치") {
             if(this.props.place !== []) {
                 window.sessionStorage.setItem("longitude", this.props.place[0]);
                 window.sessionStorage.setItem("latitude", this.props.place[1]);
                 this.sortCallback();
             }
         }
-
-        getPositionBtn.onclick = () => {
+*/
+/*        getPositionBtn.onclick = () => {
             addressContainer.innerHTML = "현위치";
             this.getPosition().then((position) => {
                 window.sessionStorage.setItem("latitude", position.coords.latitude);
@@ -134,7 +134,7 @@ class MainStoreContent extends React.Component {
             })
             .catch((e) => console.log(e));
         }
-
+*/
         window.addEventListener("scroll", this._infiniteScroll, true);
 
         const elt = document.getElementById("navigation__search");
@@ -187,7 +187,7 @@ class MainStoreContent extends React.Component {
         let addressContainer = document.getElementById("btn__address");
         let prev = window.sessionStorage.getItem("latitude");
 
-        if(addressContainer.innerHTML !== "현위치") {
+/*        if(addressContainer.innerHTML !== "현위치") {
             if(this.props.place !== []) {
                 if(window.sessionStorage.getItem("latitude") !== this.props.place[1]) {
                     window.sessionStorage.setItem("longitude", this.props.place[0]);
@@ -211,7 +211,7 @@ class MainStoreContent extends React.Component {
                 }
             }
         }
-    }
+*/    }
 
     render() {
         const isLoading = this.state.loading;
@@ -222,7 +222,7 @@ class MainStoreContent extends React.Component {
                     <Loading />
                 ) : (
                     <>
-                        <div className="content__partition">50m 이내</div>
+                        {/*<div className="content__partition">50m 이내</div>*/}
                         {
                             this.state.data !== undefined ?
                             this.state.data.map((data) => (
