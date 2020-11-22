@@ -77,7 +77,7 @@ class StoreJSX extends React.Component {
                                             alert(this.state.userId);//4
                                             alert(this.state.storeId);//409
                                             // axios.post("http://localhost:8000/api/stores_storeLike/", { URL EXCHANGE
-                                                axios.post("/api/stores_storeLike/", {
+                                                axios.post("http://13.124.90.138:8000/api/stores_storeLike/", {
                                                 likeYn: 'Y',
                                                 user: this.state.userId,
                                                 store: this.state.storeId,
