@@ -64,6 +64,7 @@ class Main extends React.Component {
             current: current,
             latlong: [],
             userId: null,
+            orderCount: 0,
         }
     }
 
@@ -164,14 +165,23 @@ class Main extends React.Component {
         let user_email = storage.get(cookie_token);
 
         axios.get("/api/users_user/")
-        .then((res) => {
-            let userId = res.data.find((elt) => {
-                if(elt.email === user_email) {
-                    return true;
-                }
-            }).id;
-            this.setState({ userId: userId });
-        });
+            .then((res) => {
+                let userId = res.data.find((elt) => {
+                    if (elt.email === user_email) {
+                        return true;
+                    }
+                }).id;
+                axios.get('/api/trades_saleHeader/')
+                    .then((res) => {
+                        let i = this.state.orderCount;
+                        res.data.filter((elt) => {
+                            if (elt.user === userId && (elt.orderStatus != 6 && elt.orderStatus != 7)) {
+                                i++;
+                            }
+                        });
+                        this.setState({userId: userId, orderCount: i});
+                    });
+            });
     }
 
     render() {
@@ -220,7 +230,7 @@ class Main extends React.Component {
                     </div>
                     <Link to="/order/status">
                         <div className="main__order-status">
-                            <div className="order-status__count">1</div>
+                            <div className="order-status__count">{this.state.orderCount}</div>
                         </div>
                     </Link>
                 </div>

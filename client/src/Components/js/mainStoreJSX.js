@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import storImg from '../../assets/store/img1.png';
 import star1 from '../../assets/store/star1.png';
 import star2 from '../../assets/store/star2.png';
 import star3 from '../../assets/store/star3.png';
