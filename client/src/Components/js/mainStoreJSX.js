@@ -70,7 +70,7 @@ class StoreJSX extends React.Component {
                                 <div className="tags__tag">@반포 낭만달빛마켓</div>
                                 {
                                     this.state.like !== undefined ?
-                                    <button className="tags__likes" onClick={(e) => {
+                                    <button className={`tags__likes ${this.state.likeYn === 'Y' ? 'active' : ''}`} onClick={(e) => {
                                         e.preventDefault();
 
                                         let id = this.state.likeId;
@@ -141,7 +141,7 @@ class StoreJSX extends React.Component {
                                             }
                                         }
 
-                                    }}>♥ {this.state.like}</button>
+                                    }}><span className="likes__heart">♥</span> {this.state.like}</button>
                                     :
                                     null
                                 }
@@ -167,11 +167,11 @@ class StoreJSX extends React.Component {
                             <div className="review__content">
                                 맛도 맛인데 대기하지 않고 받을 수 있어서 너무 좋았어요!!
                             </div>
-                            <button className="review__likes" onClick={(e) => {
+                            <button className={`review__likes ${Math.random() > 0.5 ? 'active' : ''}`} onClick={(e) => {
                                 e.preventDefault();
                                 // 좋아요 기능 추가 예정
                             }}>
-                                <p>♥</p> 56
+                                <p className="likes__heart">♥</p> 56
                             </button>
                         </div>
                     </div>
