@@ -20,7 +20,8 @@ class FestivalJSX extends React.Component {
         }
     }
 
-    joinFestival(){
+    joinFestival(e){
+        e.preventDefault();
         alert('사회적 거리두기 2단계 시행에 따라 임시 휴장합니다.');
     }
 
@@ -45,10 +46,13 @@ class FestivalJSX extends React.Component {
                 pathname : `/main/festival/${data.id}`,
                 state : { data }
             }}>
-                <div className="content__festival">
+                <div className="content__festival" onClick={(e) => {
+                    e.preventDefault();
+                    this.props.showFestivalInfo();
+                }}>
                     <div className="festival__header">
                         <div className="header__title">{data.festivalName}</div>
-                        <div className="header__enter" onClick={() => this.joinFestival()}>축제입장</div>
+                        <div className="header__enter" onClick={(e) => this.joinFestival(e)}>축제입장</div>
                     </div>
                     <div className="festival__detail">
                         <img src={data.img || defaultImg} alt="festival" />

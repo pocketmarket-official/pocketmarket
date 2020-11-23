@@ -1,0 +1,180 @@
+.modal__festival {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+
+  &.hidden {
+    display: none;
+  }
+
+  .modal__modal {
+    position: relative;
+    max-width: 90%;
+    border-radius: 10px;
+    padding: 11px;
+    background: white;
+    box-sizing: border-box;
+    pointer-events: all;
+
+    .modal__close {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      width: 32px;
+      height: 32px;
+    }
+
+    .modal__content {
+      padding: 8px 0 0;
+      max-height: 60vh;
+      overflow: scroll;
+
+      .content__title {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 18px;
+
+        .title__img {
+          margin-right: 8px;
+          width: 123px;
+          height: 123px;
+          border-radius: 10px;
+        }
+
+        .title__description {
+          width: 100%;
+
+          .description__title {
+            margin-bottom: 15px;
+            padding: 4px 25px 4px 4px;
+            border-radius: 5px;
+            background: #c23939;
+            font-family: "MaplestoryOTFLight", sans-serif;
+            font-size: .8rem;
+            color: white;
+          }
+
+          .description__tags {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            .tags__tag {
+              margin-right: 8px;
+              min-width: 30px;
+              border-radius: 5px;
+              padding: 3px 6px;
+              background: black;
+              text-align: center;
+              font-weight: bold;
+              font-size: .53rem;
+              color: white;
+              box-sizing: border-box;
+            }
+
+            .tags__content {
+              font-size: .6rem;
+              font-weight: bold;
+              color: black;
+
+            }
+          }
+        }
+      }
+
+      .content__description {
+        margin-bottom: 16px;
+
+        .description__title {
+          margin: 5px 0;
+          font-family: "MaplestoryOTFBold", sans-serif;
+          font-size: .7rem;
+          font-weight: bold;
+          color: #c23939;
+        }
+
+        .description__content {
+          width: 100%;
+          border-radius: 10px;
+          border: 3px solid #c23939;
+          padding: 15px;
+          box-sizing: border-box;
+          font-weight: bold;
+          font-size: .63rem;
+          line-height: 1.9;
+        }
+      }
+
+      .content__stores {
+        margin-bottom: 25px;
+
+        .stores__title {
+          margin: 5px 0;
+          font-family: "MaplestoryOTFBold", sans-serif;
+          font-size: .7rem;
+          font-weight: bold;
+          color: #010101;
+        }
+
+        .stores__content {
+          padding: 10px 0;
+          border: 3px solid #171717;
+          border-left-style: none;
+          border-right-style: none;
+          line-height: 2.5;
+          font-weight: bold;
+          font-size: .63rem;
+          color: #1b1b1b;
+
+          span {
+            display: inline-block;
+            margin: 0 10px;
+          }
+        }
+      }
+
+      .content__guide {
+
+        .guide__title {
+          margin: 5px 0;
+          font-family: "MaplestoryOTFBold", sans-serif;
+          font-size: .7rem;
+          font-weight: bold;
+          color: #010101;
+        }
+
+        .guide__img {
+          border: 3px solid #202020;
+          width: 100%;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    .modal__btns {
+      margin-top: 8px;
+      width: 100%;
+      >button {
+        display: block;
+        margin: 0 auto;
+        height: 41px;
+        padding: 0 45px;
+        border-radius: 10px;
+        background: #c23939;
+        font-weight: bold;
+        color: white;
+      }
+    }
+  }
+}
