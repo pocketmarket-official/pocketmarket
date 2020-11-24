@@ -60,7 +60,6 @@ class OrderStatus extends React.Component {
                             }
                             if(detail !== [] && elt.orderStatus !== '6' && elt.orderStatus !== '7') {
                                 elt["detail"] = detail;
-                                console.log(elt);
                                 matched.push(elt);
                             }
                         });

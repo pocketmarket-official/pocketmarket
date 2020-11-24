@@ -17,8 +17,6 @@ class ReviewWrite extends React.Component {
         let storeId = this.props.location.state.storeId || null;
         let saleHeaderId = this.props.location.state.id || null;
 
-        console.log(this.props);
-
         this.state = {
             userId: null,
             billNo: billNo,
@@ -63,7 +61,6 @@ class ReviewWrite extends React.Component {
                 axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{
                     orderStatus: 6,
                 } );
-                console.log(res.data);
             })
             .catch(err => console.log(err))
     }

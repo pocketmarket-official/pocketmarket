@@ -22,8 +22,6 @@ class FestivalStore extends React.Component {
                     }
                 }
             );
-            console.log(res);
-            console.log(stores);
         });
 
         this.state = {

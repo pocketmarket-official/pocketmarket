@@ -415,7 +415,6 @@ class Order extends React.Component {
                                                     <div className="item__option" onClick={() => {
                                                         if(data[0].option) {
                                                             const elt = document.getElementById("optionmodal");
-                                                            console.log(data[0].option);
                                                             this.setState({
                                                                 selected: data[0],
                                                                 modal_options: data[0].option,

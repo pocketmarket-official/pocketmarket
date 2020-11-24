@@ -49,7 +49,6 @@ class QuestionWrite extends React.Component {
             }
         })
             .then(res => {
-                console.log(res.data);
             })
             .catch(err => console.log(err))
     };
@@ -58,7 +57,6 @@ class QuestionWrite extends React.Component {
         let container = document.getElementById("fileupload");
         const elt = document.getElementById("empty");
         if(container.childElementCount === 5) {
-            console.log(elt);
             elt.style.display = "none";
         }
 

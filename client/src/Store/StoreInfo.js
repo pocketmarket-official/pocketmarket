@@ -5,20 +5,17 @@ import {firestore, storageRef} from "../firebase";
 function StoreMain() {
     const [storeList, setStoreList] = useState([]);
     useEffect(() => {
-        console.log('마운트됨');
         firestore.collection("m_store").get()
             .then(function (doc) {
                 if (doc.size) {
                     setStoreList(Array.from(doc.docs.values()));
                 } else {
-                    console.log("no data");
                 }
             })
             .catch(function (error) {
                 console.error("Error adding document: ", error);
             });
         return () => {
-            console.log('언마운트..');
         };
     }, []);
 
@@ -37,7 +34,6 @@ function StoreMain() {
 
 function StoreInfo({store}) {
 
-    console.log(store.data());
     const storeData = store.data();
     const [imageUrl, setImageUrl] = useState('');
     const imgRef = storageRef.child(storeData.image);
