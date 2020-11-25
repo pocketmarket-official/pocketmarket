@@ -103,11 +103,13 @@ class OrderStatus extends React.Component {
                     :
                     this.state.matched.map((elt) => {
                         let status;
+                        let deleteButton;
                         let button;
                         let time = "";
                         let text = "";
                         if(elt.orderStatus === '1') {
                             status = "주문중";
+                            deleteButton = (<></>);
                             button = (
                                 <>
                                     <div className="pickup active">
@@ -123,6 +125,7 @@ class OrderStatus extends React.Component {
                             );
                         } else if(elt.orderStatus === '2') {
                             status = "조리중";
+                            deleteButton = (<></>);
                             button = (
                                 <>
                                 </>
@@ -134,6 +137,7 @@ class OrderStatus extends React.Component {
                             text = "완료시간";
                             let d = new Date();
                             let pickup_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
+                            deleteButton = (<></>);
                             button = (
                                 <>
                                     <div className="pickup active">
@@ -156,32 +160,17 @@ class OrderStatus extends React.Component {
                                     </div>
                                 </>
                             );
-                        } else if(elt.orderStatus === '4') {
+                        } else if(elt.orderStatus === '4' || elt.orderStatus === '5') {
                             status = "픽업완료";
                             time = elt.pickupTime;
                             time = time.substring(0, 2) + ':' + time.substring(2, 4) + ':' + time.substring(4, 6);
                             text = "픽업시간";
-                            button = (
-                                <>
-                                    <div className="pickup active">
-                                        <div className="pickup__message">
-                                            리뷰를 등록하면 다양한 혜택을 누리실 수 있습니다 ▶
-                                        </div>
-                                        <Link to={{pathname: '/order/review', state: {
-                                            userId: this.state.userId,
-                                            saleDt: elt.saleDt,
-                                            storeId: elt.storeId,
-                                            billNo: elt.billNo,
-                                                id: elt.id,
-                                        }}}><button className="pickup__btn">리뷰작성</button></Link>
-                                    </div>
-                                </>
-                            );
-                        } else if(elt.orderStatus === '5') {
-                            status = "픽업완료";
-                            time = elt.pickupTime;
-                            time = time.substring(0, 2) + ':' + time.substring(2, 4) + ':' + time.substring(4, 6);
-                            text = "픽업시간";
+                            deleteButton = (<>
+                                <button className="card__delete" onClick={(e) => {
+                                    e.preventDefault();
+                                }}>X
+                                </button>
+                            </>);
                             button = (
                                 <>
                                     <div className="pickup active">
@@ -210,10 +199,7 @@ class OrderStatus extends React.Component {
                                                 <img className="cal" alt="calendar" src={btnCal}/>
                                                 {elt.saleDt}
                                             </div>
-                                            <button className="card__delete" onClick={(e) => {
-                                                e.preventDefault();
-                                            }}>X
-                                            </button>
+                                            {deleteButton}
                                         </div>
                                     </div>
                                     <div className="card__info__detail cooked">
