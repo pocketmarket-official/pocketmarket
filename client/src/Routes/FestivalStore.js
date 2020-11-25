@@ -10,54 +10,43 @@ class FestivalStore extends React.Component {
     constructor(props) {
         super(props);
 
-        let festivalId = this.props.location.state.data.id;
-        let storesId = [];
+        this.state = {
+            stores: [],
+            festival: this.props.location.state.data
+        }
+    }
+
+    componentDidMount() {
         let stores = [];
-        let storesTmp = [];
-
-
-
-        const parmasTmp = {id:1};
-        let storeTmp = axios.get("/api/stores_store/", {params:{storeCd:"00402"}})
-            .then((res) => {
-                console.log("==========");
-                console.log(res.data);
-                console.log("==========");
-            });
-
-
 
         axios.get("/api/festivals_join/")
         .then((res) => {
-            storesId = res.data.filter(
+            let storesId = res.data.filter(
                 (elt) => {
-                    if (elt.festivalCd === festivalId) {
+                    if (elt.festivalCd === this.state.festival.id) {
                         return true;
                     }
                 }
             );
-            storesId.forEach((store)=>{
-                const params = {storeId : store.id};
-                axios.get("/api/stores_store/", {params})
-                    .then((res)=>{
-                        storesTmp = res.data.filter(
-                            (elt) => {
-                                if (elt.id === store.id) {
-                                    return true;
+
+            axios.get("/api/stores_store")
+                .then((res) => {
+                    let stores = res.data.filter(
+                        (elt) => {
+                            let flag = false;
+                            storesId.forEach((row) => {
+                                if (row.storeCd === elt.id) {
+                                    flag = true;
                                 }
-                            }
-                        );
-                        // stores.append(storesTmp);
-                    })
-            });
-            // this.state.stores = stores;
+                            });
+                            if (flag) return true;
+                        });
+
+                    console.log(stores);
+                    this.setState({stores});
+                });
+
         });
-
-        this.state = {
-            festival: this.props.location.state.data,
-            stores: stores,
-        };
-
     }
 
     render() {
@@ -69,18 +58,17 @@ class FestivalStore extends React.Component {
                             <div className="festival__image"><img src={this.state.festival.imgUrl || bg} alt="festival" /></div>
                             <div className="festival__title">
                                 Festival
-                                {/*<div className="festival__name">{ festival.festivalName }</div>*/}
-                                {/*<div className="festival__description">{ festival.descriptionHeader }</div>*/}
-                                {/*<div className="festival__address">{ festival.addr1 }</div>*/}
-                                <div className="festival__name">여의도 밤도깨비 야시장</div>
-                                <div className="festival__description">세계각국의 음식과 상품이 가득한 글로벌 야시장! 한강으로 하룻밤의 세계여행을 떠나보세요!</div>
+                                <div className="festival__name">{ this.state.festival.festivalName }</div>
+                                <div className="festival__description">{ this.state.festival.descriptionHeader }</div>
+                                {/*<div className="festival__address">{ this.state.festival.addr1 }</div>*/}
                             </div>
                         </div>
                         {
-                            this.state.stores.map((data) => {
+                            this.state.stores.map((store) => {
                                 return (
                                     <>
-                                        <StoreJSX data={this.state.festival}/>
+                                        <StoreJSX data={store} key={store.storeCd} />
+                                        {/*<StoreJSX data={this.state.stores} key={this.state.stores.storeCd}/>*/}
                                     </>
                                 );
                             })
