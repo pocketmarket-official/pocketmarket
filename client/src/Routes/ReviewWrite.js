@@ -61,6 +61,7 @@ class ReviewWrite extends React.Component {
                 axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{
                     orderStatus: 6,
                 } );
+                window.location.href = '/order/status'
             })
             .catch(err => console.log(err))
     }
