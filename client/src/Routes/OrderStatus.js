@@ -168,9 +168,16 @@ class OrderStatus extends React.Component {
                             deleteButton = (<>
                                 <button className="card__delete" onClick={(e) => {
                                     e.preventDefault();
+                                    let id = elt.id;
+                                    axios.put(`/api/trades_saleHeader/${id}/`, {
+                                        orderStatus: 7,
+                                    })
+                                        .then((res) => {
+                                            window.location.reload();
+                                        });
                                 }}>X
                                 </button>
-                            </>);
+                                </>);
                             button = (
                                 <>
                                     <div className="pickup active">
