@@ -1,25 +1,27 @@
+import json
 import os
 import requests
-from django.shortcuts import render
-from django.views.generic import View
-from django.http import HttpResponse
-from django.conf import settings
 
-from django.db import transaction
+from datetime import datetime
+from django.conf import settings
 from django.contrib.auth import login
 from django.core.files.base import ContentFile
+from django.db import transaction
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
-import json
-from datetime import datetime
-from time import localtime, strftime
-from stores.models import StoreLike
-from stores.models import Store
-from users.models import User
+
 from items.models import Item
 from trades.models import SaleHeader
 from trades.models import SaleDetail
 from trades.models import CardLog
+from stores.models import StoreLike
+from stores.models import Store
+from time import localtime
+from time import strftime
+from users.models import User
 
 
 
