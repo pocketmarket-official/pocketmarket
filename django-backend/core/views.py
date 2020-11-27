@@ -43,6 +43,7 @@ def kakao_login(request):
     client_id = os.environ.get('KAKAO_KEY')
     # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
     redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
+    print(1)
     return HttpResponseRedirect(
         f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
     )
@@ -51,12 +52,15 @@ def kakao_login(request):
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
     try:
+        print(2)
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
         # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
         redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
+        print(3)
         if code is not None:
+            print(4)
             # get access_token with the code
             request_api = requests.post(
                 f'https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}',
@@ -105,6 +109,7 @@ def kakao_callback(request):
                 else:
                     raise KakaoException()
     except KakaoException:
+        print(5)
         # return HttpResponseRedirect('http://localhost:3000/login') URL EXCHANGE
         return HttpResponseRedirect('http://13.124.90.138:3000/login')
 
