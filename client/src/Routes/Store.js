@@ -4,60 +4,82 @@ import HeaderBack from '../Components/js/HeaderBack';
 import StoreList from '../Components/js/StoreList';
 
 import bg from '../assets/store_grid/grid_top_bg.jpg';
-import menu1 from '../assets/store_grid/grid_img1.jpg';
-import menu2 from '../assets/store_grid/grid_img2.jpg';
-import menu3 from '../assets/store_grid/grid_img3.jpg';
-import menu4 from '../assets/store_grid/grid_img4.jpg';
-import menu5 from '../assets/store_grid/grid_img5.jpg';
-import menu6 from '../assets/store_grid/grid_img6.jpg';
-import menu7 from '../assets/store_grid/grid_img7.jpg';
-import menu8 from '../assets/store_grid/grid_img8.jpg';
-import menu9 from '../assets/store_grid/grid_img9.jpg';
-import menu10 from '../assets/store_grid/grid_img10.jpg';
-import menu11 from '../assets/store_grid/grid_img11.jpg';
-import menu12 from '../assets/store_grid/grid_img12.jpg';
+import axios from "axios";
+import Loading from "../Components/js/Loading";
+import StoreJSX from "../Components/js/mainStoreJSX";
 
 class StoreView extends React.Component {
     constructor(props) {
         super(props);
-        const id = this.props.location.state.data.storeCd;
+        const id = this.props.location.state.data.id;
         const storeName = this.props.location.state.data.storeName;
         const link = "/main/store/" + id + "/order";
 
         this.state = {
+            id: id,
             current: 0,
             link: link,
             storeName: storeName,
+            reviews: [],
         };
 
         this.handlePageSlide = this.handlePageSlide.bind(this);
         this.handlePageRender = this.handlePageRender.bind(this);
+        this.handleMultipleImage = this.handleMultipleImage(this);
+    }
+
+    componentDidMount() {
+        axios.get("/api/reviews_review/")
+            .then((res) => {
+                let reviews = res.data.filter(
+                    (elt) => {
+                        if (elt.storeCd === this.state.id && elt.deleteYn === 'N') {
+                            return true;
+                        }
+                    }
+                );
+                this.setState({reviews});
+            });
     }
 
     handlePageSlide() {
         this.setState((prev) => ({ current: (prev.current + 1) % 2 }));
     }
 
+    handleMultipleImage(){
+
+    }
+
     handlePageRender() {
+        const isLoading = this.state.loading;
         if(this.state.current === 0) {
             return (
             <>
                 <div className="store__review__grid" id="review__container">
-                        <div className="photo"><img src={menu1}/></div>
-                        <div><img src={menu2}/></div>
-                        <div><img src={menu3}/></div>
-                        <div><img src={menu4}/></div>
-                        <div><img src={menu5}/></div>
-                        <div><img src={menu6}/></div>
-                        <div><img src={menu7}/></div>
-                        <div><img src={menu8}/></div>
-                        <div><img src={menu9}/></div>
-                        <div><img src={menu10}/></div>
-                        <div><img src={menu11}/></div>
-                        <div><img src={menu12}/></div>
-                        <div><img src={menu4}/></div>
-                        <div><img src={menu5}/></div>
-                        <div><img src={menu6}/></div>
+                    {
+                        isLoading ? (
+                            <Loading/>
+                        ) : (
+                            <>
+                                {
+                                    this.state.reviews !== undefined ?
+                                        this.state.reviews.map((review) => {
+                                            return (<>
+                                                <Link to={{pathname: `/review/${review.id}`}}>
+                                                    {
+                                                        (review.img2==undefined || review.img2 == '') ?
+                                                            <div><img src={review.img1}/></div> //추가이미지 없는애
+                                                            : <div className="photo"><img src={review.img1}/></div> //추가이미지 있는애
+                                                    }
+                                                </Link>
+                                            </>);
+                                        })
+                                            :
+                                            null
+                                }
+                            </>
+                        )
+                    }
                 </div>
             </>
             );

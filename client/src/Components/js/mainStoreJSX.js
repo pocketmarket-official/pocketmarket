@@ -59,7 +59,7 @@ class StoreJSX extends React.Component {
         return (
                 <div className="content__store">
                     <Link to={{
-                        pathname: `/main/store/${this.props.data.storeCd}`,
+                        pathname: `/main/store/${this.props.data.id}`,
                         state: {data, d}
                     }}>
                     <div className="store__store">
