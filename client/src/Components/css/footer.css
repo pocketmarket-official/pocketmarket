@@ -12,11 +12,14 @@ footer .footer__top {
     font-size: 12px;
     font-weight: 500;
 }
-footer .footer__top .footer__column {
+footer .footer__column {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 3px 0;
 }
 footer .footer__middle {
     display: flex;
