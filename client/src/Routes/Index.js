@@ -1,6 +1,7 @@
 import React, { useMemo, useRef } from "react";
 import { Link, Redirect } from "react-router-dom";
 import HeaderBack from "../Components/js/HeaderBack";
+import Footer from "../Components/js/Footer";
 import cookie from 'react-cookies';
 import Flicking from "@egjs/react-flicking";
 import { AutoPlay } from "@egjs/flicking-plugins";
@@ -80,8 +81,8 @@ function Index({authenticated, login, location}) {
                         </div>
                     </Link>
                 </div>
-                <div className="footer">all rights reserved pocketmarket</div>
             </div>
+            <Footer />
         </>
     );
 }
