@@ -2,7 +2,6 @@ const models = require('../models');
 
 
 const index = function(req, res) {
-    console.log(req.headers['content-range']);
     const contentRange = req.headers['content-range'] ? req.headers['content-range'].split('-') : null;
     let limit = 10;
     let offset = 0;
