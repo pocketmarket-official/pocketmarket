@@ -20,13 +20,13 @@ class Order extends React.Component {
         this.clearOrderList = this.clearOrderList.bind(this);
         this.handleCategoryScroll = this.handleCategoryScroll.bind(this);
 
-        let storeCd = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
+        let storeId = this.props.history.location.pathname.split("/")[3]; // 주소로부터 가져온 store code
 
         this.state = {
             link: link,
             storeName: "",
-            storeId: "",
-            storeCd: storeCd,
+            storeId: storeId,
+            storeCd: "",
             keymapCd: "",
             touchGroupCd: null,
             brandCd: "",
@@ -65,7 +65,8 @@ class Order extends React.Component {
         .then((res) => {
             let store = res.data.find(
                 (elt) => {
-                    if (elt.storeCd === this.state.storeCd) {
+                    //todo: ===이랑 ==이랑 다르게 동작
+                    if (elt.id == this.state.storeId) {
                         return true;
                     }
                 }
