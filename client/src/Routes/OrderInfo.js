@@ -127,7 +127,7 @@ class OrderInfo extends React.Component {
                         <div className="orderinfo__title">결제수단선택</div>
                         {/*<Link to="/main/store/C0001/orderinfo/payMethod">*/}
                             <div className="orderinfo__choices">
-                                <input type="checkbox" value="PG결제"/>PG결제
+                                <input type="checkbox" value="PG결제"/>카드결제
                                 <span>></span>
                             </div>
                         {/*</Link>*/}
