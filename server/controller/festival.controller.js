@@ -3,7 +3,6 @@ import {renameKeys} from '../util/util'
 
 const index = function(req, res) {
     req.query.limit = req.query.limit || 10;
-    console.log(req.headers['content-range']);
     const contentRange = req.headers['content-range'] ? req.headers['content-range'].split('-') : null;
     let limit = 10;
     let offset = 0;
@@ -31,7 +30,6 @@ const index = function(req, res) {
 const create = (req, res) => {
     const newFestival = req.body;
     if (!newFestival.name) return res.status(400).end();
-    console.log(newFestival);
     models.Festival.create(newFestival)
         .then(festival => {
             res.status(201).json(festival);
