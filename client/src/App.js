@@ -70,7 +70,7 @@ function App() {
         <Route authenticated={authenticated} exact path="/order/complete" component={OrderComplete} />
         <Route authenticated={authenticated} exact path="/order/status" component={OrderStatus} />
         <Route authenticated={authenticated} exact path="/order/status/:storeId" component={BigStatus} />
-        <Route authenticated={authenticated} exact path="/review" component={ReviewList} />
+        <Route authenticated={authenticated} exact path="/review/:reviewId" component={ReviewList} />
         <Route authenticated={authenticated} exact path="/mypage" component={Mypage} />
         <Route authenticated={authenticated} exact path="/mypage/collections" component={Collections} />
         <Route authenticated={authenticated} exact path="/mypage/myplace" component={Myplace} />

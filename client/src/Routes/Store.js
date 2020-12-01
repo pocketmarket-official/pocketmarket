@@ -14,6 +14,7 @@ class StoreView extends React.Component {
         const id = this.props.location.state.data.id;
         const storeName = this.props.location.state.data.storeName;
         const link = "/main/store/" + id + "/order";
+        console.log(this.props.location.state.data);
 
         this.state = {
             id: id,
@@ -21,6 +22,7 @@ class StoreView extends React.Component {
             link: link,
             storeName: storeName,
             reviews: [],
+            users: [],
         };
 
         this.handlePageSlide = this.handlePageSlide.bind(this);
@@ -39,6 +41,11 @@ class StoreView extends React.Component {
                     }
                 );
                 this.setState({reviews});
+            });
+
+        axios.get('/api/users_user/')
+            .then((res) => {
+                this.setState({users: res.data});
             });
     }
 
@@ -84,7 +91,7 @@ class StoreView extends React.Component {
             </>
             );
         } else if(this.state.current === 1) {
-            return <StoreList />;
+            return <StoreList reviews={this.state.reviews} users={this.state.users} />;
         } else {
             return null;
         }

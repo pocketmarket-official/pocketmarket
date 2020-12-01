@@ -78,8 +78,8 @@ class MainStoreContent extends React.Component {
 
     _infiniteScroll() {
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-        let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight;
+        let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop); //내릴수록 늘어남
+        let clientHeight = document.documentElement.clientHeight; //고정
 
         if( 10 >= scrollHeight - scrollTop - clientHeight ) {
             this.setState({
