@@ -181,41 +181,6 @@ class KDSMain extends React.Component{
                                 <img src={bg} alt=""/>
                             </div>
                         </div>
-
-                        <div className=" lane">
-                            <div className=" bg">
-                                <img src={bg} alt=""/>
-                            </div>
-                            <div className=" bg">
-                                <img src={bg} alt=""/>
-                            </div>
-                            <div className=" bg">
-                                <img src={bg} alt=""/>
-                            </div>
-                            <div className=" bg">
-                                <img src={bg} alt=""/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="total-order">
-                        <div className="order">
-                            <div className="orderHeader">
-                                <div className="info1">
-                                    <span>Summary</span>
-                                </div>
-                            </div>
-
-                            <div className="orderDetail">
-                                <div className="itemGroup">
-                                    <div className="item">
-                                        <div className="quantity">1</div>
-                                        <div className="name">TEST</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
