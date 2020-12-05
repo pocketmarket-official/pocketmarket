@@ -2,7 +2,7 @@ import React from 'react';
 import bg from '../assets/kds/B_img.png';
 import timer from '../assets/kds/ic_timer.svg';
 import axios from 'axios';
-// import Clock from 'react-live-clock';
+import Clock from 'react-live-clock';
 import cookie from "react-cookies";
 
 class KDSMain extends React.Component{
@@ -24,6 +24,24 @@ class KDSMain extends React.Component{
             month: month,
             day: day
         };
+
+        this._timeTickling = this._timeTickling.bind(this);
+    }
+
+    _timeTickling(current){
+        let tmpMatched = this.state.matched;
+        let tmp = new Date(current);
+        let tmp1 = tmp.getHours();
+        let tmp2 = tmp.getMinutes();
+        let tmp3 = tmp.getSeconds();
+
+        tmpMatched.forEach(elt=>{
+            let saleTime = elt.detail[0].saleTime;
+            console.log(elt.detail[0].saleTime);
+            elt.timeLaps = current - saleTime;
+        });
+
+        this.setState({matched : tmpMatched});
     }
 
     componentDidMount(){
@@ -114,8 +132,11 @@ class KDSMain extends React.Component{
                     </div>
                     <div>
                         <span>{this.state.year}.{this.state.month}.{this.state.day}</span>
-                        <span>AM</span>
-                        <span></span>
+                        {/*<span>AM</span>*/}
+                        <span><Clock format={"HH:mm:ss"} ticking={true} onChange={(res)=>
+                        {
+                            this._timeTickling(res);
+                        }}/></span>
                     </div>
                 </div>
                 <div className="body">
@@ -126,7 +147,6 @@ class KDSMain extends React.Component{
                                 <div>loading...</div>
                                 :
                                     this.state.matched.map((elt)=>{
-                                        console.log(elt);
                                         return(
                                         <>
                                             {/*ORDER_BOX*/}
@@ -151,7 +171,7 @@ class KDSMain extends React.Component{
                                                                 <div className="billNo">{elt.billNo}</div>
                                                                 <div className="elapsedTime">
                                                                     <img src={timer} alt=""/>
-                                                                    <div className="step1">00:59</div>
+                                                                    <div className="step1">{this.state.matched.timeLaps}</div>
                                                                 </div>
                                                             </div>
                                                             {/*<div className="right">*/}
@@ -233,7 +253,7 @@ class KDSMain extends React.Component{
 
                     <div className="techCtl">
                         <button className="myButton cnrStats">LABEL_CNR_STATS</button>
-                        <button className="myButton soldout">LABEL_SOLDOUT</button>
+                        <button className="myButton cnrStats">LABEL_SOLDOUT</button>
                     </div>
                     <div className="pageCtl">
                         {/*<button className="myButton">*/}
@@ -276,9 +296,9 @@ class KDSMain extends React.Component{
                                         e.preventDefault();
                                         let store = this.state.store;
                                         axios.put(`/api/stores_store/${store.id}/`, {
-                                                    openYn: 'N',
+                                                    openYn: 'Y',
                                                 });
-                                        store.openYn = 'N';
+                                        store.openYn = 'Y';
                                         this.setState({store});
                                         }}>개점하기</buton>
                                 </>

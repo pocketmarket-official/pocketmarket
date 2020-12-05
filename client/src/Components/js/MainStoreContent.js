@@ -95,7 +95,7 @@ class MainStoreContent extends React.Component {
         axios.get("/api/stores_store/")
         .then((res) => {
             const stores = res.data.filter((elt) => {
-                if(elt.useYn === 'Y'){
+                if(elt.useYn === 'Y' && elt.openYn === 'Y'){
                     return true;
                 }
             });
