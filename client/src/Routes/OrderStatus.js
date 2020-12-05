@@ -41,7 +41,6 @@ class OrderStatus extends React.Component {
                             return true;
                         }
                     });
-                    // axios.get("http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") URL EXCHANGE
                     axios.get("/api/trades_saleDetail?ordering=saleDt,storeCd,billNo")
                     .then((res) => {
                         let matched = [];
@@ -49,16 +48,16 @@ class OrderStatus extends React.Component {
                         // sale dt 기준으로 정렬되어 있는 데이터
                         saleHeader.forEach((elt) => {
                             let detail = [];
-                            for(let item in saleDetail) {
-                                if(saleDetail[item].saleDt === elt.saleDt) {
-                                    if(saleDetail[item].storeCd === elt.storeCd) {
-                                        if(saleDetail[item].billNo === elt.billNo) {
-                                            detail.push(saleDetail[item]);
+                            for(let index in saleDetail) {
+                                if(saleDetail[index].saleDt === elt.saleDt) {
+                                    if(saleDetail[index].storeCd === elt.storeCd) {
+                                        if(saleDetail[index].billNo === elt.billNo) {
+                                            detail.push(saleDetail[index]);
                                         }
                                     }
                                 }
                             }
-                            if(detail !== [] && elt.orderStatus !== '6' && elt.orderStatus !== '7') {
+                            if(detail !== [] && elt.orderStatus == '6' && elt.orderStatus !== '7') {
                                 elt["detail"] = detail;
                                 matched.push(elt);
                             }
