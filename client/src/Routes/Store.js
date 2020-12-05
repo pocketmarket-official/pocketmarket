@@ -5,7 +5,6 @@ import StoreList from '../Components/js/StoreList';
 
 import bg from '../assets/store_grid/grid_top_bg.jpg';
 import axios from "axios";
-import Loading from "../Components/js/Loading";
 import StoreJSX from "../Components/js/mainStoreJSX";
 
 class StoreView extends React.Component {
@@ -14,7 +13,6 @@ class StoreView extends React.Component {
         const id = this.props.location.state.data.id;
         const storeName = this.props.location.state.data.storeName;
         const link = "/main/store/" + id + "/order";
-        console.log(this.props.location.state.data);
 
         this.state = {
             id: id,
@@ -40,12 +38,13 @@ class StoreView extends React.Component {
                         }
                     }
                 );
-                this.setState({reviews});
-            });
-
-        axios.get('/api/users_user/')
-            .then((res) => {
-                this.setState({users: res.data});
+                axios.get('/api/users_user/')
+                    .then((res) => {
+                        this.setState({
+                            users: res.data,
+                            reviews: reviews,
+                        });
+                    });
             });
     }
 
@@ -58,34 +57,34 @@ class StoreView extends React.Component {
     }
 
     handlePageRender() {
-        const isLoading = this.state.loading;
         if(this.state.current === 0) {
             return (
             <>
                 <div className="store__review__grid" id="review__container">
                     {
-                        isLoading ? (
-                            <Loading/>
-                        ) : (
-                            <>
-                                {
-                                    this.state.reviews !== undefined ?
-                                        this.state.reviews.map((review) => {
-                                            return (<>
-                                                <Link to={{pathname: `/review/${review.id}`}}>
+                        <>
+                            {
+                                this.state.reviews !== undefined ?
+                                    this.state.reviews.map((review) => {
+                                        return (
+                                            <>
+                                                <Link to={{
+                                                    pathname: `/review/${review.id}`,
+                                                    state: {review: review},
+                                                }}>
                                                     {
                                                         (review.img2==undefined || review.img2 == '') ?
                                                             <div><img src={review.img1}/></div> //추가이미지 없는애
                                                             : <div className="photo"><img src={review.img1}/></div> //추가이미지 있는애
                                                     }
                                                 </Link>
-                                            </>);
-                                        })
-                                            :
-                                            null
-                                }
+                                            </>
+                                        );
+                                    })
+                                    :
+                                    null
+                            }
                             </>
-                        )
                     }
                 </div>
             </>

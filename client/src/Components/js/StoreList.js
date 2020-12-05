@@ -73,7 +73,10 @@ class StoreList extends React.Component {
                                 });
                                     return (
                                         <>
-                                            <Link to={{pathname: `/review/${review.id}`}}>
+                                            <Link to={{
+                                                pathname: `/review/${review.id}`,
+                                                state: review
+                                            }}>
                                                 <div className="storeList__grid">
                                                     <div className="storeList__box">
                                                         <div className="storeList_publisherBox">

@@ -126,7 +126,7 @@
 
 
 
-import React, {useRef} from 'react';
+import React from 'react';
 
 import itemimg from "../../assets/review_list/list_img1.jpg";
 import userimg from "../../assets/review_list/ico_user1.png";
@@ -148,17 +148,35 @@ let temp = [
 
 ];
 
-function ReviewJSX() {
-    const paginationElem = useRef(null);
 
-    function onChangeReviewItem(e) {
-        for (let item of paginationElem.current.children) {
-            item.classList.remove('active');
+class ReviewJSX extends React.Component{
+    constructor(props){
+        super(props);
+        this.onChangeReviewItem = this.onChangeReviewItem.bind(this);
+
+        console.log(this.props);
+
+        // const paginationElem = useRef(null);
+        const paginationElem = React.createRef();
+        // let paginationElem = '';
+
+        this.state = {
+            paginationElem: paginationElem,
         }
-        paginationElem.current.children[e.index].classList.add('active');
     }
 
-    return (
+    componentDidMount(){
+    }
+
+    onChangeReviewItem = (e) => {
+        for (let item of this.state.paginationElem.current.children) {
+            item.classList.remove('active');
+        }
+        this.state.paginationElem.current.children[e.index].classList.add('active');
+    };
+
+    render(){
+        return(
         <>
             {
                 temp.map((data) => {
@@ -172,7 +190,7 @@ function ReviewJSX() {
                                                   anchor={0}
                                                   zIndex={0}
                                                   infinite={true}
-                                                  onChange={onChangeReviewItem}
+                                                  onChange={this.onChangeReviewItem}
                                                   className={"image"}>
                                             <img src={itemimg}/>
                                             <img src={itemimg}/>
@@ -180,7 +198,7 @@ function ReviewJSX() {
                                             <img src={itemimg}/>
                                             <img src={itemimg}/>
                                         </Flicking>
-                                        <div ref={paginationElem} className="pagination">
+                                        <div ref={this.state.paginationElem} className="pagination">
                                             <div className="pagination-item active"/>
                                             <div className="pagination-item"/>
                                             <div className="pagination-item"/>
@@ -235,8 +253,8 @@ function ReviewJSX() {
                     );
                 })}
         </>
-    );
-
+        );
+    }
 }
 
 export default ReviewJSX;
