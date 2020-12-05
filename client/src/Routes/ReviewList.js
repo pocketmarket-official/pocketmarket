@@ -3,13 +3,19 @@ import HeaderBack from '../Components/js/HeaderBack';
 import ReviewJSX from '../Components/js/reviewJSX';
 
 
-function ReviewList() {
-    return (
-        <>
-            <HeaderBack url='/mypage' />
-            <ReviewJSX />
-        </>
-    );
+class ReviewList extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <>
+                <HeaderBack url='/mypage' />
+                <ReviewJSX fuck={this.props} />
+            </>
+        );
+    }
 }
 
 export default ReviewList;

@@ -73,18 +73,19 @@ class StoreView extends React.Component {
                                                     state: {review: review},
                                                 }}>
                                                     {
-                                                        (review.img2==undefined || review.img2 == '') ?
+                                                        (review.img2 === null || review.img2 === '') ?
                                                             <div><img src={review.img1}/></div> //추가이미지 없는애
-                                                            : <div className="photo"><img src={review.img1}/></div> //추가이미지 있는애
+                                                            :
+                                                            <div className="photo"><img src={review.img1}/></div> //추가이미지 있는애
                                                     }
                                                 </Link>
                                             </>
                                         );
                                     })
-                                    :
-                                    null
+                                :
+                                null
                             }
-                            </>
+                        </>
                     }
                 </div>
             </>

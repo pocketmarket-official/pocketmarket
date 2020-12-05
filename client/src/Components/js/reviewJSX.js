@@ -149,7 +149,7 @@ let temp = [
 ];
 
 
-class ReviewJSX extends React.Component{
+class ReviewJSX extends React.Component {
     constructor(props){
         super(props);
         this.onChangeReviewItem = this.onChangeReviewItem.bind(this);
@@ -165,9 +165,6 @@ class ReviewJSX extends React.Component{
         }
     }
 
-    componentDidMount(){
-    }
-
     onChangeReviewItem = (e) => {
         for (let item of this.state.paginationElem.current.children) {
             item.classList.remove('active');
@@ -175,7 +172,7 @@ class ReviewJSX extends React.Component{
         this.state.paginationElem.current.children[e.index].classList.add('active');
     };
 
-    render(){
+    render() {
         return(
         <>
             {
