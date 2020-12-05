@@ -27,6 +27,7 @@ class Store(models.Model):
     bankNo = models.CharField(max_length=40, null=True, blank=True)
     openDt = models.CharField(max_length=8, null=True, blank=True)
     closeDt = models.CharField(max_length=8, null=True, blank=True)
+    openYn = models.CharField(max_length=1, default='Y')
     imgLogoUrl = models.CharField(max_length=200, null=True, blank=True)
     orgIf = models.CharField(max_length=1000, null=True, blank=True)
     xPosition = models.FloatField(null=True)

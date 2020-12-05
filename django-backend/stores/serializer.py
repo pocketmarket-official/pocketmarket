@@ -31,6 +31,7 @@ class StoreSerializer(serializers.ModelSerializer):
             'bankNo',
             'openDt',
             'closeDt',
+            'openYn',
             'imgLogoUrl',
             'orgIf',
             'xPosition',
