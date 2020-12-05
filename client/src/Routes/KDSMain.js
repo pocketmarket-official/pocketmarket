@@ -1,16 +1,68 @@
 import React from 'react';
 import bg from '../assets/kds/B_img.png';
 import timer from '../assets/kds/ic_timer.svg';
+import axios from 'axios';
+
+let storeCd = '00401';
 
 class KDSMain extends React.Component{
     constructor(props){
         super(props);
 
         this.state = {
-
+            store: '',
+            saleDetail: [],
+            matched: [],
+            loading: true,
         };
     }
 
+    componentDidMount(){
+        axios.get('/api/stores_store/')
+            .then((res)=> {
+                let store = res.data.find((elt) => {
+                    if(elt.storeCd === storeCd){
+                        return true;
+                    }
+                });
+                axios.get("/api/trades_saleHeader/")
+                    .then((res)=>{
+                        let saleHeader = res.data.filter((elt) => {
+                            if (elt.storeCd === storeCd) {
+                                return true;
+                            }
+                        });
+
+                        axios.get('/api/trades_saleDetail?ordering=saleDt,storeCd,billNo')
+                            .then((res)=>{
+                                let matched = [];
+                                // sale dt 기준으로 정렬되어있는 데이터
+                                saleHeader.forEach((elt)=>{
+                                    let detail = [];
+                                    for(let index in res.data){
+                                        if(res.data[index].saleDt === elt.saleDt){
+                                            if(res.data[index].storeCd === elt.storeCd){
+                                                if(res.data[index].billNo === elt.billNo){
+                                                    detail.push(res.data[index]);
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if(detail !== [] && elt.orderStatus == '2') {
+                                        elt["detail"] = detail;
+                                        matched.push(elt);
+                                    }
+                                });
+                                this.setState({
+                                    matched: matched,
+                                    store: store,
+                                    loading: false,
+                                })
+                            });
+                    });
+            });
+    }
 
 
     render(){
@@ -18,7 +70,7 @@ class KDSMain extends React.Component{
             <div className="kds">
                 <div className="header">
                     <div>
-                        <span>POCKET MARKET</span>
+                        <span>{this.state.store.storeName}</span>
                     </div>
                     <div>
                         <span>01. 주방KDS</span>
