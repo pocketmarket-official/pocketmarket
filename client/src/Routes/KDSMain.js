@@ -29,18 +29,37 @@ class KDSMain extends React.Component{
     }
 
     _timeTickling(current){
-        let tmpMatched = this.state.matched;
-        let tmp = new Date(current);
-        let tmp1 = tmp.getHours();
-        let tmp2 = tmp.getMinutes();
-        let tmp3 = tmp.getSeconds();
+        let tmpMatched = [];
+        let curDttm = new Date(current);
+        let curYear = curDttm.getFullYear();
+        let curMonth = curDttm.getMonth()+1;
+        let curDate = curDttm.getDate();
+        let curHour = curDttm.getHours();
+        let curMinute = curDttm.getMinutes();
+        let curSec = curDttm.getSeconds();
 
-        tmpMatched.forEach(elt=>{
+        this.state.matched.forEach(elt=>{
+            let saleDate = elt.saleDt;
             let saleTime = elt.detail[0].saleTime;
-            console.log(elt.detail[0].saleTime);
-            elt.timeLaps = current - saleTime;
+            let ordYear = saleDate.slice(0,4);
+            let ordMonth = saleDate.slice(4,6);
+            let ordDate = saleDate.slice(6,8);
+            let ordHour = saleTime.slice(0,2);
+            let ordMinute = saleTime.slice(2,4);
+            let ordSec = saleTime.slice(4,6);
+            let ordDttm = new Date(ordYear, ordMonth-1, ordDate, ordHour, ordMinute, ordSec, 0);
+
+            let timelaps = Math.abs(curDttm - ordDttm) / 1000;
+            let daylaps = Math.floor(timelaps / 86400);
+            let hourlaps = Math.floor(timelaps / 3600) % 24;
+            let minutelaps = Math.floor(timelaps / 60) % 60;
+            let seclaps = timelaps % 60;
+
+            elt.timeLaps = minutelaps;
+            tmpMatched.push(elt);
         });
 
+        console.log(tmpMatched[0].timeLaps);
         this.setState({matched : tmpMatched});
     }
 
@@ -171,7 +190,7 @@ class KDSMain extends React.Component{
                                                                 <div className="billNo">{elt.billNo}</div>
                                                                 <div className="elapsedTime">
                                                                     <img src={timer} alt=""/>
-                                                                    <div className="step1">{this.state.matched.timeLaps}</div>
+                                                                    <div className="step1">{elt.timeLaps}분 경과</div>
                                                                 </div>
                                                             </div>
                                                             {/*<div className="right">*/}

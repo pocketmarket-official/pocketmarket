@@ -56,18 +56,22 @@ class StoreJSX extends React.Component {
     render() {
         let d = this.props.data.show_dist;
         let data = this.props.data;
-        return (
-                <div className="content__store">
-                    <Link to={{
-                        pathname: `/main/store/${this.props.data.id}`,
-                        state: {data, d}
-                    }}>
-                    <div className="store__store">
+
+        let renderBody =
+            <>
+                <div className="store__store">
                         <img className="store__image" src={data.imgLogoUrl || defaultImg} alt="store"/>
                         <div className="store__detail">
                             <div className="detail__tags">
                                 {/* <div className="tags__new">NEW</div> */}
-                                <div className="tags__tag">@반포 낭만달빛마켓</div>
+                                {data.openYn === 'N'?
+                                    <>
+                                        <div className="tags__tag">금일영업종료</div>
+                                    </>
+                                    :
+                                    null
+                                }
+
                                 {
                                     this.state.like !== undefined ?
                                     <button className={`tags__likes ${this.state.likeYn === 'Y' ? 'active' : ''}`} onClick={(e) => {
@@ -175,7 +179,24 @@ class StoreJSX extends React.Component {
                             </button>
                         </div>
                     </div>
-                    </Link>
+            </>;
+
+        return (
+                <div className="content__store">
+                    {data.openYn === 'Y' ?
+                        <>
+                            <Link to={{
+                                pathname: `/main/store/${this.props.data.id}`,
+                                state: {data, d}
+                            }}>
+                                {renderBody}
+                            </Link>
+                        </>
+                        :
+                        <>
+                            {renderBody}
+                        </>
+                    }
                 </div>
         );
     }
