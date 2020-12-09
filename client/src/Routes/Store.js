@@ -2,10 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import StoreList from '../Components/js/StoreList';
-
 import bg from '../assets/store_grid/grid_top_bg.jpg';
 import axios from "axios";
-import StoreJSX from "../Components/js/mainStoreJSX";
 
 class StoreView extends React.Component {
     constructor(props) {
@@ -36,6 +34,7 @@ class StoreView extends React.Component {
                         if (elt.storeCd === this.state.id && elt.deleteYn === 'N') {
                             return true;
                         }
+                        return false;
                     }
                 );
                 axios.get('/api/users_user/')
@@ -74,9 +73,9 @@ class StoreView extends React.Component {
                                                 }}>
                                                     {
                                                         (review.img2 === null || review.img2 === '') ?
-                                                            <div><img src={review.img1}/></div> //추가이미지 없는애
+                                                            <div><img src={review.img1} alt="review" /></div> //추가이미지 없는애
                                                             :
-                                                            <div className="photo"><img src={review.img1}/></div> //추가이미지 있는애
+                                                            <div className="photo"><img src={review.img1} alt="reviews" /></div> //추가이미지 있는애
                                                     }
                                                 </Link>
                                             </>
@@ -104,7 +103,7 @@ class StoreView extends React.Component {
                 <div className="storeGrid-store">
                     <div className="storeGrid__content">
                         {/*<div className="store__store">*/}
-                            <div className="storeGrid__image"><img src={bg}/></div>
+                            <div className="storeGrid__image"><img src={bg} alt="big store img" /></div>
                             <div className="storeGrid__detail">
                                 <div className="storeGrid__title">
                                     <div className="storeGrid__name">{this.props.location.state.data.storeName}</div>

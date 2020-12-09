@@ -376,7 +376,7 @@ class OrderHistory extends React.Component {
                                         locale="ko"		// 언어설정 기본값은 영어
                                         dateFormat="yyyy-MM-dd"	// 날짜 형식 설정
                             ></DatePicker>
-                            <input type="image" src={search} value="조회" id="search" onClick={this.searchHistory}/>
+                            <input type="image" src={search} alt="search" value="조회" id="search" onClick={this.searchHistory}/>
                         </div>
                     </div>
 
