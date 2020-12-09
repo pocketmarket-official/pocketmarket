@@ -154,8 +154,6 @@ class ReviewJSX extends React.Component {
         super(props);
         this.onChangeReviewItem = this.onChangeReviewItem.bind(this);
 
-        console.log(this.props);
-
         // const paginationElem = useRef(null);
         const paginationElem = React.createRef();
         // let paginationElem = '';

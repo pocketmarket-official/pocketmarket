@@ -12,7 +12,7 @@ class ReviewList extends React.Component {
         return (
             <>
                 <HeaderBack url='/mypage' />
-                <ReviewJSX fuck={this.props} />
+                <ReviewJSX props={this.props} />
             </>
         );
     }

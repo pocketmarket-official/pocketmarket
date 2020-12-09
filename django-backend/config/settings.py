@@ -22,40 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-#AWS Setting
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-AWS_REGION_NAME = 'ap-northeast-2'
-AWS_QUERYSTRING_AUTH = False
-AWS_DEFAULT_ACL = None
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-#S3 setting
-AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
-AWS_S3_SECURE_URLS = False       # use http instead of https
-AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-    'ACL': 'public-read'
-}
-
-DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
-
-STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-ALLOWED_HOSTS = ['0.0.0.0:8000', 'localhost', '127.0.0.1', '13.124.90.138']
-
-#readct deployment
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'client', 'static'),
-# ]
-# STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'client/')
+ALLOWED_HOSTS = ['0.0.0.0:8000', 'localhost', '127.0.0.1', '13.124.90.138', '.elasticbeanstalk.com']
 
 # Application definition
 
@@ -107,8 +74,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            #react deploy ver
-            # os.path.join(BASE_DIR, 'client')
+            os.path.join(BASE_DIR, "build"), # react build한 파일
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,32 +88,7 @@ TEMPLATES = [
     },
 ]
 
-WEBPACK_LOADER = {
-    'DEFAULT': {
-            'BUNDLE_DIR_NAME': 'bundles/',
-            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
-        }
-}
-
 WSGI_APPLICATION = 'config.wsgi.application'
-
-##2020.09.26 _ jhonny Cloche Ma
-DATABASES = {
-    'default' : {
-        'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'pocketMarket_dev',
-        'USER' : 'admin',
-        'PASSWORD' : os.environ.get("DB_ADMIN_PASSWORD"),
-        'PORT' : '3306',
-        'HOST' : 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
-        'OPTIONS' : {
-            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
-            # 'charset': 'utf8mb4',
-        },
-    }
-}
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -181,19 +122,41 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = "users.User"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_URL = '/static/'
 
-CORS_ORIGIN_WHITELIST = (
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "build/static/"),
+]
+
+# cors 관련 설정
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:8000',
     'http://13.124.90.138:3000',
     'http://13.124.90.138:8000',
-)
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'content-type',
+    'x-csrftoken',
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -201,4 +164,99 @@ REST_FRAMEWORK = {
     ]
 }
 
-AUTH_USER_MODEL = "users.User"
+# Database and DEBUG
+# SECURITY WARNING: don't run with debug turned on in production!
+
+STATE = os.environ.get("STATE")
+
+if STATE == "local":
+    DEBUG = True
+
+    DATABASES = {
+        'default' : {
+            'ENGINE' : 'django.db.backends.mysql',
+            'NAME' : 'pocketMarket_dev',
+            'USER' : 'admin',
+            'PASSWORD' : os.environ.get("DB_ADMIN_PASSWORD"),
+            'PORT' : '3306',
+            'HOST' : 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
+            'OPTIONS' : {
+                'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
+                # 'charset': 'utf8mb4',
+            },
+        }
+    }
+
+elif STATE == "dev":
+    DEBUG = True
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': os.environ.get("RDS_HOST"), # endpoint
+            'NAME': os.environ.get("RDS_NAME"), # amazon RDS DB identifier
+            'USER': os.environ.get("RDS_USER"),
+            'PASSWORD': os.environ.get("RDS_PASSOWRD"),
+            'PORT': '5432',
+        }
+    }
+
+    #AWS Setting
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    AWS_REGION_NAME = 'ap-northeast-2'
+    AWS_QUERYSTRING_AUTH = False
+    AWS_DEFAULT_ACL = 'public-read'
+
+    #S3 setting
+    AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
+    AWS_S3_SECURE_URLS = False       # use http instead of https
+    AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+        'ACL': 'public-read'
+    }
+
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+elif STATE == "production":
+    DEBUG = False
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': os.environ.get("RDS_HOST"), # endpoint
+            'NAME': os.environ.get("RDS_NAME"), # amazon RDS DB identifier
+            'USER': os.environ.get("RDS_USER"),
+            'PASSWORD': os.environ.get("RDS_PASSOWRD"),
+            'PORT': '5432',
+        }
+    }
+
+    #AWS Setting
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    AWS_REGION_NAME = 'ap-northeast-2'
+    AWS_QUERYSTRING_AUTH = False
+    AWS_DEFAULT_ACL = 'public-read'
+
+    #S3 setting
+    AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
+    AWS_S3_SECURE_URLS = False       # use http instead of https
+    AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+        'ACL': 'public-read'
+    }
+
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)

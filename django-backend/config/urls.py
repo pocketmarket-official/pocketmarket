@@ -37,6 +37,8 @@ from trades import views as trade_views
 from kdses import views as kds_views
 #interfaces
 from interfaces import views as interface_views
+from django.urls import re_path
+from django.views.generic import TemplateView
 
 
 
@@ -106,5 +108,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('masterDown/', interface_views.MasterDownView, name='masterDown'),
     path('storeLike/', core_views.storeLike, name='storeLike'),
-
+    re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html"), name="index"),
 ]
