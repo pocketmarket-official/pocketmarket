@@ -209,16 +209,16 @@ elif STATE == "dev":
     AWS_DEFAULT_ACL = 'public-read'
 
     #S3 setting
-    AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
-    AWS_S3_SECURE_URLS = False       # use http instead of https
-    AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-        'ACL': 'public-read'
-    }
+    # AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
+    # AWS_S3_SECURE_URLS = False       # use http instead of https
+    # AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
+    # AWS_S3_OBJECT_PARAMETERS = {
+    #     'CacheControl': 'max-age=86400',
+    #     'ACL': 'public-read'
+    # }
 
-    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+    # DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    # STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
 
 #    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
