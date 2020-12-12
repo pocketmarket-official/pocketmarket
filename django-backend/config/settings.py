@@ -53,9 +53,15 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'rest_framework',
     'storages',
+    'fcm_django',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
+
+FCM_API_KEY = os.environ.get("FCM_API_KEY")
+FCM_DJANGO_SETTINGS = {
+        "FCM_SERVER_KEY": FCM_API_KEY
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
