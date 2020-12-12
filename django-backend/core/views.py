@@ -42,7 +42,7 @@ def kakao_login(request):
     ''' use kakao oauth '''
     client_id = os.environ.get('KAKAO_KEY')
     # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
-    redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
+    redirect_uri = '/login/kakao/callback'
     return HttpResponseRedirect(
         f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
     )
@@ -54,8 +54,9 @@ def kakao_callback(request):
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
-        # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
-        redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback'
+        # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE LOCAL
+        # redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback' URL EXCHANGE SERVER
+        redirect_uri = '/login/kakao/callback'
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -100,13 +101,15 @@ def kakao_callback(request):
                             photo_request = requests.get(picture)
                             user.profileImage.save(f"{name}_avatar", ContentFile(photo_request.content))
                     login(request, user)
-                    # return HttpResponseRedirect('http://localhost:3000/main') URL EXCHANGE
-                    return HttpResponseRedirect('http://13.124.90.138:3000/main')
+                    # return HttpResponseRedirect('http://localhost:3000/main') URL EXCHANGE LOCAL
+                    # return HttpResponseRedirect('http://13.124.90.138:3000/main') URL EXCHANGE SERVER
+                    return HttpResponseRedirect('/index')
                 else:
                     raise KakaoException()
     except KakaoException:
-        # return HttpResponseRedirect('http://localhost:3000/login') URL EXCHANGE
-        return HttpResponseRedirect('http://13.124.90.138:3000/login')
+        # return HttpResponseRedirect('http://localhost:3000/login') URL EXCHANGE LOCAL
+        # return HttpResponseRedirect('http://13.124.90.138:3000/login') URL EXCHANGE SERVER
+        return HttpResponseRedirect('/login')
 
 
 @csrf_exempt
@@ -441,7 +444,8 @@ def trade(request):
                 cardLogObj.orgSeq = None
             cardLogObj.save()
 
-        data = {'url': 'http://13.124.90.138:3000/order/status'}
+        # data = {'url': 'http://13.124.90.138:3000/order/status'} URL EXCHANGE
+        data = {'url': '/order/status'}
 
         response = JsonResponse(data)
         return response
