@@ -29,8 +29,9 @@ function Intro({authenticated, login, location}) {
 //            secure: true,
         });
         storage.add(access_token, email);
-        // window.location.href = "http://localhost:8000/login/kakao/"; URL EXCHANGE
-        window.location.href = "http://13.124.90.138:8000/login/kakao/";
+        // window.location.href = "http://localhost:8000/login/kakao/"; URL EXCHANGE LOCAL
+        // window.location.href = "http://13.124.90.138:8000/login/kakao/"; URL EXCHANGE SERVER
+        window.location.href = "/login/kakao/";
     };
 
     const responseFail = (err) => {
