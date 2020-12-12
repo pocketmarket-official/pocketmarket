@@ -12,6 +12,7 @@ import storage from '../storage.js';
  * when error on video playing, show login button immediately
  */
 function Intro({authenticated, login, location}) {
+
     const [playingVideo, setPlayingVideo] = useState(true);
 
     // kakao login api built in django backend
