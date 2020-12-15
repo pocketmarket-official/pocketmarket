@@ -149,6 +149,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://13.124.90.138:3000',
     'http://13.124.90.138:8000',
+    'http://localhost:8000',
+    'http://localhost:8000',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -175,7 +177,7 @@ REST_FRAMEWORK = {
 
 STATE = os.environ.get("STATE")
 
-if STATE == "local":
+if STATE == "local:start":
     DEBUG = True
 
     DATABASES = {
