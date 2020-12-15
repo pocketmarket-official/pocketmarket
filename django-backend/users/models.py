@@ -10,6 +10,9 @@ class User(AbstractUser):
     """ User Model Definition """
     profileName = models.CharField(max_length=30, default='')
     profileImage = models.ImageField(upload_to="images/userProfile", null=True)
+    androidToken = models.CharField(max_length=255, blank=True)
+    iosToken = models.CharField(max_length=255, blank=True)
+
 
 
     pass

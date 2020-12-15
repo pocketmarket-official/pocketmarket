@@ -23,7 +23,7 @@ from time import localtime
 from time import strftime
 from users.models import User
 
-
+from fcm_django.models import FCMDevice
 
 
 ##
@@ -39,18 +39,40 @@ class KakaoException(Exception):
 
 
 def kakao_login(request):
+    # device = FCMDevice.objects.all().first()
+    #
+    # message = {
+    #     "to": "eAoS0-4ERYewwdD40eZMt5:APA91bGuw9pTDk2Lqxht1qMJSM6e0CMxDhnvvdouIx445eKgYWe4JHNJ_M2YMQHJW4NOtIjYc9BJrHVWfxUGho_vMiQxIZt72-4vXEnG5nAWtc-KChJs38UgpzLPYBuWNCZlRmn_IY4n",
+    #     "notification": {
+    #         "body": "great match!",
+    #         "title": "Portugal vs. Denmark",
+    #         "icon": "myicon"
+    #     }
+    # }
+    # device.send_message("Title", message)
+
     ''' use kakao oauth '''
-    client_id = os.environ.get('KAKAO_KEY')
-    # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
-    redirect_uri = '/login/kakao/callback'
-    return HttpResponseRedirect(
-        f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
-    )
+    # client_id = os.environ.get('KAKAO_KEY')
+    # # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
+    # redirect_uri = '/login/kakao/callback'
+    # return HttpResponseRedirect(
+    #     f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
+    # )
+
+    '''20201215 Jhonny Cloche Ma. kakao login by api'''
+    print("1")
+    restApiKey = os.environ.get('KAKAO_KEY')
+    # redirect_uri = '/login/kakao/callback'
+    redirect_uri = 'http://localhost:8000/login/kakao/callback/' #URL EXCHANGE
+    link = f'/oauth/authorize?client_id={restApiKey}&redirect_uri={redirect_uri}&response_type=code HTTP/1.1'
+    result = requests.get(link)
+    return result
 
 
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
     try:
+        print("2")
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
@@ -448,6 +470,10 @@ def trade(request):
         data = {'url': '/order/status'}
 
         response = JsonResponse(data)
+
+        device = FCMDevice.objects.all().first()
+
+
         return response
 
     except Exception as ex:
