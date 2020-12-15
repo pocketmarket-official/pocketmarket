@@ -6,6 +6,8 @@ import bgVideo from "../assets/intro/intro.mp4";
 import bgImage from "../assets/intro/bg.jpg";
 import storage from '../storage.js';
 
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 /**
  * Entry component
  *
@@ -20,19 +22,19 @@ function Intro({authenticated, login, location}) {
     const responseLogin = (res) => {
         alert('df');
         console.log('ddff');
-        let access_token = res.response.access_token;
-        let email = res.profile.kakao_account.email;
-
-        const expires = new Date();
-        expires.setDate(expires.getDate() + 1);
-
-        cookie.save("access_token", access_token, {
-            path: '/',
-            expires: expires,
-//            httpOnly: true,
-//            secure: true,
-        });
-        storage.add(access_token, email);
+//         let access_token = res.response.access_token;
+//         let email = res.profile.kakao_account.email;
+//
+//         const expires = new Date();
+//         expires.setDate(expires.getDate() + 1);
+//
+//         cookie.save("access_token", access_token, {
+//             path: '/',
+//             expires: expires,
+// //            httpOnly: true,
+// //            secure: true,
+//         });
+//         storage.add(access_token, email);
         // window.location.href = "http://localhost:8000/login/kakao/"; //URL EXCHANGE LOCAL
         // window.location.href = "http://13.124.90.138:8000/login/kakao/"; URL EXCHANGE SERVER
         // window.location.href = "/login/kakao/";
