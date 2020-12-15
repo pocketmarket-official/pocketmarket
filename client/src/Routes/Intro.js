@@ -6,7 +6,6 @@ import bgVideo from "../assets/intro/intro.mp4";
 import bgImage from "../assets/intro/bg.jpg";
 import storage from '../storage.js';
 
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 /**
  * Entry component
