@@ -34,6 +34,8 @@ class Store(models.Model):
     yPosition = models.FloatField(null=True)
     score = models.FloatField(default=0.0)
     description = models.CharField(max_length=250, null=True, blank=True)
+    androidToken = models.CharField(max_length=255, blank=True)
+    iosToken = models.CharField(max_length=255, blank=True)
     insDt = models.DateTimeField(default=datetime.now(), null=True, blank=True)
     insUs = models.CharField(max_length=30, null=True, blank=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True, blank=True)

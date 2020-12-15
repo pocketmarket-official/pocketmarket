@@ -1,8 +1,8 @@
 
-## 포켓 마켓
+## 포켓마켓
 
 서비스명 : 포켓마켓
-설명 : 행사별 푸드트럭의 위치와 고객을 연결해주는 플랫폼입니다.
+설명 : 행사별 푸드트럭의 위치와 고객을 연결해주는 플랫폼입니다. 
 
 기능 : 
 
@@ -12,34 +12,26 @@
 
 결제연동
 
-통합 포인트 제공
-
 주문 상태 실시간 모니터링
 
-주문,결제 이력 확인
+주문, 결제 이력 확인
 
 
 사용 기술 스택 :
 
-frontend - React
+Frontend - React
 
-backend - Django
+Backend - Django
 
-database - 
+Deploy - Amazon AWS Elastic Beanstalk
 
-hosting - amazon aws
-
-vcs - github
+VCS - git
 
 
 멤버 :
 
 기획 - 장문진, 마진형
 
-개발 - 노민철, 마진형, 손수훈
+개발 - 노민철, 마진형
 
 배포 url : 
-
-화면 정의서 : 
-
-테이블 정의서 : 

@@ -18,8 +18,8 @@ boto3 = "*"
 django-storages = "*"
 pillow = "*"
 django-webpack-loader = "*"
-fcm-django = "*"
 pipenv-to-requirements = "*"
+fcm-django = "*"
 
 [requires]
 python_version = "3.8"

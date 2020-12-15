@@ -40,14 +40,33 @@ import KDSSoldout from './Routes/KDSSoldout';
 import './App.css';
 import Intro from "./Routes/Intro";
 import OrderInfoPayMethod from "./Routes/OrderInfoPayMethod";
+import axios from 'axios';
 
 function App() {
-    let cookie_token = cookie.load("access_token");
-    let storage_email = storage.get(cookie_token);
-    let authenticated = false;
-    if (storage_email) {
-        authenticated = true;
-    }
+  if(process.env.REACT_APP_STATE === 'local') {
+    axios.defaults.baseURL = 'http://localhost:8000';
+  } else if(process.env.REACT_APP_STATE === 'dev') {
+    axios.defaults.baseURL = 'http://13.124.90.138:8000';
+  }
+
+  let cookie_token = cookie.load("access_token");
+  let storage_email = storage.get(cookie_token);
+  let authenticated = false;
+  if(storage_email) {
+    authenticated = true;
+  }
+
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCYaFuGXcKFTV1wIm8PeN0ri4jpur29CCY",
+      authDomain: "pocket-market-ddc08.firebaseapp.com",
+      databaseURL: "https://pocket-market-ddc08.firebaseio.com",
+      projectId: "pocket-market-ddc08",
+      storageBucket: "pocket-market-ddc08.appspot.com",
+      messagingSenderId: "196040287857",
+      appId: "1:196040287857:web:abfb63cdff7f2e1c30ddd0",
+      measurementId: "G-T84SPLRMTM"
+    };
 
   return (
       <BrowserRouter>

@@ -1,7 +1,6 @@
 import json
 import os
 import requests
-
 from datetime import datetime
 from django.conf import settings
 from django.contrib.auth import login
@@ -12,7 +11,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
-
 from items.models import Item
 from trades.models import SaleHeader
 from trades.models import SaleDetail
@@ -23,7 +21,7 @@ from time import localtime
 from time import strftime
 from users.models import User
 
-
+from fcm_django.models import FCMDevice
 
 
 ##
@@ -40,13 +38,25 @@ class KakaoException(Exception):
 
 def kakao_login(request):
     ''' use kakao oauth '''
+    # client_id = os.environ.get('KAKAO_KEY')
+    # # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
+    # redirect_uri = '/login/kakao/callback'
+    # return HttpResponseRedirect(
+    #     f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
+    # )
+
     client_id = os.environ.get('KAKAO_KEY')
     # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
-    redirect_uri = '/login/kakao/callback'
+    state = os.environ.get('STATE')
+
+    if state == 'local:start' or state == 'local:build':
+        redirect_uri = 'http://localhost:8000/login/kakao/callback/'
+    elif state == 'dev':
+        redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
+
     return HttpResponseRedirect(
         f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
     )
-
 
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
@@ -56,7 +66,11 @@ def kakao_callback(request):
         client_secret = os.environ.get('KAKAO_SECRET')
         # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE LOCAL
         # redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback' URL EXCHANGE SERVER
-        redirect_uri = '/login/kakao/callback'
+        state = os.environ.get('STATE')
+        if state == 'local:start' or state == 'local:build':
+            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/' #ma exchange
+        elif state == 'dev':
+            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -103,13 +117,25 @@ def kakao_callback(request):
                     login(request, user)
                     # return HttpResponseRedirect('http://localhost:3000/main') URL EXCHANGE LOCAL
                     # return HttpResponseRedirect('http://13.124.90.138:3000/main') URL EXCHANGE SERVER
-                    return HttpResponseRedirect('/index')
+                    if state == 'local:start':
+                        url = 'http://13.124.90.138:3000/index/' #ma exchange
+                    elif state == 'local:build':
+                        url = 'http://localhost:8000/index/'
+                    elif state == 'dev':
+                        url = 'http://13.124.90.138:8000/index'
+                    return HttpResponseRedirect(url)
                 else:
                     raise KakaoException()
     except KakaoException:
         # return HttpResponseRedirect('http://localhost:3000/login') URL EXCHANGE LOCAL
         # return HttpResponseRedirect('http://13.124.90.138:3000/login') URL EXCHANGE SERVER
-        return HttpResponseRedirect('/login')
+        if state == 'local:start':
+            url = 'http://13.124.90.138:3000/login/' #ma exchange
+        elif state == 'local:build':
+            url = 'http://localhost:8000/login/'
+        elif state == 'dev':
+            url = 'http://13.124.90.138:8000/login/'
+        return HttpResponseRedirect(url)
 
 
 @csrf_exempt
@@ -448,6 +474,10 @@ def trade(request):
         data = {'url': '/order/status'}
 
         response = JsonResponse(data)
+
+        device = FCMDevice.objects.all().first()
+
+
         return response
 
     except Exception as ex:

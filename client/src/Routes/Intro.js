@@ -18,6 +18,8 @@ function Intro({authenticated, login, location}) {
 
     // kakao login api built in django backend
     const responseLogin = (res) => {
+        alert('df');
+        console.log('ddff');
         let access_token = res.response.access_token;
         let email = res.profile.kakao_account.email;
 
@@ -31,9 +33,18 @@ function Intro({authenticated, login, location}) {
 //            secure: true,
         });
         storage.add(access_token, email);
-        // window.location.href = "http://localhost:8000/login/kakao/"; URL EXCHANGE LOCAL
+        // window.location.href = "http://localhost:8000/login/kakao/"; //URL EXCHANGE LOCAL
         // window.location.href = "http://13.124.90.138:8000/login/kakao/"; URL EXCHANGE SERVER
-        window.location.href = "/login/kakao/";
+        // window.location.href = "/login/kakao/";
+        let url;
+        let reactRestApiToken = process.env.REACT_APP_KAKAO_KEY_API;
+        if(process.env.REACT_APP_STATE === 'local') {
+            let redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'; //ma exchange
+            url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
+        } else if(process.env.REACT_APP_STATE === 'dev') {
+            url = "http://13.124.90.138/login/kakao/";
+        }
+        window.location.href = url;
     };
 
     const responseFail = (err) => {
@@ -61,7 +72,7 @@ function Intro({authenticated, login, location}) {
                         <KaKaoLogin
                             className="login__sign-in"
                             //styled component 통해 style을 입혀 줄 예정
-                            jsKey={process.env.REACT_APP_KAKAO_KEY}
+                            jsKey={process.env.REACT_APP_KAKAO_KEY_JS}
                             //카카오에서 할당받은 jsKey를 입력
                             buttonText='카카오 로그인'
                             //로그인 버튼의 text를 입력
