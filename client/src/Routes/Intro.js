@@ -12,7 +12,7 @@ import storage from '../storage.js';
  * when error on video playing, show login button immediately
  */
 function Intro({authenticated, login, location}) {
-    window.native.pushSend('test');
+    // window.native.pushSend('test');
 
     const [playingVideo, setPlayingVideo] = useState(true);
 
