@@ -1,23 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Link} from 'react-router-dom';
-import {firestore, storageRef} from "../firebase";
 
 function StoreMain() {
     const [storeList, setStoreList] = useState([]);
-    useEffect(() => {
-        firestore.collection("m_store").get()
-            .then(function (doc) {
-                if (doc.size) {
-                    setStoreList(Array.from(doc.docs.values()));
-                } else {
-                }
-            })
-            .catch(function (error) {
-                console.error("Error adding document: ", error);
-            });
-        return () => {
-        };
-    }, []);
 
     const mapToComponent = data => {
         return data.map((store, i) => {

@@ -40,7 +40,6 @@ import KDSSoldout from './Routes/KDSSoldout';
 import './App.css';
 import Intro from "./Routes/Intro";
 import OrderInfoPayMethod from "./Routes/OrderInfoPayMethod";
-import './firebase';
 
 function App() {
     let cookie_token = cookie.load("access_token");
