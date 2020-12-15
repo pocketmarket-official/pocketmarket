@@ -40,8 +40,15 @@ import KDSSoldout from './Routes/KDSSoldout';
 import './App.css';
 import Intro from "./Routes/Intro";
 import OrderInfoPayMethod from "./Routes/OrderInfoPayMethod";
+import axios from 'axios';
 
 function App() {
+  if(process.env.REACT_APP_STATE === 'local') {
+    axios.defaults.baseURL = 'http://localhost:8000';
+  } else if(process.env.REACT_APP_STATE === 'dev') {
+    axios.defaults.baseURL = 'http://13.124.90.138:8000';
+  }
+
   let cookie_token = cookie.load("access_token");
   let storage_email = storage.get(cookie_token);
   let authenticated = false;

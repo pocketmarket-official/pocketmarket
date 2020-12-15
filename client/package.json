@@ -34,8 +34,10 @@
     "webpack-bundle-tracker": "^1.0.0-alpha.1"
   },
   "scripts": {
-    "start": "react-scripts start --host 0.0.0.0",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build && rm -rf ../django-backend/build && mv build ../django-backend",
+    "start": "dotenv -e .env react-scripts start --host 0.0.0.0",
+    "build": "GENERATE_SOURCEMAP=false dotenv -e .env react-scripts build && rm -rf ../django-backend/build && mv build ../django-backend",
+    "build:dev": "GENERATE_SOURCEMAP=false dotenv -e .env.development react-scripts build && rm -rf ../django-backend/build && mv build ../django-backend",
+    "build:prod": "GENERATE_SOURCEMAP=false dotenv -e .env.prod react-scripts build && rm -rf ../django-backend/build && mv build ../django-backend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -53,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv-cli": "^4.0.0"
   }
 }
