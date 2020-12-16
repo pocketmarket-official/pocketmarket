@@ -101,7 +101,7 @@
 //         let cookie_token = cookie.load("access_token");
 //         let user_email = storage.get(cookie_token);
 //
-//         // axios.get('http://localhost:8000/api/users_user/') URL EXCHANGE
+//         // axios.get('http://localhost:8000/api/users_user/') //URL EXCHANGE
 //         axios.get('/api/users_user/')
 //             .then((res) => {
 //                 let userId = res.data.find((elt) => {
@@ -109,7 +109,7 @@
 //                         return true;
 //                     }
 //                 }).id;
-//                 // axios.get('http://localhost:8000/api/trades_saleHeader') URL EXCHANGE
+//                 // axios.get('http://localhost:8000/api/trades_saleHeader') //URL EXCHANGE
 //                 axios.get('/api/trades_saleHeader')
 //                     .then((res) => {
 //                         let saleHeader = res.data.filter((elt) => {
@@ -117,11 +117,11 @@
 //                                 return true;
 //                             }
 //                         });
-//                         // axios.get('http://localhost:8000/api/trades_cardLog?ordering=saleDt,storeCd,billNo') URL EXCHANGE
+//                         // axios.get('http://localhost:8000/api/trades_cardLog?ordering=saleDt,storeCd,billNo') //URL EXCHANGE
 //                         axios.get('/api/trades_cardLog?ordering=saleDt,storeCd,billNo')
 //                             .then((res) => {
 //                                 let cardLogs = res.data;
-//                                 // axios.get("http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") URL EXCHANGE
+//                                 // axios.get("http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE
 //                                 axios.get("/api/trades_saleDetail?ordering=saleDt,storeCd,billNo")
 //                                     .then((res) => {
 //                                         let matched = [];
@@ -157,7 +157,7 @@
 //                                             saleHeader: saleHeader,
 //                                             matched: matched,
 //                                         }, () => {
-//                                             // axios.get("http://localhost:8000/api/stores_store/") URL EXCHANGE
+//                                             // axios.get("http://localhost:8000/api/stores_store/") //URL EXCHANGE
 //                                             axios.get("/api/stores_store/")
 //                                                 .then((res) => {
 //                                                     this.state.matched.forEach((elt) => {

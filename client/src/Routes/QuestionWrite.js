@@ -42,8 +42,9 @@ class QuestionWrite extends React.Component {
             form_data.append(`img${j + 1}`, this.state.image[i][0]);
         }
 
-        // axios.post('http://localhost:8000/api/users_question/', form_data, { URL EXCHANGE
-        axios.post('/api/users_question/', form_data, {
+        // axios.post('http://localhost:8000/api/users_question/', form_data, { //URL EXCHANGE LOCAL
+        // axios.post('/api/users_question/', form_data, { //URL EXCHANGE RELATIVE
+        axios.post('http://13.124.90.138:8000/api/users_question/', form_data, { //URL EXCHANGE SERVER
             headers: {
                 'content-type': 'multipart/form-data'
             }

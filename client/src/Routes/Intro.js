@@ -19,7 +19,7 @@ function Intro({authenticated, login, location}) {
     // kakao login api built in django backend
     const responseLogin = (res) => {
         // window.location.href = "http://localhost:8000/login/kakao/"; //URL EXCHANGE LOCAL
-        // window.location.href = "http://13.124.90.138:8000/login/kakao/"; URL EXCHANGE SERVER
+        // window.location.href = "http://13.124.90.138:8000/login/kakao/"; //URL EXCHANGE SERVER
         // window.location.href = "/login/kakao/";
         let url;
         let reactRestApiToken = process.env.REACT_APP_KAKAO_KEY_API;

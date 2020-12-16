@@ -174,8 +174,9 @@ class KDSMain extends React.Component{
                                                     let id = elt.id;
                                                     let d = new Date();
                                                     let complete_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
-                                                    // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { URL EXCHANGE
-                                                    axios.put(`/api/trades_saleHeader/${id}/`, {
+                                                    // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE LOCAL
+                                                // axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
+                                                axios.put(`http://13.124.90.138:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
                                                         orderStatus: 3,
                                                         completeTime: complete_time,
                                                     })
