@@ -18,6 +18,8 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'profileName',
             'profileImage',
+            'androidToken',
+            'iosToken',
         )
 
 class PointSerializer(serializers.ModelSerializer):

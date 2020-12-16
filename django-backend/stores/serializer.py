@@ -38,6 +38,8 @@ class StoreSerializer(serializers.ModelSerializer):
             'yPosition',
             'score',
             'description',
+            'androidToken',
+            'iosToken',
             'insDt',
             'insUs',
             'modDt',
