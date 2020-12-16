@@ -37,6 +37,7 @@ import KDSPickup from './Routes/KDSPickup';
 import KDSKitchen from './Routes/KDSKitchen';
 import KDSSetting from './Routes/KDSSetting';
 import KDSSoldout from './Routes/KDSSoldout';
+import MakingCookie from './Routes/makingCookie';
 import './App.css';
 import Intro from "./Routes/Intro";
 import OrderInfoPayMethod from "./Routes/OrderInfoPayMethod";
@@ -115,6 +116,7 @@ function App() {
         <Route authenticated={authenticated} exact path="/kds/kitchen" component={KDSKitchen} />
         <Route authenticated={authenticated} exact path="/kds/setting" component={KDSSetting} />
         <Route authenticated={authenticated} exact path="/kds/soldout" component={KDSSoldout} />
+        <Route authenticated={authenticated} exact path="/makingCookie/:store_info/:email" component={MakingCookie} />
       </BrowserRouter>
   );
 }
