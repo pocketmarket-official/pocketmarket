@@ -174,7 +174,9 @@ class Main extends React.Component {
                         return true;
                     }
                 }).id;
-                axios.get('/api/trades_saleHeader/')
+                // axios.get("http://localhost:8000/api/trades_saleHeader/") // URl EXCHANGE LOCAL
+                // axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
+                axios.get("http://13.124.90.138:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
                     .then((res) => {
                         let i = this.state.orderCount;
                         res.data.filter((elt) => {

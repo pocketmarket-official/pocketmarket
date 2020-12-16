@@ -172,7 +172,9 @@ class OrderStatus extends React.Component {
                                 <button className="card__delete" onClick={(e) => {
                                     e.preventDefault();
                                     let id = elt.id;
-                                    axios.put(`/api/trades_saleHeader/${id}/`, {
+                                    // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE LOCAL
+                                    // axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
+                                    axios.put(`http://13.124.90.138:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
                                         orderStatus: 7,
                                     })
                                         .then((res) => {

@@ -58,7 +58,9 @@ class ReviewWrite extends React.Component {
             }
         })
             .then(res => {
-                axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{
+                // axios.put(`http://localhost:8000/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE LOCAL
+                // axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE RELATIVE
+                axios.put(`http://13.124.90.138:8000/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE SERVER
                     orderStatus: 6,
                 } );
                 window.location.href = '/order/status'

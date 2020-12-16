@@ -103,7 +103,9 @@ class KDSMain extends React.Component{
 
                     window.location.reload();
                     }
-                        axios.get("/api/trades_saleHeader/")
+                        // axios.get("http://localhost:8000/api/trades_saleHeader/") // URl EXCHANGE LOCAL
+                        // axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
+                        axios.get("http://13.124.90.138:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
                             .then((res)=> {
                                 let saleHeader = res.data.filter((elt) => {
                                     if (elt.storeCd === this.state.storeCd) {
