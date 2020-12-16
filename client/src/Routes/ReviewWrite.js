@@ -52,7 +52,9 @@ class ReviewWrite extends React.Component {
             let j = parseInt(i);
             form_data.append(`img${j + 1}`, this.state.image[i][0]);
         }
-        axios.post('/api/reviews_review/', form_data, {
+        // axios.post('http://localhost:8000/api/reviews_review/', form_data, { //URL EXCHANGE LOCAL
+        // axios.post('/api/reviews_review/', form_data, { //URL EXCHANGE RELATIVE
+        axios.post('http://13.124.90.138:8000/api/reviews_review/', form_data, { //URL EXCHANGE SERVER
             headers: {
                 'content-type': 'multipart/form-data'
             }

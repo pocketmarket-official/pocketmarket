@@ -82,7 +82,9 @@ class KDSMain extends React.Component{
         this.setState({storeCd});
 
 
-        axios.get('/api/stores_store/')
+        // axios.get('http://localhost:8000/api/stores_store/') // URL EXCHANGE LOCAL
+        // axios.get('/api/stores_store/') // URL EXCHANGE RELATIVE
+        axios.get('http://13.124.90.138:8000/api/stores_store/') // URL EXCHANGE SERVER
             .then((res)=> {
                 let store = res.data.find((elt) => {
                     if(elt.storeCd === this.state.storeCd){
@@ -113,7 +115,9 @@ class KDSMain extends React.Component{
                                     }
                                 });
 
-                                axios.get('/api/trades_saleDetail?ordering=saleDt,storeCd,billNo')
+                                // axios.get('http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE LOCAL
+                                // axios.get('/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE RELATIVE
+                                axios.get('http://13.124.90.138:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE SERVER
                                     .then((res) => {
                                         let matched = [];
                                         // sale dt 기준으로 정렬되어있는 데이터
@@ -305,7 +309,9 @@ class KDSMain extends React.Component{
                                     <buton className="myButton soldout" onClick={(e) => {
                                         e.preventDefault();
                                         let store = this.state.store;
-                                        axios.put(`/api/stores_store/${store.id}/`, {
+                                        // axios.put(`http://localhost:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE LOCAL
+                                        // axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
+                                        axios.put(`http://13.124.90.138:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
                                                     openYn: 'N',
                                                 });
                                         store.openYn = 'N';
@@ -317,7 +323,9 @@ class KDSMain extends React.Component{
                                     <buton className="myButton active" onClick={(e) => {
                                         e.preventDefault();
                                         let store = this.state.store;
-                                        axios.put(`/api/stores_store/${store.id}/`, {
+                                        // axios.put(`http://localhost:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE LOCAL
+                                        // axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
+                                        axios.put(`http://13.124.90.138:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
                                                     openYn: 'Y',
                                                 });
                                         store.openYn = 'Y';

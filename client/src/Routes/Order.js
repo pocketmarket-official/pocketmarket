@@ -86,7 +86,9 @@ class Order extends React.Component {
                         }
                     }
                 ).keymapCd;
-                axios.get("/api/keymaps_touchGroup/")
+                // axios.get("http://localhost:8000/api/keymaps_touchGroup/") //URL EXCHANGE LOCAL
+                // axios.get("/api/keymaps_touchGroup/") //URL EXCHANGE RELATIVE
+                axios.get("http://13.124.90.138:8000/api/keymaps_touchGroup/") //URL EXCHANGE SERVER
                 .then((res) => {
                     let touch_group = res.data.filter(
                         (elt) => {
@@ -98,7 +100,9 @@ class Order extends React.Component {
                     return [touch_group, storeId, keymapCd];
                 })
                 .then((arr) => {
-                    axios.get("/api/keymaps_keymap/")
+                    // axios.get("http://localhost:8000/api/keymaps_keymap/") //URL EXCHANGE LOCAL
+                // axios.get("/api/keymaps_keymap/") //URL EXCHANGE RELATIVE
+                axios.get("http://13.124.90.138:8000/api/keymaps_keymap/") //URL EXCHANGE SERVER
                     .then((res) => {
                         let keymap = res.data.filter(
                             (elt) => {
@@ -128,11 +132,15 @@ class Order extends React.Component {
         });
 
         // 각 item에 대해서 옵션 연결 성공
-        axios.get("/api/items_item/")
+        // axios.get("http://localhost:8000/api/items_item/") //URL EXCHANGE LOCAL
+        // axios.get("/api/items_item/") //URL EXCHANGE RELATIVE
+        axios.get("http://13.124.90.138:8000/api/items_item/") //URL EXCHANGE SERVER
         .then((res) => {
             let item_data = res.data;
             let options = {}
-            axios.get("/api/items_itemAdd/")
+        // axios.get("http://localhost:8000/api/items_itemAdd/") //URL EXCHANGE LOCAL
+        // axios.get("/api/items_itemAdd/") //URL EXCHANGE RELATIVE
+        axios.get("http://13.124.90.138:8000/api/items_itemAdd/") //URL EXCHANGE SERVER
             .then((res) => {
                 res.data.map((item) => {
                     let itemAddCd = item.itemAddCd;

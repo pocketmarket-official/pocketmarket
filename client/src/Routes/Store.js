@@ -27,7 +27,9 @@ class StoreView extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("/api/reviews_review/")
+        // axios.get("http://localhost:8000/api/reviews_review/") //URL EXCHANGE LOCAL
+        // axios.get("/api/reviews_review/") //URL EXCHANGE RELATIVE
+        axios.get("http://13.124.90.138:8000/api/reviews_review/") //URL EXCHANGE SERVER
             .then((res) => {
                 let reviews = res.data.filter(
                     (elt) => {
