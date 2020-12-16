@@ -96,6 +96,8 @@ class MainStoreContent extends React.Component {
         // axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
         axios.get("http://13.124.90.138:8000/api/stores_store/") // URL EXCHANGE SERVER
         .then((res) => {
+            console.log("===1======");
+            console.log(res);
             const stores = res.data.filter((elt) => {
                 if(elt.useYn === 'Y'){
                     return true;
