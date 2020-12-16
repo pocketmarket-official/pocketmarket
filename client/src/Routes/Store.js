@@ -37,7 +37,9 @@ class StoreView extends React.Component {
                         return false;
                     }
                 );
-                axios.get('/api/users_user/')
+        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
+        // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
                     .then((res) => {
                         this.setState({
                             users: res.data,
