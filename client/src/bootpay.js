@@ -41,7 +41,7 @@ function pay(sellItemList, price, storeName, storeId, userId) {
         let transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId, 'userId':userId};
         // axios.post('http://localhost:8000/trade/', transData); //URL EXCHANGE LOCAL
         // axios.post('/trade/', transData) //URL EXCHANGE RELATIVE
-        axios.post('http://13.124.90.138:8000/trade/', transData); //URL EXCHANGE SERVER
+        axios.post('http://13.124.90.138:8000/trade/', transData) //URL EXCHANGE SERVER
             .then((res)=>{
                 window.location.href = res.data.url;
             });
