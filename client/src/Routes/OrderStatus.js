@@ -46,7 +46,7 @@ class OrderStatus extends React.Component {
                     // axios.get("http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE LOCAL
                     // axios.get("/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE RELATIVE
                     // axios.get("http://13.124.90.138:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE SERVER
-                    axios.get("http://13.124.90.138:8000/api/trades_saleDetail") //URL EXCHANGE SERVER
+                    axios.get("http://13.124.90.138:8000/api/trades_saleDetail/") //URL EXCHANGE SERVER
                     .then((res) => {
                         let matched = [];
                         let saleDetail = res.data;
