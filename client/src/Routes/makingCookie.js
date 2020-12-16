@@ -5,8 +5,8 @@ import cookie from 'react-cookies';
 
 function MakingCookie(props) {
     const params = props.match.params;
-    let access_token = params.store_info.split('=', 2)[1];
-    let email = params.email.split('=', 2)[1];
+    let access_token = params.access_token;
+    let email = params.email;
 
     const expires = new Date();
     expires.setDate(expires.getDate() + 1);
@@ -19,7 +19,7 @@ function MakingCookie(props) {
     });
     storage.add(access_token, email);
     console.log(props);
-    window.location.href = 'localhost:3000/index';
+    window.location.href = '/index';
 
     return (
         <>

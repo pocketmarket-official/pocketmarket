@@ -50,10 +50,13 @@ function App() {
     axios.defaults.baseURL = 'http://13.124.90.138:8000';
   }
 
+  //todo: 로그인 인증수단을 전부 cookie_token으로 바꿨음
+    // https://stackoverflow.com/questions/31259865/localstorage-undefined
+    // email이 자꾸 Undefinedundefinedundefined로 define된 상태로 떠서
   let cookie_token = cookie.load("access_token");
-  let storage_email = storage.get(cookie_token);
+  // let storage_email = storage.get(cookie_token);
   let authenticated = false;
-  if(storage_email) {
+  if(cookie_token) {
     authenticated = true;
   }
 
@@ -116,7 +119,7 @@ function App() {
         <Route authenticated={authenticated} exact path="/kds/kitchen" component={KDSKitchen} />
         <Route authenticated={authenticated} exact path="/kds/setting" component={KDSSetting} />
         <Route authenticated={authenticated} exact path="/kds/soldout" component={KDSSoldout} />
-        <Route authenticated={authenticated} exact path="/makingCookie/:store_info/:email" component={MakingCookie} />
+        <Route authenticated={authenticated} exact path="/makingCookie/:access_token/:email" component={MakingCookie} />
       </BrowserRouter>
   );
 }

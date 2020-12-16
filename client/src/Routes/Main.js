@@ -162,8 +162,8 @@ class Main extends React.Component {
         this.handleTop();
 
         let cookie_token = cookie.load("access_token");
+        if(undefined === cookie_token) window.location.href = '/login/';
         let user_email = storage.get(cookie_token);
-        if(!user_email) window.location.href = '/login/';
 
         axios.get("/api/users_user/")
             .then((res) => {
