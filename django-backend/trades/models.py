@@ -67,6 +67,9 @@ class SaleDetail(models.Model):
     insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)
     modUs = models.CharField(max_length=30,  null=True)
+
+    class Meta:
+        ordering = ['saleDt', 'storeCd', 'billNo']
 #
 # class CashLog(models.Model):
 #     storeCd = models.CharField(max_length=10, default='00000')
