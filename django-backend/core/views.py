@@ -39,14 +39,14 @@ class KakaoException(Exception):
 def kakao_login(request):
     ''' use kakao oauth '''
     # client_id = os.environ.get('KAKAO_KEY')
-    # # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
+    # # redirect_uri = 'http://localhost:8000/login/kakao/callback' #URL EXCHANGE
     # redirect_uri = '/login/kakao/callback'
     # return HttpResponseRedirect(
     #     f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
     # )
 
     client_id = os.environ.get('KAKAO_KEY')
-    # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE
+    # redirect_uri = 'http://localhost:8000/login/kakao/callback' #URL EXCHANGE
     state = os.environ.get('STATE')
 
     if state == 'local:start' or state == 'local:build':
@@ -64,8 +64,8 @@ def kakao_callback(request):
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
-        # redirect_uri = 'http://localhost:8000/login/kakao/callback' URL EXCHANGE LOCAL
-        # redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback' URL EXCHANGE SERVER
+        # redirect_uri = 'http://localhost:8000/login/kakao/callback' #URL EXCHANGE LOCAL
+        # redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback' #URL EXCHANGE SERVER
         state = os.environ.get('STATE')
         if state == 'local:start' or state == 'local:build':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/' #ma exchange
@@ -115,8 +115,8 @@ def kakao_callback(request):
                             photo_request = requests.get(picture)
                             user.profileImage.save(f"{name}_avatar", ContentFile(photo_request.content))
                     login(request, user)
-                    # return HttpResponseRedirect('http://localhost:3000/main') URL EXCHANGE LOCAL
-                    # return HttpResponseRedirect('http://13.124.90.138:3000/main') URL EXCHANGE SERVER
+                    # return HttpResponseRedirect('http://localhost:3000/main') #URL EXCHANGE LOCAL
+                    # return HttpResponseRedirect('http://13.124.90.138:3000/main') #URL EXCHANGE SERVER
                     if state == 'local:start':
                         url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}' #ma exchange
                     elif state == 'local:build':
@@ -127,8 +127,8 @@ def kakao_callback(request):
                 else:
                     raise KakaoException()
     except KakaoException:
-        # return HttpResponseRedirect('http://localhost:3000/login') URL EXCHANGE LOCAL
-        # return HttpResponseRedirect('http://13.124.90.138:3000/login') URL EXCHANGE SERVER
+        # return HttpResponseRedirect('http://localhost:3000/login') #URL EXCHANGE LOCAL
+        # return HttpResponseRedirect('http://13.124.90.138:3000/login') #URL EXCHANGE SERVER
         if state == 'local:start':
             url = 'http://13.124.90.138:3000/login/' #ma exchange
         elif state == 'local:build':
@@ -470,8 +470,9 @@ def trade(request):
                 cardLogObj.orgSeq = None
             cardLogObj.save()
 
-        # data = {'url': 'http://13.124.90.138:3000/order/status'} URL EXCHANGE
-        data = {'url': '/order/status'}
+        # data = {'url': 'http://localhost:3000/order/status'} #URL EXCHANGE LOCAL
+        # data = {'url': '/order/status'} #URL EXCHANGE RELATIVE
+        data = {'url': 'http://13.124.90.138:3000/order/status'} #URL EXCHANGE SERVER
 
         response = JsonResponse(data)
 
