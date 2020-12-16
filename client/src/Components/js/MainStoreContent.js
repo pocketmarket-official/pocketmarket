@@ -92,7 +92,9 @@ class MainStoreContent extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("/api/stores_store/")
+        // axios.get("http://localhost:8000/api/stores_store/") // URL EXCHANGE LOCAL
+        // axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
+        axios.get("http://13.124.90.138:8000/api/stores_store/") // URL EXCHANGE SERVER
         .then((res) => {
             const stores = res.data.filter((elt) => {
                 if(elt.useYn === 'Y'){
