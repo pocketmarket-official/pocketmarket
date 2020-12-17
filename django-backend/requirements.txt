@@ -31,7 +31,6 @@ future==0.16.0
 idna==2.10
 jmespath==0.10.0
 jsonschema==3.2.0
-mysqlclient==2.0.2
 paramiko==2.7.2
 pathspec==0.5.9
 pbr==5.5.1
