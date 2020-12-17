@@ -52,7 +52,8 @@ def kakao_login(request):
     if state == 'local:start' or state == 'local:build':
         redirect_uri = 'http://localhost:8000/login/kakao/callback/'
     elif state == 'dev':
-        redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
+        #redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
+        redirect_uri = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
 
     return HttpResponseRedirect(
         f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
@@ -84,7 +85,8 @@ def kakao_callback(request):
         if state == 'local:start' or state == 'local:build':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/' #ma exchange
         elif state == 'dev':
-            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
+            # redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
+            redirect_uri = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -136,7 +138,8 @@ def kakao_callback(request):
                     elif state == 'local:build':
                         url = 'http://localhost:8000/index/'
                     elif state == 'dev':
-                        url = 'http://13.124.90.138:8000/index'
+                        #url = 'http://13.124.90.138:8000/index/'
+                        url = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/index/'
                     return HttpResponseRedirect(url)
                 else:
                     raise KakaoException()
@@ -148,7 +151,8 @@ def kakao_callback(request):
         elif state == 'local:build':
             url = 'http://localhost:8000/login/'
         elif state == 'dev':
-            url = 'http://13.124.90.138:8000/login/'
+            # url = 'http://13.124.90.138:8000/login/'
+            url = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
         return HttpResponseRedirect(url)
 
 
