@@ -50,7 +50,7 @@ function makeTokenSaveScript(token) {
 
 function Intro({authenticated, login, location}) {
     // window.native.pushSend('test');
-
+    tmp();
 
     const [playingVideo, setPlayingVideo] = useState(false);
 
