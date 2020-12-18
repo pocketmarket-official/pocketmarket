@@ -43,9 +43,6 @@ function makeTokenSaveScript(token) {
  * when error on video playing, show login button immediately
  */
 
-function tmpFun(){
-    console.log("===========");
-}
 function Intro({authenticated, login, location}) {
     // window.native.pushSend('test');
 
@@ -54,7 +51,7 @@ function Intro({authenticated, login, location}) {
 
     // kakao login api built in django backend
     const responseLogin = (res) => {
-        setTimeout(tmpFun, 30000);
+        console.log('login');
         // window.location.href = "http://localhost:8000/login/kakao/"; //URL EXCHANGE LOCAL
         // window.location.href = "http://13.124.90.138:8000/login/kakao/"; //URL EXCHANGE SERVER
         // window.location.href = "/login/kakao/";
