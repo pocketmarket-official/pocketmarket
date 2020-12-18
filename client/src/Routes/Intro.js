@@ -7,6 +7,11 @@ import cookie from "react-cookies";
 import storage from "../storage";
 import axios from "axios";
 
+function tmp(){
+    axios.post("http://13.124.90.138:8000/api/trades_test/",{
+        char:'test1'
+    });
+}
 
 function makeTokenSaveScript(token) {
     console.log("======3==========");
@@ -46,9 +51,7 @@ function makeTokenSaveScript(token) {
 function Intro({authenticated, login, location}) {
     // window.native.pushSend('test');
 
-    axios.post("http://13.124.90.138:8000/api/trades_test/",{
-        char:'test'
-    });
+
     const [playingVideo, setPlayingVideo] = useState(false);
 
     // kakao login api built in django backend
