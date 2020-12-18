@@ -46,7 +46,7 @@ function makeTokenSaveScript(token) {
 function Intro({authenticated, login, location}) {
     // window.native.pushSend('test');
 
-    axios.post("http://13.124.90.138:8000/trades_test",{
+    axios.post("http://13.124.90.138:8000/trades_test/",{
         char:'test'
     });
     const [playingVideo, setPlayingVideo] = useState(false);
