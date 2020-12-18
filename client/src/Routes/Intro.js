@@ -10,7 +10,7 @@ import axios from "axios";
 
 function makeTokenSaveScript(token) {
     console.log("======3==========");
-    alert(token);
+    // alert(token);
     console.log("======3==========");
         let cookie_token = cookie.load("access_token");
         let user_email = storage.get(cookie_token);
