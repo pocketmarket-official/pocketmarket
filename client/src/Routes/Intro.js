@@ -44,6 +44,7 @@ function makeTokenSaveScript(token) {
  */
 function Intro({authenticated, login, location}) {
     // window.native.pushSend('test');
+    alert('ff');
 
     const [playingVideo, setPlayingVideo] = useState(false);
 
