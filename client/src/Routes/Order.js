@@ -7,13 +7,22 @@ import closeBtn from '../assets/order_status_pop/btn_close.png';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeaderOrder from "../Components/js/HeaderOrder";
+import cookie from "react-cookies";
+import storage from "../storage";
 
 
 function makeTokenSaveScript(token) {
     console.log("======3==========");
     console.log(token);
     console.log("======3==========");
+        let cookie_token = cookie.load("access_token");
+        let user_email = storage.get(cookie_token);
+        if(!user_email) window.location.href = '/login/';
         let userId;
+
+        // if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE LOCAL
+        // if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
+        if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE SERVER
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
         axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
