@@ -3,7 +3,39 @@ import KaKaoLogin from "react-kakao-login";
 import { Redirect } from "react-router-dom";
 import bgVideo from "../assets/intro/intro.mp4";
 import bgImage from "../assets/intro/bg.jpg";
+import cookie from "react-cookies";
+import storage from "../storage";
+import axios from "axios";
 
+
+function makeTokenSaveScript(token) {
+    console.log("======3==========");
+    alert(token);
+    console.log("======3==========");
+        let cookie_token = cookie.load("access_token");
+        let user_email = storage.get(cookie_token);
+        if(!user_email) window.location.href = '/login/';
+        let userId;
+
+        // if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE LOCAL
+        // if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
+        if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE SERVER
+        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
+        // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
+            .then((res) => {
+                userId = res.data.find((elt) => {
+                    if (elt.email === user_email) {
+                        return true;
+                    }
+                }).id;
+            });
+        let transData = {"userId":userId, 'token':token};
+
+        // axios.post('http://localhost:8000/saveToken/', transData); //URL EXCHANGE LOCAL
+        // axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
+        axios.post('http://13.124.90.138:8000/saveToken/', transData) //URL EXCHANGE SERVER
+    }
 
 /**
  * Entry component
