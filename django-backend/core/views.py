@@ -62,6 +62,20 @@ def kakao_login(request):
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
     try:
+        device = FCMDevice.objects.all().first()
+
+        msg = \
+            {
+                "message": {
+                    "token": "dTEH5B5kCEWHjj6QQUuK9t:APA91bHDk0MRXcV1caYi15A2C8IhG87sydjVl4vb1m-ejV8L2qGAKCaQY6FmAIilo5bbuhPhyFDPk0qc9pH4VzlexmCExTQiYIc5gusfoqVkuJP9fm8APCGt_p1uWu_bODKY3uXoqgig",
+                    "notification": {
+                        "title": "Portugal vs. Denmark",
+                        "body": "great match!"
+                    }
+                }
+            }
+        device.send_message(msg)
+        
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
