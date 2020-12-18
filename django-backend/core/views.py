@@ -67,9 +67,9 @@ def kakao_callback(request):
     ''' sign in and log in with kakao '''
     try:
 
-        cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
-        firebase_admin.initialize_app(cred)
-        device = FCMDevice.objects.all().first()
+        # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
+        # firebase_admin.initialize_app(cred)
+        # device = FCMDevice.objects.all().first()
 
 
         code = request.GET.get('code', None)
