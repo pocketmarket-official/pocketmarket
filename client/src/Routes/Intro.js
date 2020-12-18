@@ -5,7 +5,6 @@ import bgVideo from "../assets/intro/intro.mp4";
 import bgImage from "../assets/intro/bg.jpg";
 
 
-
 /**
  * Entry component
  *
@@ -14,7 +13,7 @@ import bgImage from "../assets/intro/bg.jpg";
 function Intro({authenticated, login, location}) {
     // window.native.pushSend('test');
 
-    const [playingVideo, setPlayingVideo] = useState(true);
+    const [playingVideo, setPlayingVideo] = useState(false);
 
     // kakao login api built in django backend
     const responseLogin = (res) => {
@@ -54,19 +53,7 @@ function Intro({authenticated, login, location}) {
             {!playingVideo && (
                 <>
                     <div className="login">
-                        {/*<KaKaoLogin*/}
-                        {/*    className="login__sign-in"*/}
-                        {/*    //styled component 통해 style을 입혀 줄 예정*/}
-                        {/*    jsKey={process.env.REACT_APP_KAKAO_KEY_JS}*/}
-                        {/*    //카카오에서 할당받은 jsKey를 입력*/}
-                        {/*    buttonText='카카오 로그인'*/}
-                        {/*    //로그인 버튼의 text를 입력*/}
-                        {/*    onSuccess={responseLogin}*/}
-                        {/*    onFailure={responseFail}*/}
-                        {/*    //성공했을때 불러올 함수로서 fetch해서 localStorage에 저장할 함수를 여기로 저장*/}
-                        {/*    getProfile={true}*/}
-                        {/*/>*/}
-                        <button className="login__sign-up" onClick={responseLogin} type="button">
+                        <button className="login__sign-in" onClick={responseLogin} type="button">
                                 카카오 로그인 >
                         </button>
                     </div>
