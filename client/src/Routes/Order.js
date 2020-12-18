@@ -9,6 +9,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeaderOrder from "../Components/js/HeaderOrder";
 
 
+function makeTokenSaveScript(token) {
+    console.log("======3==========");
+    console.log(token);
+    console.log("======3==========");
+        let userId;
+        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
+        // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
+            .then((res) => {
+                userId = res.data.find((elt) => {
+                    if (elt.email === user_email) {
+                        return true;
+                    }
+                }).id;
+            });
+        let transData = {"userId":userId, 'token':token};
+
+        // axios.post('http://localhost:8000/saveToken/', transData); //URL EXCHANGE LOCAL
+        // axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
+        axios.post('http://13.124.90.138:8000/saveToken/', transData) //URL EXCHANGE SERVER
+    }
+
+
 class Order extends React.Component {
     constructor(props) {
         super(props);
@@ -184,6 +207,7 @@ class Order extends React.Component {
             this.setState({canScrollLeft, canScrollRight});
         }
     }
+
 
     render() {
         let selected_touchgroup = this.state.item_data.filter((item) => {
