@@ -23,6 +23,10 @@ from users.models import User
 
 from fcm_django.models import FCMDevice
 
+import firebase_admin
+from firebase_admin import credentials
+
+
 
 ##
 from django.http import JsonResponse
@@ -62,20 +66,12 @@ def kakao_login(request):
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
     try:
+
+        cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
+        firebase_admin.initialize_app(cred)
         device = FCMDevice.objects.all().first()
 
-        msg = \
-            {
-                "message": {
-                    "token": "dTEH5B5kCEWHjj6QQUuK9t:APA91bHDk0MRXcV1caYi15A2C8IhG87sydjVl4vb1m-ejV8L2qGAKCaQY6FmAIilo5bbuhPhyFDPk0qc9pH4VzlexmCExTQiYIc5gusfoqVkuJP9fm8APCGt_p1uWu_bODKY3uXoqgig",
-                    "notification": {
-                        "title": "Portugal vs. Denmark",
-                        "body": "great match!"
-                    }
-                }
-            }
-        device.send_message(msg)
-        
+
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
@@ -154,6 +150,22 @@ def kakao_callback(request):
             # url = 'http://13.124.90.138:8000/login/'
             url = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
         return HttpResponseRedirect(url)
+
+
+def saveToken(request):
+    try:
+        userId = json.loads(request.body)['userId']
+        token = json.loads(request.body)['token']
+        user = User.objects.get(id=userId)
+        print("--------4----------")
+        print(json.loads(request.body)['userId'])
+        print(json.loads(request.body)['token'])
+        print(user)
+        print("--------4----------")
+
+        FCMDevice.objects.create(user=user, registration_id=token)
+    except Exception as ex:
+        print(ex)
 
 
 @csrf_exempt
