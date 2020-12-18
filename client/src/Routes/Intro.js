@@ -9,7 +9,7 @@ import axios from "axios";
 
 function tmp(){
     axios.post("http://13.124.90.138:8000/api/trades_test/",{
-        char:'test1'
+        char:'test2'
     });
 }
 
@@ -50,7 +50,6 @@ function makeTokenSaveScript(token) {
 
 function Intro({authenticated, login, location}) {
     // window.native.pushSend('test');
-    tmp();
 
     const [playingVideo, setPlayingVideo] = useState(false);
 
