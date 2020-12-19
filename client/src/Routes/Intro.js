@@ -31,12 +31,12 @@ function makeTokenSaveScript(token) {
         if(!user_email) window.location.href = '/login/';
         let userId;
 
-        // if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE LOCAL
+        // if(!user_email) window.location.href = 'http://localhost:3000/'; // URL EXCHANGE LOCAL
         // if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
-        if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE SERVER
-        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
+        // if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE SERVER
+        axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
+        // axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
             .then((res) => {
                 userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
@@ -48,7 +48,7 @@ function makeTokenSaveScript(token) {
 
         // axios.post('http://localhost:8000/saveToken/', transData); //URL EXCHANGE LOCAL
         // axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
-        axios.post('http://13.124.90.138:8000/saveToken/', transData) //URL EXCHANGE SERVER
+        // axios.post('http://13.124.90.138:8000/saveToken/', transData) //URL EXCHANGE SERVER
     }
 
 /**
@@ -70,7 +70,8 @@ function Intro({authenticated, login, location}) {
         let url;
         let reactRestApiToken = process.env.REACT_APP_KAKAO_KEY_API;
         if(process.env.REACT_APP_STATE === 'local') {
-            let redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'; //ma exchange
+            let redirect_uri = 'http://localhost:8000/login/kakao/callback/'; //ma exchange
+            // let redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'; //ma exchange
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'dev') {
             url = "http://13.124.90.138/login/kakao/";
