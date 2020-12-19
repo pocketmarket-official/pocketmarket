@@ -83,7 +83,7 @@ def kakao_callback(request):
         if state == 'local:start' or state == 'local:build':
             # redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
             # redirect_uri = '/login/kakao/callback/'  # URL EXCHANGE RELATIVE
-            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback' #URL EXCHANGE SERVER
+            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/' #URL EXCHANGE SERVER
         elif state == 'dev':
             # redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
             redirect_uri = 'http://13.124.90.138/login/kakao/callback/'
