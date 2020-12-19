@@ -161,19 +161,11 @@ AWS_S3_OBJECT_PARAMETERS = {
     'ACL': 'public-read'
 }
 
-DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+STATIC_URL = '/static/'
 
-STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-
-# STATIC_URL = '/static/'
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "build/static/"),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "build/static/"),
+]
 
 # cors 관련 설정
 CORS_ALLOW_ALL_ORIGINS = False
@@ -245,13 +237,12 @@ elif STATE == "dev":
         }
     }
 
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
 
-    # DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-    # STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
-#    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-#    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
 elif STATE == "production":
     DEBUG = False
@@ -266,3 +257,11 @@ elif STATE == "production":
             'PORT': '5432',
         }
     }
+
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
