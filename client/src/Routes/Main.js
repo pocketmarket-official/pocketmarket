@@ -162,22 +162,21 @@ class Main extends React.Component {
         this.handleTop();
 
         let cookie_token = cookie.load("access_token");
-        // if(undefined === cookie_token) window.location.href = '/login/';
+        if(undefined === cookie_token) window.location.href = '/login/';
         let user_email = storage.get(cookie_token);
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        // axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
+        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
             .then((res) => {
-                let userId = 3;
-                // let userId = res.data.find((elt) => {
-                //     if (elt.email === user_email) {
-                //         return true;
-                //     }
-                // }).id;
+                let userId = res.data.find((elt) => {
+                    if (elt.email === user_email) {
+                        return true;
+                    }
+                }).id;
                 // axios.get("http://localhost:8000/api/trades_saleHeader/") // URl EXCHANGE LOCAL
                 axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
-                // axios.get("http://13.124.90.138:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
+                // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
                     .then((res) => {
                         let i = this.state.orderCount;
                         res.data.filter((elt) => {

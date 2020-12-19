@@ -44,7 +44,7 @@ class QuestionWrite extends React.Component {
 
         // axios.post('http://localhost:8000/api/users_question/', form_data, { //URL EXCHANGE LOCAL
         axios.post('/api/users_question/', form_data, { //URL EXCHANGE RELATIVE
-        // axios.post('http://13.124.90.138:8000/api/users_question/', form_data, { //URL EXCHANGE SERVER
+        // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_question/', form_data, { //URL EXCHANGE SERVER
             headers: {
                 'content-type': 'multipart/form-data'
             }
@@ -83,7 +83,7 @@ class QuestionWrite extends React.Component {
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        // axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
+        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
