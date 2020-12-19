@@ -7,13 +7,19 @@ import cookie from "react-cookies";
 import storage from "../storage";
 import axios from "axios";
 
-function tmp(){
+// function tmp(){
+//     console.log('tmp');
+//     alert('tmp');
+//     // axios.post("http://13.124.90.138:8000/api/trades_test/",{
+//     //     char:'test2'
+//     // });
+// }
+
+window.tmp = (function () {
+   // code here
     console.log('tmp');
     alert('tmp');
-    // axios.post("http://13.124.90.138:8000/api/trades_test/",{
-    //     char:'test2'
-    // });
-}
+});
 
 function makeTokenSaveScript(token) {
     console.log("======3==========");
