@@ -169,11 +169,11 @@ class Main extends React.Component {
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
         // axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
             .then((res) => {
-                let userId = res.data.find((elt) => {
-                    if (elt.email === user_email) {
-                        return true;
-                    }
-                }).id;
+                // let userId = res.data.find((elt) => {
+                //     if (elt.email === user_email) {
+                //         return true;
+                //     }
+                // }).id;
                 // axios.get("http://localhost:8000/api/trades_saleHeader/") // URl EXCHANGE LOCAL
                 axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
                 // axios.get("http://13.124.90.138:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
