@@ -15,13 +15,11 @@ import axios from "axios";
 //     // });
 // }
 
-window.tmp = (function () {
+window.tmp = (function (token) {
    // code here
-    console.log('tmp');
-    alert('tmp');
-    axios.post("http://13.124.90.138:8000/api/trades_test/",{
-        char:'test2'
-    });
+    console.log("======3==========");
+    console.log(token);
+    console.log("======3==========");
 });
 
 function makeTokenSaveScript(token) {
