@@ -53,16 +53,16 @@ class ReviewWrite extends React.Component {
             form_data.append(`img${j + 1}`, this.state.image[i][0]);
         }
         // axios.post('http://localhost:8000/api/reviews_review/', form_data, { //URL EXCHANGE LOCAL
-        // axios.post('/api/reviews_review/', form_data, { //URL EXCHANGE RELATIVE
-        axios.post('http://13.124.90.138:8000/api/reviews_review/', form_data, { //URL EXCHANGE SERVER
+        axios.post('/api/reviews_review/', form_data, { //URL EXCHANGE RELATIVE
+        // axios.post('http://13.124.90.138:8000/api/reviews_review/', form_data, { //URL EXCHANGE SERVER
             headers: {
                 'content-type': 'multipart/form-data'
             }
         })
             .then(res => {
                 // axios.put(`http://localhost:8000/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE LOCAL
-                // axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE RELATIVE
-                axios.put(`http://13.124.90.138:8000/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE SERVER
+                axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE RELATIVE
+                // axios.put(`http://13.124.90.138:8000/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE SERVER
                     orderStatus: 6,
                 } );
                 window.location.href = '/order/status'
@@ -103,8 +103,8 @@ class ReviewWrite extends React.Component {
         if(!user_email) window.location.href = '/login/';
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
+        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        // axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {

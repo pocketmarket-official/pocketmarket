@@ -21,11 +21,11 @@ function makeTokenSaveScript(token) {
         let userId;
 
         // if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE LOCAL
-        // if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
-        if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE SERVER
+        if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
+        // if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE SERVER
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
+        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        // axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
             .then((res) => {
                 userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
@@ -36,8 +36,8 @@ function makeTokenSaveScript(token) {
         let transData = {"userId":userId, 'token':token};
 
         // axios.post('http://localhost:8000/saveToken/', transData); //URL EXCHANGE LOCAL
-        // axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
-        axios.post('http://13.124.90.138:8000/saveToken/', transData) //URL EXCHANGE SERVER
+        axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
+        // axios.post('http://13.124.90.138:8000/saveToken/', transData) //URL EXCHANGE SERVER
     }
 
 
@@ -94,8 +94,8 @@ class Order extends React.Component {
 
     componentDidMount() {
         //axios.get("http://localhost:8000/api/stores_store/") //URL EXCHANGE LOCAL
-        // axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
-        axios.get("http://13.124.90.138:8000/api/stores_store/") //URL EXCHANGE SERVER
+        axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
+        // axios.get("http://13.124.90.138:8000/api/stores_store/") //URL EXCHANGE SERVER
         .then((res) => {
             let store = res.data.find(
                 (elt) => {
@@ -108,8 +108,8 @@ class Order extends React.Component {
             let storeId = store.id;
             let brandCd = store.brandCd;
             // axios.get("http://localhost:8000/api/stores_pos/") // URL EXCHANGE LOCAL
-        // axios.get("/api/stores_pos/") // URL EXCHANGE RELATIVE
-        axios.get("http://13.124.90.138:8000/api/stores_pos/") // URL EXCHANGE SERVER
+        axios.get("/api/stores_pos/") // URL EXCHANGE RELATIVE
+        // axios.get("http://13.124.90.138:8000/api/stores_pos/") // URL EXCHANGE SERVER
             .then((res) => {
                 let keymapCd = res.data.find(
                     (elt) => {
@@ -119,8 +119,8 @@ class Order extends React.Component {
                     }
                 ).keymapCd;
                 // axios.get("http://localhost:8000/api/keymaps_touchGroup/") //URL EXCHANGE LOCAL
-                // axios.get("/api/keymaps_touchGroup/") //URL EXCHANGE RELATIVE
-                axios.get("http://13.124.90.138:8000/api/keymaps_touchGroup/") //URL EXCHANGE SERVER
+                axios.get("/api/keymaps_touchGroup/") //URL EXCHANGE RELATIVE
+                // axios.get("http://13.124.90.138:8000/api/keymaps_touchGroup/") //URL EXCHANGE SERVER
                 .then((res) => {
                     let touch_group = res.data.filter(
                         (elt) => {
@@ -133,8 +133,8 @@ class Order extends React.Component {
                 })
                 .then((arr) => {
                     // axios.get("http://localhost:8000/api/keymaps_keymap/") //URL EXCHANGE LOCAL
-                // axios.get("/api/keymaps_keymap/") //URL EXCHANGE RELATIVE
-                axios.get("http://13.124.90.138:8000/api/keymaps_keymap/") //URL EXCHANGE SERVER
+                axios.get("/api/keymaps_keymap/") //URL EXCHANGE RELATIVE
+                // axios.get("http://13.124.90.138:8000/api/keymaps_keymap/") //URL EXCHANGE SERVER
                     .then((res) => {
                         let keymap = res.data.filter(
                             (elt) => {
@@ -165,14 +165,14 @@ class Order extends React.Component {
 
         // 각 item에 대해서 옵션 연결 성공
         // axios.get("http://localhost:8000/api/items_item/") //URL EXCHANGE LOCAL
-        // axios.get("/api/items_item/") //URL EXCHANGE RELATIVE
-        axios.get("http://13.124.90.138:8000/api/items_item/") //URL EXCHANGE SERVER
+        axios.get("/api/items_item/") //URL EXCHANGE RELATIVE
+        // axios.get("http://13.124.90.138:8000/api/items_item/") //URL EXCHANGE SERVER
         .then((res) => {
             let item_data = res.data;
             let options = {}
         // axios.get("http://localhost:8000/api/items_itemAdd/") //URL EXCHANGE LOCAL
-        // axios.get("/api/items_itemAdd/") //URL EXCHANGE RELATIVE
-        axios.get("http://13.124.90.138:8000/api/items_itemAdd/") //URL EXCHANGE SERVER
+        axios.get("/api/items_itemAdd/") //URL EXCHANGE RELATIVE
+        // axios.get("http://13.124.90.138:8000/api/items_itemAdd/") //URL EXCHANGE SERVER
             .then((res) => {
                 res.data.map((item) => {
                     let itemAddCd = item.itemAddCd;

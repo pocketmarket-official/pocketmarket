@@ -31,8 +31,8 @@ class OrderInfo extends React.Component {
         if(!user_email) window.location.href = '/login/';
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
+        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        // axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
         .then((res) => {
             let userId = res.data.find((elt) => {
                 if(elt.email === user_email) {

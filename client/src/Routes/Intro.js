@@ -31,7 +31,7 @@ function makeTokenSaveScript(token) {
         if(!user_email) window.location.href = '/login/';
         let userId;
 
-        // if(!user_email) window.location.href = 'http://localhost:3000/'; // URL EXCHANGE LOCAL
+        if(!user_email) window.location.href = 'http://localhost:3000/'; // URL EXCHANGE LOCAL
         // if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
         // if(!user_email) window.location.href = 'http://13.124.90.138:3000/'; // URL EXCHANGE SERVER
         axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL

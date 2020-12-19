@@ -43,8 +43,8 @@ class QuestionWrite extends React.Component {
         }
 
         // axios.post('http://localhost:8000/api/users_question/', form_data, { //URL EXCHANGE LOCAL
-        // axios.post('/api/users_question/', form_data, { //URL EXCHANGE RELATIVE
-        axios.post('http://13.124.90.138:8000/api/users_question/', form_data, { //URL EXCHANGE SERVER
+        axios.post('/api/users_question/', form_data, { //URL EXCHANGE RELATIVE
+        // axios.post('http://13.124.90.138:8000/api/users_question/', form_data, { //URL EXCHANGE SERVER
             headers: {
                 'content-type': 'multipart/form-data'
             }
@@ -82,8 +82,8 @@ class QuestionWrite extends React.Component {
         if(!user_email) window.location.href = '/login/';
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE RELATIVE
+        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        // axios.get("http://13.124.90.138:8000/api/users_user/") // URL EXCHANGE SERVER
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {

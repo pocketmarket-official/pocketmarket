@@ -83,8 +83,8 @@ class KDSMain extends React.Component{
 
 
         // axios.get('http://localhost:8000/api/stores_store/') // URL EXCHANGE LOCAL
-        // axios.get('/api/stores_store/') // URL EXCHANGE RELATIVE
-        axios.get('http://13.124.90.138:8000/api/stores_store/') // URL EXCHANGE SERVER
+        axios.get('/api/stores_store/') // URL EXCHANGE RELATIVE
+        // axios.get('http://13.124.90.138:8000/api/stores_store/') // URL EXCHANGE SERVER
             .then((res)=> {
                 let store = res.data.find((elt) => {
                     if(elt.storeCd === this.state.storeCd){
@@ -106,8 +106,8 @@ class KDSMain extends React.Component{
                     window.location.reload();
                     }
                         // axios.get("http://localhost:8000/api/trades_saleHeader/") // URl EXCHANGE LOCAL
-                        // axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
-                        axios.get("http://13.124.90.138:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
+                        axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
+                        // axios.get("http://13.124.90.138:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
                             .then((res)=> {
                                 let saleHeader = res.data.filter((elt) => {
                                     if (elt.storeCd === this.state.storeCd) {
@@ -116,9 +116,9 @@ class KDSMain extends React.Component{
                                 });
 
                                 // axios.get('http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE LOCAL
-                                // axios.get('/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE RELATIVE
+                                axios.get('/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE RELATIVE
                                 // axios.get('http://13.124.90.138:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE SERVER
-                                axios.get('http://13.124.90.138:8000/api/trades_saleDetail/') //URL EXCHANGE SERVER
+                                // axios.get('http://13.124.90.138:8000/api/trades_saleDetail/') //URL EXCHANGE SERVER
                                     .then((res) => {
                                         let matched = [];
                                         // sale dt 기준으로 정렬되어있는 데이터
@@ -182,8 +182,8 @@ class KDSMain extends React.Component{
                                                     let d = new Date();
                                                     let complete_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
                                                     // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE LOCAL
-                                                // axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
-                                                axios.put(`http://13.124.90.138:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
+                                                axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
+                                                // axios.put(`http://13.124.90.138:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
                                                         orderStatus: 3,
                                                         completeTime: complete_time,
                                                     })
@@ -311,8 +311,8 @@ class KDSMain extends React.Component{
                                         e.preventDefault();
                                         let store = this.state.store;
                                         // axios.put(`http://localhost:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE LOCAL
-                                        // axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
-                                        axios.put(`http://13.124.90.138:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
+                                        axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
+                                        // axios.put(`http://13.124.90.138:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
                                                     openYn: 'N',
                                                 });
                                         store.openYn = 'N';
@@ -325,8 +325,8 @@ class KDSMain extends React.Component{
                                         e.preventDefault();
                                         let store = this.state.store;
                                         // axios.put(`http://localhost:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE LOCAL
-                                        // axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
-                                        axios.put(`http://13.124.90.138:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
+                                        axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
+                                        // axios.put(`http://13.124.90.138:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
                                                     openYn: 'Y',
                                                 });
                                         store.openYn = 'Y';
