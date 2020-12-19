@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-ALLOWED_HOSTS = ['0.0.0.0:8000', 'localhost', '127.0.0.1', '13.124.90.138', '.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['0.0.0.0:8000', 'localhost', '127.0.0.1', 'Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com', '.elasticbeanstalk.com']
 
 # Application definition
 
@@ -183,8 +183,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:8000',
-    'http://13.124.90.138:3000',
-    'http://13.124.90.138:8000',
+    'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000',
+    'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000',
     'http://localhost:8000',
     'http://localhost:8000',
 ]
