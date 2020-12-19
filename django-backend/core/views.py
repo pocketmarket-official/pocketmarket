@@ -504,8 +504,8 @@ def trade(request):
             cardLogObj.save()
 
         # data = {'url': 'http://localhost:3000/order/status'} #URL EXCHANGE LOCAL
-        # data = {'url': '/order/status'} #URL EXCHANGE RELATIVE
-        data = {'url': 'http://13.124.90.138:3000/order/status'} #URL EXCHANGE SERVER
+        data = {'url': '/order/status'} #URL EXCHANGE RELATIVE
+        # data = {'url': 'http://13.124.90.138:3000/order/status'} #URL EXCHANGE SERVER
 
         response = JsonResponse(data)
 
