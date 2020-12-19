@@ -47,7 +47,7 @@ function App() {
   if(process.env.REACT_APP_STATE === 'local') {
     axios.defaults.baseURL = 'http://localhost:8000';
   } else if(process.env.REACT_APP_STATE === 'dev') {
-    axios.defaults.baseURL = 'http://13.124.90.138:8000';
+    axios.defaults.baseURL = 'http://52.79.255.36:8000';
   }
 
   //todo: 로그인 인증수단을 전부 cookie_token으로 바꿨음

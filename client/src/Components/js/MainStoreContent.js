@@ -94,7 +94,7 @@ class MainStoreContent extends React.Component {
     componentDidMount() {
         // axios.get("http://localhost:8000/api/stores_store/") // URL EXCHANGE LOCAL
         axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
-        // axios.get("http://13.124.90.138:8000/api/stores_store/") // URL EXCHANGE SERVER
+        // axios.get("http://52.79.255.36:8000/api/stores_store/") // URL EXCHANGE SERVER
         .then((res) => {
             console.log("===1======");
             console.log(res);

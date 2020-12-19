@@ -24,7 +24,7 @@ class MainFestivalContent extends React.Component {
 
         // axios.get("http://localhost:8000/api/festivals_festival/") // URL EXCHANGE LOCAL
         axios.get("/api/festivals_festival/") // URL EXCHANGE RELATIVE
-        // axios.get("http://13.124.90.138:8000/api/festivals_festival/") // URL EXCHANGE SERVER
+        // axios.get("http://52.79.255.36:8000/api/festivals_festival/") // URL EXCHANGE SERVER
         .then((res) => {
             const festivals = res.data;
             this.setState({
