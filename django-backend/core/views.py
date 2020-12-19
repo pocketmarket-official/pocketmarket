@@ -79,7 +79,8 @@ def kakao_callback(request):
         # redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback' #URL EXCHANGE SERVER
         state = os.environ.get('STATE')
         if state == 'local:start' or state == 'local:build':
-            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/' #ma exchange
+            redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
+            # redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback' #URL EXCHANGE SERVER
         elif state == 'dev':
             # redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
             redirect_uri = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
@@ -130,7 +131,8 @@ def kakao_callback(request):
                     # return HttpResponseRedirect('http://localhost:3000/main') #URL EXCHANGE LOCAL
                     # return HttpResponseRedirect('http://13.124.90.138:3000/main') #URL EXCHANGE SERVER
                     if state == 'local:start':
-                        url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}' #ma exchange
+                        url = f'http://localhost:3000/makingCookie/{access_token}/{email}'  # ma exchange
+                        # url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}' #ma exchange
                     elif state == 'local:build':
                         url = 'http://localhost:8000/index/'
                     elif state == 'dev':
@@ -143,7 +145,8 @@ def kakao_callback(request):
         # return HttpResponseRedirect('http://localhost:3000/login') #URL EXCHANGE LOCAL
         # return HttpResponseRedirect('http://13.124.90.138:3000/login') #URL EXCHANGE SERVER
         if state == 'local:start':
-            url = 'http://13.124.90.138:3000/login/' #ma exchange
+            url = 'http://localhost:3000/login/'  # ma exchange
+            # url = 'http://13.124.90.138:3000/login/' #ma exchange
         elif state == 'local:build':
             url = 'http://localhost:8000/login/'
         elif state == 'dev':
