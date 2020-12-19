@@ -133,11 +133,47 @@ AUTH_USER_MODEL = "users.User"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+##############################
+# 2020-12-19 Jhonny Cloche Ma#
+# S3 Setting##################
+##############################
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "build/static/"),
-]
+
+# AWS Setting
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_REGION_NAME = 'ap-northeast-2'
+AWS_QUERYSTRING_AUTH = False
+AWS_DEFAULT_ACL = 'public-read'
+
+# S3 setting
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_REGION_NAME = 'ap-northeast-2'
+AWS_QUERYSTRING_AUTH = False
+AWS_DEFAULT_ACL = None
+
+AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
+AWS_S3_SECURE_URLS = False       # use http instead of https
+AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+    'ACL': 'public-read'
+}
+
+DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+
+STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+
+# STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "build/static/"),
+# ]
 
 # cors 관련 설정
 CORS_ALLOW_ALL_ORIGINS = False
@@ -209,21 +245,6 @@ elif STATE == "dev":
         }
     }
 
-    #AWS Setting
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_REGION_NAME = 'ap-northeast-2'
-    AWS_QUERYSTRING_AUTH = False
-    AWS_DEFAULT_ACL = 'public-read'
-
-    #S3 setting
-    # AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
-    # AWS_S3_SECURE_URLS = False       # use http instead of https
-    # AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
-    # AWS_S3_OBJECT_PARAMETERS = {
-    #     'CacheControl': 'max-age=86400',
-    #     'ACL': 'public-read'
-    # }
 
     # DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
     # STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
@@ -245,26 +266,3 @@ elif STATE == "production":
             'PORT': '5432',
         }
     }
-
-    #AWS Setting
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_REGION_NAME = 'ap-northeast-2'
-    AWS_QUERYSTRING_AUTH = False
-    AWS_DEFAULT_ACL = 'public-read'
-
-    #S3 setting
-    AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
-    AWS_S3_SECURE_URLS = False       # use http instead of https
-    AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-        'ACL': 'public-read'
-    }
-
-    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
-
-    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
