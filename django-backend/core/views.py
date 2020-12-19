@@ -56,9 +56,9 @@ def kakao_login(request):
     if state == 'local:start' or state == 'local:build':
         # redirect_uri = 'http://localhost:8000/login/kakao/callback/' #URL EXCHANGE LOCAL
         redirect_uri = '/login/kakao/callback/' #URL EXCHANGE RELATIVE
-        # redirect_uri = 'http://52.79.255.36:8000/login/kakao/callback/' #URL EXCHANGE SERVER
+        # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback/' #URL EXCHANGE SERVER
     elif state == 'dev':
-        #redirect_uri = 'http://52.79.255.36:8000/login/kakao/callback/'
+        #redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback/'
         redirect_uri = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
 
     return HttpResponseRedirect(
@@ -78,14 +78,14 @@ def kakao_callback(request):
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
         # redirect_uri = 'http://localhost:8000/login/kakao/callback' #URL EXCHANGE LOCAL
-        # redirect_uri = 'http://52.79.255.36:8000/login/kakao/callback' #URL EXCHANGE SERVER
+        # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback' #URL EXCHANGE SERVER
         state = os.environ.get('STATE')
         if state == 'local:start' or state == 'local:build':
             # redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
             redirect_uri = '/login/kakao/callback/'  # URL EXCHANGE RELATIVE
-            # redirect_uri = 'http://52.79.255.36:8000/login/kakao/callback' #URL EXCHANGE SERVER
+            # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback' #URL EXCHANGE SERVER
         elif state == 'dev':
-            # redirect_uri = 'http://52.79.255.36:8000/login/kakao/callback/'
+            # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback/'
             redirect_uri = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
         if code is not None:
             # get access_token with the code
@@ -132,30 +132,30 @@ def kakao_callback(request):
                             user.profileImage.save(f"{name}_avatar", ContentFile(photo_request.content))
                     login(request, user)
                     # return HttpResponseRedirect('http://localhost:3000/main') #URL EXCHANGE LOCAL
-                    # return HttpResponseRedirect('http://52.79.255.36:3000/main') #URL EXCHANGE SERVER
+                    # return HttpResponseRedirect('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/main') #URL EXCHANGE SERVER
                     if state == 'local:start':
                         # url = f'http://localhost:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE LOCAL
                         url = f'/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
-                        # url = f'http://52.79.255.36:3000/makingCookie/{access_token}/{email}' #URL EXCHANGE SERVER
+                        # url = f'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/makingCookie/{access_token}/{email}' #URL EXCHANGE SERVER
                     elif state == 'local:build':
                         url = 'http://localhost:8000/index/'
                     elif state == 'dev':
-                        #url = 'http://52.79.255.36:8000/index/'
+                        #url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/index/'
                         url = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/index/'
                     return HttpResponseRedirect(url)
                 else:
                     raise KakaoException()
     except KakaoException:
         # return HttpResponseRedirect('http://localhost:3000/login') #URL EXCHANGE LOCAL
-        # return HttpResponseRedirect('http://52.79.255.36:3000/login') #URL EXCHANGE SERVER
+        # return HttpResponseRedirect('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/login') #URL EXCHANGE SERVER
         if state == 'local:start':
             # url = 'http://localhost:3000/login/'  # URL EXCHANGE LOCAL
             url = '/login/'  # URL EXCHANGE RELATIVE
-            # url = 'http://52.79.255.36:3000/login/' #URL EXCHANGE SERVER
+            # url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/login/' #URL EXCHANGE SERVER
         elif state == 'local:build':
             url = 'http://localhost:8000/login/'
         elif state == 'dev':
-            # url = 'http://52.79.255.36:8000/login/'
+            # url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/'
             url = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
         return HttpResponseRedirect(url)
 
@@ -510,7 +510,7 @@ def trade(request):
 
         # data = {'url': 'http://localhost:3000/order/status'} #URL EXCHANGE LOCAL
         data = {'url': '/order/status'} #URL EXCHANGE RELATIVE
-        # data = {'url': 'http://52.79.255.36:3000/order/status'} #URL EXCHANGE SERVER
+        # data = {'url': 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/order/status'} #URL EXCHANGE SERVER
 
         response = JsonResponse(data)
 
