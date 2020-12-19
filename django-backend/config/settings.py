@@ -163,9 +163,9 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 # STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "build/static/"),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "build/"),
+]
 
 DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
 STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
