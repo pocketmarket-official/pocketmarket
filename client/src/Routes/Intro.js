@@ -70,8 +70,9 @@ function Intro({authenticated, login, location}) {
         let url;
         let reactRestApiToken = process.env.REACT_APP_KAKAO_KEY_API;
         if(process.env.REACT_APP_STATE === 'local') {
-            let redirect_uri = 'http://localhost:8000/login/kakao/callback/'; //ma exchange
-            // let redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'; //ma exchange
+            // let redirect_uri = 'http://localhost:8000/login/kakao/callback/'; //URL EXCHANGE LOCAL
+            let redirect_uri = '/login/kakao/callback/'; //URL EXCHANGE RELATIVE
+            // let redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'; //URL EXCHANGE SERVER
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'dev') {
             url = "http://13.124.90.138/login/kakao/";
