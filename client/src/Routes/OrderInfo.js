@@ -9,15 +9,6 @@ import storage from "../storage";
 
 class OrderInfo extends React.Component {
     constructor(props) {
-        let cookie_token = cookie.load("access_token");
-        if(!cookie_token){
-            window.location.href = '/login/';
-        }
-        else if(cookie_token==='guest') {
-            cookie.remove('access_token');
-            window.location.href = '/login/';
-        }
-
         super(props);
         const sellItemList = this.props.location.state.sellItemList;
         const order = this.props.location.state.order;

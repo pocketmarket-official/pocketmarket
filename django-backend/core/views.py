@@ -58,12 +58,6 @@ def kakao_login(request):
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
     try:
-
-        # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
-        # firebase_admin.initialize_app(cred)
-        # device = FCMDevice.objects.all().first()
-
-
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
@@ -149,19 +143,11 @@ def saveToken(request):
         user_email = json.loads(request.body)['user_email']
         token = json.loads(request.body)['fcmToken']
         user = User.objects.get(email=user_email)
-        print("--------1----------")
-        print(token)
-        print(user)
-
-
         iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
                                                         defaults={
                                                             'user': user,
                                                             'registration_id': token
                                                         })
-        print("--------2----------")
-        print(iosToken)
-
         user.iosToken = iosToken.registration_id
         user.save()
 
@@ -185,7 +171,9 @@ def trade(request):
         terminalId = '0001000200'
         vanCd = '11'
         # parameter fromrequest
-        storeCd = Store.objects.get(id=json.loads(request.body)['storeId']).storeCd
+        store = Store.objects.get(id=json.loads(request.body)['storeId'])
+        storeCd = store.storeCd
+        storeName = store.storeName
         user = User.objects.get(id=json.loads(request.body)['userId'])
         # storeCd = f'{json.loads(request.body)["storeCd"]:05}'
         posNo = '01'
@@ -507,11 +495,14 @@ def trade(request):
         data = {'url': '/order/status'} #URL EXCHANGE RELATIVE
         # data = {'url': 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/order/status'} #URL EXCHANGE SERVER
 
+
+        # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
+        # firebase_admin.initialize_app(cred)
+        # device = FCMDevice.objects.all().first()
+        device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
+        device.send_message("주문완료", storeName+'에 주문이 완료되었습니다.' )
+
         response = JsonResponse(data)
-
-        device = FCMDevice.objects.all().first()
-
-
         return response
 
     except Exception as ex:
