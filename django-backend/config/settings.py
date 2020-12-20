@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 ALLOWED_HOSTS = [
-    'http://localhost',
-    'http://127.0.0.1',
-    'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com',
-    'http://13.124.90.138'
+    'http://localhost/',
+    'http://127.0.0.1/',
+    'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/',
+    'http://13.124.90.138/'
 ]
 
 # Application definition
