@@ -119,21 +119,15 @@ def kakao_callback(request):
                             user.profileImage.save(f"{name}_avatar", ContentFile(photo_request.content))
                     login(request, user)
 
-                    ##ios token save
-
-
-
-                    ##
-
 
                     if state == 'local:start' or state == 'local:dev':
                         url = f'http://localhost:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
                     elif state == 'local:build':
-                        url = 'http://localhost:8000/index/'
+                        url = 'http://localhost:3000/index/'
                     elif state == 'dev':
                         url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/index/'
                     elif state == 'server:appDeploy':
-                        url = 'http://13.124.90.138:8000/index/'
+                        url = 'http://13.124.90.138:3000/index/'
                     return HttpResponseRedirect(url)
                 else:
                     raise KakaoException()
