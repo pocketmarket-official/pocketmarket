@@ -29,8 +29,8 @@ ALLOWED_HOSTS = [
     'http://127.0.0.1:8000',
     'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000',
     'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000',
-    'http://13.124.90.138:3000',
-    'http://13.124.90.138:8000',
+    'http://13.124.90.138:3000/',
+    'http://13.124.90.138:8000/',
 ]
 
 # Application definition
