@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import defaultImg from '../../assets/main/grayBI.png';
-import axios from "axios";
-
 
 class FestivalJSX extends React.Component {
     constructor(props) {
@@ -39,12 +37,8 @@ class FestivalJSX extends React.Component {
         let startDt = start.getFullYear() + '년 ' + (start.getMonth() + 1) + '월 ' + start.getDate() + '일';
         let end = new Date(this.formatDate(data.endDt));
         let endDt = end.getFullYear() + '년 ' + (end.getMonth() + 1) + '월 ' + end.getDate() + '일';
-
-        return (
-            <Link to={{
-                pathname : `/main/festival/${data.id}`,
-                state : { data }
-            }}>
+        let renderBody =
+            <>
                 <div className="content__festival">
                     <div className="festival__header">
                         <div className="header__title">{data.festivalName}</div>
@@ -61,7 +55,24 @@ class FestivalJSX extends React.Component {
                         </div>
                     </div>
                 </div>
-            </Link>
+            </>;
+        return (
+            <div>
+                {data.openYn === 'Y' ?
+                        <>
+                            <Link to={{
+                                pathname: `/main/festival/${data.id}`,
+                                state: {data}
+                            }}>
+                            {renderBody}
+                            </Link>
+                        </>
+                        :
+                        <>
+                            {renderBody}
+                        </>
+                }
+            </div>
         );
     }
 }

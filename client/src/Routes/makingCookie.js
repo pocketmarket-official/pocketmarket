@@ -18,7 +18,6 @@ function MakingCookie(props) {
         //            secure: true,
     });
     storage.add(access_token, email);
-    console.log(props);
     window.location.href = '/index';
 
     return (

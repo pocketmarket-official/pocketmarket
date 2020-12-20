@@ -5,6 +5,7 @@ import StoreList from '../Components/js/StoreList';
 import bg from '../assets/store_grid/grid_top_bg.jpg';
 import axios from "axios";
 
+
 class StoreView extends React.Component {
     constructor(props) {
         super(props);

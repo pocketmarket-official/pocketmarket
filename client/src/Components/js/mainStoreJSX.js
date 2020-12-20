@@ -2,9 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import star1 from '../../assets/store/star1.png';
-import star2 from '../../assets/store/star2.png';
-import star3 from '../../assets/store/star3.png';
 import defaultImg from '../../assets/main/grayBI.png';
 import cookie from "react-cookies";
 import storage from "../../storage";
@@ -18,20 +15,21 @@ class StoreJSX extends React.Component {
             storeId: this.props.data.id,
             userId: '',
             likeYn: null,
+            userEmail: '',
         }
     }
 
     componentDidMount() {
 
+        let user_email;
         let cookie_token = cookie.load("access_token");
-        let user_email = storage.get(cookie_token);
-        if(!user_email) window.location.href = '/login/';
+        if(cookie_token){
+            user_email = storage.get(cookie_token);
+        } else {
+            user_email = 'pocketmarket.official@gmail.com' //guest User
+        }
+        this.setState({user_email});
         let userId;
-
-        // if(!user_email) window.location.href = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/'; // URL EXCHANGE LOCAL
-        if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
-        // if(!user_email) window.location.href = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/'; // URL EXCHANGE SERVER
-
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
@@ -84,7 +82,8 @@ class StoreJSX extends React.Component {
                                         e.preventDefault();
 
                                         let id = this.state.likeId;
-                                        if(id === "") {
+                                        if(this.state.user_email !== 'pocketmarket.official@gmail.com'){
+                                            if(id === "") {
                                             // axios.post("http://localhost:8000/api/stores_storeLike/", { //URL EXCHANGE LOCAL
                                             axios.post("/api/stores_storeLike/", { // URL EXCHANGE RELATIVE
                                             // axios.post("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_storeLike/", { //URL EXCHANGE SERVER
@@ -107,56 +106,56 @@ class StoreJSX extends React.Component {
                                                     });
                                                 })
                                             })
-                                        } else {
-                                            if(this.state.likeYn === 'Y') {
-                                                // axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE LOCAL
-                                                axios.put(`/api/stores_storeLike/${id}/`, { //URL EXCHANGE RELATIVE
-                                                // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE SERVER
-                                                    likeYn: 'N',
-                                                    user: this.state.userId,
-                                                    store: this.state.storeId,
-                                                })
-                                                .then(() => {
-                                                    // axios.post("http://localhost:8000/storeLike/", { //URL EXCHANGE LOCAL
-                                                    axios.post("/storeLike/", { // URL EXCHANGE RELATIVE
-                                                    // axios.post("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/storeLike/", { //URL EXCHANGE SERVER
-                                                        "storeId": this.props.data.id,
-                                                        "userId": this.state.userId,
+                                            } else {
+                                                if(this.state.likeYn === 'Y') {
+                                                    // axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE LOCAL
+                                                    axios.put(`/api/stores_storeLike/${id}/`, { //URL EXCHANGE RELATIVE
+                                                    // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE SERVER
+                                                        likeYn: 'N',
+                                                        user: this.state.userId,
+                                                        store: this.state.storeId,
                                                     })
-                                                    .then((res) => {
-                                                        this.setState({
-                                                            like: res.data.likeCnt,
-                                                            likeYn: res.data.likeYn,
-                                                            likeId: res.data.likeId,
-                                                        });
+                                                    .then(() => {
+                                                        // axios.post("http://localhost:8000/storeLike/", { //URL EXCHANGE LOCAL
+                                                        axios.post("/storeLike/", { // URL EXCHANGE RELATIVE
+                                                        // axios.post("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/storeLike/", { //URL EXCHANGE SERVER
+                                                            "storeId": this.props.data.id,
+                                                            "userId": this.state.userId,
+                                                        })
+                                                        .then((res) => {
+                                                            this.setState({
+                                                                like: res.data.likeCnt,
+                                                                likeYn: res.data.likeYn,
+                                                                likeId: res.data.likeId,
+                                                            });
+                                                        })
                                                     })
-                                                })
-                                            } else if(this.state.likeYn === 'N') {
-                                                // axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE LOCAL
-                                                axios.put(`/api/stores_storeLike/${id}/`, { //URL EXCHANGE RELATIVE
-                                                // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE SERVER
-                                                    likeYn: 'Y',
-                                                    user: this.state.userId,
-                                                    store: this.state.storeId,
-                                                })
-                                                .then(() => {
-                                                    // axios.post("http://localhost:8000/storeLike/", { //URL EXCHANGE LOCAL
-                                                    axios.post("/storeLike/", { //URL EXCHANGE RELATIVE
-                                                    // axios.post("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/storeLike/", { //URL EXCHANGE SERVER
-                                                        "storeId": this.props.data.id,
-                                                        "userId": this.state.userId,
+                                                } else if(this.state.likeYn === 'N') {
+                                                    // axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE LOCAL
+                                                    axios.put(`/api/stores_storeLike/${id}/`, { //URL EXCHANGE RELATIVE
+                                                    // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE SERVER
+                                                        likeYn: 'Y',
+                                                        user: this.state.userId,
+                                                        store: this.state.storeId,
                                                     })
-                                                    .then((res) => {
-                                                        this.setState({
-                                                            like: res.data.likeCnt,
-                                                            likeYn: res.data.likeYn,
-                                                            likeId: res.data.likeId,
-                                                        });
+                                                    .then(() => {
+                                                        // axios.post("http://localhost:8000/storeLike/", { //URL EXCHANGE LOCAL
+                                                        axios.post("/storeLike/", { //URL EXCHANGE RELATIVE
+                                                        // axios.post("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/storeLike/", { //URL EXCHANGE SERVER
+                                                            "storeId": this.props.data.id,
+                                                            "userId": this.state.userId,
+                                                        })
+                                                        .then((res) => {
+                                                            this.setState({
+                                                                like: res.data.likeCnt,
+                                                                likeYn: res.data.likeYn,
+                                                                likeId: res.data.likeId,
+                                                            });
+                                                        })
                                                     })
-                                                })
+                                                }
                                             }
                                         }
-
                                     }}><span className="likes__heart">♥</span> {this.state.like}</button>
                                     :
                                     null
@@ -179,17 +178,17 @@ class StoreJSX extends React.Component {
                             <img src={star2}/>
                     */}
                         </div>
-                        <div className="store__review">
-                            <div className="review__content">
-                                맛도 맛인데 대기하지 않고 받을 수 있어서 너무 좋았어요!!
-                            </div>
-                            <button className={`review__likes ${Math.random() > 0.5 ? 'active' : ''}`} onClick={(e) => {
-                                e.preventDefault();
-                                // 좋아요 기능 추가 예정
-                            }}>
-                                <p className="likes__heart">♥</p> 56
-                            </button>
-                        </div>
+                        {/*<div className="store__review">*/}
+                        {/*    <div className="review__content">*/}
+                        {/*        맛도 맛인데 대기하지 않고 받을 수 있어서 너무 좋았어요!!*/}
+                        {/*    </div>*/}
+                        {/*    <button className={`review__likes ${Math.random() > 0.5 ? 'active' : ''}`} onClick={(e) => {*/}
+                        {/*        e.preventDefault();*/}
+                        {/*        // 좋아요 기능 추가 예정*/}
+                        {/*    }}>*/}
+                        {/*        <p className="likes__heart">♥</p> 56*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
                     </div>
             </>;
 

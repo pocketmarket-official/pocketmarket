@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import cookie from 'react-cookies';
-import storage from '../storage.js';
+import cookie from "react-cookies";
+import storage from "../storage";
 import Header from '../Components/js/Header';
 import MainFestivalContent from '../Components/js/MainFestivalContent';
 import MainStoreContent from '../Components/js/MainStoreContent';
@@ -161,9 +161,14 @@ class Main extends React.Component {
         this.handleRefresh();
         this.handleTop();
 
+        let user_email;
         let cookie_token = cookie.load("access_token");
-        if(undefined === cookie_token) window.location.href = '/login/';
-        let user_email = storage.get(cookie_token);
+        if(cookie_token){
+            user_email = storage.get(cookie_token);
+        } else {
+            user_email = 'pocketmarket.official@gmail.com' //guest User
+        }
+
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
@@ -233,11 +238,19 @@ class Main extends React.Component {
                     <div className="main__content">
                         {this.handlePageRender()}
                     </div>
-                    <Link to="/order/status">
-                        <div className="main__order-status">
-                            <div className="order-status__count">{this.state.orderCount}</div>
-                        </div>
-                    </Link>
+                    {this.state.orderCount===0 ?
+                                <>
+                                <div></div>
+                                </>
+                            :
+                                <>
+                                <Link to="/order/status">
+                                    <div className="main__order-status">
+                                        <div className="order-status__count">{this.state.orderCount}</div>
+                                    </div>
+                                </Link>
+                                </>
+                            }
                 </div>
             </>
         );

@@ -23,9 +23,6 @@ window.tmp = (function (token) {
 });
 
 function makeTokenSaveScript(token) {
-    console.log("======3==========");
-    // alert(token);
-    console.log("======3==========");
         let cookie_token = cookie.load("access_token");
         let user_email = storage.get(cookie_token);
         if(!user_email) window.location.href = '/login/';
@@ -73,6 +70,9 @@ function Intro({authenticated, login, location}) {
             // let redirect_uri = 'http://localhost:8000/login/kakao/callback/'; //URL EXCHANGE LOCAL
             let redirect_uri = '/login/kakao/callback/'; //URL EXCHANGE RELATIVE
             // let redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback/'; //URL EXCHANGE SERVER
+            url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
+        } else if(process.env.REACT_APP_STATE === 'local:dev') {
+            let redirect_uri = 'http://localhost:8000/login/kakao/callback/';
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'dev') {
             url = "http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/";
