@@ -500,7 +500,8 @@ def trade(request):
         # firebase_admin.initialize_app(cred)
         # device = FCMDevice.objects.all().first()
         device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
-        device.send_message("주문완료", storeName+'에 주문이 완료되었습니다.' )
+        if(device) :
+            device.send_message("주문완료", storeName+'에 주문이 완료되었습니다.' )
 
         response = JsonResponse(data)
         return response
