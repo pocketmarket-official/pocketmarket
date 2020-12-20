@@ -242,7 +242,33 @@ if STATE == "local:start":
         }
     }
 
+
 elif STATE == "local:dev":
+    DEBUG = True
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'pocketMarket_dev',
+            'USER': 'admin',
+            'PASSWORD': os.environ.get("DB_ADMIN_PASSWORD"),
+            'PORT': '3306',
+            'HOST': 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                # 'charset': 'utf8mb4',
+            },
+        }
+    }
+
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+elif STATE == "server:appDeploy":
     DEBUG = True
 
     DATABASES = {
