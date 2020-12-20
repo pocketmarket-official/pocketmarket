@@ -105,6 +105,17 @@ class Order extends React.Component {
             cookie.remove('access_token');
             window.location.href = '/login/';
         }
+        let user_email = storage.get(cookie_token);
+
+        let fcmToken = cookie.load("fcmToken");
+
+        let transData = {"user_email":user_email, "fcmToken":fcmToken};
+
+        axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
+        // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/trade/', transData) //URL EXCHANGE SERVER
+            .then((res)=>{
+
+            });
 
         //axios.get("http://localhost:8000/api/stores_store/") //URL EXCHANGE LOCAL
         axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE

@@ -39,6 +39,7 @@ class KDSMain extends React.Component{
         let curSec = curDttm.getSeconds();
 
         this.state.matched.forEach(elt=>{
+            if(!elt || elt.detail[0]) return false;
             let saleDate = elt.saleDt;
             let saleTime = elt.detail[0].saleTime;
             let ordYear = saleDate.slice(0,4);
@@ -52,14 +53,13 @@ class KDSMain extends React.Component{
             let timelaps = Math.abs(curDttm - ordDttm) / 1000;
             let daylaps = Math.floor(timelaps / 86400);
             let hourlaps = Math.floor(timelaps / 3600) % 24;
-            let minutelaps = Math.floor(timelaps / 60) % 60;
+            let minutelaps = Math.floor(timelaps / 60);
             let seclaps = timelaps % 60;
 
             elt.timeLaps = minutelaps;
             tmpMatched.push(elt);
         });
 
-        console.log(tmpMatched[0].timeLaps);
         this.setState({matched : tmpMatched});
     }
 
@@ -83,7 +83,7 @@ class KDSMain extends React.Component{
 
 
         // axios.get('http://localhost:8000/api/stores_store/') // URL EXCHANGE LOCAL
-        axios.get('/api/stores_store/') // URL EXCHANGE RELATIVE
+        axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
         // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/') // URL EXCHANGE SERVER
             .then((res)=> {
                 let store = res.data.find((elt) => {
@@ -92,7 +92,7 @@ class KDSMain extends React.Component{
                     }
                 });
                 if(!store) {
-                    let storeCd = prompt('사용 불가능한 점포코드입니다. 점포코드 확인 부탁드려요!.')
+                    let storeCd = prompt('사용 불가능한 점포코드입니다. 점포코드 확인 부탁드려요!.');
                     const expires = new Date();
                     expires.setDate(expires.getDate() + 1);
 
@@ -116,7 +116,7 @@ class KDSMain extends React.Component{
                                 });
 
                                 // axios.get('http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE LOCAL
-                                axios.get('/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE RELATIVE
+                                axios.get('/api/trades_saleDetail/') //URL EXCHANGE RELATIVE
                                 // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE SERVER
                                 // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail/') //URL EXCHANGE SERVER
                                     .then((res) => {
@@ -139,6 +139,7 @@ class KDSMain extends React.Component{
                                                 matched.push(elt);
                                             }
                                         });
+
                                         this.setState({
                                             matched: matched,
                                             store: store,

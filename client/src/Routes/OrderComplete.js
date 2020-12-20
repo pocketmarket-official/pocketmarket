@@ -5,8 +5,11 @@ import cookie from "react-cookies";
 import storage from "../storage";
 
 
-function OrderComplete() {
-    let cookie_token = cookie.load("access_token");
+class OrderComplete extends React.Component{
+    constructor(props){
+        super(props);
+
+        let cookie_token = cookie.load("access_token");
         if(!cookie_token){
             window.location.href = '/login/';
         }
@@ -15,8 +18,20 @@ function OrderComplete() {
             window.location.href = '/login/';
         }
 
-    return (
-        <>
+        console.log(props.location.state.order);
+
+        this.state={
+            order: props.location.state.order
+        }
+    }
+
+    componentDidMount(){
+
+    }
+
+    render(){
+        return(
+            <>
             {/*
             <div className="modal__fastorder hidden" id="modal__fastorder" onClick={(e) => {
                 const elt = document.getElementById("modal__fastorder");
@@ -37,22 +52,37 @@ function OrderComplete() {
             <div className="ordercomplete">
                 <div className="ordercomplete__close"><p>주문완료</p></div>
                 <div className="ordercomplete__text">
-                    <div className="ordercomplete__line1">· 매장 <p>강남핫도그</p></div>
-                    <div className="ordercomplete__line2">· 주문 <p>치즈핫도그 1개, 콘핫도그 2개</p> </div>
-                    <div className="ordercomplete__line3">· 가격 <p>4,800원</p></div>
+                    <div className="ordercomplete__line1">· 매장 <p>{this.state.order.storeName}</p></div>
+                    <div className="ordercomplete__line2">· 주문 <p>
+                        {
+                            this.state.order.detail.map((elt)=>{
+                                if(elt.itemSellLevel === '1'){
+                                    return(
+                                    <>
+                                        {elt.itemName}{elt.qty}개
+                                    </>
+                                )
+                                }
+                            })
+                        }
+                    </p> </div>
+                    <div className="ordercomplete__line3">· 가격 <p>{this.state.order.saleAmt}원</p></div>
                     <div className="ordercomplete__line"></div>
-                    <div className="ordercomplete__line4"><p>홍길동님의 호출번호는 <b>0024</b> 이며 <br/> 3명의 고객이 대기중입니다.</p> </div>
+                    <div className="ordercomplete__line4"><p>고객님의 호출번호는 <b>{this.state.order.billNo}</b> 입니다.
+                        {/*<br/> 3명의 고객이 대기중입니다. */}
+                        </p></div>
                 </div>
                 <div className="ordercomplete__container">
-                    <div className="ordercomplete__confirm"><Link to="/order/status"><p>선택완료</p></Link></div>
-                    <div className="ordercomplete__fastorder" onClick={() => {
-                        const elt = document.getElementById("modal__fastorder");
-                        elt.classList.remove("hidden");
-                    }}><p>도감추가</p></div>
+                    <div className="ordercomplete__confirm"><Link to="/order/status"><p>확인</p></Link></div>
+                    {/*<div className="ordercomplete__fastorder" onClick={() => {*/}
+                    {/*    const elt = document.getElementById("modal__fastorder");*/}
+                    {/*    elt.classList.remove("hidden");*/}
+                    {/*}}><p>도감추가</p></div>*/}
                 </div>
             </div>
         </>
-    );
+        )
+    }
 }
 
 export default OrderComplete;
