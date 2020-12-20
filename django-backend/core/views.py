@@ -127,7 +127,7 @@ def kakao_callback(request):
                     elif state == 'dev':
                         url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/index/'
                     elif state == 'server:appDeploy':
-                        url = 'http://13.124.90.138:3000/index/'
+                        url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
                     return HttpResponseRedirect(url)
                 else:
                     raise KakaoException()
