@@ -143,6 +143,7 @@ def kakao_callback(request):
         return HttpResponseRedirect(url)
 
 
+@csrf_exempt
 def saveToken(request):
     try:
         user_email = json.loads(request.body)['user_email']
@@ -161,7 +162,7 @@ def saveToken(request):
         print("--------2----------")
         print(iosToken)
 
-        user.iosToken = iosToken
+        user.iosToken = iosToken.registration_id
         user.save()
 
         return
