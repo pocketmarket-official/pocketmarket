@@ -80,9 +80,9 @@ def kakao_callback(request):
         # redirect_uri = 'http://localhost:8000/login/kakao/callback' #URL EXCHANGE LOCAL
         # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback' #URL EXCHANGE SERVER
         state = os.environ.get('STATE')
-        if state == 'local:start' or state == 'local:build':
-            # redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
-            redirect_uri = '/login/kakao/callback/'  # URL EXCHANGE RELATIVE
+        if state == 'local:start' or state == 'local:build' or state == 'local:dev':
+            redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
+            # redirect_uri = '/login/kakao/callback'  # URL EXCHANGE RELATIVE
             # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback' #URL EXCHANGE SERVER
         elif state == 'dev':
             # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback/'
@@ -133,9 +133,9 @@ def kakao_callback(request):
                     login(request, user)
                     # return HttpResponseRedirect('http://localhost:3000/main') #URL EXCHANGE LOCAL
                     # return HttpResponseRedirect('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/main') #URL EXCHANGE SERVER
-                    if state == 'local:start':
+                    if state == 'local:start' or state == 'local:dev':
                         # url = f'http://localhost:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE LOCAL
-                        url = f'/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
+                        url = f'http://localhost:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
                         # url = f'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/makingCookie/{access_token}/{email}' #URL EXCHANGE SERVER
                     elif state == 'local:build':
                         url = 'http://localhost:8000/index/'

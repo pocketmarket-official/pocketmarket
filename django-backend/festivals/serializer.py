@@ -26,6 +26,7 @@ class FestivalSerializer(serializers.ModelSerializer):
             'organManager',
             'organPhone',
             'organMail',
+            'openYn',
             'insDt',
             'insUs',
             'modDt',
