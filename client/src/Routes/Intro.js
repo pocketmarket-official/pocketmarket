@@ -29,9 +29,7 @@ window.makeFcmTokenCookie = (function (token) {
     });
 });
 
-function Intro({authenticated, login, location}) {
-    // window.native.pushSend('test');
-
+function Intro({authenticated, location}) {
     const [playingVideo, setPlayingVideo] = useState(false);
 
     // kakao login api built in django backend
