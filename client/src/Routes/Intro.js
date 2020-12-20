@@ -19,6 +19,8 @@ window.makeFcmTokenCookie = (function (token) {
     const expires = new Date();
     expires.setDate(expires.getDate() + 1);
 
+    console.log('token');
+
     cookie.save("fcmToken", token, {
         path: '/',
         expires: expires,
