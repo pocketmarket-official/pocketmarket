@@ -30,7 +30,7 @@ window.makeFcmTokenCookie = (function (token) {
 function Intro({authenticated, login, location}) {
     // window.native.pushSend('test');
 
-    const [playingVideo, setPlayingVideo] = useState(true);
+    const [playingVideo, setPlayingVideo] = useState(false);
 
     // kakao login api built in django backend
     const responseLogin = (res) => {
@@ -53,9 +53,9 @@ function Intro({authenticated, login, location}) {
     const guestLogin = (res) => {
         let url;
         if(process.env.REACT_APP_STATE === 'local') {
-            url =  'http://13.124.90.138:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
+            url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
         } else if(process.env.REACT_APP_STATE === 'local:dev') {
-            url =  'http://13.124.90.138:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
+            url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
         } else if(process.env.REACT_APP_STATE === 'dev') {
             url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
         } else if(process.env.REACT_APP_STATE === 'server:appDeploy') {
