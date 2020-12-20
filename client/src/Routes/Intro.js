@@ -30,7 +30,7 @@ window.makeFcmTokenCookie = (function (token) {
 });
 
 function Intro({authenticated, location}) {
-    const [playingVideo, setPlayingVideo] = useState(false);
+    const [playingVideo, setPlayingVideo] = useState(true);
 
     // kakao login api built in django backend
     const responseLogin = (res) => {
