@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import logout from '../assets/my_page/ico_logout.png';
 import store from '../assets/my_page/ico_store.png';
+import cookie from "react-cookies";
 
 function Mypage() {
+    const logOut = (res) => {
+        cookie.remove('access_token');
+        window.location.href = '/login/';
+    };
+
     return (
         <>
             <HeaderBiz/>
@@ -19,7 +25,7 @@ function Mypage() {
                 </div>
                 <div className="setting__box">
                     <div className="setting__list"><Link to="/kds/main">점주 페이지</Link><img src={store}/></div>
-                    {/*<div className="setting__list"><p>로그아웃</p><img src={logout}/></div>*/}
+                    <div className="setting__list"><p onClick={logOut}>로그아웃</p><img src={logout}/></div>
                 </div>
             </div>
         </>

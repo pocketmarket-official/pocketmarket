@@ -1,9 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
+import cookie from "react-cookies";
+import storage from "../storage";
 
 
 function OrderComplete() {
+    let cookie_token = cookie.load("access_token");
+        if(!cookie_token){
+            window.location.href = '/login/';
+        }
+        else if(cookie_token==='guest') {
+            cookie.remove('access_token');
+            window.location.href = '/login/';
+        }
+
     return (
         <>
             {/*

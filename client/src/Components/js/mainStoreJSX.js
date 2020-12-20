@@ -21,13 +21,17 @@ class StoreJSX extends React.Component {
 
     componentDidMount() {
 
-        let user_email;
         let cookie_token = cookie.load("access_token");
-        if(cookie_token){
-            user_email = storage.get(cookie_token);
+        if(!cookie_token) window.location.href = '/login/';
+        let user_email;
+        if(!cookie_token){
+          window.location.href = '/login/';
+        } else if(cookie_token === 'guest'){
+            user_email = 'pocketmarket.official@gmail.com'
         } else {
-            user_email = 'pocketmarket.official@gmail.com' //guest User
+            user_email = storage.get(cookie_token);
         }
+
         this.setState({user_email});
         let userId;
 

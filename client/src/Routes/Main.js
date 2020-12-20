@@ -161,14 +161,15 @@ class Main extends React.Component {
         this.handleRefresh();
         this.handleTop();
 
-        let user_email;
         let cookie_token = cookie.load("access_token");
-        if(cookie_token){
-            user_email = storage.get(cookie_token);
+        let user_email;
+        if(!cookie_token){
+          window.location.href = '/login/';
+        } else if(cookie_token === 'guest'){
+            user_email = 'pocketmarket.official@gmail.com'
         } else {
-            user_email = 'pocketmarket.official@gmail.com' //guest User
+            user_email = storage.get(cookie_token);
         }
-
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
