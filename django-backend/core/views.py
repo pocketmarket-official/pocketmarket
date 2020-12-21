@@ -167,13 +167,21 @@ def saveTokenStore(request):
         print(json.loads(request.body)['storeCd'])
         print(json.loads(request.body)['fcmToken'])
         storeCd = json.loads(request.body)['storeCd']
+        print('==4')
+        print(storeCd)
         token = json.loads(request.body)['fcmToken']
+        print('==5')
+        print(token)
         store = Store.objects.get(storeCd=storeCd)
+        print('==6')
+        print(store)
         iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
                                                         defaults={
                                                             'user': store,
                                                             'registration_id': token
                                                         })
+        print('==7')
+        print(iosToken)
         store.iosToken = iosToken.registration_id
         store.save()
 
