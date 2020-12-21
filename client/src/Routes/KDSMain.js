@@ -2,7 +2,7 @@ import React from 'react';
 import bg from '../assets/kds/B_img.png';
 import timer from '../assets/kds/ic_timer.svg';
 import axios from 'axios';
-import Clock from 'react-live-clock';
+// import Clock from 'react-live-clock';
 import cookie from "react-cookies";
 
 class KDSMain extends React.Component{
@@ -162,10 +162,10 @@ class KDSMain extends React.Component{
                     <div>
                         <span>{this.state.year}.{this.state.month}.{this.state.day}</span>
                         {/*<span>AM</span>*/}
-                        <span><Clock format={"HH:mm:ss"} ticking={true} onChange={(res)=>
-                        {
-                            // this._timeTickling(res);
-                        }}/></span>
+                        {/*<span><Clock format={"HH:mm:ss"} ticking={true} onChange={(res)=>*/}
+                        {/*{*/}
+                        {/*    // this._timeTickling(res);*/}
+                        {/*}}/></span>*/}
                     </div>
                 </div>
                 <div className="body">
