@@ -52,6 +52,9 @@ class ReviewWrite extends React.Component {
             let j = parseInt(i);
             form_data.append(`img${j + 1}`, this.state.image[i][0]);
         }
+
+        if(!this.state.image) return false;
+
         // axios.post('http://localhost:8000/api/reviews_review/', form_data, { //URL EXCHANGE LOCAL
         axios.post('/api/reviews_review/', form_data, { //URL EXCHANGE RELATIVE
         // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/reviews_review/', form_data, { //URL EXCHANGE SERVER
@@ -59,15 +62,16 @@ class ReviewWrite extends React.Component {
                 'content-type': 'multipart/form-data'
             }
         })
-            .then(res => {
-                // axios.put(`http://localhost:8000/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE LOCAL
-                axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE RELATIVE
-                // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE SERVER
-                    orderStatus: 6,
-                } );
-                window.location.href = '/order/status'
-            })
-            .catch(err => console.log(err))
+        .then(res => {
+            // axios.put(`http://localhost:8000/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE LOCAL
+            axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE RELATIVE
+            // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${this.state.saleHeaderId}/`,{ //URL EXCHANGE SERVER
+                orderStatus: 6,
+            } );
+            window.location.href = '/order/status'
+        })
+        .catch(err => console.log(err))
+
     }
 
     handleImageChange = (e) => {
@@ -99,8 +103,14 @@ class ReviewWrite extends React.Component {
         };
 
         let cookie_token = cookie.load("access_token");
+        if(!cookie_token){
+            window.location.href = '/login/';
+        }
+        else if(cookie_token==='guest') {
+            cookie.remove('access_token');
+            window.location.href = '/login/';
+        }
         let user_email = storage.get(cookie_token);
-        if(!user_email) window.location.href = '/login/';
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
@@ -122,6 +132,7 @@ class ReviewWrite extends React.Component {
                 <div className="reviewwrite">
                     <div className="review__write__box">
                         <div className="review__write__caption">리뷰쓰기</div>
+                        <div>리뷰작성 시 사진을 필수로 등록하셔야 합니다!!</div>
                         <textarea className="reviewwrite__context" id="reviewwrite__context"></textarea>
                     </div>
                     {/*

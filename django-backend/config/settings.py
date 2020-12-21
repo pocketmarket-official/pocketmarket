@@ -22,7 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-ALLOWED_HOSTS = ['0.0.0.0:8000', 'localhost', '127.0.0.1', 'Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com', '.elasticbeanstalk.com']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com',
+    '13.124.90.138'
+]
 
 # Application definition
 
@@ -185,8 +190,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000',
     'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000',
-    'http://localhost:8000',
-    'http://localhost:8000',
+    'http://13.124.90.138:3000',
+    'http://13.124.90.138:8000',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -230,6 +235,60 @@ if STATE == "local:start":
             },
         }
     }
+
+
+elif STATE == "local:dev":
+    DEBUG = True
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'pocketMarket_dev',
+            'USER': 'admin',
+            'PASSWORD': os.environ.get("DB_ADMIN_PASSWORD"),
+            'PORT': '3306',
+            'HOST': 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                # 'charset': 'utf8mb4',
+            },
+        }
+    }
+
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+elif STATE == "server:appDeploy":
+    DEBUG = True
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'pocketMarket_dev',
+            'USER': 'admin',
+            'PASSWORD': os.environ.get("DB_ADMIN_PASSWORD"),
+            'PORT': '3306',
+            'HOST': 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                # 'charset': 'utf8mb4',
+            },
+        }
+    }
+
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+
+
 
 elif STATE == "dev":
     DEBUG = True

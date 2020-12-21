@@ -12,32 +12,36 @@ import storage from "../storage";
 
 
 function makeTokenSaveScript(token) {
-    console.log("======3==========");
-    console.log(token);
-    console.log("======3==========");
-        let cookie_token = cookie.load("access_token");
-        let user_email = storage.get(cookie_token);
-        if(!user_email) window.location.href = '/login/';
-        let userId;
-
-        // if(!user_email) window.location.href = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/'; // URL EXCHANGE LOCAL
-        if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
-        // if(!user_email) window.location.href = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/'; // URL EXCHANGE SERVER
-        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
-            .then((res) => {
-                userId = res.data.find((elt) => {
-                    if (elt.email === user_email) {
-                        return true;
-                    }
-                }).id;
-            });
-        let transData = {"userId":userId, 'token':token};
-
-        // axios.post('http://localhost:8000/saveToken/', transData); //URL EXCHANGE LOCAL
-        axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
-        // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/saveToken/', transData) //URL EXCHANGE SERVER
+        // let cookie_token = cookie.load("access_token");
+        // if(!cookie_token){
+        //     window.location.href = '/login/';
+        // }
+        // else if(cookie_token==='guest') {
+        //     cookie.remove('access_token');
+        //     window.location.href = '/login/';
+        // }
+        //
+        // let user_email = storage.get(cookie_token);
+        // let userId;
+        //
+        // // if(!user_email) window.location.href = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/'; // URL EXCHANGE LOCAL
+        // if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
+        // // if(!user_email) window.location.href = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/'; // URL EXCHANGE SERVER
+        // //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
+        // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        // // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
+        //     .then((res) => {
+        //         userId = res.data.find((elt) => {
+        //             if (elt.email === user_email) {
+        //                 return true;
+        //             }
+        //         }).id;
+        //     });
+        // let transData = {"userId":userId, 'token':token};
+        //
+        // // axios.post('http://localhost:8000/saveToken/', transData); //URL EXCHANGE LOCAL
+        // axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
+        // // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/saveToken/', transData) //URL EXCHANGE SERVER
     }
 
 
@@ -93,6 +97,29 @@ class Order extends React.Component {
     }
 
     componentDidMount() {
+        let cookie_token = cookie.load("access_token");
+        if(!cookie_token){
+            window.location.href = '/login/';
+        }
+        else if(cookie_token==='guest') {
+            cookie.remove('access_token');
+            window.location.href = '/login/';
+        }
+        let user_email = storage.get(cookie_token);
+
+        let fcmToken = cookie.load("fcmToken");
+
+        if(fcmToken){
+            let transData = {"user_email":user_email, "fcmToken":fcmToken};
+
+            axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
+            // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/trade/', transData) //URL EXCHANGE SERVER
+                .then((res)=>{
+
+                });
+        }
+
+
         //axios.get("http://localhost:8000/api/stores_store/") //URL EXCHANGE LOCAL
         axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
         // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/") //URL EXCHANGE SERVER

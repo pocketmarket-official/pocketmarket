@@ -5,6 +5,7 @@ import StoreList from '../Components/js/StoreList';
 import bg from '../assets/store_grid/grid_top_bg.jpg';
 import axios from "axios";
 
+
 class StoreView extends React.Component {
     constructor(props) {
         super(props);
@@ -39,15 +40,15 @@ class StoreView extends React.Component {
                         return false;
                     }
                 );
-        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
-                    .then((res) => {
-                        this.setState({
-                            users: res.data,
-                            reviews: reviews,
-                        });
-                    });
+                //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
+                axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+                // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
+                            .then((res) => {
+                                this.setState({
+                                    users: res.data,
+                                    reviews: reviews,
+                                });
+                            });
             });
     }
 

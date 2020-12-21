@@ -39,27 +39,17 @@ from rest_framework.response import Response
 class KakaoException(Exception):
     pass
 
-
 def kakao_login(request):
     ''' use kakao oauth '''
-    # client_id = os.environ.get('KAKAO_KEY')
-    # # redirect_uri = 'http://localhost:8000/login/kakao/callback' #URL EXCHANGE
-    # redirect_uri = '/login/kakao/callback'
-    # return HttpResponseRedirect(
-    #     f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
-    # )
-
     client_id = os.environ.get('KAKAO_KEY')
-    # redirect_uri = 'http://localhost:8000/login/kakao/callback' #URL EXCHANGE
     state = os.environ.get('STATE')
 
     if state == 'local:start' or state == 'local:build':
-        # redirect_uri = 'http://localhost:8000/login/kakao/callback/' #URL EXCHANGE LOCAL
         redirect_uri = '/login/kakao/callback/' #URL EXCHANGE RELATIVE
-        # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback/' #URL EXCHANGE SERVER
     elif state == 'dev':
-        #redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback/'
         redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
+    elif state == 'server:appDeploy':
+        redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
 
     return HttpResponseRedirect(
         f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
@@ -68,25 +58,16 @@ def kakao_login(request):
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
     try:
-
-        # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
-        # firebase_admin.initialize_app(cred)
-        # device = FCMDevice.objects.all().first()
-
-
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
-        # redirect_uri = 'http://localhost:8000/login/kakao/callback' #URL EXCHANGE LOCAL
-        # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback' #URL EXCHANGE SERVER
         state = os.environ.get('STATE')
-        if state == 'local:start' or state == 'local:build':
-            # redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
-            redirect_uri = '/login/kakao/callback/'  # URL EXCHANGE RELATIVE
-            # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback' #URL EXCHANGE SERVER
+        if state == 'local:start' or state == 'local:build' or state == 'local:dev':
+            redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
         elif state == 'dev':
-            # redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/kakao/callback/'
             redirect_uri = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
+        elif state == 'server:appDeploy':
+            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -131,47 +112,47 @@ def kakao_callback(request):
                             photo_request = requests.get(picture)
                             user.profileImage.save(f"{name}_avatar", ContentFile(photo_request.content))
                     login(request, user)
-                    # return HttpResponseRedirect('http://localhost:3000/main') #URL EXCHANGE LOCAL
-                    # return HttpResponseRedirect('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/main') #URL EXCHANGE SERVER
-                    if state == 'local:start':
-                        # url = f'http://localhost:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE LOCAL
-                        url = f'/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
-                        # url = f'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/makingCookie/{access_token}/{email}' #URL EXCHANGE SERVER
+
+
+                    if state == 'local:start' or state == 'local:dev':
+                        url = f'http://localhost:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
                     elif state == 'local:build':
-                        url = 'http://localhost:8000/index/'
+                        url = 'http://localhost:3000/index/'
                     elif state == 'dev':
-                        #url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/index/'
                         url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/index/'
+                    elif state == 'server:appDeploy':
+                        url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
                     return HttpResponseRedirect(url)
                 else:
                     raise KakaoException()
     except KakaoException:
-        # return HttpResponseRedirect('http://localhost:3000/login') #URL EXCHANGE LOCAL
-        # return HttpResponseRedirect('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/login') #URL EXCHANGE SERVER
         if state == 'local:start':
-            # url = 'http://localhost:3000/login/'  # URL EXCHANGE LOCAL
             url = '/login/'  # URL EXCHANGE RELATIVE
-            # url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/login/' #URL EXCHANGE SERVER
         elif state == 'local:build':
             url = 'http://localhost:8000/login/'
         elif state == 'dev':
-            # url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/login/'
             url = 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
+        elif state == 'server:appDeploy':
+            url = 'http://13.124.90.138:8000/login/'
         return HttpResponseRedirect(url)
 
 
+@csrf_exempt
 def saveToken(request):
     try:
-        userId = json.loads(request.body)['userId']
-        token = json.loads(request.body)['token']
-        user = User.objects.get(id=userId)
-        print("--------4----------")
-        print(json.loads(request.body)['userId'])
-        print(json.loads(request.body)['token'])
-        print(user)
-        print("--------4----------")
+        user_email = json.loads(request.body)['user_email']
+        token = json.loads(request.body)['fcmToken']
+        user = User.objects.get(email=user_email)
+        iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
+                                                        defaults={
+                                                            'user': user,
+                                                            'registration_id': token
+                                                        })
+        user.iosToken = iosToken.registration_id
+        user.save()
 
-        FCMDevice.objects.create(user=user, registration_id=token)
+        return
+
     except Exception as ex:
         print(ex)
 
@@ -190,7 +171,9 @@ def trade(request):
         terminalId = '0001000200'
         vanCd = '11'
         # parameter fromrequest
-        storeCd = Store.objects.get(id=json.loads(request.body)['storeId']).storeCd
+        store = Store.objects.get(id=json.loads(request.body)['storeId'])
+        storeCd = store.storeCd
+        storeName = store.storeName
         user = User.objects.get(id=json.loads(request.body)['userId'])
         # storeCd = f'{json.loads(request.body)["storeCd"]:05}'
         posNo = '01'
@@ -512,11 +495,15 @@ def trade(request):
         data = {'url': '/order/status'} #URL EXCHANGE RELATIVE
         # data = {'url': 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/order/status'} #URL EXCHANGE SERVER
 
+
+        # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
+        # firebase_admin.initialize_app(cred)
+        # device = FCMDevice.objects.all().first()
+        device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
+        if(device) :
+            device.send_message("주문완료", storeName+'에 주문이 완료되었습니다.' )
+
         response = JsonResponse(data)
-
-        device = FCMDevice.objects.all().first()
-
-
         return response
 
     except Exception as ex:

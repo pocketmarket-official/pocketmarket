@@ -242,9 +242,20 @@ import search from "../assets/point_history/ico_search.png";
 import close from "../assets/order_status_pop/btn_close.png";
 import bill_icon from "../assets/order_status/btn_date.png";
 import bill from "../assets/order_history_apprv/img_receipt.jpg";
+import cookie from "react-cookies";
+import storage from "../storage";
 
 class OrderHistory extends React.Component {
     constructor(props) {
+        let cookie_token = cookie.load("access_token");
+        if(!cookie_token){
+            window.location.href = '/login/';
+        }
+        else if(cookie_token==='guest') {
+            cookie.remove('access_token');
+            window.location.href = '/login/';
+        }
+
         super(props);
         this.searchHistory = this.searchHistory.bind(this);
 

@@ -22,8 +22,15 @@ class OrderStatus extends React.Component {
 
     componentDidMount(){
         let cookie_token = cookie.load("access_token");
+        if(!cookie_token){
+            window.location.href = '/login/';
+        }
+        else if(cookie_token==='guest') {
+            cookie.remove('access_token');
+            window.location.href = '/login/';
+        }
+
         let user_email = storage.get(cookie_token);
-        if(!user_email) window.location.href = '/login/';
 
         // axios.get('http://localhost:8000/api/users_user/') //URL EXCHANGE LOCAL
         axios.get('/api/users_user/') // URL EXCHANGE RELATIVE
@@ -44,7 +51,7 @@ class OrderStatus extends React.Component {
                         }
                     });
                     // axios.get("http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE LOCAL
-                    axios.get("/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE RELATIVE
+                    axios.get("/api/trades_saleDetail/") //URL EXCHANGE RELATIVE
                     // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE SERVER
                     // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail/") //URL EXCHANGE SERVER
                     .then((res) => {
@@ -62,11 +69,12 @@ class OrderStatus extends React.Component {
                                     }
                                 }
                             }
-                            if(detail !== [] && elt.orderStatus == '6' && elt.orderStatus !== '7') {
+                            if(detail !== [] && elt.orderStatus !== '6' && elt.orderStatus !== '7') {
                                 elt["detail"] = detail;
                                 matched.push(elt);
                             }
                         });
+
                         this.setState({
                             userId:userId,
                             saleHeader: saleHeader,
@@ -107,6 +115,7 @@ class OrderStatus extends React.Component {
                     <div>loading...</div>
                     :
                     this.state.matched.map((elt) => {
+
                         let status;
                         let deleteButton;
                         let button;
@@ -145,7 +154,11 @@ class OrderStatus extends React.Component {
                             deleteButton = (<></>);
                             button = (
                                 <>
-                                    <div className="pickup active">
+                                    <Link to={{
+                                        pathname: `/order/complete/`,
+                                        state: {order: elt}
+                                    }}>
+                                        <div className="pickup active">
                                         <div className="pickup__message">
                                             주문한 음식을 수령하셨다면 픽업완료를 눌러주세요 ▶
                                         </div>
@@ -163,7 +176,8 @@ class OrderStatus extends React.Component {
                                             })
                                         }}>픽업완료
                                         </button>
-                                    </div>
+                                        </div>
+                                    </Link>
                                 </>
                             );
                         } else if(elt.orderStatus === '4' || elt.orderStatus === '5') {
