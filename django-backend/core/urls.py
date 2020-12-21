@@ -8,4 +8,5 @@ urlpatterns = [
     path("trade/", views.trade),
     path("saveToken/", views.saveToken),
     path("saveTokenStore/", views.saveTokenStore),
+    path("pushSend_makeComplete/", views.pushSend_makeComplete),
 ]
