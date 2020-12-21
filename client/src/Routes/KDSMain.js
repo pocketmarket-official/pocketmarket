@@ -2,7 +2,7 @@ import React from 'react';
 import bg from '../assets/kds/B_img.png';
 import timer from '../assets/kds/ic_timer.svg';
 import axios from 'axios';
-import Clock from 'react-live-clock';
+// import Clock from 'react-live-clock';
 import cookie from "react-cookies";
 
 class KDSMain extends React.Component{
