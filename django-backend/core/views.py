@@ -560,7 +560,7 @@ def pushSend_makeComplete(request):
         if(device):
             device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
 
-        return
+        return HttpResponse('success')
     except Exception as ex:
         print(ex)
 
