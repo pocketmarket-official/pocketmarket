@@ -314,7 +314,8 @@ class KDSMain extends React.Component{
                     //            secure: true,
                             });
 
-                            if(user_email && fcmToken){
+                            let fcmToken = cookie.load("fcmToken");
+                            if(storeCd && fcmToken){
                                 let transData = {"storeCd":storeCd, "fcmToken":fcmToken};
 
                                 axios.post('/saveTokenStore/', transData) //URL EXCHANGE RELATIVE
