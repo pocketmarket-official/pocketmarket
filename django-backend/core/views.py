@@ -518,7 +518,11 @@ def trade(request):
         # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
         # firebase_admin.initialize_app(cred)
         # device = FCMDevice.objects.all().first()
+        print('==1')
+        print(store.storeCd)
+        print(store.iosToken)
         device = FCMDevice.objects.filter(registration_id=store.iosToken).first()
+
         if(device) :
             device.send_message("주문수신", storeName+'에 주문이 수신되었습니다.' )
 
@@ -531,6 +535,10 @@ def trade(request):
 @csrf_exempt
 def pushSend_makeComplete(request):
     try:
+        print('==2')
+        print(json.loads(request.body)['storeName'])
+        print(json.loads(request.body)['userId'])
+
         storeName = json.loads(request.body)['storeName']
         user = User.objects.get(id=json.loads(request.body)['userId'])
         device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
