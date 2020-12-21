@@ -185,7 +185,7 @@ def saveTokenStore(request):
         store.iosToken = iosToken.registration_id
         store.save()
 
-        response = JsonResponse('200')
+        response = HttpResponse
         return response
 
     except Exception as ex:
