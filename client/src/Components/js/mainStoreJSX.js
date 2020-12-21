@@ -44,9 +44,7 @@ class StoreJSX extends React.Component {
                         return true;
                     }
                 }).id;
-                // axios.post("http://localhost:8000/storeLike/", {  //URL EXCHANGE LOCAL
                 axios.post("/storeLike/", { // URL EXCHANGE RELATIVE
-                // axios.post("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/storeLike/", { //URL EXCHANGE SERVER
                     "storeId": this.props.data.id,
                     "userId": userId,
                 })

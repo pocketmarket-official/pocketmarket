@@ -179,13 +179,15 @@ class KDSMain extends React.Component{
                                                     let id = elt.id;
                                                     let d = new Date();
                                                     let complete_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
-                                                axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
+                                                    axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
                                                         orderStatus: 3,
                                                         completeTime: complete_time,
                                                     })
                                                     .then(() => {
+                                                        console.log(elt);
+                                                        let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
                                                         console.log('==1');
-                                                        let transData = {"storeName":this.state.store.storeName, "userId":elt.userId};
+                                                        console.log(transData);
                                                         axios.post('/pushSend_makeComplete/', transData) //URL EXCHANGE RELATIVE
                                                             .then((res)=>{
                                                                 console.log('==2');
@@ -282,8 +284,8 @@ class KDSMain extends React.Component{
                     </div>
 
                     <div className="techCtl">
-                        <button className="myButton cnrStats">LABEL_CNR_STATS</button>
-                        <button className="myButton cnrStats">LABEL_SOLDOUT</button>
+                        {/*<button className="myButton cnrStats">LABEL_CNR_STATS</button>*/}
+                        {/*<button className="myButton cnrStats">LABEL_SOLDOUT</button>*/}
                     </div>
                     <div className="pageCtl">
                         {/*<button className="myButton">*/}
