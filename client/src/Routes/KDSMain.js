@@ -164,7 +164,7 @@ class KDSMain extends React.Component{
                         {/*<span>AM</span>*/}
                         <span><Clock format={"HH:mm:ss"} ticking={true} onChange={(res)=>
                         {
-                            this._timeTickling(res);
+                            // this._timeTickling(res);
                         }}/></span>
                     </div>
                 </div>
