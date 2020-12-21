@@ -69,17 +69,18 @@ class KDSMain extends React.Component{
         let storeCd = cookie.load("storeCd");
 
         if (!storeCd){
-            storeCd = prompt('점포코드를 입력하세요.');
-
-            const expires = new Date();
-            expires.setDate(expires.getDate() + 1);
-
-            cookie.save("storeCd", storeCd, {
-                path: '/',
-                expires: expires,
-    //            httpOnly: true,
-    //            secure: true,
-            });
+            window.location.href = 'kds/insertStoreCd/';
+    //         storeCd = prompt('점포코드를 입력하세요.');
+    //
+    //         const expires = new Date();
+    //         expires.setDate(expires.getDate() + 1);
+    //
+    //         cookie.save("storeCd", storeCd, {
+    //             path: '/',
+    //             expires: expires,
+    // //            httpOnly: true,
+    // //            secure: true,
+    //         });
         }
         this.setState({storeCd});
 
@@ -94,18 +95,19 @@ class KDSMain extends React.Component{
                     }
                 });
                 if(!store) {
-                    let storeCd = prompt('사용 불가능한 점포코드입니다. 점포코드 확인 부탁드려요!.');
-                    const expires = new Date();
-                    expires.setDate(expires.getDate() + 1);
-
-                    cookie.save("storeCd", storeCd, {
-                        path: '/',
-                        expires: expires,
-            //            httpOnly: true,
-            //            secure: true,
-                    });
-
-                    window.location.reload();
+                    window.location.href='/kds/insertStoreCd';
+            //         let storeCd = prompt('사용 불가능한 점포코드입니다. 점포코드 확인 부탁드려요!.');
+            //         const expires = new Date();
+            //         expires.setDate(expires.getDate() + 1);
+            //
+            //         cookie.save("storeCd", storeCd, {
+            //             path: '/',
+            //             expires: expires,
+            // //            httpOnly: true,
+            // //            secure: true,
+            //         });
+            //
+            //         window.location.reload();
                     }
                         // axios.get("http://localhost:8000/api/trades_saleHeader/") // URl EXCHANGE LOCAL
                         axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
