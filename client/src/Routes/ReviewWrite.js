@@ -53,8 +53,6 @@ class ReviewWrite extends React.Component {
             form_data.append(`img${j + 1}`, this.state.image[i][0]);
         }
 
-        if(!this.state.image) return false;
-
         // axios.post('http://localhost:8000/api/reviews_review/', form_data, { //URL EXCHANGE LOCAL
         axios.post('/api/reviews_review/', form_data, { //URL EXCHANGE RELATIVE
         // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/reviews_review/', form_data, { //URL EXCHANGE SERVER
@@ -107,6 +105,7 @@ class ReviewWrite extends React.Component {
             window.location.href = '/login/';
         }
         else if(cookie_token==='guest') {
+            localStorage.removeItem(cookie_token);
             cookie.remove('access_token');
             window.location.href = '/login/';
         }

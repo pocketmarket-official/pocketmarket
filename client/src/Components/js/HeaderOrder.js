@@ -16,7 +16,7 @@ export default function HeaderOrder({storeName}) {
                 <div className="waiting__txt">대기인원</div>
                 <div className="waiting__num">12명</div>
             </div>
-            <img className="header__alarm" src={btnAlarm} alt="alarm" />
+            {/*<img className="header__alarm" src={btnAlarm} alt="alarm" />*/}
         </div>
     );
 }

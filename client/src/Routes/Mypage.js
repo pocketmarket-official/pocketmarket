@@ -7,6 +7,7 @@ import cookie from "react-cookies";
 
 function Mypage() {
     const logOut = (res) => {
+        localStorage.removeItem(cookie.load("access_token"));
         cookie.remove('access_token');
         window.location.href = '/login/';
     };
