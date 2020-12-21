@@ -32,7 +32,7 @@ class InsertStoreCd extends React.Component{
 
             axios.post('/saveTokenStore/', transData) //URL EXCHANGE RELATIVE
                 .then((res)=>{
-                    window.location.href('/kds/main');
+                    document.location.href='/kds/main';
                 });
         } else {
             document.location.href = '/kds/main';

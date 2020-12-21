@@ -116,7 +116,6 @@ class Order extends React.Component {
             let transData = {"user_email":user_email, "fcmToken":fcmToken};
 
             axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
-            // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/trade/', transData) //URL EXCHANGE SERVER
                 .then((res)=>{
 
                 });
