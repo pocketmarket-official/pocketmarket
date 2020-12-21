@@ -141,18 +141,18 @@ def kakao_callback(request):
 def saveToken(request):
     try:
         print('==4')
-        print(json.loads(request.body)['user_email'])
-        print(json.loads(request.body)['fcmToken'])
-        user_email = json.loads(request.body)['user_email']
-        token = json.loads(request.body)['fcmToken']
-        user = User.objects.get(email=user_email)
-        iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
-                                                        defaults={
-                                                            'user': user,
-                                                            'registration_id': token
-                                                        })
-        user.iosToken = iosToken.registration_id
-        user.save()
+        # print(json.loads(request.body)['user_email'])
+        # print(json.loads(request.body)['fcmToken'])
+        # user_email = json.loads(request.body)['user_email']
+        # token = json.loads(request.body)['fcmToken']
+        # user = User.objects.get(email=user_email)
+        # iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
+        #                                                 defaults={
+        #                                                     'user': user,
+        #                                                     'registration_id': token
+        #                                                 })
+        # user.iosToken = iosToken.registration_id
+        # user.save()
 
         return
 
