@@ -29,41 +29,41 @@ class KDSMain extends React.Component{
         // this._timeTickling = this._timeTickling.bind(this);
     }
 
-    _timeTickling(current){
-        let tmpMatched = [];
-        let curDttm = new Date(current);
-        let curYear = curDttm.getFullYear();
-        let curMonth = curDttm.getMonth()+1;
-        let curDate = curDttm.getDate();
-        let curHour = curDttm.getHours();
-        let curMinute = curDttm.getMinutes();
-        let curSec = curDttm.getSeconds();
-
-        this.state.matched.forEach(elt=>{
-            if(!elt || !elt.detail[0]) return false;
-            let saleDate = elt.saleDt;
-            let saleTime = elt.detail[0].saleTime;
-            let ordYear = saleDate.slice(0,4);
-            let ordMonth = saleDate.slice(4,6);
-            let ordDate = saleDate.slice(6,8);
-            let ordHour = saleTime.slice(0,2);
-            let ordMinute = saleTime.slice(2,4);
-            let ordSec = saleTime.slice(4,6);
-            let ordDttm = new Date(ordYear, ordMonth-1, ordDate, ordHour, ordMinute, ordSec, 0);
-
-            let timelaps = Math.abs(curDttm - ordDttm) / 1000;
-            let daylaps = Math.floor(timelaps / 86400);
-            let hourlaps = Math.floor(timelaps / 3600) % 24;
-            let minutelaps = Math.floor(timelaps / 60);
-            let seclaps = timelaps % 60;
-
-            elt.timeLaps = minutelaps;
-
-            tmpMatched.push(elt);
-        });
-
-        this.setState({matched : tmpMatched});
-    }
+    // _timeTickling(current){
+    //     let tmpMatched = [];
+    //     let curDttm = new Date(current);
+    //     let curYear = curDttm.getFullYear();
+    //     let curMonth = curDttm.getMonth()+1;
+    //     let curDate = curDttm.getDate();
+    //     let curHour = curDttm.getHours();
+    //     let curMinute = curDttm.getMinutes();
+    //     let curSec = curDttm.getSeconds();
+    //
+    //     this.state.matched.forEach(elt=>{
+    //         if(!elt || !elt.detail[0]) return false;
+    //         let saleDate = elt.saleDt;
+    //         let saleTime = elt.detail[0].saleTime;
+    //         let ordYear = saleDate.slice(0,4);
+    //         let ordMonth = saleDate.slice(4,6);
+    //         let ordDate = saleDate.slice(6,8);
+    //         let ordHour = saleTime.slice(0,2);
+    //         let ordMinute = saleTime.slice(2,4);
+    //         let ordSec = saleTime.slice(4,6);
+    //         let ordDttm = new Date(ordYear, ordMonth-1, ordDate, ordHour, ordMinute, ordSec, 0);
+    //
+    //         let timelaps = Math.abs(curDttm - ordDttm) / 1000;
+    //         let daylaps = Math.floor(timelaps / 86400);
+    //         let hourlaps = Math.floor(timelaps / 3600) % 24;
+    //         let minutelaps = Math.floor(timelaps / 60);
+    //         let seclaps = timelaps % 60;
+    //
+    //         elt.timeLaps = minutelaps;
+    //
+    //         tmpMatched.push(elt);
+    //     });
+    //
+    //     this.setState({matched : tmpMatched});
+    // }
 
     componentDidMount(){
         let storeCd = cookie.load("storeCd");
