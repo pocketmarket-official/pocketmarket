@@ -110,7 +110,9 @@ class Order extends React.Component {
 
         let fcmToken = cookie.load("fcmToken");
 
+        console.log(fcmToken);
         if(fcmToken){
+            console.log(user_email);
             let transData = {"user_email":user_email, "fcmToken":fcmToken};
 
             axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
