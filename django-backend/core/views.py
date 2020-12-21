@@ -140,6 +140,9 @@ def kakao_callback(request):
 @csrf_exempt
 def saveToken(request):
     try:
+        print('==4')
+        print(json.loads(request.body)['user_email'])
+        print(json.loads(request.body)['fcmToken'])
         user_email = json.loads(request.body)['user_email']
         token = json.loads(request.body)['fcmToken']
         user = User.objects.get(email=user_email)
@@ -159,6 +162,9 @@ def saveToken(request):
 @csrf_exempt
 def saveTokenStore(request):
     try:
+        print('==3')
+        print(json.loads(request.body)['storeCd'])
+        print(json.loads(request.body)['fcmToken'])
         storeCd = json.loads(request.body)['storeCd']
         token = json.loads(request.body)['fcmToken']
         store = Store.objects.get(storeCd=storeCd)
