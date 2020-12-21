@@ -132,7 +132,12 @@ class ReviewWrite extends React.Component {
                 <div className="reviewwrite">
                     <div className="review__write__box">
                         <div className="review__write__caption">리뷰쓰기</div>
-                        <div>리뷰작성 시 사진을 필수로 등록하셔야 합니다!!</div>
+                        {
+                            this.state.image.length === 0 ?
+                            <div>리뷰작성 시 사진을 필수로 등록하셔야 합니다!!</div>
+                            :
+                            null
+                        }
                         <textarea className="reviewwrite__context" id="reviewwrite__context"></textarea>
                     </div>
                     {/*
@@ -183,7 +188,12 @@ class ReviewWrite extends React.Component {
                             </div>
                             <div className="underline"/>
                             <input type="submit" value="submit" id="review__submit" hidden/>
-                            <div className="submit" onClick={() => this.handleSubmit()}>등록하기</div>
+                            {
+                                this.state.image.length === 0 ?
+                                <div className="submit__off">등록하기</div>
+                                :
+                                <div className="submit" onClick={() => this.handleSubmit()}>등록하기</div>
+                            }
                         </div>
                     </div>
                 </div>

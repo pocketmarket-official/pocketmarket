@@ -168,6 +168,21 @@
         text-align: center;
         color: #ffa800;
       }
+      .submit__off {
+        border-radius: 15px;
+        background-color: #AEAEB2;
+
+        width: 99px;
+        height: 51px;
+        margin: auto;
+        font-family: 'Nanum Gothic', sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 51px;
+        letter-spacing: 0.68px;
+        text-align: center;
+        color: #f2f2f2;
+      }
     }
   }
 }
