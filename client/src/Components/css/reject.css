@@ -1,0 +1,39 @@
+.reject {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.reject .reject__box {
+    margin: auto auto;
+    width: 100%;
+}
+.reject .reject__box .reject__message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.reject .reject__box .reject__message .message__message {
+    font-family: MaplestoryOTFLight;
+    font-size: 18px;
+}
+.reject .reject__box .reject__message .reject__exclamation {
+    margin-bottom: 50px;
+    color: gray;
+}
+.reject .reject__box .reject__button {
+    font-family: MaplestoryOTFLight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d73434;
+    color: #ffffff;
+    width: 50%;
+    height: 50px;
+    margin: 0 auto;
+    font-weight: 600;
+    border-radius: 15px;
+    box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22);
+    margin-top: 30px;
+}
