@@ -19,6 +19,7 @@ class KDSMain extends React.Component{
             store: '',
             saleDetail: [],
             matched: [],
+            tmpMatched: [],
             loading: true,
             year: year,
             month: month,
@@ -39,7 +40,7 @@ class KDSMain extends React.Component{
         let curSec = curDttm.getSeconds();
 
         this.state.matched.forEach(elt=>{
-            if(!elt || elt.detail[0]) return false;
+            if(!elt || !elt.detail[0]) return false;
             let saleDate = elt.saleDt;
             let saleTime = elt.detail[0].saleTime;
             let ordYear = saleDate.slice(0,4);
@@ -57,6 +58,7 @@ class KDSMain extends React.Component{
             let seclaps = timelaps % 60;
 
             elt.timeLaps = minutelaps;
+
             tmpMatched.push(elt);
         });
 

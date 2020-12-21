@@ -26,31 +26,27 @@ class OrderStatus extends React.Component {
             window.location.href = '/login/';
         }
         else if(cookie_token==='guest') {
+            localStorage.removeItem(cookie_token);
             cookie.remove('access_token');
             window.location.href = '/login/';
         }
 
         let user_email = storage.get(cookie_token);
 
-        // axios.get('http://localhost:8000/api/users_user/') //URL EXCHANGE LOCAL
         axios.get('/api/users_user/') // URL EXCHANGE RELATIVE
-        // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/') //URL EXCHANGE SERVER
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
                 }).id;
-                // axios.get('http://localhost:8000/api/trades_saleHeader/') //URL EXCHANGE LOCAL
                 axios.get('/api/trades_saleHeader/') //URL EXCHANGE RELATIVE
-                // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/') //URL EXCHANGE SERVER
                 .then((res) => {
                     let saleHeader = res.data.filter((elt) => {
                         if(elt.user === userId){
                             return true;
                         }
                     });
-                    // axios.get("http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE LOCAL
                     axios.get("/api/trades_saleDetail/") //URL EXCHANGE RELATIVE
                     // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE SERVER
                     // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail/") //URL EXCHANGE SERVER

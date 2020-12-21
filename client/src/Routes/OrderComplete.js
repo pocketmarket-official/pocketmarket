@@ -14,6 +14,7 @@ class OrderComplete extends React.Component{
             window.location.href = '/login/';
         }
         else if(cookie_token==='guest') {
+            localStorage.removeItem(cookie_token);
             cookie.remove('access_token');
             window.location.href = '/login/';
         }
