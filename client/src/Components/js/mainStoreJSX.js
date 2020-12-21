@@ -160,7 +160,9 @@ class StoreJSX extends React.Component {
                                                 }
                                             }
                                         }
-                                    }}><span className="likes__heart">♥</span> {this.state.like}</button>
+                                    }}>
+                                        <span className="likes__heart">♥</span> {this.state.like}
+                                    </button>
                                     :
                                     null
                                 }

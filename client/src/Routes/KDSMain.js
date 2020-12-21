@@ -191,9 +191,17 @@ class KDSMain extends React.Component{
                                                         completeTime: complete_time,
                                                     })
                                                     .then(() => {
-                                                        window.location.reload();
+                                                        console.log('==1');
+                                                        console.log(transData);
+                                                        let transData = {"storeName":this.state.store.storeName, "userId":elt.userId};
+                                                        axios.post('/pushSend_makeComplete/', transData) //URL EXCHANGE RELATIVE
+                                                            .then((res)=>{
+                                                                console.log('==2');
+                                                                window.location.reload();
+                                                            });
                                                     })
                                                 }}>
+
                                                 <div className="orderWrap">
                                                     <div className="orderHeader">
                                                         <div className="wrap">
@@ -305,6 +313,16 @@ class KDSMain extends React.Component{
                     //            httpOnly: true,
                     //            secure: true,
                             });
+
+                            if(user_email && fcmToken){
+                                let transData = {"storeCd":storeCd, "fcmToken":fcmToken};
+
+                                axios.post('/saveTokenStore/', transData) //URL EXCHANGE RELATIVE
+                                // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/trade/', transData) //URL EXCHANGE SERVER
+                                    .then((res)=>{
+
+                                    });
+                            }
                             window.location.reload();
                             }}>매장변경</buton>
                         {

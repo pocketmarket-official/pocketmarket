@@ -134,6 +134,7 @@ class Order extends React.Component {
                 }
             );
             let storeId = store.id;
+            let storeCd = store.storeCd;
             let brandCd = store.brandCd;
             // axios.get("http://localhost:8000/api/stores_pos/") // URL EXCHANGE LOCAL
             axios.get("/api/stores_pos/") // URL EXCHANGE RELATIVE
@@ -171,16 +172,16 @@ class Order extends React.Component {
                                 }
                             }
                         );
-                        axios.get("/api/trades_saleHeader")
+                        axios.get("/api/trades_saleHeader/")
                             .then((res) => {
                                let count = res.data.filter(
                                    (elt) => {
-                                        if(elt.storeCd === arr[1] && elt.orderStatus === '2'){
+                                        if(elt.storeCd === storeCd && elt.orderStatus === '2'){
                                             return true;
                                         }
                                    }
                                ).length;
-                               document.element.getId('waitingCount').innerHTML = count;
+                               document.getElementById('waitingCount').innerHTML = count+' 명';
                             });
 
                         this.setState({

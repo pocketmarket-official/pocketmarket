@@ -50,6 +50,7 @@ class QuestionWrite extends React.Component {
             }
         })
             .then(res => {
+                window.location.href = '/index'
             })
             .catch(err => console.log(err))
     };

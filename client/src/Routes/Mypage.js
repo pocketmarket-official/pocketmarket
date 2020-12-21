@@ -4,33 +4,75 @@ import HeaderBiz from '../Components/js/HeaderBiz';
 import logout from '../assets/my_page/ico_logout.png';
 import store from '../assets/my_page/ico_store.png';
 import cookie from "react-cookies";
+import storage from "../storage";
+import axios from "axios";
 
-function Mypage() {
-    const logOut = (res) => {
+class Mypage extends React.Component {
+    constructor(props){
+        super(props);
+        this.logOut = this.logOut.bind(this);
+
+        this.state = {
+            user: '',
+        }
+    }
+
+    logOut() {
         localStorage.removeItem(cookie.load("access_token"));
         cookie.remove('access_token');
         window.location.href = '/login/';
     };
 
-    return (
-        <>
-            <HeaderBiz/>
+    componentDidMount() {
+        let cookie_token = cookie.load("access_token");
+        let user_email;
+        if (!cookie_token) {
+            window.location.href = '/login/';
+        } else if (cookie_token === 'guest') {
+            user_email = 'pocketmarket.official@gmail.com'
+        } else {
+            user_email = storage.get(cookie_token);
+        }
+
+        axios.get('/api/users_user/') // URL EXCHANGE RELATIVE
+            .then((res) => {
+                let user = res.data.find((elt) => {
+                    if (elt.email === user_email) {
+                        return true;
+                    }
+                });
+                this.setState({user});
+            });
+    }
+
+    render(){
+        return(
+            <>
+                <HeaderBiz/>
             <div className="mypage">
                 <div className="mypage__box">
                     <div className="mypage__list"><Link to="/mypage/collections">포켓마켓도감</Link><p>{">"}</p></div>
                     {/*<div className="mypage__list"><Link to="/mypage/myplace">주소관리</Link><p>{">"}</p></div>*/}
                     {/*<div className="mypage__list"><Link to="/mypage/order">주문 / 결제 이력</Link><p>{">"}</p></div>*/}
                     {/*<div className="mypage__list"><Link to="/mypage/point">포인트 / 좋아요 이력</Link><p>{">"}</p></div>*/}
-                    <div className="mypage__list"><Link to="/review">리뷰 목록</Link><p>{">"}</p></div>
-                    <div className="mypage__list"><Link to="/mypage/questions">문의 하기</Link><p>{">"}</p></div>
+                    {/*<div className="mypage__list"><Link to="/review">리뷰 목록</Link><p>{">"}</p></div>*/}
+                    <div className="mypage__list"><Link to="/mypage/questions/write">문의 하기</Link><p>{">"}</p></div>
                 </div>
                 <div className="setting__box">
-                    <div className="setting__list"><Link to="/kds/main">점주 페이지</Link><img src={store}/></div>
-                    <div className="setting__list"><p onClick={logOut}>로그아웃</p><img src={logout}/></div>
+                    {
+                        this.state.user.bizYn === 'Y'?
+                            <>
+                                <div className="setting__list"><Link to="/kds/main">점주 페이지</Link><img src={store}/></div>
+                            </>
+                            :
+                            null
+                    }
+                    <div className="setting__list"><p onClick={()=>this.logOut()}>로그아웃</p><img src={logout}/></div>
                 </div>
             </div>
-        </>
-        );
+            </>
+        )
+    }
 }
 
 export default Mypage;
