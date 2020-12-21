@@ -30,7 +30,7 @@ class InsertStoreCd extends React.Component{
         if(storeCd && fcmToken){
             let transData = {"storeCd":storeCd, "fcmToken":fcmToken};
 
-            axios.post('http://13.124.90.138:8000/saveTokenStore/', transData) //URL EXCHANGE RELATIVE
+            axios.post('/saveTokenStore/', transData) //URL EXCHANGE RELATIVE
                 .then((res)=>{
                     window.location.href('/kds/main');
                 });
