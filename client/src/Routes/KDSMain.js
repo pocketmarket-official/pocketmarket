@@ -315,6 +315,9 @@ class KDSMain extends React.Component{
                             });
 
                             let fcmToken = cookie.load("fcmToken");
+                            console.log('==3');
+                            console.log(storeCd);
+                            console.log(fcmToken);
                             if(storeCd && fcmToken){
                                 let transData = {"storeCd":storeCd, "fcmToken":fcmToken};
 
