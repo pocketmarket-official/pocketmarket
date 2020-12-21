@@ -2,7 +2,7 @@ import React from 'react';
 import bg from '../assets/kds/B_img.png';
 import timer from '../assets/kds/ic_timer.svg';
 import axios from 'axios';
-// import Clock from 'react-live-clock';
+import Clock from 'react-live-clock';
 import cookie from "react-cookies";
 
 class KDSMain extends React.Component{
@@ -26,44 +26,44 @@ class KDSMain extends React.Component{
             day: day
         };
 
-        // this._timeTickling = this._timeTickling.bind(this);
+        this._timeTickling = this._timeTickling.bind(this);
     }
 
-    // _timeTickling(current){
-    //     let tmpMatched = [];
-    //     let curDttm = new Date(current);
-    //     let curYear = curDttm.getFullYear();
-    //     let curMonth = curDttm.getMonth()+1;
-    //     let curDate = curDttm.getDate();
-    //     let curHour = curDttm.getHours();
-    //     let curMinute = curDttm.getMinutes();
-    //     let curSec = curDttm.getSeconds();
-    //
-    //     this.state.matched.forEach(elt=>{
-    //         if(!elt || !elt.detail[0]) return false;
-    //         let saleDate = elt.saleDt;
-    //         let saleTime = elt.detail[0].saleTime;
-    //         let ordYear = saleDate.slice(0,4);
-    //         let ordMonth = saleDate.slice(4,6);
-    //         let ordDate = saleDate.slice(6,8);
-    //         let ordHour = saleTime.slice(0,2);
-    //         let ordMinute = saleTime.slice(2,4);
-    //         let ordSec = saleTime.slice(4,6);
-    //         let ordDttm = new Date(ordYear, ordMonth-1, ordDate, ordHour, ordMinute, ordSec, 0);
-    //
-    //         let timelaps = Math.abs(curDttm - ordDttm) / 1000;
-    //         let daylaps = Math.floor(timelaps / 86400);
-    //         let hourlaps = Math.floor(timelaps / 3600) % 24;
-    //         let minutelaps = Math.floor(timelaps / 60);
-    //         let seclaps = timelaps % 60;
-    //
-    //         elt.timeLaps = minutelaps;
-    //
-    //         tmpMatched.push(elt);
-    //     });
-    //
-    //     this.setState({matched : tmpMatched});
-    // }
+    _timeTickling(current){
+        let tmpMatched = [];
+        let curDttm = new Date(current);
+        let curYear = curDttm.getFullYear();
+        let curMonth = curDttm.getMonth()+1;
+        let curDate = curDttm.getDate();
+        let curHour = curDttm.getHours();
+        let curMinute = curDttm.getMinutes();
+        let curSec = curDttm.getSeconds();
+
+        this.state.matched.forEach(elt=>{
+            if(!elt || !elt.detail[0]) return false;
+            let saleDate = elt.saleDt;
+            let saleTime = elt.detail[0].saleTime;
+            let ordYear = saleDate.slice(0,4);
+            let ordMonth = saleDate.slice(4,6);
+            let ordDate = saleDate.slice(6,8);
+            let ordHour = saleTime.slice(0,2);
+            let ordMinute = saleTime.slice(2,4);
+            let ordSec = saleTime.slice(4,6);
+            let ordDttm = new Date(ordYear, ordMonth-1, ordDate, ordHour, ordMinute, ordSec, 0);
+
+            let timelaps = Math.abs(curDttm - ordDttm) / 1000;
+            let daylaps = Math.floor(timelaps / 86400);
+            let hourlaps = Math.floor(timelaps / 3600) % 24;
+            let minutelaps = Math.floor(timelaps / 60);
+            let seclaps = timelaps % 60;
+
+            elt.timeLaps = minutelaps;
+
+            tmpMatched.push(elt);
+        });
+
+        this.setState({matched : tmpMatched});
+    }
 
     componentDidMount(){
         let storeCd = cookie.load("storeCd");
@@ -85,9 +85,7 @@ class KDSMain extends React.Component{
         this.setState({storeCd});
 
 
-        // axios.get('http://localhost:8000/api/stores_store/') // URL EXCHANGE LOCAL
         axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
-        // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/') // URL EXCHANGE SERVER
             .then((res)=> {
                 let store = res.data.find((elt) => {
                     if(elt.storeCd === this.state.storeCd){
@@ -109,9 +107,7 @@ class KDSMain extends React.Component{
             //
             //         window.location.reload();
                     }
-                        // axios.get("http://localhost:8000/api/trades_saleHeader/") // URl EXCHANGE LOCAL
                         axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
-                        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
                             .then((res)=> {
                                 let saleHeader = res.data.filter((elt) => {
                                     if (elt.storeCd === this.state.storeCd) {
@@ -119,10 +115,7 @@ class KDSMain extends React.Component{
                                     }
                                 });
 
-                                // axios.get('http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE LOCAL
                                 axios.get('/api/trades_saleDetail/') //URL EXCHANGE RELATIVE
-                                // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE SERVER
-                                // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail/') //URL EXCHANGE SERVER
                                     .then((res) => {
                                         let matched = [];
                                         // sale dt 기준으로 정렬되어있는 데이터
@@ -163,11 +156,11 @@ class KDSMain extends React.Component{
                     </div>
                     <div>
                         <span>{this.state.year}.{this.state.month}.{this.state.day}</span>
-                        {/*<span>AM</span>*/}
-                        {/*<span><Clock format={"HH:mm:ss"} ticking={true} onChange={(res)=>*/}
-                        {/*{*/}
-                        {/*    // this._timeTickling(res);*/}
-                        {/*}}/></span>*/}
+                        <span>AM</span>
+                        <span><Clock format={"HH:mm:ss"} ticking={true} onChange={(res)=>
+                        {
+                            this._timeTickling(res);
+                        }}/></span>
                     </div>
                 </div>
                 <div className="body">
@@ -186,15 +179,12 @@ class KDSMain extends React.Component{
                                                     let id = elt.id;
                                                     let d = new Date();
                                                     let complete_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
-                                                    // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE LOCAL
                                                 axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
-                                                // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
                                                         orderStatus: 3,
                                                         completeTime: complete_time,
                                                     })
                                                     .then(() => {
                                                         console.log('==1');
-                                                        console.log(transData);
                                                         let transData = {"storeName":this.state.store.storeName, "userId":elt.userId};
                                                         axios.post('/pushSend_makeComplete/', transData) //URL EXCHANGE RELATIVE
                                                             .then((res)=>{
@@ -347,9 +337,7 @@ class KDSMain extends React.Component{
                                     <buton className="myButton soldout" onClick={(e) => {
                                         e.preventDefault();
                                         let store = this.state.store;
-                                        // axios.put(`http://localhost:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE LOCAL
                                         axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
-                                        // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
                                                     openYn: 'N',
                                                 });
                                         store.openYn = 'N';
@@ -361,9 +349,7 @@ class KDSMain extends React.Component{
                                     <buton className="myButton active" onClick={(e) => {
                                         e.preventDefault();
                                         let store = this.state.store;
-                                        // axios.put(`http://localhost:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE LOCAL
                                         axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
-                                        // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
                                                     openYn: 'Y',
                                                 });
                                         store.openYn = 'Y';
