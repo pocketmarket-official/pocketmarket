@@ -26,7 +26,7 @@ class KDSMain extends React.Component{
             day: day
         };
 
-        this._timeTickling = this._timeTickling.bind(this);
+        // this._timeTickling = this._timeTickling.bind(this);
     }
 
     _timeTickling(current){
@@ -301,34 +301,44 @@ class KDSMain extends React.Component{
                         {/*    <span>1/2</span>*/}
                         {/*</div>*/}
                         {/*<button className="myButton active">다음</button>*/}
-                        <buton className="myButton" onClick={(e) => {
-                            e.preventDefault();
-                            let storeCd = prompt('매장코드를 입력해주세요.');
-                            const expires = new Date();
-                            expires.setDate(expires.getDate() + 1);
 
-                            cookie.save("storeCd", storeCd, {
-                                path: '/',
-                                expires: expires,
-                    //            httpOnly: true,
-                    //            secure: true,
-                            });
 
-                            let fcmToken = cookie.load("fcmToken");
-                            console.log('==3');
-                            console.log(storeCd);
-                            console.log(fcmToken);
-                            if(storeCd && fcmToken){
-                                let transData = {"storeCd":storeCd, "fcmToken":fcmToken};
+                    {/********************************************/}
+                    {/*********20201222 Jhonny cloche Ma**********/}
+                    {/*매장변경 원본. hybrid app에서 prompt안먹어서 변경.*/}
+                    {/********************************************/}
+                    {/*    <buton className="myButton" onClick={(e) => {*/}
+                    {/*        e.preventDefault();*/}
+                    {/*        let storeCd = prompt('매장코드를 입력해주세요.');*/}
+                    {/*        const expires = new Date();*/}
+                    {/*        expires.setDate(expires.getDate() + 1);*/}
 
-                                axios.post('/saveTokenStore/', transData) //URL EXCHANGE RELATIVE
-                                // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/trade/', transData) //URL EXCHANGE SERVER
-                                    .then((res)=>{
+                    {/*        cookie.save("storeCd", storeCd, {*/}
+                    {/*            path: '/',*/}
+                    {/*            expires: expires,*/}
+                    {/*//            httpOnly: true,*/}
+                    {/*//            secure: true,*/}
+                    {/*        });*/}
 
-                                    });
-                            }
-                            window.location.reload();
-                            }}>매장변경</buton>
+                    {/*        let fcmToken = cookie.load("fcmToken");*/}
+                    {/*        console.log('==3');*/}
+                    {/*        console.log(storeCd);*/}
+                    {/*        console.log(fcmToken);*/}
+                    {/*        if(storeCd && fcmToken){*/}
+                    {/*            let transData = {"storeCd":storeCd, "fcmToken":fcmToken};*/}
+
+                    {/*            axios.post('/saveTokenStore/', transData) //URL EXCHANGE RELATIVE*/}
+                    {/*            // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/trade/', transData) //URL EXCHANGE SERVER*/}
+                    {/*                .then((res)=>{*/}
+
+                    {/*                });*/}
+                    {/*        }*/}
+                    {/*        window.location.reload();*/}
+                    {/*        }}>매장변경</buton>*/}
+
+                        <a href="/kds/insertStoreCd">
+                            <buton className="myButton">매장변경</buton>
+                        </a>
                         {
                             this.state.store.openYn == 'Y' ?
                                 <>
