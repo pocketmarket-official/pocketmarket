@@ -31,7 +31,8 @@ function Intro({authenticated, location}) {
             let redirect_uri = 'http://localhost:8000/login/kakao/callback/';
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'dev') {
-            url = "http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/";
+            let redirect_uri = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/';
+            url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'server:appDeploy') {
             let redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
@@ -46,7 +47,7 @@ function Intro({authenticated, location}) {
         } else if(process.env.REACT_APP_STATE === 'local:dev') {
             url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
         } else if(process.env.REACT_APP_STATE === 'dev') {
-            url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
+            url = "http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/";
         } else if(process.env.REACT_APP_STATE === 'server:appDeploy') {
             url =  'http://13.124.90.138:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
         }
