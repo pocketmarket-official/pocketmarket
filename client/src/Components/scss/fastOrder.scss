@@ -9,8 +9,8 @@
   flex-direction: column;
   position: relative;
   .nicemaster {
+    width: 95%;
     margin : 5px auto;
-    width: 398px;
     height: 30px;
     border-radius: 10px;
     background-color: #b4022f;
@@ -35,7 +35,7 @@
       border-right: solid 2px #b4022f;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
-      justify-content: flex-end;
+      justify-content: center;
       margin-left: 9px;
       .region__box {
         font-family: Nanum Gothic, sans-serif;
@@ -113,19 +113,17 @@
     display: grid;
     box-sizing: border-box;
     overflow: scroll;
-    grid-template-columns: 98px 98px 98px 98px;
-
+    grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+    grid-template-rows: minmax(100px, auto);
     margin: 12px 10px;
 
-
     .store__grid {
-
       position: relative;
       padding: 5.5px;
 
       .store__image{
-        width: 87px;
-        height: 87px;
+        width: 100%;
+        height: 100%;
       }
       .mark {
         position: absolute;
