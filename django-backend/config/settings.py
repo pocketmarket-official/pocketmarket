@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com',
+    'pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com',
     '13.124.90.138'
 ]
 
