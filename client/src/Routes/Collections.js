@@ -20,13 +20,11 @@ class Collections extends React.Component {
     componentDidMount() {
         axios.get("/api/stores_store/")
         .then((res) => {
-            console.log(res.data);
             this.setState({ stores: res.data })
-        })
+        });
     }
 
     render() {
-        console.log(this.state.stores);
         return (
             <>
                 <HeaderBack url='/mypage' />

@@ -135,7 +135,7 @@
 //
 // export default QuestionsHistory;
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import QuestionResult from '../Components/js/QuestionResult';
@@ -152,21 +152,11 @@ class QuestionsHistory extends React.Component {
     constructor(props) {
         super(props);
         this.searchHistory = this.searchHistory.bind(this);
+        this.getDateStr = this.getDateStr.bind(this);
 
         let today = new Date();
-        let month = today.getMonth();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(month + 1).padStart(2, '0');
-        let yyyy = today.getFullYear();
-        today = yyyy + '-' + mm + '-' + dd;
-        if(month === 0) {
-            mm = '12';
-            yyyy = today.getFullYear() - 1;
-        }
-        else {
-            mm = String(month).padStart(2, '0');
-        }
-        let past = yyyy + '.' + mm + '.' + dd;
+        let past = new Date();
+        past.setMonth(past.getMonth() - 1);
 
         let temp = [
                 {
@@ -194,17 +184,26 @@ class QuestionsHistory extends React.Component {
 
         let search_result = [];
         for (let t in temp) {
-            if(temp[t].date >= past && temp[t].date <= today) {
+            if(new Date(temp[t].date).getTime() >= past.getTime() && new Date(temp[t].date).getTime() <= today.getTime()) {
                 search_result.push(temp[t]);
             }
         }
 
         this.state = {
-            today: today,
-            past: past,
             result: search_result,
+            startDate: past,
+            endDate: today,
             temp: temp,
         }
+    }
+
+    getDateStr(date) {
+        let month = date.getMonth();
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(month + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        date = yyyy + '-' + mm + '-' + dd;
+        return date;
     }
 
     searchHistory() {
@@ -212,20 +211,13 @@ class QuestionsHistory extends React.Component {
         const val2 = document.getElementById("date2").value;
         let search_result = [];
         for (let t in this.state.temp) {
-            if(this.state.temp[t].date >= val1 && this.state.temp[t].date <= val2) {
+            if(new Date(this.state.temp[t].date).getTime() >= new Date(val1).getTime() && new Date(this.state.temp[t].date).getTime() <= new Date(val2).getTime()) {
                 search_result.push(this.state.temp[t]);
             }
         }
         this.setState({ result: search_result });
     }
 
-    componentDidMount() {
-        const date1 = document.getElementById("date1");
-        const date2 = document.getElementById("date2");
-        date1.value = this.state.past;
-        date2.value = this.state.today;
-        this.searchHistory();
-    }
     render() {
         let jsx;
         if(this.state.result.length === 0) {
@@ -244,22 +236,33 @@ class QuestionsHistory extends React.Component {
                     <div className="pointhistory__search__container">
                         <div className="search__input">
                             <span><img src={calendar}/></span>
-                            <DatePicker className="dd" id="date1" value="2020.01.01"
+                            <DatePicker className="dd" id="date1"
                                         locale="ko"	// 언어설정 기본값은 영어
                                         dateFormat="yyyy-MM-dd"	// 날짜 형식 설정
+                                        value={this.state.past}
+                                        selected={this.state.startDate}
+                                        onChange={(date) => {
+                                            let elt = document.getElementById("date1");
+                                            elt.value = date;
+                                            this.setState({ startDate: date });
+                                        }}
                             ></DatePicker>
-                            {/*<input type="text" id="date1"/>*/}
-                            &nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+                            ~
                             <span><img src={calendar}/></span>
-
-                            <DatePicker className="dd" id="date2" value="2020.10.10"
+                            <DatePicker className="dd" id="date2"
                                         locale="ko"		// 언어설정 기본값은 영어
                                         dateFormat="yyyy-MM-dd"	// 날짜 형식 설정
+                                        value={this.state.today}
+                                        selected={this.state.endDate}
+                                        onChange={(date) => {
+                                            let elt = document.getElementById("date2");
+                                            elt.value = date;
+                                            this.setState({ endDate: date });
+                                        }}
                             ></DatePicker>
-                            <input type="image" src={search} value="조회" id="search" onClick={this.searchHistory}/>
+                            <input type="image" src={search} value="조회" id="search" onClick={() => this.searchHistory()}/>
                         </div>
                     </div>
-
                     <div className="question__result__container">
                         {jsx}
                     </div>
