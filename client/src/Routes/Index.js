@@ -1,8 +1,7 @@
 import React, { useMemo, useRef } from "react";
 import { Link, Redirect } from "react-router-dom";
-import HeaderBack from "../Components/js/HeaderBack";
+import Header from "../Components/js/Header";
 import Footer from "../Components/js/Footer";
-import cookie from 'react-cookies';
 import Flicking from "@egjs/react-flicking";
 import { AutoPlay } from "@egjs/flicking-plugins";
 
@@ -33,7 +32,7 @@ function Index({authenticated, login, location}) {
 
     return (
         <>
-            <HeaderBack/>
+            <Header/>
             <div className="index">
                 <Flicking classPrefix="jumbo"
                           hanger={0}

@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import btnBack from '../assets/map/btn_back.png';
 import btnClocation from '../assets/map/btn_clocation.png';
 import btnPoc from '../assets/map/ico_poc.png';
+import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
 class MyplaceDetail extends React.Component {
     render() {

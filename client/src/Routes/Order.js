@@ -8,8 +8,7 @@ import { faRedo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeaderOrder from "../Components/js/HeaderOrder";
 import cookie from "react-cookies";
-import storage from "../storage";
-
+import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
 function makeTokenSaveScript(token) {
         // let cookie_token = cookie.load("access_token");
@@ -97,17 +96,7 @@ class Order extends React.Component {
     }
 
     componentDidMount() {
-        let cookie_token = cookie.load("access_token");
-        if(!cookie_token){
-            window.location.href = '/login/';
-        }
-        else if(cookie_token==='guest') {
-            localStorage.removeItem(cookie_token);
-            cookie.remove('access_token');
-            window.location.href = '/login/';
-        }
-        let user_email = storage.get(cookie_token);
-
+        let user_email = cookieCheck_rejectGuest();
         let fcmToken = cookie.load("fcmToken");
 
         console.log(fcmToken);
@@ -122,9 +111,7 @@ class Order extends React.Component {
         }
 
 
-        //axios.get("http://localhost:8000/api/stores_store/") //URL EXCHANGE LOCAL
         axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
-        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/") //URL EXCHANGE SERVER
         .then((res) => {
             let store = res.data.find(
                 (elt) => {
@@ -137,9 +124,7 @@ class Order extends React.Component {
             let storeId = store.id;
             let storeCd = store.storeCd;
             let brandCd = store.brandCd;
-            // axios.get("http://localhost:8000/api/stores_pos/") // URL EXCHANGE LOCAL
             axios.get("/api/stores_pos/") // URL EXCHANGE RELATIVE
-            // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_pos/") // URL EXCHANGE SERVER
             .then((res) => {
                 let keymapCd = res.data.find(
                     (elt) => {
@@ -148,9 +133,7 @@ class Order extends React.Component {
                         }
                     }
                 ).keymapCd;
-                // axios.get("http://localhost:8000/api/keymaps_touchGroup/") //URL EXCHANGE LOCAL
                 axios.get("/api/keymaps_touchGroup/") //URL EXCHANGE RELATIVE
-                // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/keymaps_touchGroup/") //URL EXCHANGE SERVER
                 .then((res) => {
                     let touch_group = res.data.filter(
                         (elt) => {
@@ -162,9 +145,7 @@ class Order extends React.Component {
                     return [touch_group, storeId, keymapCd];
                 })
                 .then((arr) => {
-                    // axios.get("http://localhost:8000/api/keymaps_keymap/") //URL EXCHANGE LOCAL
                     axios.get("/api/keymaps_keymap/") //URL EXCHANGE RELATIVE
-                    // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/keymaps_keymap/") //URL EXCHANGE SERVER
                     .then((res) => {
                         let keymap = res.data.filter(
                             (elt) => {
@@ -209,7 +190,7 @@ class Order extends React.Component {
         // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/items_item/") //URL EXCHANGE SERVER
         .then((res) => {
             let item_data = res.data;
-            let options = {}
+            let options = {};
         // axios.get("http://localhost:8000/api/items_itemAdd/") //URL EXCHANGE LOCAL
         axios.get("/api/items_itemAdd/") //URL EXCHANGE RELATIVE
         // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/items_itemAdd/") //URL EXCHANGE SERVER
@@ -217,7 +198,7 @@ class Order extends React.Component {
                 res.data.map((item) => {
                     let itemAddCd = item.itemAddCd;
                     let elt = item_data.find((element) => {if(element.id === item.itemCd) { return true;}});
-                    let option = []
+                    let option = [];
                     itemAddCd.map((data) => {
                         for(let i in item_data) {
                             if(item_data[i].id === data) {

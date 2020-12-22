@@ -3,23 +3,11 @@ import { Redirect } from "react-router-dom";
 import bgVideo from "../assets/intro/intro.mp4";
 import bgImage from "../assets/intro/bg.jpg";
 import cookie from "react-cookies";
-import storage from "../storage";
-import axios from "axios";
-
-// function tmp(){
-//     console.log('tmp');
-//     alert('tmp');
-//     // axios.post("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_test/",{
-//     //     char:'test2'
-//     // });
-// }
 
 window.makeFcmTokenCookie = (function (token) {
    // code here
     const expires = new Date();
     expires.setDate(expires.getDate() + 1);
-
-    console.log('token');
 
     cookie.save("fcmToken", token, {
         path: '/',
@@ -43,7 +31,7 @@ function Intro({authenticated, location}) {
             let redirect_uri = 'http://localhost:8000/login/kakao/callback/';
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'dev') {
-            url = "http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/";
+            url = "http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/";
         } else if(process.env.REACT_APP_STATE === 'server:appDeploy') {
             let redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import cookie from "react-cookies";
-import storage from "../storage";
 import Header from '../Components/js/Header';
 import MainFestivalContent from '../Components/js/MainFestivalContent';
 import MainStoreContent from '../Components/js/MainStoreContent';
 import MainMapContent from '../Components/js/MainMapContent';
+import {cookieCheck_approveGuest} from '../Components/js/CookieCheck.js'
 
 import btnSearchImg from '../assets/common/btn_sceach.png';
 
@@ -160,29 +159,18 @@ class Main extends React.Component {
     componentDidMount() {
         this.handleRefresh();
         this.handleTop();
+        let user_email = cookieCheck_approveGuest();
 
-        let cookie_token = cookie.load("access_token");
-        let user_email;
-        if(!cookie_token){
-          window.location.href = '/login/';
-        } else if(cookie_token === 'guest'){
-            user_email = 'pocketmarket.official@gmail.com'
-        } else {
-            user_email = storage.get(cookie_token);
-        }
 
-        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
+
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
                 }).id;
-                // axios.get("http://localhost:8000/api/trades_saleHeader/") // URl EXCHANGE LOCAL
                 axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
-                // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
                     .then((res) => {
                         let i = this.state.orderCount;
                         res.data.filter((elt) => {

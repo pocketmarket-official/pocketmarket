@@ -5,6 +5,7 @@ import MyplaceDetailListJSX from '../Components/js/myplaceDetailListJSX';
 import rewrite from '../assets/my_place_full/img_name.png';
 import close from "../assets/order_status_pop/btn_close.png";
 import search from '../assets/my_place_full/ico_search.png';
+import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
 function Myplace() {
     return (

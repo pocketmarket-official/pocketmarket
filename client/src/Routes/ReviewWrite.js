@@ -1,8 +1,7 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
 import axios from 'axios';
-import cookie from 'react-cookies';
-import storage from '../storage.js';
+import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import img_ico from '../../src/assets/review_write/img_up_ico.png';
 
 class ReviewWrite extends React.Component {
@@ -94,22 +93,13 @@ class ReviewWrite extends React.Component {
     };
 
     componentDidMount() {
+        let user_email = cookieCheck_rejectGuest();
         const elt = document.getElementById("select_image");
         const elt2 = document.getElementById("hidden_select");
         elt.onclick = () => {
             elt2.click();
         };
 
-        let cookie_token = cookie.load("access_token");
-        if(!cookie_token){
-            window.location.href = '/login/';
-        }
-        else if(cookie_token==='guest') {
-            localStorage.removeItem(cookie_token);
-            cookie.remove('access_token');
-            window.location.href = '/login/';
-        }
-        let user_email = storage.get(cookie_token);
 
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE

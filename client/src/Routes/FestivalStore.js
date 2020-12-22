@@ -28,10 +28,7 @@ class FestivalStore extends React.Component {
                     }
                 }
             );
-
-            // axios.get("http://localhost:8000/api/stores_store/") // URL EXCHANGE LOCAL
             axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
-            // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/") // URL EXCHANGE SERVER
                 .then((res) => {
                     let stores = res.data.filter(
                         (elt) => {
@@ -43,11 +40,8 @@ class FestivalStore extends React.Component {
                             });
                             if (flag) return true;
                         });
-
-                    console.log(stores);
                     this.setState({stores});
                 });
-
         });
     }
 

@@ -6,6 +6,7 @@ import store from '../assets/my_page/ico_store.png';
 import cookie from "react-cookies";
 import storage from "../storage";
 import axios from "axios";
+import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
 class Mypage extends React.Component {
     constructor(props){
@@ -24,15 +25,7 @@ class Mypage extends React.Component {
     };
 
     componentDidMount() {
-        let cookie_token = cookie.load("access_token");
-        let user_email;
-        if (!cookie_token) {
-            window.location.href = '/login/';
-        } else if (cookie_token === 'guest') {
-            user_email = 'pocketmarket.official@gmail.com'
-        } else {
-            user_email = storage.get(cookie_token);
-        }
+        let user_email = cookieCheck_rejectGuest();
 
         axios.get('/api/users_user/') // URL EXCHANGE RELATIVE
             .then((res) => {

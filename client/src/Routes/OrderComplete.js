@@ -1,25 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
-import cookie from "react-cookies";
-import storage from "../storage";
-
+import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
 class OrderComplete extends React.Component{
     constructor(props){
         super(props);
-
-        let cookie_token = cookie.load("access_token");
-        if(!cookie_token){
-            window.location.href = '/login/';
-        }
-        else if(cookie_token==='guest') {
-            localStorage.removeItem(cookie_token);
-            cookie.remove('access_token');
-            window.location.href = '/login/';
-        }
-
-        console.log(props.location.state.order);
 
         this.state={
             order: props.location.state.order
@@ -27,7 +13,7 @@ class OrderComplete extends React.Component{
     }
 
     componentDidMount(){
-
+        let user_email = cookieCheck_rejectGuest()
     }
 
     render(){

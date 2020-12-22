@@ -28,9 +28,7 @@ class StoreView extends React.Component {
     }
 
     componentDidMount() {
-        // axios.get("http://localhost:8000/api/reviews_review/") //URL EXCHANGE LOCAL
         axios.get("/api/reviews_review/") //URL EXCHANGE RELATIVE
-        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/reviews_review/") //URL EXCHANGE SERVER
             .then((res) => {
                 let reviews = res.data.filter(
                     (elt) => {
@@ -40,9 +38,7 @@ class StoreView extends React.Component {
                         return false;
                     }
                 );
-                //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
                 axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-                // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
                             .then((res) => {
                                 this.setState({
                                     users: res.data,

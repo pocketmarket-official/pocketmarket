@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import btnCal from '../assets/order_status/btn_date.png'
 import axios from "axios";
-import cookie from "react-cookies";
-import storage from "../storage";
+import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
 class OrderStatus extends React.Component {
     constructor(props) {
@@ -21,17 +20,7 @@ class OrderStatus extends React.Component {
     };
 
     componentDidMount(){
-        let cookie_token = cookie.load("access_token");
-        if(!cookie_token){
-            window.location.href = '/login/';
-        }
-        else if(cookie_token==='guest') {
-            localStorage.removeItem(cookie_token);
-            cookie.remove('access_token');
-            window.location.href = '/login/';
-        }
-
-        let user_email = storage.get(cookie_token);
+        let user_email = cookieCheck_rejectGuest();
 
         axios.get('/api/users_user/') // URL EXCHANGE RELATIVE
             .then((res) => {

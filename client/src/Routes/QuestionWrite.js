@@ -1,9 +1,8 @@
 import React from 'react';
 import HeaderBack from '../Components/js/HeaderBack';
 import img_ico from "../assets/review_write/img_up_ico.png";
-import cookie from 'react-cookies';
-import storage from '../storage.js';
 import axios from 'axios';
+import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
 class QuestionWrite extends React.Component {
     constructor(props) {
@@ -78,17 +77,7 @@ class QuestionWrite extends React.Component {
 
 
     componentDidMount() {
-    let cookie_token = cookie.load("access_token");
-        if(!cookie_token){
-            window.location.href = '/login/';
-        }
-        else if(cookie_token==='guest') {
-            localStorage.removeItem(cookie_token);
-            cookie.remove('access_token');
-            window.location.href = '/login/';
-        }
-        let user_email = storage.get(cookie_token);
-
+    let user_email = cookieCheck_rejectGuest();
         //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
         axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
         // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
