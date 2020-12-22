@@ -37,6 +37,7 @@ import KDSPickup from './Routes/KDSPickup';
 import KDSKitchen from './Routes/KDSKitchen';
 import KDSSetting from './Routes/KDSSetting';
 import KDSSoldout from './Routes/KDSSoldout';
+import InsertStoreCd from './Routes/InsertStoreCd'
 import MakingCookie from './Routes/makingCookie';
 import Reject from './Routes/Reject';
 import './App.css';
@@ -122,6 +123,7 @@ function App() {
         <Route authenticated={authenticated} exact path="/kds/kitchen" component={KDSKitchen} />
         <Route authenticated={authenticated} exact path="/kds/setting" component={KDSSetting} />
         <Route authenticated={authenticated} exact path="/kds/soldout" component={KDSSoldout} />
+        <Route authenticated={authenticated} exact path="/kds/insertStoreCd" component={InsertStoreCd} />
         <Route authenticated={authenticated} exact path="/makingCookie/:access_token/:email" component={MakingCookie} />
         <CacheRoute authenticated={authenticated} exact path="/reject" component={Reject} />
       </BrowserRouter>

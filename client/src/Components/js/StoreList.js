@@ -75,20 +75,19 @@ class StoreList extends React.Component {
                                         <>
                                             <Link to={{
                                                 pathname: `/review/${review.id}`,
-                                                state: review
+                                                state: {review: review},
                                             }}>
                                                 <div className="storeList__grid">
                                                     <div className="storeList__box">
                                                         <div className="storeList_publisherBox">
                                                             <div className="storeList__photo"><img src={review.img1}/></div>
                                                             <div className="storeList__name">{user.profileName}</div>
-                                                            <div className="storeList__likes"><p className="listLikesButton">♥</p>53
-                                                            </div>
+                                                            {/*<div className="storeList__likes"><p className="listLikesButton">♥</p>53</div>*/}
                                                             <div className="storeList__publisher">{user.email}</div>
                                                             {/*<div className="storeList__publisher">{user.email} 20.09.20 [치즈핫도그,
                                                                 콘핫도그x2]
                                                             </div>*/}
-                                                            <div className="storeList__description">{review.content}
+                                                            <div className="storeList__description">{review.context}
                                                             </div>
                                                         </div>
                                                         {/*<div className="storeList__replyBox">*/}

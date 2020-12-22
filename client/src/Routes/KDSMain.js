@@ -69,24 +69,23 @@ class KDSMain extends React.Component{
         let storeCd = cookie.load("storeCd");
 
         if (!storeCd){
-            storeCd = prompt('점포코드를 입력하세요.');
-
-            const expires = new Date();
-            expires.setDate(expires.getDate() + 1);
-
-            cookie.save("storeCd", storeCd, {
-                path: '/',
-                expires: expires,
-    //            httpOnly: true,
-    //            secure: true,
-            });
+            window.location.href = 'kds/insertStoreCd/';
+    //         storeCd = prompt('점포코드를 입력하세요.');
+    //
+    //         const expires = new Date();
+    //         expires.setDate(expires.getDate() + 1);
+    //
+    //         cookie.save("storeCd", storeCd, {
+    //             path: '/',
+    //             expires: expires,
+    // //            httpOnly: true,
+    // //            secure: true,
+    //         });
         }
         this.setState({storeCd});
 
 
-        // axios.get('http://localhost:8000/api/stores_store/') // URL EXCHANGE LOCAL
         axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
-        // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/') // URL EXCHANGE SERVER
             .then((res)=> {
                 let store = res.data.find((elt) => {
                     if(elt.storeCd === this.state.storeCd){
@@ -94,22 +93,21 @@ class KDSMain extends React.Component{
                     }
                 });
                 if(!store) {
-                    let storeCd = prompt('사용 불가능한 점포코드입니다. 점포코드 확인 부탁드려요!.');
-                    const expires = new Date();
-                    expires.setDate(expires.getDate() + 1);
-
-                    cookie.save("storeCd", storeCd, {
-                        path: '/',
-                        expires: expires,
-            //            httpOnly: true,
-            //            secure: true,
-                    });
-
-                    window.location.reload();
+                    window.location.href='/kds/insertStoreCd';
+            //         let storeCd = prompt('사용 불가능한 점포코드입니다. 점포코드 확인 부탁드려요!.');
+            //         const expires = new Date();
+            //         expires.setDate(expires.getDate() + 1);
+            //
+            //         cookie.save("storeCd", storeCd, {
+            //             path: '/',
+            //             expires: expires,
+            // //            httpOnly: true,
+            // //            secure: true,
+            //         });
+            //
+            //         window.location.reload();
                     }
-                        // axios.get("http://localhost:8000/api/trades_saleHeader/") // URl EXCHANGE LOCAL
                         axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
-                        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/") // URl EXCHANGE SERVER
                             .then((res)=> {
                                 let saleHeader = res.data.filter((elt) => {
                                     if (elt.storeCd === this.state.storeCd) {
@@ -117,10 +115,7 @@ class KDSMain extends React.Component{
                                     }
                                 });
 
-                                // axios.get('http://localhost:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE LOCAL
                                 axios.get('/api/trades_saleDetail/') //URL EXCHANGE RELATIVE
-                                // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo') //URL EXCHANGE SERVER
-                                // axios.get('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail/') //URL EXCHANGE SERVER
                                     .then((res) => {
                                         let matched = [];
                                         // sale dt 기준으로 정렬되어있는 데이터
@@ -161,7 +156,7 @@ class KDSMain extends React.Component{
                     </div>
                     <div>
                         <span>{this.state.year}.{this.state.month}.{this.state.day}</span>
-                        {/*<span>AM</span>*/}
+                        <span>AM</span>
                         <span><Clock format={"HH:mm:ss"} ticking={true} onChange={(res)=>
                         {
                             this._timeTickling(res);
@@ -184,16 +179,23 @@ class KDSMain extends React.Component{
                                                     let id = elt.id;
                                                     let d = new Date();
                                                     let complete_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
-                                                    // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE LOCAL
-                                                axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
-                                                // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
+                                                    axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
                                                         orderStatus: 3,
                                                         completeTime: complete_time,
                                                     })
                                                     .then(() => {
-                                                        window.location.reload();
+                                                        console.log(elt);
+                                                        let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
+                                                        console.log('==1');
+                                                        console.log(transData);
+                                                        axios.post('/pushSend_makeComplete/', transData) //URL EXCHANGE RELATIVE
+                                                            .then((res)=>{
+                                                                console.log('==2');
+                                                                window.location.reload();
+                                                            });
                                                     })
                                                 }}>
+
                                                 <div className="orderWrap">
                                                     <div className="orderHeader">
                                                         <div className="wrap">
@@ -282,8 +284,8 @@ class KDSMain extends React.Component{
                     </div>
 
                     <div className="techCtl">
-                        <button className="myButton cnrStats">LABEL_CNR_STATS</button>
-                        <button className="myButton cnrStats">LABEL_SOLDOUT</button>
+                        {/*<button className="myButton cnrStats">LABEL_CNR_STATS</button>*/}
+                        {/*<button className="myButton cnrStats">LABEL_SOLDOUT</button>*/}
                     </div>
                     <div className="pageCtl">
                         {/*<button className="myButton">*/}
@@ -293,29 +295,51 @@ class KDSMain extends React.Component{
                         {/*    <span>1/2</span>*/}
                         {/*</div>*/}
                         {/*<button className="myButton active">다음</button>*/}
-                        <buton className="myButton" onClick={(e) => {
-                            e.preventDefault();
-                            let storeCd = prompt('매장코드를 입력해주세요.');
-                            const expires = new Date();
-                            expires.setDate(expires.getDate() + 1);
 
-                            cookie.save("storeCd", storeCd, {
-                                path: '/',
-                                expires: expires,
-                    //            httpOnly: true,
-                    //            secure: true,
-                            });
-                            window.location.reload();
-                            }}>매장변경</buton>
+
+                    {/********************************************/}
+                    {/*********20201222 Jhonny cloche Ma**********/}
+                    {/*매장변경 원본. hybrid app에서 prompt안먹어서 변경.*/}
+                    {/********************************************/}
+                    {/*    <buton className="myButton" onClick={(e) => {*/}
+                    {/*        e.preventDefault();*/}
+                    {/*        let storeCd = prompt('매장코드를 입력해주세요.');*/}
+                    {/*        const expires = new Date();*/}
+                    {/*        expires.setDate(expires.getDate() + 1);*/}
+
+                    {/*        cookie.save("storeCd", storeCd, {*/}
+                    {/*            path: '/',*/}
+                    {/*            expires: expires,*/}
+                    {/*//            httpOnly: true,*/}
+                    {/*//            secure: true,*/}
+                    {/*        });*/}
+
+                    {/*        let fcmToken = cookie.load("fcmToken");*/}
+                    {/*        console.log('==3');*/}
+                    {/*        console.log(storeCd);*/}
+                    {/*        console.log(fcmToken);*/}
+                    {/*        if(storeCd && fcmToken){*/}
+                    {/*            let transData = {"storeCd":storeCd, "fcmToken":fcmToken};*/}
+
+                    {/*            axios.post('/saveTokenStore/', transData) //URL EXCHANGE RELATIVE*/}
+                    {/*            // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/trade/', transData) //URL EXCHANGE SERVER*/}
+                    {/*                .then((res)=>{*/}
+
+                    {/*                });*/}
+                    {/*        }*/}
+                    {/*        window.location.reload();*/}
+                    {/*        }}>매장변경</buton>*/}
+
+                        <a href="/kds/insertStoreCd">
+                            <buton className="myButton">매장변경</buton>
+                        </a>
                         {
                             this.state.store.openYn == 'Y' ?
                                 <>
                                     <buton className="myButton soldout" onClick={(e) => {
                                         e.preventDefault();
                                         let store = this.state.store;
-                                        // axios.put(`http://localhost:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE LOCAL
                                         axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
-                                        // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
                                                     openYn: 'N',
                                                 });
                                         store.openYn = 'N';
@@ -327,9 +351,7 @@ class KDSMain extends React.Component{
                                     <buton className="myButton active" onClick={(e) => {
                                         e.preventDefault();
                                         let store = this.state.store;
-                                        // axios.put(`http://localhost:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE LOCAL
                                         axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
-                                        // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/${store.id}/`, { //URL EXCHANGE SERVER
                                                     openYn: 'Y',
                                                 });
                                         store.openYn = 'Y';

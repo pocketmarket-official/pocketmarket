@@ -12,6 +12,7 @@ class User(AbstractUser):
     profileImage = models.ImageField(upload_to="images/userProfile", null=True)
     androidToken = models.CharField(max_length=255, blank=True)
     iosToken = models.CharField(max_length=255, blank=True)
+    bizYn = models.CharField(max_length=1, default='N')
 
 
 

@@ -140,6 +140,9 @@ def kakao_callback(request):
 @csrf_exempt
 def saveToken(request):
     try:
+        print('==4')
+        print(json.loads(request.body)['user_email'])
+        print(json.loads(request.body)['fcmToken'])
         user_email = json.loads(request.body)['user_email']
         token = json.loads(request.body)['fcmToken']
         user = User.objects.get(email=user_email)
@@ -151,7 +154,38 @@ def saveToken(request):
         user.iosToken = iosToken.registration_id
         user.save()
 
-        return
+        response = JsonResponse('200')
+        return response
+
+    except Exception as ex:
+        print(ex)
+
+@csrf_exempt
+def saveTokenStore(request):
+    try:
+        print('==3')
+        print(json.loads(request.body)['storeCd'])
+        print(json.loads(request.body)['fcmToken'])
+        storeCd = json.loads(request.body)['storeCd']
+        print('==4')
+        print(storeCd)
+        token = json.loads(request.body)['fcmToken']
+        print('==5')
+        print(token)
+        store = Store.objects.get(storeCd=storeCd)
+        print('==6')
+        print(store)
+        iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
+                                                        defaults={
+                                                            'user': store,
+                                                            'registration_id': token
+                                                        })
+        print('==7')
+        print(iosToken)
+        store.iosToken = iosToken.registration_id
+        store.save()
+
+        return HttpResponse('success')
 
     except Exception as ex:
         print(ex)
@@ -499,15 +533,38 @@ def trade(request):
         # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
         # firebase_admin.initialize_app(cred)
         # device = FCMDevice.objects.all().first()
-        device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
+        print('==1')
+        print(store.storeCd)
+        print(store.iosToken)
+        device = FCMDevice.objects.filter(registration_id=store.iosToken).first()
+
         if(device) :
-            device.send_message("주문완료", storeName+'에 주문이 완료되었습니다.' )
+            device.send_message("주문수신", storeName+'에 주문이 수신되었습니다.' )
 
         response = JsonResponse(data)
         return response
 
     except Exception as ex:
         print(ex)
+
+
+@csrf_exempt
+def pushSend_makeComplete(request):
+    try:
+        print('==2')
+        print(json.loads(request.body)['storeName'])
+        print(json.loads(request.body)['userId'])
+
+        storeName = json.loads(request.body)['storeName']
+        user = User.objects.get(id=json.loads(request.body)['userId'])
+        device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
+        if(device):
+            device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
+
+        return HttpResponse('success')
+    except Exception as ex:
+        print(ex)
+
 
 @csrf_exempt
 def storeLike(request):

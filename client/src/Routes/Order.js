@@ -110,11 +110,12 @@ class Order extends React.Component {
 
         let fcmToken = cookie.load("fcmToken");
 
+        console.log(fcmToken);
         if(fcmToken){
+            console.log(user_email);
             let transData = {"user_email":user_email, "fcmToken":fcmToken};
 
             axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
-            // axios.post('http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/trade/', transData) //URL EXCHANGE SERVER
                 .then((res)=>{
 
                 });
@@ -134,10 +135,11 @@ class Order extends React.Component {
                 }
             );
             let storeId = store.id;
+            let storeCd = store.storeCd;
             let brandCd = store.brandCd;
             // axios.get("http://localhost:8000/api/stores_pos/") // URL EXCHANGE LOCAL
-        axios.get("/api/stores_pos/") // URL EXCHANGE RELATIVE
-        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_pos/") // URL EXCHANGE SERVER
+            axios.get("/api/stores_pos/") // URL EXCHANGE RELATIVE
+            // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_pos/") // URL EXCHANGE SERVER
             .then((res) => {
                 let keymapCd = res.data.find(
                     (elt) => {
@@ -161,8 +163,8 @@ class Order extends React.Component {
                 })
                 .then((arr) => {
                     // axios.get("http://localhost:8000/api/keymaps_keymap/") //URL EXCHANGE LOCAL
-                axios.get("/api/keymaps_keymap/") //URL EXCHANGE RELATIVE
-                // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/keymaps_keymap/") //URL EXCHANGE SERVER
+                    axios.get("/api/keymaps_keymap/") //URL EXCHANGE RELATIVE
+                    // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/keymaps_keymap/") //URL EXCHANGE SERVER
                     .then((res) => {
                         let keymap = res.data.filter(
                             (elt) => {
@@ -171,7 +173,17 @@ class Order extends React.Component {
                                 }
                             }
                         );
-
+                        axios.get("/api/trades_saleHeader/")
+                            .then((res) => {
+                               let count = res.data.filter(
+                                   (elt) => {
+                                        if(elt.storeCd === storeCd && elt.orderStatus === '2'){
+                                            return true;
+                                        }
+                                   }
+                               ).length;
+                               document.getElementById('waitingCount').innerHTML = count+' 명';
+                            });
 
                         this.setState({
                             touch_group: arr[0],

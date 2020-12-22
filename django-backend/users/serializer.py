@@ -20,6 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
             'profileImage',
             'androidToken',
             'iosToken',
+            'bizYn',
         )
 
 class PointSerializer(serializers.ModelSerializer):

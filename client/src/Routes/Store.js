@@ -112,8 +112,8 @@ class StoreView extends React.Component {
                             <div className="storeGrid__detail">
                                 <div className="storeGrid__title">
                                     <div className="storeGrid__name">{this.props.location.state.data.storeName}</div>
-                                    <div className="storeGrid__distance">{this.props.location.state.d}</div>
-                                    <div className="storeGrid__likes"><p className="likesButton">♥</p>{this.props.location.state.data.like_count || 123}</div>
+                                    {/*<div className="storeGrid__distance">{this.props.location.state.d}</div>*/}
+                                    {/*<div className="storeGrid__likes"><p className="likesButton">♥</p>{this.props.location.state.data.like_count || 123}</div>*/}
                                     <div className="storeGrid__description">{this.props.location.state.data.description}</div>
                                 </div>
                                 <div className="storeGrid__description">
