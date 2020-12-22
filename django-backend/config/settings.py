@@ -170,7 +170,6 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "build/"),
-    https://pocketmarket-dev.s3.ap-northeast-2.amazonaws.com/
 ]
 
 DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
