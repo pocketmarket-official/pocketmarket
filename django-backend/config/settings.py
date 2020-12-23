@@ -131,17 +131,20 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 AUTH_USER_MODEL = "users.User"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-##############################
-# 2020-12-19 Jhonny Cloche Ma#
-# S3 Setting##################
-##############################
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "build/static/"),
+]
 
 
 # AWS Setting
@@ -166,20 +169,6 @@ AWS_S3_OBJECT_PARAMETERS = {
     'ACL': 'public-read'
 }
 
-# STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "build/"),
-]
-
-DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
-
-STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-STATIC_ROOT = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
 # cors 관련 설정
 CORS_ALLOW_ALL_ORIGINS = False
 
@@ -188,8 +177,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:8000',
-    'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000',
-    'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000',
+    'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000',
+    'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000',
     'http://13.124.90.138:3000',
     'http://13.124.90.138:8000',
 ]
@@ -237,6 +226,9 @@ if STATE == "local:start":
     }
 
 
+
+
+# 진형 개인 사용용도. 이름 바꿀 예정
 elif STATE == "local:dev":
     DEBUG = True
 
@@ -254,13 +246,6 @@ elif STATE == "local:dev":
             },
         }
     }
-
-    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
-
-    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
 elif STATE == "server:appDeploy":
     DEBUG = True
@@ -304,12 +289,12 @@ elif STATE == "dev":
         }
     }
 
-    # DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-    # STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
 
-    # STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
-    # MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
 elif STATE == "production":
     DEBUG = False

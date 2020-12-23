@@ -47,7 +47,7 @@ def kakao_login(request):
     if state == 'local:start' or state == 'local:build':
         redirect_uri = '/login/kakao/callback/' #URL EXCHANGE RELATIVE
     elif state == 'dev':
-        redirect_uri = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
+        redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
     elif state == 'server:appDeploy':
         redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
 
@@ -65,7 +65,7 @@ def kakao_callback(request):
         if state == 'local:start' or state == 'local:build' or state == 'local:dev':
             redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
         elif state == 'dev':
-            redirect_uri = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
+            redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
         elif state == 'server:appDeploy':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         if code is not None:
@@ -119,7 +119,7 @@ def kakao_callback(request):
                     elif state == 'local:build':
                         url = 'http://localhost:3000/index/'
                     elif state == 'dev':
-                        url = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/index/'
+                        url = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/index/'
                     elif state == 'server:appDeploy':
                         url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
                     return HttpResponseRedirect(url)
@@ -131,7 +131,7 @@ def kakao_callback(request):
         elif state == 'local:build':
             url = 'http://localhost:8000/login/'
         elif state == 'dev':
-            url = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
+            url = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
         elif state == 'server:appDeploy':
             url = 'http://13.124.90.138:8000/login/'
         return HttpResponseRedirect(url)
@@ -527,7 +527,7 @@ def trade(request):
 
         # data = {'url': 'http://localhost:3000/order/status'} #URL EXCHANGE LOCAL
         data = {'url': '/order/status'} #URL EXCHANGE RELATIVE
-        # data = {'url': 'http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/order/status'} #URL EXCHANGE SERVER
+        # data = {'url': 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/order/status'} #URL EXCHANGE SERVER
 
 
         # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
