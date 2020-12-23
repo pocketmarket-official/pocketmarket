@@ -3,6 +3,7 @@ import storage from "../../storage";
 
 function cookieCheck_rejectGuest(){
     let cookie_token = cookie.load("access_token");
+
     if(!cookie_token){
         window.location.href = '/login/';
     }
@@ -12,6 +13,10 @@ function cookieCheck_rejectGuest(){
         window.location.href = '/login/';
     }
     let user_email = storage.get(cookie_token);
+    if(!user_email){
+        cookie.remove('access_token');
+        window.location.href = '/login/';
+    }
 
     return user_email;
 }
@@ -25,6 +30,10 @@ function cookieCheck_approveGuest(){
         user_email = 'pocketmarket.official@gmail.com'
     } else {
         user_email = storage.get(cookie_token);
+        if(!user_email){
+            cookie.remove('access_token');
+            window.location.href = '/login/';
+        }
     }
 
     return user_email;

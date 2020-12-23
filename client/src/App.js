@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 import cookie from 'react-cookies';
-import storage from './storage.js';
 import Index from './Routes/Index';
 import Main from './Routes/Main';
 import Mypage from './Routes/Mypage';
@@ -55,10 +54,7 @@ function App() {
   }
 
   //todo: 로그인 인증수단을 전부 cookie_token으로 바꿨음
-    // https://stackoverflow.com/questions/31259865/localstorage-undefined
-    // email이 자꾸 Undefinedundefinedundefined로 define된 상태로 떠서
   let cookie_token = cookie.load("access_token");
-  // let storage_email = storage.get(cookie_token);
   let authenticated = false;
   if(cookie_token) {
     authenticated = true;

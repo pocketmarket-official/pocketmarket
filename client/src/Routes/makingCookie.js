@@ -8,6 +8,13 @@ function MakingCookie(props) {
     let access_token = params.access_token;
     let email = params.email;
 
+    //쿠키는 있는데 storage에 메일이 없으면 쿠키 삭제
+    let cookie_token = cookie.load("access_token");
+    let user_email = storage.get(cookie_token);
+    if(!user_email){
+        cookie.remove('access_token');
+    }
+
     const expires = new Date();
     expires.setDate(expires.getDate() + 1);
 
