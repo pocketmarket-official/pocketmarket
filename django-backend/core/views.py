@@ -140,9 +140,6 @@ def kakao_callback(request):
 @csrf_exempt
 def saveToken(request):
     try:
-        print('==4')
-        print(json.loads(request.body)['user_email'])
-        print(json.loads(request.body)['fcmToken'])
         user_email = json.loads(request.body)['user_email']
         token = json.loads(request.body)['fcmToken']
         user = User.objects.get(email=user_email)
@@ -163,25 +160,14 @@ def saveToken(request):
 @csrf_exempt
 def saveTokenStore(request):
     try:
-        print('==3')
-        print(json.loads(request.body)['storeCd'])
-        print(json.loads(request.body)['fcmToken'])
         storeCd = json.loads(request.body)['storeCd']
-        print('==4')
-        print(storeCd)
         token = json.loads(request.body)['fcmToken']
-        print('==5')
-        print(token)
         store = Store.objects.get(storeCd=storeCd)
-        print('==6')
-        print(store)
         iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
                                                         defaults={
                                                             'user': store,
                                                             'registration_id': token
                                                         })
-        print('==7')
-        print(iosToken)
         store.iosToken = iosToken.registration_id
         store.save()
 
@@ -531,9 +517,6 @@ def trade(request):
         # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
         # firebase_admin.initialize_app(cred)
         # device = FCMDevice.objects.all().first()
-        print('==1')
-        print(store.storeCd)
-        print(store.iosToken)
         device = FCMDevice.objects.filter(registration_id=store.iosToken).first()
 
         if(device) :
@@ -549,10 +532,6 @@ def trade(request):
 @csrf_exempt
 def pushSend_makeComplete(request):
     try:
-        print('==2')
-        print(json.loads(request.body)['storeName'])
-        print(json.loads(request.body)['userId'])
-
         storeName = json.loads(request.body)['storeName']
         user = User.objects.get(id=json.loads(request.body)['userId'])
         device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
