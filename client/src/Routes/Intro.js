@@ -28,10 +28,10 @@ function Intro({authenticated, location}) {
             let redirect_uri = '/login/kakao/callback/'; //URL EXCHANGE RELATIVE
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'local:dev') {
-            let redirect_uri = 'http://localhost:8000/login/kakao/callback/';
+            let redirect_uri = '/login/kakao/callback/';
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'dev') {
-            let redirect_uri = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/';
+            let redirect_uri = '/login/kakao/callback/';
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'server:appDeploy') {
             let redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
@@ -45,9 +45,9 @@ function Intro({authenticated, location}) {
         if(process.env.REACT_APP_STATE === 'local') {
             url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
         } else if(process.env.REACT_APP_STATE === 'local:dev') {
-            url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
+            url =  '/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
         } else if(process.env.REACT_APP_STATE === 'dev') {
-            url = "http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/makingCookie/guest/pocketmarket.official@gmail.com";
+            url = "/makingCookie/guest/pocketmarket.official@gmail.com";
         } else if(process.env.REACT_APP_STATE === 'server:appDeploy') {
             url =  'http://13.124.90.138:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
         }

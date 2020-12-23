@@ -49,7 +49,7 @@ function App() {
   if(process.env.REACT_APP_STATE === 'local' || process.env.REACT_APP_STATE === 'local:dev') {
     axios.defaults.baseURL = 'http://localhost:8000';
   } else if(process.env.REACT_APP_STATE === 'dev') {
-    axios.defaults.baseURL = 'http://pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000';
+    axios.defaults.baseURL = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000';
   } else if(process.env.REACT_APP_STATE === 'server:appDeploy') {
     axios.defaults.baseURL = 'http://13.124.90.138:8000';
   }

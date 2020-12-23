@@ -24,7 +24,7 @@ class MainFestivalContent extends React.Component {
 
         // axios.get("http://localhost:8000/api/festivals_festival/") // URL EXCHANGE LOCAL
         axios.get("/api/festivals_festival/") // URL EXCHANGE RELATIVE
-        // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/festivals_festival/") // URL EXCHANGE SERVER
+        // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/festivals_festival/") // URL EXCHANGE SERVER
         .then((res) => {
             const festivals = res.data;
             this.setState({

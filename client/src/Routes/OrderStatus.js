@@ -37,8 +37,8 @@ class OrderStatus extends React.Component {
                         }
                     });
                     axios.get("/api/trades_saleDetail/") //URL EXCHANGE RELATIVE
-                    // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE SERVER
-                    // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail/") //URL EXCHANGE SERVER
+                    // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE SERVER
+                    // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail/") //URL EXCHANGE SERVER
                     .then((res) => {
                         let matched = [];
                         let saleDetail = res.data;
@@ -67,7 +67,7 @@ class OrderStatus extends React.Component {
                         }, () => {
                             // axios.get("http://localhost:8000/api/stores_store/") //URL EXCHANGE LOCAL
                             axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
-                            // axios.get("http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/") //URL EXCHANGE SERVER
+                            // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/") //URL EXCHANGE SERVER
                             .then((res) => {
                                 this.state.matched.forEach((elt) => {
                                     let store = res.data.find((dt) => {
@@ -152,7 +152,7 @@ class OrderStatus extends React.Component {
                                             let id = elt.id;
                                             // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE LOCAL
                                             axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
-                                            // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
+                                            // axios.put(`http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
                                                 orderStatus: 4,
                                                 pickupTime: pickup_time,
                                             })
@@ -176,7 +176,7 @@ class OrderStatus extends React.Component {
                                     let id = elt.id;
                                     // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE LOCAL
                                     axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
-                                    // axios.put(`http://Pocketmarket-dev.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
+                                    // axios.put(`http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
                                         orderStatus: 7,
                                     })
                                         .then((res) => {
