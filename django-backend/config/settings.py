@@ -286,10 +286,6 @@ elif STATE == "dev":
             'PASSWORD': os.environ.get("DB_REAL_PASSWORD"),
             'PORT': os.environ.get("DB_REAL_PORT"),
             'HOST': os.environ.get("DB_REAL_HOST"),
-            'OPTIONS': {
-                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-                # 'charset': 'utf8mb4',
-            },
         }
     }
 
@@ -306,11 +302,11 @@ elif STATE == "production":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'HOST': os.environ.get("RDS_HOST"), # endpoint
-            'NAME': os.environ.get("RDS_NAME"), # amazon RDS DB identifier
-            'USER': os.environ.get("RDS_USER"),
-            'PASSWORD': os.environ.get("RDS_PASSOWRD"),
-            'PORT': '5432',
+            'NAME': os.environ.get("DB_REAL_NAME"),
+            'USER': os.environ.get("DB_REAL_USER"),
+            'PASSWORD': os.environ.get("DB_REAL_PASSWORD"),
+            'PORT': os.environ.get("DB_REAL_PORT"),
+            'HOST': os.environ.get("DB_REAL_HOST"),
         }
     }
 
