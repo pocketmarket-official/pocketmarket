@@ -11,6 +11,8 @@ import showStoreImg from "../assets/index/btn_index2.png";
 import showCollectionImg from "../assets/index/btn_index3.png";
 import showOrderImg from "../assets/index/btn_index4.png";
 
+import Toast from '../Components/js/Toast';
+
 function Index({authenticated, login, location}) {
     const paginationElem = useRef(null);
     const autoPlayPlugin = useMemo(() => {
@@ -80,6 +82,7 @@ function Index({authenticated, login, location}) {
                         </div>
                     </Link>
                 </div>
+            <Toast message="welcome welcome welcome welcome welcome welcome " />
             </div>
             <Footer />
         </>
