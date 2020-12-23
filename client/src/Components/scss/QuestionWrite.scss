@@ -106,8 +106,9 @@
         text-align: center;
         color: #ffa800;
       }
+      .submit:active {
+        transform: scale(0.9);
+      }
     }
   }
-
-
 }
