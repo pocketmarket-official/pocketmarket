@@ -14,11 +14,12 @@ class Toast extends PureComponent {
 
     handleToast() {
         let elt = document.getElementById("toast");
-        elt.classList.add("toast_off");
+        if(elt) {
+            elt.classList.add("toast_off");
+        }
     }
 
     render() {
-        console.log('test');
         return (
             <>
                 <div className="toast_off" id="toast">{this.props.message}</div>
