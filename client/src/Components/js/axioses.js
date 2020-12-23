@@ -17,7 +17,7 @@ function festivalStore(festivalId){
                     }
                 }
             );
-            axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
+            axios.get("/api/stores_store/")
                 .then((res) => {
                     let stores = res.data.filter(
                         (elt) => {
@@ -35,14 +35,14 @@ function festivalStore(festivalId){
 }
 
 function mainAxios(user_email) {
-    axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+    axios.get("/api/users_user/")
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
                 }).id;
-                axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
+                axios.get("/api/trades_saleHeader/")
                     .then((res) => {
                         let i = 0;
                         res.data.filter((elt) => {
@@ -51,8 +51,6 @@ function mainAxios(user_email) {
                             }
                         });
                         let result = {userId:userId, orderCount:i};
-                        console.log('==1');
-                        console.log(result);
                         return result;
                     });
             });

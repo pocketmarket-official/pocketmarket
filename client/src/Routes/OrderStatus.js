@@ -22,23 +22,21 @@ class OrderStatus extends React.Component {
     componentDidMount(){
         let user_email = cookieCheck_rejectGuest();
 
-        axios.get('/api/users_user/') // URL EXCHANGE RELATIVE
+        axios.get('/api/users_user/')
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
                 }).id;
-                axios.get('/api/trades_saleHeader/') //URL EXCHANGE RELATIVE
+                axios.get('/api/trades_saleHeader/')
                 .then((res) => {
                     let saleHeader = res.data.filter((elt) => {
                         if(elt.user === userId){
                             return true;
                         }
                     });
-                    axios.get("/api/trades_saleDetail/") //URL EXCHANGE RELATIVE
-                    // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail?ordering=saleDt,storeCd,billNo") //URL EXCHANGE SERVER
-                    // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleDetail/") //URL EXCHANGE SERVER
+                    axios.get("/api/trades_saleDetail/")
                     .then((res) => {
                         let matched = [];
                         let saleDetail = res.data;
@@ -65,9 +63,7 @@ class OrderStatus extends React.Component {
                             saleHeader: saleHeader,
                             matched: matched,
                         }, () => {
-                            // axios.get("http://localhost:8000/api/stores_store/") //URL EXCHANGE LOCAL
-                            axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
-                            // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_store/") //URL EXCHANGE SERVER
+                            axios.get("/api/stores_store/")
                             .then((res) => {
                                 this.state.matched.forEach((elt) => {
                                     let store = res.data.find((dt) => {
@@ -150,9 +146,7 @@ class OrderStatus extends React.Component {
                                         <button className="pickup__btn" onClick={(e) => {
                                             e.preventDefault();
                                             let id = elt.id;
-                                            // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE LOCAL
-                                            axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
-                                            // axios.put(`http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
+                                            axios.put(`/api/trades_saleHeader/${id}/`, {
                                                 orderStatus: 4,
                                                 pickupTime: pickup_time,
                                             })
@@ -174,9 +168,7 @@ class OrderStatus extends React.Component {
                                 <button className="card__delete" onClick={(e) => {
                                     e.preventDefault();
                                     let id = elt.id;
-                                    // axios.put(`http://localhost:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE LOCAL
-                                    axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
-                                    // axios.put(`http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/trades_saleHeader/${id}/`, { //URL EXCHANGE SERVER
+                                    axios.put(`/api/trades_saleHeader/${id}/`, {
                                         orderStatus: 7,
                                     })
                                         .then((res) => {
