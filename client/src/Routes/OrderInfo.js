@@ -26,9 +26,7 @@ class OrderInfo extends React.Component {
     componentDidMount(){
         let user_email = cookieCheck_rejectGuest();
 
-        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
+        axios.get("/api/users_user/")
         .then((res) => {
             let userId = res.data.find((elt) => {
                 if(elt.email === user_email) {

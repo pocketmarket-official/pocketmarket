@@ -163,14 +163,14 @@ class Main extends React.Component {
 
 
 
-        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        axios.get("/api/users_user/")
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
                 }).id;
-                axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
+                axios.get("/api/trades_saleHeader/")
                     .then((res) => {
                         let i = this.state.orderCount;
                         res.data.filter((elt) => {

@@ -28,7 +28,7 @@ class FestivalStore extends React.Component {
                     }
                 }
             );
-            axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
+            axios.get("/api/stores_store/")
                 .then((res) => {
                     let stores = res.data.filter(
                         (elt) => {

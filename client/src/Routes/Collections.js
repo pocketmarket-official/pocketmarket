@@ -114,7 +114,6 @@ class Collections extends React.Component {
                                             }
                                         }
                                     );
-                                    console.log(stores);
                                     this.setState({stores})
                                 });
                         });
@@ -172,12 +171,10 @@ class Collections extends React.Component {
                         <div className="fastorder__store">
                             {
                                 this.state.stores.map((elt) => {
-                                    console.log(elt);
                                     if(elt.imgLogoUrl===undefined || elt.imgLogoUrl===null){
                                         elt.imgLogoUrl = defaultImg
                                     }
                                         if (elt.defaultYn === 'Y') {
-                                            console.log('1');
                                             return(
                                                 <>
                                                 <div className="store__grid">
@@ -189,7 +186,6 @@ class Collections extends React.Component {
                                             )
                                         } else {
                                             if (elt.grayYn === 'Y') {
-                                                console.log('2');
                                                 return(
                                                     <>
                                                     <div className="store__grid nice">
@@ -200,7 +196,6 @@ class Collections extends React.Component {
                                                     </>
                                                     )
                                             } else {
-                                                console.log('3');
                                                 return(
                                                     <>
                                                     <div className="store__grid visit">

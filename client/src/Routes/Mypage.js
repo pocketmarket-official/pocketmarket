@@ -27,7 +27,7 @@ class Mypage extends React.Component {
     componentDidMount() {
         let user_email = cookieCheck_rejectGuest();
 
-        axios.get('/api/users_user/') // URL EXCHANGE RELATIVE
+        axios.get('/api/users_user/')
             .then((res) => {
                 let user = res.data.find((elt) => {
                     if (elt.email === user_email) {

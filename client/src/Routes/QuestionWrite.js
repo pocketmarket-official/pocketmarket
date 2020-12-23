@@ -41,9 +41,7 @@ class QuestionWrite extends React.Component {
             form_data.append(`img${j + 1}`, this.state.image[i][0]);
         }
 
-        // axios.post('http://localhost:8000/api/users_question/', form_data, { //URL EXCHANGE LOCAL
-        axios.post('/api/users_question/', form_data, { //URL EXCHANGE RELATIVE
-        // axios.post('http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_question/', form_data, { //URL EXCHANGE SERVER
+        axios.post('/api/users_question/', form_data, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
@@ -78,9 +76,7 @@ class QuestionWrite extends React.Component {
 
     componentDidMount() {
     let user_email = cookieCheck_rejectGuest();
-        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
+        axios.get("/api/users_user/")
             .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {

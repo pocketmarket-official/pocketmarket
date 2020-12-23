@@ -28,7 +28,7 @@ class ReviewJSX extends React.Component {
     };
 
     componentDidMount(){
-        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        axios.get("/api/users_user/")
             .then((res) => {
                 let reviewUser = res.data.find((elt) => {
                     if (elt.id === this.state.review.user) {
@@ -40,7 +40,6 @@ class ReviewJSX extends React.Component {
     }
 
     render() {
-        console.log(this.state.review);
         return(
             <>
                 <div className="review">

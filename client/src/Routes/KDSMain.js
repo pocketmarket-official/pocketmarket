@@ -85,7 +85,7 @@ class KDSMain extends React.Component{
         this.setState({storeCd});
 
 
-        axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
+        axios.get("/api/stores_store/")
             .then((res)=> {
                 let store = res.data.find((elt) => {
                     if(elt.storeCd === this.state.storeCd){
@@ -107,7 +107,7 @@ class KDSMain extends React.Component{
             //
             //         window.location.reload();
                     }
-                        axios.get("/api/trades_saleHeader/") // URl EXCHANGE RELATIVE
+                        axios.get("/api/trades_saleHeader/")
                             .then((res)=> {
                                 let saleHeader = res.data.filter((elt) => {
                                     if (elt.storeCd === this.state.storeCd) {
@@ -115,7 +115,7 @@ class KDSMain extends React.Component{
                                     }
                                 });
 
-                                axios.get('/api/trades_saleDetail/') //URL EXCHANGE RELATIVE
+                                axios.get('/api/trades_saleDetail/')
                                     .then((res) => {
                                         let matched = [];
                                         // sale dt 기준으로 정렬되어있는 데이터
@@ -179,18 +179,14 @@ class KDSMain extends React.Component{
                                                     let id = elt.id;
                                                     let d = new Date();
                                                     let complete_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
-                                                    axios.put(`/api/trades_saleHeader/${id}/`, { //URL EXCHANGE RELATIVE
+                                                    axios.put(`/api/trades_saleHeader/${id}/`, {
                                                         orderStatus: 3,
                                                         completeTime: complete_time,
                                                     })
                                                     .then(() => {
-                                                        console.log(elt);
                                                         let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
-                                                        console.log('==1');
-                                                        console.log(transData);
-                                                        axios.post('/pushSend_makeComplete/', transData) //URL EXCHANGE RELATIVE
+                                                        axios.post('/pushSend_makeComplete/', transData)
                                                             .then((res)=>{
-                                                                console.log('==2');
                                                                 window.location.reload();
                                                             });
                                                     })
@@ -321,7 +317,7 @@ class KDSMain extends React.Component{
                     {/*        if(storeCd && fcmToken){*/}
                     {/*            let transData = {"storeCd":storeCd, "fcmToken":fcmToken};*/}
 
-                    {/*            axios.post('/saveTokenStore/', transData) //URL EXCHANGE RELATIVE*/}
+                    {/*            axios.post('/saveTokenStore/', transData) */}
                     {/*            // axios.post('http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/trade/', transData) //URL EXCHANGE SERVER*/}
                     {/*                .then((res)=>{*/}
 
@@ -337,7 +333,7 @@ class KDSMain extends React.Component{
                                     <buton className="myButton soldout" onClick={(e) => {
                                         e.preventDefault();
                                         let store = this.state.store;
-                                        axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
+                                        axios.put(`/api/stores_store/${store.id}/`, {
                                                     openYn: 'N',
                                                 });
                                         store.openYn = 'N';
@@ -349,7 +345,7 @@ class KDSMain extends React.Component{
                                     <buton className="myButton active" onClick={(e) => {
                                         e.preventDefault();
                                         let store = this.state.store;
-                                        axios.put(`/api/stores_store/${store.id}/`, { //URL EXCHANGE RELATIVE
+                                        axios.put(`/api/stores_store/${store.id}/`, {
                                                     openYn: 'Y',
                                                 });
                                         store.openYn = 'Y';

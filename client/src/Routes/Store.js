@@ -28,7 +28,7 @@ class StoreView extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("/api/reviews_review/") //URL EXCHANGE RELATIVE
+        axios.get("/api/reviews_review/")
             .then((res) => {
                 let reviews = res.data.filter(
                     (elt) => {
@@ -38,7 +38,7 @@ class StoreView extends React.Component {
                         return false;
                     }
                 );
-                axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+                axios.get("/api/users_user/")
                             .then((res) => {
                                 this.setState({
                                     users: res.data,

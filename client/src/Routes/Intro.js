@@ -25,7 +25,7 @@ function Intro({authenticated, location}) {
         let url;
         let reactRestApiToken = process.env.REACT_APP_KAKAO_KEY_API;
         if(process.env.REACT_APP_STATE === 'local') {
-            let redirect_uri = '/login/kakao/callback/'; //URL EXCHANGE RELATIVE
+            let redirect_uri = '/login/kakao/callback/';
             url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         } else if(process.env.REACT_APP_STATE === 'local:dev') {
             let redirect_uri = '/login/kakao/callback/';
@@ -43,13 +43,13 @@ function Intro({authenticated, location}) {
     const guestLogin = (res) => {
         let url;
         if(process.env.REACT_APP_STATE === 'local') {
-            url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
+            url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'
         } else if(process.env.REACT_APP_STATE === 'local:dev') {
-            url =  '/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
+            url =  '/makingCookie/guest/pocketmarket.official@gmail.com'
         } else if(process.env.REACT_APP_STATE === 'dev') {
             url = "/makingCookie/guest/pocketmarket.official@gmail.com";
         } else if(process.env.REACT_APP_STATE === 'server:appDeploy') {
-            url =  'http://13.124.90.138:3000/makingCookie/guest/pocketmarket.official@gmail.com'  // URL EXCHANGE RELATIVE
+            url =  'http://13.124.90.138:3000/makingCookie/guest/pocketmarket.official@gmail.com'
         }
         window.location.href = url;
     };

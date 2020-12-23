@@ -35,16 +35,14 @@ class StoreJSX extends React.Component {
         this.setState({user_email});
         let userId;
 
-        //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
-        // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
+        axios.get("/api/users_user/")
             .then((res) => {
                 userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
                 }).id;
-                axios.post("/storeLike/", { // URL EXCHANGE RELATIVE
+                axios.post("/storeLike/", {
                     "storeId": this.props.data.id,
                     "userId": userId,
                 })
@@ -86,17 +84,13 @@ class StoreJSX extends React.Component {
                                         let id = this.state.likeId;
                                         if(this.state.user_email !== 'pocketmarket.official@gmail.com'){
                                             if(id === "") {
-                                            // axios.post("http://localhost:8000/api/stores_storeLike/", { //URL EXCHANGE LOCAL
-                                            axios.post("/api/stores_storeLike/", { // URL EXCHANGE RELATIVE
-                                            // axios.post("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_storeLike/", { //URL EXCHANGE SERVER
+                                            axios.post("/api/stores_storeLike/", {
                                                 likeYn: 'Y',
                                                 user: this.state.userId,
                                                 store: this.state.storeId,
                                             })
                                             .then(() => {
-                                                // axios.post("http://localhost:8000/storeLike/", { //URL EXCHANGE LOCAL
-                                                axios.post("/storeLike/", { // URL EXCHANGE RELATIVE
-                                                // axios.post("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/storeLike/", { //URL EXNCAHNGE SERVER
+                                                axios.post("/storeLike/", {
                                                     "storeId": this.props.data.id,
                                                     "userId": this.state.userId,
                                                 })
@@ -110,17 +104,13 @@ class StoreJSX extends React.Component {
                                             })
                                             } else {
                                                 if(this.state.likeYn === 'Y') {
-                                                    // axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE LOCAL
-                                                    axios.put(`/api/stores_storeLike/${id}/`, { //URL EXCHANGE RELATIVE
-                                                    // axios.put(`http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE SERVER
+                                                    axios.put(`/api/stores_storeLike/${id}/`, {
                                                         likeYn: 'N',
                                                         user: this.state.userId,
                                                         store: this.state.storeId,
                                                     })
                                                     .then(() => {
-                                                        // axios.post("http://localhost:8000/storeLike/", { //URL EXCHANGE LOCAL
-                                                        axios.post("/storeLike/", { // URL EXCHANGE RELATIVE
-                                                        // axios.post("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/storeLike/", { //URL EXCHANGE SERVER
+                                                        axios.post("/storeLike/", {
                                                             "storeId": this.props.data.id,
                                                             "userId": this.state.userId,
                                                         })
@@ -133,17 +123,13 @@ class StoreJSX extends React.Component {
                                                         })
                                                     })
                                                 } else if(this.state.likeYn === 'N') {
-                                                    // axios.put(`http://localhost:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE LOCAL
-                                                    axios.put(`/api/stores_storeLike/${id}/`, { //URL EXCHANGE RELATIVE
-                                                    // axios.put(`http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/stores_storeLike/${id}/`, { //URL EXCHANGE SERVER
+                                                    axios.put(`/api/stores_storeLike/${id}/`, {
                                                         likeYn: 'Y',
                                                         user: this.state.userId,
                                                         store: this.state.storeId,
                                                     })
                                                     .then(() => {
-                                                        // axios.post("http://localhost:8000/storeLike/", { //URL EXCHANGE LOCAL
-                                                        axios.post("/storeLike/", { //URL EXCHANGE RELATIVE
-                                                        // axios.post("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/storeLike/", { //URL EXCHANGE SERVER
+                                                        axios.post("/storeLike/", {
                                                             "storeId": this.props.data.id,
                                                             "userId": this.state.userId,
                                                         })

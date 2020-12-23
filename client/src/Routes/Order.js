@@ -24,10 +24,10 @@ function makeTokenSaveScript(token) {
         // let userId;
         //
         // // if(!user_email) window.location.href = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/'; // URL EXCHANGE LOCAL
-        // if(!user_email) window.location.href = '/'; // URL EXCHANGE RELATIVE
+        // if(!user_email) window.location.href = '/';
         // // if(!user_email) window.location.href = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/'; // URL EXCHANGE SERVER
         // //axios.get("http://localhost:8000/api/users_user/") // URL EXCHANGE LOCAL
-        // axios.get("/api/users_user/") // URL EXCHANGE RELATIVE
+        // axios.get("/api/users_user/")
         // // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/users_user/") // URL EXCHANGE SERVER
         //     .then((res) => {
         //         userId = res.data.find((elt) => {
@@ -39,7 +39,7 @@ function makeTokenSaveScript(token) {
         // let transData = {"userId":userId, 'token':token};
         //
         // // axios.post('http://localhost:8000/saveToken/', transData); //URL EXCHANGE LOCAL
-        // axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
+        // axios.post('/saveToken/', transData)
         // // axios.post('http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/saveToken/', transData) //URL EXCHANGE SERVER
     }
 
@@ -99,19 +99,17 @@ class Order extends React.Component {
         let user_email = cookieCheck_rejectGuest();
         let fcmToken = cookie.load("fcmToken");
 
-        console.log(fcmToken);
         if(fcmToken){
-            console.log(user_email);
             let transData = {"user_email":user_email, "fcmToken":fcmToken};
 
-            axios.post('/saveToken/', transData) //URL EXCHANGE RELATIVE
+            axios.post('/saveToken/', transData)
                 .then((res)=>{
 
                 });
         }
 
 
-        axios.get("/api/stores_store/") // URL EXCHANGE RELATIVE
+        axios.get("/api/stores_store/")
         .then((res) => {
             let store = res.data.find(
                 (elt) => {
@@ -124,7 +122,7 @@ class Order extends React.Component {
             let storeId = store.id;
             let storeCd = store.storeCd;
             let brandCd = store.brandCd;
-            axios.get("/api/stores_pos/") // URL EXCHANGE RELATIVE
+            axios.get("/api/stores_pos/")
             .then((res) => {
                 let keymapCd = res.data.find(
                     (elt) => {
@@ -133,7 +131,7 @@ class Order extends React.Component {
                         }
                     }
                 ).keymapCd;
-                axios.get("/api/keymaps_touchGroup/") //URL EXCHANGE RELATIVE
+                axios.get("/api/keymaps_touchGroup/")
                 .then((res) => {
                     let touch_group = res.data.filter(
                         (elt) => {
@@ -145,7 +143,7 @@ class Order extends React.Component {
                     return [touch_group, storeId, keymapCd];
                 })
                 .then((arr) => {
-                    axios.get("/api/keymaps_keymap/") //URL EXCHANGE RELATIVE
+                    axios.get("/api/keymaps_keymap/")
                     .then((res) => {
                         let keymap = res.data.filter(
                             (elt) => {
@@ -185,15 +183,11 @@ class Order extends React.Component {
         });
 
         // 각 item에 대해서 옵션 연결 성공
-        // axios.get("http://localhost:8000/api/items_item/") //URL EXCHANGE LOCAL
-        axios.get("/api/items_item/") //URL EXCHANGE RELATIVE
-        // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/items_item/") //URL EXCHANGE SERVER
+        axios.get("/api/items_item/")
         .then((res) => {
             let item_data = res.data;
             let options = {};
-        // axios.get("http://localhost:8000/api/items_itemAdd/") //URL EXCHANGE LOCAL
-        axios.get("/api/items_itemAdd/") //URL EXCHANGE RELATIVE
-        // axios.get("http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000/api/items_itemAdd/") //URL EXCHANGE SERVER
+        axios.get("/api/items_itemAdd/")
             .then((res) => {
                 res.data.map((item) => {
                     let itemAddCd = item.itemAddCd;
