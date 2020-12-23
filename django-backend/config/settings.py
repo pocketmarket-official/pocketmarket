@@ -213,11 +213,11 @@ if STATE == "local:start":
     DATABASES = {
         'default' : {
             'ENGINE' : 'django.db.backends.mysql',
-            'NAME' : 'pocketMarket_dev',
-            'USER' : 'admin',
-            'PASSWORD' : os.environ.get("DB_ADMIN_PASSWORD"),
-            'PORT' : '3306',
-            'HOST' : 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
+            'NAME' : os.environ.get("DB_DEV_NAME"),
+            'USER' : os.environ.get("DB_DEV_USER"),
+            'PASSWORD' : os.environ.get("DB_DEV_PASSWORD"),
+            'PORT' : os.environ.get("DB_DEV_PORT"),
+            'HOST' : os.environ.get("DB_DEV_HOST"),
             'OPTIONS' : {
                 'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
                 # 'charset': 'utf8mb4',
@@ -235,11 +235,11 @@ elif STATE == "local:dev":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'pocketMarket_dev',
-            'USER': 'admin',
-            'PASSWORD': os.environ.get("DB_ADMIN_PASSWORD"),
-            'PORT': '3306',
-            'HOST': 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
+            'NAME': os.environ.get("DB_DEV_NAME"),
+            'USER': os.environ.get("DB_DEV_USER"),
+            'PASSWORD': os.environ.get("DB_DEV_PASSWORD"),
+            'PORT': os.environ.get("DB_DEV_PORT"),
+            'HOST': os.environ.get("DB_DEV_HOST"),
             'OPTIONS': {
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
                 # 'charset': 'utf8mb4',
@@ -253,11 +253,11 @@ elif STATE == "server:appDeploy":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'pocketMarket_dev',
-            'USER': 'admin',
-            'PASSWORD': os.environ.get("DB_ADMIN_PASSWORD"),
-            'PORT': '3306',
-            'HOST': 'pocketmarket-mysql.cdufdbmrynds.ap-northeast-2.rds.amazonaws.com',
+            'NAME': os.environ.get("DB_DEV_NAME"),
+            'USER': os.environ.get("DB_DEV_USER"),
+            'PASSWORD': os.environ.get("DB_DEV_PASSWORD"),
+            'PORT': os.environ.get("DB_DEV_PORT"),
+            'HOST': os.environ.get("DB_DEV_HOST"),
             'OPTIONS': {
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
                 # 'charset': 'utf8mb4',
@@ -280,12 +280,16 @@ elif STATE == "dev":
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'HOST': os.environ.get("RDS_HOST"), # endpoint
-            'NAME': os.environ.get("RDS_NAME"), # amazon RDS DB identifier
-            'USER': os.environ.get("RDS_USER"),
-            'PASSWORD': os.environ.get("RDS_PASSOWRD"),
-            'PORT': '5432',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get("DB_REAL_NAME"),
+            'USER': os.environ.get("DB_REAL_USER"),
+            'PASSWORD': os.environ.get("DB_REAL_PASSWORD"),
+            'PORT': os.environ.get("DB_REAL_PORT"),
+            'HOST': os.environ.get("DB_REAL_HOST"),
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                # 'charset': 'utf8mb4',
+            },
         }
     }
 
