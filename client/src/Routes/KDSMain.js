@@ -330,9 +330,7 @@ class KDSMain extends React.Component{
                     {/*        window.location.reload();*/}
                     {/*        }}>매장변경</buton>*/}
 
-                        <a href="/kds/insertStoreCd">
-                            <buton className="myButton">매장변경</buton>
-                        </a>
+                        <buton className="myButton" onClick={() => {window.location.href='/kds/insertStoreCd'}}>매장변경</buton>
                         {
                             this.state.store.openYn == 'Y' ?
                                 <>
