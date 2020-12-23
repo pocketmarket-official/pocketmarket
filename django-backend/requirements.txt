@@ -14,7 +14,6 @@ cached-property==1.5.2
 cachetools==4.1.1
 cairocffi==1.2.0
 cement==2.8.2
-ceph==1.0.0
 ceph-volume==1.0.0
 cephfs==2.0.0
 cephfs-shell==0.0.1
