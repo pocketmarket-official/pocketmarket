@@ -45,7 +45,7 @@ def kakao_login(request):
     state = os.environ.get('STATE')
 
     if state == 'local:start' or state == 'local:build':
-        redirect_uri = '/login/kakao/callback/' #URL EXCHANGE RELATIVE
+        redirect_uri = '/login/kakao/callback/'
     elif state == 'dev':
         redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
     elif state == 'server:appDeploy':
@@ -115,19 +115,19 @@ def kakao_callback(request):
 
 
                     if state == 'local:start' or state == 'local:dev':
-                        url = f'http://localhost:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
+                        url = f'http://localhost:3000/makingCookie/{access_token}/{email}'
                     elif state == 'local:build':
                         url = 'http://localhost:3000/index/'
                     elif state == 'dev':
                         url = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/index/'
                     elif state == 'server:appDeploy':
-                        url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'  # URL EXCHANGE RELATIVE
+                        url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'
                     return HttpResponseRedirect(url)
                 else:
                     raise KakaoException()
     except KakaoException:
         if state == 'local:start':
-            url = '/login/'  # URL EXCHANGE RELATIVE
+            url = '/login/'
         elif state == 'local:build':
             url = 'http://localhost:8000/login/'
         elif state == 'dev':
@@ -525,9 +525,7 @@ def trade(request):
                 cardLogObj.orgSeq = None
             cardLogObj.save()
 
-        # data = {'url': 'http://localhost:3000/order/status'} #URL EXCHANGE LOCAL
-        data = {'url': '/order/status'} #URL EXCHANGE RELATIVE
-        # data = {'url': 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000/order/status'} #URL EXCHANGE SERVER
+        data = {'url': '/order/status'}
 
 
         # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
