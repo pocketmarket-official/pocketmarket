@@ -186,16 +186,78 @@ def trade(request):
         saleDetailList = []
         cardLogList = []
         saleDetailObjList = []
+        tradeErrorCode = '000'
+        tradeErrorMsg = ''
         # constant
         compCd = 'C0028'
-        terminalId = '0001000200'
+        terminalId = 'pocmaket1m'
         vanCd = '11'
-        # parameter fromrequest
+        # parameter from request
+        if(request.body == None):
+            tradeErrorCode = '010'
+            tradeErrorMsg = "requestBody doesn't exist"
+            data = {'url': '/order/status', 'tradeErrorCode':tradeErrorCode, 'tradeErrorMsg':tradeErrorMsg}
+            response = JsonResponse(data)
+            return response
+
+        requestBody = json.loads(request.body)
+        if (requestBody == None):
+            tradeErrorCode = '011'
+            tradeErrorMsg = "requestBody json load failure"
+            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+            response = JsonResponse(data)
+            return response
+
+        if (requestBody['storeId'] == None):
+            tradeErrorCode = '012'
+            tradeErrorMsg = "requestBody storeId doesn't exist"
+            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+            response = JsonResponse(data)
+            return response
+
+        if (requestBody['userId'] == None):
+            tradeErrorCode = '013'
+            tradeErrorMsg = "requestBody userId doesn't exist"
+            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+            response = JsonResponse(data)
+            return response
+
+        sellItemList = requestBody['sellItemList']
+        if (sellItemList == None):
+            tradeErrorCode = '013'
+            tradeErrorMsg = "requestBody sellItemList doesn't exist"
+            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+            response = JsonResponse(data)
+            return response
+
+        payment = json.loads(request.body)['data']
+        if (payment == None):
+            tradeErrorCode = '014'
+            tradeErrorMsg = "requestBody data(payment) doesn't exist"
+            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+            response = JsonResponse(data)
+            return response
+
         store = Store.objects.get(id=json.loads(request.body)['storeId'])
+        user = User.objects.get(id=json.loads(request.body)['userId'])
+
+        if (store == None):
+            tradeErrorCode = '020'
+            tradeErrorMsg = "store object doesn't exist"
+            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+            response = JsonResponse(data)
+            return response
+
+        if (user == None):
+            tradeErrorCode = '021'
+            tradeErrorMsg = "user object doesn't exist"
+            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+            response = JsonResponse(data)
+            return response
+
         storeCd = store.storeCd
         storeName = store.storeName
-        user = User.objects.get(id=json.loads(request.body)['userId'])
-        # storeCd = f'{json.loads(request.body)["storeCd"]:05}'
+
         posNo = '01'
         dcAmt = 0.0
 
@@ -209,6 +271,17 @@ def trade(request):
         mealCd = '9'
         mealName = '기타'
         billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')
+        if billNo:
+            if billNo > '9999':
+                tradeErrorCode = '030'
+                tradeErrorMsg = "order overflow"
+                data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+                response = JsonResponse(data)
+                return response
+            else:
+                billNo = f'{int(billNo[0].billNo) + 1:04}'
+        else:
+            billNo = '0001'
 
         ##definition for trade variables
         # saleHeader
@@ -226,16 +299,28 @@ def trade(request):
         cardInstFlag = 'N'
         cardInstMont = 0
 
-        if billNo:
-            billNo = f'{int(billNo[0].billNo) + 1:04}'
-        else:
-            billNo = '0001'
+
 
         i = 1
-        for item in json.loads(request.body)['sellItemList']:
+        detailSupAmt = 0.0
+        detailTaxAmt = 0.0
+        for item in sellItemList:
             target = Item.objects.get(itemCd=item['itemCd'])
+            if (target == None):
+                tradeErrorCode = '022'
+                tradeErrorMsg = "target object doesn't exist"
+                data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+                response = JsonResponse(data)
+                return response
             headerTotSaleAmt += target.price * item['qty']  # sum(saleprice * qty)
             headerTotQty += item['qty']
+            supAmt = round(((target.price * item['qty']) - dcAmt) / 1.1), #saleAmt*1.1
+            taxAmt = round(((target.price * item['qty']) - dcAmt) - (((target.price * item['qty']) - dcAmt) / 1.1)), #saleAmt-supAmt
+            #할당하고 난 결과물이 tuple로 나옴. 첫번째 인자만 다시 받아와야 함
+            supAmt = supAmt[0]
+            taxAmt = taxAmt[0]
+            detailSupAmt += supAmt
+            detailTaxAmt += taxAmt
             saleDetailObj = SaleDetail.objects.create(
                 storeCd=storeCd,
                 saleDt=saleDt,
@@ -255,8 +340,8 @@ def trade(request):
                 orgSalePrice=target.price,
                 totSaleAmt=target.price * item['qty'],
                 saleAmt=(target.price * item['qty']) - dcAmt, #totSaleAmt - dcAmt
-                supAmt=((target.price * item['qty']) - dcAmt) / 1.1, #saleAmt*1.1
-                taxAmt=((target.price * item['qty']) - dcAmt) - (((target.price * item['qty']) - dcAmt) / 1.1), #saleAmt-supAmt
+                supAmt=supAmt,
+                taxAmt=taxAmt,
                 offTaxAmt=0.0,
                 taxYn='Y',
                 totDcAmt=0.0,
@@ -269,7 +354,7 @@ def trade(request):
             i += 1
 
         i = 1
-        payment = json.loads(request.body)['data']
+
         if payment['method'] == 'card':
             headerCardAmt += payment['price']  # 카드결제금액 더해가는 방식
             cardSeq = i
@@ -314,10 +399,37 @@ def trade(request):
             i += 1
 
         headerSaleAmt = headerTotSaleAmt - headerTotDcAmt
-        headerSupAmt = headerSaleAmt / 1.1
+        headerSupAmt = round(headerSaleAmt / 1.1)
+        # 할당하고 난 결과물이 tuple로 나옴. 첫번째 인자만 다시 받아와야 함
+        headerSupAmt = headerSupAmt[0]
         headerTaxAmt = headerSaleAmt - headerSupAmt
         headerOffTaxAmt = 0.0
 
+        #detail 공급가액 합계와 header 공급가액이 다르면
+        if(detailSupAmt != headerSupAmt):
+            #다르긴 한데 10원 미만으로 차이나면 header 공급가액을 detail 공급가액의 합계로 바꾸고
+            if(abs(detailSupAmt - headerSupAmt)<10):
+                headerSupAmt = detailSupAmt
+            #10원 이상 차이나면 에러
+            else:
+                tradeErrorCode = '040'
+                tradeErrorMsg = "detailSupAmt and headerSupAmt doesn't matched"
+                data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+                response = JsonResponse(data)
+                return response
+
+        # detail 부가세액 합계와 header 부가세액이 다르면
+        if (detailTaxAmt != headerTaxAmt):
+            # 다르긴 한데 10원 미만으로 차이나면 header 부가세액을 detail 부가세액의 합계로 바꾸고
+            if (abs(detailTaxAmt - headerTaxAmt) < 10):
+                headerSupAmt = detailSupAmt
+            # 10원 이상 차이나면 에러
+            else:
+                tradeErrorCode = '040'
+                tradeErrorMsg = "detailSupAmt and headerSupAmt doesn't matched"
+                data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+                response = JsonResponse(data)
+                return response
 
         saleHeaderObj = SaleHeader.objects.create(
             storeCd=storeCd,
