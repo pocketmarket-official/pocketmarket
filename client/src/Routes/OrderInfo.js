@@ -106,8 +106,9 @@ class OrderInfo extends React.Component {
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">포장선택</div>
                         <div className="orderinfo__choices" style={{paddingLeft: '26px'}}>
-                            <input id="eatIn" type="radio" name="where" value="Eat in" defaultChecked={true} /><label htmlFor="eatIn">현장식사</label>
-                            <input id="takeOut" type="radio" name="where" value="Take out" /><label htmlFor="takeOut" style={{marginRight: '20px'}}>방문포장</label>
+                            <input id="takeOut" type="radio" name="where" value="Take out" defaultChecked={true}/><label htmlFor="takeOut" style={{marginRight: '20px'}}>방문포장</label>
+                            <input id="eatIn" type="radio" name="where" value="Eat in" disabled={true}/><label htmlFor="eatIn">현장식사</label>
+
                         </div>
                     </div>
                     {/*<div className="orderinfo__options">*/}

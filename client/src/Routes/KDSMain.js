@@ -69,7 +69,7 @@ class KDSMain extends React.Component{
         let storeCd = cookie.load("storeCd");
 
         if (!storeCd){
-            window.location.href = 'kds/insertStoreCd/';
+            window.location.href = '/insertStoreCd/';
     //         storeCd = prompt('점포코드를 입력하세요.');
     //
     //         const expires = new Date();
@@ -295,7 +295,7 @@ class KDSMain extends React.Component{
 
                     {/********************************************/}
                     {/*********20201222 Jhonny cloche Ma**********/}
-                    {/*매장변경 원본. hybrid app에서 prompt안먹어서 변경.*/}
+                    {/*매장설정 원본. hybrid app에서 prompt안먹어서 변경.*/}
                     {/********************************************/}
                     {/*    <buton className="myButton" onClick={(e) => {*/}
                     {/*        e.preventDefault();*/}
@@ -324,9 +324,9 @@ class KDSMain extends React.Component{
                     {/*                });*/}
                     {/*        }*/}
                     {/*        window.location.reload();*/}
-                    {/*        }}>매장변경</buton>*/}
+                    {/*        }}>매장설정</buton>*/}
 
-                        <buton className="myButton" onClick={() => {window.location.href='/kds/insertStoreCd'}}>매장변경</buton>
+                        <buton className="myButton" onClick={() => {window.location.href='/kds/insertStoreCd'}}>매장설정</buton>
                         {
                             this.state.store.openYn == 'Y' ?
                                 <>
