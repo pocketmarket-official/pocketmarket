@@ -26,6 +26,7 @@ class OrderInfo extends React.Component {
     componentDidMount(){
         let user_email = cookieCheck_rejectGuest();
 
+
         axios.get("/api/users_user/")
         .then((res) => {
             let userId = res.data.find((elt) => {
@@ -35,6 +36,7 @@ class OrderInfo extends React.Component {
             }).id;
             this.setState({ userId: userId });
         });
+
     }
 
     render() {
@@ -99,7 +101,9 @@ class OrderInfo extends React.Component {
             tradesInfo.push(tradesInfoRow);
         }
 
+
         return (
+
             <>
                 <HeaderBiz/>
                 <div className="orderinfo">
