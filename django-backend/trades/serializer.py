@@ -8,6 +8,7 @@ from trades.models import CardLog
 from trades.models import PurchaseLog
 from trades.models import SoldoutLog
 from trades.models import CornerStateLog
+from trades.models import ErrorLog
 from trades.models import Test
 
 
@@ -249,6 +250,27 @@ class CornerStateLogSerializer(serializers.ModelSerializer):
             'modDt',
             'modUs'
         )
+
+class ErrorLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ErrorLog
+        fields = (
+            'storeId',
+            'saleDt',
+            'posNo',
+            'billNo',
+            'userId',
+            'itemId',
+            'tradeErrorCode',
+            'tradeErrorMsg',
+            'context',
+            'exception',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs',
+        )
+
 
 
 class TestSerializer(serializers.ModelSerializer):

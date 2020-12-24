@@ -21,6 +21,8 @@ from trades.models import SoldoutLog
 from trades.serializer import SoldoutLogSerializer
 from trades.models import CornerStateLog
 from trades.serializer import CornerStateLogSerializer
+from trades.models import ErrorLog
+from trades.serializer import ErrorLogSerializer
 from trades.models import Test
 from trades.serializer import TestSerializer
 
@@ -69,6 +71,11 @@ class SoldoutLogView(viewsets.ModelViewSet):
 class CornerStateLogView(viewsets.ModelViewSet):
     serializer_class = CornerStateLogSerializer
     queryset = CornerStateLog.objects.all()
+
+class ErrorLogView(viewsets.ModelViewSet):
+
+    serializer_class = ErrorLogSerializer
+    queryset = ErrorLog.objects.all()
 
 
 class TestView(viewsets.ModelViewSet):

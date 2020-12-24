@@ -15,11 +15,14 @@ from items.models import Item
 from trades.models import SaleHeader
 from trades.models import SaleDetail
 from trades.models import CardLog
+from trades.models import ErrorLog
 from stores.models import StoreLike
 from stores.models import Store
 from time import localtime
 from time import strftime
 from users.models import User
+
+from lib.BootpayApi import BootpayApi
 
 from fcm_django.models import FCMDevice
 
@@ -178,7 +181,6 @@ def saveTokenStore(request):
 
 
 @csrf_exempt
-@transaction.atomic
 def trade(request):
     try:
         # variable defintion
@@ -186,74 +188,82 @@ def trade(request):
         saleDetailList = []
         cardLogList = []
         saleDetailObjList = []
+        # variable for error response
+        context = ''
         tradeErrorCode = '000'
         tradeErrorMsg = ''
+        tradeErrorCode = '000'
+        tradeErrorMsg = ''
+        # variable for ErrorLog
+        storeId = ''
+        saleDt = ''
+        posNo = ''
+        billNo = ''
+        userId = ''
+        itemId = ''
+        # variable for cancelation
+        bootpay = BootpayApi(
+            os.environ.get("BOOTPAY_WEB_APPLICATION_ID"),
+            os.environ.get("BOOTPAY_PRIVATE_KEY")
+        )
+
         # constant
         compCd = 'C0028'
         terminalId = 'pocmaket1m'
         vanCd = '11'
+
         # parameter from request
-        if(request.body == None):
-            tradeErrorCode = '010'
-            tradeErrorMsg = "requestBody doesn't exist"
-            data = {'url': '/order/status', 'tradeErrorCode':tradeErrorCode, 'tradeErrorMsg':tradeErrorMsg}
-            response = JsonResponse(data)
-            return response
+        tradeErrorCode = '010'
+        tradeErrorMsg = "requestBody doesn't exist"
+        requestBody = request.body
 
-        requestBody = json.loads(request.body)
-        if (requestBody == None):
-            tradeErrorCode = '011'
-            tradeErrorMsg = "requestBody json load failure"
-            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-            response = JsonResponse(data)
-            return response
+        tradeErrorCode = '011'
+        tradeErrorMsg = "requestBody json load failure"
+        requestBodyJson = json.loads(requestBody)
 
-        if (requestBody['storeId'] == None):
-            tradeErrorCode = '012'
-            tradeErrorMsg = "requestBody storeId doesn't exist"
-            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-            response = JsonResponse(data)
-            return response
+        tradeErrorCode = '012'
+        tradeErrorMsg = "requestBody userId doesn't exist"
+        userId = requestBodyJson['userId']
 
-        if (requestBody['userId'] == None):
-            tradeErrorCode = '013'
-            tradeErrorMsg = "requestBody userId doesn't exist"
-            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-            response = JsonResponse(data)
-            return response
+        tradeErrorCode = '013'
+        tradeErrorMsg = "requestBody storeId doesn't exist"
+        storeId = requestBodyJson['storeId']
 
-        sellItemList = requestBody['sellItemList']
-        if (sellItemList == None):
-            tradeErrorCode = '013'
-            tradeErrorMsg = "requestBody sellItemList doesn't exist"
-            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-            response = JsonResponse(data)
-            return response
+        tradeErrorCode = '014'
+        tradeErrorMsg = "requestBody sellItemList doesn't exist"
+        sellItemList = requestBodyJson['sellItemList']
 
-        payment = json.loads(request.body)['data']
-        if (payment == None):
-            tradeErrorCode = '014'
-            tradeErrorMsg = "requestBody data(payment) doesn't exist"
-            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-            response = JsonResponse(data)
-            return response
+        tradeErrorCode = '015'
+        tradeErrorMsg = "requestBody data(payment) doesn't exist"
+        payment = requestBodyJson['data']
 
-        store = Store.objects.get(id=json.loads(request.body)['storeId'])
-        user = User.objects.get(id=json.loads(request.body)['userId'])
+        tradeErrorCode = '020'
+        tradeErrorMsg = "user object doesn't exist"
+        context = 'userId = ' + str(userId)
+        user = User.objects.get(id=userId)
 
-        if (store == None):
-            tradeErrorCode = '020'
-            tradeErrorMsg = "store object doesn't exist"
-            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-            response = JsonResponse(data)
-            return response
+        tradeErrorCode = '021'
+        tradeErrorMsg = "store object doesn't exist"
+        context = 'storeId = ' + str(storeId)
+        store = Store.objects.get(id=storeId)
 
-        if (user == None):
-            tradeErrorCode = '021'
-            tradeErrorMsg = "user object doesn't exist"
-            data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-            response = JsonResponse(data)
-            return response
+        if store.openYn == 'N':
+            # bootpay accesstoken 받아오기
+            bootpayAceessToken = bootpay.get_access_token()
+            # bootpay accesstoken의 상태를 확인하고
+            if bootpayAceessToken['status'] == 200:
+                # bootpay에 취소 요청을 날린다.
+                cancel_result = bootpay.cancel(payment['receipt_id'],
+                                               payment['price'],
+                                               user.email,
+                                               store.storeName + ' 매장이 마감되었음')
+                # 취소 되었다면
+                if cancel_result['status'] == 200:
+                    data = {'url': '/order/status',
+                            'result': '202',
+                            'context': '주문이 접수되지 않았습니다. 주문하시는 동안에 가게가 마감해버렸나봐요 ㅜㅜ'}
+                    response = JsonResponse(data)
+                    return response
 
         storeCd = store.storeCd
         storeName = store.storeName
@@ -272,10 +282,12 @@ def trade(request):
         mealName = '기타'
         billNo = SaleHeader.objects.filter(storeCd=storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')
         if billNo:
-            if billNo > '9999':
-                tradeErrorCode = '030'
-                tradeErrorMsg = "order overflow"
-                data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
+            if billNo[0].billNo > '9999':
+                data = {'url': '/order/status',
+                        'result': '500',
+                        'tradeErrorCode': '030',
+                        'tradeErrorMsg': "order overflow",
+                        'context': context}
                 response = JsonResponse(data)
                 return response
             else:
@@ -299,62 +311,7 @@ def trade(request):
         cardInstFlag = 'N'
         cardInstMont = 0
 
-
-
         i = 1
-        detailSupAmt = 0.0
-        detailTaxAmt = 0.0
-        for item in sellItemList:
-            target = Item.objects.get(itemCd=item['itemCd'])
-            if (target == None):
-                tradeErrorCode = '022'
-                tradeErrorMsg = "target object doesn't exist"
-                data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-                response = JsonResponse(data)
-                return response
-            headerTotSaleAmt += target.price * item['qty']  # sum(saleprice * qty)
-            headerTotQty += item['qty']
-            supAmt = round(((target.price * item['qty']) - dcAmt) / 1.1), #saleAmt*1.1
-            taxAmt = round(((target.price * item['qty']) - dcAmt) - (((target.price * item['qty']) - dcAmt) / 1.1)), #saleAmt-supAmt
-            #할당하고 난 결과물이 tuple로 나옴. 첫번째 인자만 다시 받아와야 함
-            supAmt = supAmt[0]
-            taxAmt = taxAmt[0]
-            detailSupAmt += supAmt
-            detailTaxAmt += taxAmt
-            saleDetailObj = SaleDetail.objects.create(
-                storeCd=storeCd,
-                saleDt=saleDt,
-                posNo=posNo,
-                billNo=billNo,
-                seq=i,
-                saleFlag=saleFlag,
-                orderType=str(item['orderType']),
-                itemCd=item['itemCd'],
-                itemName=target.itemName,
-                qty=item['qty'],
-                itemSellGroup=str(item['itemSellGroup']),
-                itemSellLevel=str(item['itemSellLevel']),
-                itemSellType=str(item['itemSellType']),
-                saleCost=target.price,
-                salePrice=target.price - dcAmt,
-                orgSalePrice=target.price,
-                totSaleAmt=target.price * item['qty'],
-                saleAmt=(target.price * item['qty']) - dcAmt, #totSaleAmt - dcAmt
-                supAmt=supAmt,
-                taxAmt=taxAmt,
-                offTaxAmt=0.0,
-                taxYn='Y',
-                totDcAmt=0.0,
-                pointDcAmt=0.0,
-                saleTime=saleTime,
-                sendYn='N',
-            )
-            saleDetailObjList.append(saleDetailObj)
-
-            i += 1
-
-        i = 1
-
         if payment['method'] == 'card':
             headerCardAmt += payment['price']  # 카드결제금액 더해가는 방식
             cardSeq = i
@@ -398,97 +355,179 @@ def trade(request):
 
             i += 1
 
-        headerSaleAmt = headerTotSaleAmt - headerTotDcAmt
-        headerSupAmt = round(headerSaleAmt / 1.1)
-        # 할당하고 난 결과물이 tuple로 나옴. 첫번째 인자만 다시 받아와야 함
-        headerSupAmt = headerSupAmt[0]
-        headerTaxAmt = headerSaleAmt - headerSupAmt
-        headerOffTaxAmt = 0.0
+        with transaction.atomic():
+            i = 1
+            detailSupAmt = 0
+            detailTaxAmt = 0
+            for item in sellItemList:
+                tradeErrorCode = '022'
+                tradeErrorMsg = "target object doesn't exist"
+                context = 'itemCd = '+str(item['itemCd'])
+                target = Item.objects.get(itemCd=item['itemCd'])
+                itemId = target.id
+                #해당 제품이 품절되었으면
+                if target.remainCount == 0:
+                    # bootpay accesstoken 받아오기
+                    bootpayAcceessToken = bootpay.get_access_token()
+                    #bootpay accesstoken의 상태를 확인하고
+                    if bootpayAcceessToken['status'] == 200:
+                        #bootpay에 취소 요청을 날린다.
+                        cancel_result = bootpay.cancel(payment['receipt_id'],
+                                                       payment['price'],
+                                                       user.email,
+                                                       store.storeName+'의 '+target.itemName+' 제품이 품절되었음.')
+                        # 취소 되었다면
+                        if cancel_result['status'] == 200:
+                            data = {'url': '/order/status',
+                                    'result': '202',
+                                    'context': '주문이 접수되지 않았습니다.'
+                                               + target.itemName
+                                               + '품목이 주문하시는 동안 다 떨어졌나봐요 ㅜㅜ'}
+                            response = JsonResponse(data)
+                            return response
 
-        #detail 공급가액 합계와 header 공급가액이 다르면
-        if(detailSupAmt != headerSupAmt):
-            #다르긴 한데 10원 미만으로 차이나면 header 공급가액을 detail 공급가액의 합계로 바꾸고
-            if(abs(detailSupAmt - headerSupAmt)<10):
-                headerSupAmt = detailSupAmt
-            #10원 이상 차이나면 에러
-            else:
-                tradeErrorCode = '040'
-                tradeErrorMsg = "detailSupAmt and headerSupAmt doesn't matched"
-                data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-                response = JsonResponse(data)
-                return response
+                headerTotSaleAmt += target.price * item['qty']  # sum(saleprice * qty)
+                headerTotQty += item['qty']
+                supAmt = round(((target.price * item['qty']) - dcAmt) / 1.1) #saleAmt*1.1
+                taxAmt = round(((target.price * item['qty']) - dcAmt) - (((target.price * item['qty']) - dcAmt) / 1.1)) #saleAmt-supAmt
+                #할당하고 난 결과물이 tuple로 나옴. 첫번째 인자만 다시 받아와야 함
+                supAmt = supAmt
+                taxAmt = taxAmt
+                detailSupAmt += supAmt
+                detailTaxAmt += taxAmt
+                saleDetailObj = SaleDetail.objects.create(
+                    storeCd=storeCd,
+                    saleDt=saleDt,
+                    posNo=posNo,
+                    billNo=billNo,
+                    seq=i,
+                    saleFlag=saleFlag,
+                    orderType=str(item['orderType']),
+                    itemCd=item['itemCd'],
+                    itemName=target.itemName,
+                    qty=item['qty'],
+                    itemSellGroup=str(item['itemSellGroup']),
+                    itemSellLevel=str(item['itemSellLevel']),
+                    itemSellType=str(item['itemSellType']),
+                    saleCost=target.price,
+                    salePrice=target.price - dcAmt,
+                    orgSalePrice=target.price,
+                    totSaleAmt=target.price * item['qty'],
+                    saleAmt=(target.price * item['qty']) - dcAmt, #totSaleAmt - dcAmt
+                    supAmt=supAmt,
+                    taxAmt=taxAmt,
+                    offTaxAmt=0.0,
+                    taxYn='Y',
+                    totDcAmt=0.0,
+                    pointDcAmt=0.0,
+                    saleTime=saleTime,
+                    sendYn='N',
+                )
+                saleDetailObjList.append(saleDetailObj)
 
-        # detail 부가세액 합계와 header 부가세액이 다르면
-        if (detailTaxAmt != headerTaxAmt):
-            # 다르긴 한데 10원 미만으로 차이나면 header 부가세액을 detail 부가세액의 합계로 바꾸고
-            if (abs(detailTaxAmt - headerTaxAmt) < 10):
-                headerSupAmt = detailSupAmt
-            # 10원 이상 차이나면 에러
-            else:
-                tradeErrorCode = '040'
-                tradeErrorMsg = "detailSupAmt and headerSupAmt doesn't matched"
-                data = {'url': '/order/status', 'tradeErrorCode': tradeErrorCode, 'tradeErrorMsg': tradeErrorMsg}
-                response = JsonResponse(data)
-                return response
+                i += 1
 
-        saleHeaderObj = SaleHeader.objects.create(
-            storeCd=storeCd,
-            saleDt=saleDt,
-            posNo=posNo,
-            billNo=billNo,
-            saleFlag=saleFlag,
-            totQty=headerTotQty,
-            totSaleAmt=headerTotSaleAmt,
-            saleAmt=headerSaleAmt,
-            supAmt=headerSupAmt,
-            taxAmt=headerTaxAmt,
-            offTaxAmt=headerOffTaxAmt,
-            totDcAmt=headerTotDcAmt,
-            pointDcAmt=headerPointDcAmt,
-            pointDcCnt=headerPointDcCnt,
-            cardAmt=headerCardAmt,
-            kkmAmt=headerKkmAmt,
-            returnYn='N',
-            orgStoreCd='',
-            orgSaleDt='',
-            orgPosNo='',
-            orgBillNo='',
-            sendYn='N',
-            orderStatus='2',
-            user = user
-        )
+            headerSaleAmt = headerTotSaleAmt - headerTotDcAmt
+            headerSupAmt = round(headerSaleAmt / 1.1)
+            headerTaxAmt = headerSaleAmt - headerSupAmt
+            headerOffTaxAmt = 0.0
+
+            #detail 공급가액 합계와 header 공급가액이 다르면
+            if(detailSupAmt != headerSupAmt):
+                #다르긴 한데 10원 미만으로 차이나면 header 공급가액을 detail 공급가액의 합계로 바꾸고
+                if(abs(detailSupAmt - headerSupAmt)<10):
+                    headerSupAmt = detailSupAmt
+                #10원 이상 차이나면 에러
+                else:
+                    ErrorLog.objects.create(storeId=storeId, saleDt=saleDt, posNo=posNo,
+                                            billNo=billNo, userId=userId, itemId=itemId,
+                                            tradeErrorCode='040', tradeErrorMsg="detailSupAmt and headerSupAmt doesn't matched",
+                                            exception='',
+                                            context='storeCd=' + storeCd
+                                                   + ' saleDt=' + saleDt
+                                                   + ' posNo=' + posNo
+                                                   + ' billNo=' + billNo
+                                                   + ' headerSupAmt=' + str(headerSupAmt)
+                                                   + ' detailSupAmt=' + str(detailSupAmt))
 
 
-        cardLogObj = CardLog.objects.create(
-            storeCd=storeCd,
-            saleDt=saleDt,
-            posNo=posNo,
-            billNo=billNo,
-            seq=cardSeq,
-            saleFlag=saleFlag,
-            cardAmt=cardCardAmt,
-            cardNo=cardCardNo,
-            vanCd=cardVanCd,
-            cardCd=cardCardCd,
-            cardName=cardCardName,
-            apprNo=cardApprNo,
-            apprDt=cardApprDt,
-            apprTime=cardApprTime,
-            apprFlag='1',
-            instFlag=cardInstFlag,
-            instMonth=cardInstMont,
-            terminalId=cardTerminalId,
-            registerNo=cardRegisterNo,
-            returnYn='N',
-            orgStoreCd='',
-            orgSaleDt='',
-            orgPosNo='',
-            orgBillNo='',
-            orgSeq=None,
-            orgApprNo='',
-            remark='',
-            sendYn='N',
-        )
+            # detail 부가세액 합계와 header 부가세액이 다르면
+            if (detailTaxAmt != headerTaxAmt):
+                # 다르긴 한데 10원 미만으로 차이나면 header 부가세액을 detail 부가세액의 합계로 바꾸고
+                if (abs(detailTaxAmt - headerTaxAmt) < 10):
+                    headerTaxAmt = detailTaxAmt
+                # 10원 이상 차이나면 에러
+                else:
+                    ErrorLog.objects.create(storeId=storeId, saleDt=saleDt, posNo=posNo,
+                                            billNo=billNo, userId=userId, itemId=itemId,
+                                            tradeErrorCode='041',
+                                            tradeErrorMsg="detailTaxAmt and headerTaxAmt doesn't matched",
+                                            exception='',
+                                            context='storeCd=' + storeCd
+                                                    + ' saleDt=' + saleDt
+                                                    + ' posNo=' + posNo
+                                                    + ' billNo=' + billNo
+                                                    + ' headerSupAmt=' + str(headerTaxAmt)
+                                                    + ' detailSupAmt=' + str(detailTaxAmt))
+
+            saleHeaderObj = SaleHeader.objects.create(
+                storeCd=storeCd,
+                saleDt=saleDt,
+                posNo=posNo,
+                billNo=billNo,
+                saleFlag=saleFlag,
+                totQty=headerTotQty,
+                totSaleAmt=headerTotSaleAmt,
+                saleAmt=headerSaleAmt,
+                supAmt=headerSupAmt,
+                taxAmt=headerTaxAmt,
+                offTaxAmt=headerOffTaxAmt,
+                totDcAmt=headerTotDcAmt,
+                pointDcAmt=headerPointDcAmt,
+                pointDcCnt=headerPointDcCnt,
+                cardAmt=headerCardAmt,
+                kkmAmt=headerKkmAmt,
+                returnYn='N',
+                orgStoreCd='',
+                orgSaleDt='',
+                orgPosNo='',
+                orgBillNo='',
+                sendYn='N',
+                orderStatus='2',
+                user = user
+            )
+
+
+            cardLogObj = CardLog.objects.create(
+                storeCd=storeCd,
+                saleDt=saleDt,
+                posNo=posNo,
+                billNo=billNo,
+                seq=cardSeq,
+                saleFlag=saleFlag,
+                cardAmt=cardCardAmt,
+                cardNo=cardCardNo,
+                vanCd=cardVanCd,
+                cardCd=cardCardCd,
+                cardName=cardCardName,
+                apprNo=cardApprNo,
+                apprDt=cardApprDt,
+                apprTime=cardApprTime,
+                apprFlag='1',
+                instFlag=cardInstFlag,
+                instMonth=cardInstMont,
+                terminalId=cardTerminalId,
+                registerNo=cardRegisterNo,
+                returnYn='N',
+                orgStoreCd='',
+                orgSaleDt='',
+                orgPosNo='',
+                orgBillNo='',
+                orgSeq=None,
+                orgApprNo='',
+                remark='',
+                sendYn='N',
+            )
 
 
         saleHeaderRow = {
@@ -606,7 +645,6 @@ def trade(request):
             "T_SALE_D": saleDetailList,
             "T_CARD_L": cardLogList
         }
-        # trDataEncoded = json.dumps(trData, ensure_ascii=False)
         trData = json.dumps(trData)
 
 
@@ -623,22 +661,36 @@ def trade(request):
                 cardLogObj.orgSeq = None
             cardLogObj.save()
 
-        data = {'url': '/order/status'}
+        data = {'url': '/order/status', 'result':'200'}
 
 
         # cred = credentials.Certificate("../../pocket-market-ddc08-firebase-adminsdk-nlmru-0985fb13eb.json")
         # firebase_admin.initialize_app(cred)
         # device = FCMDevice.objects.all().first()
-        device = FCMDevice.objects.filter(registration_id=store.iosToken).first()
-
-        if(device) :
-            device.send_message("주문수신", storeName+'에 주문이 수신되었습니다.' )
+        if(store.iosToken):
+            device = FCMDevice.objects.filter(registration_id=store.iosToken).first()
+            if (device):
+                device.send_message("주문수신", storeName + '에 주문이 수신되었습니다.')
 
         response = JsonResponse(data)
         return response
 
     except Exception as ex:
         print(ex)
+        ErrorLog.objects.create(storeId=storeId,saleDt=saleDt,posNo=posNo,
+                                billNo=billNo, userId=userId, itemId=itemId,
+                                tradeErrorCode=tradeErrorCode, tradeErrorMsg=tradeErrorMsg,
+                                exception=str(ex), context=context)
+
+
+        data = {'url': '/order/status',
+                'result': '500',
+                'context':context,
+                'tradeErrorCode': tradeErrorCode,
+                'tradeErrorMsg': tradeErrorMsg}
+        response = JsonResponse(data)
+        return response
+
 
 
 @csrf_exempt

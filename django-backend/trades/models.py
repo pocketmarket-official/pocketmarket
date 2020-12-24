@@ -198,6 +198,24 @@ class CornerStateLog(models.Model):
     modUs = models.CharField(max_length=30,  null=True)
 
 
+class ErrorLog(models.Model):
+    storeId = models.CharField(max_length=10, default='')
+    saleDt = models.CharField(max_length=8, default='')
+    posNo = models.CharField(max_length=5, default='91')
+    billNo = models.CharField(max_length=10, default='')
+    userId = models.CharField(max_length=10, default='')
+    itemId = models.CharField(max_length=10, default='')
+    tradeErrorCode = models.CharField(max_length=3, blank=True)
+    tradeErrorMsg = models.CharField(max_length=100, default='')
+    context = models.CharField(max_length=255, default='')
+    exception = models.CharField(max_length=255, default='')
+    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insUs = models.CharField(max_length=30, null=True)
+    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modUs = models.CharField(max_length=30, null=True)
+
+
+
 class Test(models.Model):
     char = models.CharField(max_length=10, blank=True)
     image = models.ImageField(upload_to="images/test", null=True)

@@ -20,6 +20,7 @@ class Item(models.Model):
     ordPrtYn = models.CharField(max_length=1, default='N')
     ordPrtText = models.CharField(max_length=100, null=True)
     kdsSendYn = models.CharField(max_length=1, default='N')
+    remainCount = models.IntegerField(default=1)
     insDt = models.DateTimeField(default=datetime.now(), null=True)
     insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=datetime.now(), null=True)

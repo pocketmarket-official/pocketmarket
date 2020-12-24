@@ -70,6 +70,13 @@ class CornerStateLogAdmin(admin.ModelAdmin):
 
     pass
 
+@admin.register(models.ErrorLog)
+class ErrorLogAdmin(admin.ModelAdmin):
+
+    """ CornerStateLog Admin """
+
+    pass
+
 
 @admin.register(models.Test)
 class TeestAdmin(admin.ModelAdmin):

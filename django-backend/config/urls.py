@@ -89,7 +89,7 @@ router.register(r'trades_cardLog', trade_views.CardLogView, 'cardLog')
 # router.register(r'trades_standardLog', trade_views.StandardLogView, 'standardLog')
 router.register(r'trades_purchaseLog', trade_views.PurchaseLogView, 'purchaseLog')
 router.register(r'trades_soldoutLog', trade_views.SoldoutLogView, 'soldoutLog')
-router.register(r'trades_cornerStateLog', trade_views.CornerStateLogView, 'cornerStateLog')
+router.register(r'trades_ErrorLog', trade_views.ErrorLogView, 'ErrorLog')
 # router.register(r'trades_tradeMaker', trade_views.TradeMakerView, 'tradeMaker')
 router.register(r'trades_test', trade_views.TestView, 'test')
 #kdses

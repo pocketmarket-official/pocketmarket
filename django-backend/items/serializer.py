@@ -25,6 +25,7 @@ class ItemSerializer(serializers.ModelSerializer):
             'ordPrtYn',
             'ordPrtText',
             'kdsSendYn',
+            'remainCount',
             'insDt',
             'insUs',
             'modDt',
