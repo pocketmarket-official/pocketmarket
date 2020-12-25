@@ -61,11 +61,14 @@ class QuestionsHistory extends React.Component {
                     console.log(res);
 
                     const questions = res.data.filter((elt) => {
-                        if(elt.user === userId && this.state.startDate <= new Date(this.strToDate(elt.questionDate)) && new Date(this.strToDate(elt.questionDate)) <= this.state.endDate) {
+                        let questionDate = new Date(this.strToDate(elt.questionDate));
+                        console.log('==7');
+                        console.log(questionDate);
+                        if(elt.user === userId && this.state.startDate <= questionDate && questionDate <= this.state.endDate) {
                             return true;
                         }
                     });
-                    console.log('==7');
+                    console.log('==8');
                     console.log(questions);
 
                     this.setState({ userId: userId, result: questions, questions: res.data });
@@ -75,20 +78,20 @@ class QuestionsHistory extends React.Component {
     }
 
     strToDate(str_date) {
-        console.log('==8');
+        console.log('==9');
         console.log(str_date);
 
         let datestr = "";
         let _str = String(str_date);
         datestr = _str.slice(0, 4) + '.' + _str.slice(4, 6) + '.' + _str.slice(6, 8);
-        console.log('==9');
+        console.log('==10');
         console.log(datestr);
 
         return datestr;
     }
 
     getDateStr(date) {
-        console.log('==10');
+        console.log('==11');
         console.log(date);
 
         let month = date.getMonth();
@@ -96,7 +99,7 @@ class QuestionsHistory extends React.Component {
         let mm = String(month + 1).padStart(2, '0');
         let yyyy = date.getFullYear();
         date = yyyy + '-' + mm + '-' + dd;
-        console.log('==11');
+        console.log('==12');
         console.log(date);
 
         return date;
