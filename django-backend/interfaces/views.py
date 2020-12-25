@@ -23,28 +23,28 @@ from trades.models import SaleDetail
 from trades.models import CardLog
 
 from django.http import HttpResponse
+from django.http import JsonResponse
 
 
-##todo get or create 구문에서 비교조건이 pk와 동일한지 체크
-def MasterDownView(request):
+def MasterDownTotal(request):
     try:
-        ## values
-        compCd = 'C0028'
-        posNo = '01'
-        ## parameter
-        storeCd = request.GET['storeCd']
-
         state = os.environ.get('STATE')
         if state == 'local:start' or state == 'local:dev':
             domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
         elif state == 'dev':
             domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
         elif state == 'production':
             domain = 'http://asp.imtsoft.me/api/'
+            compCd = 'C0023'
         elif state == 'server:appDeploy':
             domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
 
-        ##todo : brand down은 따로 나누기
+        #error check variable
+        errorMsg = ''
+        context = ''
 
         ## brands_brand
         url = domain + "pocketMarket/brandsBrand?compCd=" + compCd  # json 결과
@@ -72,6 +72,80 @@ def MasterDownView(request):
                     brand_pktmkt.modDt = brand_imt.get('MOD_DT')
                     brand_pktmkt.modUs = brand_imt.get('MOD_US')
                     brand_pktmkt.save()
+        else :
+            errorMsg = 'brand Down Failure'
+            context = 'url=' + url + ' compCd=' + compCd
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
+
+    except Exception as ex:
+        print(ex)
+        data = {'context': context,
+                'errorMsg': errorMsg}
+        response = JsonResponse(data)
+        return response
+
+##todo get or create 구문에서 비교조건이 pk와 동일한지 체크
+def MasterDownView(request):
+    try:
+        ## values
+        posNo = '01'
+        ## parameter
+        storeCd = request.GET['storeCd']
+
+        state = os.environ.get('STATE')
+        if state == 'local:start' or state == 'local:dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif state == 'dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif state == 'production':
+            domain = 'http://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+        elif state == 'server:appDeploy':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+
+        ## brands_brand
+        url = domain + "pocketMarket/brandsBrand?compCd=" + compCd  # json 결과
+        request = urllib.request.Request(url)
+        response = urllib.request.urlopen(request)
+        rescode = response.getcode()
+        if (rescode == 200):
+            response_body = response.read().decode('euc-kr')
+            response_body_json = json.loads(response_body)
+            for brand_imt in response_body_json:
+                brand_pktmkt, flag = Brand.objects.get_or_create(brandCd=brand_imt.get('BRAND_CD'),
+                                                                 defaults={
+                                                                     'brandName': brand_imt.get('BRAND_NM'),
+                                                                     'useYn': brand_imt.get('USE_YN'),
+                                                                     'insDt': brand_imt.get('INS_DT'),
+                                                                     'insUs': brand_imt.get('INS_US'),
+                                                                     'modDt': brand_imt.get('MOD_DT'),
+                                                                     'modUs': brand_imt.get('MOD_US')
+                                                                 })
+                if not flag:
+                    brand_pktmkt.brandName = brand_imt.get('BRAND_NM')
+                    brand_pktmkt.useYn = brand_imt.get('USE_YN')
+                    brand_pktmkt.insDt = brand_imt.get('INS_DT')
+                    brand_pktmkt.insUs = brand_imt.get('INS_US')
+                    brand_pktmkt.modDt = brand_imt.get('MOD_DT')
+                    brand_pktmkt.modUs = brand_imt.get('MOD_US')
+                    brand_pktmkt.save()
+        else:
+            errorMsg = 'brand Down Failure'
+            context = 'url=' + url + ' compCd=' + compCd
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            # response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ##stores_store
         url = domain + "pocketMarket/storesStore?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
@@ -145,6 +219,15 @@ def MasterDownView(request):
             ## parameters about store
             store = store_pktmkt
             brand = store.brandCd
+        else :
+            errorMsg = 'store Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            # response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ##stores_funset
         url = domain + "pocketMarket/storesFunset?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
@@ -197,6 +280,15 @@ def MasterDownView(request):
                     funset_pktmkt.modDt = funset_imt.get('MOD_DT')
                     funset_pktmkt.modUs = funset_imt.get('MOD_US')
                     funset_pktmkt.save()
+        else:
+            errorMsg = 'storeFunSet Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            # response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ##keymaps_StoreKeymap
         url = domain + "pocketMarket/keymapsStoreKeymap?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
@@ -236,6 +328,15 @@ def MasterDownView(request):
                     storeKeymap_pktmkt.modDt = storeKeymap_imt.get('MOD_DT')
                     storeKeymap_pktmkt.modUs = storeKeymap_imt.get('MOD_US')
                     storeKeymap_pktmkt.save()
+        else:
+            errorMsg = 'storeKeyMap Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            # response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ##stores_pos
         url = domain + "pocketMarket/storesPos?compCd=" + compCd + "&storCd=" + storeCd + "&posNo=" + posNo  # json 결과
@@ -269,6 +370,15 @@ def MasterDownView(request):
                     pos_pktmkt.callNoYn = pos_imt.get('CALL_NO_YN')
                     pos_pktmkt.useYn = pos_imt.get('USE_YN')
                     pos_pktmkt.save()
+        else:
+            errorMsg = 'storePos Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ##keymaps_TouchGroup
         storeKeymap = pos_pktmkt.keymapCd
@@ -311,6 +421,15 @@ def MasterDownView(request):
                     touchGroup_pktmkt.modDt = touchGroup_imt.get('MOD_DT')
                     touchGroup_pktmkt.modUs = touchGroup_imt.get('MOD_US')
                     touchGroup_pktmkt.save()
+        else:
+            errorMsg = 'keympaTouchGroup Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ## items_item
         url = domain + "pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brand.brandCd  # json 결과
@@ -357,6 +476,15 @@ def MasterDownView(request):
                     item_pktmkt.modDt = item_imt.get('MOD_DT')
                     item_pktmkt.modUs = item_imt.get('MOD_US')
                     item_pktmkt.save()
+        else:
+            errorMsg = 'item Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ## TODO : set 구성상품 하나 삭제 했을 때 지울 방법이 없는데 그건 어떻게 처리함? - 질문해두었음
         ## items_set
@@ -388,6 +516,15 @@ def MasterDownView(request):
                     set_pktmkt.modDt = set_imt.get('MOD_DT')
                     set_pktmkt.modUs = set_imt.get('MOD_US')
                     set_pktmkt.save()
+        else:
+            errorMsg = 'itemSet Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ##todo : set와 마찬가지로 삭제됐을 때 어떻게?
 
@@ -413,6 +550,15 @@ def MasterDownView(request):
                     setOpt_pktmkt.insDt = setOpt_imt.get('INS_DT')
                     setOpt_pktmkt.insUs = setOpt_imt.get('INS_US')
                     setOpt_pktmkt.save()
+        else:
+            errorMsg = 'setOpt Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ## todo : 얘도 삭제 안됨
         ## items ItemAdd
@@ -440,6 +586,15 @@ def MasterDownView(request):
                     itemAdd_pktmkt.insDt = itemAdd_imt.get('INS_DT')
                     itemAdd_pktmkt.insUs = itemAdd_imt.get('INS_US')
                     itemAdd_pktmkt.save()
+            else:
+                errorMsg = 'itemAdd Down Failure'
+                context = 'url=' + url
+                data = {'result': '500',
+                        'context': context,
+                        'errorMsg': errorMsg}
+                response = JsonResponse(data)
+                # return response
+                return HttpResponse(context)
 
         ## items AddCat
         url = domain + "pocketMarket/itemsAddcat?compCd=" + compCd  # json 결과
@@ -467,6 +622,15 @@ def MasterDownView(request):
                     addCat_pktmkt.modDt = addCat_imt.get('MOD_DT')
                     addCat_pktmkt.modUs = addCat_imt.get('MOD_US')
                     addCat_pktmkt.save()
+        else:
+            errorMsg = 'itemAddCat Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ## todo : 얘도 삭제 안됨
         ## itmes_Add
@@ -494,6 +658,15 @@ def MasterDownView(request):
                     add_pktmkt.modDt = add_imt.get('MOD_DT')
                     add_pktmkt.modUs = add_imt.get('MOD_US')
                     add_pktmkt.save()
+        else:
+            errorMsg = 'itemAdd Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ## cprts_cprt
         url = domain + "pocketMarket/cprtsMaster?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
@@ -523,6 +696,15 @@ def MasterDownView(request):
                     cprt_pktmkt.modDt = cprt_imt.get('MOD_DT')
                     cprt_pktmkt.modUs = cprt_imt.get('MOD_US')
                     cprt_pktmkt.save()
+        else:
+            errorMsg = 'cprtMaster Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ## cprts_group
         url = domain + "pocketMarket/cprtsGrp?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
@@ -552,6 +734,15 @@ def MasterDownView(request):
                     group_pktmkt.modDt = group_imt.get('MOD_DT')
                     group_pktmkt.modUs = group_imt.get('MOD_US')
                     group_pktmkt.save()
+        else:
+            errorMsg = 'cprtGroup Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ## cprts_relation
         url = domain + "pocketMarket/cprtsCprt?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
@@ -580,6 +771,15 @@ def MasterDownView(request):
                     relation_pktmkt.modDt = relation_imt.get('MOD_DT')
                     relation_pktmkt.modUs = relation_imt.get('MOD_US')
                     relation_pktmkt.save()
+        else:
+            errorMsg = 'cprtRelation Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ## keymaps_keymap
         url = domain + "pocketMarket/keymapsKeymap?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + storeKeymap.keymapCd  # json 결과
@@ -623,11 +823,18 @@ def MasterDownView(request):
                     keymap_pktmkt.modDt = keymap_imt.get('MOD_DT')
                     keymap_pktmkt.modUs = keymap_imt.get('MOD_US')
                     keymap_pktmkt.save()
-
         else:
-            print("Error Code:" + rescode)
+            errorMsg = 'keymap Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         return HttpResponse(store.storeName + '매장의 마스터 수신이 완료되었습니다.')
+
     except Exception as ex:
         print(ex)
         return HttpResponse(store.storeName + '매장의 마스터 수신이 완료되었습니다.')
