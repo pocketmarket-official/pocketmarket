@@ -1,16 +1,14 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import QuestionResult from '../Components/js/QuestionResult';
-import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
-
+import { cookieCheck_rejectGuest } from "../Components/js/CookieCheck.js"
 import calendar from "../assets/point_history/ico_date.png";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import search from "../assets/point_history/ico_search.png";
-
 import ko from "date-fns/locale/ko";
 import axios from "axios";
+
 registerLocale('ko', ko);
 
 
@@ -19,44 +17,23 @@ class QuestionsHistory extends React.Component {
         super(props);
         this.searchHistory = this.searchHistory.bind(this);
         this.getDateStr = this.getDateStr.bind(this);
+        this.strToDate = this.strToDate.bind(this);
 
         let today = new Date();
         let past = new Date();
         past.setMonth(past.getMonth() - 1);
 
-        let temp = [
-                {
-                    id: 1,
-                    date: "2020.08.01",
-                    writer: "마진형",
-                    question: "좋아요 포켓머니로 전환을 하였는데 300PM이 사라졌습니다. \n 포인트 돌려주세요~ \n 돌려주세요~ 돌려주세요~ 돌려주세요~ ",
-                    answer: ['저도요', '문의주셔서 감사합니다'],
-                },
-                {
-                    id: 2,
-                    date: "2020.08.26",
-                    writer: "마진형",
-                    question: "점주 등록은 어떻게 하나요?",
-                    answer: ['전화주세요'],
-                },
-                {
-                    id: 3,
-                    date: "2020.09.17",
-                    writer: "마진형",
-                    question: "버그가 있어요",
-                    answer: ['감사합니다'],
-                },
-        ];
-
+        /*
         let search_result = [];
         for (let t in temp) {
             if(new Date(temp[t].date).getTime() >= past.getTime() && new Date(temp[t].date).getTime() <= today.getTime()) {
                 search_result.push(temp[t]);
             }
         }
+        */
 
         this.state = {
-            result: search_result,
+            result: [],
             startDate: past,
             endDate: today,
             userId: '',
@@ -68,7 +45,7 @@ class QuestionsHistory extends React.Component {
         let user_email = cookieCheck_rejectGuest();
 
         axios.get("api/users_user/")
-            .then((res)=>{
+            .then((res) => {
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
@@ -78,20 +55,21 @@ class QuestionsHistory extends React.Component {
                 axios.get("/api/users_question/")
                 .then((res) => {
                     const questions = res.data.filter((elt) => {
-                        console.log('==1');
-                        console.log(this.state.startDate);
-                        console.log(elt.insDt);
-                        console.log(this.state.endDate);
-                        console.log('==1');
-                        if(elt.user === userId && this.state.startDate <= elt.insDt && elt.insDt <= this.state.endDate){
+                        if(elt.user === userId && this.state.startDate <= new Date(this.strToDate(elt.questionDate)) && new Date(this.strToDate(elt.questionDate)) <= this.state.endDate) {
                             return true;
                         }
                     });
-
-                    this.setState({userId: userId, questions:questions})
+                    this.setState({ userId: userId, result: questions, questions: res.data });
                 });
-            });
+            }
+        );
+    }
 
+    strToDate(str_date) {
+        let datestr = "";
+        let _str = String(str_date);
+        datestr = _str.slice(0, 4) + '.' + _str.slice(4, 6) + '.' + _str.slice(6, 8);
+        return datestr;
     }
 
     getDateStr(date) {
@@ -107,9 +85,9 @@ class QuestionsHistory extends React.Component {
         const val1 = document.getElementById("date1").value;
         const val2 = document.getElementById("date2").value;
         let search_result = [];
-        for (let t in this.state.temp) {
-            if(new Date(this.state.temp[t].date).getTime() >= new Date(val1).getTime() && new Date(this.state.temp[t].date).getTime() <= new Date(val2).getTime()) {
-                search_result.push(this.state.temp[t]);
+        for (let t in this.state.questions) {
+            if(this.state.startDate <= new Date(this.strToDate(this.state.questions[t].questionDate)) && new Date(this.strToDate(this.state.questions[t].questionDate)) <= this.state.endDate) {
+                search_result.push(this.state.questions[t]);
             }
         }
         this.setState({ result: search_result });

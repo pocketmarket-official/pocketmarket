@@ -37,6 +37,8 @@
         font-family: "Nanum Gothic", sans-serif;
         box-sizing: border-box;
         letter-spacing: 1.03px;
+        display: flex;
+        flex-direction: column;
 
         .storeGrid__name {
           margin-left: 9px;
@@ -57,6 +59,15 @@
           color: white;
           font-family: "MaplestoryOTFLight";
           letter-spacing: 0px;
+        }
+
+        .container__info {
+          margin-left: auto;
+          margin-top: auto;
+          .info__addr, info__mobile {
+            margin-left: auto;
+            margin-top: auto;
+          }
         }
 
         .storeGrid__likes {
@@ -99,38 +110,42 @@
         justify-content: flex-end;
         align-items: center;
         margin-bottom: 2px;
-
-        button {
-          font-family: MaplestoryOTFLight;
-        }
-
-        .slide {
-          width: 44px;
-          height: 21px;
-          border-radius: 19.5px;
-          background-color: #343434;
+        .container__container {
           display: flex;
           justify-content: center;
           align-items: center;
+          button {
+            font-family: MaplestoryOTFLight;
+          }
 
-          .subslide {
-            position: relative;
-            width: 34px;
-            height: 13px;
+          .slide {
+            width: 44px;
+            height: 21px;
             border-radius: 19.5px;
-            background-color: #131313;
+            background-color: #343434;
             display: flex;
+            justify-content: center;
             align-items: center;
 
-            .slideBall {
-              width: 15px;
-              height: 15px;
-              background-color: #fa245a;
-              border-radius: 50%;
+            .subslide {
+              position: relative;
+              width: 34px;
+              height: 13px;
+              border-radius: 19.5px;
+              background-color: #131313;
+              display: flex;
+              align-items: center;
 
-              &.right {
-                position: absolute;
-                right: 0;
+              .slideBall {
+                width: 15px;
+                height: 15px;
+                background-color: #fa245a;
+                border-radius: 50%;
+
+                &.right {
+                  position: absolute;
+                  right: 0;
+                }
               }
             }
           }

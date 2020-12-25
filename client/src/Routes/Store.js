@@ -28,6 +28,7 @@ class StoreView extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props.location.state.data);
         axios.get("/api/reviews_review/")
             .then((res) => {
                 let reviews = res.data.filter(
@@ -104,13 +105,19 @@ class StoreView extends React.Component {
                 <div className="storeGrid-store">
                     <div className="storeGrid__content">
                         {/*<div className="store__store">*/}
-                            <div className="storeGrid__image"><img src={bg} alt="big store img" /></div>
+                            <div className="storeGrid__image">
+                                <img src={bg} alt="big store img" />
+                            </div>
                             <div className="storeGrid__detail">
                                 <div className="storeGrid__title">
                                     <div className="storeGrid__name">{this.props.location.state.data.storeName}</div>
                                     {/*<div className="storeGrid__distance">{this.props.location.state.d}</div>*/}
                                     {/*<div className="storeGrid__likes"><p className="likesButton">♥</p>{this.props.location.state.data.like_count || 123}</div>*/}
                                     <div className="storeGrid__description">{this.props.location.state.data.description}</div>
+                                    <div className="container__info">
+                                        <div className="info__addr">주소: {this.props.location.state.data.addr1}</div>
+                                        <div className="info__mobile">전화번호: {this.props.location.state.data.mobile}</div>
+                                    </div>
                                 </div>
                                 <div className="storeGrid__description">
                                     {this.props.location.state.data.comment}
@@ -118,13 +125,15 @@ class StoreView extends React.Component {
                             </div>
                         {/*</div>*/}
                         <div className="button__container" onClick={this.handlePageSlide}>
-                            <button><p className="simple">간단</p></button>
-                            <div className="slide">
-                                <div className="subslide">
-                                    <div className={"slideBall " + (this.state.current === 1 ? 'right' : '')}/>
+                            <div className="container__container">
+                                <button><p className="simple">간단</p></button>
+                                <div className="slide">
+                                    <div className="subslide">
+                                        <div className={"slideBall " + (this.state.current === 1 ? 'right' : '')}/>
+                                    </div>
                                 </div>
+                                <button><p className="detail">상세</p></button>
                             </div>
-                            <button><p className="detail">상세</p></button>
                         </div>
                     </div>
                     {this.handlePageRender()}
