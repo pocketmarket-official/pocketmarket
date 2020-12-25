@@ -83,7 +83,7 @@ class QuestionsHistory extends React.Component {
 
         let datestr = "";
         let _str = String(str_date);
-        datestr = _str.slice(0, 4) + '.' + _str.slice(4, 6) + '.' + _str.slice(6, 8);
+        datestr = _str.slice(0, 4) + '/' + _str.slice(4, 6) + '/' + _str.slice(6, 8);
         console.log('==10');
         console.log(datestr);
 
