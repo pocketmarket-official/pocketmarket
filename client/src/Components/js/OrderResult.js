@@ -24,17 +24,15 @@ class OrderResult extends React.Component {
     // }
 
     render() {
+        console.log(this.props.result);
         let result = this.props.result;
         return (
             result.map((data) => {
                 let contentId = "content" + data.id;
                 let eltId = "orderhistory" + data.id;
-                let total = 0
+                let total = data.saleAmt;
                 const review = "";
                 let review_txt ="";
-                for(let i in data.order) {
-                    total += (data.order[i][1] * data.order[i][2])
-                }
                 total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 {
                     if (data.review == "N") {
@@ -45,7 +43,7 @@ class OrderResult extends React.Component {
                                 <div className="orderhistory__content" id={contentId}>
 
                                     <div className="orderhistory__detail">
-                                        <div className="orderhistory__name">{data.place}</div>
+                                        <div className="orderhistory__name">{data.storeName}</div>
                                         <div className="orderhistory__price">{total}원</div>
                                         <button className="orderhistory__btn info" onClick={() => {
                                             const elt = document.getElementById("modal__conversion");
@@ -71,7 +69,7 @@ class OrderResult extends React.Component {
                                 <div className="orderhistory__content" id={contentId}>
 
                                     <div className="orderhistory__detail">
-                                        <div className="orderhistory__name">{data.place}</div>
+                                        <div className="orderhistory__name">{data.storeName}</div>
                                         <div className="orderhistory__price">{total}원</div>
                                         <button className="orderhistory__btn info" onClick={() => {
                                             const elt = document.getElementById("modal__conversion");

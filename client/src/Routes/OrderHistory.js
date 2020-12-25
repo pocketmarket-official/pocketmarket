@@ -18,7 +18,6 @@ class OrderHistory extends React.Component {
     constructor(props) {
         super(props);
         this.searchHistory = this.searchHistory.bind(this);
-        this.searchHistory = this.searchHistory.bind(this);
         this.getDateStr = this.getDateStr.bind(this);
         this.strToDate = this.strToDate.bind(this);
 
@@ -64,6 +63,22 @@ class OrderHistory extends React.Component {
         }
     }
 
+    strToDate(str_date) {
+        let datestr = "";
+        let _str = String(str_date);
+        datestr = _str.slice(0, 4) + '.' + _str.slice(4, 6) + '.' + _str.slice(6, 8);
+        return datestr;
+    }
+
+    getDateStr(date) {
+        let month = date.getMonth();
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(month + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        date = yyyy + '-' + mm + '-' + dd;
+        return date;
+    }
+
     searchHistory() {
         const val1 = document.getElementById("date1").value;
         const val2 = document.getElementById("date2").value;
@@ -75,6 +90,7 @@ class OrderHistory extends React.Component {
         }
         this.setState({ result: search_result });
     }
+
 
     componentDidMount() {
         let user_email = cookieCheck_rejectGuest();
@@ -145,13 +161,13 @@ class OrderHistory extends React.Component {
 
     render() {
         let jsx;
-        if(this.state.result.length === 0) {
+        if(this.state.matched.length === 0) {
             jsx =
                 <>
                     <div className="result__nodata">검색 결과가 없습니다.</div>
                 </>;
         } else {
-            jsx = <OrderResult result={this.state.result} />;
+            jsx = <OrderResult result={this.state.matched} />;
         }
         return (
             <>
