@@ -2,7 +2,7 @@
 define reviews related models
 """
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 
 class Review(models.Model):
 
@@ -20,18 +20,18 @@ class Review(models.Model):
     img4 = models.ImageField(upload_to='images/review', null=True, blank=True)
     img5 = models.ImageField(upload_to='images/review', null=True, blank=True)
     deleteYn = models.CharField(max_length=1, default='N', blank=True, null=True)
-    insDt = models.DateTimeField(default=datetime.now(), blank=True, null=True)
+    insDt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     insUs = models.CharField(max_length=30, null=True, blank=True)
-    modDt = models.DateTimeField(default=datetime.now(), blank=True, null=True)
+    modDt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     modUs = models.CharField(max_length=30, null=True, blank=True)
 
 class ReviewLike(models.Model):
     review = models.ForeignKey('Review', on_delete=models.CASCADE, default=1)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
     likeYn = models.CharField(max_length=1, default='Y')
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)
 
 class Reply(models.Model):
@@ -42,7 +42,7 @@ class Reply(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
     context = models.TextField(null=True)
     deleteYn = models.CharField(max_length=1, default='N')
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)

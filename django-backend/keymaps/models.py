@@ -2,8 +2,7 @@
 define keymaps related models
 """
 from django.db import models
-from datetime import datetime
-
+from django.utils import timezone
 
 class StoreKeymap(models.Model):
 
@@ -14,9 +13,9 @@ class StoreKeymap(models.Model):
     keymapName = models.CharField(max_length=30, default='')
     blankImgUrl = models.CharField(max_length=200, null=True)
     useYn = models.CharField(max_length=1, default='Y')
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)
 
     def __str__(self):
@@ -32,9 +31,9 @@ class TouchGroup(models.Model):
     posPage = models.IntegerField(default=0)
     posIndex = models.IntegerField(default=0)
     useYn = models.CharField(max_length=1, default='Y')
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)
 
     def __str__(self):
@@ -52,7 +51,7 @@ class Keymap(models.Model):
     cprtGroupCd = models.CharField(max_length=5, null=True)
     dispYn = models.CharField(max_length=1, default='Y')
     expectCnt = models.IntegerField(default=0)
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)

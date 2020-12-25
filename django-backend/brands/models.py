@@ -2,8 +2,7 @@
 define festivals related models
 """
 from django.db import models
-from datetime import datetime
-
+from django.utils import timezone
 
 class Brand(models.Model):
 
@@ -11,9 +10,9 @@ class Brand(models.Model):
     brandCd = models.CharField(max_length=5, default='00000')
     brandName = models.CharField(max_length=100, default='')
     useYn = models.CharField(max_length=1, default='Y')
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)
 
     def __str__(self):

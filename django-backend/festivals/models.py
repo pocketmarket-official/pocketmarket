@@ -28,9 +28,9 @@ class Festival(models.Model):
     organPhone = models.CharField(max_length=20, blank=True, null=True)
     organMail = models.CharField(max_length=50, blank=True, null=True)
     openYn = models.CharField(max_length=1, default='Y')
-    insDt = models.DateTimeField(default=datetime.now(), blank=True, null=True)
+    insDt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     insUs = models.CharField(max_length=30, blank=True, null=True)
-    modDt = models.DateTimeField(default=datetime.now(), blank=True, null=True)
+    modDt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     modUs = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
@@ -40,8 +40,8 @@ class Join(models.Model):
     festivalCd = models.ForeignKey('festivals.Festival', on_delete=models.CASCADE, default=1)
     seq = models.IntegerField(default=1)
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)
 

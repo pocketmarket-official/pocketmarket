@@ -4,7 +4,7 @@ define users related models
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 
 class User(AbstractUser):
     """ User Model Definition """
@@ -26,9 +26,9 @@ class Point(models.Model):
     totExchangePoint = models.IntegerField(null=True)
     totSpendPoint = models.IntegerField(null=True)
     lastExchangeDate = models.CharField(max_length=8, null=True)
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30,  null=True)
 
 class MyPlace(models.Model):
@@ -42,9 +42,9 @@ class MyPlace(models.Model):
     yPosition = models.FloatField(null=True)
     defaultYn = models.CharField(max_length=1, default='N')
     deleteYn = models.CharField(max_length=1, default='N')
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)
 
 class Business(models.Model):
@@ -59,9 +59,9 @@ class Business(models.Model):
     storeAddr = models.CharField(max_length=100, blank=True)
     orderYn = models.CharField(max_length=1, default='Y')
     BizRegi = models.ImageField(null=True, upload_to='images/bizRegi')
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)
 
 class Question(models.Model):
@@ -73,7 +73,7 @@ class Question(models.Model):
     img3 = models.ImageField(upload_to='images/question', null=True)
     img4 = models.ImageField(upload_to='images/question', null=True)
     img5 = models.ImageField(upload_to='images/question', null=True)
-    insDt = models.DateTimeField(default=datetime.now())
+    insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now())
+    modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)

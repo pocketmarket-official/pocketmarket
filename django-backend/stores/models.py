@@ -2,7 +2,7 @@
 define stores related models
 """
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 
 class Store(models.Model):
     """ Store Model Definition """
@@ -36,9 +36,9 @@ class Store(models.Model):
     description = models.CharField(max_length=250, null=True, blank=True)
     androidToken = models.CharField(max_length=255, blank=True)
     iosToken = models.CharField(max_length=255, blank=True)
-    insDt = models.DateTimeField(default=datetime.now(), null=True, blank=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True, blank=True)
     insUs = models.CharField(max_length=30, null=True, blank=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True, blank=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True, blank=True)
     modUs = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
@@ -59,9 +59,9 @@ class Funset(models.Model):
     kktAlrFailFg = models.CharField(max_length=1, null=True)
     kktAlrId = models.CharField(max_length=50, null=True)
     kktAlrPw = models.CharField(max_length=50, null=True)
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30,  null=True)
 
 class Pos(models.Model):
@@ -79,16 +79,16 @@ class StoreDic(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
     store = models.ForeignKey('Store', on_delete=models.CASCADE, default=1)
     dicType = models.CharField(max_length=1, default='1') #1:구매이력 있음/2:리뷰이력 있음
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30,  null=True)
 
 class StoreLike(models.Model):
     store = models.ForeignKey('store', on_delete=models.CASCADE, default=1)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)
     likeYn = models.CharField(max_length=1, default='Y')
-    insDt = models.DateTimeField(default=datetime.now(), null=True, blank=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True, blank=True)
     insUs = models.CharField(max_length=30,  null=True, blank=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True, blank=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True, blank=True)
     modUs = models.CharField(max_length=30,  null=True, blank=True)

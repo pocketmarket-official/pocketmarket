@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from datetime import datetime
 
 # Create your models here.
 class SaleHeader(models.Model):
@@ -30,9 +29,9 @@ class SaleHeader(models.Model):
     completeTime = models.CharField(max_length=8, null=True, blank=True)
     pickupTime = models.CharField(max_length=8, null=True, blank=True)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, blank=True)
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30, null=True)
 
 
@@ -63,9 +62,9 @@ class SaleDetail(models.Model):
     pointDcAmt = models.FloatField(default=0.0)
     saleTime = models.CharField(max_length=6)
     sendYn = models.CharField(max_length=1, default='N')
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30,  null=True)
 
     class Meta:
@@ -86,9 +85,9 @@ class SaleDetail(models.Model):
 #     orgBillNo = models.CharField(max_length=10, null=True)
 #     orgSeq = models.IntegerField(default=1, null=True)
 #     saleTime = models.CharField(max_length=6)
-#     insDt = models.DateTimeField(default=datetime.now(), null=True)
+#     insDt = models.DateTimeField(default=timezone.now, null=True)
 #     insUs = models.CharField(max_length=30,  null=True)
-#     modDt = models.DateTimeField(default=datetime.now(), null=True)
+#     modDt = models.DateTimeField(default=timezone.now, null=True)
 #     modUs = models.CharField(max_length=30,  null=True)
 
 class CardLog(models.Model):
@@ -120,9 +119,9 @@ class CardLog(models.Model):
     orgApprNo = models.CharField(max_length=8, default='')
     remark = models.CharField(max_length=255, default='')
     sendYn = models.CharField(max_length=1, default='N')
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30,  null=True)
 #
 # class EtcLog(models.Model):
@@ -136,9 +135,9 @@ class CardLog(models.Model):
 #     etcPayCatCd = models.CharField(max_length=5, default='000')
 #     etcPayCd = models.CharField(max_length=5, default='000')
 #     remark = models.CharField(max_length=255, null=True)
-#     insDt = models.DateTimeField(default=datetime.now(), null=True)
+#     insDt = models.DateTimeField(default=timezone.now, null=True)
 #     insUs = models.CharField(max_length=30,  null=True)
-#     modDt = models.DateTimeField(default=datetime.now(), null=True)
+#     modDt = models.DateTimeField(default=timezone.now, null=True)
 #     modUs = models.CharField(max_length=30,  null=True)
 #
 # class StandardLog(models.Model):
@@ -156,9 +155,9 @@ class CardLog(models.Model):
 #     standardQty = models.FloatField(default=0.0)
 #     itemCd = models.CharField(max_length=20, default='00000')
 #     qty = models.IntegerField(default=0)
-#     insDt = models.DateTimeField(default=datetime.now(), null=True)
+#     insDt = models.DateTimeField(default=timezone.now, null=True)
 #     insUs = models.CharField(max_length=30,  null=True)
-#     modDt = models.DateTimeField(default=datetime.now(), null=True)
+#     modDt = models.DateTimeField(default=timezone.now, null=True)
 #     modUs = models.CharField(max_length=30,  null=True)
 
 class PurchaseLog(models.Model):
@@ -171,9 +170,9 @@ class PurchaseLog(models.Model):
     orderUnit = models.CharField(max_length=5, default='')
     purchaseQty = models.IntegerField(default=0)
     approvalFlag = models.CharField(max_length=3, default='')
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30,  null=True)
 
 class SoldoutLog(models.Model):
@@ -181,9 +180,9 @@ class SoldoutLog(models.Model):
     saleDt = models.CharField(max_length=8, default='')
     itemCd = models.CharField(max_length=20, default='')
     soldoutYn = models.CharField(max_length=1, default='Y')
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30,  null=True)
 
 class CornerStateLog(models.Model):
@@ -192,9 +191,9 @@ class CornerStateLog(models.Model):
     keymapCd = models.CharField(max_length=10, default='')
     groupCd = models.CharField(max_length=3, default='')
     stateFlag = models.CharField(max_length=1, default='1') #[1:원활/2:혼잡/3:주문불가]
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30,  null=True)
 
 
@@ -209,9 +208,9 @@ class ErrorLog(models.Model):
     tradeErrorMsg = models.CharField(max_length=100, default='')
     context = models.CharField(max_length=255, default='')
     exception = models.CharField(max_length=255, default='')
-    insDt = models.DateTimeField(default=datetime.now(), null=True)
+    insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30, null=True)
-    modDt = models.DateTimeField(default=datetime.now(), null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30, null=True)
 
 

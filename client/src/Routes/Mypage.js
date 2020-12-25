@@ -4,7 +4,6 @@ import HeaderBiz from '../Components/js/HeaderBiz';
 import logout from '../assets/my_page/ico_logout.png';
 import store from '../assets/my_page/ico_store.png';
 import cookie from "react-cookies";
-import storage from "../storage";
 import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
@@ -49,7 +48,7 @@ class Mypage extends React.Component {
                     {/*<div className="mypage__list"><Link to="/mypage/order">주문 / 결제 이력</Link><p>{">"}</p></div>*/}
                     {/*<div className="mypage__list"><Link to="/mypage/point">포인트 / 좋아요 이력</Link><p>{">"}</p></div>*/}
                     {/*<div className="mypage__list"><Link to="/review">리뷰 목록</Link><p>{">"}</p></div>*/}
-                    <div className="mypage__list"><Link to="/mypage/questions/write">문의 하기</Link><p>{">"}</p></div>
+                    <div className="mypage__list"><Link to="/mypage/questions/">문의 하기</Link><p>{">"}</p></div>
                 </div>
                 <div className="setting__box">
                     {
