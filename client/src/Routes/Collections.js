@@ -9,8 +9,6 @@ import img4 from '../assets/store_fastorder/32.jpg';
 import base from '../assets/store_fastorder/store_base.jpg';
 import {cookieCheck_rejectGuest} from '../Components/js/CookieCheck.js'
 import axios from 'axios';
-import cookie from "react-cookies";
-import storage from "../storage";
 import defaultImg from '../assets/main/grayBI.png';
 
 class Collections extends React.Component {

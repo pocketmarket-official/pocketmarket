@@ -21,10 +21,14 @@ class OrderHistory extends React.Component {
         this.strToDate = this.strToDate.bind(this);
 
         let today = new Date();
+        today.setHours(0,0,0,0);
         let past = new Date();
+        past.setHours(0,0,0,0);
         past.setMonth(past.getMonth() - 1);
 
         this.state = {
+            today: today,
+            past: past,
             startDate: past,
             endDate: today,
             result: [],
@@ -43,11 +47,9 @@ class OrderHistory extends React.Component {
     }
 
     searchHistory() {
-        const val1 = document.getElementById("date1").value;
-        const val2 = document.getElementById("date2").value;
         let search_result = [];
         for (let t in this.state.matched) {
-            let saleDt = new Date(this.strToDate(this.state.matched[t].questionDate));
+            let saleDt = new Date(this.strToDate(this.state.matched[t].saleDt));
             if(this.state.startDate <= saleDt && saleDt <= this.state.endDate) {
                 search_result.push(this.state.matched[t]);
             }
@@ -121,13 +123,13 @@ class OrderHistory extends React.Component {
 
     render() {
         let jsx;
-        if(this.state.matched.length === 0) {
+        if(this.state.result.length === 0) {
             jsx =
                 <>
                     <div className="result__nodata">검색 결과가 없습니다.</div>
                 </>;
         } else {
-            jsx = <OrderResult result={this.state.matched} />;
+            jsx = <OrderResult result={this.state.result} />;
         }
         return (
             <>

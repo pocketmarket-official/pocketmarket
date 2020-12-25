@@ -20,6 +20,8 @@ class OrderStatus extends React.Component {
     };
 
     componentDidMount(){
+        let previousUrl = document.referrer.split('/');
+
         let user_email = cookieCheck_rejectGuest();
 
         axios.get('/api/users_user/')

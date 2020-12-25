@@ -13,6 +13,9 @@ class OrderInfo extends React.Component {
         const storeName = this.props.location.state.storeName;
         const storeId = this.props.location.state.storeId;
         const storeCd = this.props.location.state.storeCd;
+
+        this.props.history.go(1);
+
         this.state = {
             sellItemList: sellItemList,
             order: order,

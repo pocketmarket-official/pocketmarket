@@ -19,10 +19,14 @@ class QuestionsHistory extends React.Component {
         this.strToDate = this.strToDate.bind(this);
 
         let today = new Date();
+        today.setHours(0,0,0,0);
         let past = new Date();
+        past.setHours(0,0,0,0);
         past.setMonth(past.getMonth() - 1);
 
         this.state = {
+            today: today,
+            past: past,
             result: [],
             startDate: past,
             endDate: today,
@@ -66,8 +70,6 @@ class QuestionsHistory extends React.Component {
 
 
     searchHistory() {
-        const val1 = document.getElementById("date1").value;
-        const val2 = document.getElementById("date2").value;
         let search_result = [];
         for (let t in this.state.questions) {
             if(this.state.startDate <= new Date(this.strToDate(this.state.questions[t].questionDate)) && new Date(this.strToDate(this.state.questions[t].questionDate)) <= this.state.endDate) {
