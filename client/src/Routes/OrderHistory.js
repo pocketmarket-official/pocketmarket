@@ -169,6 +169,7 @@ class OrderHistory extends React.Component {
         } else {
             jsx = <OrderResult result={this.state.matched} />;
         }
+        console.log(this.state);
         return (
             <>
                 <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {

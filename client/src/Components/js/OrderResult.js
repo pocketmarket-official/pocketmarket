@@ -24,7 +24,6 @@ class OrderResult extends React.Component {
     // }
 
     render() {
-        console.log(this.props.result);
         let result = this.props.result;
         return (
             result.map((data) => {
