@@ -34,7 +34,7 @@ class OrderResult extends React.Component {
                 let review_txt ="";
                 total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 {
-                    if (data.review == "N") {
+                    if (data.reviewYn == "N") {
                         return (
                             <>
                                 <div className="orderhistory__date">{data.date}</div>
