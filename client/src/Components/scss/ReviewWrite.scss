@@ -1,16 +1,14 @@
-
-
-
 .reviewwrite {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   box-sizing: border-box;
   flex-direction: column;
   margin-top: $headerHeight;
   justify-content: flex-start;
   .review__write__box {
     width: 100%;
+    height: 40%;
     padding: 30px 8px;
     box-sizing: border-box;
     .review__write__caption {
@@ -26,18 +24,20 @@
       color: #ffffff;
     }
     .reviewwrite__context {
-      display: block;
-      width: 95%;
-      height: 118px;
+      width: 100%;
+      height: 100%;
       margin: 11px auto;
       box-sizing: border-box;
       padding: 8px;
-      border: solid 3px #4a4a4a;
+      border: solid 2px #4a4a4a;
       border-radius: 0;
       font-size: 12px;
       box-shadow: 2.8px 5.3px 8px 2px rgba(0, 0, 0, 0.1);
       font-family: Nanum Gothic, sans-serif;
       resize: none;
+    }
+    .reviewwrite__context:focus {
+      outline: none;
     }
   }
   .review__content__box {
@@ -126,6 +126,8 @@
           position: relative;
           width: 100%;
           border: solid 1px #f3f3f3;
+          width: 72px;
+          height: 72px;
 
           &:before {
             display: block;

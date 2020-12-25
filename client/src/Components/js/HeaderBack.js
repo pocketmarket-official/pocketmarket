@@ -13,6 +13,7 @@ function HeaderBack(props) {
             <div className="header__box">
                 <img className="header__back"  onClick={() => {history.goBack()}} src={btnBack}/>
                 <Link to="/index"><img className="header__bi" src={bi} alt="logo" /></Link>
+                <div className="fake"></div>
                 {/*<img className="header__alarm" src={btnAlarm} alt="alarm" />*/}
             </div>
         );

@@ -18,14 +18,74 @@
     font-family: MaplestoryOTFLight;
     font-size: 14px;
     box-shadow: 0 3px 36px rgba(23,55,87, 0.4),0 5px 15px rgba(0,0,0,.47);
+    animation-name: slideupdown;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+}
+
+.toast_up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #d73434;
+    color: #f2f2f2;
+    width: 50%;
+    min-height: 50px;
+    padding: 0 15px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 999;
+    border-radius: 50px;
+    font-weight: 600;
+    font-family: MaplestoryOTFLight;
+    font-size: 14px;
+    box-shadow: 0 3px 36px rgba(23,55,87, 0.4),0 5px 15px rgba(0,0,0,.47);
     animation-name: slideup;
     animation-duration: 3s;
     animation-fill-mode: forwards;
 }
 
-@keyframes slideup {
+.toast_down {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #d73434;
+    color: #f2f2f2;
+    width: 50%;
+    min-height: 50px;
+    padding: 0 15px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 999;
+    border-radius: 50px;
+    font-weight: 600;
+    font-family: MaplestoryOTFLight;
+    font-size: 14px;
+    box-shadow: 0 3px 36px rgba(23,55,87, 0.4),0 5px 15px rgba(0,0,0,.47);
+    animation-name: slidedown;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideupdown {
     0% {bottom: -50px}
     50% {bottom: 30px}
+    100% {bottom: -50px}
+}
+
+@keyframes slideup {
+    0% {bottom: -50px}
+    100% {bottom: 30px}
+}
+
+@keyframes slidedown {
+    0% {bottom: 30px}
     100% {bottom: -50px}
 }
 

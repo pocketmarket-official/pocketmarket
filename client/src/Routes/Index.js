@@ -57,32 +57,32 @@ function Index({authenticated, login, location}) {
                     <div className="pagination-item"/>
                 </div>
                 <div className="content">
-                    <Link to={{pathname: "/main", state: { current: 0 }}}>
-                        <div className="content-item">
+                    <div className="content-item">
+                        <Link to={{pathname: "/main", state: { current: 0 }}}>
                             <img src={showFestivalImg} alt="축제보기" />
                             <span>축제보기</span>
-                        </div>
-                    </Link>
-                    <Link to={{pathname: "/main", state: { current: 1 }}}>
-                        <div className="content-item">
+                        </Link>
+                    </div>
+                    <div className="content-item">
+                        <Link to={{pathname: "/main", state: { current: 1 }}}>
                             <img src={showStoreImg} alt="매장보기" />
                             <span>매장보기</span>
-                        </div>
-                    </Link>
-                    <Link to="/mypage/collections">
-                        <div className="content-item">
+                        </Link>
+                    </div>
+                    <div className="content-item">
+                        <Link to="/mypage/collections">
                             <img src={showCollectionImg} alt="포켓도감" />
                             <span>포켓도감</span>
-                        </div>
-                    </Link>
-                    <Link to="/order/status">
-                        <div className="content-item">
+                        </Link>
+                    </div>
+                    <div className="content-item">
+                        <Link to="/order/status">
                             <img src={showOrderImg} alt="주문상태" />
                             <span>주문상태</span>
-                        </div>
-                    </Link>
+                        </Link>
+                    </div>
                 </div>
-            <Toast message="welcome welcome welcome welcome welcome welcome " />
+            <Toast message="cannot access the page " vanishOnClick={false} turn="on" />
             </div>
             <Footer />
         </>

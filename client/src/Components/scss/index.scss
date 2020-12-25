@@ -3,6 +3,7 @@
   margin-top: $headerHeight;
 
   .jumbotron {
+    width: 100%;
     height: 275px;
 
     img {
@@ -32,9 +33,9 @@
   }
 
   .content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     margin-top: 22px;
     border-top: 1px solid #eeeeee;
     padding: 60px 14px 0;
@@ -42,6 +43,7 @@
     .content-item {
       position: relative;
       width: 140px;
+      margin: 0 auto;
       height: 115px;
       margin-bottom: 50px;
       border-radius: 15px;

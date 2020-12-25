@@ -1,5 +1,3 @@
-
-
 .orderstatus {
   width: 100%;
   height: 100%;
@@ -8,6 +6,18 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  a {
+    .orderstatus__card {
+      .card__info {
+        .card__title__info {
+          .order__date {
+            color: black;
+          }
+        }
+      }
+    }
+  }
 
   .orderstatus__card {
     width:83%;
