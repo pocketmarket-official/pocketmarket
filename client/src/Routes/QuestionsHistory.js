@@ -23,15 +23,6 @@ class QuestionsHistory extends React.Component {
         let past = new Date();
         past.setMonth(past.getMonth() - 1);
 
-        /*
-        let search_result = [];
-        for (let t in temp) {
-            if(new Date(temp[t].date).getTime() >= past.getTime() && new Date(temp[t].date).getTime() <= today.getTime()) {
-                search_result.push(temp[t]);
-            }
-        }
-        */
-
         this.state = {
             result: [],
             startDate: past,

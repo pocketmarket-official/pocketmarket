@@ -3,32 +3,28 @@ import HeaderBiz from '../Components/js/HeaderBiz';
 import OrderResult from '../Components/js/OrderResult';
 
 import calendar from "../assets/point_history/ico_date.png";
-import DatePicker from "react-datepicker";
+import DatePicker, {registerLocale} from "react-datepicker";
 import search from "../assets/point_history/ico_search.png";
 import close from "../assets/order_status_pop/btn_close.png";
 import bill_icon from "../assets/order_status/btn_date.png";
 import bill from "../assets/order_history_apprv/img_receipt.jpg";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
+import ko from "date-fns/locale/ko";
+import axios from "axios";
+
+registerLocale('ko', ko);
 
 class OrderHistory extends React.Component {
     constructor(props) {
         super(props);
         this.searchHistory = this.searchHistory.bind(this);
+        this.searchHistory = this.searchHistory.bind(this);
+        this.getDateStr = this.getDateStr.bind(this);
+        this.strToDate = this.strToDate.bind(this);
 
         let today = new Date();
-        let month = today.getMonth();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(month + 1).padStart(2, '0');
-        let yyyy = today.getFullYear();
-        today = yyyy + '-' + mm + '-' + dd;
-        if(month === 0) {
-            mm = '12';
-            yyyy = today.getFullYear() - 1;
-        }
-        else {
-            mm = String(month).padStart(2, '0');
-        }
-        let past = yyyy + '.' + mm + '.' + dd;
+        let past = new Date();
+        past.setMonth(past.getMonth() - 1);
 
         let temp = [
                 {
@@ -58,18 +54,13 @@ class OrderHistory extends React.Component {
                 },
             ];
 
-        let search_result = [];
-        for (let t in temp) {
-            if(temp[t].date >= past && temp[t].date <= today) {
-                search_result.push(temp[t]);
-            }
-        }
-
         this.state = {
             today: today,
             past: past,
-            result: search_result,
-            temp: temp,
+            saleHeader: [],
+            saleDetail: [],
+            matched: [],
+            storeId: ''
         }
     }
 
@@ -87,11 +78,69 @@ class OrderHistory extends React.Component {
 
     componentDidMount() {
         let user_email = cookieCheck_rejectGuest();
-        const date1 = document.getElementById("date1");
-        const date2 = document.getElementById("date2");
-        date1.value = this.state.past;
-        date2.value = this.state.today;
-        this.searchHistory();
+
+        axios.get('/api/users_user/')
+            .then((res) => {
+                let userId = res.data.find((elt) => {
+                    if (elt.email === user_email) {
+                        return true;
+                    }
+                }).id;
+                axios.get('/api/trades_saleHeader/')
+                .then((res) => {
+                    let saleHeader = res.data.filter((elt) => {
+                        if(elt.user === userId){
+                            return true;
+                        }
+                    });
+                    axios.get("/api/trades_saleDetail/")
+                    .then((res) => {
+                        let matched = [];
+                        let saleDetail = res.data;
+                        // sale dt 기준으로 정렬되어 있는 데이터
+                        saleHeader.forEach((elt) => {
+                            let detail = [];
+                            for(let index in saleDetail) {
+                                if(saleDetail[index].saleDt === elt.saleDt) {
+                                    if(saleDetail[index].storeCd === elt.storeCd) {
+                                        if(saleDetail[index].billNo === elt.billNo) {
+                                            detail.push(saleDetail[index]);
+                                        }
+                                    }
+                                }
+                            }
+                            if(detail !== [] && elt.orderStatus !== '6' && elt.orderStatus !== '7') {
+                                elt["detail"] = detail;
+                                matched.push(elt);
+                            }
+                        });
+
+                        this.setState({
+                            userId:userId,
+                            saleHeader: saleHeader,
+                            matched: matched,
+                        }, () => {
+                            axios.get("/api/stores_store/")
+                            .then((res) => {
+                                this.state.matched.forEach((elt) => {
+                                    let store = res.data.find((dt) => {
+                                        if(elt.storeCd === dt.storeCd) {
+                                            return true;
+                                        }
+                                    });
+                                    let storeName = store.storeName;
+                                    let storeId = store.id;
+                                    elt["storeName"] = storeName;
+                                    elt["storeId"] = storeId;
+                                });
+                                this.setState({
+                                    loading: false,
+                                })
+                            });
+                        });
+                    });
+                });
+            });
     }
 
     render() {

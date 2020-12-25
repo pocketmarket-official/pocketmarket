@@ -10,12 +10,12 @@ class OrderStatus extends React.Component {
         super(props);
 
         this.state = {
-            userId: null,
+            userId: '',
             saleHeader: [],
             saleDetail: [],
             matched: [],
             loading: true,
-            storeId: null,
+            storeId: '',
         }
     };
 
