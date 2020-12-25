@@ -43,6 +43,7 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
             'completeTime',
             'pickupTime',
             'user',
+            'reviewYn',
             'insDt',
             'insUs',
             'modDt',
