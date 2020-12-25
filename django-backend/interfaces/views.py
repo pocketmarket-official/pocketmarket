@@ -1,6 +1,7 @@
 import urllib.request
 import requests
 import json
+import os
 from brands.models import Brand
 from stores.models import Store
 from stores.models import Funset
@@ -33,10 +34,20 @@ def MasterDownView(request):
         ## parameter
         storeCd = request.GET['storeCd']
 
+        state = os.environ.get('STATE')
+        if state == 'local:start' or state == 'local:dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+        elif state == 'dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+        elif state == 'production':
+            domain = 'http://asp.imtsoft.me/api/'
+        elif state == 'server:appDeploy':
+            domain = 'http://asp-test.imtsoft.me/api/'
+
         ##todo : brand down은 따로 나누기
 
         ## brands_brand
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/brandsBrand?compCd=" + compCd  # json 결과
+        url = domain + "pocketMarket/brandsBrand?compCd=" + compCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -63,7 +74,7 @@ def MasterDownView(request):
                     brand_pktmkt.save()
 
         ##stores_store
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/storesStore?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        url = domain + "pocketMarket/storesStore?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -136,7 +147,7 @@ def MasterDownView(request):
             brand = store.brandCd
 
         ##stores_funset
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/storesFunset?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        url = domain + "pocketMarket/storesFunset?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -188,7 +199,7 @@ def MasterDownView(request):
                     funset_pktmkt.save()
 
         ##keymaps_StoreKeymap
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsStoreKeymap?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        url = domain + "pocketMarket/keymapsStoreKeymap?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -227,7 +238,7 @@ def MasterDownView(request):
                     storeKeymap_pktmkt.save()
 
         ##stores_pos
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/storesPos?compCd=" + compCd + "&storCd=" + storeCd + "&posNo=" + posNo  # json 결과
+        url = domain + "pocketMarket/storesPos?compCd=" + compCd + "&storCd=" + storeCd + "&posNo=" + posNo  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -261,7 +272,7 @@ def MasterDownView(request):
 
         ##keymaps_TouchGroup
         storeKeymap = pos_pktmkt.keymapCd
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsTgrp?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + storeKeymap.keymapCd  # json 결과
+        url = domain + "pocketMarket/keymapsTgrp?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + storeKeymap.keymapCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -302,7 +313,7 @@ def MasterDownView(request):
                     touchGroup_pktmkt.save()
 
         ## items_item
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brand.brandCd  # json 결과
+        url = domain + "pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brand.brandCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -349,7 +360,7 @@ def MasterDownView(request):
 
         ## TODO : set 구성상품 하나 삭제 했을 때 지울 방법이 없는데 그건 어떻게 처리함? - 질문해두었음
         ## items_set
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsSet?compCd=" + compCd  # json 결과
+        url = domain + "pocketMarket/itemsSet?compCd=" + compCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -381,7 +392,7 @@ def MasterDownView(request):
         ##todo : set와 마찬가지로 삭제됐을 때 어떻게?
 
         ## items SetOpt
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsSetopt?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        url = domain + "pocketMarket/itemsSetopt?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -405,7 +416,7 @@ def MasterDownView(request):
 
         ## todo : 얘도 삭제 안됨
         ## items ItemAdd
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsItemadd?compCd=" + compCd  # json 결과
+        url = domain + "pocketMarket/itemsItemadd?compCd=" + compCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -431,7 +442,7 @@ def MasterDownView(request):
                     itemAdd_pktmkt.save()
 
         ## items AddCat
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsAddcat?compCd=" + compCd  # json 결과
+        url = domain + "pocketMarket/itemsAddcat?compCd=" + compCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -459,7 +470,7 @@ def MasterDownView(request):
 
         ## todo : 얘도 삭제 안됨
         ## itmes_Add
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/itemsAdd?compCd=" + compCd  # json 결과
+        url = domain + "pocketMarket/itemsAdd?compCd=" + compCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -485,7 +496,7 @@ def MasterDownView(request):
                     add_pktmkt.save()
 
         ## cprts_cprt
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/cprtsMaster?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        url = domain + "pocketMarket/cprtsMaster?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -514,7 +525,7 @@ def MasterDownView(request):
                     cprt_pktmkt.save()
 
         ## cprts_group
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/cprtsGrp?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        url = domain + "pocketMarket/cprtsGrp?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -543,7 +554,7 @@ def MasterDownView(request):
                     group_pktmkt.save()
 
         ## cprts_relation
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/cprtsCprt?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
+        url = domain + "pocketMarket/cprtsCprt?compCd=" + compCd + "&storCd=" + storeCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -571,7 +582,7 @@ def MasterDownView(request):
                     relation_pktmkt.save()
 
         ## keymaps_keymap
-        url = "http://asp-test.imtsoft.me/api/pocketMarket/keymapsKeymap?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + storeKeymap.keymapCd  # json 결과
+        url = domain + "pocketMarket/keymapsKeymap?compCd=" + compCd + "&storCd=" + storeCd + "&keymapCd=" + storeKeymap.keymapCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()

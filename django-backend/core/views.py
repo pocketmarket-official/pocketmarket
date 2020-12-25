@@ -647,7 +647,7 @@ def trade(request):
         }
         trData = json.dumps(trData)
 
-        state = os.environ.get('state')
+        state = os.environ.get('STATE')
         if state == 'local:start' or state == 'local:dev':
             domain = 'http://asp-test.imtsoft.me/api/'
         elif state == 'dev':
@@ -669,6 +669,17 @@ def trade(request):
             if cardLogObj.orgSeq == '':
                 cardLogObj.orgSeq = None
             cardLogObj.save()
+        else :
+            tradeErrorCode  = '030'
+            tradeErrorMsg = str(request.context) #TODO: imtsoft respponse 명세 알아야함
+            context = 'storeCd=' + storeCd\
+                      + ' saleDt=' + saleDt\
+                      + ' posNo=' + posNo\
+                      + ' billNo=' + billNo
+            ErrorLog.objects.create(storeId=storeId, saleDt=saleDt, posNo=posNo,
+                                    billNo=billNo, userId=userId, itemId=itemId,
+                                    tradeErrorCode=tradeErrorCode, tradeErrorMsg=tradeErrorMsg,
+                                    exception='', context=context)
 
         data = {'url': '/order/status', 'result':'200'}
 
