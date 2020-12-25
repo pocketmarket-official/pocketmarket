@@ -18,44 +18,16 @@ class OrderHistory extends React.Component {
     constructor(props) {
         super(props);
         this.searchHistory = this.searchHistory.bind(this);
-        this.getDateStr = this.getDateStr.bind(this);
         this.strToDate = this.strToDate.bind(this);
 
         let today = new Date();
         let past = new Date();
         past.setMonth(past.getMonth() - 1);
 
-        let temp = [
-                {
-                    id: 1,
-                    username: '노민철',
-                    date: '2020.08.01',
-                    place: '스타벅스',
-                    review: "Y",
-                    order: [['아메리카노', 4100, 2], ['아이스 라떼', 4900, 1]],
-
-                },
-                {
-                    id: 2,
-                    username: '노민철',
-                    date: '2020.08.27',
-                    place: '강남핫도그',
-                    review: "Y",
-                    order: [['아메리카노', 4100, 1], ['티라미수', 5900, 1]],
-                },
-                {
-                    id: 3,
-                    username: '노민철',
-                    date: '2020.09.03',
-                    place: '조폭떡볶이',
-                    review: "Y",
-                    order: [['아이스 라떼', 4900, 1]],
-                },
-            ];
-
         this.state = {
             startDate: past,
             endDate: today,
+            result: [],
             saleHeader: [],
             saleDetail: [],
             matched: [],
@@ -66,26 +38,18 @@ class OrderHistory extends React.Component {
     strToDate(str_date) {
         let datestr = "";
         let _str = String(str_date);
-        datestr = _str.slice(0, 4) + '.' + _str.slice(4, 6) + '.' + _str.slice(6, 8);
+        datestr = _str.slice(0, 4) + '/' + _str.slice(4, 6) + '/' + _str.slice(6, 8);
         return datestr;
-    }
-
-    getDateStr(date) {
-        let month = date.getMonth();
-        let dd = String(date.getDate()).padStart(2, '0');
-        let mm = String(month + 1).padStart(2, '0');
-        let yyyy = date.getFullYear();
-        date = yyyy + '-' + mm + '-' + dd;
-        return date;
     }
 
     searchHistory() {
         const val1 = document.getElementById("date1").value;
         const val2 = document.getElementById("date2").value;
         let search_result = [];
-        for (let t in this.state.temp) {
-            if(this.state.temp[t].date >= val1 && this.state.temp[t].date <= val2) {
-                search_result.push(this.state.temp[t]);
+        for (let t in this.state.matched) {
+            let saleDt = new Date(this.strToDate(this.state.matched[t].questionDate));
+            if(this.state.startDate <= saleDt && saleDt <= this.state.endDate) {
+                search_result.push(this.state.matched[t]);
             }
         }
         this.setState({ result: search_result });
@@ -101,42 +65,55 @@ class OrderHistory extends React.Component {
             .then((res2) => {
                 axios.get("/api/trades_saleDetail/")
                 .then((res3) => {
-                    let userId = res1.data.find((elt) => {
-                        if (elt.email === user_email) {
-                            return true;
-                        }
-                    }).id;
+                    axios.get("/api/stores_store/")
+                    .then((res4)=>{
+                        let userId = res1.data.find((elt) => {
+                            if (elt.email === user_email) {
+                                return true;
+                            }
+                        }).id;
 
-                    let saleHeader = res2.data.filter((elt) => {
-                        let saleDt = new Date(this.strToDate(elt.saleDt));
-                        if (elt.user === userId && this.state.startDate <= saleDt && saleDt <= this.state.endDate) {
-                            return true;
-                        }
-                    });
-
-                    let matched = [];
-                    let saleDetail = res3.data;
-                    // sale dt 기준으로 정렬되어 있는 데이터
-                    saleHeader.forEach((elt) => {
-                        let detail = [];
-                        for (let index in saleDetail) {
-                            if (saleDetail[index].saleDt === elt.saleDt) {
-                                if (saleDetail[index].storeCd === elt.storeCd) {
-                                    if (saleDetail[index].billNo === elt.billNo) {
-                                        detail.push(saleDetail[index]);
+                        let matched = [];
+                        let saleDetail = res3.data;
+                        // sale dt 기준으로 정렬되어 있는 데이터
+                        res2.data.forEach((elt) => {
+                            if(elt.user === userId){
+                                let detail = [];
+                                for (let index in saleDetail) {
+                                if (saleDetail[index].saleDt === elt.saleDt) {
+                                    if (saleDetail[index].storeCd === elt.storeCd) {
+                                        if (saleDetail[index].billNo === elt.billNo) {
+                                                detail.push(saleDetail[index]);
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
-                        elt["detail"] = detail;
-                        matched.push(elt);
-                    });
+                                elt["detail"] = detail;
 
-                    this.setState({
-                        userId: userId,
-                        saleHeader: saleHeader,
-                        matched: matched,
-                    })
+                                let stores = res4.data;
+                                for (let index in stores){
+                                    if(stores[index].storeCd === elt.storeCd){
+                                        elt["storeName"] = stores[index].storeName;
+                                    }
+                                }
+                                matched.push(elt);
+                            }
+                        });
+
+                        let result = matched.filter((elt) => {
+                            let saleDt = new Date(this.strToDate(elt.saleDt));
+                            if (this.state.startDate <= saleDt && saleDt <= this.state.endDate) {
+                                return true;
+                            }
+                        });
+
+
+                        this.setState({
+                            userId: userId,
+                            result: result,
+                            matched: matched,
+                        })
+                    });
                 });
             });
         });
@@ -152,7 +129,6 @@ class OrderHistory extends React.Component {
         } else {
             jsx = <OrderResult result={this.state.matched} />;
         }
-        console.log(this.state);
         return (
             <>
                 <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {
@@ -181,17 +157,29 @@ class OrderHistory extends React.Component {
                     <div className="orderhistory__search__container">
                         <div className="search__input">
                             <span><img src={calendar}/></span>
-                            <DatePicker className="dd" id="date1" value="2020.01.01"
+                            <DatePicker className="dd" id="date1"
                                         locale="ko"	// 언어설정 기본값은 영어
                                         dateFormat="yyyy-MM-dd"	// 날짜 형식 설정
+                                        value={this.state.past}
+                                        selected={this.state.startDate}
+                                        onChange={(date) => {
+                                            let elt = document.getElementById("date1");
+                                            elt.value = date;
+                                            this.setState({ startDate: date });
+                                        }}
                             ></DatePicker>
-                            {/*<input type="text" id="date1"/>*/}
-                            &nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+                            ~
                             <span><img src={calendar}/></span>
-
-                            <DatePicker className="dd" id="date2" value="2020.10.10"
+                            <DatePicker className="dd" id="date2"
                                         locale="ko"		// 언어설정 기본값은 영어
                                         dateFormat="yyyy-MM-dd"	// 날짜 형식 설정
+                                        value={this.state.today}
+                                        selected={this.state.endDate}
+                                        onChange={(date) => {
+                                            let elt = document.getElementById("date2");
+                                            elt.value = date;
+                                            this.setState({ endDate: date });
+                                        }}
                             ></DatePicker>
                             <input type="image" src={search} alt="search" value="조회" id="search" onClick={this.searchHistory}/>
                         </div>

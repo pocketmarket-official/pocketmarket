@@ -14,17 +14,13 @@ registerLocale('ko', ko);
 
 class QuestionsHistory extends React.Component {
     constructor(props) {
-        console.log('==1');
         super(props);
         this.searchHistory = this.searchHistory.bind(this);
-        this.getDateStr = this.getDateStr.bind(this);
         this.strToDate = this.strToDate.bind(this);
 
         let today = new Date();
         let past = new Date();
         past.setMonth(past.getMonth() - 1);
-        console.log('==2');
-        console.log(past);
 
         this.state = {
             result: [],
@@ -37,40 +33,23 @@ class QuestionsHistory extends React.Component {
 
     componentDidMount() {
         let user_email = cookieCheck_rejectGuest();
-        console.log('==3');
-        console.log(user_email);
-
 
         axios.get("api/users_user/")
             .then((res) => {
-                console.log('==4');
-                console.log(res);
-
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
                 }).id;
-                console.log('==5');
-                console.log(userId);
-
 
                 axios.get("/api/users_question/")
                 .then((res) => {
-                    console.log('==6');
-                    console.log(res);
-
                     const questions = res.data.filter((elt) => {
                         let questionDate = new Date(this.strToDate(elt.questionDate));
-                        console.log('==7');
-                        console.log(questionDate);
                         if(elt.user === userId && this.state.startDate <= questionDate && questionDate <= this.state.endDate) {
                             return true;
                         }
                     });
-                    console.log('==8');
-                    console.log(questions);
-
                     this.setState({ userId: userId, result: questions, questions: res.data });
                 });
             }
@@ -78,47 +57,23 @@ class QuestionsHistory extends React.Component {
     }
 
     strToDate(str_date) {
-        console.log('==9');
-        console.log(str_date);
-
         let datestr = "";
         let _str = String(str_date);
         datestr = _str.slice(0, 4) + '/' + _str.slice(4, 6) + '/' + _str.slice(6, 8);
-        console.log('==10');
-        console.log(datestr);
 
         return datestr;
     }
 
-    getDateStr(date) {
-        console.log('==11');
-        console.log(date);
-
-        let month = date.getMonth();
-        let dd = String(date.getDate()).padStart(2, '0');
-        let mm = String(month + 1).padStart(2, '0');
-        let yyyy = date.getFullYear();
-        date = yyyy + '-' + mm + '-' + dd;
-        console.log('==12');
-        console.log(date);
-
-        return date;
-    }
 
     searchHistory() {
         const val1 = document.getElementById("date1").value;
         const val2 = document.getElementById("date2").value;
-        console.log('==12');
-        console.log(val1);
-        console.log(val2);
         let search_result = [];
         for (let t in this.state.questions) {
             if(this.state.startDate <= new Date(this.strToDate(this.state.questions[t].questionDate)) && new Date(this.strToDate(this.state.questions[t].questionDate)) <= this.state.endDate) {
                 search_result.push(this.state.questions[t]);
             }
         }
-        console.log('==13');
-        console.log(search_result);
         this.setState({ result: search_result });
     }
 
