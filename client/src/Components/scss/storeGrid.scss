@@ -100,6 +100,10 @@
         align-items: center;
         margin-bottom: 2px;
 
+        button {
+          font-family: MaplestoryOTFLight;
+        }
+
         .slide {
           width: 44px;
           height: 21px;
@@ -162,12 +166,15 @@
     .store__review__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+      grid-auto-rows: 14%;
+      grid-row-gap: 3px;
+      grid-column-gap: 1px;
 
       div {
         position: relative;
         flex: 1;
         height: 100%;
-        padding: 1px;
 
         &.photo {
 
@@ -185,9 +192,8 @@
         }
 
         img {
-          display: block;
-          max-width: 100%;
-          height: auto;
+          width: 100%;
+          height: 100%;
         }
       }
     }
@@ -207,7 +213,7 @@
       width: 99px;
       height: 51px;
       margin: auto;
-      font-family: 'Nanum Gothic', sans-serif;
+      font-family: MaplestoryOTFLight, Nanum Gothic, sans-serif;
       font-size: 13px;
       font-weight: bold;
       font-stretch: normal;

@@ -419,7 +419,9 @@ class Order extends React.Component {
                                                     }
                                                 });
                                             }}>
-                                        <img className="menu__image" src={data.imgSmallUrl} alt="menu" />
+                                        <div className="image__container">
+                                            <img className="menu__image" src={data.imgSmallUrl} alt="menu" />
+                                        </div>
                                         <div className="menu__name">{data.itemName}</div>
                                         <div className="menu__price">{data.price}원</div>
                                     </div>
