@@ -135,28 +135,23 @@ class OrderStatus extends React.Component {
                             deleteButton = (<></>);
                             button = (
                                 <>
-                                    <Link to={{
-                                        pathname: `/order/complete/`,
-                                        state: {order: elt}
-                                    }}>
-                                        <div className="pickup active">
-                                        <div className="pickup__message">
-                                            주문한 음식을 수령하셨다면 픽업완료를 눌러주세요 ▶
-                                        </div>
-                                        <button className="pickup__btn" onClick={(e) => {
-                                            e.preventDefault();
-                                            let id = elt.id;
-                                            axios.put(`/api/trades_saleHeader/${id}/`, {
-                                                orderStatus: 4,
-                                                pickupTime: pickup_time,
-                                            })
-                                            .then(() => {
-                                                window.location.reload();
-                                            })
-                                        }}>픽업완료
-                                        </button>
-                                        </div>
-                                    </Link>
+                                    <div className="pickup active">
+                                    <div className="pickup__message">
+                                        주문한 음식을 수령하셨다면 픽업완료를 눌러주세요 ▶
+                                    </div>
+                                    <button className="pickup__btn" onClick={(e) => {
+                                        e.preventDefault();
+                                        let id = elt.id;
+                                        axios.put(`/api/trades_saleHeader/${id}/`, {
+                                            orderStatus: 4,
+                                            pickupTime: pickup_time,
+                                        })
+                                        .then(() => {
+                                            window.location.reload();
+                                        })
+                                    }}>픽업완료
+                                    </button>
+                                    </div>
                                 </>
                             );
                         } else if(elt.orderStatus === '4' || elt.orderStatus === '5') {
@@ -195,58 +190,118 @@ class OrderStatus extends React.Component {
                             );
                         }
 
+                        if(elt.orderStatus === '3') {
                         return (
                             <>
-                                <div className="orderstatus__card">
-                                    <div className="card__info">
-                                        <div className="card__title">{elt.storeName}</div>
-                                        <div className="card__title__info">
-                                            <div className="order__date">
-                                                <img className="cal" alt="calendar" src={btnCal}/>
-                                                {elt.saleDt}
+                                <Link to={{
+                                    pathname: `/order/complete/`,
+                                    state: {order: elt}
+                                }}>
+                                    <div className="orderstatus__card">
+                                        <div className="card__info">
+                                            <div className="card__title">{elt.storeName}</div>
+                                            <div className="card__title__info">
+                                                <div className="order__date">
+                                                    <img className="cal" alt="calendar" src={btnCal}/>
+                                                    {elt.saleDt}
+                                                </div>
+                                                {deleteButton}
                                             </div>
-                                            {deleteButton}
                                         </div>
-                                    </div>
-                                    <div className="card__info__detail cooked">
-                                        <div className="order__list">
-                                            <div className="line__title">주문목록</div>
-                                            <div className="line__detail">{
-                                                elt.detail.map((elt) => {
-                                                    if(elt.itemSellLevel === '1') {
-                                                        return (
-                                                            <>
-                                                                <div>{elt.itemName} {elt.qty}개</div>
-                                                            </>
-                                                        );
-                                                    } else {
-                                                        return null;
-                                                    }
-                                                })
-                                            }</div>
-                                        </div>
-                                        <div className="order__number">
-                                            <div className="line__title">주문번호</div>
-                                            <div className="line__detail">{elt.billNo}</div>
-                                        </div>
-                                        <div className="order__status">
-                                            <div className="line__title">주문상태</div>
-                                            <div className="line__detail">{status}</div>
-                                        </div>
-                                        {
-                                            time !== "" ?
-                                            <div className="order__time">
-                                                <div className="line__title">{text}</div>
-                                                <div className="line__detail">{time}</div>
+                                        <div className="card__info__detail cooked">
+                                            <div className="order__list">
+                                                <div className="line__title">주문목록</div>
+                                                <div className="line__detail">{
+                                                    elt.detail.map((elt) => {
+                                                        if(elt.itemSellLevel === '1') {
+                                                            return (
+                                                                <>
+                                                                    <div>{elt.itemName} {elt.qty}개</div>
+                                                                </>
+                                                            );
+                                                        } else {
+                                                            return null;
+                                                        }
+                                                    })
+                                                }</div>
                                             </div>
-                                            :
-                                            null
-                                        }
+                                            <div className="order__number">
+                                                <div className="line__title">주문번호</div>
+                                                <div className="line__detail">{elt.billNo}</div>
+                                            </div>
+                                            <div className="order__status">
+                                                <div className="line__title">주문상태</div>
+                                                <div className="line__detail">{status}</div>
+                                            </div>
+                                            {
+                                                time !== "" ?
+                                                <div className="order__time">
+                                                    <div className="line__title">{text}</div>
+                                                    <div className="line__detail">{time}</div>
+                                                </div>
+                                                :
+                                                null
+                                            }
+                                        </div>
+                                        {button}
                                     </div>
-                                    {button}
-                                </div>
+                                </Link>
                             </>
                         );
+                        } else {
+                            return (
+                                <>
+                                    <div className="orderstatus__card">
+                                        <div className="card__info">
+                                            <div className="card__title">{elt.storeName}</div>
+                                            <div className="card__title__info">
+                                                <div className="order__date">
+                                                    <img className="cal" alt="calendar" src={btnCal}/>
+                                                    {elt.saleDt}
+                                                </div>
+                                                {deleteButton}
+                                            </div>
+                                        </div>
+                                        <div className="card__info__detail cooked">
+                                            <div className="order__list">
+                                                <div className="line__title">주문목록</div>
+                                                <div className="line__detail">{
+                                                    elt.detail.map((elt) => {
+                                                        if(elt.itemSellLevel === '1') {
+                                                            return (
+                                                                <>
+                                                                    <div>{elt.itemName} {elt.qty}개</div>
+                                                                </>
+                                                            );
+                                                        } else {
+                                                            return null;
+                                                        }
+                                                    })
+                                                }</div>
+                                            </div>
+                                            <div className="order__number">
+                                                <div className="line__title">주문번호</div>
+                                                <div className="line__detail">{elt.billNo}</div>
+                                            </div>
+                                            <div className="order__status">
+                                                <div className="line__title">주문상태</div>
+                                                <div className="line__detail">{status}</div>
+                                            </div>
+                                            {
+                                                time !== "" ?
+                                                <div className="order__time">
+                                                    <div className="line__title">{text}</div>
+                                                    <div className="line__detail">{time}</div>
+                                                </div>
+                                                :
+                                                null
+                                            }
+                                        </div>
+                                        {button}
+                                    </div>
+                                </>
+                            );
+                        }
                     })
                 }
                 </div>
