@@ -647,9 +647,18 @@ def trade(request):
         }
         trData = json.dumps(trData)
 
+        state = os.environ.get('state')
+        if state == 'local:start' or state == 'local:dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+        elif state == 'dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+        elif state == 'production':
+            domain = 'http://asp.imtsoft.me/api/'
+        elif state == 'server:appDeploy':
+            domain = 'http://asp-test.imtsoft.me/api/'
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
-        request = requests.post('http://asp-test.imtsoft.me/api/outer/sale', data= trData,  verify=False, headers=headers)
+        request = requests.post(domain+'outer/sale', data= trData,  verify=False, headers=headers)
         if request.status_code == 200:
             saleHeaderObj.sendYn = 'Y'
             saleHeaderObj.save()
