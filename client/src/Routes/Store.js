@@ -28,7 +28,6 @@ class StoreView extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.location.state.data);
         axios.get("/api/reviews_review/")
             .then((res) => {
                 let reviews = res.data.filter(

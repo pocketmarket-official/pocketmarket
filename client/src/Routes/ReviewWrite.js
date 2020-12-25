@@ -7,6 +7,7 @@ import img_ico from '../../src/assets/review_write/img_up_ico.png';
 class ReviewWrite extends React.Component {
     constructor(props) {
         super(props);
+        this.props.history.go(1);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.getFormatDate = this.getFormatDate.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
