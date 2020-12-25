@@ -60,6 +60,7 @@ class ReviewWrite extends React.Component {
         .then(res => {
             axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{
                 orderStatus: 6,
+                reviewYn: 'Y',
             } );
             window.location.href = '/order/status'
         })

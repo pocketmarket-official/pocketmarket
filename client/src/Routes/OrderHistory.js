@@ -54,8 +54,8 @@ class OrderHistory extends React.Component {
             ];
 
         this.state = {
-            today: today,
-            past: past,
+            startDate: past,
+            endDate: today,
             saleHeader: [],
             saleDetail: [],
             matched: [],
@@ -96,67 +96,50 @@ class OrderHistory extends React.Component {
         let user_email = cookieCheck_rejectGuest();
 
         axios.get('/api/users_user/')
-            .then((res) => {
-                let userId = res.data.find((elt) => {
-                    if (elt.email === user_email) {
-                        return true;
-                    }
-                }).id;
-                axios.get('/api/trades_saleHeader/')
-                .then((res) => {
-                    let saleHeader = res.data.filter((elt) => {
-                        if(elt.user === userId){
+        .then((res1) => {
+            axios.get('/api/trades_saleHeader/')
+            .then((res2) => {
+                axios.get("/api/trades_saleDetail/")
+                .then((res3) => {
+                    let userId = res1.data.find((elt) => {
+                        if (elt.email === user_email) {
+                            return true;
+                        }
+                    }).id;
+
+                    let saleHeader = res2.data.filter((elt) => {
+                        let saleDt = new Date(this.strToDate(elt.saleDt));
+                        if (elt.user === userId && this.state.startDate <= saleDt && saleDt <= this.state.endDate) {
                             return true;
                         }
                     });
-                    axios.get("/api/trades_saleDetail/")
-                    .then((res) => {
-                        let matched = [];
-                        let saleDetail = res.data;
-                        // sale dt 기준으로 정렬되어 있는 데이터
-                        saleHeader.forEach((elt) => {
-                            let detail = [];
-                            for(let index in saleDetail) {
-                                if(saleDetail[index].saleDt === elt.saleDt) {
-                                    if(saleDetail[index].storeCd === elt.storeCd) {
-                                        if(saleDetail[index].billNo === elt.billNo) {
-                                            detail.push(saleDetail[index]);
-                                        }
+
+                    let matched = [];
+                    let saleDetail = res3.data;
+                    // sale dt 기준으로 정렬되어 있는 데이터
+                    saleHeader.forEach((elt) => {
+                        let detail = [];
+                        for (let index in saleDetail) {
+                            if (saleDetail[index].saleDt === elt.saleDt) {
+                                if (saleDetail[index].storeCd === elt.storeCd) {
+                                    if (saleDetail[index].billNo === elt.billNo) {
+                                        detail.push(saleDetail[index]);
                                     }
                                 }
                             }
-                            if(detail !== [] && elt.orderStatus !== '6' && elt.orderStatus !== '7') {
-                                elt["detail"] = detail;
-                                matched.push(elt);
-                            }
-                        });
-
-                        this.setState({
-                            userId:userId,
-                            saleHeader: saleHeader,
-                            matched: matched,
-                        }, () => {
-                            axios.get("/api/stores_store/")
-                            .then((res) => {
-                                this.state.matched.forEach((elt) => {
-                                    let store = res.data.find((dt) => {
-                                        if(elt.storeCd === dt.storeCd) {
-                                            return true;
-                                        }
-                                    });
-                                    let storeName = store.storeName;
-                                    let storeId = store.id;
-                                    elt["storeName"] = storeName;
-                                    elt["storeId"] = storeId;
-                                });
-                                this.setState({
-                                    loading: false,
-                                })
-                            });
-                        });
+                        }
+                        elt["detail"] = detail;
+                        matched.push(elt);
                     });
+
+                    this.setState({
+                        userId: userId,
+                        saleHeader: saleHeader,
+                        matched: matched,
+                    })
                 });
             });
+        });
     }
 
     render() {
