@@ -3,6 +3,7 @@ import HeaderBack from '../Components/js/HeaderBack';
 import axios from 'axios';
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import img_ico from '../../src/assets/review_write/img_up_ico.png';
+import Toast from "../Components/js/Toast";
 
 class ReviewWrite extends React.Component {
     constructor(props) {
@@ -12,18 +13,20 @@ class ReviewWrite extends React.Component {
         this.getFormatDate = this.getFormatDate.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
 
-        let billNo = this.props.location.state.billNo || null;
-        let saleDt = this.props.location.state.saleDt || null;
-        let storeId = this.props.location.state.storeId || null;
-        let saleHeaderId = this.props.location.state.id || null;
+        console.log(this.props.location.state.matched);
+        let billNo = this.props.location.state.matched.billNo || null;
+        let saleDt = this.props.location.state.matched.saleDt || null;
+        let storeId = this.props.location.state.matched.storeId || null;
+        let saleHeaderId = this.props.location.state.matched.id || null;
 
         this.state = {
-            userId: null,
+            userId: '',
             billNo: billNo,
             saleDt: saleDt,
             storeId: storeId,
             saleHeaderId: saleHeaderId,
             image: [],
+            toastYn: 'N',
         }
     }
 
@@ -63,7 +66,7 @@ class ReviewWrite extends React.Component {
                 orderStatus: 6,
                 reviewYn: 'Y',
             } );
-            window.location.href = '/order/status'
+            window.location.href = '/mypage/order'
         })
         .catch(err => console.log(err))
 
@@ -117,12 +120,6 @@ class ReviewWrite extends React.Component {
                 <div className="reviewwrite">
                     <div className="review__write__box">
                         <div className="review__write__caption">리뷰쓰기</div>
-                        {
-                            this.state.image.length === 0 ?
-                            <div>리뷰작성 시 사진을 필수로 등록하셔야 합니다!!</div>
-                            :
-                            null
-                        }
                         <textarea className="reviewwrite__context" id="reviewwrite__context"></textarea>
                     </div>
                     {/*
@@ -175,13 +172,20 @@ class ReviewWrite extends React.Component {
                             <input type="submit" value="submit" id="review__submit" hidden/>
                             {
                                 this.state.image.length === 0 ?
-                                <div className="submit__off">등록하기</div>
+                                <div className="submit__off" onClick={() => this.setState({toastYn:"Y"})}>등록하기</div>
                                 :
                                 <div className="submit" onClick={() => this.handleSubmit()}>등록하기</div>
                             }
                         </div>
                     </div>
                 </div>
+                {this.state.toastYn === 'Y'?
+                    <>
+                        <Toast message="리뷰 작성 시 사진을 필수로 등록하셔야 해요!" vanishOnClick={true} turn="on" />
+                    </>
+                    :
+                    null
+                }
             </>
         );
     }

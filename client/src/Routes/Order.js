@@ -8,7 +8,8 @@ import { faRedo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeaderOrder from "../Components/js/HeaderOrder";
 import cookie from "react-cookies";
-import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
+import {cookieCheck_approveGuest} from "../Components/js/CookieCheck.js"
+import Toast from "../Components/js/Toast";
 
 function makeTokenSaveScript(token) {
         // let cookie_token = cookie.load("access_token");
@@ -63,7 +64,7 @@ class Order extends React.Component {
             storeId: storeId,
             storeCd: "",
             keymapCd: "",
-            touchGroupCd: null,
+            touchGroupCd: '',
             brandCd: "",
             touch_group: [],
             keymap: [],
@@ -76,6 +77,8 @@ class Order extends React.Component {
             orderContainerClosed: true,
             canScrollLeft: false,
             canScrollRight: false,
+            user: '',
+            toastFlag: 'N',
         };
     }
 
@@ -96,7 +99,7 @@ class Order extends React.Component {
     }
 
     componentDidMount() {
-        let user_email = cookieCheck_rejectGuest();
+        let user_email = cookieCheck_approveGuest();
         let fcmToken = cookie.load("fcmToken");
 
         if(fcmToken){
@@ -162,19 +165,27 @@ class Order extends React.Component {
                                    }
                                ).length;
                                document.getElementById('waitingCount').innerHTML = count+' 명';
+
+                               axios.get("/api/users_user/")
+                                .then((res) => {
+                                    let user = res.data.find((elt) => {
+                                        if (elt.email === user_email) {
+                                            return true;
+                                        }
+                                    });
+                                    this.setState({
+                                        user: user,
+                                        touch_group: arr[0],
+                                        storeId: arr[1],
+                                        keymapCd: arr[2],
+                                        brandCd: brandCd,
+                                        keymaps: res.data,
+                                        touchGroupCd: arr[0][0].id,
+                                        keymap: keymap,
+                                        storeName: store.storeName,
+                                    });
+                                });
                             });
-
-                        this.setState({
-                            touch_group: arr[0],
-                            storeId: arr[1],
-                            keymapCd: arr[2],
-                            brandCd: brandCd,
-                            keymaps: res.data,
-                            touchGroupCd: arr[0][0].id,
-                            keymap: keymap,
-                            storeName: store.storeName,
-                        });
-
                         // init category scroll handle state
                         setTimeout(() => this.categoryScrollDom.dispatchEvent(new Event('scroll')));
                     })
@@ -455,16 +466,27 @@ class Order extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <Link to={{
-                                pathname: this.state.link,
-                                state: {
-                                    order: this.state.order_list,
-                                    storeName: this.state.storeName,
-                                    storeId: this.state.storeId,
-                                    storeCd: this.state.storeCd,
-                                }}}>
-                                <div className="order__pass">주문결제</div>
-                            </Link>
+                            {this.state.user.guestYn === "N"?
+                                <>
+                                    <Link to={{
+                                        pathname: this.state.link,
+                                        state: {
+                                            order: this.state.order_list,
+                                            storeName: this.state.storeName,
+                                            storeId: this.state.storeId,
+                                            storeCd: this.state.storeCd,
+                                        }}}>
+                                        <div className="order__pass">주문결제</div>
+                                    </Link>
+                                </>
+                                :
+                                <>
+                                    <div className="order__pass" onClick={() => {
+                                        this.setState({toastYn:'Y'})
+                                    }}>주문결제</div>
+                                </>
+                            }
+
                         </div>
                         <div className="order__detail">
                             {
@@ -526,6 +548,13 @@ class Order extends React.Component {
                         </div>
                     </div>
                 </div>
+                {this.state.toastYn === 'Y'?
+                    <>
+                        <Toast message="결제는 로그인 하셔야만 진행할 수 있으세요 :)" vanishOnClick={true} turn="on" />
+                    </>
+                    :
+                    null
+                }
             </>
         );
     }

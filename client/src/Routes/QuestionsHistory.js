@@ -48,11 +48,14 @@ class QuestionsHistory extends React.Component {
 
                 axios.get("/api/users_question/")
                 .then((res) => {
-                    const questions = res.data.filter((elt) => {
+                    let questions = res.data.filter((elt) => {
                         let questionDate = new Date(this.strToDate(elt.questionDate));
                         if(elt.user === userId && this.state.startDate <= questionDate && questionDate <= this.state.endDate) {
                             return true;
                         }
+                    });
+                    questions = questions.sort(function(a, b) {
+                        return a.insDt > b.insDt ? -1 : a.insDt < b.insDt ? 1 : 0;
                     });
                     this.setState({ userId: userId, result: questions, questions: res.data });
                 });
@@ -76,6 +79,10 @@ class QuestionsHistory extends React.Component {
                 search_result.push(this.state.questions[t]);
             }
         }
+        search_result = search_result.sort(function(a, b) {
+            return a.insDt > b.insDt ? -1 : a.insDt < b.insDt ? 1 : 0;
+        });
+
         this.setState({ result: search_result });
     }
 

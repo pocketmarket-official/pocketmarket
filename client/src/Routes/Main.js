@@ -8,6 +8,7 @@ import MainMapContent from '../Components/js/MainMapContent';
 import {cookieCheck_approveGuest} from '../Components/js/CookieCheck.js'
 
 import btnSearchImg from '../assets/common/btn_sceach.png';
+import Toast from "../Components/js/Toast";
 
 class Main extends React.Component {
     constructor(props) {
@@ -62,7 +63,7 @@ class Main extends React.Component {
             temp: temp,
             current: current,
             latlong: [],
-            userId: null,
+            user: '',
             orderCount: 0,
         }
     }
@@ -72,8 +73,8 @@ class Main extends React.Component {
         if(this.state.current === 0) {
             return <MainFestivalContent />;
         } else if(this.state.current === 1) {
-            if(this.state.userId) {
-                return <MainStoreContent place={this.state.latlong} userId={this.state.userId} />;
+            if(this.state.user.id) {
+                return <MainStoreContent place={this.state.latlong} userId={this.state.user.Id} />;
             }
         } else if(this.state.current === 2) {
             return <MainMapContent place={this.state.latlong} />;
@@ -161,24 +162,22 @@ class Main extends React.Component {
         this.handleTop();
         let user_email = cookieCheck_approveGuest();
 
-
-
         axios.get("/api/users_user/")
             .then((res) => {
-                let userId = res.data.find((elt) => {
+                let user = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
-                }).id;
+                });
                 axios.get("/api/trades_saleHeader/")
                     .then((res) => {
                         let i = this.state.orderCount;
                         res.data.filter((elt) => {
-                            if (elt.user === userId && (elt.orderStatus != 6 && elt.orderStatus != 7)) {
+                            if (elt.user === user.id && (elt.orderStatus != 6 && elt.orderStatus != 7)) {
                                 i++;
                             }
                         });
-                        this.setState({userId: userId, orderCount: i});
+                        this.setState({user: user, orderCount: i});
                     });
             });
     }
@@ -241,6 +240,14 @@ class Main extends React.Component {
                                 </>
                             }
                 </div>
+                {this.state.user.guestYn === 'Y'?
+                    <>
+                        <Toast message="좋아요 기능은 로그인 하셔야 사용할 수 있으세요 :)" vanishOnClick={false} turn="on" />
+                    </>
+                    :
+                    null
+                }
+
             </>
         );
     }

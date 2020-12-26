@@ -43,6 +43,7 @@ import './App.css';
 import Intro from "./Routes/Intro";
 import OrderInfoPayMethod from "./Routes/OrderInfoPayMethod";
 import axios from 'axios';
+import storage from "./storage";
 
 function App() {
   if(process.env.REACT_APP_STATE === 'local' || process.env.REACT_APP_STATE === 'local:dev') {
@@ -53,12 +54,24 @@ function App() {
     axios.defaults.baseURL = 'http://13.124.90.138:8000';
   }
 
-  //todo: 로그인 인증수단을 전부 cookie_token으로 바꿨음
-  let cookie_token = cookie.load("access_token");
-  let authenticated = false;
-  if(cookie_token) {
-    authenticated = true;
-  }
+    //todo: 로그인 인증수단을 전부 cookie_token으로 바꿨음
+    // 쿠키를 받아오고
+    let cookie_token = cookie.load("access_token");
+    let authenticated = false;
+    //쿠키가 있으면
+    if(cookie_token) {
+        //그 쿠키로 메일을 받아오고
+        let user_email = storage.get(cookie_token);
+        //메일도 있으면 정상
+        if(user_email){
+            authenticated = true;
+        } else {
+            // 메일이 없으면 해당 토큰의 쿠키를 삭제하고
+            cookie.remove('access_token');
+            // 미인증
+            authenticated = false;
+        }
+    }
 
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {

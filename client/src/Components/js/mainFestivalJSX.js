@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import defaultImg from '../../assets/main/grayBI.png';
+import Toast from "./Toast";
 
 class FestivalJSX extends React.Component {
     constructor(props) {
@@ -8,18 +9,19 @@ class FestivalJSX extends React.Component {
         this.formatDate = this.formatDate.bind(this);
         this.joinFestival = this.joinFestival.bind(this);
         this.state = {
-            festival: null,
-            festivalName: null,
-            startDate: null,
-            endDate: null,
-            descriptionHeader: null,
-            img: null,
-            userId: null,
+            festival: '',
+            festivalName: '',
+            startDate: '',
+            endDate: '',
+            descriptionHeader: '',
+            img: '',
+            userId: '',
+            toastYn: 'N'
         }
     }
 
     joinFestival(){
-        alert('사회적 거리두기 2단계 시행에 따라 임시 휴장합니다.');
+        this.setState({toastYn:'Y'})
     }
 
     formatDate(dateStr) {
@@ -55,6 +57,13 @@ class FestivalJSX extends React.Component {
                         </div>
                     </div>
                 </div>
+                {this.state.toastYn === 'Y'?
+                <>
+                    <Toast message="COVID-19로 인해 축제는 운영하지 않고 있어요 ㅜ_ㅜ" vanishOnClick={false} turn="on" />
+                </>
+                :
+                null
+                }
             </>;
         return (
             <div>

@@ -25,7 +25,6 @@ class OrderResult extends React.Component {
 
     render() {
         let result = this.props.result;
-        console.log(result);
         return (
             result.map((data) => {
                 let contentId = "content" + data.id;
@@ -53,7 +52,10 @@ class OrderResult extends React.Component {
                                         <button className="orderhistory__btn__review review__start" onClick={() => {
 
                                         }}>
-                                            <Link to="/order/review">{review_txt}리뷰쓰기</Link>
+                                            <Link to={{pathname: '/order/review', state: {
+                                                matched: data,
+                                            }}}>
+                                                {review_txt}리뷰쓰기</Link>
                                         </button>
                                     </div>
                                     <button className="orderhistory__btn rebuy"><img src={order}/></button>

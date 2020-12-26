@@ -3,57 +3,43 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import defaultImg from '../../assets/main/grayBI.png';
-import cookie from "react-cookies";
-import storage from "../../storage";
 
+import {cookieCheck_approveGuest} from "./CookieCheck"
 
 class StoreJSX extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            like: null,
+            likeCnt: '',
             storeId: this.props.data.id,
-            userId: '',
-            likeYn: null,
-            userEmail: '',
+            user: '',
+            likeYn: '',
         }
     }
 
     componentDidMount() {
-
-        let cookie_token = cookie.load("access_token");
-        if(!cookie_token) window.location.href = '/login/';
-        let user_email;
-        if(!cookie_token){
-          window.location.href = '/login/';
-        } else if(cookie_token === 'guest'){
-            user_email = 'pocketmarket.official@gmail.com'
-        } else {
-            user_email = storage.get(cookie_token);
-        }
+        let user_email = cookieCheck_approveGuest();
 
         this.setState({user_email});
-        let userId;
-
         axios.get("/api/users_user/")
             .then((res) => {
-                userId = res.data.find((elt) => {
+                let user = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
                     }
-                }).id;
+                });
                 axios.post("/storeLike/", {
                     "storeId": this.props.data.id,
-                    "userId": userId,
+                    "userId": user.id,
                 })
                     .then((res) => {
                         this.setState({
-                            like: res.data.likeCnt,
+                            likeCnt: res.data.likeCnt,
                             likeYn: res.data.likeYn,
                             likeId: res.data.likeId,
                         });
                     });
-                this.setState({userId: userId});
+                this.setState({user: user});
             });
     }
 
@@ -77,26 +63,26 @@ class StoreJSX extends React.Component {
                                 }
 
                                 {
-                                    this.state.like !== undefined ?
+                                    this.state.likeCnt !== undefined ?
                                     <button className={`tags__likes ${this.state.likeYn === 'Y' ? 'active' : ''}`} onClick={(e) => {
                                         e.preventDefault();
 
                                         let id = this.state.likeId;
-                                        if(this.state.user_email !== 'pocketmarket.official@gmail.com'){
+                                        if(this.state.user.guestYn === 'N'){
                                             if(id === "") {
                                             axios.post("/api/stores_storeLike/", {
                                                 likeYn: 'Y',
-                                                user: this.state.userId,
+                                                user: this.state.user.id,
                                                 store: this.state.storeId,
                                             })
                                             .then(() => {
                                                 axios.post("/storeLike/", {
                                                     "storeId": this.props.data.id,
-                                                    "userId": this.state.userId,
+                                                    "userId": this.state.user.id,
                                                 })
                                                 .then((res) => {
                                                     this.setState({
-                                                        like: res.data.likeCnt,
+                                                        likeCnt: res.data.likeCnt,
                                                         likeYn: res.data.likeYn,
                                                         likeId: res.data.likeId,
                                                     });
@@ -106,17 +92,17 @@ class StoreJSX extends React.Component {
                                                 if(this.state.likeYn === 'Y') {
                                                     axios.put(`/api/stores_storeLike/${id}/`, {
                                                         likeYn: 'N',
-                                                        user: this.state.userId,
+                                                        user: this.state.user.id,
                                                         store: this.state.storeId,
                                                     })
                                                     .then(() => {
                                                         axios.post("/storeLike/", {
                                                             "storeId": this.props.data.id,
-                                                            "userId": this.state.userId,
+                                                            "userId": this.state.user.id,
                                                         })
                                                         .then((res) => {
                                                             this.setState({
-                                                                like: res.data.likeCnt,
+                                                                likeCnt: res.data.likeCnt,
                                                                 likeYn: res.data.likeYn,
                                                                 likeId: res.data.likeId,
                                                             });
@@ -125,17 +111,17 @@ class StoreJSX extends React.Component {
                                                 } else if(this.state.likeYn === 'N') {
                                                     axios.put(`/api/stores_storeLike/${id}/`, {
                                                         likeYn: 'Y',
-                                                        user: this.state.userId,
+                                                        user: this.state.user.id,
                                                         store: this.state.storeId,
                                                     })
                                                     .then(() => {
                                                         axios.post("/storeLike/", {
                                                             "storeId": this.props.data.id,
-                                                            "userId": this.state.userId,
+                                                            "userId": this.state.user.id,
                                                         })
                                                         .then((res) => {
                                                             this.setState({
-                                                                like: res.data.likeCnt,
+                                                                likeCnt: res.data.likeCnt,
                                                                 likeYn: res.data.likeYn,
                                                                 likeId: res.data.likeId,
                                                             });
@@ -145,7 +131,7 @@ class StoreJSX extends React.Component {
                                             }
                                         }
                                     }}>
-                                        <span className="likes__heart">♥</span> {this.state.like}
+                                        <span className="likes__heart">♥</span> {this.state.likeCnt}
                                     </button>
                                     :
                                     null

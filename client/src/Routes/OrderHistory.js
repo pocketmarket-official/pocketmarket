@@ -47,14 +47,17 @@ class OrderHistory extends React.Component {
     }
 
     searchHistory() {
-        let search_result = [];
+        let result = [];
         for (let t in this.state.matched) {
             let saleDt = new Date(this.strToDate(this.state.matched[t].saleDt));
             if(this.state.startDate <= saleDt && saleDt <= this.state.endDate) {
-                search_result.push(this.state.matched[t]);
+                result.push(this.state.matched[t]);
             }
         }
-        this.setState({ result: search_result });
+        result = result.sort(function(a, b) {
+            return a.id > b.id ? -1 : a.id < b.id ? 1 : 0;
+        });
+        this.setState({ result });
     }
 
 
@@ -96,6 +99,7 @@ class OrderHistory extends React.Component {
                                 for (let index in stores){
                                     if(stores[index].storeCd === elt.storeCd){
                                         elt["storeName"] = stores[index].storeName;
+                                        elt["storeId"] = stores[index].id;
                                     }
                                 }
                                 matched.push(elt);
@@ -107,6 +111,10 @@ class OrderHistory extends React.Component {
                             if (this.state.startDate <= saleDt && saleDt <= this.state.endDate) {
                                 return true;
                             }
+                        });
+
+                        result = result.sort(function(a, b) {
+                            return a.id > b.id ? -1 : a.id < b.id ? 1 : 0;
                         });
 
 

@@ -20,8 +20,6 @@ class OrderStatus extends React.Component {
     };
 
     componentDidMount(){
-        let previousUrl = document.referrer.split('/');
-
         let user_email = cookieCheck_rejectGuest();
 
         axios.get('/api/users_user/')
@@ -58,6 +56,9 @@ class OrderStatus extends React.Component {
                                 elt["detail"] = detail;
                                 matched.push(elt);
                             }
+                        });
+                        matched = matched.sort(function(a, b) {
+                            return a.saleDt > b.saleDt ? -1 : a.saleDt < b.saleDt ? 1 : 0;
                         });
 
                         this.setState({
@@ -98,7 +99,6 @@ class OrderStatus extends React.Component {
                     <div>loading...</div>
                     :
                     this.state.matched.map((elt) => {
-
                         let status;
                         let deleteButton;
                         let button;
@@ -181,12 +181,10 @@ class OrderStatus extends React.Component {
                                             리뷰를 등록하면 다양한 혜택을 누리실 수 있습니다 ▶
                                         </div>
                                         <Link to={{pathname: '/order/review', state: {
-                                            userId: this.state.userId,
-                                            saleDt: elt.saleDt,
-                                            storeId: elt.storeId,
-                                            billNo: elt.billNo,
-                                                id: elt.id,
-                                        }}}><button className="pickup__btn">리뷰작성</button></Link>
+                                            matched: elt,
+                                        }}}>
+                                            <button className="pickup__btn">리뷰작성</button>
+                                        </Link>
                                     </div>
                                 </>
                             );

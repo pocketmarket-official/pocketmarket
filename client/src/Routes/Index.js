@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from "../Components/js/Header";
 import Footer from "../Components/js/Footer";
 import Flicking from "@egjs/react-flicking";
@@ -11,9 +11,11 @@ import showStoreImg from "../assets/index/btn_index2.png";
 import showCollectionImg from "../assets/index/btn_index3.png";
 import showOrderImg from "../assets/index/btn_index4.png";
 
+import { cookieCheck_approveGuest } from "../Components/js/CookieCheck.js"
 import Toast from '../Components/js/Toast';
+import axios from "axios";
 
-function Index({authenticated, login, location}) {
+function Index() {
     const paginationElem = useRef(null);
     const autoPlayPlugin = useMemo(() => {
         return new AutoPlay({
@@ -22,6 +24,17 @@ function Index({authenticated, login, location}) {
         });
     }, []);
 
+    let user_email = cookieCheck_approveGuest();
+    let user = '';
+    axios.get("/api/users_user/")
+        .then((res) => {
+            user = res.data.find((elt) => {
+                if (elt.email === user_email) {
+                    return true;
+                }
+            });
+        });
+
     function onChangeJumboItem(e) {
         for (let item of paginationElem.current.children) {
             item.classList.remove('active');
@@ -29,8 +42,8 @@ function Index({authenticated, login, location}) {
         paginationElem.current.children[e.index].classList.add('active');
     }
 
-    const {from} = location.state || {from: {pathname: "/index"}};
-    if (authenticated) return <Redirect to={from}/>;
+    // const {from} = location.state || {from: {pathname: "/index"}};
+    // if (authenticated) return <Redirect to={from}/>;
 
     return (
         <>
@@ -82,9 +95,15 @@ function Index({authenticated, login, location}) {
                         </Link>
                     </div>
                 </div>
-            <Toast message="cannot access the page " vanishOnClick={false} turn="on" />
             </div>
             <Footer />
+            {user.guestYn === 'Y'?
+                <>
+                    <Toast message="포켓도감, 주문목록 보기는 로그인 하셔야만 이용할 수 있으세요 :)" vanishOnClick={true} turn="on" />
+                </>
+                :
+                null
+            }
         </>
     );
 }
