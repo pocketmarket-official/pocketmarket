@@ -21,6 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
             'androidToken',
             'iosToken',
             'bizYn',
+            'guestYn',
         )
 
 class PointSerializer(serializers.ModelSerializer):

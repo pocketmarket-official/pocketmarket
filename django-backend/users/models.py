@@ -13,6 +13,7 @@ class User(AbstractUser):
     androidToken = models.CharField(max_length=255, blank=True)
     iosToken = models.CharField(max_length=255, blank=True)
     bizYn = models.CharField(max_length=1, default='N')
+    guestYn = models.CharField(max_length=1, default='N')
 
 
 
