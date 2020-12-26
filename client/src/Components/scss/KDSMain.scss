@@ -26,26 +26,26 @@
     align-items: center;
 
     div {
-      width: 30%;
-
-      &:nth-child(2) {
-        text-align: center;
+      font-size: 28px;
+      &:nth-child(1) {
+        width: 50%;
       }
 
-      &:last-child {
+      &:nth-child(2) {
+        width: 50%;
+        text-align: right;
+        .btn__refresh {
+          margin-top: 2px;
+          width: 30px;
+          height: 28px;
+          background: url("../../assets/common/btn_refresh.png");
+          background-size: 100%;
+        }
         display: flex;
         justify-content: flex-end;
-        align-items: flex-end;
-
         span {
-          font-size: 1rem;
-
           &:first-child {
-            margin-right: 15px;
-          }
-
-          &:last-child {
-            font-size: 1.5rem;
+            margin-right: 5px;
           }
         }
       }
