@@ -28,17 +28,17 @@ from django.http import JsonResponse
 
 def MasterDownTotal(request):
     try:
-        state = os.environ.get('STATE')
-        if state == 'local:start' or state == 'local:dev':
+        STATE = os.environ.get("STATE")
+        if STATE == 'local:start' or STATE == 'local:dev':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
-        elif state == 'dev':
+        elif STATE == 'dev':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
-        elif state == 'production':
-            domain = 'http://asp.imtsoft.me/api/'
+        elif STATE == 'production':
+            domain = 'https://asp.imtsoft.me/api/'
             compCd = 'C0023'
-        elif state == 'server:appDeploy':
+        elif STATE == 'server:appDeploy':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
 
@@ -97,17 +97,17 @@ def MasterDownView(request):
         ## parameter
         storeCd = request.GET['storeCd']
 
-        state = os.environ.get('STATE')
-        if state == 'local:start' or state == 'local:dev':
+        STATE = os.environ.get("STATE")
+        if STATE == 'local:start' or STATE == 'local:dev':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
-        elif state == 'dev':
+        elif STATE == 'dev':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
-        elif state == 'production':
-            domain = 'http://asp.imtsoft.me/api/'
+        elif STATE == 'production':
+            domain = 'https://asp.imtsoft.me/api/'
             compCd = 'C0023'
-        elif state == 'server:appDeploy':
+        elif STATE == 'server:appDeploy':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
 
@@ -586,15 +586,15 @@ def MasterDownView(request):
                     itemAdd_pktmkt.insDt = itemAdd_imt.get('INS_DT')
                     itemAdd_pktmkt.insUs = itemAdd_imt.get('INS_US')
                     itemAdd_pktmkt.save()
-            else:
-                errorMsg = 'itemAdd Down Failure'
-                context = 'url=' + url
-                data = {'result': '500',
-                        'context': context,
-                        'errorMsg': errorMsg}
-                response = JsonResponse(data)
-                # return response
-                return HttpResponse(context)
+        else:
+            errorMsg = 'itemAdd Down Failure'
+            context = 'url=' + url
+            data = {'result': '500',
+                    'context': context,
+                    'errorMsg': errorMsg}
+            response = JsonResponse(data)
+            # return response
+            return HttpResponse(context)
 
         ## items AddCat
         url = domain + "pocketMarket/itemsAddcat?compCd=" + compCd  # json 결과

@@ -45,7 +45,7 @@ class KakaoException(Exception):
 def kakao_login(request):
     ''' use kakao oauth '''
     client_id = os.environ.get('KAKAO_KEY')
-    state = os.environ.get('STATE')
+    state = os.environ.get("STATE")
 
     if state == 'local:start' or state == 'local:build':
         redirect_uri = '/login/kakao/callback/'
@@ -64,12 +64,14 @@ def kakao_callback(request):
         code = request.GET.get('code', None)
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
-        state = os.environ.get('STATE')
-        if state == 'local:start' or state == 'local:build' or state == 'local:dev':
+        STATE = os.environ.get("STATE")
+        if STATE == 'local:start' or STATE == 'local:build' or STATE == 'local:dev':
             redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
-        elif state == 'dev':
+        elif STATE == 'dev':
             redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
-        elif state == 'server:appDeploy':
+        elif STATE == 'production':
+            redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
+        elif STATE == 'server:appDeploy':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         if code is not None:
             # get access_token with the code
@@ -647,14 +649,14 @@ def trade(request):
         }
         trData = json.dumps(trData)
 
-        state = os.environ.get('STATE')
-        if state == 'local:start' or state == 'local:dev':
+        STATE = os.environ.get("STATE")
+        if STATE == 'local:start' or state == 'local:dev':
             domain = 'http://asp-test.imtsoft.me/api/'
-        elif state == 'dev':
+        elif STATE == 'dev':
             domain = 'http://asp-test.imtsoft.me/api/'
-        elif state == 'production':
-            domain = 'http://asp.imtsoft.me/api/'
-        elif state == 'server:appDeploy':
+        elif STATE == 'production':
+            domain = 'https://asp.imtsoft.me/api/'
+        elif STATE == 'server:appDeploy':
             domain = 'http://asp-test.imtsoft.me/api/'
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
