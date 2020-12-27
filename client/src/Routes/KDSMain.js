@@ -65,11 +65,18 @@ class KDSMain extends React.Component{
         this.setState({matched : tmpMatched});
     }
 
+    handleRefresh() {
+        const btn = document.getElementById("refresh");
+        btn.onclick = () => {
+            window.location.reload(true);
+        };
+    }
+
     componentDidMount(){
         let storeCd = cookie.load("storeCd");
 
         if (!storeCd){
-            window.location.href = '/insertStoreCd/';
+            window.location.href = '/kds/insertStoreCd/';
     //         storeCd = prompt('점포코드를 입력하세요.');
     //
     //         const expires = new Date();
@@ -84,7 +91,7 @@ class KDSMain extends React.Component{
         }
         this.setState({storeCd});
 
-
+        this.handleRefresh();
         axios.get("/api/stores_store/")
             .then((res)=> {
                 let store = res.data.find((elt) => {
@@ -155,12 +162,11 @@ class KDSMain extends React.Component{
                         <span>{this.state.store.storeName}</span>
                     </div>
                     <div>
-                        <span>{this.state.year}.{this.state.month}.{this.state.day}</span>
-                        <span>AM</span>
                         <span><Clock format={"HH:mm:ss"} ticking={true} onChange={(res)=>
                         {
                             this._timeTickling(res);
                         }}/></span>
+                        <button id="refresh" className="btn__refresh"/>
                     </div>
                 </div>
                 <div className="body">
