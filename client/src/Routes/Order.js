@@ -106,9 +106,6 @@ class Order extends React.Component {
             let transData = {"user_email":user_email, "fcmToken":fcmToken};
 
             axios.post('/saveToken/', transData)
-                .then((res)=>{
-
-                });
         }
 
 
@@ -116,8 +113,7 @@ class Order extends React.Component {
         .then((res) => {
             let store = res.data.find(
                 (elt) => {
-                    //todo: ===이랑 ==이랑 다르게 동작
-                    if (elt.id == this.state.storeId) {
+                    if (elt.id.toString() === this.state.storeId) {
                         return true;
                     }
                 }
@@ -156,8 +152,8 @@ class Order extends React.Component {
                             }
                         );
                         axios.get("/api/trades_saleHeader/")
-                            .then((res) => {
-                               let count = res.data.filter(
+                            .then((saleHeaders) => {
+                               let count = saleHeaders.data.filter(
                                    (elt) => {
                                         if(elt.storeCd === storeCd && elt.orderStatus === '2'){
                                             return true;
@@ -167,8 +163,8 @@ class Order extends React.Component {
                                document.getElementById('waitingCount').innerHTML = count+' 명';
 
                                axios.get("/api/users_user/")
-                                .then((res) => {
-                                    let user = res.data.find((elt) => {
+                                .then((users) => {
+                                    let user = users.data.find((elt) => {
                                         if (elt.email === user_email) {
                                             return true;
                                         }
@@ -202,7 +198,11 @@ class Order extends React.Component {
             .then((res) => {
                 res.data.map((item) => {
                     let itemAddCd = item.itemAddCd;
-                    let elt = item_data.find((element) => {if(element.id === item.itemCd) { return true;}});
+                    let elt = item_data.find((element)=> {
+                        if(element.id === item.itemCd) {
+                            return true;
+                        }
+                    });
                     let option = [];
                     itemAddCd.map((data) => {
                         for(let i in item_data) {
@@ -214,6 +214,9 @@ class Order extends React.Component {
                         options[elt.id] = option;
                     });
                 });
+                console.log("==1");
+                console.log(options);
+                console.log("==1");
                 this.setState({
                     options: options,
                     item_data: item_data,
@@ -245,6 +248,7 @@ class Order extends React.Component {
 
 
     render() {
+        console.log(this.state);
         let selected_touchgroup = this.state.item_data.filter((item) => {
             for(let i in this.state.keymap) {
                 if(this.state.keymap[i].itemCd === item.id) {

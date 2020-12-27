@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
+import { useHistory } from "react-router-dom";
 
 class OrderComplete extends React.Component{
     constructor(props){
@@ -17,6 +18,8 @@ class OrderComplete extends React.Component{
     }
 
     render(){
+        const history = useHistory();
+
         return(
             <>
             {/*
@@ -60,8 +63,8 @@ class OrderComplete extends React.Component{
                         </p></div>
                 </div>
                 <div className="ordercomplete__container">
-                    <div className="ordercomplete__confirm"><Link to="/order/status"><p>확인</p></Link></div>
-                    {/*<div className="ordercomplete__fastorder" onClick={() => {*/}
+                    <div className="ordercomplete__confirm" onClick={() => {history.goBack()}}><p>확인</p></div>
+                    {/*<div className="ordercomplete__fastorder" onClick={() => {*/}인
                     {/*    const elt = document.getElementById("modal__fastorder");*/}
                     {/*    elt.classList.remove("hidden");*/}
                     {/*}}><p>도감추가</p></div>*/}

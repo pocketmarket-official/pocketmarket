@@ -60,10 +60,34 @@ class ReviewJSX extends React.Component {
                             </Flicking>
                             <div ref={this.state.paginationElem} className="pagination">
                                 <div className="pagination-item active"/>
-                                <div className="pagination-item"/>
-                                <div className="pagination-item"/>
-                                <div className="pagination-item"/>
-                                <div className="pagination-item"/>
+                                {this.state.review.img2?
+                                    <>
+                                        <div className="pagination-item"/>
+                                    </>
+                                    :
+                                    null
+                                }
+                                {this.state.review.img3?
+                                    <>
+                                        <div className="pagination-item"/>
+                                    </>
+                                    :
+                                    null
+                                }
+                                {this.state.review.img4?
+                                    <>
+                                        <div className="pagination-item"/>
+                                    </>
+                                    :
+                                    null
+                                }
+                                {this.state.review.img5?
+                                    <>
+                                        <div className="pagination-item"/>
+                                    </>
+                                    :
+                                    null
+                                }
                             </div>
                         </div>
 
