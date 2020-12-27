@@ -436,7 +436,7 @@ def MasterDownView(request):
 
         ## items_item
         # url = domain + "pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brand.brandCd  # json 결과
-        url = domain + "pocketMarket/itemsItem?compCd=" + compCd  # json 결과
+        url = domain + "/
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -598,6 +598,7 @@ def MasterDownView(request):
                 #                                                      })
                 # if flag :
                 #     itemAdd_pktmkt.itemAddCd.add(itemAddCd)
+                #     itemAdd_pktmkt.save()
                 # else :
                 #     itemAdd_pktmkt.itemAddCd.add(itemAddCd)
                 #     itemAdd_pktmkt.itemSort = itemAdd_imt.get('ITEM_SORT')

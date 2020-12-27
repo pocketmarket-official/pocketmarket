@@ -194,34 +194,83 @@ class Order extends React.Component {
         .then((res) => {
             let item_data = res.data;
             let options = {};
-        axios.get("/api/items_itemAdd/")
-            .then((res) => {
-                res.data.map((item) => {
-                    let itemAddCd = item.itemAddCd;
-                    let elt = item_data.find((element)=> {
-                        if(element.id === item.itemCd) {
-                            return true;
-                        }
+            axios.get("/api/items_itemAdd/")
+                .then((res) => {
+                    let optionTmpArray = [];
+                    let interval = 26; //index와 id간 차이
+                    res.data.map((itemAdd) => {
+                        let sortingList = {itemCd: itemAdd.itemCd,
+                            //item id가 auto_increment이기 때문에 index로 활용할 수 있음.
+                            //auto_increment가 깨지거나 중간에 데이터가 삭제되거나 섞이는 순간 사용할 수 없는 로직.
+                            addItem: item_data[itemAdd.itemAddCd[0]-interval]};
+                        optionTmpArray.push(sortingList);
                     });
-                    let option = [];
-                    itemAddCd.map((data) => {
-                        for(let i in item_data) {
-                            if(item_data[i].id === data) {
-                                option.push(item_data[i]);
-                                break;
+
+                    optionTmpArray.sort(function(a, b) { // 오름차순
+                        return a.itemCd < b.itemCd ? -1 : a.itemCd > b.itemCd ? 1 : 0;
+                    });
+
+                    let options = {};
+                    let index = 0;
+                    let previousItemCd = optionTmpArray[0].itemCd;
+                    let tmpArray = [];
+                    console.log("=========");
+                    console.log(optionTmpArray);
+                    console.log("=========");
+                    optionTmpArray.map((optionItems) => {
+                        console.log("==1");
+                        console.log(optionItems);
+                        console.log(previousItemCd);
+
+                        if (optionItems.itemCd !== previousItemCd) {
+                            console.log("==2");
+                            console.log(tmpArray);
+                            options[previousItemCd] = tmpArray;
+                            console.log("==3");
+                            console.log(optionItems.itemCd);
+                            console.log(tmpArray);
+                            tmpArray = [];
+                            tmpArray.push(optionItems.addItem);
+                            previousItemCd = optionItems.itemCd;
+                            console.log("==4");
+                            console.log(index);
+                            index++;
+                            if (index === optionTmpArray.length) {
+                                console.log("==8");
+                                console.log(optionItems.itemCd);
+                                console.log(tmpArray);
+                                options[optionItems.itemCd] = tmpArray;
+                                tmpArray=[];
+                            }
+                        } else {
+                            console.log("==5");
+                            console.log(optionItems.addItem);
+                            tmpArray.push(optionItems.addItem);
+                            console.log("==6");
+                            console.log(index);
+                            console.log(optionTmpArray.length);
+                            index++;
+                            if (index === optionTmpArray.length) {
+                                console.log("==7");
+                                console.log(optionItems.itemCd);
+                                console.log(tmpArray);
+                                options[optionItems.itemCd] = tmpArray;
+                                tmpArray=[];
                             }
                         }
-                        options[elt.id] = option;
+                    });
+
+                    console.log("=========");
+                    console.log(options);
+                    console.log("=========");
+
+
+
+                    this.setState({
+                        options: options,
+                        item_data: item_data,
                     });
                 });
-                console.log("==1");
-                console.log(options);
-                console.log("==1");
-                this.setState({
-                    options: options,
-                    item_data: item_data,
-                });
-            });
         });
     }
 
@@ -248,7 +297,6 @@ class Order extends React.Component {
 
 
     render() {
-        console.log(this.state);
         let selected_touchgroup = this.state.item_data.filter((item) => {
             for(let i in this.state.keymap) {
                 if(this.state.keymap[i].itemCd === item.id) {
