@@ -46,13 +46,16 @@ import axios from 'axios';
 import storage from "./storage";
 
 function App() {
-  if(process.env.REACT_APP_STATE === 'local' || process.env.REACT_APP_STATE === 'local:dev') {
-    axios.defaults.baseURL = 'http://localhost:8000';
-  } else if(process.env.REACT_APP_STATE === 'dev') {
-    axios.defaults.baseURL = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com';
-  } else if(process.env.REACT_APP_STATE === 'server:appDeploy') {
-    axios.defaults.baseURL = 'http://13.124.90.138:8000';
-  }
+    let STATE = process.env.REACT_APP_STATE;
+      if(STATE === 'local' || STATE === 'local:dev') {
+        axios.defaults.baseURL = 'http://localhost:8000';
+      } else if(STATE === 'dev') {
+        axios.defaults.baseURL = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com';
+      } else if(STATE === 'production') {
+        axios.defaults.baseURL = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com';
+      } else if(STATE === 'server:appDeploy') {
+        axios.defaults.baseURL = 'http://13.124.90.138:8000';
+      }
 
     //todo: 로그인 인증수단을 전부 cookie_token으로 바꿨음
     // 쿠키를 받아오고
