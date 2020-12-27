@@ -225,6 +225,13 @@ if STATE == "local:start":
         }
     }
 
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
 
 
 
@@ -235,24 +242,26 @@ elif STATE == "local:dev":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get("DB_DEV_NAME"),
-            'USER': os.environ.get("DB_DEV_USER"),
-            'PASSWORD': os.environ.get("DB_DEV_PASSWORD"),
-            'PORT': os.environ.get("DB_DEV_PORT"),
-            'HOST': os.environ.get("DB_DEV_HOST"),
+            'NAME': os.environ.get("DB_JH_NAME"),
+            'USER': os.environ.get("DB_JH_USER"),
+            'PASSWORD': os.environ.get("DB_JH_PASSWORD"),
+            'PORT': os.environ.get("DB_JH_PORT"),
+            'HOST': os.environ.get("DB_JH_HOST"),
             'OPTIONS': {
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
                 # 'charset': 'utf8mb4',
             },
         }
     }
-    #
-    # DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-    # STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
-    #
-    # STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-    #
-    # MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    USE_TZ = True
+
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
 elif STATE == "server:appDeploy":
     DEBUG = True

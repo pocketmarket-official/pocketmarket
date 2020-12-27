@@ -98,9 +98,12 @@ def MasterDownView(request):
         storeCd = request.GET['storeCd']
 
         STATE = os.environ.get("STATE")
-        if STATE == 'local:start' or STATE == 'local:dev':
+        if STATE == 'local:start':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
+        elif STATE == 'local:dev':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
         elif STATE == 'dev':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
@@ -432,7 +435,8 @@ def MasterDownView(request):
             return HttpResponse(context)
 
         ## items_item
-        url = domain + "pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brand.brandCd  # json 결과
+        # url = domain + "pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brand.brandCd  # json 결과
+        url = domain + "pocketMarket/itemsItem?compCd=" + compCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
@@ -566,26 +570,40 @@ def MasterDownView(request):
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
+
         if (rescode == 200):
             response_body = response.read().decode('euc-kr')
             response_body_json = json.loads(response_body)
             for itemAdd_imt in response_body_json:
                 itemCd = Item.objects.get(itemCd=itemAdd_imt.get('ITEM_CD'))
                 itemAddCd = Item.objects.get(itemCd=itemAdd_imt.get('ADD_ITEM_CD'))
-                itemAdd_pktmkt, flag = ItemAdd.objects.get_or_create(itemCd=itemCd,
-                                                                     defaults={
-                                                                         'itemSort': itemAdd_imt.get('ITEM_SORT'),
-                                                                         'insDt': itemAdd_imt.get('INS_DT'),
-                                                                         'insUs': itemAdd_imt.get('INS_US')
-                                                                     })
-                if flag :
-                    itemAdd_pktmkt.itemAddCd.add(itemAddCd)
-                else :
-                    itemAdd_pktmkt.itemAddCd.add(itemAddCd)
-                    itemAdd_pktmkt.itemSort = itemAdd_imt.get('ITEM_SORT')
-                    itemAdd_pktmkt.insDt = itemAdd_imt.get('INS_DT')
-                    itemAdd_pktmkt.insUs = itemAdd_imt.get('INS_US')
-                    itemAdd_pktmkt.save()
+                itemAdd = ItemAdd.objects.filter(itemCd=itemCd, itemAddCd=itemAddCd)
+                if(len(itemAdd)==0):
+                    itemAdd = ItemAdd.objects.create(itemCd=itemCd, itemSort=itemAdd_imt.get('ITEM_SORT'),
+                                             insDt=itemAdd_imt.get('INS_DT'), insUs=itemAdd_imt.get('INS_US'))
+                    itemAdd.itemAddCd.add(itemAddCd)
+                    itemAdd.save()
+                else:
+                    itemAdd = ItemAdd.objects.get(itemCd=itemCd, itemAddCd=itemAddCd)
+                    itemAdd.itemSort = itemAdd_imt.get('ITEM_SORT')
+                    itemAdd.insDt = itemAdd_imt.get('INS_DT')
+                    itemAdd.insUs = itemAdd_imt.get('INS_US')
+                    itemAdd.save()
+                # itemAdd_pktmkt, flag = ItemAdd.objects.get_or_create(itemCd=itemCd,
+                #                                                      itemAddCd=itemAddCd,
+                #                                                      defaults={
+                #                                                          'itemSort': itemAdd_imt.get('ITEM_SORT'),
+                #                                                          'insDt': itemAdd_imt.get('INS_DT'),
+                #                                                          'insUs': itemAdd_imt.get('INS_US')
+                #                                                      })
+                # if flag :
+                #     itemAdd_pktmkt.itemAddCd.add(itemAddCd)
+                # else :
+                #     itemAdd_pktmkt.itemAddCd.add(itemAddCd)
+                #     itemAdd_pktmkt.itemSort = itemAdd_imt.get('ITEM_SORT')
+                #     itemAdd_pktmkt.insDt = itemAdd_imt.get('INS_DT')
+                #     itemAdd_pktmkt.insUs = itemAdd_imt.get('INS_US')
+                #     itemAdd_pktmkt.save()
         else:
             errorMsg = 'itemAdd Down Failure'
             context = 'url=' + url
@@ -837,7 +855,7 @@ def MasterDownView(request):
 
     except Exception as ex:
         print(ex)
-        return HttpResponse(store.storeName + '매장의 마스터 수신이 완료되었습니다.')
+        return HttpResponse(ex)
 
 # class InterfaceView(viewsets.ModelViewSet):
 #     compCd = '1'
