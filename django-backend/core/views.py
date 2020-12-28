@@ -101,7 +101,7 @@ def kakao_callback(request):
                     if STATE == 'local':
                         url = f'http://localhost:3000/makingCookie/{access_token}/{email}'
                     elif STATE == 'dev':
-                        url = 'http://13.124.90.138:3000/index/'
+                        url = f'http://13.124.90.138:8000/makingCookie/{access_token}/{email}'
                     elif STATE == 'production':
                         url = f'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/makingCookie/{access_token}/{email}'
                     return HttpResponseRedirect(url)
