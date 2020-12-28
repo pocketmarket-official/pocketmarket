@@ -29,9 +29,6 @@ from fcm_django.models import FCMDevice
 import firebase_admin
 from firebase_admin import credentials
 
-
-
-##
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+
 from pathlib import Path
 import os
 
@@ -22,12 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com',
-    '13.124.90.138'
-]
+ALLOWED_HOSTS = ["localhost", "13.124.90.138", "pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com"]
 
 # Application definition
 
@@ -63,15 +59,10 @@ THIRD_PARTY_APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
-FCM_API_KEY = os.environ.get("FCM_API_KEY")
-FCM_DJANGO_SETTINGS = {
-        "FCM_SERVER_KEY": FCM_API_KEY
-}
-
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -80,6 +71,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+AUTH_USER_MODEL = "users.User"
 
 TEMPLATES = [
     {
@@ -133,8 +126,6 @@ USE_L10N = True
 
 USE_TZ = False
 
-AUTH_USER_MODEL = "users.User"
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -146,27 +137,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "build/static/"),
 ]
 
+MEDIA_URL = '/media/'
 
-# AWS Setting
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-AWS_REGION_NAME = 'ap-northeast-2'
-AWS_QUERYSTRING_AUTH = False
-AWS_DEFAULT_ACL = 'public-read'
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
-# S3 setting
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-AWS_REGION_NAME = 'ap-northeast-2'
-AWS_QUERYSTRING_AUTH = False
-AWS_DEFAULT_ACL = None
-
-AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
-AWS_S3_SECURE_URLS = False       # use http instead of https
-AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-    'ACL': 'public-read'
+# rest_framework permission settings
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
 }
 
 # cors 관련 설정
@@ -177,10 +156,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:8000',
-    'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000',
-    'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000',
     'http://13.124.90.138:3000',
     'http://13.124.90.138:8000',
+    'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:3000',
+    'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com:8000',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -196,10 +175,21 @@ CORS_ALLOW_HEADERS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ]
+
+# AWS and S3
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = 'pocketmarket-dev'
+AWS_DEFAULT_ACL = 'public-read'
+AWS_S3_HOST = 's3.ap-northeast-2.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_QUERYSTRING_AUTH = False
+
+FCM_API_KEY = os.environ.get("FCM_API_KEY")
+FCM_DJANGO_SETTINGS = {
+    "FCM_SERVER_KEY": FCM_API_KEY
 }
 
 # Database and DEBUG
@@ -207,17 +197,17 @@ REST_FRAMEWORK = {
 
 STATE = os.environ.get("STATE")
 
-if STATE == "local:start":
+if STATE == "local":
     DEBUG = True
 
     DATABASES = {
         'default' : {
             'ENGINE' : 'django.db.backends.mysql',
-            'NAME' : os.environ.get("DB_DEV_NAME"),
-            'USER' : os.environ.get("DB_DEV_USER"),
-            'PASSWORD' : os.environ.get("DB_DEV_PASSWORD"),
-            'PORT' : os.environ.get("DB_DEV_PORT"),
-            'HOST' : os.environ.get("DB_DEV_HOST"),
+            'NAME' : os.environ.get("DB_LOCAL_NAME"),
+            'USER' : os.environ.get("DB_LOCAL_USER"),
+            'PASSWORD' : os.environ.get("DB_LOCAL_PASSWORD"),
+            'PORT' : os.environ.get("DB_LOCAL_PORT"),
+            'HOST' : os.environ.get("DB_LOCAL_HOST"),
             'OPTIONS' : {
                 'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
                 # 'charset': 'utf8mb4',
@@ -225,18 +215,48 @@ if STATE == "local:start":
         }
     }
 
+elif STATE == "dev":
+    DEBUG = True
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get("DB_DEV_NAME"),
+            'USER': os.environ.get("DB_DEV_USER"),
+            'PASSWORD': os.environ.get("DB_DEV_PASSWORD"),
+            'PORT': os.environ.get("DB_DEV_PORT"),
+            'HOST': os.environ.get("DB_DEV_HOST"),
+        }
+    }
+
     DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
     STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
-
     STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
     MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
+elif STATE == "production":
+    DEBUG = False
 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get("DB_REAL_NAME"),
+            'USER': os.environ.get("DB_REAL_USER"),
+            'PASSWORD': os.environ.get("DB_REAL_PASSWORD"),
+            'PORT': os.environ.get("DB_REAL_PORT"),
+            'HOST': os.environ.get("DB_REAL_HOST"),
+        }
+    }
 
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
+    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+
+# -----------------------------------------------------------------------------------------
 
 # 진형 개인 사용용도. 이름 바꿀 예정
-elif STATE == "local:dev":
+elif STATE == "local:JH":
     DEBUG = True
 
     DATABASES = {
@@ -287,49 +307,3 @@ elif STATE == "server:appDeploy":
     STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
 
     MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-
-
-
-elif STATE == "dev":
-    DEBUG = True
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get("DB_REAL_NAME"),
-            'USER': os.environ.get("DB_REAL_USER"),
-            'PASSWORD': os.environ.get("DB_REAL_PASSWORD"),
-            'PORT': os.environ.get("DB_REAL_PORT"),
-            'HOST': os.environ.get("DB_REAL_HOST"),
-        }
-    }
-
-    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
-
-    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-elif STATE == "production":
-    DEBUG = False
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get("DB_REAL_NAME"),
-            'USER': os.environ.get("DB_REAL_USER"),
-            'PASSWORD': os.environ.get("DB_REAL_PASSWORD"),
-            'PORT': os.environ.get("DB_REAL_PORT"),
-            'HOST': os.environ.get("DB_REAL_HOST"),
-        }
-    }
-
-    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
-    STATICFILES_STORAGE = 'config.storage_backends.StaticStorage'
-
-    STATIC_URL = 'https://%s.%s/static/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
-    MEDIA_URL = 'https://%s.%s/media/' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-
