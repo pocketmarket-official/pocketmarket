@@ -99,7 +99,7 @@ def kakao_callback(request):
 
 
                     if STATE == 'local':
-                        url = f'http://localhost:3000/makingCookie/{access_token}/{email}'
+                        url = f'http://{request.headers["HOST"]}/makingCookie/{access_token}/{email}'
                     elif STATE == 'dev':
                         url = f'http://13.124.90.138:8000/makingCookie/{access_token}/{email}'
                     elif STATE == 'production':
