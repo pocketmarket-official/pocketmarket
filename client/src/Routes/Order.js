@@ -197,7 +197,7 @@ class Order extends React.Component {
             axios.get("/api/items_itemAdd/")
                 .then((res) => {
                     let optionTmpArray = [];
-                    let interval = 26; //index와 id간 차이
+                    let interval = 1; //index와 id간 차이
                     res.data.map((itemAdd) => {
                         let sortingList = {itemCd: itemAdd.itemCd,
                             //item id가 auto_increment이기 때문에 index로 활용할 수 있음.
