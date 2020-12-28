@@ -26,6 +26,7 @@ yarn-error.log*
 
 # medial
 uploads/
+staticfiles/
 
 # Created by https://www.toptal.com/developers/gitignore/api/firebase
 # Edit at https://www.toptal.com/developers/gitignore?templates=firebase
