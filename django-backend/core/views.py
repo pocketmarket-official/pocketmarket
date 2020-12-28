@@ -39,22 +39,6 @@ from rest_framework.response import Response
 class KakaoException(Exception):
     pass
 
-def kakao_login(request):
-    ''' use kakao oauth '''
-    client_id = os.environ.get('KAKAO_KEY')
-    state = os.environ.get("STATE")
-
-    if state == 'local:start' or state == 'local:build':
-        redirect_uri = '/login/kakao/callback/'
-    elif state == 'dev':
-        redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
-    elif state == 'server:appDeploy':
-        redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
-
-    return HttpResponseRedirect(
-        f'https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code'
-    )
-
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
     try:
@@ -62,14 +46,12 @@ def kakao_callback(request):
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
         STATE = os.environ.get("STATE")
-        if STATE == 'local:start' or STATE == 'local:build' or STATE == 'local:dev':
+        if STATE == 'local':
             redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
         elif STATE == 'dev':
-            redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
+            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         elif STATE == 'production':
             redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
-        elif STATE == 'server:appDeploy':
-            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -116,26 +98,22 @@ def kakao_callback(request):
                     login(request, user)
 
 
-                    if STATE == 'local:start' or STATE == 'local:dev':
+                    if STATE == 'local':
                         url = f'http://localhost:3000/makingCookie/{access_token}/{email}'
-                    elif STATE == 'local:build':
-                        url = 'http://localhost:3000/index/'
                     elif STATE == 'dev':
+                        url = 'http://13.124.90.138:3000/index/'
+                    elif STATE == 'production':
                         url = f'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/makingCookie/{access_token}/{email}'
-                    elif STATE == 'server:appDeploy':
-                        url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'
                     return HttpResponseRedirect(url)
                 else:
                     raise KakaoException()
     except KakaoException:
-        if STATE == 'local:start':
+        if STATE == 'local':
             url = '/login/'
-        elif STATE == 'local:build':
-            url = 'http://localhost:8000/login/'
         elif STATE == 'dev':
-            url = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
-        elif STATE == 'server:appDeploy':
             url = 'http://13.124.90.138:8000/login/'
+        elif STATE == 'production':
+            url = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
         return HttpResponseRedirect(url)
 
 
@@ -647,14 +625,12 @@ def trade(request):
         trData = json.dumps(trData)
 
         STATE = os.environ.get("STATE")
-        if STATE == 'local:start' or state == 'local:dev':
+        if STATE == 'local':
             domain = 'http://asp-test.imtsoft.me/api/'
         elif STATE == 'dev':
             domain = 'http://asp-test.imtsoft.me/api/'
         elif STATE == 'production':
             domain = 'https://asp.imtsoft.me/api/'
-        elif STATE == 'server:appDeploy':
-            domain = 'http://asp-test.imtsoft.me/api/'
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
         request = requests.post(domain+'outer/sale', data= trData,  verify=False, headers=headers)

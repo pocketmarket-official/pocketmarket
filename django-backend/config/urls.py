@@ -100,8 +100,6 @@ router.register(r'kdses_kdsDetail', kds_views.KdsDetailView, 'kdsDetail')
 
 
 urlpatterns = [
-    # re_path(r'^$', views.index),
-    # path('', TemplateView.as_view(template_name="index.html")),
     path("", include("core.urls")),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),

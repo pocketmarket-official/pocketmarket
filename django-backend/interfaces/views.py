@@ -29,7 +29,7 @@ from django.http import JsonResponse
 def MasterDownTotal(request):
     try:
         STATE = os.environ.get("STATE")
-        if STATE == 'local:start' or STATE == 'local:dev':
+        if STATE == 'local':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
         elif STATE == 'dev':
@@ -38,9 +38,6 @@ def MasterDownTotal(request):
         elif STATE == 'production':
             domain = 'https://asp.imtsoft.me/api/'
             compCd = 'C0023'
-        elif STATE == 'server:appDeploy':
-            domain = 'http://asp-test.imtsoft.me/api/'
-            compCd = 'C0028'
 
         #error check variable
         errorMsg = ''
@@ -98,21 +95,15 @@ def MasterDownView(request):
         storeCd = request.GET['storeCd']
 
         STATE = os.environ.get("STATE")
-        if STATE == 'local:start':
+        if STATE == 'local':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
-        elif STATE == 'local:dev':
-            domain = 'https://asp.imtsoft.me/api/'
-            compCd = 'C0023'
         elif STATE == 'dev':
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
         elif STATE == 'production':
             domain = 'https://asp.imtsoft.me/api/'
             compCd = 'C0023'
-        elif STATE == 'server:appDeploy':
-            domain = 'http://asp-test.imtsoft.me/api/'
-            compCd = 'C0028'
 
         ## brands_brand
         url = domain + "pocketMarket/brandsBrand?compCd=" + compCd  # json 결과
