@@ -436,7 +436,7 @@ def MasterDownView(request):
 
         ## items_item
         # url = domain + "pocketMarket/itemsItem?compCd=" + compCd + "&brandCd=" + brand.brandCd  # json 결과
-        url = domain + "/
+        url = domain + "pocketMarket/itemsItem?compCd=" + compCd  # json 결과
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         rescode = response.getcode()
