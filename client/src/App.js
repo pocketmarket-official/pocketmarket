@@ -47,14 +47,12 @@ import storage from "./storage";
 
 function App() {
     let STATE = process.env.REACT_APP_STATE;
-      if(STATE === 'local' || STATE === 'local:dev') {
+      if(STATE === 'local:start' || STATE === 'local:build') {
         axios.defaults.baseURL = 'http://localhost:8000';
       } else if(STATE === 'dev') {
-        axios.defaults.baseURL = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com';
+        axios.defaults.baseURL = 'http://13.124.90.138:8000';
       } else if(STATE === 'production') {
         axios.defaults.baseURL = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com';
-      } else if(STATE === 'server:appDeploy') {
-        axios.defaults.baseURL = 'http://13.124.90.138:8000';
       }
 
     //todo: 로그인 인증수단을 전부 cookie_token으로 바꿨음

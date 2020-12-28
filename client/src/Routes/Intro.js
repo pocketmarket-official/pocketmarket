@@ -23,40 +23,29 @@ function Intro({authenticated, location}) {
     // kakao login api built in django backend
     const responseLogin = (res) => {
         let url;
+        let redirect_uri;
         let reactRestApiToken = process.env.REACT_APP_KAKAO_KEY_API;
         let STATE = process.env.REACT_APP_STATE;
-        if(STATE === 'local') {
-            let redirect_uri = '/login/kakao/callback/';
-            url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
-        } else if(STATE === 'local:dev') {
-            let redirect_uri = 'http://localhost:8000/login/kakao/callback/';
-            url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
+        if(STATE === 'local:start') {
+            redirect_uri = 'http://localhost:8000/login/kakao/callback/';
+        } else if(STATE === 'local:build') {
+            redirect_uri = 'http://localhost/login/kakao/callback/';
         } else if(STATE === 'dev') {
-            let redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/';
-            url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
+            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         } else if(STATE === 'production') {
-            let redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/';
-            url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
-        } else if(STATE === 'server:appDeploy') {
-            let redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
-            url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
+            redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/';
         }
+        url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         window.location.href = url;
     };
 
     const guestLogin = (res) => {
         let url;
         let STATE = process.env.REACT_APP_STATE;
-        if(STATE === 'local') {
+        if(STATE === 'local:start') {
             url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'
-        } else if(STATE === 'local:dev') {
+        } else {
             url =  '/makingCookie/guest/pocketmarket.official@gmail.com'
-        } else if(STATE === 'dev') {
-            url = "/makingCookie/guest/pocketmarket.official@gmail.com";
-        } else if(STATE === 'production') {
-            url = "/makingCookie/guest/pocketmarket.official@gmail.com";
-        } else if(STATE === 'server:appDeploy') {
-            url =  'http://13.124.90.138:3000/makingCookie/guest/pocketmarket.official@gmail.com'
         }
         window.location.href = url;
     };
