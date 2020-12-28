@@ -24,6 +24,9 @@ yarn-error.log*
 
 .idea
 
+# medial
+uploads/
+
 # Created by https://www.toptal.com/developers/gitignore/api/firebase
 # Edit at https://www.toptal.com/developers/gitignore?templates=firebase
 
