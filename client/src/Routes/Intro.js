@@ -29,7 +29,7 @@ function Intro({authenticated, location}) {
         if(STATE === 'local:start') {
             redirect_uri = 'http://localhost:8000/login/kakao/callback/';
         } else if(STATE === 'local:build') {
-            redirect_uri = 'http://localhost/login/kakao/callback/';
+            redirect_uri = 'http://localhost:8000/login/kakao/callback/';
         } else if(STATE === 'dev') {
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         } else if(STATE === 'production') {
