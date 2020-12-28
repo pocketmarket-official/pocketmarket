@@ -194,6 +194,8 @@ if STATE == "local":
         }
     }
 
+    USE_TZ = True
+
 elif STATE == "dev":
     DEBUG = True
 
