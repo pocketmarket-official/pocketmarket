@@ -191,8 +191,23 @@ def trade(request):
             os.environ.get("BOOTPAY_PRIVATE_KEY")
         )
 
+        STATE = os.environ.get("STATE")
+        if STATE == 'local':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif STATE == 'dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif STATE == 'production':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+        elif STATE == 'jh':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+
+
         # constant
-        compCd = 'C0028'
+
         terminalId = 'pocmaket1m'
         vanCd = '11'
 
@@ -301,9 +316,9 @@ def trade(request):
             cardSeq = i
             cardCardAmt += payment['price']
             cardCardNo = payment['card_no']
-            cardVanCd = '001'  # todo: asp에 nice pg코드 등록
-            cardCardCd = '001'  # 발급사 #todo: asp cardCode와 맞추기
-            cardCardName = payment['card_code']  # todo: asp cardNamerhk 맞추기
+            cardVanCd = vanCd
+            cardCardCd = payment['card_code']
+            cardCardName = payment['card_name']
             cardApprNo = payment['order_id'].split('_')[0]
             cardApprDt = payment['purchased_at'].split(' ')[0].split('-')[0] \
                          + payment['purchased_at'].split(' ')[0].split('-')[1] \
@@ -314,29 +329,6 @@ def trade(request):
             cardTerminalId = terminalId
             # cardRegisterNo =  payment['receipt_id']  # todo: 이거뭐임?
             cardRegisterNo = ''
-        # for payment in json.loads(request.body)['data']:
-        #     if payment['method'] == 'card':
-        #         headerCardAmt += payment['price']  # 카드결제금액 더해가는 방식
-        #         cardSeq = i
-        #         cardCardAmt += payment['price']
-        #         cardCardNo = payment['card_no']
-        #         cardVanCd = '001'  # todo: asp에 nice pg코드 등록
-        #         cardCardCd = '001'  # 발급사 #todo: asp cardCode와 맞추기
-        #         cardCardName = 'card_code'  # todo: asp cardNamerhk 맞추기
-        #         cardApprNo = payment['order_id'].split('_')['0']
-        #         cardApprDt = payment['order_id'].split('_')['0'].split['-'][0]\
-        #                      + payment['order_id'].split('_')['0'].split['-'][1]\
-        #                      + payment['order_id'].split('_')['0'].split['-'][2]
-        #         cardApprTime = payment['order_id'].split('_')['1'].split[':'][0]\
-        #                      + payment['order_id'].split('_')['1'].split[':'][1]\
-        #                      + payment['order_id'].split('_')['1'].split[':'][2]
-        #         cardTerminalId = terminalId
-        #         cardRegisterNo = payment['receipt_no'] #todo: 이거뭐임?
-        #     elif payment['method'] == '':
-        #         headerTotDcAmt += payment['amount']
-        #         headerPointDcAmt += payment['amount']
-        #         headerPointDcCnt += 1
-
             i += 1
 
         with transaction.atomic():
@@ -630,16 +622,6 @@ def trade(request):
             "T_CARD_L": cardLogList
         }
         trData = json.dumps(trData)
-
-        STATE = os.environ.get("STATE")
-        if STATE == 'local':
-            domain = 'http://asp-test.imtsoft.me/api/'
-        elif STATE == 'dev':
-            domain = 'http://asp-test.imtsoft.me/api/'
-        elif STATE == 'production':
-            domain = 'https://asp.imtsoft.me/api/'
-        elif STATE == 'jh':
-            domain = 'https://asp.imtsoft.me/api/'
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
         request = requests.post(domain+'outer/sale', data= trData,  verify=False, headers=headers)
