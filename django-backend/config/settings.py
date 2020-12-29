@@ -265,26 +265,6 @@ elif STATE == "production":
 
 # -----------------------------------------------------------------------------------------
 
-# 진형 개인 사용용도. 이름 바꿀 예정
-elif STATE == "local:JH":
-    DEBUG = True
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get("DB_JH_NAME"),
-            'USER': os.environ.get("DB_JH_USER"),
-            'PASSWORD': os.environ.get("DB_JH_PASSWORD"),
-            'PORT': os.environ.get("DB_JH_PORT"),
-            'HOST': os.environ.get("DB_JH_HOST"),
-            'OPTIONS': {
-                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-                # 'charset': 'utf8mb4',
-            },
-        }
-    }
-
-    USE_TZ = True
 
 elif STATE == "server:appDeploy":
     DEBUG = True
