@@ -38,6 +38,9 @@ def MasterDownTotal(request):
         elif STATE == 'production':
             domain = 'https://asp.imtsoft.me/api/'
             compCd = 'C0023'
+        elif STATE == 'jh':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
 
         #error check variable
         errorMsg = ''
@@ -102,6 +105,9 @@ def MasterDownView(request):
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
         elif STATE == 'production':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+        elif STATE == 'jh':
             domain = 'https://asp.imtsoft.me/api/'
             compCd = 'C0023'
 
