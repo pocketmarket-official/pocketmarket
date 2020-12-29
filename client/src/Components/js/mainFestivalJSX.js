@@ -73,7 +73,7 @@ class FestivalJSX extends React.Component {
                 {/*                pathname: `/main/festival/${data.id}`,*/}
                 {/*                state: {data}*/}
                 {/*            }}>*/}
-                {/*            {renderBody}*/}
+                            {renderBody}
                 {/*            </Link>*/}
                 {/*        </>*/}
                 {/*        :*/}
