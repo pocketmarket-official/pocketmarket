@@ -52,6 +52,8 @@ def kakao_callback(request):
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         elif STATE == 'production':
             redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
+        elif STATE == 'jh':
+            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         if code is not None:
             # get access_token with the code
             request_api = requests.post(
@@ -101,9 +103,12 @@ def kakao_callback(request):
                     if STATE == 'local':
                         url = f'http://localhost:3000/makingCookie/{access_token}/{email}'
                     elif STATE == 'dev':
-                        url = f'http://13.124.90.138:8000/makingCookie/{access_token}/{email}'
+                        url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'
                     elif STATE == 'production':
                         url = f'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/makingCookie/{access_token}/{email}'
+                    elif STATE == 'jh':
+                        url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'
+
                     return HttpResponseRedirect(url)
                 else:
                     raise KakaoException()
@@ -114,6 +119,9 @@ def kakao_callback(request):
             url = 'http://13.124.90.138:8000/login/'
         elif STATE == 'production':
             url = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
+        elif STATE == 'dev':
+            url = 'http://13.124.90.138:8000/login/'
+
         return HttpResponseRedirect(url)
 
 
@@ -193,6 +201,9 @@ def trade(request):
             compCd = 'C0028'
         elif STATE == 'production':
             domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+        elif STATE == 'jh':
+            domain = 'http://asp.imtsoft.me/api/'
             compCd = 'C0023'
 
         # constant
@@ -697,6 +708,9 @@ def tradeReSend(request):
             domain = 'http://asp-test.imtsoft.me/api/'
             compCd = 'C0028'
         elif STATE == 'production':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+        elif STATE == 'jh':
             domain = 'https://asp.imtsoft.me/api/'
             compCd = 'C0023'
 
