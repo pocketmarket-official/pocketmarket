@@ -22,6 +22,8 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
             'posNo',
             'billNo',
             'saleFlag',
+            'saleDay',
+            'saleTime',
             'totQty',
             'totSaleAmt',
             'saleAmt',

@@ -275,6 +275,20 @@ def trade(request):
         if weekday == 0:
             weekday = 7
         saleTime = strftime('%H%M%S', localtime())
+        saleTimeCd = ''
+        if saleTime < '050000':
+            saleTimeCd = '06'
+        elif saleTime < '100000':
+            saleTimeCd = '01'
+        elif saleTime < '130000':
+            saleTimeCd = '02'
+        elif saleTime < '160000':
+            saleTimeCd = '03'
+        elif saleTime < '190000':
+            saleTimeCd = '04'
+        elif saleTime < '230000':
+            saleTimeCd = '05'
+
         saleFlag = '1'
         mealCd = '9'
         mealName = '기타'
@@ -451,6 +465,8 @@ def trade(request):
                 posNo=posNo,
                 billNo=billNo,
                 saleFlag=saleFlag,
+                saleDay=weekday,
+                saleTime=saleTime,
                 totQty=headerTotQty,
                 totSaleAmt=headerTotSaleAmt,
                 saleAmt=headerSaleAmt,
@@ -516,7 +532,7 @@ def trade(request):
             "ORD_FG": "4",  # 주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
             "SALE_TM": saleTime,  # 판매시간(시간분초)
             "SALE_DAY": weekday,  # 일요일 1 부터 7까지
-            "SALE_TM_CD": "01",  # 시간코드 공통코드 045번 참조 #todo: 뭔솔?
+            "SALE_TM_CD": saleTimeCd,  # 시간코드 공통코드 045번 참조
             "RETURN_FG": saleHeaderObj.returnYn,  # 반품플레그(원거래에도 업데이트 해줘야함)
             "SALE_FG": saleHeaderObj.saleFlag,
             "MEAL_CD": mealCd,
@@ -616,15 +632,15 @@ def trade(request):
         cardLogList.append(cardLogRow)
 
         trData = {
-            "T_SALE_H": saleHeaderList,
-            "T_SALE_D": saleDetailList,
-            "T_CARD_L": cardLogList
+            # "T_SALE_H": saleHeaderList,
+            # "T_SALE_D": saleDetailList,
+            # "T_CARD_L": cardLogList
         }
         trData = json.dumps(trData)
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
         request = requests.post(domain+'outer/sale', data= trData,  verify=False, headers=headers)
-        if request.status_code == 200:
+        if json.loads(request.text)['status'] == 0:
             saleHeaderObj.sendYn = 'Y'
             saleHeaderObj.save()
             for saleDetailObj in saleDetailObjList:
@@ -636,7 +652,7 @@ def trade(request):
             cardLogObj.save()
         else :
             tradeErrorCode  = '030'
-            tradeErrorMsg = str(request.context) #TODO: imtsoft respponse 명세 알아야함
+            tradeErrorMsg = str(json.loads(request.text)['message'])
             context = 'storeCd=' + storeCd\
                       + ' saleDt=' + saleDt\
                       + ' posNo=' + posNo\
@@ -676,6 +692,185 @@ def trade(request):
         response = JsonResponse(data)
         return response
 
+@csrf_exempt
+def tradeReSend(request):
+    try:
+        compCd = '00000'
+        mealCd = '9'
+        mealName = '기타'
+
+        STATE = os.environ.get("STATE")
+        if STATE == 'local':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif STATE == 'dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif STATE == 'production':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+
+        saleHeaderList = SaleHeader.objects.filter(sendYn='N')
+        for saleHeaderObj in saleHeaderList:
+            storeCd = saleHeaderObj.storeCd
+            saleDt = saleHeaderObj.saleDt
+            posNo = saleHeaderObj.posNo
+            billNo = saleHeaderObj.billNo
+
+            saleTime = saleHeaderObj.saleTime
+            saleTimeCd = ''
+            if saleTime < '050000':
+                saleTimeCd = '06'
+            elif saleTime < '100000':
+                saleTimeCd = '01'
+            elif saleTime < '130000':
+                saleTimeCd = '02'
+            elif saleTime < '160000':
+                saleTimeCd = '03'
+            elif saleTime < '190000':
+                saleTimeCd = '04'
+            elif saleTime < '230000':
+                saleTimeCd = '05'
+
+            saleHeaderList = []
+            saleHeaderObjRow = {
+                "COMP_CD": compCd,
+                "STOR_CD": saleHeaderObj.storeCd,
+                "SALE_DT": saleHeaderObj.saleDt,
+                "POS_NO": saleHeaderObj.posNo,
+                "BILL_NO": saleHeaderObj.billNo,
+                "SALE_TP": "2",  # 판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
+                "ONOFF_TP": "1",  # 온라인 오프라인 형태, 온라인주문일경우 1
+                "ORD_FG": "4",  # 주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
+                "SALE_TM": saleHeaderObj.saleTime,  # 판매시간(시간분초)
+                "SALE_DAY": saleHeaderObj.saleDay,  # 일요일 1 부터 7까지
+                "SALE_TM_CD": saleTimeCd,
+                "RETURN_FG": saleHeaderObj.returnYn,  # 반품플레그(원거래에도 업데이트 해줘야함)
+                "SALE_FG": saleHeaderObj.saleFlag,
+                "MEAL_CD": mealCd,
+                "MEAL_NM": mealName,
+                "TOT_QTY": saleHeaderObj.totQty,
+                "TOT_SALE_AMT": saleHeaderObj.totSaleAmt,
+                "SALE_AMT": saleHeaderObj.saleAmt,
+                "SUP_AMT": saleHeaderObj.supAmt,
+                "TAX_AMT": saleHeaderObj.taxAmt,
+                "OFF_TAX_AMT": saleHeaderObj.offTaxAmt,
+                "TOT_DC_AMT": saleHeaderObj.totDcAmt,
+                "NORM_DC_AMT": 0.0,
+                "PNT_DC_AMT": saleHeaderObj.pointDcAmt,
+                "NORM_DC_CNT": 0,
+                "PNT_DC_CNT": saleHeaderObj.pointDcCnt,
+                "CASH_AMT": 0.0,
+                "CARD_AMT": saleHeaderObj.cardAmt,
+                "ETC_AMT": 0.0
+            }
+            saleHeaderList.append(saleHeaderObjRow)
+
+            saleDetailList = []
+            saleDetails = SaleDetail.objects.filter(storeCd=storeCd, saleDt=saleDt, posNo=posNo, billNo=billNo)
+            for saleDetailObj in saleDetails:
+                saleDetailRow = {
+                    "COMP_CD": compCd,
+                    "STOR_CD": saleDetailObj.storeCd,
+                    "SALE_DT": saleDetailObj.saleDt,
+                    "POS_NO": saleDetailObj.posNo,
+                    "BILL_NO": saleDetailObj.billNo,
+                    "SEQ": saleDetailObj.seq,
+                    "SALE_FG": saleDetailObj.saleFlag,
+                    "ORD_TP": saleDetailObj.orderType,
+                    "MEAL_CD": mealCd,
+                    "MEAL_NM": mealName,
+                    "CNR_CD": "",
+                    "CNR_NM": "",
+                    "ITEM_CD": saleDetailObj.itemCd,
+                    "ITEM_NM": saleDetailObj.itemName,
+                    "QTY": saleDetailObj.qty,
+                    "ITEM_SELL_GRP": saleDetailObj.itemSellGroup,
+                    "ITEM_SELL_LV": saleDetailObj.itemSellLevel,
+                    "ITEM_SELL_TY": saleDetailObj.itemSellType,
+                    "SALE_COST": saleDetailObj.saleCost,
+                    "SALE_PRIC": saleDetailObj.salePrice,
+                    "ORG_SALE_PRIC": saleDetailObj.orgSalePrice,
+                    "TOT_SALE_AMT": saleDetailObj.totSaleAmt,
+                    "SALE_AMT": saleDetailObj.saleAmt,
+                    "SUP_AMT": saleDetailObj.supAmt,
+                    "TAX_AMT": saleDetailObj.taxAmt,
+                    "OFF_TAX_AMT": saleDetailObj.offTaxAmt,
+                    "TAX_YN": saleDetailObj.taxYn,
+                    "TOT_DC_AMT": saleDetailObj.totDcAmt,  # todo: 로직 생각하기
+                    "NORM_DC_AMT": 0.0,
+                    "PNT_DC_AMT": saleDetailObj.pointDcAmt,
+                    "SALE_TM": saleDetailObj.saleTime,
+                    "SALE_YN": "Y",  # 매출포함여부
+                }
+                saleDetailList.append(saleDetailRow)
+
+                cardLogList = []
+                cardLogs = CardLog.objects.filter(storeCd=storeCd, saleDt=saleDt, posNo=posNo, billNo=billNo)
+
+                for cardLogObj in cardLogs:
+                    cardLogRow = {
+                        "COMP_CD": compCd,
+                        "STOR_CD": cardLogObj.storeCd,
+                        "SALE_DT": cardLogObj.saleDt,
+                        "POS_NO": cardLogObj.posNo,
+                        "BILL_NO": cardLogObj.billNo,
+                        "TRAN_FG": "1",  # 0:전체 1:일반 / 2: 포인트충전 / 3:후결제 / 4:선결제 / 5:RF 충전
+                        "SEQ": cardLogObj.seq,
+                        "SALE_FG": cardLogObj.saleFlag,
+                        "CARD_AMT": cardLogObj.cardAmt,
+                        "CARD_NO": cardLogObj.cardNo,
+                        "VAN_CD": cardLogObj.vanCd,
+                        "CARD_CD": cardLogObj.cardCd,
+                        "CARD_NM": cardLogObj.cardName,
+                        "BUY_CARD_CD": cardLogObj.cardCd,
+                        "BUY_CARD_NM": cardLogObj.cardName,
+                        "APPR_NO": cardLogObj.apprNo,
+                        "APPR_DT": cardLogObj.apprDt,
+                        "APPR_TM": cardLogObj.apprTime,
+                        "APPR_FG": cardLogObj.apprFlag,
+                        "SIGN_YN": "N",
+                        "INST_FG": cardLogObj.instFlag,
+                        "INST_MON": cardLogObj.instMonth,
+                        "TERMINAL_ID": cardLogObj.terminalId,
+                        "REGISTER_NO": cardLogObj.registerNo,
+                        "RETURN_FG": cardLogObj.returnYn,
+                        "ORG_STOR_CD": cardLogObj.orgStoreCd,
+                        "ORG_SALE_DT": cardLogObj.orgSaleDt,
+                        "ORG_POS_NO": cardLogObj.orgPosNo,
+                        "ORG_BILL_NO": cardLogObj.orgBillNo,
+                        "ORG_SEQ": cardLogObj.orgSeq,
+                        "ORG_APPR_NO": cardLogObj.orgApprNo,
+                        "REMARK": cardLogObj.remark,
+                    }
+
+                cardLogList.append(cardLogRow)
+
+            trData = {
+                "T_SALE_H": saleHeaderList,
+                "T_SALE_D": saleDetailList,
+                "T_CARD_L": cardLogList
+            }
+            trData = json.dumps(trData)
+
+            headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
+            request = requests.post(domain + 'outer/sale', data=trData, verify=False, headers=headers)
+            if json.loads(request.text)['status'] == 0:
+                saleHeaderObj.sendYn = 'Y'
+                saleHeaderObj.save()
+                for saleDetailObj in saleDetails:
+                    saleDetailObj.sendYn = 'Y'
+                    saleDetailObj.save()
+                for cardLogObj in cardLogs:
+                    cardLogObj.sendYn = 'Y'
+                    cardLogObj.save()
+                    cardLogObj.save()
+
+        return HttpResponse('재송신 성공')
+
+    except Exception as ex:
+        print(ex)
+        return HttpResponse('재송신 실패')
 
 
 @csrf_exempt

@@ -450,6 +450,7 @@ def MasterDownView(request):
                                                                    'takeOutPrice': item_imt.get('TAKE_OUT_PRICE'),
                                                                    'setYn': item_imt.get('SET_YN'),
                                                                    'itemFg': item_imt.get('ITEM_FG'),
+                                                                   'itemDesc': item_imt.get('ITEM_DESC') if item_imt.get('ITEM_DESC') else  '',
                                                                    'imgSmallUrl': item_imt.get('IMG_SMALL_URL'),
                                                                    'ordPrtYn': item_imt.get('ORD_PRT_YN'),
                                                                    'ordPrtText': item_imt.get('ORD_PRT_TXT'),
@@ -467,6 +468,7 @@ def MasterDownView(request):
                     item_pktmkt.takeOutPrice = item_imt.get('TAKE_OUT_PRICE')
                     item_pktmkt.setYn = item_imt.get('SET_YN')
                     item_pktmkt.itemFg = item_imt.get('ITEM_FG')
+                    item_pktmkt.itemDesc = item_imt.get('ITEM_DESC') if item_imt.get('ITEM_DESC') else  ''
                     item_pktmkt.imgSmallUrl = item_imt.get('IMG_SMALL_URL')
                     item_pktmkt.ordPrtYn = item_imt.get('ORD_PRT_YN')
                     item_pktmkt.ordPrtText = item_imt.get('ORD_PRT_TXT')
