@@ -633,9 +633,9 @@ def trade(request):
         cardLogList.append(cardLogRow)
 
         trData = {
-            # "T_SALE_H": saleHeaderList,
-            # "T_SALE_D": saleDetailList,
-            # "T_CARD_L": cardLogList
+            "T_SALE_H": saleHeaderList,
+            "T_SALE_D": saleDetailList,
+            "T_CARD_L": cardLogList
         }
         trData = json.dumps(trData)
 
