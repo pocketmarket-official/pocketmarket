@@ -8,6 +8,8 @@ class SaleHeader(models.Model):
     posNo = models.CharField(max_length=5, default='91')
     billNo = models.CharField(max_length=10, default='')
     saleFlag = models.CharField(max_length=3, default='') #baseCode:050 [0:전체/1:정상/2:취소]
+    saleDay = models.CharField(max_length=1, default='')
+    saleTime = models.CharField(max_length=6, default='')
     totQty = models.IntegerField(default=0)
     totSaleAmt = models.FloatField(default=0.0) #할인이 적용되기 전 매출액
     saleAmt = models.FloatField(default=0.0) #할인이 적용된 실제 결제금액
