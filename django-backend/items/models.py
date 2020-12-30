@@ -14,6 +14,7 @@ class Item(models.Model):
     takeOutPrice = models.FloatField(default=0.0, null=True)
     setYn = models.CharField(max_length=1, default='N')
     itemFg = models.CharField(max_length=1, default='1')
+    itemDesc = models.CharField(max_length=255, default='')
     useYn = models.CharField(max_length=1, default='Y')
     imgSmallUrl = models.CharField(max_length=200, null=True)
     ordPrtYn = models.CharField(max_length=1, default='N')

@@ -666,6 +666,68 @@ def trade(request):
         response = JsonResponse(data)
         return response
 
+@csrf_exempt
+def tradeReSend(request):
+    try:
+        compCd = '00000'
+
+        STATE = os.environ.get("STATE")
+        if STATE == 'local':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif STATE == 'dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif STATE == 'production':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+
+        saleHeaderList = SaleHeader.objects.filter(sendYn='N')
+        for saleHeader in saleHeaderList:
+            storeCd = saleHeader.storeCd
+            saleDt = saleHeader.saleDt
+            posNo = saleHeader.posNo
+            billNo = saleHeader.billNo
+
+            saleDetail = SaleDetail.objects.filter(storeCd=storeCd, saleDt=saleDt, posNo=posNo, billNo=billNo)
+            cardLog = CardLog.objects.filter(storeCd=storeCd, saleDt=saleDt, posNo=posNo, billNo=billNo)
+
+            saleHeaderRow = {
+                "COMP_CD": compCd,
+                "STOR_CD": saleHeader.storeCd,
+                "SALE_DT": saleHeader.saleDt,
+                "POS_NO": saleHeader.posNo,
+                "BILL_NO": saleHeader.billNo,
+                "SALE_TP": "2",  # 판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
+                "ONOFF_TP": "1",  # 온라인 오프라인 형태, 온라인주문일경우 1
+                "ORD_FG": "4",  # 주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
+                "SALE_TM": saleHeader.saleTime,  # 판매시간(시간분초)
+                "SALE_DAY": saleHeader.weekday,  # 일요일 1 부터 7까지
+                "SALE_TM_CD": "01",  # 시간코드 공통코드 045번 참조 #todo: 뭔솔?
+                "RETURN_FG": saleHeader.returnYn,  # 반품플레그(원거래에도 업데이트 해줘야함)
+                "SALE_FG": saleHeader.saleFlag,
+                "MEAL_CD": saleHeader.mealCd,
+                "MEAL_NM": saleHeader.mealName,
+                "TOT_QTY": saleHeader.totQty,
+                "TOT_SALE_AMT": saleHeader.totSaleAmt,
+                "SALE_AMT": saleHeader.saleAmt,
+                "SUP_AMT": saleHeader.supAmt,
+                "TAX_AMT": saleHeader.taxAmt,
+                "OFF_TAX_AMT": saleHeader.offTaxAmt,
+                "TOT_DC_AMT": saleHeader.totDcAmt,
+                "NORM_DC_AMT": 0.0,
+                "PNT_DC_AMT": saleHeader.pointDcAmt,
+                "NORM_DC_CNT": 0,
+                "PNT_DC_CNT": saleHeader.pointDcCnt,
+                "CASH_AMT": 0.0,
+                "CARD_AMT": saleHeader.cardAmt,
+                "ETC_AMT": 0.0
+            }
+
+
+
+    except Exception as ex:
+        print(ex)
 
 
 @csrf_exempt
