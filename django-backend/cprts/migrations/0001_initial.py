@@ -14,28 +14,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Keymap',
+            name='Cprt',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('posPage', models.IntegerField(default=0)),
-                ('posIndex', models.IntegerField(default=0)),
-                ('soldoutYn', models.CharField(max_length=1, null=True)),
-                ('cprtGroupCd', models.CharField(max_length=5, null=True)),
-                ('dispYn', models.CharField(default='Y', max_length=1)),
-                ('expectCnt', models.IntegerField(default=0)),
-                ('insDt', models.DateTimeField(default=django.utils.timezone.now)),
-                ('insUs', models.CharField(max_length=30, null=True)),
-                ('modDt', models.DateTimeField(default=django.utils.timezone.now)),
-                ('modUs', models.CharField(max_length=30, null=True)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='StoreKeymap',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('keymapCd', models.CharField(default='000', max_length=10)),
-                ('keymapName', models.CharField(default='', max_length=30)),
-                ('blankImgUrl', models.CharField(max_length=200, null=True)),
+                ('cprtCd', models.CharField(default='000', max_length=5)),
+                ('cprtName', models.CharField(default='', max_length=50)),
                 ('useYn', models.CharField(default='Y', max_length=1)),
                 ('insDt', models.DateTimeField(default=django.utils.timezone.now)),
                 ('insUs', models.CharField(max_length=30, null=True)),
@@ -44,21 +27,28 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='TouchGroup',
+            name='Group',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('touchGroupCd', models.CharField(default='000', max_length=5)),
-                ('touchGroupName', models.CharField(default='', max_length=100)),
-                ('imgUrl', models.CharField(max_length=200, null=True)),
-                ('imgUseYn', models.CharField(default='N', max_length=1)),
-                ('posPage', models.IntegerField(default=0)),
-                ('posIndex', models.IntegerField(default=0)),
+                ('cprtGroupCd', models.CharField(default='000', max_length=5)),
+                ('cprtGroupName', models.CharField(default='', max_length=50)),
                 ('useYn', models.CharField(default='Y', max_length=1)),
                 ('insDt', models.DateTimeField(default=django.utils.timezone.now)),
                 ('insUs', models.CharField(max_length=30, null=True)),
                 ('modDt', models.DateTimeField(default=django.utils.timezone.now)),
                 ('modUs', models.CharField(max_length=30, null=True)),
-                ('keymapCd', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='keymaps.storekeymap')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Relation',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('insDt', models.DateTimeField(default=django.utils.timezone.now)),
+                ('insUs', models.CharField(max_length=30, null=True)),
+                ('modDt', models.DateTimeField(default=django.utils.timezone.now)),
+                ('modUs', models.CharField(max_length=30, null=True)),
+                ('cprtCd', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='cprts.cprt')),
+                ('cprtGroupCd', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='cprts.group')),
             ],
         ),
     ]
