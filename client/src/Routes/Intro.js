@@ -34,6 +34,8 @@ function Intro({authenticated, location}) {
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         } else if(STATE === 'production') {
             redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/';
+        } else if(STATE === 'jh') {
+            redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         }
         url = `https://kauth.kakao.com/oauth/authorize?client_id=${reactRestApiToken}&redirect_uri=${redirect_uri}&response_type=code`;
         window.location.href = url;

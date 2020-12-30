@@ -1,0 +1,288 @@
+  File "manage.py", line 19
+    ) from exc
+         ^
+SyntaxError: invalid syntax
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 20, 2020 - 14:17:30
+Django version 3.1.3, using settings 'config.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+[20/Nov/2020 14:22:06] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+[20/Nov/2020 14:22:06] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+[20/Nov/2020 14:22:07] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:22:07] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:22:07] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:07] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:07] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:07] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:07] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:22:13] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:22:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:23:13] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:57] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:57] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:57] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:57] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:57] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:58] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:58] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:58] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:58] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:23:58] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:08] "GET /api/items_item/ HTTP/1.1" 200 14252
+[20/Nov/2020 14:24:08] "GET /api/items_item/ HTTP/1.1" 200 14252
+[20/Nov/2020 14:24:08] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:24:08] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:08] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:08] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:08] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:24:08] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:08] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:24:08] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:08] "GET /api/stores_pos/ HTTP/1.1" 200 154
+[20/Nov/2020 14:24:08] "GET /api/items_itemAdd/ HTTP/1.1" 200 1628
+[20/Nov/2020 14:24:08] "GET /api/items_itemAdd/ HTTP/1.1" 200 1628
+[20/Nov/2020 14:24:08] "GET /api/stores_pos/ HTTP/1.1" 200 154
+[20/Nov/2020 14:24:08] "GET /api/stores_pos/ HTTP/1.1" 200 154
+[20/Nov/2020 14:24:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:13] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:47] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:24:59] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:25:10] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 14:25:16] "GET /api/items_item/ HTTP/1.1" 200 14252
+[20/Nov/2020 14:25:16] "GET /api/items_item/ HTTP/1.1" 200 14252
+[20/Nov/2020 14:25:16] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:25:16] "GET /api/items_itemAdd/ HTTP/1.1" 200 1628
+[20/Nov/2020 14:25:16] "GET /api/stores_pos/ HTTP/1.1" 200 154
+[20/Nov/2020 14:25:16] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:25:16] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 14:25:16] "GET /api/items_itemAdd/ HTTP/1.1" 200 1628
+[20/Nov/2020 14:25:16] "GET /api/stores_pos/ HTTP/1.1" 200 154
+[20/Nov/2020 14:25:16] "GET /api/stores_pos/ HTTP/1.1" 200 154
+[20/Nov/2020 14:32:49] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+[20/Nov/2020 14:32:49] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+[20/Nov/2020 14:33:38] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+[20/Nov/2020 14:33:38] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+[20/Nov/2020 15:34:03] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 15:34:03] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:04] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:09] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 15:34:09] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 15:34:09] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:09] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:09] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:09] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:09] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:09] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:09] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:09] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:09] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:10] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 15:34:11] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 15:34:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 16:32:29] "GET /api/ HTTP/1.1" 200 11706
+[20/Nov/2020 16:32:37] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+[20/Nov/2020 16:32:37] "  /*à     Cookie: mstshash=Administr" 400 -
+Invalid HTTP_HOST header: 'example.com'. You may need to add 'example.com' to ALLOWED_HOSTS.
+Bad Request: /http:/example.com/
+[20/Nov/2020 18:21:23] code 400, message Bad request version ('À\x14À')
+[20/Nov/2020 18:21:23] You're accessing the development server over HTTPS, but it only supports HTTP.
+
+Invalid HTTP_HOST header: 'ip-172-31-42-180.ap-northeast-2.compute.internal:8000'. You may need to add 'ip-172-31-42-180.ap-northeast-2.compute.internal' to ALLOWED_HOSTS.
+Bad Request: /
+[20/Nov/2020 18:26:57] "GET / HTTP/1.0" 400 70094
+[20/Nov/2020 18:30:08] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+[20/Nov/2020 18:30:08] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+Session data corrupted
+[20/Nov/2020 21:09:44] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+Session data corrupted
+[20/Nov/2020 21:09:44] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+Session data corrupted
+[20/Nov/2020 21:09:49] "GET /api/festivals_join/ HTTP/1.1" 200 559
+Session data corrupted
+[20/Nov/2020 21:09:49] "GET /api/festivals_join/ HTTP/1.1" 200 559
+Session data corrupted
+[20/Nov/2020 21:10:25] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+Session data corrupted
+[20/Nov/2020 21:10:25] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+Session data corrupted
+Session data corrupted
+[20/Nov/2020 21:11:22] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:11:22] "GET /api/stores_store/ HTTP/1.1" 200 185980
+Session data corrupted
+[20/Nov/2020 21:11:23] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:11:23] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:11:23] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:11:23] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:11:23] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+Session data corrupted
+[20/Nov/2020 21:11:32] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:11:32] "GET /api/stores_store/ HTTP/1.1" 200 185980
+Session data corrupted
+Session data corrupted
+[20/Nov/2020 21:11:32] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:11:32] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+Session data corrupted
+[20/Nov/2020 21:11:32] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:11:32] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:11:32] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:35] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+[20/Nov/2020 21:12:35] "GET /api/festivals_festival/ HTTP/1.1" 200 3769
+[20/Nov/2020 21:12:38] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:12:38] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:12:38] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:38] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:38] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:38] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:38] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:38] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:38] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:38] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:47] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:12:47] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:12:48] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:48] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:48] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:48] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:48] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:48] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:48] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:12:48] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:16] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:13:16] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:13:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:16] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:24] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:13:24] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:13:24] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:24] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:24] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:24] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:24] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:24] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:24] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:13:24] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+Session data corrupted
+[20/Nov/2020 21:16:11] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:16:11] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:16:11] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:16:11] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:16:11] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+Session data corrupted
+[20/Nov/2020 21:16:14] "GET /api/stores_store/ HTTP/1.1" 200 185980
+[20/Nov/2020 21:16:14] "GET /api/stores_store/ HTTP/1.1" 200 185980
+Session data corrupted
+[20/Nov/2020 21:16:14] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+Session data corrupted
+[20/Nov/2020 21:16:14] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:16:14] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:16:14] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:16:14] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+[20/Nov/2020 21:16:19] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:16:19] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:16:19] "GET /api/users_user/ HTTP/1.1" 200 345
+[20/Nov/2020 21:16:19] "GET /api/users_user/ HTTP/1.1" 200 345
+Session data corrupted
+[20/Nov/2020 21:16:19] "GET /api/users_user/ HTTP/1.1" 200 345
