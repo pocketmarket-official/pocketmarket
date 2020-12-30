@@ -622,15 +622,15 @@ def trade(request):
         cardLogList.append(cardLogRow)
 
         trData = {
-            "T_SALE_H": saleHeaderList,
-            "T_SALE_D": saleDetailList,
-            "T_CARD_L": cardLogList
+            # "T_SALE_H": saleHeaderList,
+            # "T_SALE_D": saleDetailList,
+            # "T_CARD_L": cardLogList
         }
         trData = json.dumps(trData)
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
         request = requests.post(domain+'outer/sale', data= trData,  verify=False, headers=headers)
-        if request.status_code == 200:
+        if json.loads(request.text)['status'] == 0:
             saleHeaderObj.sendYn = 'Y'
             saleHeaderObj.save()
             for saleDetailObj in saleDetailObjList:
@@ -642,7 +642,7 @@ def trade(request):
             cardLogObj.save()
         else :
             tradeErrorCode  = '030'
-            tradeErrorMsg = str(request.context) #TODO: imtsoft respponse 명세 알아야함
+            tradeErrorMsg = str(json.loads(request.text)['message'])
             context = 'storeCd=' + storeCd\
                       + ' saleDt=' + saleDt\
                       + ' posNo=' + posNo\
@@ -845,7 +845,7 @@ def tradeReSend(request):
 
             headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
             request = requests.post(domain + 'outer/sale', data=trData, verify=False, headers=headers)
-            if request.status_code == 200:
+            if json.loads(request.text)['status'] == 0:
                 saleHeaderObj.sendYn = 'Y'
                 saleHeaderObj.save()
                 for saleDetailObj in saleDetails:
