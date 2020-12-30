@@ -20,6 +20,7 @@ class ItemSerializer(serializers.ModelSerializer):
             'takeOutPrice',
             'setYn',
             'itemFg',
+            'itemDesc',
             'useYn',
             'imgSmallUrl',
             'ordPrtYn',

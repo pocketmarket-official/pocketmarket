@@ -342,7 +342,7 @@ class Order extends React.Component {
                             <img src={this.state.selected.imgSmallUrl} alt="menu" />
                             <div className="optionmodal__title">
                                 <div className="optionmodal__name">{this.state.selected.itemName}</div>
-                                <div className="optionmodal__description">처음부터 끝까지 모자렐라 치즈의 풍미를 즐길 수 있는 핫도그</div>
+                                <div className="optionmodal__description">{this.state.selected.itemDesc}</div>
                                 <div className="optionmodal__content">{this.state.selected.price}원</div>
                             </div>
                         </div>

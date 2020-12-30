@@ -66,21 +66,21 @@ class FestivalJSX extends React.Component {
                 }
             </>;
         return (
-            <div>
-                {data.openYn === 'Y' ?
-                        <>
-                            <Link to={{
-                                pathname: `/main/festival/${data.id}`,
-                                state: {data}
-                            }}>
+            <div onClick={() => this.joinFestival()}>
+                {/*{data.openYn === 'Y' ?*/}
+                {/*        <>*/}
+                {/*            <Link to={{*/}
+                {/*                pathname: `/main/festival/${data.id}`,*/}
+                {/*                state: {data}*/}
+                {/*            }}>*/}
                             {renderBody}
-                            </Link>
-                        </>
-                        :
-                        <>
-                            {renderBody}
-                        </>
-                }
+                {/*            </Link>*/}
+                {/*        </>*/}
+                {/*        :*/}
+                {/*        <>*/}
+                {/*            {renderBody}*/}
+                {/*        </>*/}
+                {/*}*/}
             </div>
         );
     }
