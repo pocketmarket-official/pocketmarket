@@ -201,6 +201,9 @@ def trade(request):
         elif STATE == 'production':
             domain = 'https://asp.imtsoft.me/api/'
             compCd = 'C0023'
+        elif STATE == 'jh':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
 
         # constant
 
