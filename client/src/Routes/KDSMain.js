@@ -4,6 +4,7 @@ import timer from '../assets/kds/ic_timer.svg';
 import axios from 'axios';
 import Clock from 'react-live-clock';
 import cookie from "react-cookies";
+import btnBack from "../assets/common/btn_bs.png";
 
 class KDSMain extends React.Component{
     constructor(props){
@@ -158,7 +159,9 @@ class KDSMain extends React.Component{
         return (
             <div className="kds">
                 <div className="header">
+
                     <div>
+                        <img className="header__back"  onClick={() => {this.props.history.go(-1);}} src={btnBack}/>
                         <span>{this.state.store.storeName}</span>
                     </div>
                     <div>

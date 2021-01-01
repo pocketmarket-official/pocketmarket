@@ -214,57 +214,26 @@ class Order extends React.Component {
                     let index = 0;
                     let previousItemCd = optionTmpArray[0].itemCd;
                     let tmpArray = [];
-                    console.log("=========");
-                    console.log(optionTmpArray);
-                    console.log("=========");
                     optionTmpArray.map((optionItems) => {
-                        console.log("==1");
-                        console.log(optionItems);
-                        console.log(previousItemCd);
-
                         if (optionItems.itemCd !== previousItemCd) {
-                            console.log("==2");
-                            console.log(tmpArray);
                             options[previousItemCd] = tmpArray;
-                            console.log("==3");
-                            console.log(optionItems.itemCd);
-                            console.log(tmpArray);
                             tmpArray = [];
                             tmpArray.push(optionItems.addItem);
                             previousItemCd = optionItems.itemCd;
-                            console.log("==4");
-                            console.log(index);
                             index++;
                             if (index === optionTmpArray.length) {
-                                console.log("==8");
-                                console.log(optionItems.itemCd);
-                                console.log(tmpArray);
                                 options[optionItems.itemCd] = tmpArray;
                                 tmpArray=[];
                             }
                         } else {
-                            console.log("==5");
-                            console.log(optionItems.addItem);
                             tmpArray.push(optionItems.addItem);
-                            console.log("==6");
-                            console.log(index);
-                            console.log(optionTmpArray.length);
                             index++;
                             if (index === optionTmpArray.length) {
-                                console.log("==7");
-                                console.log(optionItems.itemCd);
-                                console.log(tmpArray);
                                 options[optionItems.itemCd] = tmpArray;
                                 tmpArray=[];
                             }
                         }
                     });
-
-                    console.log("=========");
-                    console.log(options);
-                    console.log("=========");
-
-
 
                     this.setState({
                         options: options,

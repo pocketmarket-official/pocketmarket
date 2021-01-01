@@ -115,6 +115,9 @@
       grid-gap: 9px;
       margin-bottom: 9px;
 
+      .options__option:active {
+        transform : scale(0.9);
+      }
       .options__option {
         display: flex;
         justify-content: center;

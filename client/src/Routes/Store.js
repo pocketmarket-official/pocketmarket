@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import StoreList from '../Components/js/StoreList';
-import bg from '../assets/store_grid/grid_top_bg.jpg';
 import axios from "axios";
 
 
@@ -105,7 +104,7 @@ class StoreView extends React.Component {
                     <div className="storeGrid__content">
                         {/*<div className="store__store">*/}
                             <div className="storeGrid__image">
-                                <img src={bg} alt="big store img" />
+                                <img src={this.props.location.state.data.imgLogoUrl} alt="big store img" />
                             </div>
                             <div className="storeGrid__detail">
                                 <div className="storeGrid__title">
