@@ -115,7 +115,7 @@ class QuestionsHistory extends React.Component {
                                             this.setState({ startDate: date });
                                         }}
                             ></DatePicker>
-                            ~
+                            <div className="tilda">~</div>
                             <span><img src={calendar}/></span>
                             <DatePicker className="dd" id="date2"
                                         locale="ko"		// 언어설정 기본값은 영어
