@@ -24,6 +24,7 @@ class StoreView extends React.Component {
         this.handlePageSlide = this.handlePageSlide.bind(this);
         this.handlePageRender = this.handlePageRender.bind(this);
         this.handleMultipleImage = this.handleMultipleImage(this);
+
     }
 
     componentDidMount() {
