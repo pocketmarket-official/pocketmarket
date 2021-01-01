@@ -87,9 +87,11 @@ class OrderResult extends React.Component {
                                            작성완료
                                         </button>
                                     </div>
-                                    <Link to={link}>
-                                        <button className="orderhistory__btn rebuy"><img src={order}/></button>
-                                    </Link>
+                                        <button className="orderhistory__btn rebuy">
+                                            <Link to={link}>
+                                                <img src={order}/>
+                                            </Link>
+                                        </button>
                                 </div>
 
                             </>
