@@ -57,13 +57,14 @@ class StoreView extends React.Component {
 
     handlePageRender() {
         if(this.state.current === 0) {
+            console.log(this.state.reviews)
             return (
             <>
                 <div className="store__review__grid" id="review__container">
                     {
                         <>
                             {
-                                this.state.reviews !== undefined ?
+                                this.state.reviews.length !== 0 ?
                                     this.state.reviews.map((review) => {
                                         return (
                                             <>
@@ -87,6 +88,12 @@ class StoreView extends React.Component {
                         </>
                     }
                 </div>
+                {
+                    this.state.reviews.length === 0 ?
+                    <div className="review__empty">아직 리뷰가 하나도 없어요..</div>
+                    :
+                    null
+                }
             </>
             );
         } else if(this.state.current === 1) {

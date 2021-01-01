@@ -59,9 +59,11 @@ class OrderResult extends React.Component {
                                                 {review_txt}리뷰쓰기</Link>
                                         </button>
                                     </div>
-                                    <Link to={link}>
-                                        <button className="orderhistory__btn rebuy"><img src={order}/></button>
-                                    </Link>
+                                    <button className="orderhistory__btn rebuy">
+                                        <Link to={link}>
+                                            <img src={order}/>
+                                        </Link>
+                                    </button>
                                 </div>
 
                             </>

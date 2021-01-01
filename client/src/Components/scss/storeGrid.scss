@@ -178,6 +178,12 @@
       }
     }
 
+    .review__empty {
+      font-family: MaplestoryOTFLight;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .store__review__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -185,7 +191,6 @@
       grid-auto-rows: 14%;
       grid-row-gap: 3px;
       grid-column-gap: 1px;
-
       div {
         position: relative;
         flex: 1;

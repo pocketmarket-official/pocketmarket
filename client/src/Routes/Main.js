@@ -74,8 +74,6 @@ class Main extends React.Component {
         if(this.state.current === 0) {
             return <MainFestivalContent />;
         } else if(this.state.current === 1) {
-            console.log(this.state);
-
             if(this.state.user.id) {
                 return <MainStoreContent place={this.state.latlong} userId={this.state.user.Id} />;
             }

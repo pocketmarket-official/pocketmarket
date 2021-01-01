@@ -106,11 +106,17 @@ class MainFestivalContent extends React.Component {
     }
 
     render() {
-        return (
-            this.state.data.map((data) => (
-                    <FestivalJSX data={data} key={data.id} />
-            ))
-        );
+        if(this.state.data.length === 0) {
+            return (
+                <div className="festival__empty">현재 진행 중인 축제가 없네요..</div>
+            );
+        } else {
+            return (
+                this.state.data.map((data) => (
+                        <FestivalJSX data={data} key={data.id} />
+                ))
+            );
+        }
     }
 }
 
