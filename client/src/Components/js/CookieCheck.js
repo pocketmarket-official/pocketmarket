@@ -46,7 +46,7 @@ function cookieCheck_approveGuest(){
     } //쿠키가 있는데 게스트용이면
     else if(cookie_token === 'guest'){
         //유저 메일을 테스트 메일로 고정하고
-        user_email = 'pocketmarket.official@gmail.com'
+        user_email = 'test.pocketmarket@gmail.com'
     } else {
         // 게스트용이 아니면 storage에서 받아온다.
         user_email = storage.get(cookie_token);
@@ -58,8 +58,34 @@ function cookieCheck_approveGuest(){
             window.location.href = '/login/';
         }
     }
-
     return user_email;
 }
 
-export {cookieCheck_approveGuest, cookieCheck_rejectGuest}
+function logout(){
+    //쿠키 먼저 받아오고
+    let cookie_token = cookie.load("access_token");
+    let user_email;
+    //쿠키가 없으면 로그인페이지로
+    if(!cookie_token){
+      window.location.href = '/login/';
+    }
+    else {
+        //쿠키가 있으면 이메일을 가져오고
+        user_email = storage.get(cookie_token);
+        if(!user_email){
+            // 이메일이 없으면 해당 토큰의 쿠키를 삭제하고
+            cookie.remove('access_token');
+            // 로그인페이지로
+            window.location.href = '/login/';
+        } else {
+            // 이메일이 있으면 스토리지도 지우고
+            localStorage.removeItem(cookie_token);
+            // 쿠키도 지우고
+            cookie.remove('access_token');
+            // 로그인페이지로
+            window.location.href = '/login/';
+        }
+    }
+}
+
+export {cookieCheck_approveGuest, cookieCheck_rejectGuest, logout}

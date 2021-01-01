@@ -1,27 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
-import logout from '../assets/my_page/ico_logout.png';
+import logoutBtn from '../assets/my_page/ico_logout.png';
 import store from '../assets/my_page/ico_store.png';
-import cookie from "react-cookies";
 import axios from "axios";
-import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
+import { cookieCheck_rejectGuest } from "../Components/js/CookieCheck.js";
+import { logout } from "../Components/js/CookieCheck";
 
 class Mypage extends React.Component {
     constructor(props){
         super(props);
-        this.logOut = this.logOut.bind(this);
+        this.doLogOut = this.doLogOut.bind(this);
 
         this.state = {
             user: '',
         }
     }
 
-    logOut() {
-        localStorage.removeItem(cookie.load("access_token"));
-        cookie.remove('access_token');
-        window.location.href = '/login/';
-    };
+    doLogOut(){
+        logout();
+    }
+
 
     componentDidMount() {
         let user_email = cookieCheck_rejectGuest();
@@ -59,7 +58,7 @@ class Mypage extends React.Component {
                                 :
                                 null
                         }
-                        <div className="setting__list"><p onClick={()=>this.logOut()}>로그아웃</p><img src={logout}/></div>
+                        <div className="setting__list"><p onClick={()=>this.doLogOut()}>로그아웃</p><img src={logoutBtn}/></div>
                     </div>
                 </div>
             </>

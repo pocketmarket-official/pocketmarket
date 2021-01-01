@@ -46,9 +46,9 @@ function Intro({authenticated, location}) {
         let url;
         let STATE = process.env.REACT_APP_STATE;
         if(STATE === 'local:start') {
-            url =  'http://localhost:3000/makingCookie/guest/pocketmarket.official@gmail.com'
+            url =  'http://localhost:3000/makingCookie/guest/test.pocketmarket@gmail.com'
         } else {
-            url =  '/makingCookie/guest/pocketmarket.official@gmail.com'
+            url =  '/makingCookie/guest/test.pocketmarket@gmail.com'
         }
         window.location.href = url;
     };

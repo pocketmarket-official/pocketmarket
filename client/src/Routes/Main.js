@@ -6,6 +6,7 @@ import MainFestivalContent from '../Components/js/MainFestivalContent';
 import MainStoreContent from '../Components/js/MainStoreContent';
 import MainMapContent from '../Components/js/MainMapContent';
 import {cookieCheck_approveGuest} from '../Components/js/CookieCheck.js'
+import {logout} from '../Components/js/CookieCheck.js'
 
 import btnSearchImg from '../assets/common/btn_sceach.png';
 import Toast from "../Components/js/Toast";
@@ -163,19 +164,28 @@ class Main extends React.Component {
         this.handleRefresh();
         this.handleTop();
         let user_email = cookieCheck_approveGuest();
-
         axios.get("/api/users_user/")
-            .then((res) => {
-                let user = res.data.find((elt) => {
-                    if (elt.email === user_email) {
-                        return true;
-                    }
-                });
+            .then((res1) => {
                 axios.get("/api/trades_saleHeader/")
-                    .then((res) => {
+                    .then((res2) => {
+                        let user = res1.data.find((elt1) => {
+                            if (elt1.email === user_email) {
+                                return true;
+                            }
+                        });
+
+                        if(user){
+                            if(user.guestYn === 'Y'){
+                                document.getElementById('header__menu').style.visibility="hidden";
+                            }
+                        } else {
+                            logout()
+                        }
+
+
                         let i = this.state.orderCount;
-                        res.data.filter((elt) => {
-                            if (elt.user === user.id && (elt.orderStatus != 6 && elt.orderStatus != 7)) {
+                        res2.data.filter((elt2) => {
+                            if (elt2.user === user.id && (elt2.orderStatus != 6 && elt2.orderStatus != 7)) {
                                 i++;
                             }
                         });

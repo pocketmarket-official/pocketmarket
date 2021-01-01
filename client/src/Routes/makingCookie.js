@@ -2,7 +2,7 @@ import React from 'react';
 import storage from '../storage.js';
 import cookie from 'react-cookies';
 
-
+//TODO : 세션관리 해야함
 function MakingCookie(props) {
     //쿠키는 있는데 storage에 메일이 없으면 쿠키 삭제
     let cookie_token = cookie.load("access_token");

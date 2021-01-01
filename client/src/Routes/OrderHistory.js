@@ -35,7 +35,7 @@ class OrderHistory extends React.Component {
             saleHeader: [],
             saleDetail: [],
             matched: [],
-            storeId: ''
+            storeId: '',
         }
     }
 
