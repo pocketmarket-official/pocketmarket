@@ -154,7 +154,7 @@ def saveTokenStore(request):
         print(json.loads(request.body)['fcmToken'])
         token = json.loads(request.body)['fcmToken']
         print("==4")
-        print(json.loads(request.body)['token'])
+        print(token)
 
         store = Store.objects.get(storeCd=storeCd)
         print("==5")
