@@ -255,6 +255,9 @@
           }
         }
       }
+      .order__pass:active {
+        transform: scale(0.9);
+      }
       .order__pass {
         width: 87px;
         height: 38.5px;

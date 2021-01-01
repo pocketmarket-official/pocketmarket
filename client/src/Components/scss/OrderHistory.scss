@@ -112,7 +112,7 @@
           margin: auto;
         }
       }
-      .orderhistory__btn, .orderhistory__btn__review  {
+      .orderhistory__btn, .orderhistory__btn__review {
         border-radius: 5px;
         border: solid 1px #d5d5d5;
         background-color: #ffffff;
@@ -124,28 +124,35 @@
         font-weight: bold;
         width: 16%;
 
-        &.info{
+        &.info {
           font-size: 10px;
         }
-        &.review__start{
-          a{
+
+        &.review__start {
+          a {
             font-size: 10px;
             color: #b4022f;
           }
 
 
         }
-        &.review__end{
+
+        &.review__end {
           font-size: 10px;
           color: #a2a2a2;
         }
-        &.rebuy{
-          width: 13%;
-          background: #3d3d3d;
-          img{
-            margin: auto;
-            width: 21px;
-            height: 21px;
+
+        &a {
+          width: 100%;
+          .rebuy {
+            width: 13%;
+            background: #3d3d3d;
+
+            img {
+              margin: auto;
+              width: 21px;
+              height: 21px;
+            }
           }
         }
       }
