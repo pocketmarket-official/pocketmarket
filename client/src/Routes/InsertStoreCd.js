@@ -1,6 +1,5 @@
 import React, { useMemo, useRef } from "react";
 import cookie from 'react-cookies';
-import {cookieCheck_approveGuest} from "../Components/js/CookieCheck"
 
 import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck";
@@ -35,9 +34,6 @@ class InsertStoreCd extends React.Component{
                 }).id;
                 if(storeCd && fcmToken){
                     let transData = {"storeCd":storeCd, "fcmToken":fcmToken, "userId":userId};
-                    console.log(transData);
-                    alert(storeCd);
-                    alert(fcmToken);
 
                     axios.post('/saveTokenStore/', transData)
                         .then((res)=>{
