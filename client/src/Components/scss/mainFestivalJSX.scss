@@ -1,5 +1,12 @@
 @import "mixins";
 
+.festival__empty {
+  font-family: 'MaplestoryOTFLight';
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .content__festival {
   margin: 16px 0;
   width: 100%;
