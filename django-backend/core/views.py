@@ -652,7 +652,7 @@ def trade(request):
                 cardLogObj.orgSeq = None
             cardLogObj.save()
         else :
-            tradeErrorCode  = '030'
+            tradeErrorCode  = '031'
             tradeErrorMsg = str(json.loads(request.text)['message'])
             context = 'storeCd=' + storeCd\
                       + ' saleDt=' + saleDt\
