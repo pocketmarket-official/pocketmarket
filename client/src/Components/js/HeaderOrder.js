@@ -9,7 +9,7 @@ export default function HeaderOrder({storeName}) {
     return (
         <div className="header__box">
             <img className="header__back"  onClick={() => {history.goBack()}} src={btnBack}/>
-            <div className="header__store-name">
+            <div className="header__store-name" onClick={() => {history.goBack()}}>
                 {storeName}
             </div>
             <div className="header__waiting">
