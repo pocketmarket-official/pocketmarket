@@ -32,6 +32,7 @@ class OrderResult extends React.Component {
                 let total = data.saleAmt;
                 const review = "";
                 let review_txt ="";
+                const link = `/main/store/${data.storeId}/order`;
                 total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 {
                     if (data.reviewYn == "N") {
@@ -58,7 +59,9 @@ class OrderResult extends React.Component {
                                                 {review_txt}리뷰쓰기</Link>
                                         </button>
                                     </div>
-                                    <button className="orderhistory__btn rebuy"><img src={order}/></button>
+                                    <Link to={link}>
+                                        <button className="orderhistory__btn rebuy"><img src={order}/></button>
+                                    </Link>
                                 </div>
 
                             </>
@@ -82,7 +85,9 @@ class OrderResult extends React.Component {
                                            작성완료
                                         </button>
                                     </div>
-                                    <button className="orderhistory__btn rebuy"><img src={order}/></button>
+                                    <Link to={link}>
+                                        <button className="orderhistory__btn rebuy"><img src={order}/></button>
+                                    </Link>
                                 </div>
 
                             </>
