@@ -31,8 +31,8 @@ class InsertStoreCd extends React.Component{
                 let userId = res.data.find((elt) => {
                     if (elt.email === user_email) {
                         return true;
-                    }.id
-                });
+                    }
+                }).id;
                 if(storeCd && fcmToken){
                     let transData = {"storeCd":storeCd, "fcmToken":fcmToken, "userId":userId};
                     console.log(transData);
