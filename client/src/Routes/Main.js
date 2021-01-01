@@ -176,7 +176,6 @@ class Main extends React.Component {
 
                         if(user){
                             if(user.guestYn === 'Y'){
-                                console.log(document.getElementById('header__menu').classList);
                                 document.getElementById('header__menu').classList.add("hide");
                             }
                         } else {

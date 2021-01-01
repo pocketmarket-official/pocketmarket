@@ -14,6 +14,7 @@ import showOrderImg from "../assets/index/btn_index4.png";
 import { cookieCheck_approveGuest } from "../Components/js/CookieCheck.js"
 import Toast from '../Components/js/Toast';
 import axios from "axios";
+import {logout} from "../Components/js/CookieCheck";
 
 function Index() {
     const paginationElem = useRef(null);
@@ -33,6 +34,14 @@ function Index() {
                     return true;
                 }
             });
+
+            if(user){
+                if(user.guestYn === 'Y'){
+                    document.getElementById('header__menu').classList.add("hide");
+                }
+            } else {
+                logout()
+            }
         });
 
     function onChangeJumboItem(e) {
