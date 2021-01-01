@@ -21,11 +21,9 @@ class ReviewJSX extends React.Component {
     }
 
     onChangeReviewItem = (e) => {
-        console.log(this.state.paginationElem.current.children.length)
         for (let item of this.state.paginationElem.current.children) {
             item.classList.remove('active');
         }
-        console.log(this.state.paginationElem.current.children)
         this.state.paginationElem.current.children[e.index].classList.add('active');
     };
 
