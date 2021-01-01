@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import logoutBtn from '../assets/my_page/ico_logout.png';
 import store from '../assets/my_page/ico_store.png';
-import cookie from "react-cookies";
 import axios from "axios";
 import { cookieCheck_rejectGuest } from "../Components/js/CookieCheck.js";
 import { logout } from "../Components/js/CookieCheck";
