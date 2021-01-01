@@ -88,7 +88,7 @@ class SaleDetailSerializer(serializers.ModelSerializer):
             'modUs'
         )
 
-#
+
 # class CashLogSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = CashLog

@@ -6,6 +6,7 @@ from stores.models import StoreDic
 from stores.models import StoreLike
 
 class StoreSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Store
         fields = (

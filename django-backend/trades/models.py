@@ -72,7 +72,7 @@ class SaleDetail(models.Model):
 
     class Meta:
         ordering = ['saleDt', 'storeCd', 'billNo']
-#
+
 # class CashLog(models.Model):
 #     storeCd = models.CharField(max_length=10, default='00000')
 #     saleDt = models.CharField(max_length=8, default='00000000')

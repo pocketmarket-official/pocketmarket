@@ -17,7 +17,6 @@ class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
-
 class PointView(viewsets.ModelViewSet):
 
     serializer_class = PointSerializer

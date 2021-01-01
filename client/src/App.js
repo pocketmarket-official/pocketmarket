@@ -51,7 +51,7 @@ function App() {
         axios.defaults.baseURL = 'http://localhost:8000';
       } else if(STATE === 'dev') {
         axios.defaults.baseURL = 'http://13.124.90.138:8000';
-      } else if(STATE === 'production') {
+      } else if(STATE === 'prod') {
         axios.defaults.baseURL = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com';
       } else if(STATE === 'jh') {
         axios.defaults.baseURL = 'http://13.124.90.138:8000';

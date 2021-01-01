@@ -4,7 +4,6 @@ from reviews.models import ReviewLike
 from reviews.models import Reply
 
 
-
 class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:

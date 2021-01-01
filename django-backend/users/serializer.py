@@ -8,7 +8,6 @@ from users.models import Business
 from users.models import Question
 
 
-
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:

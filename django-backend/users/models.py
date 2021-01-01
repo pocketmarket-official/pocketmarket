@@ -15,10 +15,6 @@ class User(AbstractUser):
     bizYn = models.CharField(max_length=1, default='N')
     guestYn = models.CharField(max_length=1, default='N')
 
-
-
-    pass
-
 class Point(models.Model):
     """ Point Model Definition """
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, default=1)

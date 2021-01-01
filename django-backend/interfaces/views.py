@@ -21,7 +21,6 @@ from cprts.models import Relation
 from trades.models import SaleHeader
 from trades.models import SaleDetail
 from trades.models import CardLog
-
 from django.http import HttpResponse
 from django.http import JsonResponse
 

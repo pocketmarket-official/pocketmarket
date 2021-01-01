@@ -19,11 +19,9 @@ class ReviewLikeAdmin(admin.ModelAdmin):
 
     pass
 
-
 @admin.register(models.Reply)
 class ReplyAdmin(admin.ModelAdmin):
 
     """ Reply Admin """
 
     pass
-

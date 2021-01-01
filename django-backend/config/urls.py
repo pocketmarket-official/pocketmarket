@@ -108,5 +108,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('masterDown/', interface_views.MasterDownView, name='masterDown'),
     path('storeLike/', core_views.storeLike, name='storeLike'),
-    re_path(r'^(?:.*)?$', TemplateView.as_view(template_name="index.html"), name="index"),
+    re_path(r'^(?:.*)?$', TemplateView.as_view(template_name="index.html"), name="index"), # regex - everything else
 ]

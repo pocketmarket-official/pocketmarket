@@ -2,7 +2,6 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from datetime import datetime
 from time import gmtime, strftime
-
 from trades.models import SaleHeader
 from trades.serializer import SaleHeaderSerializer
 from trades.models import SaleDetail

@@ -12,7 +12,6 @@ from stores.serializer import StoreLikeSerializer
 from stores.models import StoreLike
 
 
-
 class StoreView(viewsets.ModelViewSet):
 
     serializer_class = StoreSerializer

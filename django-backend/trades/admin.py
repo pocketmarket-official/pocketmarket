@@ -20,7 +20,7 @@ class SaleDetailAdmin(admin.ModelAdmin):
 
     pass
 
-#
+
 # @admin.register(models.CashLog)
 # class CashLogAdmin(admin.ModelAdmin):
 #

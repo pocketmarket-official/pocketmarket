@@ -4,6 +4,7 @@ define items related models
 from django.db import models
 from django.utils import timezone
 
+
 class Master(models.Model):
     """ Master Model Definition """
     storeCd = models.CharField(max_length=10, null=True)

@@ -21,23 +21,19 @@ from stores.models import Store
 from time import localtime
 from time import strftime
 from users.models import User
-
 from lib.BootpayApi import BootpayApi
-
 from fcm_django.models import FCMDevice
-
 import firebase_admin
 from firebase_admin import credentials
-
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-# Create your views here.
-
 
 class KakaoException(Exception):
+
     pass
+
 
 def kakao_callback(request):
     ''' sign in and log in with kakao '''
@@ -47,7 +43,7 @@ def kakao_callback(request):
         client_secret = os.environ.get('KAKAO_SECRET')
         STATE = os.environ.get("STATE")
         if STATE == 'local':
-            redirect_uri = 'http://localhost:8000/login/kakao/callback/'  # URL EXCHANGE LOCAL
+            redirect_uri = 'http://localhost:8000/login/kakao/callback/'
         elif STATE == 'dev':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         elif STATE == 'production':
@@ -308,7 +304,7 @@ def trade(request):
         else:
             billNo = '0001'
 
-        ##definition for trade variables
+        # definition for trade variables
         # saleHeader
         headerTotQty = 0
         headerTotSaleAmt = 0.0
@@ -355,7 +351,7 @@ def trade(request):
                 context = 'itemCd = '+str(item['itemCd'])
                 target = Item.objects.get(itemCd=item['itemCd'])
                 itemId = target.id
-                #해당 제품이 품절되었으면
+                # 해당 제품이 품절되었으면
                 if target.remainCount == 0:
                     # bootpay accesstoken 받아오기
                     bootpayAcceessToken = bootpay.get_access_token()

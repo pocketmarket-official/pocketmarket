@@ -44,4 +44,3 @@ class Join(models.Model):
     insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=timezone.now)
     modUs = models.CharField(max_length=30, null=True)
-
