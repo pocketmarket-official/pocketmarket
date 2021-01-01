@@ -1,6 +1,6 @@
 import React, { useMemo, useRef } from "react";
 import cookie from 'react-cookies';
-import {cookieCheck_approveGuest} from "./CookieCheck"
+import {cookieCheck_approveGuest} from "../Components/js/CookieCheck"
 
 import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck";
