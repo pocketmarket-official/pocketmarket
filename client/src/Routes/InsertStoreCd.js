@@ -26,6 +26,8 @@ class InsertStoreCd extends React.Component{
         if(storeCd && fcmToken){
             let transData = {"storeCd":storeCd, "fcmToken":fcmToken};
             console.log(transData);
+            alert(storeCd);
+            alert(fcmToken);
 
             axios.post('/saveTokenStore/', transData)
                 .then((res)=>{
