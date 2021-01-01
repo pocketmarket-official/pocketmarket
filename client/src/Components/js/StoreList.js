@@ -64,7 +64,7 @@ class StoreList extends React.Component {
             ) : (
                 <>
                     {
-                        this.props.reviews !== undefined ?
+                        this.props.reviews.length !== 0 ?
                             this.props.reviews.map((review) => {
                                 let user = this.props.users.find((elt)=>{
                                     if(elt.id === review.user){
@@ -108,7 +108,7 @@ class StoreList extends React.Component {
                                     );
                                 })
                             :
-                            null
+                            <div className="review__empty">아직 리뷰가 하나도 없어요..</div>
                     }
                 </>
             )
