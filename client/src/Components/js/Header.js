@@ -8,13 +8,6 @@ import bi from '../../assets/common/BI.png';
 function Header() {
     return (
             <div className="header__box">
-                {/*{this.state.user.guestYn === 'Y'?*/}
-                {/*    null*/}
-                {/*    :*/}
-                {/*    <>*/}
-                {/*        <Link to="/mypage"><img className="header__menu" src={btnMenuImg} alt="hamburger button" /></Link>*/}
-                {/*    </>*/}
-                {/*}*/}
                 <Link to="/mypage" className="mypagelink"><img className="header__menu" id="header__menu" src={btnMenuImg} alt="hamburger button" /></Link>
                 <Link to="/index"><img className="header__bi" src={bi} alt="logo" /></Link>
                 <div className="fake"></div>

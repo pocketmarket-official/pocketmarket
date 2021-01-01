@@ -148,10 +148,94 @@ class OrderHistory extends React.Component {
                         e.stopPropagation();
                     }}>
                         <div className="modal__header__bill">
-                            <img src={bill_icon}/>영수증
+                            <img src={bill_icon}/>구매내역
                         </div>
                         <div className="modal__bill">
-                            <img src={bill}/>
+                            <div className="result__item">
+                                <div>가게이름</div>
+                                <div className="result__detail">
+                                    <div className="result__phone">
+                                        <div className="phone__phone">Tel:</div>
+                                        <div>01012345678</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="result__item">
+                                <div className="result__name">
+                                    <div className="name__name">대표자:</div>
+                                    <div>마진형</div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div className="result__item">
+                                <div>판매일자</div>
+                                <div className="result__detail">
+                                    <div className="result__posno">
+                                        <div className="posno__posno">POSNO:</div>
+                                        <div>01</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="result__item">
+                                <div className="result__receipt">
+                                    <div className="receipt__receipt">영수증번호:</div>
+                                    <div>001</div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div className="result__items">
+                                <div className="item__list">
+                                    <div>품목명</div>
+                                    <div>단가</div>
+                                    <div>수량</div>
+                                    <div>금액</div>
+                                </div>
+                            {/* 여기서 for문 돌려가며 데이터 뽑으면 됨 */}
+                                <div className="item__list">
+                                    <div>아이스 망고</div>
+                                    <div>2500원</div>
+                                    <div>2</div>
+                                    <div>5000원</div>
+                                </div>
+                                <div className="item__list">
+                                    <div>아이스 망고</div>
+                                    <div>2500원</div>
+                                    <div>2</div>
+                                    <div>5000원</div>
+                                </div>
+                                <div className="item__list">
+                                    <div>아이스 망고</div>
+                                    <div>2500원</div>
+                                    <div>2</div>
+                                    <div>5000원</div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div className="result__item">
+                                <div>카드사</div>
+                                <div>신한</div>
+                            </div>
+                            <div className="result__item">
+                                <div>카드번호</div>
+                                <div>52728961****4089</div>
+                            </div>
+                            <div className="result__item">
+                                <div>승인번호</div>
+                                <div>1609486156428</div>
+                            </div>
+                            <div className="result__item">
+                                <div>결제금액</div>
+                                <div>5500원</div>
+                            </div>
+                            <div className="result__item">
+                                <div>승인번호</div>
+                                <div>1609486156428</div>
+                            </div>
+                            <hr />
+                            <div className="result__item last">
+                                <div>합계</div>
+                                <div>5500원</div>
+                            </div>
                         </div>
 
                         <div className="modal__close__btn" id="modal__close__btn" onClick={() =>{

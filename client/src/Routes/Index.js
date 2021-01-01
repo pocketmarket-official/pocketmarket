@@ -53,7 +53,6 @@ function Index() {
 
     // const {from} = location.state || {from: {pathname: "/index"}};
     // if (authenticated) return <Redirect to={from}/>;
-
     return (
         <>
             <Header/>
