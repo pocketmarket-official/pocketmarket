@@ -10,6 +10,7 @@ import base from '../assets/store_fastorder/store_base.jpg';
 import {cookieCheck_rejectGuest} from '../Components/js/CookieCheck.js'
 import axios from 'axios';
 import defaultImg from '../assets/main/grayBI.png';
+import {Link} from "react-router-dom";
 
 class Collections extends React.Component {
     constructor(props) {
@@ -168,39 +169,55 @@ class Collections extends React.Component {
                         </div>
                         <div className="fastorder__store">
                             {
-                                this.state.stores.map((elt) => {
-                                    if(elt.imgLogoUrl===undefined || elt.imgLogoUrl===null){
-                                        elt.imgLogoUrl = defaultImg
+                                this.state.stores.map((data) => {
+                                    if(data.imgLogoUrl===undefined || data.imgLogoUrl===null){
+                                        data.imgLogoUrl = defaultImg
                                     }
-                                        if (elt.defaultYn === 'Y') {
+                                        if (data.defaultYn === 'Y') {
                                             return(
                                                 <>
-                                                <div className="store__grid">
-                                                    <img className="store__image" src={defaultImg}/>
-                                                    {/*<img className="mark" src={mark}/>*/}
-                                                    {/*<img className="none" src={emptymark}/>*/}
-                                                </div>
+                                                    <Link to={{
+                                                        pathname: `/main/store/${data.id}`,
+                                                        state: {data}
+                                                    }}>
+
+                                                        <div className="store__grid">
+                                                            <img className="store__image" src={defaultImg}/>
+                                                            {/*<img className="mark" src={mark}/>*/}
+                                                            {/*<img className="none" src={emptymark}/>*/}
+                                                        </div>
+                                                    </Link>
                                                 </>
                                             )
                                         } else {
-                                            if (elt.grayYn === 'Y') {
+                                            if (data.grayYn === 'Y') {
                                                 return(
                                                     <>
-                                                    <div className="store__grid nice">
-                                                        <img className="store__image" src={elt.imgLogoUrl}/>
-                                                        {/*<img className="mark" src={mark}/>*/}
-                                                        {/*<img className="none" src={emptymark}/>*/}
-                                                    </div>
+                                                        <Link to={{
+                                                            pathname: `/main/store/${data.id}`,
+                                                            state: {data}
+                                                        }}>
+                                                            <div className="store__grid nice">
+                                                                <img className="store__image" src={data.imgLogoUrl}/>
+                                                                {/*<img className="mark" src={mark}/>*/}
+                                                                {/*<img className="none" src={emptymark}/>*/}
+                                                            </div>
+                                                        </Link>
                                                     </>
                                                     )
                                             } else {
                                                 return(
                                                     <>
-                                                    <div className="store__grid visit">
-                                                        <img className="store__image" src={elt.imgLogoUrl}/>
-                                                        {/*<img className="mark" src={mark}/>*/}
-                                                        {/*<img className="none" src={emptymark}/>*/}
-                                                    </div>
+                                                        <Link to={{
+                                                            pathname: `/main/store/${data.id}`,
+                                                            state: {data}
+                                                        }}>
+                                                            <div className="store__grid visit">
+                                                                <img className="store__image" src={data.imgLogoUrl}/>
+                                                                {/*<img className="mark" src={mark}/>*/}
+                                                                {/*<img className="none" src={emptymark}/>*/}
+                                                            </div>
+                                                        </Link>
                                                     </>
                                                     )
                                             }
