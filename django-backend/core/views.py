@@ -144,35 +144,17 @@ def saveToken(request):
 @csrf_exempt
 def saveTokenStore(request):
     try:
-        print("==1")
-        print(json.loads(request.body)['storeCd'])
-
         storeCd = json.loads(request.body)['storeCd']
-        print("==2")
-        print(storeCd)
-        print("==3")
-        print(json.loads(request.body)['fcmToken'])
         token = json.loads(request.body)['fcmToken']
-        print("==4")
-        print(token)
-        print("==42")
-        print(json.loads(request.body)['userId'])
         userId = json.loads(request.body)['userId']
         user = User.objects.get(id=userId)
-        print("==43")
-        print(user)
         store = Store.objects.get(storeCd=storeCd)
-        print("==5")
-        print(store)
 
         iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
                                                         defaults={
                                                             'user': user,
                                                             'registration_id': token
                                                         })
-        print("==6")
-        print(iosToken)
-
         store.iosToken = iosToken.registration_id
 
         store.save()
