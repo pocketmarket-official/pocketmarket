@@ -25,10 +25,16 @@
     border: 1px solid black;
     align-items: center;
 
+
+
     div {
       font-size: 28px;
       &:nth-child(1) {
         width: 50%;
+        .header__back {
+          width: 38px;
+          height: 38px;
+        }
       }
 
       &:nth-child(2) {
