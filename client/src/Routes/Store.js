@@ -105,7 +105,7 @@ class StoreView extends React.Component {
                     <div className="storeGrid__content">
                         {/*<div className="store__store">*/}
                             <div className="storeGrid__image">
-                                <img src={bg} alt="big store img" />
+                                <img src={this.props.location.state.data.imgLogoUrl} alt="big store img" />
                             </div>
                             <div className="storeGrid__detail">
                                 <div className="storeGrid__title">
