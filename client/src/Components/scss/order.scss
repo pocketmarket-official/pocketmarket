@@ -229,6 +229,9 @@
           margin-left:6px;
           margin-top: 2px;
           background-image: linear-gradient(to top, rgba(65, 65, 65, 1), #010101);
+          .reset__image:active {
+            transform: scale(0.9);
+          }
           .reset__image {
             font-size: 17px;
             font-weight: bold;
