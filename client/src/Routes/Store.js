@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import StoreList from '../Components/js/StoreList';
-import bg from '../assets/store_grid/grid_top_bg.jpg';
 import axios from "axios";
 
 
