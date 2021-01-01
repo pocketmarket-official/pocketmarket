@@ -21,9 +21,11 @@ class ReviewJSX extends React.Component {
     }
 
     onChangeReviewItem = (e) => {
+        console.log(this.state.paginationElem.current.children.length)
         for (let item of this.state.paginationElem.current.children) {
             item.classList.remove('active');
         }
+        console.log(this.state.paginationElem.current.children)
         this.state.paginationElem.current.children[e.index].classList.add('active');
     };
 
@@ -84,28 +86,28 @@ class ReviewJSX extends React.Component {
                             </Flicking>
                             <div ref={this.state.paginationElem} className="pagination">
                                 <div className="pagination-item active"/>
-                                {this.state.review.img2?
+                                {this.state.review.img2 !== null ?
                                     <>
                                         <div className="pagination-item"/>
                                     </>
                                     :
                                     null
                                 }
-                                {this.state.review.img3?
+                                {this.state.review.img3 !== null ?
                                     <>
                                         <div className="pagination-item"/>
                                     </>
                                     :
                                     null
                                 }
-                                {this.state.review.img4?
+                                {this.state.review.img4 !== null ?
                                     <>
                                         <div className="pagination-item"/>
                                     </>
                                     :
                                     null
                                 }
-                                {this.state.review.img5?
+                                {this.state.review.img5 !== null ?
                                     <>
                                         <div className="pagination-item"/>
                                     </>
