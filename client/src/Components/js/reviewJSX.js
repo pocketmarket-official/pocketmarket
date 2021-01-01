@@ -52,11 +52,35 @@ class ReviewJSX extends React.Component {
                                       infinite={true}
                                       onChange={this.onChangeReviewItem}
                                       className={"image"}>
-                                <img src={this.state.review.img1 || defaultImg}/>
-                                <img src={this.state.review.img2 || defaultImg}/>
-                                <img src={this.state.review.img3 || defaultImg}/>
-                                <img src={this.state.review.img4 || defaultImg}/>
-                                <img src={this.state.review.img5 || defaultImg}/>
+                                <img src={this.state.review.img1}/>
+                                {this.state.review.img2 === undefined?
+                                null
+                                :
+                                <>
+                                    <img src={this.state.review.img2}/>
+                                </>
+                                }
+                                {this.state.review.img3 === undefined?
+                                null
+                                :
+                                <>
+                                    <img src={this.state.review.img3}/>
+                                </>
+                                }
+                                {this.state.review.img4 === undefined?
+                                null
+                                :
+                                <>
+                                    <img src={this.state.review.img4}/>
+                                </>
+                                }
+                                {this.state.review.img5 === undefined?
+                                null
+                                :
+                                <>
+                                    <img src={this.state.review.img5}/>
+                                </>
+                                }
                             </Flicking>
                             <div ref={this.state.paginationElem} className="pagination">
                                 <div className="pagination-item active"/>
@@ -95,7 +119,7 @@ class ReviewJSX extends React.Component {
                         <div className="review_container">
                             <div className="review__header">
                                 <div className="review__user">
-                                    <div className="user__avatar"><img className="image" src={this.state.reviewUser.profileImage || defaultImg}/>
+                                    <div className="user__avatar"><img className="image user__evatar" src={this.state.reviewUser.profileImage || defaultImg}/>
                                     </div>
                                     <div className="user__name">{this.state.reviewUser.profileName}</div>
                                 </div>
