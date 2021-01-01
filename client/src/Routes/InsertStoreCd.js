@@ -2,6 +2,7 @@ import React, { useMemo, useRef } from "react";
 import cookie from 'react-cookies';
 
 import axios from "axios";
+import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck";
 
 class InsertStoreCd extends React.Component{
     constructor(props){
@@ -10,6 +11,7 @@ class InsertStoreCd extends React.Component{
     }
 
     handleSubmit(){
+
         const storeCd = document.getElementById("storeCd").value;
         const expires = new Date();
         expires.setDate(expires.getDate() + 1);
@@ -22,17 +24,27 @@ class InsertStoreCd extends React.Component{
         });
 
         let fcmToken = cookie.load("fcmToken");
+        let user_email = cookieCheck_rejectGuest();
+        axios.get("api/users_user/")
+            .then ((res)=>{
+                let userId = res.data.find((elt) => {
+                    if (elt.email === user_email) {
+                        return true;
+                    }
+                }).id;
+                if(storeCd && fcmToken){
+                    let transData = {"storeCd":storeCd, "fcmToken":fcmToken, "userId":userId};
 
-        if(storeCd && fcmToken){
-            let transData = {"storeCd":storeCd, "fcmToken":fcmToken};
+                    axios.post('/saveTokenStore/', transData)
+                        .then((res)=>{
+                            document.location.href='/kds/main';
+                        });
+                } else {
+                    document.location.href = '/kds/main';
+                }
+            });
 
-            axios.post('/saveTokenStore/', transData)
-                .then((res)=>{
-                    document.location.href='/kds/main';
-                });
-        } else {
-            document.location.href = '/kds/main';
-        }
+
 
     }
 
