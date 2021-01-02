@@ -40,6 +40,7 @@ class ReviewJSX extends React.Component {
     }
 
     render() {
+        console.log(this.state.review)
         return(
             <>
                 <div className="review">
@@ -49,32 +50,32 @@ class ReviewJSX extends React.Component {
                                       hanger={0}
                                       anchor={0}
                                       zIndex={0}
-                                      infinite={true}
+                                      infinite={false}
                                       onChange={this.onChangeReviewItem}
                                       className={"image"}>
                                 <img src={this.state.review.img1}/>
-                                {this.state.review.img2 === undefined?
+                                {this.state.review.img2 === null?
                                 null
                                 :
                                 <>
                                     <img src={this.state.review.img2}/>
                                 </>
                                 }
-                                {this.state.review.img3 === undefined?
+                                {this.state.review.img3 === null?
                                 null
                                 :
                                 <>
                                     <img src={this.state.review.img3}/>
                                 </>
                                 }
-                                {this.state.review.img4 === undefined?
+                                {this.state.review.img4 === null?
                                 null
                                 :
                                 <>
                                     <img src={this.state.review.img4}/>
                                 </>
                                 }
-                                {this.state.review.img5 === undefined?
+                                {this.state.review.img5 === null?
                                 null
                                 :
                                 <>
@@ -84,28 +85,28 @@ class ReviewJSX extends React.Component {
                             </Flicking>
                             <div ref={this.state.paginationElem} className="pagination">
                                 <div className="pagination-item active"/>
-                                {this.state.review.img2?
+                                {this.state.review.img2 !== null ?
                                     <>
                                         <div className="pagination-item"/>
                                     </>
                                     :
                                     null
                                 }
-                                {this.state.review.img3?
+                                {this.state.review.img3 !== null ?
                                     <>
                                         <div className="pagination-item"/>
                                     </>
                                     :
                                     null
                                 }
-                                {this.state.review.img4?
+                                {this.state.review.img4 !== null ?
                                     <>
                                         <div className="pagination-item"/>
                                     </>
                                     :
                                     null
                                 }
-                                {this.state.review.img5?
+                                {this.state.review.img5 !== null ?
                                     <>
                                         <div className="pagination-item"/>
                                     </>
