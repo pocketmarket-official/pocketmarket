@@ -80,7 +80,13 @@ class StoreList extends React.Component {
                                                 <div className="storeList__grid">
                                                     <div className="storeList__box">
                                                         <div className="storeList_publisherBox">
-                                                            <div className="storeList__photo"><img src={review.img1}/></div>
+                                                            {
+                                                                (review.img2 === null || review.img2 === '' || review.img2 === undefined) ?
+                                                                    <img src={review.img1}/> //추가이미지 없는애
+                                                                    :
+                                                                    <div className="storeList__photo"><img src={review.img1}/></div>//추가이미지 있는애
+                                                            }
+
                                                             <div className="box__box">
                                                                 <div className="storeList__name">{user.profileName}</div>
                                                                 {/*<div className="storeList__likes"><p className="listLikesButton">♥</p>53</div>*/}
