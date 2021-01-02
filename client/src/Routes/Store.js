@@ -58,7 +58,6 @@ class StoreView extends React.Component {
 
     handlePageRender() {
         if(this.state.current === 0) {
-            console.log(this.state.reviews)
             return (
             <>
                 <div className="store__review__grid" id="review__container">
@@ -74,7 +73,7 @@ class StoreView extends React.Component {
                                                     state: {review: review},
                                                 }}>
                                                     {
-                                                        (review.img2 === null || review.img2 === '') ?
+                                                        (review.img2 === null || review.img2 === '' || review.img2 === undefined) ?
                                                             <div><img src={review.img1} alt="review" /></div> //추가이미지 없는애
                                                             :
                                                             <div className="photo"><img src={review.img1} alt="reviews" /></div> //추가이미지 있는애
