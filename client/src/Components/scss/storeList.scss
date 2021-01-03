@@ -20,6 +20,16 @@
           background-color: #ffffff;
           border-radius: 15px;
 
+          .storeList__photo__no {
+            width: 135px;
+            float: left;
+            position: relative;
+            height: 100%;
+            padding: 1px;
+            border-radius: 15px;
+            margin: 5px 5px;
+          }
+
           .storeList__photo{
               width: 135px;
               float: left;
@@ -42,6 +52,7 @@
                   height: 15px;
                 }
               }
+
 
               img{
                 background-repeat: no-repeat;

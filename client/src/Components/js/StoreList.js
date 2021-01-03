@@ -82,7 +82,7 @@ class StoreList extends React.Component {
                                                         <div className="storeList_publisherBox">
                                                             {
                                                                 (review.img2 === null || review.img2 === '' || review.img2 === undefined) ?
-                                                                    <img src={review.img1}/> //추가이미지 없는애
+                                                                    <div className="storeList__photo__no"><img src={review.img1}/></div> //추가이미지 없는애
                                                                     :
                                                                     <div className="storeList__photo"><img src={review.img1}/></div>//추가이미지 있는애
                                                             }
