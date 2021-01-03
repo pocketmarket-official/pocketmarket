@@ -161,7 +161,7 @@ class KDSMain extends React.Component{
                 <div className="header">
 
                     <div>
-                        <img className="header__back"  onClick={() => {this.props.history.go(-1);}} src={btnBack}/>
+                        <img className="header__back"  onClick={() => {window.location.href = "/mypage"}} src={btnBack}/>
                         <span>{this.state.store.storeName}</span>
                     </div>
                     <div>

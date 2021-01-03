@@ -47,6 +47,7 @@ class OrderComplete extends React.Component{
                                     return(
                                     <>
                                         {elt.itemName}{elt.qty}개
+                                        <br />
                                     </>
                                 )
                                 }
