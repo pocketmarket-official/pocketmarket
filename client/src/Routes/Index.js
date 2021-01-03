@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../Components/js/Header";
+import HeaderGuest from "../Components/js/HeaderGuest";
 import Footer from "../Components/js/Footer";
 import Flicking from "@egjs/react-flicking";
 import { AutoPlay } from "@egjs/flicking-plugins";
@@ -46,12 +47,12 @@ function Index() {
         });
     }
 
-    if(user){
+/*    if(user){
         if(user.guestYn === 'Y'){
             document.getElementById('header__menu').classList.add("hide");
         }
     }
-
+*/
     console.log(user);
 
     function onChangeJumboItem(e) {
@@ -65,7 +66,12 @@ function Index() {
     // if (authenticated) return <Redirect to={from}/>;
     return (
         <>
-            <Header/>
+            {
+                user !== null && user.guestYn === 'Y' ?
+                    <HeaderGuest />
+                    :
+                    <Header />
+            }
             <div className="index">
                 <Flicking classPrefix="jumbo"
                           hanger={0}
