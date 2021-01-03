@@ -3,6 +3,7 @@ import axios from "axios";
 
 
 function pay(sellItemList, price, storeName, storeId, userId) {
+    window.BootPay.setDevice('IOS');
     BootPay.request({
         // price: trInfo.Price,
         price: price,
