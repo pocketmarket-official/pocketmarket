@@ -10,6 +10,7 @@ import {logout} from '../Components/js/CookieCheck.js'
 
 import btnSearchImg from '../assets/common/btn_sceach.png';
 import Toast from "../Components/js/Toast";
+import Pull from 'pulljs';
 
 class Main extends React.Component {
     constructor(props) {
@@ -190,6 +191,30 @@ class Main extends React.Component {
                         this.setState({user: user, orderCount: i});
                     });
             });
+
+        Pull.init({
+            distThreshold: 60, // in ms
+            distMax: 120,
+            distReload: 50,
+            bodyOffset: 20,
+            mainElement: 'body',
+            triggerElement: 'body',
+            ptrElement: '.ptr',
+            classPrefix: 'ptr--',
+            cssProp: 'min-height',
+            containerClassName: '',
+            boxClassName: '',
+            contentClassName: '',
+            textClassName: '',
+            instructionsPullToRefresh: 'Pull down to refresh',
+            instructionsReleaseToRefresh: '당겨서 새로고침!',
+            instructionsRefreshing: 'Refreshing',
+            refreshTimeout: 500,
+            ptrOnDesktop: false, // enable desktop mouse functionality
+            onInit: () => {},
+            onRefresh: () => window.location.reload(),
+            resistanceFunction: t => Math.min(1, t / 2.5),
+        });
     }
 
     render() {

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../Components/js/Header";
 import Footer from "../Components/js/Footer";
@@ -26,23 +26,33 @@ function Index() {
     }, []);
 
     let user_email = cookieCheck_approveGuest();
-    let user = '';
-    axios.get("/api/users_user/")
-        .then((res) => {
-            user = res.data.find((elt) => {
-                if (elt.email === user_email) {
-                    return true;
-                }
-            });
+    let [user, setUser] = useState(null);
 
-            if(user){
-                if(user.guestYn === 'Y'){
-                    document.getElementById('header__menu').classList.add("hide");
-                }
-            } else {
-                logout()
-            }
+    function getUser() {
+        return axios.get("/api/users_user/")
+                .then((res) => {
+                    let _user = res.data.find((elt) => {
+                        if(elt.email === user_email) {
+                            return true;
+                        }
+                    });
+                    return _user;
+                })
+    }
+
+    if(!user) {
+        getUser().then((res) => {
+                setUser(res);
         });
+    }
+
+    if(user){
+        if(user.guestYn === 'Y'){
+            document.getElementById('header__menu').classList.add("hide");
+        }
+    }
+
+    console.log(user);
 
     function onChangeJumboItem(e) {
         for (let item of paginationElem.current.children) {
@@ -105,7 +115,7 @@ function Index() {
                 </div>
             </div>
             <Footer />
-            {user.guestYn === 'Y'?
+            {user !== null && user.guestYn === 'Y'?
                 <>
                     <Toast message="포켓도감, 주문목록 보기는 로그인 하셔야만 이용할 수 있으세요 :)" vanishOnClick={true} turn="on" />
                 </>

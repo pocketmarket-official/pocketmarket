@@ -99,7 +99,7 @@
       .orderhistory__detail{
         display: flex;
         align-items: center;
-        width: 100%;
+        width: 90%;
         height: 35px;
         border-radius: 5px;
         font-size: 14px;
@@ -112,6 +112,10 @@
         .orderhistory__price{
           margin: auto;
         }
+      }
+      .orderhistory__btn_link {
+        margin-right: 5px;
+        width: 10%;
       }
       .orderhistory__btn, .orderhistory__btn__review  {
         border-radius: 5px;
@@ -142,12 +146,12 @@
           color: #a2a2a2;
         }
         &.rebuy{
-          width: 13%;
+          width: 100%;
           background: #3d3d3d;
           img{
             margin: auto;
             width: 21px;
-            height: 21px;
+            height: 24px;
           }
         }
       }

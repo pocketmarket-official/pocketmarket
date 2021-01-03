@@ -30,9 +30,6 @@ class Toast extends PureComponent {
             turn: flag2,
         }
     }
-    shouldComponentUpdate() {
-        return false;
-    }
 
     componentDidMount() {
         let elt = document.getElementById("toast");
