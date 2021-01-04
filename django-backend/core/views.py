@@ -124,15 +124,37 @@ def kakao_callback(request):
 @csrf_exempt
 def saveToken(request):
     try:
+        # variable for error response
+        context = ''
+        tradeErrorCode = '200'
+        tradeErrorMsg = ''
+        userId = ''
+
+        tradeErrorCode = '201'
+        tradeErrorMsg = "request user_email doesn't exist"
         user_email = json.loads(request.body)['user_email']
+
+        tradeErrorCode = '202'
+        tradeErrorMsg = "request token doesn't exist"
         token = json.loads(request.body)['fcmToken']
+
+        tradeErrorCode = '203'
+        tradeErrorMsg = "user object doesn't exist"
         user = User.objects.get(email=user_email)
+
+        tradeErrorCode = '204'
+        tradeErrorMsg = "ios token get_or_create failed"
+        context = 'token=' + token + ' user=' + str(user.id)
         iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
                                                         defaults={
                                                             'user': user,
                                                             'registration_id': token
                                                         })
         user.iosToken = iosToken.registration_id
+
+        tradeErrorCode = '205'
+        tradeErrorMsg = "ios token update failed"
+        context = 'token=' + token + ' user=' + str(user.id)
         user.save()
 
         response = JsonResponse('200')
@@ -140,16 +162,45 @@ def saveToken(request):
 
     except Exception as ex:
         print(ex)
+        ErrorLog.objects.create(storeId='', saleDt='', posNo='',
+                                billNo='', userId=userId, itemId='',
+                                tradeErrorCode=tradeErrorCode, tradeErrorMsg=tradeErrorMsg,
+                                exception=str(ex), context=context)
 
 @csrf_exempt
+#TODO : Error moudle 따로 빼아함
 def saveTokenStore(request):
     try:
+        # variable for error response
+        context = ''
+        tradeErrorCode = '300'
+        tradeErrorMsg = ''
+        userId=''
+        storeCd=''
+
+        tradeErrorCode = '301'
+        tradeErrorMsg = "request storeCd doesn't exist"
         storeCd = json.loads(request.body)['storeCd']
+
+        tradeErrorCode = '302'
+        tradeErrorMsg = "request fcmToken doesn't exist"
         token = json.loads(request.body)['fcmToken']
+
+        tradeErrorCode = '303'
+        tradeErrorMsg = "request userId doesn't exist"
         userId = json.loads(request.body)['userId']
+
+        tradeErrorCode = '304'
+        tradeErrorMsg = "user object doesn't exist"
         user = User.objects.get(id=userId)
+
+        tradeErrorCode = '305'
+        tradeErrorMsg = "store object doesn't exist"
         store = Store.objects.get(storeCd=storeCd)
 
+        tradeErrorCode = '306'
+        tradeErrorMsg = "ios token get_or_create failed"
+        context = 'token='+token+' user='+str(user.id)
         iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
                                                         defaults={
                                                             'user': user,
@@ -157,12 +208,19 @@ def saveTokenStore(request):
                                                         })
         store.iosToken = iosToken.registration_id
 
+        tradeErrorCode = '307'
+        tradeErrorMsg = "ios token update failed"
+        context = 'token=' + token + ' user=' + str(user.id)
         store.save()
 
         return HttpResponse('success')
 
     except Exception as ex:
         print(ex)
+        ErrorLog.objects.create(storeId=storeCd, saleDt='', posNo='',
+                                billNo='', userId=userId, itemId='',
+                                tradeErrorCode=tradeErrorCode, tradeErrorMsg=tradeErrorMsg,
+                                exception=str(ex), context=context)
 
 
 @csrf_exempt
