@@ -154,7 +154,7 @@ def saveToken(request):
 
         tradeErrorCode = '205'
         tradeErrorMsg = "ios token update failed"
-        context = 'iosToken='+str(iosToken.id) + ' token=' + token + ' user=' + str(user.id)
+        context = 'fcmToken='+str(iosToken.id) + ' token=' + iosToken.registration_id + ' user=' + str(user.id)
         user.save()
 
         response = JsonResponse('200')
@@ -210,7 +210,7 @@ def saveTokenStore(request):
 
         tradeErrorCode = '307'
         tradeErrorMsg = "ios token update failed"
-        context = 'iosToken='+str(iosToken.id) + 'token=' + token + ' user=' + str(user.id)
+        context = 'fcmToken='+str(iosToken.id) + 'token=' + iosToken.registration_id + ' store=' + str(store.id)
         store.save()
 
         return HttpResponse('success')
