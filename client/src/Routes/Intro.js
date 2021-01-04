@@ -18,34 +18,6 @@ window.makeFcmTokenCookie = (function (token) {
     });
 });
 
-
-const applicationId = process.env.REACT_APPLE_APP_ID;
-
-window.registerAppId = (function () {
-    console.log("==1==");
-    console.log(applicationId);
-    // window.BootPay.setApplicationId(applicationId);
-});
-
-window.registerAppIdDemo = (function () {
-    console.log("==2==");
-    console.log(applicationId);
-    // window.setApplicationId(applicationId);
-});
-
-window.setDevice = (function () {
-    console.log("==3==");
-    console.log(applicationId);
-    // window.BootPay.setDevice('IOS');
-});
-
-window.startTrace = (function () {
-    console.log("==4==");
-    console.log(applicationId);
-    // window.BootPay.startTrace();
-});
-
-
 function Intro({authenticated, location}) {
     const [playingVideo, setPlayingVideo] = useState(true);
 
