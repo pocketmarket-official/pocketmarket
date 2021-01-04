@@ -143,7 +143,7 @@ def saveToken(request):
         user = User.objects.get(email=user_email)
 
         tradeErrorCode = '204'
-        tradeErrorMsg = "ios token get_or_create failed"
+        tradeErrorMsg = "user ios token get_or_create failed"
         context = 'token=' + token + ' user=' + str(user.id)
         iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
                                                         defaults={
@@ -151,10 +151,13 @@ def saveToken(request):
                                                             'registration_id': token
                                                         })
         user.iosToken = iosToken.registration_id
+        print(iosToken)
+        print(user)
+        print(user.iosToken)
 
         tradeErrorCode = '205'
-        tradeErrorMsg = "ios token update failed"
-        # context = 'fcmToken='+str(iosToken.id) + ' token=' + iosToken.registration_id + ' user=' + str(user.id)
+        tradeErrorMsg = "user ios token update failed"
+        context = 'fcmToken='+str(iosToken.id) + ' token=' + iosToken.registration_id + ' user=' + str(user.id)
         user.save()
 
         response = JsonResponse('200')
@@ -199,7 +202,7 @@ def saveTokenStore(request):
         store = Store.objects.get(storeCd=storeCd)
 
         tradeErrorCode = '306'
-        tradeErrorMsg = "ios token get_or_create failed"
+        tradeErrorMsg = "store ios token get_or_create failed"
         context = 'token='+token+' user='+str(user.id)
         iosToken, flag = FCMDevice.objects.get_or_create(registration_id=token,
                                                         defaults={
@@ -209,7 +212,7 @@ def saveTokenStore(request):
         store.iosToken = iosToken.registration_id
 
         tradeErrorCode = '307'
-        tradeErrorMsg = "ios token update failed"
+        tradeErrorMsg = "store ios token update failed"
         context = 'fcmToken='+str(iosToken.id) + 'token=' + iosToken.registration_id + ' store=' + str(store.id)
         store.save()
 
