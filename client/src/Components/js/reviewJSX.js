@@ -40,11 +40,18 @@ class ReviewJSX extends React.Component {
     }
 
     render() {
-        console.log(this.state.review)
         return(
             <>
                 <div className="review">
                     <div className="review__list">
+                        <div className="review__header">
+                            <div className="review__user">
+                                <div className="user__avatar"><img className="image user__evatar" src={this.state.reviewUser.profileImage || defaultImg}/>
+                                </div>
+                                <div className="user__name">{this.state.reviewUser.profileName}</div>
+                            </div>
+                        </div>
+                        <div className="bar"></div>
                         <div className="image__container">
                             <Flicking classPrefix="jumbo"
                                       hanger={0}
@@ -83,6 +90,7 @@ class ReviewJSX extends React.Component {
                                 </>
                                 }
                             </Flicking>
+                            <div className="bar"></div>
                             <div ref={this.state.paginationElem} className="pagination">
                                 <div className="pagination-item active"/>
                                 {this.state.review.img2 !== null ?
@@ -115,26 +123,12 @@ class ReviewJSX extends React.Component {
                                 }
                             </div>
                         </div>
-
-
                         <div className="review_container">
-                            <div className="review__header">
-                                <div className="review__user">
-                                    <div className="user__avatar"><img className="image user__evatar" src={this.state.reviewUser.profileImage || defaultImg}/>
-                                    </div>
-                                    <div className="user__name">{this.state.reviewUser.profileName}</div>
-                                </div>
-
-                                {/*<button className="review__like"><p>♥</p> {data.like_count}</button>*/}
-                            </div>
-
-                            {/*<div className="review__order">*/}
-                            {/*    {data.id} {data.order_date} {data.order_list}*/}
-                            {/*</div>*/}
+                            <button className="review__like"><p>♥ 1</p></button>
+                            {/*<div className="review__order">
+                                {data.id} {data.order_date} {data.order_list}
+                            </div>*/}
                             <div className="review__review">{this.state.review.context}</div>
-                            <div>
-                                <div className="bar"></div>
-                            </div>
                             {/*<button id="review__more" onClick={() => {*/}
                             {/*    let i = data.id;*/}
                             {/*    const elt = document.getElementById(i);*/}

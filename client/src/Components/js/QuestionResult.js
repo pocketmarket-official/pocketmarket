@@ -4,7 +4,7 @@ import React from 'react';
 class QuestionResult extends React.Component {
     render() {
         let result = this.props.result;
-
+        console.log(result);
         return (
             result.map((data) => {
                 let imgFlag;
@@ -15,7 +15,7 @@ class QuestionResult extends React.Component {
                 }
                 return (
                     <>
-                        <div className="result__date">{data.date}</div>
+                        <div className="result__date">{data.questionDate}</div>
 
                         <div className="result__question">
                             <div className="result__text Q">Q<p>문의내용</p></div>

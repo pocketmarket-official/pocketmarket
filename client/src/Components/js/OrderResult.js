@@ -38,7 +38,7 @@ class OrderResult extends React.Component {
                     if (data.reviewYn == "N") {
                         return (
                             <>
-                                <div className="orderhistory__date">{data.date}</div>
+                                <div className="orderhistory__date">{data.saleDt}</div>
 
                                 <div className="orderhistory__content" id={contentId}>
 
@@ -65,13 +65,12 @@ class OrderResult extends React.Component {
                                         </Link>
                                     </button>
                                 </div>
-
                             </>
                         );
                     } else {
                         return (
                             <>
-                                <div className="orderhistory__date">{data.date}</div>
+                                <div className="orderhistory__date">{data.saleDt}</div>
 
                                 <div className="orderhistory__content" id={contentId}>
 

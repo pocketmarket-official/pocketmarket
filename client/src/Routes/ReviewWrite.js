@@ -13,7 +13,6 @@ class ReviewWrite extends React.Component {
         this.getFormatDate = this.getFormatDate.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
 
-        console.log(this.props.location.state.matched);
         let billNo = this.props.location.state.matched.billNo || null;
         let saleDt = this.props.location.state.matched.saleDt || null;
         let storeId = this.props.location.state.matched.storeId || null;
