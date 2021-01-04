@@ -1,45 +1,9 @@
 import BootPay from "bootpay-js";
 import axios from "axios";
 
-function getCookie(cookie_name) {
-  var x, y;
-  var val = document.cookie.split(';');
-
-  for (var i = 0; i < val.length; i++) {
-    x = val[i].substr(0, val[i].indexOf('='));
-    y = val[i].substr(val[i].indexOf('=') + 1);
-    x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
-    if (x == cookie_name) {
-      return unescape(y); // unescape로 디코딩 후 값 리턴
-    }
-  }
-}
-
-function pay(sellItemList, price, storeName, storeId, userId) {
-    let applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
-
-    let device = getCookie('device');
-    console.log(device);
-    if(device){
-        console.log("456");
-        let meta = document.createElement('meta');
-        meta.name='bootpay-application-id';
-        meta.content=applicationId;
-        document.getElementsByTagName('head')[0].appendChild(meta);
-
-        let script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = "https://cdn.bootpay.co.kr/js/bootpay-2.1.1.min.js";
-        document.getElementsByTagName('head')[0].appendChild(script);
-
-
-        applicationId = process.env.REACT_APPLE_APP_ID;
-        BootPay.setApplicationId(applicationId);
-        // window.setApplicationId(applicationId);
-        window.BootPay.setDevice('IOS');
-        BootPay.startTrace();
-    }
-
+function pay(sellItemList, price, applicationId, storeName, storeId, userId) {
+    console.log("==3==");
+    console.log(applicationId);
 
     BootPay.request({
         // price: trInfo.Price,

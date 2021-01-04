@@ -4,20 +4,32 @@ import HeaderBiz from "../Components/js/HeaderBiz";
 
 import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
-import cookie from "react-cookies";
+import BootPay from "bootpay-js";
+
+let applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
+console.log("==1==");
+console.log(applicationId);
 
 window.identifyIosDevice = (function () {
-    // code here
-    const expires = new Date();
-    expires.setDate(expires.getDate() + 1);
-    console.log("ios");
+    console.log("==2==");
+    console.log(applicationId);
 
-    cookie.save("device", "ios", {
-        path: '/',
-        expires: expires,
-        //            httpOnly: true,
-        //            secure: true,
-    });
+    let meta = document.createElement('meta');
+    meta.name='bootpay-application-id';
+    meta.content=applicationId;
+    document.getElementsByTagName('head')[0].appendChild(meta);
+
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = "https://cdn.bootpay.co.kr/js/bootpay-2.1.1.min.js";
+    document.getElementsByTagName('head')[0].appendChild(script);
+
+
+    applicationId = process.env.REACT_APPLE_APP_ID;
+    BootPay.setApplicationId(applicationId);
+    // window.setApplicationId(applicationId);
+    window.BootPay.setDevice('IOS');
+    BootPay.startTrace();
 });
 
 class OrderInfo extends React.Component {
@@ -198,7 +210,7 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="divide"/>
                     <div className="orderinfo__btn"
-                         onClick={({sellItemList}) => pay(tradesInfo, price, this.state.storeName, this.state.storeId, this.state.userId)}>
+                         onClick={({sellItemList}) => pay(tradesInfo, price, applicationId, this.state.storeName, this.state.storeId, this.state.userId)}>
                         결제하기
                     </div>
                 </div>
