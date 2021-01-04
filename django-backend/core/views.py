@@ -151,14 +151,6 @@ def saveToken(request):
                                                             'registration_id': token
                                                         })
         user.iosToken = iosToken.registration_id
-        print("==1==")
-        print(iosToken)
-        print("==2==")
-        print(iosToken.registration_id)
-        print("==3==")
-        print(user)
-        print("==4==")
-        print(user.iosToken)
 
         tradeErrorCode = '205'
         tradeErrorMsg = "user ios token update failed"
