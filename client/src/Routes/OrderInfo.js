@@ -6,11 +6,12 @@ import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import BootPay from "bootpay-js";
 
-let applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
+let applicationId = process.env.REACT_APP_BOOTPAY_ID;
 console.log("==1==");
 console.log(applicationId);
 
 window.identifyIosDevice = (function () {
+    let applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
     console.log("==2==");
     console.log(applicationId);
 
