@@ -29,6 +29,8 @@ window.identifyIosDevice = (function () {
     // window.setApplicationId(applicationId);
     window.BootPay.setDevice('IOS');
     BootPay.startTrace();
+
+    this.setState({applicationId})
 });
 
 class OrderInfo extends React.Component {
@@ -49,6 +51,7 @@ class OrderInfo extends React.Component {
             storeId: storeId,
             storeCd: storeCd,
             userId: null,
+            applicationId: '',
         }
      };
 
