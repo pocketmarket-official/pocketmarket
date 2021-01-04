@@ -55,9 +55,6 @@ class OrderInfo extends React.Component {
 
     componentDidMount(){
         let user_email = cookieCheck_rejectGuest();
-        console.log("==4==");
-        console.log(this.state.applicationId);
-
 
         axios.get("/api/users_user/")
         .then((res) => {
