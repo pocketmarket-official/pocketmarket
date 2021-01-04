@@ -6,7 +6,7 @@ import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import BootPay from "bootpay-js";
 
-let applicationId = process.env.REACT_APP_BOOTPAY_ID;
+let applicationId = process.env.REACT_APP_BOOTPAY_APP_ID;
 console.log("==1==");
 console.log(applicationId);
 
