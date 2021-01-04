@@ -6,10 +6,6 @@ import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import BootPay from "bootpay-js";
 
-let applicationId = process.env.REACT_APP_BOOTPAY_APP_ID;
-console.log("==1==");
-console.log(applicationId);
-
 window.identifyIosDevice = (function () {
     let applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
     console.log("==2==");
@@ -51,14 +47,14 @@ class OrderInfo extends React.Component {
             storeId: storeId,
             storeCd: storeCd,
             userId: null,
-            applicationId: '',
+            applicationId: process.env.REACT_APP_BOOTPAY_APP_ID,
         }
      };
 
     componentDidMount(){
         let user_email = cookieCheck_rejectGuest();
         console.log("==4==");
-        console.log(applicationId);
+        console.log(this.state.applicationId);
 
 
         axios.get("/api/users_user/")
