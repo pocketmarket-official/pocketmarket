@@ -25,8 +25,6 @@ window.identifyIosDevice = (function () {
     script.src = "https://cdn.bootpay.co.kr/js/bootpay-2.1.1.min.js";
     document.getElementsByTagName('head')[0].appendChild(script);
 
-
-    applicationId = process.env.REACT_APPLE_APP_ID;
     BootPay.setApplicationId(applicationId);
     // window.setApplicationId(applicationId);
     window.BootPay.setDevice('IOS');
