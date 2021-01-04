@@ -5,32 +5,6 @@ import HeaderBiz from "../Components/js/HeaderBiz";
 import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
-const applicationId = process.env.REACT_APPLE_APP_ID;
-
-window.registerAppId = (function () {
-    console.log("==1==");
-    console.log(applicationId);
-    // window.BootPay.setApplicationId(applicationId);
-});
-
-window.registerAppIdDemo = (function () {
-    console.log("==2==");
-    console.log(applicationId);
-    // window.setApplicationId(applicationId);
-});
-
-window.setDevice = (function () {
-    console.log("==3==");
-    console.log(applicationId);
-    // window.BootPay.setDevice('IOS');
-});
-
-window.startTrace = (function () {
-    console.log("==4==");
-    console.log(applicationId);
-    // window.BootPay.startTrace();
-});
-
 
 
 class OrderInfo extends React.Component {
