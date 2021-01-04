@@ -2,7 +2,7 @@ import BootPay from "bootpay-js";
 import axios from "axios";
 
 function pay(sellItemList, price, applicationId, storeName, storeId, userId) {
-    console.log("==3==");
+    console.log("==4==");
     console.log(applicationId);
 
     BootPay.request({

@@ -55,6 +55,8 @@ class OrderInfo extends React.Component {
 
     componentDidMount(){
         let user_email = cookieCheck_rejectGuest();
+        console.log("==4==");
+        console.log(applicationId);
 
 
         axios.get("/api/users_user/")
@@ -95,7 +97,7 @@ class OrderInfo extends React.Component {
             order_list.push(menu);
         }
 
-        let tradesInfo = []
+        let tradesInfo = [];
         let sellGroup = 1;
         for(let idx in this.state.order) {
             let option = 1;
