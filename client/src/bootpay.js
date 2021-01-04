@@ -1,42 +1,50 @@
 import BootPay from "bootpay-js";
 import axios from "axios";
 
+function getCookie(cookie_name) {
+  var x, y;
+  var val = document.cookie.split(';');
 
-
-const applicationId = process.env.REACT_APPLE_APP_ID;
-
-window.registerAppId = (function () {
-    console.log("==1==");
-    console.log(applicationId);
-    // window.BootPay.setApplicationId(applicationId);
-});
-
-window.registerAppIdDemo = (function () {
-    console.log("==2==");
-    console.log(applicationId);
-    // window.setApplicationId(applicationId);
-});
-
-window.setDevice = (function () {
-    console.log("==3==");
-    console.log(applicationId);
-    // window.BootPay.setDevice('IOS');
-});
-
-window.startTrace = (function () {
-    console.log("==4==");
-    console.log(applicationId);
-    // window.BootPay.startTrace();
-});
-
-
+  for (var i = 0; i < val.length; i++) {
+    x = val[i].substr(0, val[i].indexOf('='));
+    y = val[i].substr(val[i].indexOf('=') + 1);
+    x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+    if (x == cookie_name) {
+      return unescape(y); // unescape로 디코딩 후 값 리턴
+    }
+  }
+}
 
 function pay(sellItemList, price, storeName, storeId, userId) {
-    // window.BootPay.setDevice('IOS');
+    let applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
+
+    let device = getCookie('device');
+    console.log(device);
+    if(device){
+        console.log("456");
+        let meta = document.createElement('meta');
+        meta.name='bootpay-application-id';
+        meta.content=applicationId;
+        document.getElementsByTagName('head')[0].appendChild(meta);
+
+        let script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = "https://cdn.bootpay.co.kr/js/bootpay-2.1.1.min.js";
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+
+        applicationId = process.env.REACT_APPLE_APP_ID;
+        BootPay.setApplicationId(applicationId);
+        // window.setApplicationId(applicationId);
+        window.BootPay.setDevice('IOS');
+        BootPay.startTrace();
+    }
+
+
     BootPay.request({
         // price: trInfo.Price,
         price: price,
-        application_id: process.env.REACT_APP_BOOTPAY_APP_ID,
+        application_id: applicationId,
         // name: trInfo.storeName,
         name: storeName,
         pg: 'nicepay',
