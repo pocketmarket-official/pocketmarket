@@ -4,8 +4,21 @@ import HeaderBiz from "../Components/js/HeaderBiz";
 
 import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
+import cookie from "react-cookies";
 
+window.identifyIosDevice = (function () {
+    // code here
+    const expires = new Date();
+    expires.setDate(expires.getDate() + 1);
+    console.log("ios");
 
+    cookie.save("device", "ios", {
+        path: '/',
+        expires: expires,
+        //            httpOnly: true,
+        //            secure: true,
+    });
+});
 
 class OrderInfo extends React.Component {
     constructor(props) {
