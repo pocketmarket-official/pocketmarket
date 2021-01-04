@@ -6,8 +6,13 @@ import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import BootPay from "bootpay-js";
 
+let applicationId = process.env.REACT_APP_BOOTPAY_APP_ID;
+console.log("==1==");
+console.log(applicationId);
+
+
 window.identifyIosDevice = (function () {
-    let applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
+    applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
     console.log("==2==");
     console.log(applicationId);
 
@@ -47,7 +52,6 @@ class OrderInfo extends React.Component {
             storeId: storeId,
             storeCd: storeCd,
             userId: null,
-            applicationId: process.env.REACT_APP_BOOTPAY_APP_ID,
         }
      };
 
@@ -210,7 +214,7 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="divide"/>
                     <div className="orderinfo__btn"
-                         onClick={({sellItemList}) => pay(tradesInfo, price, this.state.applicationId, this.state.storeName, this.state.storeId, this.state.userId)}>
+                         onClick={({sellItemList}) => pay(tradesInfo, price, applicationId, this.state.storeName, this.state.storeId, this.state.userId)}>
                         결제하기
                     </div>
                 </div>
