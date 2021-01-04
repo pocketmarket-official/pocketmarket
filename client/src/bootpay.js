@@ -1,7 +1,7 @@
 import BootPay from "bootpay-js";
 import axios from "axios";
 
-const applicationId = process.env.REACT_APPLE_APP_ID;
+
 
 function pay(sellItemList, price, storeName, storeId, userId) {
     // window.BootPay.setDevice('IOS');

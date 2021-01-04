@@ -5,6 +5,7 @@ import HeaderBiz from "../Components/js/HeaderBiz";
 import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 
+const applicationId = process.env.REACT_APPLE_APP_ID;
 
 window.registerAppId = (function () {
     console.log("==1==");
