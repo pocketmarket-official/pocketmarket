@@ -16,15 +16,15 @@ window.identifyIosDevice = (function () {
     console.log("==2==");
     console.log(applicationId);
 
-    let meta = document.createElement('meta');
-    meta.name='bootpay-application-id';
-    meta.content=applicationId;
-    document.getElementsByTagName('head')[0].appendChild(meta);
-
-    let script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = "https://cdn.bootpay.co.kr/js/bootpay-2.1.1.min.js";
-    document.getElementsByTagName('head')[0].appendChild(script);
+    // let meta = document.createElement('meta');
+    // meta.name='bootpay-application-id';
+    // meta.content=applicationId;
+    // document.getElementsByTagName('head')[0].appendChild(meta);
+    //
+    // let script = document.createElement('script');
+    // script.type = 'text/javascript';
+    // script.src = "https://cdn.bootpay.co.kr/js/bootpay-2.1.1.min.js";
+    // document.getElementsByTagName('head')[0].appendChild(script);
 
     window.BootPay.setApplicationId(applicationId);
     // window.setApplicationId(applicationId);
