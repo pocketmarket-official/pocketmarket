@@ -165,8 +165,7 @@ def saveToken(request):
         context = 'fcmToken='+str(iosToken.id) + ' token=' + iosToken.registration_id + ' user=' + str(user.id)
         user.save()
 
-        response = JsonResponse('200')
-        return response
+        return HttpResponse('200')
 
     except Exception as ex:
         print(ex)
