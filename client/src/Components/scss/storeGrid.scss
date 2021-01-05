@@ -7,6 +7,12 @@
     height: 100vh;
     margin-top: $headerHeight;
     box-sizing: border-box;
+    &:after {
+      height: 70px;
+      width: 100%;
+      content: '';
+      position: absolute;
+    }
     hr {
       border: 1px dotted #e2e6e7;
     }
@@ -189,7 +195,7 @@
     .store__review__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(1, 33vw);
+      grid-auto-rows: 33vw;
       grid-row-gap: 3px;
       grid-column-gap: 1px;
       div {
