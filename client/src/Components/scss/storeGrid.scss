@@ -1,15 +1,18 @@
 @import "mixins";
 
 .page__store {
+  height: 100vh;
   .storeGrid-store {
     width: 100%;
+    height: 100vh;
     margin-top: $headerHeight;
     box-sizing: border-box;
-
+    hr {
+      border: 1px dotted #e2e6e7;
+    }
     .storeGrid__content {
       $storeGridImageWidth: 100%;
       $storeGridImageHeight: 210px;
-
       .storeGrid__image {
         img {
           width: $storeGridImageWidth;
@@ -23,7 +26,6 @@
           object-fit: cover;
         }
       }
-
       .storeGrid__title {
         position: absolute;
         top: $headerHeight;
@@ -187,8 +189,7 @@
     .store__review__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(1, 1fr);
-      grid-auto-rows: 14%;
+      grid-template-rows: repeat(1, 33vw);
       grid-row-gap: 3px;
       grid-column-gap: 1px;
       div {
@@ -197,12 +198,19 @@
         height: 100%;
 
         &.photo {
-
+          .multiple {
+            width: 7%;
+            z-index: 1;
+            position: absolute;
+            color: #ffffff;
+            margin-left: 29vw;
+            margin-top: 7px;
+            transform: rotate(-90deg);
+          }
           &:after {
             position: absolute;
             background-repeat: no-repeat;
             content: '';
-            background: url('../../assets/store_grid/photo_ico.png');
             top: 7px;
             right: 7px;
             background-size: contain;

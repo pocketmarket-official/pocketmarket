@@ -124,7 +124,7 @@ class ReviewJSX extends React.Component {
                             </div>
                         </div>
                         <div className="review_container">
-                            <button className="review__like"><p>♥ 1</p></button>
+                            {/*<button className="review__like"><p>♥ 1</p></button>*/}
                             {/*<div className="review__order">
                                 {data.id} {data.order_date} {data.order_list}
                             </div>*/}

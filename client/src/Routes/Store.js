@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import StoreList from '../Components/js/StoreList';
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClone } from '@fortawesome/free-solid-svg-icons';
 
 
 class StoreView extends React.Component {
@@ -76,7 +78,10 @@ class StoreView extends React.Component {
                                                         (review.img2 === null || review.img2 === '' || review.img2 === undefined) ?
                                                             <div><img src={review.img1} alt="review" /></div> //추가이미지 없는애
                                                             :
-                                                            <div className="photo"><img src={review.img1} alt="reviews" /></div> //추가이미지 있는애
+                                                            <div className="photo">
+                                                                <FontAwesomeIcon icon={faClone} class="multiple" />
+                                                                <img src={review.img1} alt="reviews" />
+                                                            </div> //추가이미지 있는애
                                                     }
                                                 </Link>
                                             </>

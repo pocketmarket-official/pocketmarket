@@ -2,8 +2,11 @@ import React from 'react';
 import InfiniteScroll from './InfiniteScroll';
 import menu from '../../assets/store_list/grid_img1.jpg';
 import Loading from "./Loading";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClone } from '@fortawesome/free-solid-svg-icons';
+
 
 class StoreList extends React.Component {
     constructor(props) {
@@ -84,7 +87,10 @@ class StoreList extends React.Component {
                                                                 (review.img2 === null || review.img2 === '' || review.img2 === undefined) ?
                                                                     <div className="storeList__photo__no"><img src={review.img1}/></div> //추가이미지 없는애
                                                                     :
-                                                                    <div className="storeList__photo"><img src={review.img1}/></div>//추가이미지 있는애
+                                                                    <div className="storeList__photo">
+                                                                        <FontAwesomeIcon icon={faClone} class="multiple" />
+                                                                        <img src={review.img1}/>
+                                                                    </div>//추가이미지 있는애
                                                             }
 
                                                             <div className="box__box">
@@ -110,6 +116,7 @@ class StoreList extends React.Component {
                                                     </div>
                                                 </div>
                                             </Link>
+                                            <hr />
                                         </>
                                     );
                                 })
