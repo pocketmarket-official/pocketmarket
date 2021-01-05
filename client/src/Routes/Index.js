@@ -53,7 +53,6 @@ function Index() {
         }
     }
 */
-    console.log(user);
 
     function onChangeJumboItem(e) {
         for (let item of paginationElem.current.children) {

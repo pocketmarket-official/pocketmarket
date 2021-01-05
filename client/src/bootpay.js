@@ -1,13 +1,14 @@
 import BootPay from "bootpay-js";
 import axios from "axios";
 
+function pay(sellItemList, price, applicationId, storeName, storeId, userId) {
+    console.log("==4==");
+    console.log(applicationId);
 
-function pay(sellItemList, price, storeName, storeId, userId) {
-    window.BootPay.setDevice('IOS');
     BootPay.request({
         // price: trInfo.Price,
         price: price,
-        application_id: process.env.REACT_APP_BOOTPAY_APP_ID,
+        application_id: applicationId,
         // name: trInfo.storeName,
         name: storeName,
         pg: 'nicepay',

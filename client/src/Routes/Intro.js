@@ -17,6 +17,8 @@ window.makeFcmTokenCookie = (function (token) {
     });
 });
 
+
+
 function Intro({authenticated, location}) {
     const [playingVideo, setPlayingVideo] = useState(true);
 

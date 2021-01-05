@@ -4,7 +4,6 @@ import React from 'react';
 class QuestionResult extends React.Component {
     render() {
         let result = this.props.result;
-        console.log(result);
         return (
             result.map((data) => {
                 let imgFlag;
