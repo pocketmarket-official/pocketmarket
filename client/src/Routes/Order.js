@@ -81,6 +81,7 @@ class Order extends React.Component {
             toastFlag: 'N',
             optionChangeFlag: false,
             optionData: [],
+            option_options: [],
         };
     }
 
@@ -296,7 +297,8 @@ class Order extends React.Component {
                     const elt = document.getElementById("optionmodal");
                     elt.classList.add("hidden");
                     this.setState({
-                        modal_options: []
+                        modal_options: [],
+                        optionChangeFlag: false,
                     });
                 }}>
                     <div className="optionmodal__container" onClick={(e) => {
@@ -306,7 +308,8 @@ class Order extends React.Component {
                             const elt = document.getElementById("optionmodal");
                             elt.classList.add("hidden");
                             this.setState({
-                                modal_options: []
+                                modal_options: [],
+                                optionChangeFlag: false,
                             });
                         }}/>
                         <div className="optionmodal__header">
@@ -535,6 +538,7 @@ class Order extends React.Component {
                                                                 this.setState({
                                                                     selected: data[0],
                                                                     modal_options: data[0].option,
+                                                                    option_options: data[0].option,
                                                                     optionChangeFlag: true,
                                                                     optionData: data,
                                                                 }, () => {
