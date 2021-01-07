@@ -35,7 +35,7 @@
     "webpack-bundle-tracker": "^1.0.0-alpha.1"
   },
   "scripts": {
-    "start": "dotenv -e .env react-scripts start --host 0.0.0.0",
+    "start": "BROWSER=none dotenv -e .env react-scripts start --host 0.0.0.0",
     "build": "GENERATE_SOURCEMAP=false dotenv -e .env.local react-scripts build && rm -rf ../django-backend/build && mv build ../django-backend",
     "build:dev": "GENERATE_SOURCEMAP=false dotenv -e .env.development.local react-scripts build && rm -rf ../django-backend/build && mv build ../django-backend",
     "build:prod": "GENERATE_SOURCEMAP=false dotenv -e .env.prod react-scripts build && rm -rf ../django-backend/build && mv build ../django-backend",

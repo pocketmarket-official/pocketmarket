@@ -79,6 +79,8 @@ class Order extends React.Component {
             canScrollRight: false,
             user: '',
             toastFlag: 'N',
+            optionChangeFlag: false,
+            optionData: [],
         };
     }
 
@@ -393,12 +395,17 @@ class Order extends React.Component {
                             <button className="optionmodal__select" onClick={() => {
                                 let menu = lodash.cloneDeep(this.state.selected);
                                 menu["option"] = lodash.cloneDeep(this.state.modal_options);
+                                if(this.state.optionChangeFlag) {
+                                    const idx = this.state.order_list.indexOf(this.state.optionData);
+                                    this.state.order_list.splice(idx, 1);
+                                }
                                 this.setState({
                                     order_list: this.state.order_list.concat([[menu, 1]]),
                                     modal_options: [],
                                     selected: "",
                                     price: price,
                                     order: order,
+                                    optionChangeFlag: false,
                                 });
                                 const elt = document.getElementById("optionmodal");
                                 elt.classList.add("hidden");
@@ -517,21 +524,26 @@ class Order extends React.Component {
                                             <div className="order__item">
                                                 <div className="item__list">1</div>
                                                 <div className="item__name">{data[0].itemName}</div>
-                                                <div className="item__option__box">
-                                                    <div className="item__option" onClick={() => {
-                                                        if(data[0].option) {
-                                                            const elt = document.getElementById("optionmodal");
-                                                            this.setState({
-                                                                selected: data[0],
-                                                                modal_options: data[0].option,
-                                                            }, () => {
-                                                                const idx = this.state.order_list.indexOf(data);
-                                                                this.state.order_list.splice(idx, 1);
-                                                                elt.classList.remove("hidden");
-                                                            })
-                                                        }
-                                                    }}>옵션변경</div>
-                                                </div>
+                                                {
+                                                    this.state.options[data[0].id] !== undefined ?
+                                                    <div className="item__option__box">
+                                                        <div className="item__option" onClick={() => {
+                                                            if(data[0].option) {
+                                                                const elt = document.getElementById("optionmodal");
+                                                                this.setState({
+                                                                    selected: data[0],
+                                                                    modal_options: data[0].option,
+                                                                    optionChangeFlag: true,
+                                                                    optionData: data,
+                                                                }, () => {
+                                                                    elt.classList.remove("hidden");
+                                                                })
+                                                            }
+                                                        }}>옵션변경</div>
+                                                    </div>
+                                                    :
+                                                    <div className="item__option__box__none"></div>
+                                                }
                                                 <div className="item__quantity__box">
                                                     <div className="item__decrease__button" onClick={() => {
                                                         data[1] -= 1;
