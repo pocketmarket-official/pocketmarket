@@ -395,12 +395,14 @@ class Order extends React.Component {
                             <button className="optionmodal__select" onClick={() => {
                                 let menu = lodash.cloneDeep(this.state.selected);
                                 menu["option"] = lodash.cloneDeep(this.state.modal_options);
+                                let cnt = 1;
                                 if(this.state.optionChangeFlag) {
                                     const idx = this.state.order_list.indexOf(this.state.optionData);
+                                    cnt = this.state.optionData[1];
                                     this.state.order_list.splice(idx, 1);
                                 }
                                 this.setState({
-                                    order_list: this.state.order_list.concat([[menu, 1]]),
+                                    order_list: this.state.order_list.concat([[menu, cnt]]),
                                     modal_options: [],
                                     selected: "",
                                     price: price,
