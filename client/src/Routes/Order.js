@@ -81,7 +81,6 @@ class Order extends React.Component {
             toastFlag: 'N',
             optionChangeFlag: false,
             optionData: [],
-            option_options: [],
         };
     }
 
@@ -535,10 +534,10 @@ class Order extends React.Component {
                                                         <div className="item__option" onClick={() => {
                                                             if(data[0].option) {
                                                                 const elt = document.getElementById("optionmodal");
+                                                                let _option = lodash.cloneDeep(data[0].option);
                                                                 this.setState({
                                                                     selected: data[0],
-                                                                    modal_options: data[0].option,
-                                                                    option_options: data[0].option,
+                                                                    modal_options: _option,
                                                                     optionChangeFlag: true,
                                                                     optionData: data,
                                                                 }, () => {
