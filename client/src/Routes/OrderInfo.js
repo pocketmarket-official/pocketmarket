@@ -5,6 +5,7 @@ import HeaderBiz from "../Components/js/HeaderBiz";
 import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import BootPay from "bootpay-js";
+import cookie from "react-cookies";
 
 let applicationId = process.env.REACT_APP_BOOTPAY_APP_ID;
 console.log("==1==");
@@ -55,6 +56,13 @@ class OrderInfo extends React.Component {
 
     componentDidMount(){
         let user_email = cookieCheck_rejectGuest();
+        let fcmToken = cookie.load("fcmToken");
+
+        if(fcmToken){
+            let transData = {"user_email":user_email, "fcmToken":fcmToken};
+
+            axios.post('/saveToken/', transData)
+        }
 
         axios.get("/api/users_user/")
         .then((res) => {

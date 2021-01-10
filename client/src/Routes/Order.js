@@ -102,14 +102,6 @@ class Order extends React.Component {
 
     componentDidMount() {
         let user_email = cookieCheck_approveGuest();
-        let fcmToken = cookie.load("fcmToken");
-
-        if(fcmToken){
-            let transData = {"user_email":user_email, "fcmToken":fcmToken};
-
-            axios.post('/saveToken/', transData)
-        }
-
 
         axios.get("/api/stores_store/")
         .then((res) => {
