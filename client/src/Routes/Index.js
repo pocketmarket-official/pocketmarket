@@ -15,7 +15,7 @@ import showOrderImg from "../assets/index/btn_index4.png";
 import { cookieCheck_approveGuest } from "../Components/js/CookieCheck.js"
 import Toast from '../Components/js/Toast';
 import axios from "axios";
-import {logout} from "../Components/js/CookieCheck";
+import { logout } from "../Components/js/CookieCheck";
 
 function Index() {
     const paginationElem = useRef(null);
@@ -28,6 +28,7 @@ function Index() {
 
     let user_email = cookieCheck_approveGuest();
     let [user, setUser] = useState(null);
+    let [toast, setToast] = useState("off");
 
     function getUser() {
         return axios.get("/api/users_user/")
@@ -71,6 +72,13 @@ function Index() {
                     :
                     <Header />
             }
+            {user !== null && user.guestYn === 'Y'?
+                <>
+                    <Toast message="로그인 후 사용하실 수 있는 컨텐츠입니다. " turn={toast} />
+                </>
+                :
+                null
+            }
             <div className="index">
                 <Flicking classPrefix="jumbo"
                           hanger={0}
@@ -93,40 +101,38 @@ function Index() {
                     <div className="pagination-item"/>
                 </div>
                 <div className="content">
-                    <div className="content-item">
-                        <Link to={{pathname: "/main", state: { current: 0 }}}>
-                            <img src={showFestivalImg} alt="축제보기" />
-                            <span>축제보기</span>
-                        </Link>
-                    </div>
-                    <div className="content-item">
-                        <Link to={{pathname: "/main", state: { current: 1 }}}>
-                            <img src={showStoreImg} alt="매장보기" />
-                            <span>매장보기</span>
-                        </Link>
-                    </div>
-                    <div className="content-item">
-                        <Link to="/mypage/collections">
-                            <img src={showCollectionImg} alt="포켓도감" />
-                            <span>포켓도감</span>
-                        </Link>
-                    </div>
-                    <div className="content-item">
-                        <Link to="/order/status">
-                            <img src={showOrderImg} alt="주문상태" />
-                            <span>주문상태</span>
-                        </Link>
-                    </div>
+                    <Link to={{pathname: "/main", state: { current: 0 }}}>
+                        <div className="content-item">
+                                <img src={showFestivalImg} alt="축제보기" />
+                                <span>축제보기</span>
+                        </div>
+                    </Link>
+                    <Link to={{pathname: "/main", state: { current: 1 }}}>
+                        <div className="content-item">
+                                <img src={showStoreImg} alt="매장보기" />
+                                <span>매장보기</span>
+                        </div>
+                    </Link>
+                    <Link to="/mypage/collections" onClick={(e) => {
+                        if(user !== null && user.guestYn === 'Y') {
+                            e.preventDefault();
+                            setToast("on");
+                        }
+                    }}>
+                        <div className="content-item">
+                                <img src={showCollectionImg} alt="포켓도감" />
+                                <span>포켓도감</span>
+                        </div>
+                    </Link>
+                    <Link to="/order/status">
+                        <div className="content-item">
+                                <img src={showOrderImg} alt="주문상태" />
+                                <span>주문상태</span>
+                        </div>
+                    </Link>
                 </div>
             </div>
             <Footer />
-            {user !== null && user.guestYn === 'Y'?
-                <>
-                    <Toast message="포켓도감, 주문목록 보기는 로그인 하셔야만 이용할 수 있으세요 :)" vanishOnClick={true} turn="on" />
-                </>
-                :
-                null
-            }
         </>
     );
 }

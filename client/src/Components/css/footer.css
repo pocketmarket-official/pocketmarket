@@ -6,6 +6,7 @@ footer {
     background-color: #F9FAFB;
     padding: 10px 15px;
     font-family: MaplestoryOTFLight;
+    margin-top: auto;
 }
 footer .footer__top {
     display: flex;

@@ -31,15 +31,16 @@
       }
     }
   }
-
+  a:active {
+    transform: scale(0.9);
+  }
   .content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    margin-top: 22px;
+    margin-top: 15px;
     border-top: 1px solid #eeeeee;
-    padding: 60px 14px 0;
-
+    padding: 40px 14px 0;
     .content-item {
       position: relative;
       width: 140px;
@@ -50,7 +51,6 @@
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
       background-color: white;
       font-family: 'MaplestoryOTFBold', 'Nanum Gothic', sans-serif;
-
       img {
         position: absolute;
         top: 40%;
