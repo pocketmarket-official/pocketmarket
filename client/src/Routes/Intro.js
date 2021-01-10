@@ -6,6 +6,8 @@ import cookie from "react-cookies";
 
 window.makeFcmTokenCookie = (function (token) {
    // code here
+    console.log("==1==");
+    console.log(token);
     const expires = new Date();
     expires.setDate(expires.getDate() + 1);
 
