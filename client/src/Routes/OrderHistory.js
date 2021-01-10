@@ -36,6 +36,7 @@ class OrderHistory extends React.Component {
             saleDetail: [],
             matched: [],
             storeId: '',
+            loading: true,
         }
     }
 
@@ -122,6 +123,7 @@ class OrderHistory extends React.Component {
                             userId: userId,
                             result: result,
                             matched: matched,
+                            loading: false,
                         })
                     });
                 });
@@ -131,6 +133,7 @@ class OrderHistory extends React.Component {
 
     render() {
         let jsx;
+        let isLoading = this.state.loading;
         if(this.state.result.length === 0) {
             jsx =
                 <>
@@ -280,7 +283,12 @@ class OrderHistory extends React.Component {
                     </div>
 
                     <div className="orderhistory__result__container">
-                        {jsx}
+                        {
+                            isLoading === false ?
+                            jsx
+                            :
+                            <div className="loading">Loading...</div>
+                        }
                     </div>
                 </div>
             </>

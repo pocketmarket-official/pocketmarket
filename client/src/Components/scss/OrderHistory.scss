@@ -76,7 +76,6 @@
     .orderhistory__date{
       margin: 25px 0 0 0;
       padding-bottom: 10px;
-
       font-family: 'Nanum Gothic', sans-serif;
       font-size: 17px;
       font-weight: 800;
@@ -85,6 +84,12 @@
       letter-spacing: 2.2px;
       text-align: left;
       color: #b4022f;
+    }
+    .loading {
+      font-family: MaplestoryOTFLight;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
     }
     .orderhistory__content{
       display: flex;
@@ -164,14 +169,10 @@
           }
         }
       }
-
     }
   }
-
 }
-
-
-.result__nodata{
+.result__nodata {
   margin-top: 20px;
   text-align: center;
   font-family: 'Nanum Gothic', sans-serif;
@@ -180,8 +181,6 @@
   font-weight: bold;
   font-stretch: normal;
 }
-
-
 .modal__conversion.hidden {
   display: none;
 }

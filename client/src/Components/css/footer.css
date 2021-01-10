@@ -5,6 +5,7 @@ footer {
     flex-direction: column;
     background-color: #F9FAFB;
     padding: 10px 15px;
+    font-family: MaplestoryOTFLight;
 }
 footer .footer__top {
     display: flex;

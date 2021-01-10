@@ -21,12 +21,11 @@ class StoreView extends React.Component {
             storeName: storeName,
             reviews: [],
             users: [],
+            loading: true,
         };
 
         this.handlePageSlide = this.handlePageSlide.bind(this);
         this.handlePageRender = this.handlePageRender.bind(this);
-        this.handleMultipleImage = this.handleMultipleImage(this);
-
     }
 
     componentDidMount() {
@@ -45,6 +44,7 @@ class StoreView extends React.Component {
                                 this.setState({
                                     users: res.data,
                                     reviews: reviews,
+                                    loading: false,
                                 });
                             });
             });
@@ -54,50 +54,54 @@ class StoreView extends React.Component {
         this.setState((prev) => ({ current: (prev.current + 1) % 2 }));
     }
 
-    handleMultipleImage(){
-
-    }
-
     handlePageRender() {
         if(this.state.current === 0) {
+            let isLoading = this.state.loading;
             return (
-            <>
-                <div className="store__review__grid" id="review__container">
-                    {
-                        <>
-                            {
-                                this.state.reviews.length !== 0 ?
-                                    this.state.reviews.map((review) => {
-                                        return (
-                                            <>
-                                                <Link to={{
-                                                    pathname: `/review/${review.id}`,
-                                                    state: {review: review},
-                                                }}>
-                                                    {
-                                                        (review.img2 === null || review.img2 === '' || review.img2 === undefined) ?
-                                                            <div><img src={review.img1} alt="review" /></div> //추가이미지 없는애
-                                                            :
-                                                            <div className="photo">
-                                                                <FontAwesomeIcon icon={faClone} class="multiple" />
-                                                                <img src={review.img1} alt="reviews" />
-                                                            </div> //추가이미지 있는애
-                                                    }
-                                                </Link>
-                                            </>
-                                        );
-                                    })
-                                :
-                                null
-                            }
-                        </>
-                    }
-                </div>
+                <>
                 {
-                    this.state.reviews.length === 0 ?
-                    <div className="review__empty">아직 리뷰가 하나도 없어요..</div>
+                    isLoading === false ?
+                    <>
+                        <div className="store__review__grid" id="review__container">
+                            {
+                                <>
+                                    {
+                                        this.state.reviews.length !== 0 ?
+                                            this.state.reviews.map((review) => {
+                                                return (
+                                                    <>
+                                                        <Link to={{
+                                                            pathname: `/review/${review.id}`,
+                                                            state: {review: review},
+                                                        }}>
+                                                            {
+                                                                (review.img2 === null || review.img2 === '' || review.img2 === undefined) ?
+                                                                    <div><img src={review.img1} alt="review" /></div> //추가이미지 없는애
+                                                                    :
+                                                                    <div className="photo">
+                                                                        <FontAwesomeIcon icon={faClone} class="multiple" />
+                                                                        <img src={review.img1} alt="reviews" />
+                                                                    </div> //추가이미지 있는애
+                                                            }
+                                                        </Link>
+                                                    </>
+                                                );
+                                            })
+                                        :
+                                        null
+                                    }
+                                </>
+                            }
+                        </div>
+                        {
+                            this.state.reviews.length === 0 ?
+                            <div className="review__empty">아직 리뷰가 하나도 없어요..</div>
+                            :
+                            null
+                        }
+                    </>
                     :
-                    null
+                    <div class="loading">Loading...</div>
                 }
             </>
             );

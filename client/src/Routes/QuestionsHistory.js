@@ -31,7 +31,8 @@ class QuestionsHistory extends React.Component {
             startDate: past,
             endDate: today,
             userId: '',
-            questions: []
+            questions: [],
+            loading: true,
         }
     }
 
@@ -57,7 +58,12 @@ class QuestionsHistory extends React.Component {
                     questions = questions.sort(function(a, b) {
                         return a.insDt > b.insDt ? -1 : a.insDt < b.insDt ? 1 : 0;
                     });
-                    this.setState({ userId: userId, result: questions, questions: res.data });
+                    this.setState({ 
+                        userId: userId,
+                        result: questions,
+                        questions: res.data,
+                        loading: false
+                    });
                 });
             }
         );
@@ -88,6 +94,7 @@ class QuestionsHistory extends React.Component {
 
     render() {
         let jsx;
+        let isLoading = this.state.loading;
         if(this.state.result.length === 0) {
             jsx =
                 <>
@@ -132,7 +139,12 @@ class QuestionsHistory extends React.Component {
                         </div>
                     </div>
                     <div className="question__result__container">
-                        {jsx}
+                        {
+                            isLoading === false ?
+                            jsx
+                            :
+                            <div className="loading">Loading...</div>
+                        }
                     </div>
                     <div className="question__add"><Link to="/mypage/questions/write">문의하기</Link></div>
                 </div>

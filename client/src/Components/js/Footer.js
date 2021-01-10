@@ -23,7 +23,6 @@ const content = [
     },
 ];
 
-/*
 const useTabs = (initialTab, allTabs) => {
     const [currentIndex, setCurrentIndex] = useState(initialTab);
 
@@ -53,37 +52,6 @@ function Footer() {
                     }
                 </div>
                 <div className="footer__column">{currentItem.content}</div>
-                <div className="footer__middle">
-                    포켓마켓은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 포켓마켓은 상품, 거래정보 및 거래에 책임을 지지 않습니다. 
-                </div>
-                <div className="footer__bottom">
-                    © 2020 all rights reserved
-                </div>
-
-            </footer>
-        </>
-    );
-}
-*/
-
-function Footer() {
-    return (
-        <>
-            <footer>
-                {
-                    content.map((elt) => {
-                        return (
-                            <>
-                                <div className="footer__top">
-                                {elt.tab}
-                                <div className="footer__column">
-                                {elt.content}
-                                </div>
-                                </div>
-                            </>
-                        );
-                    })
-                }
                 <div className="footer__middle">
                     포켓마켓은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 포켓마켓은 상품, 거래정보 및 거래에 책임을 지지 않습니다. 
                 </div>

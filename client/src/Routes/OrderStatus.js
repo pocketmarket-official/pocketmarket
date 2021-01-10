@@ -97,12 +97,12 @@ class OrderStatus extends React.Component {
                 <div className="orderstatus">
                 {
                     this.state.loading === true?
-                    <div>loading...</div>
+                    <div className="loading">Loading...</div>
                     :
                         this.state.matched.length === 0?
                             <>
-                            <img src={bi} alt="logo" />
-                            <div className="result__nodata">주문 내역이 없습니다.</div>
+                                <img src={bi} alt="logo" className="bi" />
+                                <div className="result__nodata">주문 내역이 없습니다.</div>
                             </>
                             :
                             this.state.matched.map((elt) => {
