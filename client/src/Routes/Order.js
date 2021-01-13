@@ -9,7 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeaderOrder from "../Components/js/HeaderOrder";
 import cookie from "react-cookies";
 import {cookieCheck_approveGuest} from "../Components/js/CookieCheck.js"
-import Toast from "../Components/js/Toast";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import logo from '../assets/common/logo.png';
 
 function makeTokenSaveScript(token) {
         // let cookie_token = cookie.load("access_token");
@@ -499,14 +501,37 @@ class Order extends React.Component {
                                             storeName: this.state.storeName,
                                             storeId: this.state.storeId,
                                             storeCd: this.state.storeCd,
-                                        }}}>
+                                        }}}
+
+                                        onClick={(e) => {
+                                            if(price === 0) {
+                                                e.preventDefault();
+                                                toast(<div className="message-container"><img src={logo} /><div>메뉴를 선택해주세요!</div></div>, {
+                                                    position: "top-center",
+                                                    autoClose: 5000,
+                                                    closeOnClick: true,
+                                                    className: 'toast',
+                                                    hideProgressBar: false,
+                                                    closeButton: false,
+                                                });
+                                            }
+                                        }}
+                                    >
                                         <div className="order__pass">주문결제</div>
                                     </Link>
                                 </>
                                 :
                                 <>
-                                    <div className="order__pass" onClick={() => {
-                                        this.setState({toastYn:'Y'})
+                                    <div className="order__pass" onClick={(e) => {
+                                        e.preventDefault();
+                                        toast(<div className="message-container"><img src={logo} /><div>로그인 후 이용하실 수 있습니다!</div></div>, {
+                                            position: "top-center",
+                                            autoClose: 5000,
+                                            closeOnClick: true,
+                                            className: 'toast',
+                                            hideProgressBar: false,
+                                            closeButton: false,
+                                        });
                                     }}>주문결제</div>
                                 </>
                             }
@@ -578,13 +603,6 @@ class Order extends React.Component {
                         </div>
                     </div>
                 </div>
-                {this.state.toastYn === 'Y'?
-                    <>
-                        <Toast message="결제는 로그인 하셔야만 진행할 수 있으세요 :)" vanishOnClick={true} turn="on" />
-                    </>
-                    :
-                    null
-                }
             </>
         );
     }

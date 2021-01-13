@@ -7,9 +7,7 @@ import MainStoreContent from '../Components/js/MainStoreContent';
 import MainMapContent from '../Components/js/MainMapContent';
 import {cookieCheck_approveGuest} from '../Components/js/CookieCheck.js'
 import {logout} from '../Components/js/CookieCheck.js'
-
 import btnSearchImg from '../assets/common/btn_sceach.png';
-import Toast from "../Components/js/Toast";
 import Pull from 'pulljs';
 
 class Main extends React.Component {
@@ -275,14 +273,6 @@ class Main extends React.Component {
                                 </>
                             }
                 </div>
-                {this.state.user.guestYn === 'Y'?
-                    <>
-                        <Toast message="좋아요 기능은 로그인 하셔야 사용할 수 있으세요 :)" vanishOnClick={false} turn="on" />
-                    </>
-                    :
-                    null
-                }
-
             </>
         );
     }

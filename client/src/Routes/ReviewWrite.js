@@ -3,7 +3,9 @@ import HeaderBack from '../Components/js/HeaderBack';
 import axios from 'axios';
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import img_ico from '../../src/assets/review_write/img_up_ico.png';
-import Toast from "../Components/js/Toast";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import logo from '../assets/common/logo.png';
 
 class ReviewWrite extends React.Component {
     constructor(props) {
@@ -25,7 +27,6 @@ class ReviewWrite extends React.Component {
             storeId: storeId,
             saleHeaderId: saleHeaderId,
             image: [],
-            toastYn: 'N',
         }
     }
 
@@ -171,20 +172,23 @@ class ReviewWrite extends React.Component {
                             <input type="submit" value="submit" id="review__submit" hidden/>
                             {
                                 this.state.image.length === 0 ?
-                                <div className="submit__off" onClick={() => this.setState({toastYn:"Y"})}>등록하기</div>
+                                <div className="submit__off" onClick={(e) => {
+                                    e.preventDefault();
+                                    toast(<div className="message-container"><img src={logo} /><div>사진을 등록해주세요!</div></div>, {
+                                        position: "top-center",
+                                        autoClose: 5000,
+                                        closeOnClick: true,
+                                        className: 'toast',
+                                        hideProgressBar: false,
+                                        closeButton: false,
+                                    });
+                                }}>등록하기</div>
                                 :
                                 <div className="submit" onClick={() => this.handleSubmit()}>등록하기</div>
                             }
                         </div>
                     </div>
                 </div>
-                {this.state.toastYn === 'Y'?
-                    <>
-                        <Toast message="리뷰 작성 시 사진을 필수로 등록하셔야 해요!" vanishOnClick={true} turn="on" />
-                    </>
-                    :
-                    null
-                }
             </>
         );
     }

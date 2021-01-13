@@ -36,6 +36,9 @@ const useTabs = (initialTab, allTabs) => {
     };
 };
 
+let year = new Date;
+year = year.getFullYear();
+
 function Footer() {
     const { currentItem, changeItem } = useTabs(0, content);
 
@@ -56,7 +59,7 @@ function Footer() {
                     포켓마켓은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 포켓마켓은 상품, 거래정보 및 거래에 책임을 지지 않습니다. 
                 </div>
                 <div className="footer__bottom">
-                    © 2020 all rights reserved
+                    © {year} all rights reserved
                 </div>
 
             </footer>

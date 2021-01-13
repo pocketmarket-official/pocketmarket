@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import defaultImg from '../../assets/main/grayBI.png';
-import Toast from "./Toast";
 
 class FestivalJSX extends React.Component {
     constructor(props) {
         super(props);
         this.formatDate = this.formatDate.bind(this);
-        this.joinFestival = this.joinFestival.bind(this);
         this.state = {
             festival: '',
             festivalName: '',
@@ -16,12 +14,7 @@ class FestivalJSX extends React.Component {
             descriptionHeader: '',
             img: '',
             userId: '',
-            toastYn: 'N'
         }
-    }
-
-    joinFestival(){
-        this.setState({toastYn:'Y'})
     }
 
     formatDate(dateStr) {
@@ -44,7 +37,7 @@ class FestivalJSX extends React.Component {
                 <div className="content__festival">
                     <div className="festival__header">
                         <div className="header__title">{data.festivalName}</div>
-                        <div className="header__enter" onClick={() => this.joinFestival()}>축제입장</div>
+                        <div className="header__enter">축제입장</div>
                     </div>
                     <div className="festival__detail">
                         <img src={data.img || defaultImg} alt="festival" />
@@ -57,13 +50,6 @@ class FestivalJSX extends React.Component {
                         </div>
                     </div>
                 </div>
-                {this.state.toastYn === 'Y'?
-                <>
-                    <Toast message="COVID-19로 인해 축제는 운영하지 않고 있어요 ㅜ_ㅜ" vanishOnClick={false} turn="on" />
-                </>
-                :
-                null
-                }
             </>;
         return (
             <div onClick={() => this.joinFestival()}>

@@ -44,6 +44,7 @@ import Intro from "./Routes/Intro";
 import OrderInfoPayMethod from "./Routes/OrderInfoPayMethod";
 import axios from 'axios';
 import storage from "./storage";
+import { toast } from 'react-toastify';
 
 function App() {
     let STATE = process.env.REACT_APP_STATE;
@@ -87,6 +88,8 @@ function App() {
       appId: "1:196040287857:web:abfb63cdff7f2e1c30ddd0",
       measurementId: "G-T84SPLRMTM"
     };
+
+  toast.configure();
 
   return (
       <BrowserRouter>
