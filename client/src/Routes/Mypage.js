@@ -42,6 +42,7 @@ class Mypage extends React.Component {
                 <HeaderBiz/>
                 <div className="mypage">
                     <div className="mypage__box">
+                        <div className="mypage__list"><Link to="/mypage/notice">공지사항</Link><p>{">"}</p></div>
                         <div className="mypage__list"><Link to="/mypage/collections">포켓마켓도감</Link><p>{">"}</p></div>
                         {/*<div className="mypage__list"><Link to="/mypage/myplace">주소관리</Link><p>{">"}</p></div>*/}
                         <div className="mypage__list"><Link to="/mypage/order">주문 / 결제 이력</Link><p>{">"}</p></div>

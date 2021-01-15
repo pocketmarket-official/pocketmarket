@@ -38,6 +38,8 @@ import KDSSetting from './Routes/KDSSetting';
 import KDSSoldout from './Routes/KDSSoldout';
 import InsertStoreCd from './Routes/InsertStoreCd'
 import MakingCookie from './Routes/makingCookie';
+import Notice from './Routes/Notice';
+import NoticeResult from './Routes/NoticeResult';
 import Reject from './Routes/Reject';
 import './App.css';
 import Intro from "./Routes/Intro";
@@ -114,6 +116,8 @@ function App() {
         <Route authenticated={authenticated} exact path="/order/status/:storeId" component={BigStatus} />
         <Route authenticated={authenticated} exact path="/review/:reviewId" component={ReviewList} />
         <Route authenticated={authenticated} exact path="/mypage" component={Mypage} />
+        <Route authenticated={authenticated} exact path="/mypage/notice" component={Notice} />
+        <Route authenticated={authenticated} exact path="/mypage/notice/:noticeId" component={NoticeResult} />
         <Route authenticated={authenticated} exact path="/mypage/collections" component={Collections} />
         <Route authenticated={authenticated} exact path="/mypage/myplace" component={Myplace} />
         <Route authenticated={authenticated} exact path="/mypage/myplace/detailList" component={MyplaceDetailList} />

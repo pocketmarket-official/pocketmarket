@@ -1,0 +1,38 @@
+.notice {
+    margin-top: 60px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: MaplestoryOTFLight;
+}
+.notice .notice__body a:visited, a:link, a:active {
+    text-decoration: none;
+    color: #000000;
+}
+.notice .notice__body .notice__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 15px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #636366;
+}
+.notice .notice__body .notice__list .notice__content {
+}
+.notice .notice__body .notice__list .notice__content .notice__title {
+    font-size: 16px;
+    margin-top: 5px;
+}
+.notice .notice__body .notice__list .notice__content .notice__date {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #636366;
+}
+.notice .notice__body .notice__list .notice__mark {
+    color: #636366;
+}
+.noticeresult__content {
+    margin: 70px 5px 5px 5px;
+    font-family: MaplestoryOTFLight;
+}
