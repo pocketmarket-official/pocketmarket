@@ -4,7 +4,6 @@ import btnMenuImg from '../../assets/common/btn_menu.png';
 import btnAlarm from '../../assets/common/btn_alarm.png';
 import bi from '../../assets/common/BI.png';
 
-
 function Header() {
     return (
             <div className="header__box">
