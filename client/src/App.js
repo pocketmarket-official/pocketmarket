@@ -109,7 +109,7 @@ function App() {
           <CacheRoute exact path="/main/store/:storeId/orderinfo" component={OrderInfo} />
           <CacheRoute exact path="/main/store/:storeId/orderinfo/payMethod" component={OrderInfoPayMethod} />
         </CacheSwitch>
-        <CacheRoute authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
+        <Route authenticated={authenticated} exact path="/main/store/:storeId" component={StoreView} />
         <Route authenticated={authenticated} exact path="/order/review" component={ReviewWrite} />
         <Route authenticated={authenticated} exact path="/order/complete" component={OrderComplete} />
         <Route authenticated={authenticated} exact path="/order/status" component={OrderStatus} />
