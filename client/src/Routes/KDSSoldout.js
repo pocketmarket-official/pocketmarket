@@ -129,38 +129,40 @@ class KDSSoldout extends React.Component{
 
         return (
         <>
-            <div className="sold-out-setting">
-                <div className="category-selector">
-                    {categoryHtml}
-                </div>
-                <div>
-                    {this.state.food.map((eachFood, index) => {
-                        const each_button_id = `food_button_${index}`
-                        if (this.state.soldOut[index] === 0) {
-                            return (<button id={each_button_id} onClick={handleClickOfFoodButton} className="button">{eachFood}</button>);
-                        } else {
-                            return (<button id={each_button_id} onClick={handleClickOfFoodButton} className="button button-active-food">{eachFood}</button>);
-                        }
-                    })}
-                </div>
-            </div>
-            <div className="info">
-                <span>※ 품절 정보는 자정이 지나면 자동으로 초기화 됩니다.</span>
-                <div className="label sold-out"></div>
-                <span>품절</span>
-                <div className="label normal"></div>
-                <span>보유</span>
-            </div>
-            <div className="footer">
-                <div className="footer-btn prev" routerLink="/" onClick={handleGoBack}>
-                    <div className="fa-icon">
-                        <FontAwesomeIcon icon={faChevronLeft}/>
+            <div className="kds-soldout">
+                <div className="sold-out-setting">
+                    <div className="category-selector">
+                        {categoryHtml}
                     </div>
-                    <span>이전</span></div>
-                <div className="footer-btn save">
-                    <span>저장</span>
-                    <div className="fa-icon">
-                        <FontAwesomeIcon icon={faSave}/>
+                    <div>
+                        {this.state.food.map((eachFood, index) => {
+                            const each_button_id = `food_button_${index}`
+                            if (this.state.soldOut[index] === 0) {
+                                return (<button id={each_button_id} onClick={handleClickOfFoodButton} className="button">{eachFood}</button>);
+                            } else {
+                                return (<button id={each_button_id} onClick={handleClickOfFoodButton} className="button button-active-food">{eachFood}</button>);
+                            }
+                        })}
+                    </div>
+                </div>
+                <div className="info">
+                    <span>※ 품절 정보는 자정이 지나면 자동으로 초기화 됩니다.</span>
+                    <div className="label sold-out"></div>
+                    <span>품절</span>
+                    <div className="label normal"></div>
+                    <span>보유</span>
+                </div>
+                <div className="footer">
+                    <div className="footer-btn prev" routerLink="/" onClick={handleGoBack}>
+                        <div className="fa-icon">
+                            <FontAwesomeIcon icon={faChevronLeft}/>
+                        </div>
+                        <span>이전</span></div>
+                    <div className="footer-btn save">
+                        <span>저장</span>
+                        <div className="fa-icon">
+                            <FontAwesomeIcon icon={faSave}/>
+                        </div>
                     </div>
                 </div>
             </div>
