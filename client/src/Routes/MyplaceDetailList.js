@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import MyplaceDetailListJSX from '../Components/js/myplaceDetailListJSX';
 import rewrite from '../assets/my_place_full/img_name.png';

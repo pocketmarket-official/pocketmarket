@@ -12,7 +12,6 @@ import showCollectionImg from "../assets/index/btn_index3.png";
 import showOrderImg from "../assets/index/btn_index4.png";
 import { cookieCheck_approveGuest } from "../Components/js/CookieCheck.js"
 import axios from "axios";
-import { logout } from "../Components/js/CookieCheck";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import logo from '../assets/common/logo.png';

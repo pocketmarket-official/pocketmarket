@@ -3,13 +3,6 @@ import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 
 class Notice extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-    }
-
     render() {
         return (
             <>

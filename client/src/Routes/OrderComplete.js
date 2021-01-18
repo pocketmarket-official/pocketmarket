@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import HeaderBiz from '../Components/js/HeaderBiz';
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 

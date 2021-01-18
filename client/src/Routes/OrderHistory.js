@@ -7,7 +7,6 @@ import DatePicker, {registerLocale} from "react-datepicker";
 import search from "../assets/point_history/ico_search.png";
 import close from "../assets/order_status_pop/btn_close.png";
 import bill_icon from "../assets/order_status/btn_date.png";
-import bill from "../assets/order_history_apprv/img_receipt.jpg";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import ko from "date-fns/locale/ko";
 import axios from "axios";

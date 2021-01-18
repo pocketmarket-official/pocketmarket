@@ -36,7 +36,7 @@ const useTabs = (initialTab, allTabs) => {
     };
 };
 
-let year = new Date;
+let year = new Date();
 year = year.getFullYear();
 
 function Footer() {

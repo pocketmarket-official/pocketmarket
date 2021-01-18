@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-
 import btnBack from '../../assets/common/btn_bs.png';
-import btnAlarm from '../../assets/common/btn_alarm.png';
 import bi from '../../assets/common/BI.png';
 
 
@@ -11,7 +9,7 @@ function HeaderBack(props) {
 
     return (
             <div className="header__box">
-                <img className="header__back"  onClick={() => {history.goBack()}} src={btnBack}/>
+                <img className="header__back" alt="back-btn"  onClick={() => {history.goBack()}} src={btnBack}/>
                 <Link to="/index"><img className="header__bi" src={bi} alt="logo" /></Link>
                 <div className="fake"></div>
                 {/*<img className="header__alarm" src={btnAlarm} alt="alarm" />*/}

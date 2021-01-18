@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import btnMenuImg from '../../assets/common/btn_menu.png';
-import btnAlarm from '../../assets/common/btn_alarm.png';
 import bi from '../../assets/common/BI.png';
 
 function Header() {

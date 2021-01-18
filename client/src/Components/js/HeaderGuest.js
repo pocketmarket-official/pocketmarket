@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import btnAlarm from '../../assets/common/btn_alarm.png';
+import { Link } from 'react-router-dom';
+//import btnAlarm from '../../assets/common/btn_alarm.png';
 import bi from '../../assets/common/BI.png';
 import { logout } from "./CookieCheck.js";
 
 
 function HeaderGuest(props) {
-    const history = useHistory();
 
     return (
             <div className="header__box">

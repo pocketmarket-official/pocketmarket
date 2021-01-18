@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import defaultImg from '../../assets/main/grayBI.png';
 
 class FestivalJSX extends React.Component {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import HeaderBack from '../Components/js/HeaderBack';
 import StoreJSX from "../Components/js/mainStoreJSX";
 import axios from 'axios';

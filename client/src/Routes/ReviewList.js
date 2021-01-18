@@ -3,10 +3,6 @@ import HeaderBack from '../Components/js/HeaderBack';
 import ReviewJSX from '../Components/js/reviewJSX';
 
 class ReviewList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <>

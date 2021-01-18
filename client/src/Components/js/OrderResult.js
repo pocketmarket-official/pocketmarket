@@ -1,9 +1,6 @@
 import React from 'react';
 import order from "../../assets/order_history/ico_order.png";
 import { Link } from 'react-router-dom';
-import close from "../../assets/order_status_pop/btn_close.png";
-import arw from "../../assets/point_history_conversion/ico_arw.png";
-import btnMenuImg from "../../assets/common/btn_menu.png";
 
 class OrderResult extends React.Component {
     // componentDidMount() {
@@ -28,9 +25,9 @@ class OrderResult extends React.Component {
         return (
             result.map((data) => {
                 let contentId = "content" + data.id;
-                let eltId = "orderhistory" + data.id;
+//                let eltId = "orderhistory" + data.id;
                 let total = data.saleAmt;
-                const review = "";
+//                const review = "";
                 let review_txt ="";
                 const link = `/main/store/${data.storeId}/order`;
                 total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

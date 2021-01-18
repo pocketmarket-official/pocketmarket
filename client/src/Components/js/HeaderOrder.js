@@ -1,6 +1,5 @@
 import {useHistory} from "react-router-dom";
 import btnBack from "../../assets/common/btn_bs.png";
-import btnAlarm from "../../assets/common/btn_alarm.png";
 import React from "react";
 
 export default function HeaderOrder({storeName}) {
@@ -8,7 +7,7 @@ export default function HeaderOrder({storeName}) {
 
     return (
         <div className="header__box">
-            <img className="header__back"  onClick={() => {history.goBack()}} src={btnBack}/>
+            <img className="header__back" alt="back-btn"  onClick={() => {history.goBack()}} src={btnBack}/>
             <div className="header__store-name" onClick={() => {history.goBack()}}>
                 {storeName}
             </div>
