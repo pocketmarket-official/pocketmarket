@@ -77,4 +77,4 @@ virtualenv==20.2.2
 virtualenv-clone==0.5.4
 wcwidth==0.1.9
 websocket-client==0.57.0
-mysqlclient==2.0.2
+psycopg2==2.8.4
