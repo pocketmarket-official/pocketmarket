@@ -239,11 +239,11 @@ elif STATE == "production":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get("DB_REAL_NAME"),
-            'USER': os.environ.get("DB_REAL_USER"),
-            'PASSWORD': os.environ.get("DB_REAL_PASSWORD"),
-            'PORT': os.environ.get("DB_REAL_PORT"),
-            'HOST': os.environ.get("DB_REAL_HOST"),
+            'NAME': os.environ.get("DB_PRODUCTION_NAME"),
+            'USER': os.environ.get("DB_PRODUCTION_USER"),
+            'PASSWORD': os.environ.get("DB_PRODUCTION_PASSWORD"),
+            'PORT': os.environ.get("DB_PRODUCTION_PORT"),
+            'HOST': os.environ.get("DB_PRODUCTION_HOST"),
         }
     }
 
