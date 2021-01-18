@@ -238,7 +238,7 @@ elif STATE == "production":
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.environ.get("DB_PRODUCTION_NAME"),
             'USER': os.environ.get("DB_PRODUCTION_USER"),
             'PASSWORD': os.environ.get("DB_PRODUCTION_PASSWORD"),
