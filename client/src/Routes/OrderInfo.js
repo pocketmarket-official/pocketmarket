@@ -8,14 +8,9 @@ import BootPay from "bootpay-js";
 import cookie from "react-cookies";
 
 let applicationId = process.env.REACT_APP_BOOTPAY_APP_ID;
-console.log("==1==");
-console.log(applicationId);
-
 
 window.identifyIosDevice = (function () {
     applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
-    console.log("==2==");
-    console.log(applicationId);
 
     let meta = document.createElement('meta');
     meta.name='bootpay-application-id';
@@ -217,7 +212,15 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="divide"/>
                     <div className="orderinfo__btn"
-                         onClick={({sellItemList}) => pay(tradesInfo, price, applicationId, this.state.storeName, this.state.storeId, this.state.userId)}>
+                         onClick={async ({sellItemList}) => {
+                             let result = await pay(tradesInfo, price, applicationId, this.state.storeName, this.state.storeId, this.state.userId)
+                             console.log("++++++++++++++++++++++++++");
+                             console.log(result);
+                             console.log("++++++++++++++++++++++++++");
+                             if (result == 200){
+                                 window.location.replace('/order/status');
+                             }
+                         }}>
                         결제하기
                     </div>
                 </div>

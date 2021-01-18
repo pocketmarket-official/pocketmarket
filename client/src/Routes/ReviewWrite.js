@@ -66,7 +66,7 @@ class ReviewWrite extends React.Component {
                 orderStatus: 6,
                 reviewYn: 'Y',
             } );
-            window.location.href = '/mypage/order'
+            window.location.replace('/mypage/order')
         })
         .catch(err => console.log(err))
 
