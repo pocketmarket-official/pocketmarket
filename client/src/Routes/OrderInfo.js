@@ -211,6 +211,7 @@ class OrderInfo extends React.Component {
                         <div className="amount__amount">{price}원</div>
                     </div>
                     <div className="divide"/>
+                    {/*TODO: location replace 마무리 지어야 함*/}
                     <div className="orderinfo__btn"
                          onClick={async ({sellItemList}) => {
                              let result = await pay(tradesInfo, price, applicationId, this.state.storeName, this.state.storeId, this.state.userId)
