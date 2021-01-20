@@ -64,6 +64,12 @@ class OrderHistory extends React.Component {
     componentDidMount() {
         let user_email = cookieCheck_rejectGuest();
 
+
+        //todo: getelement 안됨
+        let eleme = document.getElementById('receipt_1');
+        console.log(eleme);
+
+
         axios.get('/api/users_user/')
         .then((res1) => {
             axios.get('/api/trades_saleHeader/')
