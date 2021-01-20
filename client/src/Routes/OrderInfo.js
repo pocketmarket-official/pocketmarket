@@ -214,9 +214,6 @@ class OrderInfo extends React.Component {
                     <div className="orderinfo__btn"
                          onClick={async ({sellItemList}) => {
                              let result = await pay(tradesInfo, price, applicationId, this.state.storeName, this.state.storeId, this.state.userId)
-                             console.log("++++++++++++++++++++++++++");
-                             console.log(result);
-                             console.log("++++++++++++++++++++++++++");
                              if (result == 200){
                                  window.location.replace('/order/status');
                              }
