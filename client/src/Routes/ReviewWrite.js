@@ -40,14 +40,6 @@ class ReviewWrite extends React.Component {
         return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
     };
 
-    test() {
-        console.log("test");
-        var elem = document.getElementsByClassName('submit')[0];
-        var elemTmp = elem;
-        elem.remove();
-        alert('1');
-        document.createElement(elemTmp);
-    }
     handleSubmit = (e) => {
         if(!e.detail || e.detail == 1){
             let form_data = new FormData();
@@ -196,7 +188,6 @@ class ReviewWrite extends React.Component {
                                 :
                                 <div className="submit" onClick={this.handleSubmit}>등록하기</div>
                             }
-                            <div className="test" id="test" onClick={() => this.test()}>test</div>
                         </div>
                     </div>
                 </div>
