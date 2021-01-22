@@ -78,8 +78,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            's3://pocketmarket-production/static/',
-            # os.path.join(BASE_DIR, "build"), # react build한 파일
+            os.path.join(BASE_DIR, "build"), # react build한 파일
         ],
         'APP_DIRS': True,
         'OPTIONS': {

@@ -39,38 +39,39 @@ class ReviewWrite extends React.Component {
         return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
     };
 
-    handleSubmit() {
-        let form_data = new FormData();
-        var date = new Date();
-        date = this.getFormatDate(date);
-        const content = document.getElementById("reviewwrite__context");
+    handleSubmit = (e) => {
+        if(!e.detail || e.detail == 1){
+            let form_data = new FormData();
+            var date = new Date();
+            date = this.getFormatDate(date);
+            const content = document.getElementById("reviewwrite__context");
 
-        form_data.append('storeCd', this.state.storeId);
-        form_data.append('saleDt', this.state.saleDt);
-        form_data.append('billNo', this.state.billNo);
-        form_data.append('user', this.state.userId);
-        form_data.append('reviewDt', date);
-        form_data.append('context', content.value);
-        for(let i in this.state.image){
-            let j = parseInt(i);
-            form_data.append(`img${j + 1}`, this.state.image[i][0]);
-        }
-
-        axios.post('/api/reviews_review/', form_data, {
-            headers: {
-                'content-type': 'multipart/form-data'
+            form_data.append('storeCd', this.state.storeId);
+            form_data.append('saleDt', this.state.saleDt);
+            form_data.append('billNo', this.state.billNo);
+            form_data.append('user', this.state.userId);
+            form_data.append('reviewDt', date);
+            form_data.append('context', content.value);
+            for(let i in this.state.image){
+                let j = parseInt(i);
+                form_data.append(`img${j + 1}`, this.state.image[i][0]);
             }
-        })
-        .then(res => {
-            axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{
-                orderStatus: 6,
-                reviewYn: 'Y',
-            } );
-            window.location.replace('/mypage/order')
-        })
-        .catch(err => console.log(err))
 
-    }
+            axios.post('/api/reviews_review/', form_data, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            })
+            .then(res => {
+                axios.put(`/api/trades_saleHeader/${this.state.saleHeaderId}/`,{
+                    orderStatus: 6,
+                    reviewYn: 'Y',
+                } );
+                window.location.replace('/mypage/order')
+            })
+            .catch(err => console.log(err))
+        }
+    };
 
     handleImageChange = (e) => {
         let container = document.getElementById("fileupload");
@@ -184,7 +185,7 @@ class ReviewWrite extends React.Component {
                                     });
                                 }}>등록하기</div>
                                 :
-                                <div className="submit" onClick={() => this.handleSubmit()}>등록하기</div>
+                                <div className="submit" onClick={this.handleSubmit}>등록하기</div>
                             }
                         </div>
                     </div>
