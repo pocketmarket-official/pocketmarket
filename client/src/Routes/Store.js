@@ -101,7 +101,7 @@ class StoreView extends React.Component {
                         }
                     </>
                     :
-                    <div class="loading">Loading...</div>
+                    <div className="loading">Loading...</div>
                 }
             </>
             );
@@ -154,7 +154,7 @@ class StoreView extends React.Component {
                 </div>
                 <div className="order">
                     <Link to={this.state.link}>
-                        <p className="orderButton">주문하기</p>
+                        <p className="orderButton">메뉴보기</p>
                     </Link>
                 </div>
             </div>
