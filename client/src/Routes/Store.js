@@ -101,7 +101,7 @@ class StoreView extends React.Component {
                         }
                     </>
                     :
-                    <div class="loading">Loading...</div>
+                    <div className="loading">Loading...</div>
                 }
             </>
             );
