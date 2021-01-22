@@ -36,6 +36,7 @@ class OrderHistory extends React.Component {
             matched: [],
             storeId: '',
             loading: true,
+            selected: {},
         }
     }
 
@@ -63,12 +64,6 @@ class OrderHistory extends React.Component {
 
     componentDidMount() {
         let user_email = cookieCheck_rejectGuest();
-
-
-        //todo: getelement 안됨
-        let eleme = document.getElementById('receipt_1');
-        console.log(eleme);
-
 
         axios.get('/api/users_user/')
         .then((res1) => {
@@ -106,6 +101,8 @@ class OrderHistory extends React.Component {
                                     if(stores[index].storeCd === elt.storeCd){
                                         elt["storeName"] = stores[index].storeName;
                                         elt["storeId"] = stores[index].id;
+                                        elt["tel"] = stores[index].tel;
+                                        elt["ceo"] = stores[index].storeCeo;
                                     }
                                 }
                                 matched.push(elt);
@@ -136,6 +133,23 @@ class OrderHistory extends React.Component {
         });
     }
 
+    componentDidUpdate() {
+        //todo: getelement 안됨
+        let elem = document.getElementsByClassName('info');
+        let index = 0;
+        while (index < elem.length){
+            let receipt = elem[index];
+            const __this = this;
+            receipt.onclick = function (event) {
+                const elt = document.getElementById("modal__conversion");
+                elt.classList.remove("hidden");
+                __this.setState({selected:__this.state.result[receipt.id]});
+            };
+            console.log(this.state.result);
+            index += 1;
+        }
+    }
+
     render() {
         let jsx;
         let isLoading = this.state.loading;
@@ -160,18 +174,18 @@ class OrderHistory extends React.Component {
                         </div>
                         <div className="modal__bill">
                             <div className="result__item">
-                                <div>가게이름</div>
+                                <div>{this.state.selected.storeName}</div>
                                 <div className="result__detail">
                                     <div className="result__phone">
                                         <div className="phone__phone">Tel:</div>
-                                        <div>01012345678</div>
+                                        <div>{this.state.selected.tel}</div>
                                     </div>
                                 </div>
                             </div>
                             <div className="result__item">
                                 <div className="result__name">
                                     <div className="name__name">대표자:</div>
-                                    <div>마진형</div>
+                                    <div>{this.state.selected.ceo}</div>
                                 </div>
                             </div>
                             <hr />
@@ -180,14 +194,14 @@ class OrderHistory extends React.Component {
                                 <div className="result__detail">
                                     <div className="result__posno">
                                         <div className="posno__posno">POSNO:</div>
-                                        <div>01</div>
+                                        <div>{this.state.selected.posNo}</div>
                                     </div>
                                 </div>
                             </div>
                             <div className="result__item">
                                 <div className="result__receipt">
                                     <div className="receipt__receipt">영수증번호:</div>
-                                    <div>001</div>
+                                    <div>{this.state.selected.billNo}</div>
                                 </div>
                             </div>
                             <hr />

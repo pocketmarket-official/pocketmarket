@@ -22,13 +22,14 @@ class OrderResult extends React.Component {
 
     render() {
         let result = this.props.result;
+        let receipt_index = -1;
         return (
             result.map((data) => {
                 let contentId = "content" + data.id;
                 let total = data.saleAmt;
                 let review_txt ="";
+                receipt_index += 1;
                 const link = `/main/store/${data.storeId}/order`;
-                let receipt_id = `receipt_${data.id}`;
                 total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 {
                     if (data.reviewYn == "N") {
@@ -41,9 +42,8 @@ class OrderResult extends React.Component {
                                     <div className="orderhistory__detail">
                                         <div className="orderhistory__name">{data.storeName}</div>
                                         <div className="orderhistory__price">{total}원</div>
-                                        <button className="orderhistory__btn info" id={receipt_id} onClick={() => {
-                                            const elt = document.getElementById("modal__conversion");
-                                            elt.classList.remove("hidden")
+                                        <button className="orderhistory__btn info" id={receipt_index} onClick={() => {
+
                                         }}>구매내역
                                         </button>
                                         <button className="orderhistory__btn__review review__start" onClick={() => {
@@ -73,7 +73,7 @@ class OrderResult extends React.Component {
                                     <div className="orderhistory__detail">
                                         <div className="orderhistory__name">{data.storeName}</div>
                                         <div className="orderhistory__price">{total}원</div>
-                                        <button className="orderhistory__btn info" id={receipt_id} onClick={() => {
+                                        <button className="orderhistory__btn info" id={receipt_index} onClick={() => {
                                             const elt = document.getElementById("modal__conversion");
                                             elt.classList.remove("hidden")
                                         }}>구매내역
