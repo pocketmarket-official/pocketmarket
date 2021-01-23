@@ -191,7 +191,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 1;
 }
 .modal__conversion .modal__modal {
@@ -290,6 +292,10 @@
         font-size: 12px;
         width: 100%;
         margin-top: 3px;
+        .list__detail {
+          width: 25%;
+          text-align: center;
+        }
       }
     }
     .last {
