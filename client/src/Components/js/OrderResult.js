@@ -30,7 +30,6 @@ class OrderResult extends React.Component {
 
     render() {
         let result = this.props.result;
-        console.log(this.state);
         return (
                 <>
                 <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {
@@ -138,7 +137,6 @@ class OrderResult extends React.Component {
                 let total = data.saleAmt;
                 let review_txt ="";
                 const link = `/main/store/${data.storeId}/order`;
-                let receipt_id = `receipt_${data.id}`;
                 total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 {
                     if (data.reviewYn == "N") {
@@ -149,7 +147,7 @@ class OrderResult extends React.Component {
                                     <div className="orderhistory__detail">
                                         <div className="orderhistory__name">{data.storeName}</div>
                                         <div className="orderhistory__price">{total}원</div>
-                                        <button className="orderhistory__btn info" id={receipt_id} onClick={() => {
+                                        <button className="orderhistory__btn info" onClick={() => {
                                             this.setState({ selected: data.detail });
                                             const elt = document.getElementById("modal__conversion");
                                             elt.classList.remove("hidden")
@@ -180,7 +178,7 @@ class OrderResult extends React.Component {
                                     <div className="orderhistory__detail">
                                         <div className="orderhistory__name">{data.storeName}</div>
                                         <div className="orderhistory__price">{total}원</div>
-                                        <button className="orderhistory__btn info" id={receipt_id} onClick={() => {
+                                        <button className="orderhistory__btn info" onClick={() => {
                                             this.setState({ selected: data.detail });
                                             const elt = document.getElementById("modal__conversion");
                                             elt.classList.remove("hidden")

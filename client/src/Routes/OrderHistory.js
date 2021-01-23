@@ -33,6 +33,7 @@ class OrderHistory extends React.Component {
             matched: [],
             storeId: '',
             loading: true,
+            selected: {},
         }
     }
 
@@ -60,12 +61,6 @@ class OrderHistory extends React.Component {
 
     componentDidMount() {
         let user_email = cookieCheck_rejectGuest();
-
-
-        //todo: getelement 안됨
-        let eleme = document.getElementById('receipt_1');
-        console.log(eleme);
-
 
         axios.get('/api/users_user/')
         .then((res1) => {
@@ -103,6 +98,8 @@ class OrderHistory extends React.Component {
                                     if(stores[index].storeCd === elt.storeCd){
                                         elt["storeName"] = stores[index].storeName;
                                         elt["storeId"] = stores[index].id;
+                                        elt["tel"] = stores[index].tel;
+                                        elt["ceo"] = stores[index].storeCeo;
                                     }
                                 }
                                 matched.push(elt);
@@ -131,10 +128,6 @@ class OrderHistory extends React.Component {
                 });
             });
         });
-    }
-
-    componentDidUpdate() {
-        const elt = document.getElementById("receipt_1");
     }
 
     render() {
