@@ -44,10 +44,7 @@ class OrderResult extends React.Component {
                         </div>
                         <div className="modal__bill">
                             <div className="result__item">
-                                <div>가게이름</div>
                                 <div>{this.state.selected.storeName}</div>
-                                {/*//todo*/}
-                                {/*가게이름 field 디자인*/}
                                 <div className="result__detail">
                                     <div className="result__phone">
                                         <div className="phone__phone">Tel:</div>
@@ -63,9 +60,6 @@ class OrderResult extends React.Component {
                             </div>
                             <hr />
                             <div className="result__item">
-                                <div>판매일자</div>
-                                {/*//todo*/}
-                                {/*판매일자 field 디자인*/}
                                 <div>{this.state.selected.saleDt}</div>
                                 <div className="result__detail">
                                     <div className="result__posno">
