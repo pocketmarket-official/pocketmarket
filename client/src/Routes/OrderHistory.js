@@ -68,62 +68,78 @@ class OrderHistory extends React.Component {
             .then((res2) => {
                 axios.get("/api/trades_saleDetail/")
                 .then((res3) => {
-                    axios.get("/api/stores_store/")
+                    axios.get("/api/trades_cardLog/")
                     .then((res4)=>{
-                        let userId = res1.data.find((elt) => {
-                            if (elt.email === user_email) {
-                                return true;
-                            }
-                        }).id;
+                        axios.get("/api/stores_store/")
+                        .then((res5)=> {
+                            let userId = res1.data.find((elt) => {
+                                if (elt.email === user_email) {
+                                    return true;
+                                }
+                            }).id;
 
-                        let matched = [];
-                        let saleDetail = res3.data;
-                        // sale dt 기준으로 정렬되어 있는 데이터
-                        res2.data.forEach((elt) => {
-                            if(elt.user === userId){
-                                let detail = [];
-                                for (let index in saleDetail) {
-                                if (saleDetail[index].saleDt === elt.saleDt) {
-                                    if (saleDetail[index].storeCd === elt.storeCd) {
-                                        if (saleDetail[index].billNo === elt.billNo) {
-                                                detail.push(saleDetail[index]);
+                            let matched = [];
+                            let saleDetail = res3.data;
+                            let cardLogs = res4.data;
+                            // sale dt 기준으로 정렬되어 있는 데이터
+                            res2.data.forEach((elt) => {
+                                if (elt.user === userId) {
+                                    let detail = [];
+                                    for (let index in saleDetail) {
+                                        if (saleDetail[index].saleDt === elt.saleDt) {
+                                            if (saleDetail[index].storeCd === elt.storeCd) {
+                                                if (saleDetail[index].billNo === elt.billNo) {
+                                                    detail.push(saleDetail[index]);
+                                                }
                                             }
                                         }
                                     }
-                                }
-                                elt["detail"] = detail;
+                                    elt["detail"] = detail;
 
-                                let stores = res4.data;
-                                for (let index in stores){
-                                    if(stores[index].storeCd === elt.storeCd){
-                                        elt["storeName"] = stores[index].storeName;
-                                        elt["storeId"] = stores[index].id;
-                                        elt["tel"] = stores[index].tel;
-                                        elt["ceo"] = stores[index].storeCeo;
+                                    let cardLog = [];
+                                    for (let index in cardLogs) {
+                                        if (cardLogs[index].saleDt === elt.saleDt) {
+                                            if (cardLogs[index].storeCd === elt.storeCd) {
+                                                if (cardLogs[index].billNo === elt.billNo) {
+                                                    cardLog.push(cardLogs[index]);
+                                                }
+                                            }
+                                        }
                                     }
+                                    elt["cardLog"] = cardLog;
+
+                                    let stores = res5.data;
+                                    for (let index in stores) {
+                                        if (stores[index].storeCd === elt.storeCd) {
+                                            elt["storeName"] = stores[index].storeName;
+                                            elt["storeId"] = stores[index].id;
+                                            elt["tel"] = stores[index].tel;
+                                            elt["ceo"] = stores[index].storeCeo;
+                                        }
+                                    }
+                                    matched.push(elt);
                                 }
-                                matched.push(elt);
-                            }
+                            });
+
+                            let result = matched.filter((elt) => {
+                                let saleDt = new Date(this.strToDate(elt.saleDt));
+                                if (this.state.startDate <= saleDt && saleDt <= this.state.endDate) {
+                                    return true;
+                                }
+                            });
+
+                            result = result.sort(function (a, b) {
+                                return a.id > b.id ? -1 : a.id < b.id ? 1 : 0;
+                            });
+
+
+                            this.setState({
+                                userId: userId,
+                                result: result,
+                                matched: matched,
+                                loading: false,
+                            })
                         });
-
-                        let result = matched.filter((elt) => {
-                            let saleDt = new Date(this.strToDate(elt.saleDt));
-                            if (this.state.startDate <= saleDt && saleDt <= this.state.endDate) {
-                                return true;
-                            }
-                        });
-
-                        result = result.sort(function(a, b) {
-                            return a.id > b.id ? -1 : a.id < b.id ? 1 : 0;
-                        });
-
-
-                        this.setState({
-                            userId: userId,
-                            result: result,
-                            matched: matched,
-                            loading: false,
-                        })
                     });
                 });
             });
