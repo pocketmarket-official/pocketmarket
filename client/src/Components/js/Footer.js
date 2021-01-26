@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const content = [
     {
@@ -45,6 +46,17 @@ function Footer() {
     return (
         <>
             <footer>
+                <div className="footer__top">
+                    <Link to="/mypage/notice/1">
+                        <div>개인정보처리방침</div>
+                    </Link>
+                    <Link to="/mypage/notice/2">
+                        <div>전자상거래 이용약관</div>
+                    </Link>
+                    <Link to="/mypage/notice/3">
+                        <div>위치기반서비스 이용약관</div>
+                    </Link>
+                </div>
                 <div className="footer__top">
                     {
                         content.map((section, index) => (

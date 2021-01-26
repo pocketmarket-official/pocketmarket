@@ -35,4 +35,16 @@
 .noticeresult__content {
     margin: 70px 5px 5px 5px;
     font-family: MaplestoryOTFLight;
+    line-height: 1.5;
+}
+.noticeresult__content h2, h3 {
+    text-align: center;
+}
+.noticeresult__content table {
+    border-collapse: collapse;
+    text-align: center;
+}
+.noticeresult__content table th, td {
+    width: 50%;
+    border: 1px solid black;
 }
