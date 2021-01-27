@@ -30,7 +30,7 @@ function Intro({authenticated, location}) {
         let redirect_uri;
         let reactRestApiToken = process.env.REACT_APP_KAKAO_KEY_API;
         let STATE = process.env.REACT_APP_STATE;
-        let DOMAIN = process.env.REACT_DOMAIN;
+        let DOMAIN = process.env.REACT_APP_DOMAIN;
         // kakao developer allowed redirect uri
         if(STATE === 'local:start') {
             redirect_uri = 'http://localhost:8000/login/kakao/callback/';
@@ -40,9 +40,6 @@ function Intro({authenticated, location}) {
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         } else if(STATE === 'prod') {
             redirect_uri = `${DOMAIN}/login/kakao/callback/`;
-            console.log("==1");
-            console.log(redirect_uri);
-            console.log("==1");
         } else if(STATE === 'jh') {
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         }
