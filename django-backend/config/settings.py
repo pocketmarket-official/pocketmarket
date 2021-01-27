@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "13.124.90.138", "pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "13.124.90.138", "pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com", "pocketmarket.site"]
 
 # Application definition
 
