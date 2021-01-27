@@ -48,7 +48,7 @@ def kakao_callback(request):
         elif STATE == 'dev':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         elif STATE == 'production':
-            redirect_uri = 'www.naver.com'
+            redirect_uri = 'http://pocketmarket.site/login/kakao/callback/'
         elif STATE == 'jh':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         if code is not None:
