@@ -115,7 +115,7 @@ def kakao_callback(request):
         elif STATE == 'dev':
             url = 'http://13.124.90.138:8000/login/'
         elif STATE == 'production':
-            url = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
+            url = '/login/'
         elif STATE == 'dev':
             url = 'http://13.124.90.138:8000/login/'
 
