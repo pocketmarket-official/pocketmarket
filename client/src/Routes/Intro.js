@@ -38,7 +38,8 @@ function Intro({authenticated, location}) {
         } else if(STATE === 'dev') {
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         } else if(STATE === 'prod') {
-            redirect_uri = 'http://pocketmarket.site/login/kakao/callback/';
+            let DOMAIN = process.env.REACT_DOMAIN;
+            redirect_uri = `${DOMAIN}/login/kakao/callback/`;
         } else if(STATE === 'jh') {
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         }
