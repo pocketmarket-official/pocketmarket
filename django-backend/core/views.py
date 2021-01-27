@@ -42,6 +42,7 @@ def kakao_callback(request):
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
         STATE = os.environ.get("STATE")
+
         if STATE == 'local':
             redirect_uri = 'http://localhost:8000/login/kakao/callback/'
         elif STATE == 'dev':
@@ -101,7 +102,7 @@ def kakao_callback(request):
                     elif STATE == 'dev':
                         url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'
                     elif STATE == 'production':
-                        url = f'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/makingCookie/{access_token}/{email}'
+                        url = f'/makingCookie/{access_token}/{email}'
                     elif STATE == 'jh':
                         url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'
 
