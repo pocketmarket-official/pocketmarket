@@ -30,6 +30,7 @@ function Intro({authenticated, location}) {
         let redirect_uri;
         let reactRestApiToken = process.env.REACT_APP_KAKAO_KEY_API;
         let STATE = process.env.REACT_APP_STATE;
+        // kakao developer allowed redirect uri
         if(STATE === 'local:start') {
             redirect_uri = 'http://localhost:8000/login/kakao/callback/';
         } else if(STATE === 'local:build') {
@@ -37,7 +38,7 @@ function Intro({authenticated, location}) {
         } else if(STATE === 'dev') {
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         } else if(STATE === 'prod') {
-            redirect_uri = '/login/kakao/callback/';
+            redirect_uri = 'http://pocketmarket.site/login/kakao/callback/';
         } else if(STATE === 'jh') {
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         }
