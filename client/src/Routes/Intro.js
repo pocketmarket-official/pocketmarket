@@ -40,6 +40,9 @@ function Intro({authenticated, location}) {
         } else if(STATE === 'prod') {
             let DOMAIN = process.env.REACT_DOMAIN;
             redirect_uri = `${DOMAIN}/login/kakao/callback/`;
+            console.log("==1");
+            console.log(redirect_uri);
+            console.log("==1");
         } else if(STATE === 'jh') {
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/';
         }
