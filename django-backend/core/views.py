@@ -48,7 +48,7 @@ def kakao_callback(request):
         elif STATE == 'dev':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         elif STATE == 'production':
-            redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
+            redirect_uri = '/login/kakao/callback/'
         elif STATE == 'jh':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         if code is not None:
