@@ -158,6 +158,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://13.124.90.138:3000',
     'http://13.124.90.138:8000',
+    'http://pocketmarket.site',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -165,6 +166,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://13.124.90.138:3000',
     'http://13.124.90.138:8000',
+    'http://pocketmarket.site',
 ]
 
 CORS_ALLOW_HEADERS = [
