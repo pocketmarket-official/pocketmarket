@@ -42,12 +42,14 @@ def kakao_callback(request):
         client_id = os.environ.get('KAKAO_KEY')
         client_secret = os.environ.get('KAKAO_SECRET')
         STATE = os.environ.get("STATE")
+        DOMAIN = os.environ.get("DOMAIN")
+
         if STATE == 'local':
             redirect_uri = 'http://localhost:8000/login/kakao/callback/'
         elif STATE == 'dev':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         elif STATE == 'production':
-            redirect_uri = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/kakao/callback/'
+            redirect_uri = DOMAIN+'/login/kakao/callback/'
         elif STATE == 'jh':
             redirect_uri = 'http://13.124.90.138:8000/login/kakao/callback/'
         if code is not None:
@@ -101,7 +103,7 @@ def kakao_callback(request):
                     elif STATE == 'dev':
                         url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'
                     elif STATE == 'production':
-                        url = f'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/makingCookie/{access_token}/{email}'
+                        url = f'/makingCookie/{access_token}/{email}'
                     elif STATE == 'jh':
                         url = f'http://13.124.90.138:3000/makingCookie/{access_token}/{email}'
 
@@ -114,7 +116,7 @@ def kakao_callback(request):
         elif STATE == 'dev':
             url = 'http://13.124.90.138:8000/login/'
         elif STATE == 'production':
-            url = 'http://pocketmarket-prod.eba-qcrhvmux.ap-northeast-2.elasticbeanstalk.com/login/'
+            url = '/login/'
         elif STATE == 'dev':
             url = 'http://13.124.90.138:8000/login/'
 
