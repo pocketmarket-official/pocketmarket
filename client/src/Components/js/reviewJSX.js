@@ -40,15 +40,34 @@ class ReviewJSX extends React.Component {
     }
 
     render() {
+        let email;
+        if(this.state.reviewUser) {
+            let parseEmail = this.state.reviewUser.email.split("@");
+            let email_front;
+            let email_back = parseEmail[1];
+            if(parseEmail[0].length === 1) {
+                email_front = "*";
+            } else if(parseEmail[0].length === 2) {
+                email_front = parseEmail[0].slice(0, 1) + "*";
+            } else {
+                email_front = parseEmail[0].slice(0, 2) + "*".repeat(parseEmail[0].length - 2);
+            }
+            email = email_front + "@" + email_back;
+        }
+
         return(
             <>
                 <div className="review">
                     <div className="review__list">
                         <div className="review__header">
                             <div className="review__user">
-                                <div className="user__avatar"><img className="image user__evatar" src={this.state.reviewUser.profileImage || defaultImg}/>
+                                <div className="user__avatar">
+                                    <img className="image user__evatar" src={this.state.reviewUser.profileImage || defaultImg}/>
                                 </div>
-                                <div className="user__name">{this.state.reviewUser.profileName}</div>
+                                <div className="user__info">
+                                    <div className="user__name">{this.state.reviewUser.profileName}</div>
+                                    <div className="user__email">{email}</div>
+                                </div>
                             </div>
                         </div>
                         <div className="bar"></div>

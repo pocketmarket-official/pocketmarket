@@ -74,6 +74,18 @@ class StoreList extends React.Component {
                                         return true;
                                     }
                                 });
+                                let parseEmail = user.email.split("@");
+                                let email_front;
+                                let email_back = parseEmail[1];
+                                if(parseEmail[0].length === 1) {
+                                    email_front = "*";
+                                } else if(parseEmail[0].length === 2) {
+                                    email_front = parseEmail[0].slice(0, 1) + "*";
+                                } else {
+                                    email_front = parseEmail[0].slice(0, 2) + "*".repeat(parseEmail[0].length - 2);
+                                }
+
+                                let email = email_front + "@" + email_back;
                                     return (
                                         <>
                                             <Link to={{
@@ -96,7 +108,7 @@ class StoreList extends React.Component {
                                                             <div className="box__box">
                                                                 <div className="storeList__name">{user.profileName}</div>
                                                                 {/*<div className="storeList__likes"><p className="listLikesButton">♥</p>53</div>*/}
-                                                                <div className="storeList__publisher">{user.email}</div>
+                                                                <div className="storeList__publisher">{email}</div>
                                                                 {/*<div className="storeList__publisher">{user.email} 20.09.20 [치즈핫도그,
                                                                     콘핫도그x2]
                                                                 </div>*/}

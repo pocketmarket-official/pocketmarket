@@ -116,3 +116,8 @@ input[type=range]::-webkit-slider-thumb {
   height: 16px; width: 16px;
   border-radius: 50%;
 }
+
+body {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
