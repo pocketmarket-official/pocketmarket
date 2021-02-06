@@ -151,7 +151,7 @@ class Order extends React.Component {
                             .then((saleHeaders) => {
                                let count = saleHeaders.data.filter(
                                    (elt) => {
-                                        if(elt.storeCd === storeCd && elt.orderStatus === '2'){
+                                        if(elt.storeCd === storeCd && (elt.orderStatus === '1' || elt.orderStatus === '2')){
                                             return true;
                                         }
                                    }

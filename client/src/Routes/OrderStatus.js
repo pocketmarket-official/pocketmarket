@@ -111,19 +111,33 @@ class OrderStatus extends React.Component {
                                 let button;
                                 let time = "";
                                 let text = "";
-                                if(elt.orderStatus === '1') {
-                                    status = "주문중";
+                                if(elt.orderStatus === '0') {
+                                    status = "장바구니";
+                                    deleteButton = (<></>);
+                                    button = (
+                                        <>
+                                        </>
+                                    );
+                                } else if(elt.orderStatus === '1') {
+                                    status = "주문 수락 대기중";
                                     deleteButton = (<></>);
                                     button = (
                                         <>
                                             <div className="pickup active">
-                                                <div className="pickup__message">
-                                                    주문한 음식을 수령하셨다면 픽업완료를 눌러주세요 ▶
-                                                </div>
-                                                <button className="pickup__btn" onClick={(e) => {
-                                                    e.preventDefault();
-                                                }}>주문중
-                                                </button>
+                                            <div className="pickup__message">
+                                                주문을 취소하시려면 주문취소를 눌러주세요 ▶
+                                            </div>
+                                            <button className="pickup__btn" onClick={(e) => {
+                                                e.preventDefault();
+                                                let id = elt.id;
+                                                axios.put(`/api/trades_saleHeader/${id}/`, {
+
+                                                })
+                                                .then(() => {
+                                                    window.location.reload();
+                                                })
+                                            }}>주문취소
+                                            </button>
                                             </div>
                                         </>
                                     );
