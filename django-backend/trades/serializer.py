@@ -133,6 +133,7 @@ class CardLogSerializer(serializers.ModelSerializer):
             'apprDt',
             'apprTime',
             'apprFlag',
+            'receiptId',
             'instFlag',
             'instMonth',
             'terminalId',

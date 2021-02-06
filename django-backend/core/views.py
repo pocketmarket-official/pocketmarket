@@ -236,8 +236,6 @@ def trade(request):
         context = ''
         tradeErrorCode = '000'
         tradeErrorMsg = ''
-        tradeErrorCode = '000'
-        tradeErrorMsg = ''
         # variable for ErrorLog
         storeId = ''
         saleDt = ''
@@ -544,7 +542,7 @@ def trade(request):
                 orgPosNo='',
                 orgBillNo='',
                 sendYn='N',
-                orderStatus='2',
+                orderStatus='1',
                 user = user
             )
 
@@ -565,6 +563,7 @@ def trade(request):
                 apprDt=cardApprDt,
                 apprTime=cardApprTime,
                 apprFlag='1',
+                receiptId=payment['receipt_id'],
                 instFlag=cardInstFlag,
                 instMonth=cardInstMont,
                 terminalId=cardTerminalId,
@@ -751,6 +750,74 @@ def trade(request):
                 'tradeErrorMsg': tradeErrorMsg}
         response = JsonResponse(data)
         return response
+
+@csrf_exempt
+def tradeRefund(request):
+    try:
+        # variable defintion
+        saleHeaderList = []
+        saleDetailList = []
+        cardLogList = []
+        saleDetailObjList = []
+        # variable for error response
+        context = ''
+        tradeErrorCode = '100'
+        tradeErrorMsg = ''
+        # variable for ErrorLog
+        storeId = ''
+        saleDt = ''
+        posNo = ''
+        billNo = ''
+        userId = ''
+        itemId = ''
+        # variable for cancelation
+        bootpay = BootpayApi(
+            os.environ.get("BOOTPAY_WEB_APPLICATION_ID"),
+            os.environ.get("BOOTPAY_PRIVATE_KEY")
+        )
+
+        STATE = os.environ.get("STATE")
+        if STATE == 'local':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif STATE == 'dev':
+            domain = 'http://asp-test.imtsoft.me/api/'
+            compCd = 'C0028'
+        elif STATE == 'production':
+            domain = 'https://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+        elif STATE == 'jh':
+            domain = 'http://asp.imtsoft.me/api/'
+            compCd = 'C0023'
+
+        bootpayAcceessToken = bootpay.get_access_token()
+        # bootpay accesstoken의 상태를 확인하고
+        if bootpayAcceessToken['status'] == 200:
+            # bootpay에 취소 요청을 날린다.
+            cancel_result = bootpay.cancel('601eb4855b2948003baf7897',
+                                           6000,
+                                           'slop1434@korea.ac.kr',
+                                           '테스트결제123')
+
+        response = JsonResponse('refund success')
+        return response
+
+    except Exception as ex:
+        print(ex)
+        ErrorLog.objects.create(storeId=storeId,saleDt=saleDt,posNo=posNo,
+                                billNo=billNo, userId=userId, itemId=itemId,
+                                tradeErrorCode=tradeErrorCode, tradeErrorMsg=tradeErrorMsg,
+                                exception=str(ex), context=context)
+
+
+        data = {'url': '/order/status',
+                'result': '500',
+                'context':context,
+                'tradeErrorCode': tradeErrorCode,
+                'tradeErrorMsg': tradeErrorMsg}
+        response = JsonResponse(data)
+        return response
+
 
 @csrf_exempt
 def tradeReSend(request):
