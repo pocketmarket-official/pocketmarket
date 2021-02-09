@@ -10,4 +10,5 @@ urlpatterns = [
     path("saveToken/", views.saveToken),
     path("saveTokenStore/", views.saveTokenStore),
     path("pushSend_makeComplete/", views.pushSend_makeComplete),
+    path("pushSend_confirmComplete/", views.pushSend_confirmComplete),
 ]
