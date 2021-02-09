@@ -139,7 +139,7 @@ class KDSMain extends React.Component{
                                                     }
                                                 }
                                             }
-                                            if (detail !== [] && elt.orderStatus == '2') {
+                                            if (detail !== [] && (elt.orderStatus == '1' || elt.orderStatus == '2')) {
                                                 elt["detail"] = detail;
                                                 matched.push(elt);
                                             }
@@ -159,7 +159,6 @@ class KDSMain extends React.Component{
         return (
             <div className="kds">
                 <div className="header">
-
                     <div>
                         <img className="header__back"  onClick={() => {window.location.href = "/mypage"}} src={btnBack}/>
                         <span>{this.state.store.storeName}</span>
@@ -180,95 +179,199 @@ class KDSMain extends React.Component{
                                 <div>loading...</div>
                                 :
                                     this.state.matched.map((elt)=>{
-                                        return(
-                                        <>
-                                            {/*ORDER_BOX*/}
-                                            <div className="orderBox" onClick={(e) => {
-                                                    e.preventDefault();
-                                                    let id = elt.id;
-                                                    let d = new Date();
-                                                    let complete_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
-                                                    axios.put(`/api/trades_saleHeader/${id}/`, {
-                                                        orderStatus: 3,
-                                                        completeTime: complete_time,
-                                                    })
-                                                    .then(() => {
-                                                        let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
-                                                        axios.post('/pushSend_makeComplete/', transData)
-                                                            .then((res)=>{
-                                                                window.location.reload();
-                                                            });
-                                                    })
-                                                }}>
+                                        if(elt.orderStatus === '2'){
+                                            return(
+                                                <>
+                                                    {/*ORDER_BOX*/}
+                                                    <div className="orderBox" onClick={(e) => {
+                                                            e.preventDefault();
+                                                            let id = elt.id;
+                                                            let d = new Date();
+                                                            let complete_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
+                                                            axios.put(`/api/trades_saleHeader/${id}/`, {
+                                                                orderStatus: 3,
+                                                                completeTime: complete_time,
+                                                            })
+                                                            .then(() => {
+                                                                let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
+                                                                axios.post('/pushSend_makeComplete/', transData)
+                                                                    .then((res)=>{
+                                                                        window.location.reload();
+                                                                    });
+                                                            })
+                                                        }}>
 
-                                                <div className="orderWrap">
-                                                    <div className="orderHeader">
-                                                        <div className="wrap">
-                                                            <div className="left">
-                                                                <div className="billNo">{elt.billNo}</div>
-                                                                <div className="elapsedTime">
-                                                                    <img src={timer} alt=""/>
-                                                                    <div className="step1">{elt.timeLaps}분 경과</div>
-                                                                </div>
-                                                            </div>
-                                                            {/*<div className="right">*/}
-                                                                {/*<div>94</div>*/}
-                                                                {/*<div>EAT-IN</div>*/}
-                                                            {/*</div>*/}
-                                                        </div>
-                                                    </div>
-                                                    {
-                                                        elt.detail.map((elt2)=>{
-                                                            return(
-                                                                <>
-                                                                    <div className="orderDetail" >
-                                                                        <div className="itemGroup">
-                                                                            {
-                                                                                elt2.itemSellLevel == '1' ?
-                                                                                    <>
-                                                                                        <div className="item">
-                                                                                            <div
-                                                                                                className="quantity">{elt2.qty}</div>
-                                                                                            <div className="name">{elt2.itemName}
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </>
-                                                                                    :
-                                                                                    elt2.qty > 0 ?
-                                                                                        <>
-                                                                                            <div
-                                                                                                className="item indent">
-                                                                                                <div
-                                                                                                    className="quantity">{elt2.qty}</div>
-                                                                                                <div
-                                                                                                    className="name">{elt2.itemName}
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </>
-                                                                                        :
-                                                                                        <>
-                                                                                            <div
-                                                                                                className="item negative indent">
-                                                                                                <div
-                                                                                                    className="quantity">{elt2.qty}
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    className="name">{elt2.itemName}
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </>
-                                                                            }
+                                                        <div className="orderWrap">
+                                                            <div className="orderHeader">
+                                                                <div className="wrap">
+                                                                    <div className="left">
+                                                                        <div className="billNo">{elt.billNo}</div>
+                                                                        <div className="elapsedTime">
+                                                                            <img src={timer} alt=""/>
+                                                                            <div className="step1">{elt.timeLaps}분 경과</div>
                                                                         </div>
                                                                     </div>
-                                                                </>
-                                                            );
-                                                        }).reverse()
-                                                    }
+                                                                    {/*<div className="right">*/}
+                                                                        {/*<div>94</div>*/}
+                                                                        {/*<div>EAT-IN</div>*/}
+                                                                    {/*</div>*/}
+                                                                </div>
+                                                            </div>
+                                                            {
+                                                                elt.detail.map((elt2)=>{
+                                                                    return(
+                                                                        <>
+                                                                            <div className="orderDetail" >
+                                                                                <div className="itemGroup">
+                                                                                    {
+                                                                                        elt2.itemSellLevel == '1' ?
+                                                                                            <>
+                                                                                                <div className="item">
+                                                                                                    <div
+                                                                                                        className="quantity">{elt2.qty}</div>
+                                                                                                    <div className="name">{elt2.itemName}
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </>
+                                                                                            :
+                                                                                            elt2.qty > 0 ?
+                                                                                                <>
+                                                                                                    <div
+                                                                                                        className="item indent">
+                                                                                                        <div
+                                                                                                            className="quantity">{elt2.qty}</div>
+                                                                                                        <div
+                                                                                                            className="name">{elt2.itemName}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </>
+                                                                                                :
+                                                                                                <>
+                                                                                                    <div
+                                                                                                        className="item negative indent">
+                                                                                                        <div
+                                                                                                            className="quantity">{elt2.qty}
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            className="name">{elt2.itemName}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </>
+                                                                                    }
+                                                                                </div>
+                                                                            </div>
+                                                                        </>
+                                                                    );
+                                                                }).reverse()
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            );
+                                        } else {
+                                            return(
+                                                <>
+                                                    {/*ORDER_BOX*/}
+                                                    <div className="orderBox" onClick={(e) => {
+                                                            e.preventDefault();
+                                                            let id = elt.id;
+                                                            let d = new Date();
+                                                            let confirm_time = d.getHours().toString().padStart(2, "0") + d.getMinutes().toString().padStart(2, "0") + d.getSeconds().toString().padStart(2, "0");
+                                                            axios.get('/api/trades_saleHeader/')
+                                                                .then((res) => {
+                                                                    let saleHeader = res.data.find((elt2) => {
+                                                                        if(elt2.id === elt.id){
+                                                                            return true;
+                                                                        }
+                                                                    });
 
-                                                </div>
-                                            </div>
-                                        </>
-                                        );
+                                                                    if (saleHeader.returnYn === 'Y'){
+
+                                                                    } else {
+                                                                        axios.put(`/api/trades_saleHeader/${id}/`, {
+                                                                            orderStatus: 2,
+                                                                            confirmTime: confirm_time,
+                                                                        })
+                                                                        .then(() => {
+                                                                            let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
+                                                                            axios.post('/pushSend_confirmComplete/', transData)
+                                                                                .then((res)=>{
+                                                                                    window.location.reload();
+                                                                                });
+                                                                        })
+                                                                    }
+                                                                });
+                                                        }}>
+
+                                                        <div className="orderWrap">
+                                                            <div className="orderHeader_waiting">
+                                                                <div className="wrap">
+                                                                    <div className="left">
+                                                                        <div className="billNo">{elt.billNo}</div>
+                                                                        <div className="elapsedTime">
+                                                                            <img src={timer} alt=""/>
+                                                                            <div className="step1">{elt.timeLaps}분 경과</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    {/*<div className="right">*/}
+                                                                        {/*<div>94</div>*/}
+                                                                        {/*<div>EAT-IN</div>*/}
+                                                                    {/*</div>*/}
+                                                                </div>
+                                                            </div>
+                                                            {
+                                                                elt.detail.map((elt2)=>{
+                                                                    return(
+                                                                        <>
+                                                                            <div className="orderDetail" >
+                                                                                <div className="itemGroup">
+                                                                                    {
+                                                                                        elt2.itemSellLevel == '1' ?
+                                                                                            <>
+                                                                                                <div className="item">
+                                                                                                    <div
+                                                                                                        className="quantity">{elt2.qty}</div>
+                                                                                                    <div className="name">{elt2.itemName}
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </>
+                                                                                            :
+                                                                                            elt2.qty > 0 ?
+                                                                                                <>
+                                                                                                    <div
+                                                                                                        className="item indent">
+                                                                                                        <div
+                                                                                                            className="quantity">{elt2.qty}</div>
+                                                                                                        <div
+                                                                                                            className="name">{elt2.itemName}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </>
+                                                                                                :
+                                                                                                <>
+                                                                                                    <div
+                                                                                                        className="item negative indent">
+                                                                                                        <div
+                                                                                                            className="quantity">{elt2.qty}
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            className="name">{elt2.itemName}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </>
+                                                                                    }
+                                                                                </div>
+                                                                            </div>
+                                                                        </>
+                                                                    );
+                                                                }).reverse()
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            );
+                                        }
                                     })
                             }
                         </div>
