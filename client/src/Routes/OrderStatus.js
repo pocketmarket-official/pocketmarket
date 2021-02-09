@@ -5,6 +5,7 @@ import btnCal from '../assets/order_status/btn_date.png'
 import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import bi from '../assets/main/grayBI.png';
+import close from "../assets/order_status_pop/btn_close.png";
 
 class OrderStatus extends React.Component {
     constructor(props) {
@@ -123,19 +124,30 @@ class OrderStatus extends React.Component {
                                     deleteButton = (<></>);
                                     button = (
                                         <>
+                                            <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {
+                                                const elt = document.getElementById("modal__conversion");
+                                                elt.classList.add("hidden");
+                                            }}>
+                                                <div className="modal__modal" onClick={(e) => {
+                                                    e.stopPropagation();
+                                                }}>
+
+
+                                                    <div className="modal__close__btn" id="modal__close__btn" onClick={() =>{
+                                                        const elt = document.getElementById("modal__conversion");
+                                                        elt.classList.add("hidden");
+                                                    }}><img src={close}/></div>
+                                                </div>
+                                            </div>
+
                                             <div className="pickup active">
                                             <div className="pickup__message">
                                                 주문을 취소하시려면 주문취소를 눌러주세요 ▶
                                             </div>
-                                            <button className="pickup__btn" onClick={(e) => {
-                                                e.preventDefault();
-                                                let id = elt.id;
-                                                axios.put(`/api/trades_saleHeader/${id}/`, {
-
-                                                })
-                                                .then(() => {
-                                                    window.location.reload();
-                                                })
+                                            <button className="pickup__btn" onClick={() =>{
+                                                const elt = document.getElementById("modal__conversion");
+                                                console.log(elt);
+                                                elt.classList.remove("hidden");
                                             }}>주문취소
                                             </button>
                                             </div>
