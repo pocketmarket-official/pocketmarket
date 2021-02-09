@@ -1016,6 +1016,19 @@ def pushSend_makeComplete(request):
     except Exception as ex:
         print(ex)
 
+@csrf_exempt
+def pushSend_confirmComplete(request):
+    try:
+        storeName = json.loads(request.body)['storeName']
+        user = User.objects.get(id=json.loads(request.body)['userId'])
+        device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
+        if(device):
+            device.send_message("상품제조 시작", storeName + '에 주문하신 상품이 준비되었습니다.')
+
+        return HttpResponse('success')
+    except Exception as ex:
+        print(ex)
+
 
 @csrf_exempt
 def storeLike(request):
