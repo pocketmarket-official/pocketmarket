@@ -166,6 +166,83 @@
             }
           }
 
+          .orderHeader_waiting {
+            height: 55px;
+            overflow: hidden;
+            background-color: red;
+            padding: 5px;
+
+            .wrap {
+              display: flex;
+              height: 100%;
+              justify-content: space-between;
+
+              div {
+                &.left {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  padding: 4px;
+                  background: #212121;
+                  border-radius: 5px;
+
+                  .billNo {
+                    color: #E9E9E9;
+                    font-size: 24px;
+                  }
+
+                  .elapsedTime {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    min-width: 75px;
+                    text-align: right;
+                    color: white;
+
+                    img {
+                      width: .8rem;
+                      height: .8rem;
+                      margin-right: 5px;
+                    }
+
+                    div {
+                      min-width: 44px;
+                    }
+
+                    .step1 {
+                      color: #ffffff;
+                    }
+
+                    .step2 {
+                      color: #ff8200;
+                    }
+
+                    .step3 {
+                      color: #ff0000;
+                    }
+
+                  }
+                }
+
+                &.right {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-end;
+                  justify-content: space-evenly;
+                  color: #2C2C2C;
+                }
+              }
+            }
+
+            &.revert {
+              background-color: #f0932b;
+            }
+
+            &.void {
+              background-color: #e74c3c;
+            }
+          }
+
           .orderDetail {
             width: 100%;
             height: calc(100% - 50px);
