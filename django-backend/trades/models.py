@@ -28,6 +28,7 @@ class SaleHeader(models.Model):
     orgBillNo = models.CharField(max_length=10, null=True)
     sendYn = models.CharField(max_length=1, default='N')
     orderStatus = models.CharField(max_length=1, default=1)#0:장바구니/1:수락대기중/2:조리중/3:조리완료/4:픽업완료(User)/5:픽업완료(Store)/6:리뷰작성/7:리뷰취소
+    confirmTime = models.CharField(max_length=8, null=True, blank=True)
     completeTime = models.CharField(max_length=8, null=True, blank=True)
     pickupTime = models.CharField(max_length=8, null=True, blank=True)
     reviewYn = models.CharField(max_length=1, default='N')
