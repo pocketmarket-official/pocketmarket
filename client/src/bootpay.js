@@ -5,11 +5,6 @@ function pay(sellItemList, price, applicationId, storeName, storeId, userId) {
     console.log("==4==");
     console.log(applicationId);
 
-    window.BootPay.setApplicationId(applicationId);
-    // window.setApplicationId(applicationId);
-    window.BootPay.setDevice('IOS');
-    BootPay.startTrace();
-
     BootPay.request({
         // price: trInfo.Price,
         price: price,

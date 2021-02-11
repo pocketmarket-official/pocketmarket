@@ -9,26 +9,26 @@ import cookie from "react-cookies";
 
 let applicationId = process.env.REACT_APP_BOOTPAY_APP_ID;
 
-window.identifyIosDevice = (function () {
-    applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
-    //
-    // let meta = document.createElement('meta');
-    // meta.name='bootpay-application-id';
-    // meta.content=applicationId;
-    // document.getElementsByTagName('head')[0].appendChild(meta);
-    //
-    // let script = document.createElement('script');
-    // script.type = 'text/javascript';
-    // script.src = "https://cdn.bootpay.co.kr/js/bootpay-2.1.1.min.js";
-    // document.getElementsByTagName('head')[0].appendChild(script);
-
-    console.log("=====1=====");
-
-    window.BootPay.setApplicationId(applicationId);
-    // window.setApplicationId(applicationId);
-    window.BootPay.setDevice('IOS');
-    BootPay.startTrace();
-});
+// window.identifyIosDevice = (function () {
+//     applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
+//     //
+//     // let meta = document.createElement('meta');
+//     // meta.name='bootpay-application-id';
+//     // meta.content=applicationId;
+//     // document.getElementsByTagName('head')[0].appendChild(meta);
+//     //
+//     // let script = document.createElement('script');
+//     // script.type = 'text/javascript';
+//     // script.src = "https://cdn.bootpay.co.kr/js/bootpay-2.1.1.min.js";
+//     // document.getElementsByTagName('head')[0].appendChild(script);
+//
+//     console.log("=====1=====");
+//
+//     window.BootPay.setApplicationId(applicationId);
+//     // window.setApplicationId(applicationId);
+//     window.BootPay.setDevice('IOS');
+//     BootPay.startTrace();
+// });
 
 class OrderInfo extends React.Component {
     constructor(props) {
