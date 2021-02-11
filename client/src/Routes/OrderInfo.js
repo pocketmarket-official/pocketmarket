@@ -10,12 +10,12 @@ import cookie from "react-cookies";
 let applicationId = process.env.REACT_APP_BOOTPAY_APP_ID;
 
 window.identifyIosDevice = (function () {
-    applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
-
-    let meta = document.createElement('meta');
-    meta.name='bootpay-application-id';
-    meta.content=applicationId;
-    document.getElementsByTagName('head')[0].appendChild(meta);
+    // applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
+    //
+    // let meta = document.createElement('meta');
+    // meta.name='bootpay-application-id';
+    // meta.content=applicationId;
+    // document.getElementsByTagName('head')[0].appendChild(meta);
     //
     // let script = document.createElement('script');
     // script.type = 'text/javascript';
