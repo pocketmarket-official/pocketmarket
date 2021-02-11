@@ -135,6 +135,7 @@ class CardLogSerializer(serializers.ModelSerializer):
             'apprTime',
             'apprFlag',
             'receiptId',
+            'cancelId',
             'instFlag',
             'instMonth',
             'terminalId',

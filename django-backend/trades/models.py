@@ -27,7 +27,7 @@ class SaleHeader(models.Model):
     orgPosNo = models.CharField(max_length=5, null=True)
     orgBillNo = models.CharField(max_length=10, null=True)
     sendYn = models.CharField(max_length=1, default='N')
-    orderStatus = models.CharField(max_length=1, default=1)#0:장바구니/1:수락대기중/2:조리중/3:조리완료/4:픽업완료(User)/5:픽업완료(Store)/6:리뷰작성/7:리뷰취소
+    orderStatus = models.CharField(max_length=1, default=1)#0:장바구니/1:수락대기중/2:조리중/3:조리완료/4:픽업완료(User)/5:픽업완료(Store)/6:리뷰작성/7:리뷰취소/9:반품
     confirmTime = models.CharField(max_length=8, null=True, blank=True)
     completeTime = models.CharField(max_length=8, null=True, blank=True)
     pickupTime = models.CharField(max_length=8, null=True, blank=True)
@@ -111,6 +111,7 @@ class CardLog(models.Model):
     apprTime = models.CharField(max_length=6, default='')
     apprFlag = models.CharField(max_length=1, default=1) #[1:정상승인/2:임의등록]
     receiptId = models.CharField(max_length=30, default='')
+    cancelId = models.CharField(max_length=50, default='')
     instFlag = models.CharField(max_length=1, default='0') #[0:할부없음/1:할부]
     instMonth = models.CharField(max_length=2, default='00')
     terminalId = models.CharField(max_length=20, default='')

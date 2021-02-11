@@ -764,7 +764,7 @@ def tradeRefund(request):
         tradeErrorCode = '100'
         tradeErrorMsg = ''
         # variable for ErrorLog
-        storeId = ''
+        storeCd = ''
         saleDt = ''
         posNo = ''
         billNo = ''
@@ -790,21 +790,155 @@ def tradeRefund(request):
             domain = 'http://asp.imtsoft.me/api/'
             compCd = 'C0023'
 
+        # parameter from request
+        tradeErrorCode = '410'
+        tradeErrorMsg = "requestBody doesn't exist"
+        requestBody = request.body
+
+        tradeErrorCode = '411'
+        tradeErrorMsg = "requestBody json load failure"
+        requestBodyJson = json.loads(requestBody)
+
+        tradeErrorCode = '412'
+        tradeErrorMsg = "requestBody saleHeaderId doesn't exist"
+        saleHeaderId = requestBodyJson['saleHeaderId']
+
+        tradeErrorCode = '420'
+        tradeErrorMsg = "saleHeader object doesn't exist"
+        context = 'saleHeaderId = ' + str(saleHeaderId)
+        orgSaleHeader = SaleHeader.objects.get(id=saleHeaderId)
+
+        tradeErrorCode = '421'
+        tradeErrorMsg = "saleDetail object doesn't exist"
+        context = 'saleHeaderId = ' + str(saleHeaderId)
+        orgSaleDetail = SaleDetail.objects.filter(storeCd=orgSaleHeader.storeCd, saleDt=orgSaleHeader.saleDt,
+                                                  posNo=orgSaleHeader.posNo, billNo=orgSaleHeader.billNo)
+
+        tradeErrorCode = '422'
+        tradeErrorMsg = "cardLog object doesn't exist"
+        context = 'saleHeaderId = ' + str(saleHeaderId)
+        orgCardLog = CardLog.objects.get(storeCd=orgSaleHeader.storeCd, saleDt=orgSaleHeader.saleDt,
+                                            posNo=orgSaleHeader.posNo, billNo=orgSaleHeader.billNo)
+
+        tradeErrorCode = '423'
+        tradeErrorMsg = "store object doesn't exist"
+        context = 'storeCd = ' + str(orgSaleHeader.storeCd)
+        store = Store.objects.get(storeCd=orgSaleHeader.storeCd)
+        storeCd = store.storeCd
+
+        tradeErrorCode = '424'
+        tradeErrorMsg = "user object doesn't exist"
+        context = 'userId = ' + str(orgSaleHeader.user)
+        user = User.objects.get(id=orgSaleHeader.user.id)
+
+        saleDt = datetime.today().strftime('%Y%m%d')
+        posNo = '01'
+
+        #etc parameters
+        saleDt = datetime.today().strftime('%Y%m%d')
+        weekday = ((datetime.today().weekday()) + 2) % 7
+        if weekday == 0:
+            weekday = 7
+        saleTime = strftime('%H%M%S', localtime())
+        saleTimeCd = ''
+        if saleTime < '050000':
+            saleTimeCd = '06'
+        elif saleTime < '100000':
+            saleTimeCd = '01'
+        elif saleTime < '130000':
+            saleTimeCd = '02'
+        elif saleTime < '160000':
+            saleTimeCd = '03'
+        elif saleTime < '190000':
+            saleTimeCd = '04'
+        elif saleTime < '230000':
+            saleTimeCd = '05'
+
+        billNo = SaleHeader.objects.filter(storeCd=orgSaleHeader.storeCd, posNo=posNo, saleDt=saleDt).order_by('-billNo')
+        if billNo:
+            if billNo[0].billNo > '9999':
+                data = {'url': '/order/status',
+                        'result': '500',
+                        'tradeErrorCode': '030',
+                        'tradeErrorMsg': "order overflow",
+                        'context': context}
+                response = JsonResponse(data)
+                return response
+            else:
+                billNo = f'{int(billNo[0].billNo) + 1:04}'
+        else:
+            billNo = '0001'
+
+
         bootpayAcceessToken = bootpay.get_access_token()
         # bootpay accesstoken의 상태를 확인하고
         if bootpayAcceessToken['status'] == 200:
             # bootpay에 취소 요청을 날린다.
-            cancel_result = bootpay.cancel('601eb4855b2948003baf7897',
-                                           6000,
-                                           'slop1434@korea.ac.kr',
-                                           '테스트결제123')
+            cancel_result = bootpay.cancel(orgCardLog.receiptId,
+                                           orgCardLog.cardAmt,
+                                           user.email,
+                                           '주문 수락 이전 고객 취소')
+
+            if cancel_result['status'] == 200:
+                apprNo = cancel_result['data']['order_id'].split('_')[0]
+                apprTime = cancel_result['data']['revoked_at'].split(' ')[1].split(':')[0] \
+                           + cancel_result['data']['revoked_at'].split(' ')[1].split(':')[1] \
+                           + cancel_result['data']['revoked_at'].split(' ')[1].split(':')[2]
+                cancelId = cancel_result['data']['cancel_id']
+
+                with transaction.atomic():
+                    SaleHeader.objects.create(storeCd=orgSaleHeader.storeCd, saleDt=saleDt, posNo=orgSaleHeader.posNo,
+                                              billNo=billNo, saleFlag=2, saleDay=weekday, saleTime=saleTime,
+                                              totQty=orgSaleHeader.totQty * (-1),
+                                              totSaleAmt=orgSaleHeader.totSaleAmt * (-1), saleAmt=orgSaleHeader.saleAmt * (-1),
+                                              supAmt=orgSaleHeader.supAmt * (-1), taxAmt=orgSaleHeader.taxAmt * (-1),
+                                              offTaxAmt=orgSaleHeader.offTaxAmt * (-1), totDcAmt=orgSaleHeader.totDcAmt * (-1),
+                                              pointDcAmt=orgSaleHeader.pointDcAmt * (-1), pointDcCnt=orgSaleHeader.pointDcCnt * (-1),
+                                              cardAmt=orgSaleHeader.cardAmt * (-1), kkmAmt=orgSaleHeader.kkmAmt * (-1),
+                                              returnYn='Y', orgStoreCd=orgSaleHeader.storeCd, orgSaleDt=orgSaleHeader.saleDt,
+                                              orgPosNo=orgSaleHeader.posNo, orgBillNo=orgSaleHeader.billNo,
+                                              sendYn='N', orderStatus=9, user=user)
+                    orgSaleHeader.returnYn = 'Y'
+                    orgSaleHeader.save()
+
+                    for saleDetail in orgSaleDetail:
+                        SaleDetail.objects.create(storeCd=saleDetail.storeCd, saleDt=saleDetail.saleDt,
+                                                  posNo=saleDetail.posNo,
+                                                  billNo=billNo, seq=saleDetail.seq, saleFlag=2,
+                                                  orderType=saleDetail.orderType,
+                                                  itemCd=saleDetail.itemCd, itemName=saleDetail.itemName,
+                                                  qty=saleDetail.qty * (-1), itemSellGroup=saleDetail.itemSellGroup,
+                                                  itemSellLevel=saleDetail.itemSellLeve,
+                                                  itemSellType=saleDetail.itemSellType,
+                                                  saleCost=saleDetail.saleCost, salePrice=saleDetail.salePrice,
+                                                  orgSalePrice=saleDetail.orgSalePrice,
+                                                  totSaleAmt=saleDetail.totSaleAmt * (-1),
+                                                  saleAmt=saleDetail.saleAmt * (-1),
+                                                  supAmt=saleDetail.subAmt * (-1), taxAmt=saleDetail.taxAmt * (-1),
+                                                  totDcAmt=saleDetail.totDcAmt * (-1),
+                                                  pointDcAmt=saleDetail.pointDcAmt * (-1), saleTime=saleTime,
+                                                  sendYn='N')
+                    CardLog.create(storeCd=orgCardLog.storeCd, saleDt=orgCardLog.saleDt, posNo=orgCardLog.posNo,
+                                   billNo=billNo, seq=orgCardLog.seq, saleFlag=2, cardAmt=orgCardLog.cardAmt * (-1),
+                                   cardNo=orgCardLog.cardNo, vanCd=orgCardLog.vanCd, cardCd=orgCardLog.cardCd,
+                                   cardName=orgCardLog.cardName, apprNo=apprNo, apprTime=apprTime, apprFlag=1,
+                                   cancelId=cancelId, instFlag=orgCardLog.instFlag, instMonth=orgCardLog.instMonth,
+                                   terminalId=orgCardLog.terminalId, registerNo=orgCardLog.registerNo,
+                                   returnYn='Y', orgStoreCd=orgCardLog.storeCd, orgSaleDt=orgCardLog.saleDt,
+                                   orgPosNo=orgCardLog.posNo, orgBillNo=orgCardLog.billNo, orgSeq=orgCardLog.seq,
+                                   orgApprNo=orgCardLog.apprNo, remark=orgCardLog.remark, sendYn='N')
+                    orgCardLog.returnYn='Y'
+                    orgCardLog.save()
+
+                response = JsonResponse('refund success')
+                return response
 
         response = JsonResponse('refund success')
         return response
 
     except Exception as ex:
         print(ex)
-        ErrorLog.objects.create(storeId=storeId,saleDt=saleDt,posNo=posNo,
+        ErrorLog.objects.create(storeId=storeCd,saleDt=saleDt,posNo=posNo,
                                 billNo=billNo, userId=userId, itemId=itemId,
                                 tradeErrorCode=tradeErrorCode, tradeErrorMsg=tradeErrorMsg,
                                 exception=str(ex), context=context)
