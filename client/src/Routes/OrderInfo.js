@@ -10,7 +10,7 @@ import cookie from "react-cookies";
 let applicationId = process.env.REACT_APP_BOOTPAY_APP_ID;
 
 window.identifyIosDevice = (function () {
-    // applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
+    applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
     //
     // let meta = document.createElement('meta');
     // meta.name='bootpay-application-id';
