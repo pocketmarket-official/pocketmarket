@@ -240,3 +240,41 @@
     }
   }
 }
+
+.modal__conversion.hidden {
+  display: none;
+}
+.modal__conversion {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //TODO : 가운데로 왜 안보내지는지?
+  margin: auto;
+  z-index: 1;
+}
+.modal__conversion .modal__modal {
+  max-width: 300px;
+  max-height: 100px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+
+  // TODO: SCSS 구동원리를 모르겠음
+  .modal__header {
+    border-bottom: 1px solid #b4022f;
+    padding-bottom: 10px;
+  }
+}
+.modal__cancel{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  div{
+    border: 1px solid black;
+  }
+}

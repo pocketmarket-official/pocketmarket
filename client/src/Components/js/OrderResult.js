@@ -153,7 +153,6 @@ class OrderResult extends React.Component {
                                         <div className="orderhistory__name">{data.storeName}</div>
                                         <div className="orderhistory__price">{total}원</div>
                                         <button className="orderhistory__btn info" onClick={() => {
-                                            console.log(data);
                                             this.setState({ selected: data });
                                             const elt = document.getElementById("modal__conversion");
                                             elt.classList.remove("hidden")

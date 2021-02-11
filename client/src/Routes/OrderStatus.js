@@ -18,6 +18,7 @@ class OrderStatus extends React.Component {
             matched: [],
             loading: true,
             storeId: '',
+            selected: 0,
         }
     };
 
@@ -125,17 +126,39 @@ class OrderStatus extends React.Component {
                                     button = (
                                         <>
                                             <div className="modal__conversion hidden" id="modal__conversion" onClick={() => {
-                                                const elt = document.getElementById("modal__conversion");
-                                                elt.classList.add("hidden");
+                                                const element = document.getElementById("modal__conversion");
+                                                element.classList.add("hidden");
                                             }}>
                                                 <div className="modal__modal" onClick={(e) => {
                                                     e.stopPropagation();
                                                 }}>
+                                                    <div className="modal__header">정말로 취소하시겠어요?</div>
+                                                    <div className="modal__cancel">
+                                                        <div onClick={() =>{
+                                                        let transData = {"saleHeaderId":this.state.selected};
+                                                        axios.post('/tradeRefund/', transData)
+                                                            .then((res)=>{
+                                                                console.log(res.data);
+                                                                if(res.data.result==='200'){
+                                                                    window.location.href = res.data.url;
+                                                                } else if(res.data.result==='202'){
+
+                                                                } else if(res.data.result==='500'){
+                                                                    // toast message after page redirect
+                                                                }
+
+                                                            });
+                                                        }}>주문취소</div>
+                                                        <div onClick={() =>{
+                                                        const element = document.getElementById("modal__conversion");
+                                                        element.classList.add("hidden");
+                                                        }}>닫기</div>
+                                                    </div>
 
 
                                                     <div className="modal__close__btn" id="modal__close__btn" onClick={() =>{
-                                                        const elt = document.getElementById("modal__conversion");
-                                                        elt.classList.add("hidden");
+                                                        const element = document.getElementById("modal__conversion");
+                                                        element.classList.add("hidden");
                                                     }}><img src={close}/></div>
                                                 </div>
                                             </div>
@@ -145,9 +168,9 @@ class OrderStatus extends React.Component {
                                                 주문을 취소하시려면 주문취소를 눌러주세요 ▶
                                             </div>
                                             <button className="pickup__btn" onClick={() =>{
-                                                const elt = document.getElementById("modal__conversion");
-                                                console.log(elt);
-                                                elt.classList.remove("hidden");
+                                                this.setState({selected:elt.id});
+                                                const element = document.getElementById("modal__conversion");
+                                                element.classList.remove("hidden");
                                             }}>주문취소
                                             </button>
                                             </div>
