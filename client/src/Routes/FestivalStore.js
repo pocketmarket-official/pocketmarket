@@ -54,7 +54,7 @@ class FestivalStore extends React.Component {
                             <div className="festival__title">
                                 Festival
                                 <div className="festival__name">{ this.state.festival.festivalName }</div>
-                                <div className="festival__description">{ this.state.festival.descriptionHeader }</div>
+                                <div className="festival__description">{ this.state.festival.descriptionDetail }</div>
                                 {/*<div className="festival__address">{ this.state.festival.addr1 }</div>*/}
                             </div>
                         </div>

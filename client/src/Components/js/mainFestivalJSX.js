@@ -1,10 +1,12 @@
 import React from 'react';
 import defaultImg from '../../assets/main/grayBI.png';
+import { Link } from 'react-router-dom';
 
 class FestivalJSX extends React.Component {
     constructor(props) {
         super(props);
         this.formatDate = this.formatDate.bind(this);
+        this.joinFestival = this.joinFestival.bind(this);
         this.state = {
             festival: '',
             festivalName: '',
@@ -14,6 +16,10 @@ class FestivalJSX extends React.Component {
             img: '',
             userId: '',
         }
+    }
+
+    joinFestival(){
+        console.log('todo');
     }
 
     formatDate(dateStr) {
