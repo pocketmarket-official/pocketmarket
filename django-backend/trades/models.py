@@ -21,6 +21,7 @@ class SaleHeader(models.Model):
     pointDcCnt = models.IntegerField(default=0)
     cardAmt = models.FloatField(default=0.0)
     kkmAmt = models.FloatField(default=0.0)
+    callNo = models.CharField(max_length=20, default='')
     returnYn = models.CharField(max_length=1, default='N')
     orgStoreCd = models.CharField(max_length=10, null=True)
     orgSaleDt = models.CharField(max_length=8, null=True)

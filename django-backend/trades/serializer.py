@@ -35,6 +35,7 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
             'pointDcCnt',
             'cardAmt',
             'kkmAmt',
+            'callNo',
             'returnYn',
             'orgStoreCd',
             'orgSaleDt',
