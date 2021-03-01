@@ -144,7 +144,6 @@ class OrderInfo extends React.Component {
                         <div className="orderinfo__choices" style={{paddingLeft: '26px'}}>
                             <input id="takeOut" type="radio" name="where" value="Take out" defaultChecked={true}/><label htmlFor="takeOut" style={{marginRight: '20px'}}>방문포장</label>
                             <input id="eatIn" type="radio" name="where" value="Eat in" disabled={true}/><label htmlFor="eatIn">현장식사</label>
-
                         </div>
                     </div>
                     {/*<div className="orderinfo__options">*/}
@@ -206,6 +205,18 @@ class OrderInfo extends React.Component {
                             {/*</div>*/}
                         </div>
                     </div>
+                    <div className="orderinfo__options">
+                        <div className="orderinfo__title">휴대폰 번호</div>
+                        <div className="orderinfo__pay">
+                            <div className="call__info">
+                                <div>상품 준비 완료 시 알림톡 수신하실 연락처를 입력해주세요.</div>
+                                <div>본 연락처는 개인 계정정보와 무관하게 주문 건 별로 매칭되어 관리되며 알림톡 전송 후 완전히 삭제됩니다.<br/>
+                                    수신을 원하지 않으실 경우 입력하지 않으셔도 좋습니다.
+                                </div>
+                                <input id="callNo" className="call__number" type="tel" name="callNo"/>
+                            </div>
+                        </div>
+                    </div>
                     <div className="orderinfo__amount">
                         <div className="amount__title">최종 결제금액</div>
                         <div className="amount__amount">{price}원</div>
@@ -214,7 +225,9 @@ class OrderInfo extends React.Component {
                     {/*TODO: location replace 마무리 지어야 함*/}
                     <div className="orderinfo__btn"
                          onClick={async ({sellItemList}) => {
-                             let result = await pay(tradesInfo, price, applicationId, this.state.storeName, this.state.storeId, this.state.userId)
+                             let callNo = document.getElementById('callNo').value;
+                             console.log(callNo);
+                             let result = await pay(tradesInfo, price, applicationId, callNo, this.state.storeName, this.state.storeId, this.state.userId);
                              if (result == 200){
                                  window.location.replace('/order/status');
                              }
