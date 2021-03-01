@@ -149,6 +149,18 @@
           margin-left: auto;
         }
       }
+
+      .call__info{
+        > *:first-child {
+          font-weight: bold;
+        }
+
+        .call__number{
+          margin-top: 5px;
+          border: 1px solid black;
+          border-radius : 15px;
+        }
+      }
     }
   }
 
