@@ -293,6 +293,10 @@ def trade(request):
         tradeErrorMsg = "requestBody data(payment) doesn't exist"
         payment = requestBodyJson['data']
 
+        tradeErrorCode = '016'
+        tradeErrorMsg = "requestBody callNo doesn't exist"
+        callNo = requestBodyJson['callNo']
+
         tradeErrorCode = '020'
         tradeErrorMsg = "user object doesn't exist"
         context = 'userId = ' + str(userId)
@@ -536,6 +540,7 @@ def trade(request):
                 pointDcCnt=headerPointDcCnt,
                 cardAmt=headerCardAmt,
                 kkmAmt=headerKkmAmt,
+                callNo=callNo,
                 returnYn='N',
                 orgStoreCd='',
                 orgSaleDt='',
