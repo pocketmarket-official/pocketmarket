@@ -249,7 +249,7 @@ class Main extends React.Component {
                     <div className="main__navigation">
                         <div className="navigation">
                             <div className="navigation__btns">
-                                <button className={this.state.current === 0 ? 'active' : undefined} onClick={this.handlePage0Render}>축제</button>
+                                <button className={this.state.current === 0 ? 'active' : undefined} onClick={this.handlePage0Render}>타운</button>
                                 <button className={this.state.current === 1 ? 'active' : undefined} onClick={this.handlePage1Render}>매장</button>
                             </div>
                             <input type="text" className="navigation__query" id="navigation__query" />
