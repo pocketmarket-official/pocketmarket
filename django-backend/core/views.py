@@ -880,7 +880,7 @@ def tradeRefund(request):
         if bootpayAcceessToken['status'] == 200:
             # bootpay에 취소 요청을 날린다.
             cancel_result = bootpay.cancel(orgCardLog.receiptId,
-                                           orgCardLog.cardAmt,
+                                           int(orgCardLog.cardAmt),
                                            user.email,
                                            '주문 수락 이전 고객 취소')
 
@@ -913,25 +913,25 @@ def tradeRefund(request):
                                                   orderType=saleDetail.orderType,
                                                   itemCd=saleDetail.itemCd, itemName=saleDetail.itemName,
                                                   qty=saleDetail.qty * (-1), itemSellGroup=saleDetail.itemSellGroup,
-                                                  itemSellLevel=saleDetail.itemSellLeve,
+                                                  itemSellLevel=saleDetail.itemSellLevel,
                                                   itemSellType=saleDetail.itemSellType,
                                                   saleCost=saleDetail.saleCost, salePrice=saleDetail.salePrice,
                                                   orgSalePrice=saleDetail.orgSalePrice,
                                                   totSaleAmt=saleDetail.totSaleAmt * (-1),
                                                   saleAmt=saleDetail.saleAmt * (-1),
-                                                  supAmt=saleDetail.subAmt * (-1), taxAmt=saleDetail.taxAmt * (-1),
+                                                  supAmt=saleDetail.supAmt * (-1), taxAmt=saleDetail.taxAmt * (-1),
                                                   totDcAmt=saleDetail.totDcAmt * (-1),
                                                   pointDcAmt=saleDetail.pointDcAmt * (-1), saleTime=saleTime,
                                                   sendYn='N')
-                    CardLog.create(storeCd=orgCardLog.storeCd, saleDt=orgCardLog.saleDt, posNo=orgCardLog.posNo,
-                                   billNo=billNo, seq=orgCardLog.seq, saleFlag=2, cardAmt=orgCardLog.cardAmt * (-1),
-                                   cardNo=orgCardLog.cardNo, vanCd=orgCardLog.vanCd, cardCd=orgCardLog.cardCd,
-                                   cardName=orgCardLog.cardName, apprNo=apprNo, apprTime=apprTime, apprFlag=1,
-                                   cancelId=cancelId, instFlag=orgCardLog.instFlag, instMonth=orgCardLog.instMonth,
-                                   terminalId=orgCardLog.terminalId, registerNo=orgCardLog.registerNo,
-                                   returnYn='Y', orgStoreCd=orgCardLog.storeCd, orgSaleDt=orgCardLog.saleDt,
-                                   orgPosNo=orgCardLog.posNo, orgBillNo=orgCardLog.billNo, orgSeq=orgCardLog.seq,
-                                   orgApprNo=orgCardLog.apprNo, remark=orgCardLog.remark, sendYn='N')
+                    CardLog.objects.create(storeCd=orgCardLog.storeCd, saleDt=orgCardLog.saleDt, posNo=orgCardLog.posNo,
+                                           billNo=billNo, seq=orgCardLog.seq, saleFlag=2, cardAmt=orgCardLog.cardAmt * (-1),
+                                           cardNo=orgCardLog.cardNo, vanCd=orgCardLog.vanCd, cardCd=orgCardLog.cardCd,
+                                           cardName=orgCardLog.cardName, apprNo=apprNo, apprTime=apprTime, apprFlag=1,
+                                           cancelId=cancelId, instFlag=orgCardLog.instFlag, instMonth=orgCardLog.instMonth,
+                                           terminalId=orgCardLog.terminalId, registerNo=orgCardLog.registerNo,
+                                           returnYn='Y', orgStoreCd=orgCardLog.storeCd, orgSaleDt=orgCardLog.saleDt,
+                                           orgPosNo=orgCardLog.posNo, orgBillNo=orgCardLog.billNo, orgSeq=orgCardLog.seq,
+                                           orgApprNo=orgCardLog.apprNo, remark=orgCardLog.remark, sendYn='N')
                     orgCardLog.returnYn='Y'
                     orgCardLog.save()
 
