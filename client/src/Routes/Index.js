@@ -95,7 +95,7 @@ function Index() {
                     <Link to={{pathname: "/main", state: { current: 0 }}}>
                         <div className="content-item">
                                 <img src={showFestivalImg} alt="타운보기" />
-                                <span>축제보기</span>
+                                <span>타운보기</span>
                         </div>
                     </Link>
                     <Link to={{pathname: "/main", state: { current: 1 }}}>
