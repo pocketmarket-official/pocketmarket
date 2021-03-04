@@ -892,7 +892,7 @@ def tradeRefund(request):
                 cancelId = cancel_result['data']['cancel_id']
 
                 with transaction.atomic():
-                    SaleHeader.objects.create(storeCd=orgSaleHeader.storeCd, saleDt=saleDt, posNo=orgSaleHeader.posNo,
+                    saleHeaderObj = SaleHeader.objects.create(storeCd=orgSaleHeader.storeCd, saleDt=saleDt, posNo=orgSaleHeader.posNo,
                                               billNo=billNo, saleFlag=2, saleDay=weekday, saleTime=saleTime,
                                               totQty=orgSaleHeader.totQty * (-1),
                                               totSaleAmt=orgSaleHeader.totSaleAmt * (-1), saleAmt=orgSaleHeader.saleAmt * (-1),
@@ -907,7 +907,7 @@ def tradeRefund(request):
                     orgSaleHeader.save()
 
                     for saleDetail in orgSaleDetail:
-                        SaleDetail.objects.create(storeCd=saleDetail.storeCd, saleDt=saleDetail.saleDt,
+                        saleDetailRow = SaleDetail.objects.create(storeCd=saleDetail.storeCd, saleDt=saleDetail.saleDt,
                                                   posNo=saleDetail.posNo,
                                                   billNo=billNo, seq=saleDetail.seq, saleFlag=2,
                                                   orderType=saleDetail.orderType,
@@ -923,6 +923,9 @@ def tradeRefund(request):
                                                   totDcAmt=saleDetail.totDcAmt * (-1),
                                                   pointDcAmt=saleDetail.pointDcAmt * (-1), saleTime=saleTime,
                                                   sendYn='N')
+                        saleDetail.saleFlag = 2
+                        saleDetail.save()
+                        saleDetailList.append(saleDetailRow)
                     CardLog.objects.create(storeCd=orgCardLog.storeCd, saleDt=orgCardLog.saleDt, posNo=orgCardLog.posNo,
                                            billNo=billNo, seq=orgCardLog.seq, saleFlag=2, cardAmt=orgCardLog.cardAmt * (-1),
                                            cardNo=orgCardLog.cardNo, vanCd=orgCardLog.vanCd, cardCd=orgCardLog.cardCd,
@@ -934,6 +937,38 @@ def tradeRefund(request):
                                            orgApprNo=orgCardLog.apprNo, remark=orgCardLog.remark, sendYn='N')
                     orgCardLog.returnYn='Y'
                     orgCardLog.save()
+
+                    saleHeaderRow = {
+                        "COMP_CD": compCd,
+                        "STOR_CD": saleHeaderObj.storeCd,
+                        "SALE_DT": saleHeaderObj.saleDt,
+                        "POS_NO": saleHeaderObj.posNo,
+                        "BILL_NO": saleHeaderObj.billNo,
+                        "SALE_TP": "2",  # 판매 형태 [1:매장판매 / 2:선주문 / 3:DRIVE_THRU / 4: DELIVERY ]
+                        "ONOFF_TP": "1",  # 온라인 오프라인 형태, 온라인주문일경우 1
+                        "ORD_FG": "4",  # 주문형태 1:일반 / 2:콜 / 3:인터넷 / 4:모바일 / 5.kiosk
+                        "SALE_TM": saleTime,  # 판매시간(시간분초)
+                        "SALE_DAY": weekday,  # 일요일 1 부터 7까지
+                        "SALE_TM_CD": saleTimeCd,  # 시간코드 공통코드 045번 참조
+                        "RETURN_FG": saleHeaderObj.returnYn,  # 반품플레그(원거래에도 업데이트 해줘야함)
+                        "SALE_FG": saleHeaderObj.saleFlag,
+                        "MEAL_CD": orgSaleHeader.mealCd,
+                        "MEAL_NM": orgSaleHeader.mealName,
+                        "TOT_QTY": saleHeaderObj.totQty,
+                        "TOT_SALE_AMT": saleHeaderObj.totSaleAmt,
+                        "SALE_AMT": saleHeaderObj.saleAmt,
+                        "SUP_AMT": saleHeaderObj.supAmt,
+                        "TAX_AMT": saleHeaderObj.taxAmt,
+                        "OFF_TAX_AMT": saleHeaderObj.offTaxAmt,
+                        "TOT_DC_AMT": saleHeaderObj.totDcAmt,
+                        "NORM_DC_AMT": 0.0,
+                        "PNT_DC_AMT": saleHeaderObj.pointDcAmt,
+                        "NORM_DC_CNT": 0,
+                        "PNT_DC_CNT": saleHeaderObj.pointDcCnt,
+                        "CASH_AMT": 0.0,
+                        "CARD_AMT": saleHeaderObj.cardAmt,
+                        "ETC_AMT": 0.0
+                    }
 
                 response = JsonResponse('refund success')
                 return response
