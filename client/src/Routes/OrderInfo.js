@@ -6,11 +6,12 @@ import axios from "axios";
 import {cookieCheck_rejectGuest} from "../Components/js/CookieCheck.js"
 import BootPay from "bootpay-js";
 import cookie from "react-cookies";
+import { toast } from 'react-toastify';
+import logo from "../assets/common/logo.png";
 
 let applicationId = process.env.REACT_APP_BOOTPAY_APP_ID;
 
 window.identifyIosDevice = (function () {
-    console.log("=====1=====");
     applicationId = process.env.REACT_APP_BOOTPAY_APPLE_ID;
     //
     // let meta = document.createElement('meta');
@@ -32,6 +33,7 @@ window.identifyIosDevice = (function () {
 class OrderInfo extends React.Component {
     constructor(props) {
         super(props);
+        this.setDiscountRadio = this.setDiscountRadio.bind(this);
         const sellItemList = this.props.location.state.sellItemList;
         const order = this.props.location.state.order;
         const storeName = this.props.location.state.storeName;
@@ -47,6 +49,8 @@ class OrderInfo extends React.Component {
             storeId: storeId,
             storeCd: storeCd,
             userId: null,
+            discountCd : 1,
+            dcAmt : 1000,
         }
      };
 
@@ -70,6 +74,15 @@ class OrderInfo extends React.Component {
             this.setState({ userId: userId });
         });
     }
+
+    setDiscountRadio(event){
+        if(event.target.value == 'prelogin-event'){
+            this.setState({discountCd:2, dcAmt:2000});
+        } else if(event.target.value == 'open-event'){
+            this.setState({discountCd:1, dcAmt:1000});
+        }
+    }
+
 
     render() {
         let cnt = 0;
@@ -146,6 +159,22 @@ class OrderInfo extends React.Component {
                             <input id="eatIn" type="radio" name="where" value="Eat in" disabled={true}/><label htmlFor="eatIn">개인용기</label>
                         </div>
                     </div>
+                    <div className="orderinfo__options">
+                        <div className="orderinfo__title">할인선택</div>
+                        <div className="orderinfo__choices" style={{paddingLeft: '26px'}} onChange={this.setDiscountRadio}>
+                            <input id="open-event" type="radio" name="discount" value="open-event" defaultChecked={true}/><label htmlFor="open-event" style={{marginRight: '20px'}}>오픈할인</label>
+                            {
+                                this.state.userId<22 ?
+                                    <>
+                                        <input id="prelogin-event" type="radio" name="discount" value="prelogin-event"/><label htmlFor="prelogin-event">사전예약</label>
+                                    </>
+                                    :
+                                    <>
+                                        <input id="prelogin-event" type="radio" name="discount" value="prelogin-event" disabled={true}/><label htmlFor="prelogin-event">사전예약할인</label>
+                                    </>
+                            }
+                        </div>
+                    </div>
                     {/*<div className="orderinfo__options">*/}
                     {/*    <div className="orderinfo__title">할인선택</div>*/}
                     {/*    <Link to="/main/store/C0001/orderinfo/payMethod">*/}
@@ -165,7 +194,7 @@ class OrderInfo extends React.Component {
                         {/*</Link>*/}
                     </div>
                     <div className="orderinfo__options">
-                        <div className="orderinfo__title">주문 내역</div>
+                        <div className="orderinfo__title">주문내역</div>
                         <div className="orderinfo__info">
                             <div className="info__store">{this.state.storeName}</div>
                             {
@@ -192,7 +221,7 @@ class OrderInfo extends React.Component {
                         </div>
                     </div>
                     <div className="orderinfo__options">
-                        <div className="orderinfo__title">결제금액</div>
+                        <div className="orderinfo__title">판매금액</div>
                         <div className="orderinfo__pay">
                             <div className="pay__info">
                                 <div>총 금액</div>
@@ -206,12 +235,37 @@ class OrderInfo extends React.Component {
                         </div>
                     </div>
                     <div className="orderinfo__options">
+                        <div className="orderinfo__title">할인금액</div>
+                        <div className="orderinfo__pay">
+                            <div className="pay__info">
+                                {
+                                    this.state.discountCd==1?
+                                        <>
+                                            <div>오픈행사</div>
+                                            <div>{this.state.dcAmt}원</div>
+                                        </>
+                                        :
+                                        <>
+                                            <div>사전예약</div>
+                                            <div>{this.state.dcAmt}원</div>
+                                        </>
+                                }
+
+                            </div>
+                            {/*<div className="pay__info">*/}
+                            {/*    <div>포켓머니</div>*/}
+                            {/*    <button>전액 사용</button>*/}
+                            {/*    <div>0원</div>*/}
+                            {/*</div>*/}
+                        </div>
+                    </div>
+                    <div className="orderinfo__options">
                         <div className="orderinfo__title">휴대폰 번호</div>
                         <div className="orderinfo__pay">
                             <div className="call__info">
-                                <div>상품 준비 완료 시 알림톡 수신하실 연락처를 입력해주세요.</div>
-                                <div>본 연락처는 개인 계정정보와 무관하게 주문 건 별로 매칭되어 관리되며 알림톡 전송 후 완전히 삭제됩니다.<br/>
-                                    수신을 원하지 않으실 경우 입력하지 않으셔도 좋습니다.
+                                <div>
+                                    상품 준비 완료 시 <br/>
+                                    알림톡 수신하실 연락처를 입력해주세요.
                                 </div>
                                 <input id="callNo" className="call__number" type="tel" name="callNo"/>
                             </div>
@@ -219,17 +273,29 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="orderinfo__amount">
                         <div className="amount__title">최종 결제금액</div>
-                        <div className="amount__amount">{price}원</div>
+                        <div className="amount__amount">{price - this.state.dcAmt}원</div>
                     </div>
                     <div className="divide"/>
                     {/*TODO: location replace 마무리 지어야 함*/}
                     <div className="orderinfo__btn"
                          onClick={async ({sellItemList}) => {
-                             let callNo = document.getElementById('callNo').value;
-                             console.log(callNo);
-                             let result = await pay(tradesInfo, price, applicationId, callNo, this.state.storeName, this.state.storeId, this.state.userId);
-                             if (result == 200){
-                                 window.location.replace('/order/status');
+                             let cardAmt = price-this.state.dcAmt;
+
+                             if(cardAmt<1000){
+                                 toast(<div className="message-container"><img src={logo} /><div>PG사 정책에 의해 카드결제금액은 최소 1,000원이상이어야 합니다 ㅜ_ㅜ</div></div>, {
+                                        position: "top-center",
+                                        autoClose: 5000,
+                                        closeOnClick: true,
+                                        className: 'toast',
+                                        hideProgressBar: false,
+                                        closeButton: false,
+                                    });
+                             } else {
+                                 let callNo = document.getElementById('callNo').value;
+                                 let result = await pay(tradesInfo, price, applicationId, callNo, this.state.storeName, this.state.storeId, this.state.userId);
+                                 if (result == 200){
+                                     window.location.replace('/order/status');
+                                 }
                              }
                          }}>
                         결제하기
