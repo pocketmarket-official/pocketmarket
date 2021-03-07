@@ -21,6 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
             'iosToken',
             'bizYn',
             'guestYn',
+            'tmpFlag',
         )
 
 class PointSerializer(serializers.ModelSerializer):

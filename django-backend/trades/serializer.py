@@ -3,7 +3,7 @@ from trades.models import SaleHeader
 from trades.models import SaleDetail
 # from trades.models import CashLog
 from trades.models import CardLog
-# from trades.models import EtcLog
+from trades.models import EtcLog
 # from trades.models import StandardLog
 from trades.models import PurchaseLog
 from trades.models import SoldoutLog
@@ -35,6 +35,7 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
             'pointDcCnt',
             'cardAmt',
             'kkmAmt',
+            'etcAmt',
             'callNo',
             'returnYn',
             'orgStoreCd',
@@ -48,6 +49,7 @@ class SaleHeaderSerializer(serializers.ModelSerializer):
             'pickupTime',
             'user',
             'reviewYn',
+            'sendYn',
             'insDt',
             'insUs',
             'modDt',
@@ -156,31 +158,31 @@ class CardLogSerializer(serializers.ModelSerializer):
             'modUs'
         )
 
-#
-# class EtcLogSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = EtcLog
-#         fields = (
-#             'storeCd',
-#             'saleDt',
-#             'posNo',
-#             'billNo',
-#             'seq',
-#             'saleFlag',
-#             'etcAmt',
-#             'etcPayCatCd',
-#             'etcPayCd',
-#             'remark',
-#             'orgStoreCd',
-#             'orgSaleDate',
-#             'orgPosNo',
-#             'orgBillNo',
-#             'orgSeq',
-#             'insDt',
-#             'insUs',
-#             'modDt',
-#             'modUs'
-#         )
+
+class EtcLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EtcLog
+        fields = (
+            'storeCd',
+            'saleDt',
+            'posNo',
+            'billNo',
+            'seq',
+            'saleFlag',
+            'etcAmt',
+            'etcPayCatCd',
+            'etcPayCd',
+            'remark',
+            'orgStoreCd',
+            'orgSaleDate',
+            'orgPosNo',
+            'orgBillNo',
+            'orgSeq',
+            'insDt',
+            'insUs',
+            'modDt',
+            'modUs'
+        )
 
 #
 # class StandardLogSerializer(serializers.ModelSerializer):

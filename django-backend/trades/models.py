@@ -21,6 +21,7 @@ class SaleHeader(models.Model):
     pointDcCnt = models.IntegerField(default=0)
     cardAmt = models.FloatField(default=0.0)
     kkmAmt = models.FloatField(default=0.0)
+    etcAmt = models.FloatField(default=0.0)
     callNo = models.CharField(max_length=20, default='')
     returnYn = models.CharField(max_length=1, default='N')
     orgStoreCd = models.CharField(max_length=10, null=True)
@@ -130,23 +131,24 @@ class CardLog(models.Model):
     insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=timezone.now, null=True)
     modUs = models.CharField(max_length=30,  null=True)
-#
-# class EtcLog(models.Model):
-#     storeCd = models.CharField(max_length=10, default='00000')
-#     saleDt = models.CharField(max_length=8, default='00000000')
-#     posNo = models.CharField(max_length=5, default='91')
-#     billNo = models.CharField(max_length=10, default='00000')
-#     seq = models.IntegerField(default=1)
-#     saleFlag = models.CharField(max_length=3, default='000')  # baseCode:050 [0:전체/1:정상/2:취소]
-#     etcAmt = models.FloatField(default=0.0)
-#     etcPayCatCd = models.CharField(max_length=5, default='000')
-#     etcPayCd = models.CharField(max_length=5, default='000')
-#     remark = models.CharField(max_length=255, null=True)
-#     insDt = models.DateTimeField(default=timezone.now, null=True)
-#     insUs = models.CharField(max_length=30,  null=True)
-#     modDt = models.DateTimeField(default=timezone.now, null=True)
-#     modUs = models.CharField(max_length=30,  null=True)
-#
+
+class EtcLog(models.Model):
+    storeCd = models.CharField(max_length=10, default='00000')
+    saleDt = models.CharField(max_length=8, default='00000000')
+    posNo = models.CharField(max_length=5, default='91')
+    billNo = models.CharField(max_length=10, default='00000')
+    seq = models.IntegerField(default=1)
+    saleFlag = models.CharField(max_length=3, default='000')  # baseCode:050 [0:전체/1:정상/2:취소]
+    etcAmt = models.FloatField(default=0.0)
+    etcPayCatCd = models.CharField(max_length=5, default='000')
+    etcPayCd = models.CharField(max_length=5, default='000')
+    remark = models.CharField(max_length=255, null=True)
+    sendYn = models.CharField(max_length=1, default='N')
+    insDt = models.DateTimeField(default=timezone.now, null=True)
+    insUs = models.CharField(max_length=30,  null=True)
+    modDt = models.DateTimeField(default=timezone.now, null=True)
+    modUs = models.CharField(max_length=30,  null=True)
+
 # class StandardLog(models.Model):
 #     storeCd = models.CharField(max_length=10, default='00000')
 #     saleDt = models.CharField(max_length=8, default='00000000')

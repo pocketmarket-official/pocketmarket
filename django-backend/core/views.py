@@ -15,6 +15,7 @@ from items.models import Item
 from trades.models import SaleHeader
 from trades.models import SaleDetail
 from trades.models import CardLog
+from trades.models import EtcLog
 from trades.models import ErrorLog
 from stores.models import StoreLike
 from stores.models import Store
@@ -290,12 +291,16 @@ def trade(request):
         sellItemList = requestBodyJson['sellItemList']
 
         tradeErrorCode = '015'
-        tradeErrorMsg = "requestBody data(payment) doesn't exist"
-        payment = requestBodyJson['data']
+        tradeErrorMsg = "requestBody data(pgPayment) doesn't exist"
+        pgPayment = requestBodyJson['data']
 
         tradeErrorCode = '016'
         tradeErrorMsg = "requestBody callNo doesn't exist"
         callNo = requestBodyJson['callNo']
+
+        tradeErrorCode = '017'
+        tradeErrorMsg = "requestBody payments doesn't exist"
+        payments = requestBodyJson['payments']
 
         tradeErrorCode = '020'
         tradeErrorMsg = "user object doesn't exist"
@@ -313,8 +318,8 @@ def trade(request):
             # bootpay accesstoken의 상태를 확인하고
             if bootpayAceessToken['status'] == 200:
                 # bootpay에 취소 요청을 날린다.
-                cancel_result = bootpay.cancel(payment['receipt_id'],
-                                               payment['price'],
+                cancel_result = bootpay.cancel(pgPayment['receipt_id'],
+                                               pgPayment['price'],
                                                user.email,
                                                store.storeName + ' 매장이 마감되었음')
                 # 취소 되었다면
@@ -386,23 +391,23 @@ def trade(request):
         cardInstMont = 0
 
         i = 1
-        if payment['method'] == 'card':
-            headerCardAmt += payment['price']  # 카드결제금액 더해가는 방식
+        if pgPayment['method'] == 'card':
+            headerCardAmt += pgPayment['price']  # 카드결제금액 더해가는 방식
             cardSeq = i
-            cardCardAmt += payment['price']
-            cardCardNo = payment['card_no']
+            cardCardAmt += pgPayment['price']
+            cardCardNo = pgPayment['card_no']
             cardVanCd = vanCd
-            cardCardCd = payment['card_code']
-            cardCardName = payment['card_name']
-            cardApprNo = payment['order_id'].split('_')[0]
-            cardApprDt = payment['purchased_at'].split(' ')[0].split('-')[0] \
-                         + payment['purchased_at'].split(' ')[0].split('-')[1] \
-                         + payment['purchased_at'].split(' ')[0].split('-')[2]
-            cardApprTime = payment['purchased_at'].split(' ')[1].split(':')[0] \
-                           + payment['purchased_at'].split(' ')[1].split(':')[1] \
-                           + payment['purchased_at'].split(' ')[1].split(':')[2]
+            cardCardCd = pgPayment['card_code']
+            cardCardName = pgPayment['card_name']
+            cardApprNo = pgPayment['order_id'].split('_')[0]
+            cardApprDt = pgPayment['purchased_at'].split(' ')[0].split('-')[0] \
+                         + pgPayment['purchased_at'].split(' ')[0].split('-')[1] \
+                         + pgPayment['purchased_at'].split(' ')[0].split('-')[2]
+            cardApprTime = pgPayment['purchased_at'].split(' ')[1].split(':')[0] \
+                           + pgPayment['purchased_at'].split(' ')[1].split(':')[1] \
+                           + pgPayment['purchased_at'].split(' ')[1].split(':')[2]
             cardTerminalId = terminalId
-            # cardRegisterNo =  payment['receipt_id']  # todo: 이거뭐임?
+            # cardRegisterNo =  pgPayment['receipt_id']  # todo: 이거뭐임?
             cardRegisterNo = ''
             i += 1
 
@@ -423,8 +428,8 @@ def trade(request):
                     #bootpay accesstoken의 상태를 확인하고
                     if bootpayAcceessToken['status'] == 200:
                         #bootpay에 취소 요청을 날린다.
-                        cancel_result = bootpay.cancel(payment['receipt_id'],
-                                                       payment['price'],
+                        cancel_result = bootpay.cancel(pgPayment['receipt_id'],
+                                                       pgPayment['price'],
                                                        user.email,
                                                        store.storeName+'의 '+target.itemName+' 제품이 품절되었음.')
                         # 취소 되었다면
@@ -446,6 +451,11 @@ def trade(request):
                 taxAmt = taxAmt
                 detailSupAmt += supAmt
                 detailTaxAmt += taxAmt
+
+                tradeErrorCode = '031'
+                tradeErrorMsg = "saleDetail object create failure"
+                context = 'storeId = ' + str(storeId) + ' saleDt = ' + str(saleDt) + ' posNo = ' + str(posNo) + ' billNo = ' + str(billNo) + ' seq = ' + str(i)
+
                 saleDetailObj = SaleDetail.objects.create(
                     storeCd=storeCd,
                     saleDt=saleDt,
@@ -521,6 +531,11 @@ def trade(request):
                                                     + ' headerSupAmt=' + str(headerTaxAmt)
                                                     + ' detailSupAmt=' + str(detailTaxAmt))
 
+            tradeErrorCode = '032'
+            tradeErrorMsg = "saleHeader object create failure"
+            context = 'storeId = ' + str(storeId) + ' saleDt = ' + str(saleDt) + ' posNo = ' + str(
+                posNo) + ' billNo = ' + str(billNo)
+
             saleHeaderObj = SaleHeader.objects.create(
                 storeCd=storeCd,
                 saleDt=saleDt,
@@ -540,6 +555,7 @@ def trade(request):
                 pointDcCnt=headerPointDcCnt,
                 cardAmt=headerCardAmt,
                 kkmAmt=headerKkmAmt,
+                etcAmt=payments['openDcAmt']+payments['preDcAmt'],
                 callNo=callNo,
                 returnYn='N',
                 orgStoreCd='',
@@ -551,6 +567,10 @@ def trade(request):
                 user = user
             )
 
+            tradeErrorCode = '033'
+            tradeErrorMsg = "cardLog object create failure"
+            context = 'storeId = ' + str(storeId) + ' saleDt = ' + str(saleDt) + ' posNo = ' + str(
+                posNo) + ' billNo = ' + str(billNo) + ' seq = ' + str(cardSeq)
 
             cardLogObj = CardLog.objects.create(
                 storeCd=storeCd,
@@ -568,7 +588,7 @@ def trade(request):
                 apprDt=cardApprDt,
                 apprTime=cardApprTime,
                 apprFlag='1',
-                receiptId=payment['receipt_id'],
+                receiptId=pgPayment['receipt_id'],
                 instFlag=cardInstFlag,
                 instMonth=cardInstMont,
                 terminalId=cardTerminalId,
@@ -584,6 +604,104 @@ def trade(request):
                 sendYn='N',
             )
 
+            etcLogSeq=1
+            etcLogList=[]
+            discountFlag = user.tmpFlag
+
+            if (payments['preDcAmt'] != 0):
+                tradeErrorCode = '034'
+                tradeErrorMsg = "etcLog(preDc) object create failure"
+                context = 'storeId = ' + str(storeId) + ' saleDt = ' + str(saleDt) + ' posNo = ' + str(
+                    posNo) + ' billNo = ' + str(billNo) + ' seq = ' + str(etcLogSeq)
+
+                etcLogObj = EtcLog.objects.create(
+                    storeCd=storeCd,
+                    saleDt=saleDt,
+                    posNo=posNo,
+                    billNo=billNo,
+                    seq=etcLogSeq,
+                    saleFlag=saleFlag,
+                    etcAmt=payments['preDcAmt'],
+                    etcPayCatCd='001',
+                    etcPayCd='002',
+                    remark='',
+                    sendYn='N'
+                )
+
+                tradeErrorCode = '041'
+                tradeErrorMsg = "etcLog(preDc) row append failure"
+                context = 'storeCd = ' + str(etcLogObj.storeCd) + ' saleDt = ' + str(etcLogObj.saleDt) + ' posNo = ' + str(
+                    etcLogObj.posNo) + ' billNo = ' + str(etcLogObj.billNo) + ' seq = ' + str(etcLogObj.seq)
+
+                etcLogRow = {
+                    "storeCd": etcLogObj.storeCd,
+                    "saleDt": etcLogObj.saleDt,
+                    "posNo": etcLogObj.posNo,
+                    "billNo": etcLogObj.billNo,
+                    "seq": etcLogObj.seq,
+                    "saleFlag": etcLogObj.saleFlag,
+                    "etcAmt": etcLogObj.etcAmt,
+                    "etcPayCatCd": etcLogObj.etcPayCatCd,
+                    "etcPayCd": etcLogObj.etcPayCd,
+                    "remark": etcLogObj.remark
+                }
+                etcLogList.append(etcLogRow)
+                discountFlag = '3'
+                etcLogSeq += 1
+
+
+            if(payments['openDcAmt'] != 0):
+                tradeErrorCode = '035'
+                tradeErrorMsg = "etcLog(openDc) object create failure"
+                context = 'storeId = ' + str(storeId) + ' saleDt = ' + str(saleDt) + ' posNo = ' + str(
+                    posNo) + ' billNo = ' + str(billNo) + ' seq = ' + str(etcLogSeq)
+
+                etcLogObj = EtcLog.objects.create(
+                    storeCd=storeCd,
+                    saleDt=saleDt,
+                    posNo=posNo,
+                    billNo=billNo,
+                    seq=etcLogSeq,
+                    saleFlag=saleFlag,
+                    etcAmt = payments['openDcAmt'],
+                    etcPayCatCd = '001',
+                    etcPayCd = '001',
+                    remark = '',
+                    sendYn='N'
+                )
+
+                tradeErrorCode = '042'
+                tradeErrorMsg = "etcLog(openDc) row append failure"
+                context = 'storeCd = ' + str(etcLogObj.storeCd) + ' saleDt = ' + str(
+                    etcLogObj.saleDt) + ' posNo = ' + str(
+                    etcLogObj.posNo) + ' billNo = ' + str(etcLogObj.billNo) + ' seq = ' + str(etcLogObj.seq)
+
+                etcLogRow = {
+                    "storeCd" : etcLogObj.storeCd,
+                    "saleDt" : etcLogObj.saleDt,
+                    "posNo" : etcLogObj.posNo,
+                    "billNo" : etcLogObj.billNo,
+                    "seq" : etcLogObj.seq,
+                    "saleFlag" : etcLogObj.saleFlag,
+                    "etcAmt" : etcLogObj.etcAmt,
+                    "etcPayCatCd" : etcLogObj.etcPayCatCd,
+                    "etcPayCd" : etcLogObj.etcPayCd,
+                    "remark" : etcLogObj.remark
+                }
+                etcLogList.append(etcLogRow)
+                if(discountFlag=='1'):
+                    discountFlag = '4'
+                elif(discountFlag=='2' or discountFlag=='3'):
+                    discountFlag = '5'
+                etcLogSeq += 1
+
+            user.tmpFlag = discountFlag
+            user.save()
+
+        tradeErrorCode = '043'
+        tradeErrorMsg = "saleHeader row append failure"
+        context = 'storeCd = ' + str(saleHeaderObj.storeCd) + ' saleDt = ' + str(saleHeaderObj.saleDt) + ' posNo = ' + str(
+            saleHeaderObj.posNo) + ' billNo = ' + str(saleHeaderObj.billNo)
 
         saleHeaderRow = {
             "COMP_CD": compCd,
@@ -614,10 +732,14 @@ def trade(request):
             "PNT_DC_CNT": saleHeaderObj.pointDcCnt,
             "CASH_AMT": 0.0,
             "CARD_AMT": saleHeaderObj.cardAmt,
-            "ETC_AMT": 0.0
+            "ETC_AMT": saleHeaderObj.etcAmt,
         }
 
         for saleDetailObj in saleDetailObjList:
+            tradeErrorCode = '044'
+            tradeErrorMsg = "saleDetail row append failure"
+            context = 'storeCd = ' + str(saleDetailObj.storeCd) + ' saleDt = ' + str(saleDetailObj.saleDt) + ' posNo = ' + str(
+                saleDetailObj.posNo) + ' billNo = ' + str(saleDetailObj.billNo) + ' seq = ' + str(saleDetailObj.seq)
             saleDetailRow = {
                 "COMP_CD": compCd,
                 "STOR_CD": saleDetailObj.storeCd,
@@ -656,6 +778,12 @@ def trade(request):
 
         if not cardLogObj.orgSeq:
             cardLogObj.orgSeq = ""
+
+        tradeErrorCode = '045'
+        tradeErrorMsg = "cardLog row append failure"
+        context = 'storeCd = ' + str(cardLogObj.storeCd) + ' saleDt = ' + str(
+            cardLogObj.saleDt) + ' posNo = ' + str(
+            cardLogObj.posNo) + ' billNo = ' + str(cardLogObj.billNo) + ' seq = ' + str(cardLogObj.seq)
 
         cardLogRow = {
             "COMP_CD": compCd,
@@ -736,6 +864,21 @@ def trade(request):
             device = FCMDevice.objects.filter(registration_id=store.iosToken).first()
             if (device):
                 device.send_message("주문수신", storeName + '에 주문이 수신되었습니다.')
+
+
+        ma = User.objects.get(id=2)
+        device = FCMDevice.objects.filter(registration_id=ma.iosToken).first()
+        if (device):
+            device.send_message("주문수신", storeName + '에 주문이 수신되었습니다.')
+        mj = User.objects.get(id=3)
+        device = FCMDevice.objects.filter(registration_id=mj.iosToken).first()
+        if (device):
+            device.send_message("주문수신", storeName + '에 주문이 수신되었습니다.')
+        mc = User.objects.get(id=4)
+        device = FCMDevice.objects.filter(registration_id=mc.iosToken).first()
+        if (device):
+            device.send_message("주문수신", storeName + '에 주문이 수신되었습니다.')
+
 
         response = JsonResponse(data)
         return response
@@ -1184,6 +1327,19 @@ def pushSend_makeComplete(request):
         user = User.objects.get(id=json.loads(request.body)['userId'])
         device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
         if(device):
+            device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
+
+        ma = User.objects.get(id=2)
+        device = FCMDevice.objects.filter(registration_id=ma.iosToken).first()
+        if (device):
+            device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
+        mj = User.objects.get(id=3)
+        device = FCMDevice.objects.filter(registration_id=mj.iosToken).first()
+        if (device):
+            device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
+        mc = User.objects.get(id=4)
+        device = FCMDevice.objects.filter(registration_id=mc.iosToken).first()
+        if (device):
             device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
 
         return HttpResponse('success')
