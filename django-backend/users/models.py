@@ -12,9 +12,9 @@ class User(AbstractUser):
     profileImage = models.ImageField(upload_to="images/userProfile", null=True)
     androidToken = models.CharField(max_length=255, blank=True)
     iosToken = models.CharField(max_length=255, blank=True)
-    bizYn = models.CharField(max_length=17, default='N')
-    tmpFlag = models.CharField(max_length=17, default='2') #1:일반유저/2:사전예약자/3:사전예약적용완료/4:오픈할인적용완료/5:둘다적용완료
-    guestYn = models.CharField(max_length=17, default='N')
+    bizYn = models.CharField(max_length=1, default='N')
+    tmpFlag = models.CharField(max_length=1, default='2') #1:일반유저/2:사전예약자/3:사전예약적용완료/4:오픈할인적용완료/5:둘다적용완료
+    guestYn = models.CharField(max_length=1, default='N')
 
 class Point(models.Model):
     """ Point Model Definition """
@@ -38,8 +38,8 @@ class MyPlace(models.Model):
     oldAddr = models.CharField(max_length=200, null=True)
     xPosition = models.FloatField(null=True)
     yPosition = models.FloatField(null=True)
-    defaultYn = models.CharField(max_length=17, default='N')
-    deleteYn = models.CharField(max_length=17, default='N')
+    defaultYn = models.CharField(max_length=1, default='N')
+    deleteYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)
     modDt = models.DateTimeField(default=timezone.now)
@@ -55,7 +55,7 @@ class Business(models.Model):
     registerNo = models.CharField(max_length=15, blank=True)
     bizAddr = models.CharField(max_length=100, blank=True)
     storeAddr = models.CharField(max_length=100, blank=True)
-    orderYn = models.CharField(max_length=17, default='Y')
+    orderYn = models.CharField(max_length=1, default='Y')
     BizRegi = models.ImageField(null=True, upload_to='images/bizRegi')
     insDt = models.DateTimeField(default=timezone.now)
     insUs = models.CharField(max_length=30, null=True)

@@ -168,7 +168,7 @@ class Migration(migrations.Migration):
                 ('returnYn', models.CharField(default='N', max_length=1)),
                 ('orgStoreCd', models.CharField(max_length=10, null=True)),
                 ('orgSaleDt', models.CharField(max_length=8, null=True)),
-                ('orgPosNo', models.CharField(max_length=17, null=True)),
+                ('orgPosNo', models.CharField(max_length=1, null=True)),
                 ('orgBillNo', models.CharField(max_length=10, null=True)),
                 ('sendYn', models.CharField(default='N', max_length=1)),
                 ('orderStatus', models.CharField(default=1, max_length=1)),

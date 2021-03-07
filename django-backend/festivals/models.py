@@ -10,7 +10,7 @@ class Festival(models.Model):
 
     """ Festival Model Definition """
 
-    festivalCd = models.CharField(max_length=17, blank=True, null=True)
+    festivalCd = models.CharField(max_length=1, blank=True, null=True)
     festivalName = models.CharField(max_length=100, blank=True, null=True)
     startDt = models.CharField(max_length=8, blank=True, null=True)
     endDt = models.CharField(max_length=8, blank=True, null=True)
@@ -27,7 +27,7 @@ class Festival(models.Model):
     organManager = models.CharField(max_length=10, blank=True, null=True)
     organPhone = models.CharField(max_length=20, blank=True, null=True)
     organMail = models.CharField(max_length=50, blank=True, null=True)
-    openYn = models.CharField(max_length=17, default='Y')
+    openYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     insUs = models.CharField(max_length=30, blank=True, null=True)
     modDt = models.DateTimeField(default=timezone.now, blank=True, null=True)
