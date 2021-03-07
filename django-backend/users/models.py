@@ -13,7 +13,7 @@ class User(AbstractUser):
     androidToken = models.CharField(max_length=255, blank=True)
     iosToken = models.CharField(max_length=255, blank=True)
     bizYn = models.CharField(max_length=1, default='N')
-    tmpFlag = models.CharField(max_length=1, default='2') #1:일반유저/2:사전예약자/3:사전예약적용완료/4:오픈할인적용완료/5:둘다적용완료
+    tmpFlag = models.CharField(max_length=2, default='2') #1:일반유저/2:사전예약자/3:사전예약적용완료/4:오픈할인적용완료/5:둘다적용완료
     guestYn = models.CharField(max_length=1, default='N')
 
 class Point(models.Model):
