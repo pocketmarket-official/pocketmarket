@@ -9,7 +9,7 @@ class Cprt(models.Model):
     """ Cprt Model Definition """
 
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
-    cprtCd = models.CharField(max_length=1, default='000')
+    cprtCd = models.CharField(max_length=3, default='000')
     cprtName = models.CharField(max_length=50, default='')
     useYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=timezone.now)
@@ -19,7 +19,7 @@ class Cprt(models.Model):
 
 class Group(models.Model):
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
-    cprtGroupCd = models.CharField(max_length=1, default='000')
+    cprtGroupCd = models.CharField(max_length=3, default='000')
     cprtGroupName = models.CharField(max_length=50, default='')
     useYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=timezone.now)

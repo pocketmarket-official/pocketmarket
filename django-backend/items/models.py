@@ -13,7 +13,7 @@ class Item(models.Model):
     price = models.FloatField(default=0.0)
     takeOutPrice = models.FloatField(default=0.0, null=True)
     setYn = models.CharField(max_length=1, default='N')
-    itemFg = models.CharField(max_length=1, default='1')
+    itemFg = models.CharField(max_length=5, default='1')
     itemDesc = models.CharField(max_length=255, default='')
     useYn = models.CharField(max_length=1, default='Y')
     imgSmallUrl = models.CharField(max_length=200, null=True)
@@ -63,7 +63,7 @@ class ItemAdd(models.Model):
 
 
 class AddCat(models.Model):
-    addCatCd = models.CharField(max_length=1, default='00000')
+    addCatCd = models.CharField(max_length=5, default='00000')
     addCatName = models.CharField(max_length=20, default='')
     useYn = models.CharField(max_length=1, default='Y')
     insDt = models.DateTimeField(default=timezone.now, null=True)

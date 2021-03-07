@@ -24,7 +24,7 @@ class StoreKeymap(models.Model):
 class TouchGroup(models.Model):
     storeCd = models.ForeignKey('stores.Store', on_delete=models.CASCADE, default=1)
     keymapCd = models.ForeignKey('keymaps.StoreKeymap', on_delete=models.CASCADE, default=1)
-    touchGroupCd = models.CharField(max_length=1, default='000')
+    touchGroupCd = models.CharField(max_length=3, default='000')
     touchGroupName = models.CharField(max_length=100, default='')
     imgUrl = models.CharField(max_length=200, null=True)
     imgUseYn = models.CharField(max_length=1, default='N')
@@ -48,7 +48,7 @@ class Keymap(models.Model):
     posIndex = models.IntegerField(default=0)
     itemCd = models.ForeignKey('items.Item', on_delete=models.CASCADE, default=1)
     soldoutYn = models.CharField(max_length=1, null=True)
-    cprtGroupCd = models.CharField(max_length=1, null=True)
+    cprtGroupCd = models.CharField(max_length=3, null=True)
     dispYn = models.CharField(max_length=1, default='Y')
     expectCnt = models.IntegerField(default=0)
     insDt = models.DateTimeField(default=timezone.now)

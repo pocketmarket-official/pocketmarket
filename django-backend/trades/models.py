@@ -5,10 +5,10 @@ from django.utils import timezone
 class SaleHeader(models.Model):
     storeCd = models.CharField(max_length=10, default='')
     saleDt = models.CharField(max_length=8, default='')
-    posNo = models.CharField(max_length=1, default='91')
+    posNo = models.CharField(max_length=3, default='91')
     billNo = models.CharField(max_length=10, default='')
     saleFlag = models.CharField(max_length=3, default='') #baseCode:050 [0:전체/1:정상/2:취소]
-    saleDay = models.CharField(max_length=1, default='')
+    saleDay = models.CharField(max_length=3, default='')
     saleTime = models.CharField(max_length=6, default='')
     totQty = models.IntegerField(default=0)
     totSaleAmt = models.FloatField(default=0.0) #할인이 적용되기 전 매출액
@@ -26,10 +26,10 @@ class SaleHeader(models.Model):
     returnYn = models.CharField(max_length=1, default='N')
     orgStoreCd = models.CharField(max_length=10, null=True)
     orgSaleDt = models.CharField(max_length=8, null=True)
-    orgPosNo = models.CharField(max_length=1, null=True)
+    orgPosNo = models.CharField(max_length=3, null=True)
     orgBillNo = models.CharField(max_length=10, null=True)
     sendYn = models.CharField(max_length=1, default='N')
-    orderStatus = models.CharField(max_length=1, default=1)#0:장바구니/1:수락대기중/2:조리중/3:조리완료/4:픽업완료(User)/5:픽업완료(Store)/6:리뷰작성/7:리뷰취소/9:반품
+    orderStatus = models.CharField(max_length=3, default=1)#0:장바구니/1:수락대기중/2:조리중/3:조리완료/4:픽업완료(User)/5:픽업완료(Store)/6:리뷰작성/7:리뷰취소/9:반품
     confirmTime = models.CharField(max_length=8, null=True, blank=True)
     completeTime = models.CharField(max_length=8, null=True, blank=True)
     pickupTime = models.CharField(max_length=8, null=True, blank=True)
@@ -44,7 +44,7 @@ class SaleHeader(models.Model):
 class SaleDetail(models.Model):
     storeCd = models.CharField(max_length=10, default='')
     saleDt = models.CharField(max_length=8, default='')
-    posNo = models.CharField(max_length=1, default='91')
+    posNo = models.CharField(max_length=3, default='91')
     billNo = models.CharField(max_length=10, default='')
     seq = models.IntegerField(default=1)
     saleFlag = models.CharField(max_length=3, default='') #baseCode:050 [0:전체/1:정상/2:취소]
@@ -99,7 +99,7 @@ class SaleDetail(models.Model):
 class CardLog(models.Model):
     storeCd = models.CharField(max_length=10, default='')
     saleDt = models.CharField(max_length=8, default='')
-    posNo = models.CharField(max_length=1, default='91')
+    posNo = models.CharField(max_length=3, default='91')
     billNo = models.CharField(max_length=10, default='')
     seq = models.IntegerField(default=1)
     saleFlag = models.CharField(max_length=3, default='1')  # baseCode:050 [0:전체/1:정상/2:취소]
@@ -111,17 +111,17 @@ class CardLog(models.Model):
     apprNo = models.CharField(max_length=20, default='')
     apprDt = models.CharField(max_length=8, default='')
     apprTime = models.CharField(max_length=6, default='')
-    apprFlag = models.CharField(max_length=1, default=1) #[1:정상승인/2:임의등록]
+    apprFlag = models.CharField(max_length=3, default=1) #[1:정상승인/2:임의등록]
     receiptId = models.CharField(max_length=30, default='')
     cancelId = models.CharField(max_length=50, default='')
-    instFlag = models.CharField(max_length=1, default='0') #[0:할부없음/1:할부]
-    instMonth = models.CharField(max_length=1, default='00')
+    instFlag = models.CharField(max_length=3, default='0') #[0:할부없음/1:할부]
+    instMonth = models.CharField(max_length=3, default='00')
     terminalId = models.CharField(max_length=20, default='')
     registerNo = models.CharField(max_length=20, default='')
     returnYn = models.CharField(max_length=1, default='N')
     orgStoreCd = models.CharField(max_length=10, default='')
     orgSaleDt = models.CharField(max_length=8, default='')
-    orgPosNo = models.CharField(max_length=1, default='91')
+    orgPosNo = models.CharField(max_length=3, default='91')
     orgBillNo = models.CharField(max_length=10, default='')
     orgSeq = models.IntegerField(null=True)
     orgApprNo = models.CharField(max_length=8, default='')
@@ -135,13 +135,13 @@ class CardLog(models.Model):
 class EtcLog(models.Model):
     storeCd = models.CharField(max_length=10, default='00000')
     saleDt = models.CharField(max_length=8, default='00000000')
-    posNo = models.CharField(max_length=1, default='91')
+    posNo = models.CharField(max_length=3, default='91')
     billNo = models.CharField(max_length=10, default='00000')
     seq = models.IntegerField(default=1)
     saleFlag = models.CharField(max_length=3, default='000')  # baseCode:050 [0:전체/1:정상/2:취소]
     etcAmt = models.FloatField(default=0.0)
-    etcPayCatCd = models.CharField(max_length=1, default='000')
-    etcPayCd = models.CharField(max_length=1, default='000')
+    etcPayCatCd = models.CharField(max_length=3, default='000')
+    etcPayCd = models.CharField(max_length=3, default='000')
     remark = models.CharField(max_length=255, null=True)
     sendYn = models.CharField(max_length=1, default='N')
     insDt = models.DateTimeField(default=timezone.now, null=True)
@@ -176,7 +176,7 @@ class PurchaseLog(models.Model):
     seq = models.IntegerField(default=1)
     purchaseFlag = models.CharField(max_length=3, default='')
     cdmtCd = models.CharField(max_length=20, default='')
-    orderUnit = models.CharField(max_length=1, default='')
+    orderUnit = models.CharField(max_length=3, default='')
     purchaseQty = models.IntegerField(default=0)
     approvalFlag = models.CharField(max_length=3, default='')
     insDt = models.DateTimeField(default=timezone.now, null=True)
@@ -199,7 +199,7 @@ class CornerStateLog(models.Model):
     saleDt = models.CharField(max_length=8, default='')
     keymapCd = models.CharField(max_length=10, default='')
     groupCd = models.CharField(max_length=3, default='')
-    stateFlag = models.CharField(max_length=1, default='1') #[1:원활/2:혼잡/3:주문불가]
+    stateFlag = models.CharField(max_length=3, default='1') #[1:원활/2:혼잡/3:주문불가]
     insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=timezone.now, null=True)
@@ -209,7 +209,7 @@ class CornerStateLog(models.Model):
 class ErrorLog(models.Model):
     storeId = models.CharField(max_length=10, default='')
     saleDt = models.CharField(max_length=8, default='')
-    posNo = models.CharField(max_length=1, default='91')
+    posNo = models.CharField(max_length=3, default='91')
     billNo = models.CharField(max_length=10, default='')
     userId = models.CharField(max_length=10, default='')
     itemId = models.CharField(max_length=10, default='')

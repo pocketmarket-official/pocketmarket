@@ -10,7 +10,7 @@ class Festival(models.Model):
 
     """ Festival Model Definition """
 
-    festivalCd = models.CharField(max_length=1, blank=True, null=True)
+    festivalCd = models.CharField(max_length=5, blank=True, null=True)
     festivalName = models.CharField(max_length=100, blank=True, null=True)
     startDt = models.CharField(max_length=8, blank=True, null=True)
     endDt = models.CharField(max_length=8, blank=True, null=True)
