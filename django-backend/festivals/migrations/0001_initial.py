@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             name='Festival',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('festivalCd', models.CharField(blank=True, max_length=5, null=True)),
+                ('festivalCd', models.CharField(blank=True, max_length=17, null=True)),
                 ('festivalName', models.CharField(blank=True, max_length=100, null=True)),
                 ('startDt', models.CharField(blank=True, max_length=8, null=True)),
                 ('endDt', models.CharField(blank=True, max_length=8, null=True)),

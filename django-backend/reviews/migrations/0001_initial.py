@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('img3', models.ImageField(blank=True, null=True, upload_to='images/review')),
                 ('img4', models.ImageField(blank=True, null=True, upload_to='images/review')),
                 ('img5', models.ImageField(blank=True, null=True, upload_to='images/review')),
-                ('deleteYn', models.CharField(blank=True, default='N', max_length=5, null=True)),
+                ('deleteYn', models.CharField(blank=True, default='N', max_length=17, null=True)),
                 ('insDt', models.DateTimeField(blank=True, default=django.utils.timezone.now, null=True)),
                 ('insUs', models.CharField(blank=True, max_length=30, null=True)),
                 ('modDt', models.DateTimeField(blank=True, default=django.utils.timezone.now, null=True)),
