@@ -49,8 +49,10 @@ class OrderInfo extends React.Component {
             storeId: storeId,
             storeCd: storeCd,
             userId: null,
-            discountCd : 1,
-            dcAmt : 1000,
+            discountFlag: '0',
+            discountName : '할인없음',
+            dcAmt : 0,
+            preDcAmt : 0,
         }
      };
 
@@ -66,20 +68,25 @@ class OrderInfo extends React.Component {
 
         axios.get("/api/users_user/")
         .then((res) => {
-            let userId = res.data.find((elt) => {
+            let user = res.data.find((elt) => {
                 if(elt.email === user_email) {
                     return true;
                 }
-            }).id;
-            this.setState({ userId: userId });
+            });
+            if(user.tmpFlag === '2'){
+                this.setState({ userId: user.id, discountFlag:user.tmpFlag, preDcAmt:1000 });
+            } else{
+                this.setState({ userId: user.id, discountFlag:user.tmpFlag });
+            }
+
         });
     }
 
     setDiscountRadio(event){
-        if(event.target.value == 'prelogin-event'){
-            this.setState({discountCd:2, dcAmt:2000});
+        if(event.target.value == 'no-discount'){
+            this.setState({discountName:'할인없음', dcAmt:0});
         } else if(event.target.value == 'open-event'){
-            this.setState({discountCd:1, dcAmt:1000});
+            this.setState({discountName:'오픈행사', dcAmt:2000});
         }
     }
 
@@ -146,9 +153,7 @@ class OrderInfo extends React.Component {
             tradesInfo.push(tradesInfoRow);
         }
 
-
         return (
-
             <>
                 <HeaderBiz/>
                 <div className="orderinfo">
@@ -162,15 +167,15 @@ class OrderInfo extends React.Component {
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">할인선택</div>
                         <div className="orderinfo__choices" style={{paddingLeft: '26px'}} onChange={this.setDiscountRadio}>
-                            <input id="open-event" type="radio" name="discount" value="open-event" defaultChecked={true}/><label htmlFor="open-event" style={{marginRight: '20px'}}>오픈할인</label>
+                            <input id="no-discount" type="radio" name="discount" value="no-discount" defaultChecked={true}/><label htmlFor="no-discount" style={{marginRight: '20px'}}>할인없음</label>
                             {
-                                this.state.userId<22 ?
+                                this.state.discountFlag==='4' || this.state.discountFlag==='5'?
                                     <>
-                                        <input id="prelogin-event" type="radio" name="discount" value="prelogin-event"/><label htmlFor="prelogin-event">사전예약</label>
+                                        <input id="no-discount" type="radio" name="discount" value="no-discount" disabled={true}/><label htmlFor="no-discount">오픈행사</label>
                                     </>
                                     :
                                     <>
-                                        <input id="prelogin-event" type="radio" name="discount" value="prelogin-event" disabled={true}/><label htmlFor="prelogin-event">사전예약할인</label>
+                                        <input id="open-event" type="radio" name="discount" value="open-event"/><label htmlFor="open-event">오픈행사</label>
                                     </>
                             }
                         </div>
@@ -238,20 +243,20 @@ class OrderInfo extends React.Component {
                         <div className="orderinfo__title">할인금액</div>
                         <div className="orderinfo__pay">
                             <div className="pay__info">
-                                {
-                                    this.state.discountCd==1?
-                                        <>
-                                            <div>오픈행사</div>
-                                            <div>{this.state.dcAmt}원</div>
-                                        </>
-                                        :
-                                        <>
-                                            <div>사전예약</div>
-                                            <div>{this.state.dcAmt}원</div>
-                                        </>
-                                }
-
+                                <div>{this.state.discountName}</div>
+                                <div>{this.state.dcAmt}원</div>
                             </div>
+                            {
+                                this.state.discountFlag==='2'?
+                                    <>
+                                        <div className="pay__info">
+                                            <div>사전예약</div>
+                                            <div>1000원</div>
+                                        </div>
+                                    </>
+                                    :
+                                    null
+                            }
                             {/*<div className="pay__info">*/}
                             {/*    <div>포켓머니</div>*/}
                             {/*    <button>전액 사용</button>*/}
@@ -273,13 +278,13 @@ class OrderInfo extends React.Component {
                     </div>
                     <div className="orderinfo__amount">
                         <div className="amount__title">최종 결제금액</div>
-                        <div className="amount__amount">{price - this.state.dcAmt}원</div>
+                        <div className="amount__amount">{price - this.state.dcAmt - this.state.preDcAmt}원</div>
                     </div>
                     <div className="divide"/>
                     {/*TODO: location replace 마무리 지어야 함*/}
                     <div className="orderinfo__btn"
                          onClick={async ({sellItemList}) => {
-                             let cardAmt = price-this.state.dcAmt;
+                             let cardAmt = price-this.state.dcAmt-this.state.preDcAmt;
 
                              if(cardAmt<1000){
                                  toast(<div className="message-container"><img src={logo} /><div>PG사 정책에 의해 카드결제금액은 최소 1,000원이상이어야 합니다 ㅜ_ㅜ</div></div>, {
@@ -292,7 +297,12 @@ class OrderInfo extends React.Component {
                                     });
                              } else {
                                  let callNo = document.getElementById('callNo').value;
-                                 let result = await pay(tradesInfo, price, applicationId, callNo, this.state.storeName, this.state.storeId, this.state.userId);
+                                 let payments = {
+                                     'price': price,
+                                     'openDcAmt': this.state.dcAmt,
+                                     'preDcAmt': this.state.preDcAmt
+                                 };
+                                 let result = await pay(tradesInfo, payments, applicationId, callNo, this.state.storeName, this.state.storeId, this.state.userId);
                                  if (result == 200){
                                      window.location.replace('/order/status');
                                  }

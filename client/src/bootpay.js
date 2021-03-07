@@ -1,12 +1,14 @@
 import BootPay from "bootpay-js";
 import axios from "axios";
 
-function pay(sellItemList, price, applicationId, callNo, storeName, storeId, userId) {
+function pay(sellItemList, payments, applicationId, callNo, storeName, storeId, userId) {
     console.log("==4==");
     console.log(applicationId);
 
+    let price = payments.price - payments.openDcAmt - payments.preDcAmt;
+    console.log(price);
+
     BootPay.request({
-        // price: trInfo.Price,
         price: price,
         application_id: applicationId,
         // name: trInfo.storeName,
@@ -49,7 +51,7 @@ function pay(sellItemList, price, applicationId, callNo, storeName, storeId, use
         //결제가 정상적으로 완료되면 수행됩니다
         //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
         console.log('==7');
-        let transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId, 'userId':userId, 'callNo':callNo};
+        let transData = {"data":data, "sellItemList":sellItemList, 'storeId':storeId, 'userId':userId, 'callNo':callNo, 'payments':payments};
         axios.post('/trade/', transData)
             .then((res)=>{
                 console.log(res.data);

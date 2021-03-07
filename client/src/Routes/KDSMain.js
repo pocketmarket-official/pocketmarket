@@ -292,13 +292,13 @@ class KDSMain extends React.Component{
                                                                             orderStatus: 2,
                                                                             confirmTime: confirm_time,
                                                                         })
-                                                                        .then(() => {
-                                                                            let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
-                                                                            axios.post('/pushSend_confirmComplete/', transData)
-                                                                                .then((res)=>{
-                                                                                    window.location.reload();
-                                                                                });
-                                                                        })
+                                                                        // .then(() => {
+                                                                        //     let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
+                                                                        //     axios.post('/pushSend_confirmComplete/', transData)
+                                                                        //         .then((res)=>{
+                                                                        //             window.location.reload();
+                                                                        //         });
+                                                                        // })
                                                                     }
                                                                 });
                                                         }}>

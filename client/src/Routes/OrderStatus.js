@@ -132,27 +132,29 @@ class OrderStatus extends React.Component {
                                                 <div className="modal__modal" onClick={(e) => {
                                                     e.stopPropagation();
                                                 }}>
-                                                    <div className="modal__header">정말로 취소하시겠어요?</div>
+                                                    {/*<div className="modal__header">정말로 취소하시겠어요?</div>*/}
+                                                    <div className="modal__header">010-9410-9188</div>
                                                     <div className="modal__cancel">
-                                                        <div onClick={() =>{
-                                                        let transData = {"saleHeaderId":this.state.selected};
-                                                        axios.post('/tradeRefund/', transData)
-                                                            .then((res)=>{
-                                                                console.log(res.data);
-                                                                if(res.data.result==='200'){
-                                                                    window.location.href = res.data.url;
-                                                                } else if(res.data.result==='202'){
+                                                        현재 기능 점검으로 인해 담당자에게 연락하여 취소 부탁드리겠습니다.
+                                                        {/*<div onClick={() =>{*/}
+                                                        {/*let transData = {"saleHeaderId":this.state.selected};*/}
+                                                        {/*axios.post('/tradeRefund/', transData)*/}
+                                                        {/*    .then((res)=>{*/}
+                                                        {/*        console.log(res.data);*/}
+                                                        {/*        if(res.data.result==='200'){*/}
+                                                        {/*            window.location.href = res.data.url;*/}
+                                                        {/*        } else if(res.data.result==='202'){*/}
 
-                                                                } else if(res.data.result==='500'){
-                                                                    // toast message after page redirect
-                                                                }
+                                                        {/*        } else if(res.data.result==='500'){*/}
+                                                        {/*            // toast message after page redirect*/}
+                                                        {/*        }*/}
 
-                                                            });
-                                                        }}>주문취소</div>
-                                                        <div onClick={() =>{
-                                                        const element = document.getElementById("modal__conversion");
-                                                        element.classList.add("hidden");
-                                                        }}>닫기</div>
+                                                        {/*    });*/}
+                                                        {/*}}>주문취소</div>*/}
+                                                        {/*<div onClick={() =>{*/}
+                                                        {/*const element = document.getElementById("modal__conversion");*/}
+                                                        {/*element.classList.add("hidden");*/}
+                                                        {/*}}>닫기</div>*/}
                                                     </div>
 
 
