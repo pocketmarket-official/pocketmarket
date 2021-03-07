@@ -143,7 +143,7 @@ class EtcLog(models.Model):
     etcPayCatCd = models.CharField(max_length=5, default='000')
     etcPayCd = models.CharField(max_length=5, default='000')
     remark = models.CharField(max_length=255, null=True)
-    sendYn = models.CharField(max_length=1, default='N')
+    sendYn = models.CharField(max_length=2, default='N')
     insDt = models.DateTimeField(default=timezone.now, null=True)
     insUs = models.CharField(max_length=30,  null=True)
     modDt = models.DateTimeField(default=timezone.now, null=True)
