@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('posPage', models.IntegerField(default=0)),
                 ('posIndex', models.IntegerField(default=0)),
-                ('soldoutYn', models.CharField(max_length=1, null=True)),
+                ('soldoutYn', models.CharField(max_length=5, null=True)),
                 ('cprtGroupCd', models.CharField(max_length=5, null=True)),
                 ('dispYn', models.CharField(default='Y', max_length=1)),
                 ('expectCnt', models.IntegerField(default=0)),

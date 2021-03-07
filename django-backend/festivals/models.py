@@ -27,7 +27,7 @@ class Festival(models.Model):
     organManager = models.CharField(max_length=10, blank=True, null=True)
     organPhone = models.CharField(max_length=20, blank=True, null=True)
     organMail = models.CharField(max_length=50, blank=True, null=True)
-    openYn = models.CharField(max_length=1, default='Y')
+    openYn = models.CharField(max_length=5, default='Y')
     insDt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     insUs = models.CharField(max_length=30, blank=True, null=True)
     modDt = models.DateTimeField(default=timezone.now, blank=True, null=True)
