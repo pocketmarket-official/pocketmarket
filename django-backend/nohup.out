@@ -1,0 +1,595 @@
+Loading .env environment variables...
+[2021-03-14 22:43:09 +0900] [29286] [INFO] Starting gunicorn 20.0.4
+[2021-03-14 22:43:09 +0900] [29286] [INFO] Listening at: http://127.0.0.1:8000 (29286)
+[2021-03-14 22:43:09 +0900] [29286] [INFO] Using worker: sync
+[2021-03-14 22:43:09 +0900] [29302] [INFO] Booting worker with pid: 29302
+[2021-03-14 22:43:09 +0900] [29302] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'django-backend'
+[2021-03-14 22:43:09 +0900] [29302] [INFO] Worker exiting (pid: 29302)
+[2021-03-14 22:43:09 +0900] [29286] [INFO] Shutting down: Master
+[2021-03-14 22:43:09 +0900] [29286] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 18:28:06 +0900] [3089] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 18:28:06 +0900] [3089] [INFO] Listening at: http://127.0.0.1:8000 (3089)
+[2021-03-16 18:28:06 +0900] [3089] [INFO] Using worker: sync
+[2021-03-16 18:28:06 +0900] [3106] [INFO] Booting worker with pid: 3106
+[2021-03-16 18:28:06 +0900] [3106] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'django-backend'
+[2021-03-16 18:28:06 +0900] [3106] [INFO] Worker exiting (pid: 3106)
+[2021-03-16 18:28:06 +0900] [3089] [INFO] Shutting down: Master
+[2021-03-16 18:28:06 +0900] [3089] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 18:34:26 +0900] [3196] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 18:34:26 +0900] [3196] [INFO] Listening at: http://127.0.0.1:8000 (3196)
+[2021-03-16 18:34:26 +0900] [3196] [INFO] Using worker: sync
+[2021-03-16 18:34:26 +0900] [3213] [INFO] Booting worker with pid: 3213
+[2021-03-16 18:34:26 +0900] [3213] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'wsgi'
+[2021-03-16 18:34:26 +0900] [3213] [INFO] Worker exiting (pid: 3213)
+[2021-03-16 18:34:26 +0900] [3196] [INFO] Shutting down: Master
+[2021-03-16 18:34:26 +0900] [3196] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 18:46:56 +0900] [3391] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 18:46:56 +0900] [3391] [INFO] Listening at: http://127.0.0.1:8000 (3391)
+[2021-03-16 18:46:56 +0900] [3391] [INFO] Using worker: sync
+[2021-03-16 18:46:56 +0900] [3407] [INFO] Booting worker with pid: 3407
+[2021-03-16 18:46:56 +0900] [3407] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'pocketmarket'
+[2021-03-16 18:46:56 +0900] [3407] [INFO] Worker exiting (pid: 3407)
+[2021-03-16 18:46:56 +0900] [3391] [INFO] Shutting down: Master
+[2021-03-16 18:46:56 +0900] [3391] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+
+Error: can't chdir to 'django-backend'
+Loading .env environment variables…
+[2021-03-16 18:51:01 +0900] [3518] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 18:51:01 +0900] [3518] [INFO] Listening at: http://127.0.0.1:8000 (3518)
+[2021-03-16 18:51:01 +0900] [3518] [INFO] Using worker: sync
+[2021-03-16 18:51:01 +0900] [3535] [INFO] Booting worker with pid: 3535
+[2021-03-16 18:51:01 +0900] [3535] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'django-backend'
+[2021-03-16 18:51:01 +0900] [3535] [INFO] Worker exiting (pid: 3535)
+[2021-03-16 18:51:01 +0900] [3518] [INFO] Shutting down: Master
+[2021-03-16 18:51:01 +0900] [3518] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 18:52:40 +0900] [3552] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 18:52:40 +0900] [3552] [INFO] Listening at: http://127.0.0.1:8000 (3552)
+[2021-03-16 18:52:40 +0900] [3552] [INFO] Using worker: sync
+[2021-03-16 18:52:40 +0900] [3568] [INFO] Booting worker with pid: 3568
+[2021-03-16 18:52:40 +0900] [3568] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'wsgi'
+[2021-03-16 18:52:40 +0900] [3568] [INFO] Worker exiting (pid: 3568)
+[2021-03-16 18:52:40 +0900] [3552] [INFO] Shutting down: Master
+[2021-03-16 18:52:40 +0900] [3552] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 18:53:08 +0900] [3583] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 18:53:08 +0900] [3583] [INFO] Listening at: http://127.0.0.1:8000 (3583)
+[2021-03-16 18:53:08 +0900] [3583] [INFO] Using worker: sync
+[2021-03-16 18:53:08 +0900] [3599] [INFO] Booting worker with pid: 3599
+[2021-03-16 18:53:08 +0900] [3599] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'django-backend.wsgi'
+[2021-03-16 18:53:08 +0900] [3599] [INFO] Worker exiting (pid: 3599)
+[2021-03-16 18:53:08 +0900] [3583] [INFO] Shutting down: Master
+[2021-03-16 18:53:08 +0900] [3583] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 18:56:59 +0900] [3645] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 18:56:59 +0900] [3645] [INFO] Listening at: http://127.0.0.1:8000 (3645)
+[2021-03-16 18:56:59 +0900] [3645] [INFO] Using worker: sync
+[2021-03-16 18:56:59 +0900] [3661] [INFO] Booting worker with pid: 3661
+[2021-03-16 18:56:59 +0900] [3661] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'django-backend-e7OGXkmz'
+[2021-03-16 18:56:59 +0900] [3661] [INFO] Worker exiting (pid: 3661)
+[2021-03-16 18:56:59 +0900] [3645] [INFO] Shutting down: Master
+[2021-03-16 18:56:59 +0900] [3645] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 18:57:20 +0900] [3668] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 18:57:20 +0900] [3668] [INFO] Listening at: http://127.0.0.1:8000 (3668)
+[2021-03-16 18:57:20 +0900] [3668] [INFO] Using worker: sync
+[2021-03-16 18:57:20 +0900] [3684] [INFO] Booting worker with pid: 3684
+[2021-03-16 18:57:20 +0900] [3684] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'django-backend'
+[2021-03-16 18:57:20 +0900] [3684] [INFO] Worker exiting (pid: 3684)
+[2021-03-16 18:57:20 +0900] [3668] [INFO] Shutting down: Master
+[2021-03-16 18:57:20 +0900] [3668] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 19:09:49 +0900] [3860] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 19:09:49 +0900] [3860] [INFO] Listening at: http://127.0.0.1:8000 (3860)
+[2021-03-16 19:09:49 +0900] [3860] [INFO] Using worker: sync
+[2021-03-16 19:09:49 +0900] [3876] [INFO] Booting worker with pid: 3876
+[2021-03-16 19:09:49 +0900] [3876] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'django-backend'
+[2021-03-16 19:09:49 +0900] [3876] [INFO] Worker exiting (pid: 3876)
+[2021-03-16 19:09:49 +0900] [3860] [INFO] Shutting down: Master
+[2021-03-16 19:09:49 +0900] [3860] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 19:28:50 +0900] [4225] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 19:28:50 +0900] [4225] [INFO] Listening at: http://127.0.0.1:8000 (4225)
+[2021-03-16 19:28:50 +0900] [4225] [INFO] Using worker: sync
+[2021-03-16 19:28:50 +0900] [4241] [INFO] Booting worker with pid: 4241
+[2021-03-16 19:28:50 +0900] [4241] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 122, in import_module
+    raise TypeError(msg.format(name))
+TypeError: the 'package' argument is required to perform a relative import for '.django-backend.wsgi'
+[2021-03-16 19:28:50 +0900] [4241] [INFO] Worker exiting (pid: 4241)
+[2021-03-16 19:28:50 +0900] [4225] [INFO] Shutting down: Master
+[2021-03-16 19:28:50 +0900] [4225] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 19:29:16 +0900] [4249] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 19:29:16 +0900] [4249] [INFO] Listening at: http://127.0.0.1:8000 (4249)
+[2021-03-16 19:29:16 +0900] [4249] [INFO] Using worker: sync
+[2021-03-16 19:29:16 +0900] [4265] [INFO] Booting worker with pid: 4265
+[2021-03-16 19:29:16 +0900] [4265] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 119, in init_process
+    self.load_wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/workers/base.py", line 144, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 49, in load
+    return self.load_wsgiapp()
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/app/wsgiapp.py", line 39, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/Users/jhonnyclochema/.local/share/virtualenvs/django-backend-e7OGXkmz/lib/python3.8/site-packages/gunicorn/util.py", line 358, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'django-backend'
+[2021-03-16 19:29:16 +0900] [4265] [INFO] Worker exiting (pid: 4265)
+[2021-03-16 19:29:16 +0900] [4249] [INFO] Shutting down: Master
+[2021-03-16 19:29:16 +0900] [4249] [INFO] Reason: Worker failed to boot.
+Loading .env environment variables…
+[2021-03-16 19:29:28 +0900] [4270] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 19:29:28 +0900] [4270] [INFO] Listening at: http://127.0.0.1:8000 (4270)
+[2021-03-16 19:29:28 +0900] [4270] [INFO] Using worker: sync
+[2021-03-16 19:29:28 +0900] [4286] [INFO] Booting worker with pid: 4286
+[2021-03-16 19:47:35 +0900] [4270] [CRITICAL] WORKER TIMEOUT (pid:4286)
+[2021-03-16 19:47:35 +0900] [4286] [INFO] Worker exiting (pid: 4286)
+[2021-03-16 19:47:35 +0900] [4917] [INFO] Booting worker with pid: 4917
+Loading .env environment variables…
+[2021-03-16 19:54:14 +0900] [5198] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 19:54:14 +0900] [5198] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 19:54:14 +0900] [5198] [ERROR] Retrying in 1 second.
+[2021-03-16 19:54:15 +0900] [5198] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 19:54:15 +0900] [5198] [ERROR] Retrying in 1 second.
+[2021-03-16 19:54:16 +0900] [5198] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 19:54:16 +0900] [5198] [ERROR] Retrying in 1 second.
+[2021-03-16 19:54:17 +0900] [5198] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 19:54:17 +0900] [5198] [ERROR] Retrying in 1 second.
+[2021-03-16 19:54:18 +0900] [5198] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 19:54:18 +0900] [5198] [ERROR] Retrying in 1 second.
+[2021-03-16 19:54:19 +0900] [5198] [ERROR] Can't connect to ('127.0.0.1', 8000)
+Loading .env environment variables…
+[2021-03-16 20:04:40 +0900] [5563] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 20:04:40 +0900] [5563] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:04:40 +0900] [5563] [ERROR] Retrying in 1 second.
+[2021-03-16 20:04:41 +0900] [5563] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:04:41 +0900] [5563] [ERROR] Retrying in 1 second.
+[2021-03-16 20:04:42 +0900] [5563] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:04:42 +0900] [5563] [ERROR] Retrying in 1 second.
+[2021-03-16 20:04:43 +0900] [5563] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:04:43 +0900] [5563] [ERROR] Retrying in 1 second.
+[2021-03-16 20:04:44 +0900] [5563] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:04:44 +0900] [5563] [ERROR] Retrying in 1 second.
+[2021-03-16 20:04:45 +0900] [5563] [ERROR] Can't connect to ('127.0.0.1', 8000)
+[2021-03-16 20:06:07 +0900] [4270] [INFO] Handling signal: hup
+[2021-03-16 20:06:07 +0900] [4270] [INFO] Hang up: Master
+[2021-03-16 20:06:07 +0900] [5690] [INFO] Booting worker with pid: 5690
+Loading .env environment variables…
+[2021-03-16 20:06:18 +0900] [5695] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 20:06:18 +0900] [5695] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:06:18 +0900] [5695] [ERROR] Retrying in 1 second.
+[2021-03-16 20:06:19 +0900] [5695] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:06:19 +0900] [5695] [ERROR] Retrying in 1 second.
+[2021-03-16 20:06:20 +0900] [5695] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:06:20 +0900] [5695] [ERROR] Retrying in 1 second.
+[2021-03-16 20:06:21 +0900] [5695] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:06:21 +0900] [5695] [ERROR] Retrying in 1 second.
+[2021-03-16 20:06:22 +0900] [5695] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2021-03-16 20:06:22 +0900] [5695] [ERROR] Retrying in 1 second.
+[2021-03-16 20:06:23 +0900] [5695] [ERROR] Can't connect to ('127.0.0.1', 8000)
+[2021-03-16 20:11:08 +0900] [5690] [INFO] Parent changed, shutting down: <Worker 5690>
+[2021-03-16 20:11:08 +0900] [5690] [INFO] Worker exiting (pid: 5690)
+Loading .env environment variables…
+[2021-03-16 20:11:34 +0900] [5985] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 20:11:34 +0900] [5985] [INFO] Listening at: http://127.0.0.1:8000 (5985)
+[2021-03-16 20:11:34 +0900] [5985] [INFO] Using worker: sync
+[2021-03-16 20:11:34 +0900] [6001] [INFO] Booting worker with pid: 6001
+[2021-03-16 20:16:48 +0900] [6092] [INFO] Booting worker with pid: 6092
+[2021-03-16 20:16:57 +0900] [6113] [INFO] Booting worker with pid: 6113
+Loading .env environment variables…
+[2021-03-16 20:18:08 +0900] [6201] [INFO] Starting gunicorn 20.0.4
+[2021-03-16 20:18:08 +0900] [6201] [INFO] Listening at: http://127.0.0.1:8000 (6201)
+[2021-03-16 20:18:08 +0900] [6201] [INFO] Using worker: sync
+[2021-03-16 20:18:08 +0900] [6219] [INFO] Booting worker with pid: 6219
+[2021-03-16 20:34:48 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6219)
+[2021-03-16 20:34:48 +0900] [6219] [INFO] Worker exiting (pid: 6219)
+[2021-03-16 20:34:48 +0900] [6243] [INFO] Booting worker with pid: 6243
+[2021-03-17 01:30:01 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6243)
+[2021-03-17 01:30:01 +0900] [6243] [INFO] Worker exiting (pid: 6243)
+[2021-03-17 01:30:01 +0900] [6253] [INFO] Booting worker with pid: 6253
+[2021-03-17 08:20:51 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6253)
+[2021-03-17 08:20:51 +0900] [6253] [INFO] Worker exiting (pid: 6253)
+[2021-03-17 08:20:52 +0900] [6283] [INFO] Booting worker with pid: 6283
+[2021-03-17 19:15:02 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6283)
+[2021-03-17 19:15:03 +0900] [6283] [INFO] Worker exiting (pid: 6283)
+[2021-03-17 19:15:04 +0900] [6316] [INFO] Booting worker with pid: 6316
+[2021-03-19 16:46:18 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6316)
+[2021-03-19 16:46:19 +0900] [6316] [INFO] Worker exiting (pid: 6316)
+[2021-03-19 16:46:20 +0900] [6347] [INFO] Booting worker with pid: 6347
+[2021-03-19 17:01:23 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6347)
+[2021-03-19 17:01:23 +0900] [6347] [INFO] Worker exiting (pid: 6347)
+[2021-03-19 17:01:23 +0900] [6883] [INFO] Booting worker with pid: 6883
+[2021-03-19 17:27:25 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6883)
+[2021-03-19 17:27:25 +0900] [6883] [INFO] Worker exiting (pid: 6883)
+[2021-03-19 17:27:25 +0900] [6894] [INFO] Booting worker with pid: 6894
+[2021-03-19 17:48:13 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6894)
+[2021-03-19 17:48:13 +0900] [6894] [INFO] Worker exiting (pid: 6894)
+[2021-03-19 17:48:13 +0900] [6936] [INFO] Booting worker with pid: 6936
+[2021-03-19 17:57:50 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6936)
+[2021-03-19 17:57:50 +0900] [6936] [INFO] Worker exiting (pid: 6936)
+[2021-03-19 17:57:50 +0900] [6952] [INFO] Booting worker with pid: 6952
+[2021-03-20 02:30:02 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6952)
+[2021-03-20 02:30:02 +0900] [6952] [INFO] Worker exiting (pid: 6952)
+[2021-03-20 02:30:02 +0900] [6957] [INFO] Booting worker with pid: 6957
+[2021-03-20 05:58:53 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6957)
+[2021-03-20 05:58:53 +0900] [6957] [INFO] Worker exiting (pid: 6957)
+[2021-03-20 05:58:53 +0900] [6979] [INFO] Booting worker with pid: 6979
+[2021-03-20 08:30:02 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:6979)
+[2021-03-20 08:30:02 +0900] [6979] [INFO] Worker exiting (pid: 6979)
+[2021-03-20 08:30:03 +0900] [7036] [INFO] Booting worker with pid: 7036
+[2021-03-20 10:14:59 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:7036)
+[2021-03-20 10:14:59 +0900] [7036] [INFO] Worker exiting (pid: 7036)
+[2021-03-20 10:14:59 +0900] [7040] [INFO] Booting worker with pid: 7040
+[2021-03-20 12:57:38 +0900] [6201] [CRITICAL] WORKER TIMEOUT (pid:7040)
+[2021-03-20 12:57:39 +0900] [7040] [INFO] Worker exiting (pid: 7040)
+[2021-03-20 12:57:40 +0900] [7059] [INFO] Booting worker with pid: 7059
+Loading .env environment variables…
+[2021-03-20 13:03:44 +0900] [7480] [INFO] Starting gunicorn 20.0.4
+[2021-03-20 13:03:44 +0900] [7480] [INFO] Listening at: http://127.0.0.1:8000 (7480)
+[2021-03-20 13:03:44 +0900] [7480] [INFO] Using worker: sync
+[2021-03-20 13:03:44 +0900] [7496] [INFO] Booting worker with pid: 7496
+[2021-03-20 14:12:46 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:7496)
+[2021-03-20 14:12:46 +0900] [7496] [INFO] Worker exiting (pid: 7496)
+[2021-03-20 14:12:46 +0900] [8404] [INFO] Booting worker with pid: 8404
+[2021-03-20 14:29:03 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:8404)
+[2021-03-20 14:29:03 +0900] [8404] [INFO] Worker exiting (pid: 8404)
+[2021-03-20 14:29:03 +0900] [8446] [INFO] Booting worker with pid: 8446
+[2021-03-20 14:44:49 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:8446)
+[2021-03-20 14:44:49 +0900] [8446] [INFO] Worker exiting (pid: 8446)
+[2021-03-20 14:44:49 +0900] [8457] [INFO] Booting worker with pid: 8457
+[2021-03-20 15:00:33 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:8457)
+[2021-03-20 15:00:33 +0900] [8457] [INFO] Worker exiting (pid: 8457)
+[2021-03-20 15:00:33 +0900] [8476] [INFO] Booting worker with pid: 8476
+[2021-03-20 15:16:20 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:8476)
+[2021-03-20 15:16:20 +0900] [8476] [INFO] Worker exiting (pid: 8476)
+[2021-03-20 15:16:20 +0900] [8486] [INFO] Booting worker with pid: 8486
+[2021-03-20 15:30:00 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:8486)
+[2021-03-20 15:30:00 +0900] [8486] [INFO] Worker exiting (pid: 8486)
+[2021-03-20 15:30:00 +0900] [8502] [INFO] Booting worker with pid: 8502
+[2021-03-20 16:45:00 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:8502)
+[2021-03-20 16:45:00 +0900] [8502] [INFO] Worker exiting (pid: 8502)
+[2021-03-20 16:45:00 +0900] [9013] [INFO] Booting worker with pid: 9013
+[2021-03-20 17:00:47 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9013)
+[2021-03-20 17:00:47 +0900] [9013] [INFO] Worker exiting (pid: 9013)
+[2021-03-20 17:00:47 +0900] [9022] [INFO] Booting worker with pid: 9022
+[2021-03-20 17:16:33 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9022)
+[2021-03-20 17:16:33 +0900] [9022] [INFO] Worker exiting (pid: 9022)
+[2021-03-20 17:16:33 +0900] [9039] [INFO] Booting worker with pid: 9039
+[2021-03-20 17:32:17 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9039)
+[2021-03-20 17:32:17 +0900] [9039] [INFO] Worker exiting (pid: 9039)
+[2021-03-20 17:32:17 +0900] [9050] [INFO] Booting worker with pid: 9050
+[2021-03-20 17:48:06 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9050)
+[2021-03-20 17:48:06 +0900] [9050] [INFO] Worker exiting (pid: 9050)
+[2021-03-20 17:48:06 +0900] [9073] [INFO] Booting worker with pid: 9073
+[2021-03-20 18:03:52 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9073)
+[2021-03-20 18:03:52 +0900] [9073] [INFO] Worker exiting (pid: 9073)
+[2021-03-20 18:03:52 +0900] [9085] [INFO] Booting worker with pid: 9085
+[2021-03-20 18:19:36 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9085)
+[2021-03-20 18:19:36 +0900] [9085] [INFO] Worker exiting (pid: 9085)
+[2021-03-20 18:19:36 +0900] [9095] [INFO] Booting worker with pid: 9095
+[2021-03-20 18:35:24 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9095)
+[2021-03-20 18:35:24 +0900] [9095] [INFO] Worker exiting (pid: 9095)
+[2021-03-20 18:35:24 +0900] [9104] [INFO] Booting worker with pid: 9104
+[2021-03-20 18:51:10 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9104)
+[2021-03-20 18:51:10 +0900] [9104] [INFO] Worker exiting (pid: 9104)
+[2021-03-20 18:51:10 +0900] [9111] [INFO] Booting worker with pid: 9111
+[2021-03-20 19:06:56 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9111)
+[2021-03-20 19:06:56 +0900] [9111] [INFO] Worker exiting (pid: 9111)
+[2021-03-20 19:06:56 +0900] [9120] [INFO] Booting worker with pid: 9120
+[2021-03-20 19:22:42 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9120)
+[2021-03-20 19:22:42 +0900] [9120] [INFO] Worker exiting (pid: 9120)
+[2021-03-20 19:22:42 +0900] [9143] [INFO] Booting worker with pid: 9143
+[2021-03-20 19:25:01 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9143)
+[2021-03-20 19:25:01 +0900] [9143] [INFO] Worker exiting (pid: 9143)
+[2021-03-20 19:25:01 +0900] [9184] [INFO] Booting worker with pid: 9184
+[2021-03-21 02:12:10 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:9184)
+[2021-03-21 02:12:10 +0900] [9184] [INFO] Worker exiting (pid: 9184)
+[2021-03-21 02:12:10 +0900] [14484] [INFO] Booting worker with pid: 14484
+[2021-03-21 03:50:50 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:14484)
+[2021-03-21 03:50:50 +0900] [14484] [INFO] Worker exiting (pid: 14484)
+[2021-03-21 03:50:50 +0900] [14490] [INFO] Booting worker with pid: 14490
+[2021-03-21 04:30:03 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:14490)
+[2021-03-21 04:30:03 +0900] [14490] [INFO] Worker exiting (pid: 14490)
+[2021-03-21 04:30:03 +0900] [14519] [INFO] Booting worker with pid: 14519
+[2021-03-21 04:34:41 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:14519)
+[2021-03-21 04:34:41 +0900] [14519] [INFO] Worker exiting (pid: 14519)
+[2021-03-21 04:34:42 +0900] [14543] [INFO] Booting worker with pid: 14543
+[2021-03-21 08:19:14 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:14543)
+[2021-03-21 08:19:14 +0900] [14543] [INFO] Worker exiting (pid: 14543)
+[2021-03-21 08:19:15 +0900] [14546] [INFO] Booting worker with pid: 14546
+[2021-03-21 09:21:18 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:14546)
+[2021-03-21 09:21:18 +0900] [14546] [INFO] Worker exiting (pid: 14546)
+[2021-03-21 09:21:19 +0900] [14577] [INFO] Booting worker with pid: 14577
+[2021-03-21 16:30:25 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:14577)
+[2021-03-21 16:30:25 +0900] [14577] [INFO] Worker exiting (pid: 14577)
+[2021-03-21 16:30:26 +0900] [18376] [INFO] Booting worker with pid: 18376
+[2021-03-21 16:59:54 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:18376)
+[2021-03-21 16:59:54 +0900] [18376] [INFO] Worker exiting (pid: 18376)
+[2021-03-21 16:59:54 +0900] [18383] [INFO] Booting worker with pid: 18383
+[2021-03-21 17:12:20 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:18383)
+[2021-03-21 17:12:20 +0900] [18383] [INFO] Worker exiting (pid: 18383)
+[2021-03-21 17:12:20 +0900] [18415] [INFO] Booting worker with pid: 18415
+[2021-03-21 17:16:36 +0900] [7480] [CRITICAL] WORKER TIMEOUT (pid:18415)
+[2021-03-21 17:16:36 +0900] [18415] [INFO] Worker exiting (pid: 18415)
+[2021-03-21 17:16:36 +0900] [18475] [INFO] Booting worker with pid: 18475

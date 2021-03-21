@@ -65,6 +65,7 @@ PyYAML = "==5.3.1"
 websocket_client = "==0.57.0"
 firebase-admin = "*"
 requests = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
