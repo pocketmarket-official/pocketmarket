@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='addcat',
             name='addCatCd',
-            field=models.CharField(default='00000', max_length=1),
+            field=models.CharField(default='00000', max_length=5),
         ),
         migrations.AlterField(
             model_name='addcat',
