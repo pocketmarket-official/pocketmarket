@@ -23,17 +23,17 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cardlog',
             name='instMonth',
-            field=models.CharField(default='00', max_length=1),
+            field=models.CharField(default='00', max_length=2),
         ),
         migrations.AlterField(
             model_name='cardlog',
             name='orgPosNo',
-            field=models.CharField(default='91', max_length=1),
+            field=models.CharField(default='91', max_length=2),
         ),
         migrations.AlterField(
             model_name='cardlog',
             name='posNo',
-            field=models.CharField(default='91', max_length=1),
+            field=models.CharField(default='91', max_length=2),
         ),
         migrations.AlterField(
             model_name='cardlog',
