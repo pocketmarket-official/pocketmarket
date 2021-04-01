@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='setmaster',
             name='fontSize',
-            field=models.CharField(default=10, max_length=1),
+            field=models.CharField(default='10', max_length=5),
         ),
         migrations.AlterField(
             model_name='setmaster',

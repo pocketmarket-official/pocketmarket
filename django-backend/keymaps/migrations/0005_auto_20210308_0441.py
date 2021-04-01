@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='touchgroup',
             name='touchGroupCd',
-            field=models.CharField(default='000', max_length=1),
+            field=models.CharField(default='000', max_length=3),
         ),
         migrations.AlterField(
             model_name='touchgroup',
