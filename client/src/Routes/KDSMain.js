@@ -292,13 +292,13 @@ class KDSMain extends React.Component{
                                                                             orderStatus: 2,
                                                                             confirmTime: confirm_time,
                                                                         })
-                                                                        // .then(() => {
-                                                                        //     let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
-                                                                        //     axios.post('/pushSend_confirmComplete/', transData)
-                                                                        //         .then((res)=>{
-                                                                        //             window.location.reload();
-                                                                        //         });
-                                                                        // })
+                                                                        .then(() => {
+                                                                            let transData = {"storeName":this.state.store.storeName, "userId":elt.user};
+                                                                            axios.post('/pushSend_confirmComplete/', transData)
+                                                                                .then((res)=>{
+                                                                                    window.location.reload();
+                                                                                });
+                                                                        })
                                                                     }
                                                                 });
                                                         }}>
@@ -380,12 +380,6 @@ class KDSMain extends React.Component{
 
                 <div className="tail">
                     <div className="info">
-                        <div className="msg1">
-                            <span>P.M</span><br/>
-                        </div>
-                        <div className="msg2">
-                            <span>Help</span>
-                        </div>
                         <div className="msg2">
                             <span>010-9410-9188</span>
                         </div>
