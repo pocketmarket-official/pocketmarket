@@ -160,9 +160,13 @@ class OrderInfo extends React.Component {
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">포장선택</div>
                         <div className="orderinfo__choices" style={{paddingLeft: '26px'}}>
-                            <input id="takeOut" type="radio" name="where" value="Take out" defaultChecked={true}/><label htmlFor="takeOut" style={{marginRight: '20px'}}>일회용기</label>
-                            <input id="eatIn" type="radio" name="where" value="Eat in" disabled={true}/><label htmlFor="eatIn">개인용기</label>
+                            <div>
+                                <input id="takeOut" type="radio" name="where" value="Take out" defaultChecked={true}/><label htmlFor="takeOut" style={{marginRight: '20px'}}>일회용기</label>
+                                <input id="tray" type="radio" name="where" value="Tray"/><label htmlFor="tray">개인용기</label>
+                                <input id="eatIn" type="radio" name="where" value="Eat in"/><label htmlFor="eatIn" style={{marginTop: '20px'}}>현장식사</label>
+                            </div>
                         </div>
+
                     </div>
                     <div className="orderinfo__options">
                         <div className="orderinfo__title">할인선택</div>
@@ -264,18 +268,18 @@ class OrderInfo extends React.Component {
                             {/*</div>*/}
                         </div>
                     </div>
-                    <div className="orderinfo__options">
-                        <div className="orderinfo__title">휴대폰 번호</div>
-                        <div className="orderinfo__pay">
-                            <div className="call__info">
-                                <div>
-                                    상품 준비 완료 시 <br/>
-                                    알림톡 수신하실 연락처를 입력해주세요.
-                                </div>
-                                <input id="callNo" className="call__number" type="tel" name="callNo"/>
-                            </div>
-                        </div>
-                    </div>
+                    {/*<div className="orderinfo__options">*/}
+                    {/*    <div className="orderinfo__title">휴대폰 번호</div>*/}
+                    {/*    <div className="orderinfo__pay">*/}
+                    {/*        <div className="call__info">*/}
+                    {/*            <div>*/}
+                    {/*                상품 준비 완료 시 <br/>*/}
+                    {/*                알림톡 수신하실 연락처를 입력해주세요.*/}
+                    {/*            </div>*/}
+                    {/*            <input id="callNo" className="call__number" type="tel" name="callNo"/>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className="orderinfo__amount">
                         <div className="amount__title">최종 결제금액</div>
                         <div className="amount__amount">{price - this.state.dcAmt - this.state.preDcAmt}원</div>

@@ -42,7 +42,7 @@ class FestivalJSX extends React.Component {
                 <div className="content__festival">
                     <div className="festival__header">
                         <div className="header__title">{data.festivalName}</div>
-                        <div className="header__enter">축제입장</div>
+                        <div className="header__enter">타운입장</div>
                     </div>
                     <div className="festival__detail">
                         <img src={data.img || defaultImg} alt="festival" />
