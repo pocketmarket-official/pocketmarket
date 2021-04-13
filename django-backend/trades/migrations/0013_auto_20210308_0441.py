@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='errorlog',
             name='posNo',
-            field=models.CharField(default='91', max_length=1),
+            field=models.CharField(default='91', max_length=2),
         ),
         migrations.AlterField(
             model_name='etclog',
@@ -68,7 +68,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='etclog',
             name='posNo',
-            field=models.CharField(default='91', max_length=1),
+            field=models.CharField(default='91', max_length=2),
         ),
         migrations.AlterField(
             model_name='etclog',
@@ -83,7 +83,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='saledetail',
             name='posNo',
-            field=models.CharField(default='91', max_length=1),
+            field=models.CharField(default='91', max_length=2),
         ),
         migrations.AlterField(
             model_name='saledetail',
@@ -103,7 +103,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='saleheader',
             name='posNo',
-            field=models.CharField(default='91', max_length=1),
+            field=models.CharField(default='91', max_length=2),
         ),
         migrations.AlterField(
             model_name='saleheader',

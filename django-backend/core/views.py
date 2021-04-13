@@ -1326,21 +1326,21 @@ def pushSend_makeComplete(request):
         storeName = json.loads(request.body)['storeName']
         user = User.objects.get(id=json.loads(request.body)['userId'])
         device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
-        if(device):
+        if(device!=None):
             device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
 
-        ma = User.objects.get(id=2)
-        device = FCMDevice.objects.filter(registration_id=ma.iosToken).first()
-        if (device):
-            device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
-        mj = User.objects.get(id=3)
-        device = FCMDevice.objects.filter(registration_id=mj.iosToken).first()
-        if (device):
-            device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
-        mc = User.objects.get(id=4)
-        device = FCMDevice.objects.filter(registration_id=mc.iosToken).first()
-        if (device):
-            device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
+        # ma = User.objects.get(id=2)
+        # device = FCMDevice.objects.filter(registration_id=ma.iosToken).first()
+        # if (device):
+        #     device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
+        # mj = User.objects.get(id=3)
+        # device = FCMDevice.objects.filter(registration_id=mj.iosToken).first()
+        # if (device):
+        #     device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
+        # mc = User.objects.get(id=4)
+        # device = FCMDevice.objects.filter(registration_id=mc.iosToken).first()
+        # if (device):
+        #     device.send_message("상품준비완료", storeName + '에 주문하신 상품이 준비되었습니다.')
 
         return HttpResponse('success')
     except Exception as ex:
@@ -1352,8 +1352,8 @@ def pushSend_confirmComplete(request):
         storeName = json.loads(request.body)['storeName']
         user = User.objects.get(id=json.loads(request.body)['userId'])
         device = FCMDevice.objects.filter(registration_id=user.iosToken).first()
-        if(device):
-            device.send_message("상품제조 시작", storeName + '에 주문하신 상품이 준비되었습니다.')
+        if(device!=None):
+            device.send_message("상품제조 시작", storeName + '에 대한 주문이 수락되었습니다.')
 
         return HttpResponse('success')
     except Exception as ex:
