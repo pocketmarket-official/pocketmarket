@@ -168,22 +168,22 @@ class OrderInfo extends React.Component {
                         </div>
 
                     </div>
-                    <div className="orderinfo__options">
-                        <div className="orderinfo__title">할인선택</div>
-                        <div className="orderinfo__choices" style={{paddingLeft: '26px'}} onChange={this.setDiscountRadio}>
-                            <input id="no-discount" type="radio" name="discount" value="no-discount" defaultChecked={true}/><label htmlFor="no-discount" style={{marginRight: '20px'}}>할인없음</label>
-                            {
-                                this.state.discountFlag==='4' || this.state.discountFlag==='5'?
-                                    <>
-                                        <input id="no-discount" type="radio" name="discount" value="no-discount" disabled={true}/><label htmlFor="no-discount">오픈행사</label>
-                                    </>
-                                    :
-                                    <>
-                                        <input id="open-event" type="radio" name="discount" value="open-event"/><label htmlFor="open-event">오픈행사</label>
-                                    </>
-                            }
-                        </div>
-                    </div>
+                    {/*<div className="orderinfo__options">*/}
+                    {/*    <div className="orderinfo__title">할인선택</div>*/}
+                    {/*    <div className="orderinfo__choices" style={{paddingLeft: '26px'}} onChange={this.setDiscountRadio}>*/}
+                    {/*        <input id="no-discount" type="radio" name="discount" value="no-discount" defaultChecked={true}/><label htmlFor="no-discount" style={{marginRight: '20px'}}>할인없음</label>*/}
+                    {/*        {*/}
+                    {/*            this.state.discountFlag==='4' || this.state.discountFlag==='5'?*/}
+                    {/*                <>*/}
+                    {/*                    <input id="no-discount" type="radio" name="discount" value="no-discount" disabled={true}/><label htmlFor="no-discount">오픈행사</label>*/}
+                    {/*                </>*/}
+                    {/*                :*/}
+                    {/*                <>*/}
+                    {/*                    <input id="open-event" type="radio" name="discount" value="open-event"/><label htmlFor="open-event">오픈행사</label>*/}
+                    {/*                </>*/}
+                    {/*        }*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     {/*<div className="orderinfo__options">*/}
                     {/*    <div className="orderinfo__title">할인선택</div>*/}
                     {/*    <Link to="/main/store/C0001/orderinfo/payMethod">*/}
@@ -243,31 +243,31 @@ class OrderInfo extends React.Component {
                             {/*</div>*/}
                         </div>
                     </div>
-                    <div className="orderinfo__options">
-                        <div className="orderinfo__title">할인금액</div>
-                        <div className="orderinfo__pay">
-                            <div className="pay__info">
-                                <div>{this.state.discountName}</div>
-                                <div>{this.state.dcAmt}원</div>
-                            </div>
-                            {
-                                this.state.discountFlag==='2'?
-                                    <>
-                                        <div className="pay__info">
-                                            <div>사전예약</div>
-                                            <div>1000원</div>
-                                        </div>
-                                    </>
-                                    :
-                                    null
-                            }
-                            {/*<div className="pay__info">*/}
-                            {/*    <div>포켓머니</div>*/}
-                            {/*    <button>전액 사용</button>*/}
-                            {/*    <div>0원</div>*/}
-                            {/*</div>*/}
-                        </div>
-                    </div>
+                    {/*<div className="orderinfo__options">*/}
+                    {/*    <div className="orderinfo__title">할인금액</div>*/}
+                    {/*    <div className="orderinfo__pay">*/}
+                    {/*        <div className="pay__info">*/}
+                    {/*            <div>{this.state.discountName}</div>*/}
+                    {/*            <div>{this.state.dcAmt}원</div>*/}
+                    {/*        </div>*/}
+                    {/*        {*/}
+                    {/*            this.state.discountFlag==='2'?*/}
+                    {/*                <>*/}
+                    {/*                    <div className="pay__info">*/}
+                    {/*                        <div>사전예약</div>*/}
+                    {/*                        <div>1000원</div>*/}
+                    {/*                    </div>*/}
+                    {/*                </>*/}
+                    {/*                :*/}
+                    {/*                null*/}
+                    {/*        }*/}
+                    {/*        /!*<div className="pay__info">*!/*/}
+                    {/*        /!*    <div>포켓머니</div>*!/*/}
+                    {/*        /!*    <button>전액 사용</button>*!/*/}
+                    {/*        /!*    <div>0원</div>*!/*/}
+                    {/*        /!*</div>*!/*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     {/*<div className="orderinfo__options">*/}
                     {/*    <div className="orderinfo__title">휴대폰 번호</div>*/}
                     {/*    <div className="orderinfo__pay">*/}
@@ -300,13 +300,13 @@ class OrderInfo extends React.Component {
                                         closeButton: false,
                                     });
                              } else {
-                                 let callNo = document.getElementById('callNo').value;
+                                 // let callNo = document.getElementById('callNo').value;
                                  let payments = {
                                      'price': price,
                                      'openDcAmt': this.state.dcAmt,
                                      'preDcAmt': this.state.preDcAmt
                                  };
-                                 let result = await pay(tradesInfo, payments, applicationId, callNo, this.state.storeName, this.state.storeId, this.state.userId);
+                                 let result = await pay(tradesInfo, payments, applicationId, this.state.storeName, this.state.storeId, this.state.userId);
                                  if (result == 200){
                                      window.location.replace('/order/status');
                                  }

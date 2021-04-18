@@ -294,10 +294,6 @@ def trade(request):
         tradeErrorMsg = "requestBody data(pgPayment) doesn't exist"
         pgPayment = requestBodyJson['data']
 
-        tradeErrorCode = '016'
-        tradeErrorMsg = "requestBody callNo doesn't exist"
-        callNo = requestBodyJson['callNo']
-
         tradeErrorCode = '017'
         tradeErrorMsg = "requestBody payments doesn't exist"
         payments = requestBodyJson['payments']
@@ -556,7 +552,7 @@ def trade(request):
                 cardAmt=headerCardAmt,
                 kkmAmt=headerKkmAmt,
                 etcAmt=payments['openDcAmt']+payments['preDcAmt'],
-                callNo=callNo,
+                callNo='',
                 returnYn='N',
                 orgStoreCd='',
                 orgSaleDt='',
